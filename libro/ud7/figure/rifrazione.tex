@@ -1,0 +1,26 @@
+% Riflessione e rifrazione alla superficie fra due mezzi (n2 > n1):
+% angoli misurati dalla normale; theta1 = 37,6 gradi, theta2 = 24 gradi (n2/n1 = 1,5)
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \fill[formula!10] (-3.2,-3) rectangle (3.2,0);
+  \draw[thick] (-3.2,0) -- (3.2,0);
+  \node[right] at (3.2,0.35) {mezzo 1: $n_1$};
+  \node[right] at (3.2,-0.4) {mezzo 2: $n_2 > n_1$};
+  \draw[dashed, gray] (0,2.9) -- (0,-3) node[below] {normale};
+  % raggi
+  \draw[esempio, very thick, ->] (-2,2.6) -- (-1,1.3);
+  \draw[esempio, very thick] (-1,1.3) -- (0,0);
+  \draw[esempio, very thick, ->] (0,0) -- (1,1.3);
+  \draw[esempio, very thick] (1,1.3) -- (2,2.6);
+  \draw[esempio, very thick, ->] (0,0) -- (0.61,-1.37);
+  \draw[esempio, very thick] (0.61,-1.37) -- (1.22,-2.74);
+  \node[esempio, above left] at (-2,2.6) {incidente};
+  \node[esempio, above right] at (2,2.6) {riflesso};
+  \node[esempio, right] at (1.22,-2.74) {rifratto};
+  % angoli
+  \draw (0,0.9) arc[start angle=90, end angle=127.6, radius=0.9];
+  \node at (108:1.25) {$\theta_1$};
+  \draw (0,0.9) arc[start angle=90, end angle=52.4, radius=0.9];
+  \node at (72:1.25) {$\theta_1'$};
+  \draw (0,-0.9) arc[start angle=270, end angle=294, radius=0.9];
+  \node at (282:1.25) {$\theta_2$};
+\end{tikzpicture}

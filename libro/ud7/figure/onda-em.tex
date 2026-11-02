@@ -1,0 +1,24 @@
+% Onda elettromagnetica: campo elettrico e campo magnetico perpendicolari
+% tra loro e alla direzione di propagazione x
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % assi
+  \draw[->] (0,0) -- (9,0) node[right] {$x$ (propagazione)};
+  \draw[->] (0,0) -- (0,1.75) node[above] {$\vec E$};
+  \draw[->] (0,0) -- (-1.1,-1.1) node[below left] {$\vec B$};
+  % campo magnetico, nel piano obliquo (in prospettiva)
+  \draw[medica, very thick, domain=0:8.4, samples=140]
+    plot ({\x - 0.62*sin(\x*90)}, {-0.62*sin(\x*90)});
+  \foreach \x in {0.5,1,...,8} {
+    \draw[medica!70] (\x,0) -- ({\x - 0.62*sin(\x*90)}, {-0.62*sin(\x*90)});
+  }
+  % campo elettrico, nel piano verticale
+  \draw[formula, very thick, domain=0:8.4, samples=140] plot (\x, {1.25*sin(\x*90)});
+  \foreach \x in {0.5,1,...,8} {
+    \draw[formula!70] (\x,0) -- (\x, {1.25*sin(\x*90)});
+  }
+  % lunghezza d'onda e ampiezza
+  \draw[|<->|] (1,1.55) -- (5,1.55) node[midway, above] {$\lambda$};
+  \draw[<->] (1,0) -- (1,1.25) node[pos=0.6, left] {$E_0$};
+  \node[formula, right] at (8.5,1.1) {campo elettrico};
+  \node[medica, right] at (7.9,-1.45) {campo magnetico};
+\end{tikzpicture}
