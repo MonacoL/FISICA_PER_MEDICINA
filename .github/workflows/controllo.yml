@@ -1,0 +1,48 @@
+# Su ogni PR: compila ogni Unità didattica presente e il Libro, lancia i test
+# e pubblica i PDF come artifact. È lo stesso comando che si usa in locale.
+name: Controllo
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  controllo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+
+      # Solo i pacchetti di tex-packages.txt: se ne manca uno, la compilazione fallisce.
+      - name: Cache di TinyTeX
+        uses: actions/cache@v4
+        with:
+          path: ~/.TinyTeX
+          key: tinytex-${{ runner.os }}-${{ hashFiles('tex-packages.txt') }}
+
+      - name: Installa TinyTeX e i pacchetti
+        run: |
+          if [ ! -x ~/.TinyTeX/bin/x86_64-linux/tlmgr ]; then
+            wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+            ~/.TinyTeX/bin/x86_64-linux/tlmgr install $(cat tex-packages.txt)
+          fi
+          echo "$HOME/.TinyTeX/bin/x86_64-linux" >> "$GITHUB_PATH"
+
+      - name: Compila le Unità didattiche e il Libro
+        run: |
+          for sorgente in libro/ud*.tex; do
+            uv run controllo "$(basename "$sorgente" .tex)"
+          done
+
+      - name: Test
+        run: uv run pytest -v
+
+      - name: Pubblica i PDF
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf
+          path: libro/build/*.pdf
+          if-no-files-found: warn
