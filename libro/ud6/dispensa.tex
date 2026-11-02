@@ -1,0 +1,850 @@
+% UD6 — Dispensa
+% Scritta da zero (non esisteva una dispensa UD6; il vecchio eserciziario in PDF
+% è servito per livello, argomenti e contesti medici, ADR 0003). I quesiti lampo
+% vengono da esercizi.toml (ADR 0006): si modificano lì.
+\dispensa
+
+\begin{tcolorbox}[fisbox={formula}{formulaBg},title={Obiettivi dell'unità}]
+Al termine di questa unità sai:
+\begin{itemize}
+  \item descrivere le proprietà della carica elettrica e calcolare con la legge di Coulomb la forza fra cariche puntiformi;
+  \item calcolare il campo elettrico di una o più cariche puntiformi, disegnarne le linee di forza e descrivere il moto di una carica in un campo uniforme;
+  \item usare l'energia potenziale, il potenziale e la differenza di potenziale, e la conservazione dell'energia per una carica che si muove in un campo elettrico;
+  \item spiegare l'induzione elettrostatica nei conduttori e la polarizzazione dei dielettrici;
+  \item applicare le leggi di Ohm, calcolare la potenza dissipata per effetto Joule e la resistenza equivalente di resistori in serie e in parallelo;
+  \item calcolare la capacità di un condensatore piano, con e senza dielettrico, la sua energia e la capacità equivalente di condensatori in serie e in parallelo;
+  \item calcolare il campo magnetico di un filo percorso da corrente, la forza di Lorentz su una carica e su un filo, e il raggio dell'orbita di una carica in un campo magnetico uniforme;
+  \item usare la legge di Faraday-Neumann-Lenz per trovare la forza elettromotrice indotta e il verso della corrente indotta.
+\end{itemize}
+\end{tcolorbox}
+
+Il corpo umano è una macchina elettrica. Ogni cellula tiene una differenza di potenziale ai capi della sua membrana; i neuroni la usano per trasmettere segnali, il cuore per coordinare la contrazione delle sue fibre. L'elettrocardiogramma e l'elettroencefalogramma registrano queste differenze di potenziale sulla pelle; il defibrillatore rimette in ordine il cuore con una scarica di corrente; la risonanza magnetica forma immagini con un campo magnetico migliaia di volte più intenso di quello terrestre. Questa unità costruisce le leggi che servono per capire tutto questo.
+
+Servono alcuni strumenti della UD1: la notazione scientifica, i vettori e la loro somma, il teorema di Pitagora, il seno e il coseno, il prodotto vettoriale con la regola della mano destra. Servono anche alcune grandezze della meccanica (UD2), che si richiamano in una riga quando servono: la forza e la seconda legge della dinamica, $F = ma$; il lavoro; l'energia cinetica e l'energia potenziale; la potenza; il moto circolare uniforme. Dalla UD5 servono il calore e la sua misura.
+
+\begin{formula}[Costanti di questa unità]
+e \approx \SI{1,6e-19}{\coulomb}
+\qquad
+k = \frac{1}{4\pi\varepsilon_0} \approx \SI{9e9}{\newton\metre\squared\per\coulomb\squared}
+\qquad
+\varepsilon_0 \approx \SI{8,85e-12}{\farad\per\metre}
+\\
+\mu_0 = 4\pi \cdot \SI{e-7}{\tesla\metre\per\ampere}
+\qquad
+m_e \approx \SI{9,1e-31}{\kilo\gram}
+\qquad
+m_p \approx \SI{1,67e-27}{\kilo\gram}
+\end{formula}
+
+Nei quesiti d'esame i dati numerici sono scritti nel testo; questi valori servono negli esempi e per riconoscere a colpo d'occhio un ordine di grandezza sbagliato. Il loro significato si chiarisce man mano: $e$ è la carica elementare, $k$ la costante di Coulomb, $\varepsilon_0$ la costante dielettrica del vuoto, $\mu_0$ la permeabilità magnetica del vuoto, $m_e$ e $m_p$ le masse dell'elettrone e del protone.
+
+% -------------------------------------------------------------------------
+\section{La carica elettrica e la legge di Coulomb}
+\label{sec:ud6-coulomb}
+
+\subsection{Le proprietà della carica}
+
+Una bacchetta di plastica strofinata con un panno di lana attira pezzetti di carta; due bacchette strofinate allo stesso modo si respingono. Si dice che lo strofinio le ha \textbf{elettrizzate}: hanno acquistato una \textbf{carica elettrica}. Gli esperimenti mostrano che le cariche sono di due tipi, che per convenzione si chiamano \textbf{positiva} e \textbf{negativa}: cariche dello stesso segno si respingono, cariche di segno opposto si attraggono.
+
+L'origine della carica sta negli atomi. Il nucleo contiene i \textbf{protoni}, con carica positiva, e i \textbf{neutroni}, senza carica; intorno al nucleo si muovono gli \textbf{elettroni}, con carica negativa. Protone ed elettrone hanno cariche opposte ma esattamente uguali in modulo, e un atomo con tanti elettroni quanti protoni è neutro. Un corpo è carico negativamente se ha elettroni in eccesso, positivamente se ne ha in difetto. Nello strofinio alcuni elettroni passano dalla lana alla plastica: la plastica diventa negativa, la lana positiva.
+
+Le proprietà fondamentali della carica sono tre.
+\begin{itemize}
+  \item \textbf{Si misura in coulomb} (\si{\coulomb}), l'unità del SI: è la carica trasportata in un secondo da una corrente di un ampere (sezione~\ref{sec:ud6-corrente}). È una carica molto grande: i corpi elettrizzati per strofinio hanno cariche di nanocoulomb o microcoulomb.
+  \item \textbf{È quantizzata}: ogni carica è un multiplo intero della \textbf{carica elementare} $e \approx \SI{1,6e-19}{\coulomb}$, che è il modulo della carica del protone e dell'elettrone. Un corpo con $n$ elettroni in eccesso ha carica $q = -ne$; uno con $n$ elettroni in difetto ha $q = +ne$.
+  \item \textbf{Si conserva}: in un sistema isolato la carica totale, cioè la somma algebrica delle cariche positive e negative, resta costante. Lo strofinio non crea carica: la sposta da un corpo all'altro, e la lana resta positiva quanto la plastica è negativa.
+\end{itemize}
+
+\begin{richiamo}{prefissi e potenze di 10}
+In elettricità le grandezze vanno da valori piccolissimi a valori enormi, e si scrivono con i prefissi del SI (UD1): milli (m, $10^{-3}$), micro (\textmu, $10^{-6}$), nano (n, $10^{-9}$), pico (p, $10^{-12}$); chilo (k, $10^{3}$), mega (M, $10^{6}$). Prima di usare una formula si traduce ogni prefisso nella sua potenza: $\SI{3}{\micro\coulomb} = \SI{3e-6}{\coulomb}$, $\SI{20}{\centi\metre} = \SI{0,20}{\metre}$, $\SI{2}{\milli\metre\squared} = 2 \cdot (10^{-3}\,\si{\metre})^{2} = \SI{2e-6}{\metre\squared}$. Nei rapporti e nei prodotti gli esponenti si sommano e si sottraggono: $10^{-9}/10^{-19} = 10^{-9-(-19)} = 10^{10}$.
+\end{richiamo}
+
+\begin{esempio}
+Una bacchetta strofinata ha una carica di \SI{-4,8}{\nano\coulomb}. Quanti elettroni ha in eccesso?
+
+La carica è negativa, quindi la bacchetta ha elettroni in eccesso. Il loro numero è il modulo della carica diviso la carica elementare:
+\[
+  n = \frac{|q|}{e} = \frac{\SI{4,8e-9}{\coulomb}}{\SI{1,6e-19}{\coulomb}} = \frac{4{,}8}{1{,}6} \cdot 10^{-9-(-19)} = 3 \cdot 10^{10}
+\]
+Sono trenta miliardi di elettroni: tanti, ma pochissimi rispetto ai circa $10^{23}$ atomi della bacchetta.
+\end{esempio}
+
+\subsection{La legge di Coulomb}
+
+La forza fra due cariche ferme è stata misurata da Charles-Augustin de Coulomb nel 1785. Per due \textbf{cariche puntiformi}, cioè corpi carichi così piccoli rispetto alla loro distanza da poterli trattare come punti, la forza ha la direzione della retta che le unisce, è repulsiva per cariche dello stesso segno e attrattiva per cariche di segno opposto, e ha modulo
+\begin{formula}[Legge di Coulomb]
+F = k\,\frac{|q_1\,q_2|}{r^{2}}
+\qquad\qquad
+k = \frac{1}{4\pi\varepsilon_0} \approx \SI{9e9}{\newton\metre\squared\per\coulomb\squared}
+\end{formula}
+dove $r$ è la distanza fra le cariche. La costante di Coulomb $k$ si scrive anche con la \textbf{costante dielettrica del vuoto} $\varepsilon_0 \approx \SI{8,85e-12}{\coulomb\squared\per\newton\per\metre\squared}$ (la stessa unità si scrive \si{\farad\per\metre}, come si vedrà con i condensatori): $1/(4\pi \cdot \num{8,85e-12}) \approx \num{9e9}$. La legge vale nel vuoto, e quasi senza differenze nell'aria; in un materiale isolante la forza è più debole (sezione~\ref{sec:ud6-materia}). Vale anche per due sfere cariche, con $r$ uguale alla distanza fra i centri.
+
+Le due cariche si esercitano forze uguali e opposte, come vuole il principio di azione e reazione (UD2): la carica piccola attira la grande con la stessa forza con cui la grande attira la piccola.
+
+\begin{richiamo}{la proporzionalità con l'inverso del quadrato}
+Una grandezza $y$ è inversamente proporzionale al quadrato di $x$ se $y = c/x^{2}$, con $c$ costante. Se $x$ raddoppia, $x^{2}$ diventa quattro volte più grande e $y$ diventa un quarto; se $x$ triplica, $y$ diventa un nono; se $x$ si dimezza, $y$ diventa quattro volte più grande. Quando cambiano più fattori, si calcola l'effetto di ciascuno e si moltiplicano gli effetti. Nella legge di Coulomb, se entrambe le cariche raddoppiano ($\times 4$) e anche la distanza raddoppia ($\times 1/4$), la forza non cambia.
+\end{richiamo}
+
+\begin{esempio}
+(a) Due cariche puntiformi, $q_1 = \SI{+2}{\micro\coulomb}$ e $q_2 = \SI{-3}{\micro\coulomb}$, sono ferme nel vuoto a \SI{30}{\centi\metre} l'una dall'altra. Calcola il modulo della forza fra loro e di' se è attrattiva o repulsiva. (b) Quanto diventa la forza se la distanza triplica?
+
+(a) Le cariche hanno segno opposto: la forza è attrattiva. Le grandezze nel SI sono $q_1 = \SI{2e-6}{\coulomb}$, $|q_2| = \SI{3e-6}{\coulomb}$ e $r = \SI{0,30}{\metre}$, quindi $r^{2} = \SI{0,09}{\metre\squared}$:
+\[
+  F = k\,\frac{|q_1 q_2|}{r^{2}} = \SI{9e9}{\newton\metre\squared\per\coulomb\squared} \cdot \frac{\SI{2e-6}{\coulomb} \cdot \SI{3e-6}{\coulomb}}{\SI{0,09}{\metre\squared}} = \frac{9 \cdot 6 \cdot 10^{9-12}}{0{,}09}\,\si{\newton} = \frac{\num{54e-3}}{\num{9e-2}}\,\si{\newton} = \SI{0,6}{\newton}
+\]
+(b) Se la distanza triplica, la forza diventa $3^{2} = 9$ volte più piccola: $F' = \SI{0,6}{\newton}/9 \approx \SI{0,067}{\newton}$.
+\end{esempio}
+
+\begin{attenzione}[nella legge di Coulomb la distanza è al quadrato]
+Gli errori più frequenti sono tre: dimenticare il quadrato della distanza; lasciare le cariche in microcoulomb e la distanza in centimetri; usare i segni delle cariche nella formula del modulo. Conviene calcolare il modulo con i valori assoluti e decidere a parte, dai segni, se la forza è attrattiva o repulsiva.
+\end{attenzione}
+
+\input{ud6/generati/lampo-ud6-coulomb}
+
+\subsection{Più cariche: il principio di sovrapposizione}
+
+Se una carica risente di più cariche, la forza totale su di essa è la \textbf{somma vettoriale} delle forze che ciascuna delle altre le eserciterebbe da sola (UD1, somma di vettori). È il \textbf{principio di sovrapposizione}: ogni coppia di cariche interagisce come se le altre non ci fossero.
+
+\begin{esempio}
+Sull'asse $x$ ci sono tre cariche: $q_1 = \SI{+2}{\micro\coulomb}$ in $x = 0$, $q_2 = \SI{+8}{\micro\coulomb}$ in $x = \SI{30}{\centi\metre}$ e $q_3 = \SI{+1}{\micro\coulomb}$ in $x = \SI{10}{\centi\metre}$, fra le altre due. Qual è la forza totale su $q_3$?
+
+$q_3$ dista \SI{0,10}{\metre} da $q_1$ e \SI{0,20}{\metre} da $q_2$. Le cariche sono tutte positive, quindi $q_1$ spinge $q_3$ verso destra (verso $+x$) e $q_2$ la spinge verso sinistra. I moduli:
+\begin{gather*}
+  F_{13} = \num{9e9} \cdot \frac{\num{2e-6} \cdot \num{1e-6}}{(0{,}10)^{2}}\,\si{\newton} = \frac{\num{18e-3}}{\num{1e-2}}\,\si{\newton} = \SI{1,8}{\newton}
+  \\
+  F_{23} = \num{9e9} \cdot \frac{\num{8e-6} \cdot \num{1e-6}}{(0{,}20)^{2}}\,\si{\newton} = \frac{\num{72e-3}}{\num{4e-2}}\,\si{\newton} = \SI{1,8}{\newton}
+\end{gather*}
+Le due forze hanno lo stesso modulo e versi opposti: la forza totale su $q_3$ è nulla. La carica $q_2$ è quattro volte più grande di $q_1$, ma sta al doppio della distanza, e il quadrato della distanza compensa esattamente il fattore 4.
+\end{esempio}
+
+% -------------------------------------------------------------------------
+\section{Il campo elettrico}
+\label{sec:ud6-campo}
+
+\subsection{La definizione di campo elettrico}
+
+Una carica modifica lo spazio intorno a sé: qualunque altra carica messa in un punto vicino risente di una forza. Per descrivere questa proprietà dello spazio, indipendentemente dalla carica che la subisce, si mette nel punto una piccola \textbf{carica di prova} positiva $q_0$ e si misura la forza $\vec F$ che agisce su di essa. Il \textbf{campo elettrico} nel punto è la forza per unità di carica:
+\begin{formula}[Campo elettrico]
+\vec E = \frac{\vec F}{q_0}
+\qquad\qquad
+\vec F = q\,\vec E
+\qquad\qquad
+[E] = \si{\newton\per\coulomb}
+\\
+\text{carica puntiforme:}\quad E = k\,\frac{|q|}{r^{2}}
+\end{formula}
+Il campo è un vettore: ha la direzione e il verso della forza su una carica positiva. Una volta noto il campo, la forza su una carica qualsiasi $q$ è $\vec F = q\vec E$: concorde con $\vec E$ se $q$ è positiva, opposta se $q$ è negativa. La carica di prova deve essere piccola, per non spostare le cariche che producono il campo.
+
+Per una carica puntiforme $q$, la legge di Coulomb con $q_2 = q_0$ dà $F = k\,|q|\,q_0/r^{2}$, e dividendo per $q_0$ si trova la seconda riga del box. Il campo ha la direzione della retta che passa per la carica ed è \emph{uscente} se $q$ è positiva, \emph{entrante} se $q$ è negativa.
+
+\subsection{Le linee di forza}
+
+Il campo si rappresenta con le \textbf{linee di forza} (o linee di campo), curve che seguono il campo punto per punto (figura~\ref{fig:ud6-linee}):
+\begin{itemize}
+  \item in ogni punto il campo è tangente alla linea che passa di lì, con il verso della freccia;
+  \item le linee partono dalle cariche positive e finiscono sulle cariche negative (o all'infinito);
+  \item dove le linee sono più fitte il campo è più intenso;
+  \item due linee non si incrociano mai, perché in ogni punto il campo ha una sola direzione.
+\end{itemize}
+Per una carica puntiforme le linee sono semirette radiali, uscenti o entranti, più fitte vicino alla carica. Due cariche uguali e opposte a piccola distanza formano un \textbf{dipolo elettrico}: le linee escono dalla positiva e si richiudono sulla negativa. Molte molecole, come l'acqua, sono dipoli, perché la loro carica negativa è spostata da un lato; e il cuore, come vedremo, si comporta come un dipolo.
+
+\begin{figure}[h]
+\centering
+\input{ud6/figure/linee-campo}
+\caption{Linee di forza (a) di una carica positiva, (b) di una carica negativa, (c) di un dipolo elettrico. Le linee escono dalle cariche positive ed entrano in quelle negative; dove sono più fitte il campo è più intenso.}
+\label{fig:ud6-linee}
+\end{figure}
+
+\subsection{Il campo di più cariche}
+
+Per il principio di sovrapposizione, il campo prodotto da più cariche puntiformi è la somma vettoriale dei campi che ciascuna produrrebbe da sola: $\vec E = \vec E_1 + \vec E_2 + \dots$. Si calcola il modulo di ogni campo con $k|q|/r^{2}$, se ne disegnano direzione e verso, e si sommano i vettori.
+
+\begin{richiamo}{la somma di due vettori perpendicolari}
+Se due vettori $\vec a$ e $\vec b$ sono perpendicolari, il vettore somma è la diagonale del rettangolo che li ha come lati, e il suo modulo si trova con il teorema di Pitagora (UD1): $|\vec a + \vec b| = \sqrt{a^{2} + b^{2}}$. L'angolo $\alpha$ che la somma forma con $\vec a$ ha $\tan\alpha = b/a$. Se i due vettori hanno lo stesso modulo, la somma vale $a\sqrt2 \approx 1{,}41\,a$ e forma un angolo di \ang{45} con ciascuno dei due.
+\end{richiamo}
+
+\begin{esempio}
+(a) Quanto vale il campo elettrico a \SI{3}{\centi\metre} da una carica puntiforme di \SI{+2}{\nano\coulomb}? (b) Due cariche di \SI{+2}{\nano\coulomb} stanno una a \SI{3}{\centi\metre} a sinistra di un punto $P$, l'altra a \SI{3}{\centi\metre} sotto $P$. Quanto vale il campo in $P$?
+
+(a) Con $r = \SI{0,03}{\metre}$, $r^{2} = \SI{9e-4}{\metre\squared}$:
+\[
+  E = k\,\frac{|q|}{r^{2}} = \num{9e9} \cdot \frac{\num{2e-9}}{\num{9e-4}}\,\si{\newton\per\coulomb} = \frac{18}{\num{9e-4}}\,\si{\newton\per\coulomb} = \SI{2e4}{\newton\per\coulomb}
+\]
+(b) Ognuna delle due cariche produce in $P$ un campo di \SI{2e4}{\newton\per\coulomb}, uscente dalla carica: quello della carica a sinistra punta verso destra, quello della carica in basso punta verso l'alto. I due campi sono perpendicolari e hanno lo stesso modulo, quindi
+\[
+  E = \sqrt{E_1^{2} + E_2^{2}} = \SI{2e4}{\newton\per\coulomb} \cdot \sqrt2 \approx \SI{2,8e4}{\newton\per\coulomb}
+\]
+diretto verso l'alto a destra, a \ang{45} dall'orizzontale. Sommare i moduli, $2 + 2 = \num{4e4}$, sarebbe sbagliato: si sommano i vettori.
+\end{esempio}
+
+\input{ud6/generati/lampo-ud6-campo}
+
+\subsection{Il campo uniforme e il moto di una carica}
+
+Due piastre metalliche piane e parallele, grandi rispetto alla loro distanza e con cariche uguali e opposte, producono fra loro un \textbf{campo uniforme}: lo stesso in modulo, direzione e verso in ogni punto. Le linee di forza sono parallele ed equidistanti, e vanno dalla piastra positiva alla negativa (figura~\ref{fig:ud6-piastre}a). È il campo dentro un condensatore piano (sezione~\ref{sec:ud6-condensatori}), e quasi quello dentro una membrana cellulare.
+
+In un campo uniforme una carica $q$ di massa $m$ risente della forza costante $\vec F = q\vec E$. Per la seconda legge della dinamica (UD2) si muove con l'accelerazione costante $a = |q|E/m$. Se parte da ferma, si muove di moto uniformemente accelerato lungo le linee di forza: dopo il tempo $t$ ha velocità $v = at$ e ha percorso $s = \frac12 at^{2}$ (UD2). Una carica positiva accelera nel verso del campo, una negativa nel verso opposto. Se invece entra fra le piastre con velocità perpendicolare al campo, si comporta come un sasso lanciato in orizzontale: si muove di moto uniforme nella direzione iniziale e accelera nella direzione del campo, e la traiettoria è un arco di parabola (figura~\ref{fig:ud6-piastre}b). In quasi tutti i problemi il peso delle particelle cariche è trascurabile rispetto alla forza elettrica, come mostra l'esempio.
+
+\begin{figure}[h]
+\centering
+\input{ud6/figure/piastre}
+\caption{(a) Fra due piastre parallele con cariche opposte il campo è uniforme: linee di forza parallele ed equidistanti, dalla piastra positiva alla negativa. (b) Un elettrone che entra con velocità $\vec v_0$ perpendicolare al campo è deviato verso la piastra positiva lungo un arco di parabola.}
+\label{fig:ud6-piastre}
+\end{figure}
+
+\begin{esempio}
+Un protone parte da fermo in un campo elettrico uniforme di \SI{1,0e4}{\newton\per\coulomb}. Calcola (a) la forza elettrica e l'accelerazione, confrontando la forza con il peso; (b) la velocità e lo spazio percorso dopo \SI{1,0e-7}{\second}.
+
+(a) La carica del protone è $e$:
+\begin{gather*}
+  F = eE = \SI{1,6e-19}{\coulomb} \cdot \SI{1,0e4}{\newton\per\coulomb} = \SI{1,6e-15}{\newton}
+  \\
+  a = \frac{F}{m_p} = \frac{\SI{1,6e-15}{\newton}}{\SI{1,67e-27}{\kilo\gram}} \approx \SI{9,6e11}{\metre\per\second\squared}
+\end{gather*}
+dove $1{,}6/1{,}67 \approx 0{,}96$ e $10^{-15}/10^{-27} = 10^{12}$. Il peso del protone è $m_p\,g = \num{1,67e-27} \cdot 9{,}8\,\si{\newton} \approx \SI{1,6e-26}{\newton}$: la forza elettrica è $\num{1,6e-15}/\num{1,6e-26} = 10^{11}$ volte più grande, e il peso si trascura.
+
+(b) Con $t = \SI{1,0e-7}{\second}$:
+\begin{gather*}
+  v = at = \num{9,6e11} \cdot \num{1,0e-7}\,\si{\metre\per\second} = \SI{9,6e4}{\metre\per\second}
+  \\
+  s = \tfrac12 at^{2} = \tfrac12 \cdot \num{9,6e11} \cdot \num{1,0e-14}\,\si{\metre} = \SI{4,8e-3}{\metre}
+\end{gather*}
+In un decimo di microsecondo il protone percorre quasi \SI{5}{\milli\metre} e arriva a quasi \SI{100}{\kilo\metre\per\second}.
+\end{esempio}
+
+\begin{attenzione}[elettrone e protone nello stesso campo]
+Nello stesso campo un elettrone e un protone risentono di forze con lo stesso modulo, $eE$, e versi opposti. Le loro accelerazioni, invece, sono molto diverse: l'elettrone ha una massa circa $\num{1,67e-27}/\num{9,1e-31} \approx 1800$ volte più piccola, e accelera circa 1800 volte di più. Stessa forza non vuol dire stessa accelerazione.
+\end{attenzione}
+
+% -------------------------------------------------------------------------
+\section{Energia potenziale e potenziale elettrico}
+\label{sec:ud6-potenziale}
+
+\subsection{Il lavoro della forza elettrica}
+
+Il \textbf{lavoro} di una forza costante $\vec F$ che sposta il suo punto di applicazione di $\vec s$ è $W = F s \cos\theta$, dove $\theta$ è l'angolo fra forza e spostamento (UD2); si misura in joule. Una carica $q$ positiva che si sposta di $d$ nel verso di un campo uniforme $E$ riceve dalla forza elettrica il lavoro
+\[
+  W = qEd
+\]
+È la stessa situazione di un sasso che cade di un'altezza $h$, con il lavoro del peso $mgh$. E come il peso, la forza elettrica è \textbf{conservativa}: il lavoro che compie fra due punti dipende solo dai due punti, non dal percorso. Per una forza conservativa si definisce l'\textbf{energia potenziale} $U$, che diminuisce di quanto la forza compie di lavoro (UD2): $\Delta U = -W$. Se la forza elettrica compie un lavoro positivo, l'energia potenziale diminuisce e diventa, per esempio, energia cinetica.
+
+\subsection{L'energia potenziale di un sistema di cariche}
+
+Per due cariche puntiformi $q_1$ e $q_2$ a distanza $r$, si sceglie l'energia potenziale nulla quando le cariche sono infinitamente lontane. Con questa scelta
+\begin{formula}[Energia potenziale di due cariche puntiformi]
+U = k\,\frac{q_1\,q_2}{r} \qquad (U = 0 \text{ per } r \to \infty)
+\end{formula}
+Questa volta le cariche vanno con il loro segno, e al denominatore c'è $r$, non $r^{2}$. Il segno ha un significato:
+\begin{itemize}
+  \item $U > 0$ per cariche dello stesso segno, che si respingono: lasciate libere si allontanano, e l'energia potenziale diventa energia cinetica;
+  \item $U < 0$ per cariche di segno opposto, che si attraggono: il sistema è \emph{legato}, e per separare le cariche portandole all'infinito bisogna fornire l'energia $|U|$.
+\end{itemize}
+Per una distribuzione di più cariche l'energia potenziale è la somma delle energie di tutte le coppie: per tre cariche, tre coppie ($q_1q_2$, $q_1q_3$, $q_2q_3$). È l'energia che è servita per portare le cariche nelle loro posizioni partendo da lontanissimo.
+
+\begin{esempio}
+(a) Qual è l'energia potenziale delle cariche $q_1 = \SI{+2}{\micro\coulomb}$ e $q_2 = \SI{-3}{\micro\coulomb}$ a \SI{30}{\centi\metre}? Quanto lavoro serve per separarle del tutto? (b) Tre cariche di \SI{+1}{\micro\coulomb} sono ai vertici di un triangolo equilatero di lato \SI{30}{\centi\metre}. Qual è l'energia potenziale del sistema?
+
+(a) Con i segni:
+\[
+  U = k\,\frac{q_1 q_2}{r} = \num{9e9} \cdot \frac{(\num{2e-6}) \cdot (\num{-3e-6})}{0{,}30}\,\si{\joule} = \frac{\num{-54e-3}}{0{,}30}\,\si{\joule} = \SI{-0,18}{\joule}
+\]
+Il sistema è legato. Per portare le cariche all'infinito, dove $U = 0$, l'energia deve passare da $\SI{-0,18}{\joule}$ a zero: serve un lavoro di $0 - (-0{,}18) = \SI{0,18}{\joule}$.
+
+(b) Le tre coppie sono uguali, ciascuna con $U = \num{9e9} \cdot \num{1e-6} \cdot \num{1e-6}/0{,}30\,\si{\joule} = \num{9e-3}/0{,}30\,\si{\joule} = \SI{0,03}{\joule}$. In tutto $U = 3 \cdot \SI{0,03}{\joule} = \SI{0,09}{\joule}$: positiva, perché le cariche si respingono.
+\end{esempio}
+
+\subsection{Il potenziale elettrico}
+
+L'energia potenziale dipende dalla carica che si mette nel punto. Dividendo per la carica si ottiene una grandezza che dipende solo dal punto e dalle cariche che producono il campo, come si è fatto passando dalla forza al campo. Il \textbf{potenziale elettrico} $V$ in un punto è l'energia potenziale per unità di carica:
+\begin{formula}[Potenziale elettrico]
+V = \frac{U}{q_0}
+\qquad\qquad
+\SI{1}{\volt} = \SI{1}{\joule\per\coulomb}
+\\
+\text{carica puntiforme:}\quad V = k\,\frac{q}{r} \qquad (V = 0 \text{ all'infinito})
+\\
+\Delta U = q\,\Delta V
+\end{formula}
+L'unità è il \textbf{volt}. Il potenziale di una carica puntiforme ha il segno della carica: positivo intorno a una carica positiva, negativo intorno a una negativa. Il potenziale è uno \emph{scalare}: il potenziale di più cariche è la somma algebrica dei potenziali di ciascuna, con i loro segni, senza bisogno di disegnare vettori.
+
+Conta soprattutto la \textbf{differenza di potenziale} (ddp, o tensione) fra due punti, $\Delta V = V_B - V_A$. Quando una carica $q$ va da $A$ a $B$ la sua energia potenziale cambia di $\Delta U = q\,\Delta V$, l'ultima riga del box. Le cariche lasciate libere vanno verso un'energia potenziale più bassa: le cariche positive si muovono spontaneamente verso i potenziali più bassi, quelle negative verso i potenziali più alti.
+
+\begin{attenzione}[$V$, $v$ e volt: tre cose diverse]
+In questa unità $V$ è il potenziale (o la differenza di potenziale), $v$ minuscola è una velocità, e \si{\volt} in tondo è l'unità del potenziale: «$V = \SI{12}{\volt}$» si legge «il potenziale vale dodici volt». Nella UD5 $V$ era il volume. Allo stesso modo $E$ è il campo elettrico, e per le energie si usano $U$ (potenziale) e $K$ (cinetica).
+\end{attenzione}
+
+\begin{esempio}
+Due cariche puntiformi, \SI{+4}{\nano\coulomb} e \SI{-4}{\nano\coulomb}, distano \SI{20}{\centi\metre}. (a) Quanto vale il potenziale nel punto medio $M$? (b) E nel punto $P$ del segmento che sta a \SI{5}{\centi\metre} dalla carica positiva? (c) Come cambia l'energia potenziale di una carica di \SI{+1}{\nano\coulomb} che va da $P$ a $M$?
+
+Per entrambe le cariche $k\,|q| = \num{9e9} \cdot \num{4e-9}\,\si{\volt\metre} = \SI{36}{\volt\metre}$.
+
+(a) $M$ dista \SI{0,10}{\metre} da tutte e due, e i due potenziali hanno segni opposti:
+\[
+  V_M = \frac{36}{0{,}10}\,\si{\volt} - \frac{36}{0{,}10}\,\si{\volt} = 0
+\]
+(b) $P$ dista \SI{0,05}{\metre} dalla carica positiva e \SI{0,15}{\metre} da quella negativa:
+\[
+  V_P = 36 \left( \frac{1}{0{,}05} - \frac{1}{0{,}15} \right) \si{\volt} = 36 \left( 20 - \frac{20}{3} \right) \si{\volt} = 36 \cdot \frac{40}{3}\,\si{\volt} = \SI{480}{\volt}
+\]
+(c) $\Delta U = q\,(V_M - V_P) = \SI{1e-9}{\coulomb} \cdot (0 - \SI{480}{\volt}) = \SI{-4,8e-7}{\joule}$. L'energia potenziale diminuisce: la carica positiva va da sola da $P$ a $M$, verso il potenziale più basso, spinta dalla carica positiva e attirata da quella negativa.
+\end{esempio}
+
+\begin{attenzione}[potenziale nullo non vuol dire campo nullo]
+Nel punto medio dell'esempio il potenziale è zero, ma il campo no: il campo della carica positiva e quello della negativa puntano entrambi verso la carica negativa, e si sommano. Il potenziale si somma con i segni, il campo come vettore. Il campo dice quanto rapidamente il potenziale cambia da un punto all'altro, non quanto vale.
+\end{attenzione}
+
+\subsection{Campo e potenziale in un campo uniforme}
+
+In un campo uniforme il lavoro della forza elettrica su una carica $q$ che percorre la distanza $d$ lungo una linea di forza è $W = qEd$, e per definizione $W = -\Delta U = -q\,\Delta V$. Quindi, andando nel verso del campo, il potenziale diminuisce di $Ed$:
+\begin{formula}[Campo uniforme e differenza di potenziale]
+E = \frac{\Delta V}{d}
+\qquad\qquad
+\SI{1}{\volt\per\metre} = \SI{1}{\newton\per\coulomb}
+\end{formula}
+dove $\Delta V$ è, in modulo, la differenza di potenziale fra due punti a distanza $d$ lungo il campo. Il campo punta sempre dai potenziali più alti verso quelli più bassi. Le superfici in cui il potenziale ha lo stesso valore si chiamano \textbf{superfici equipotenziali} e sono perpendicolari alle linee di forza: fra due piastre sono piani paralleli alle piastre, intorno a una carica puntiforme sono sfere. Spostarsi su una superficie equipotenziale non costa lavoro. Le due unità del campo si equivalgono: $\si{\volt\per\metre} = \si{\joule\per\coulomb\per\metre} = \si{\newton\metre\per\coulomb\per\metre} = \si{\newton\per\coulomb}$.
+
+\input{ud6/generati/lampo-ud6-piastre}
+
+\begin{applicazione}{l'elettroforesi}
+L'\textbf{elettroforesi} separa le molecole cariche (proteine, frammenti di DNA) con un campo elettrico. Il campione si deposita in un gel imbevuto di una soluzione salina, e ai capi del gel si applica una differenza di potenziale. Con \SI{100}{\volt} su un gel lungo \SI{20}{\centi\metre} il campo è $E = \Delta V/d = \SI{100}{\volt}/\SI{0,20}{\metre} = \SI{500}{\volt\per\metre}$. Ogni molecola risente della forza $qE$ e si muove verso il polo di segno opposto; il gel la frena con un attrito che cresce con la velocità e con le dimensioni della molecola, e presto la molecola si muove a velocità costante, quella per cui attrito e forza elettrica si equilibrano. Molecole con carica o dimensioni diverse viaggiano a velocità diverse e finiscono in bande separate: l'elettroforesi delle proteine del siero, per esempio, separa l'albumina dalle globuline.
+\end{applicazione}
+
+\subsection{La conservazione dell'energia}
+
+Se sulla carica agisce solo la forza elettrica, l'energia si conserva: la somma dell'energia cinetica $K = \frac12 mv^{2}$ (UD2) e dell'energia potenziale $U = qV$ resta costante.
+\begin{formula}[Conservazione dell'energia per una carica]
+\tfrac12 m v^{2} + qV = \text{costante}
+\\
+\text{da ferma:}\quad \tfrac12 m v^{2} = |q\,\Delta V|
+\end{formula}
+Una carica che parte da ferma e attraversa la differenza di potenziale $\Delta V$ nel verso in cui è spinta guadagna l'energia cinetica $|q\,\Delta V|$. Per le particelle si usa un'unità di energia comoda, l'\textbf{elettronvolt}: è l'energia che guadagna la carica $e$ attraversando una differenza di potenziale di \SI{1}{\volt}, $\SI{1}{\electronvolt} = e \cdot \SI{1}{\volt} \approx \SI{1,6e-19}{\joule}$. Un elettrone accelerato da \SI{1000}{\volt} ha un'energia cinetica di \SI{1000}{\electronvolt} $= \SI{1}{\kilo\electronvolt}$. La stessa unità serve per l'energia dei fotoni (UD7).
+
+\begin{esempio}
+Un elettrone parte da fermo ed è accelerato da una differenza di potenziale di \SI{1000}{\volt}. Che velocità raggiunge?
+
+L'energia cinetica finale è $K = e\,\Delta V = \SI{1,6e-19}{\coulomb} \cdot \SI{1000}{\volt} = \SI{1,6e-16}{\joule}$. Da $K = \frac12 m_e v^{2}$:
+\[
+  v = \sqrt{\frac{2K}{m_e}} = \sqrt{\frac{\num{3,2e-16}}{\num{9,1e-31}}}\,\si{\metre\per\second} = \sqrt{\num{3,52e14}}\,\si{\metre\per\second} \approx \SI{1,9e7}{\metre\per\second}
+\]
+Per il conto: $3{,}2/9{,}1 \approx 0{,}352$ e $10^{-16}/10^{-31} = 10^{15}$, quindi il rapporto è $352 \cdot 10^{12}$, e la radice è $\sqrt{352} \cdot 10^{6} \approx 18{,}8 \cdot 10^{6}$, perché $19^{2} = 361$ è un po' più di 352. In un tubo a raggi X gli elettroni sono accelerati da circa \SI{100}{\kilo\volt} e arrivano sull'anodo con \SI{100}{\kilo\electronvolt}; a queste energie la loro velocità si avvicina a quella della luce e $\frac12 mv^{2}$ non vale più, ma l'energia è ancora $e\,\Delta V$.
+\end{esempio}
+
+\begin{applicazione}{il potenziale di membrana e la conduzione nervosa}
+La membrana di una cellula separa due soluzioni con concentrazioni diverse di ioni: dentro prevale il potassio $\mathrm{K^{+}}$, fuori il sodio $\mathrm{Na^{+}}$ e il cloro $\mathrm{Cl^{-}}$. A riposo l'interno di un neurone è a circa \SI{-70}{\milli\volt} rispetto all'esterno: è il \textbf{potenziale di membrana} (o di riposo). La membrana è spessa circa \SI{7}{\nano\metre}, e il campo al suo interno, quasi uniforme, è enorme:
+\[
+  E = \frac{\Delta V}{d} = \frac{\SI{0,070}{\volt}}{\SI{7e-9}{\metre}} = \SI{1e7}{\volt\per\metre}
+\]
+più di tre volte il campo che fa scoccare una scintilla nell'aria secca, circa \SI{3e6}{\volt\per\metre}. Su uno ione $\mathrm{Na^{+}}$ nella membrana agisce la forza $eE = \num{1,6e-19} \cdot \num{1e7}\,\si{\newton} = \SI{1,6e-12}{\newton}$, e lo ione che la attraversa cambia la sua energia potenziale di $e \cdot \SI{0,070}{\volt} = \SI{0,070}{\electronvolt}$, cioè $\num{1,6e-19} \cdot 0{,}070\,\si{\joule} \approx \SI{1,1e-20}{\joule}$.
+
+Il segnale nervoso è un'onda di variazione di questo potenziale, il \textbf{potenziale d'azione}. Quando un tratto di membrana è stimolato, si aprono canali che lasciano entrare il sodio: in circa un millisecondo l'interno passa da \SI{-70}{\milli\volt} a circa \SI{+30}{\milli\volt}, una variazione di circa \SI{100}{\milli\volt}. Poi si aprono i canali del potassio, che esce, e il potenziale torna al valore di riposo. Lo stimolo di un tratto apre i canali del tratto vicino, e il potenziale d'azione corre lungo l'assone, da circa \SI{1}{\metre\per\second} nelle fibre senza mielina fino a circa \SI{100}{\metre\per\second} in quelle mielinizzate.
+\end{applicazione}
+
+\input{ud6/generati/lampo-ud6-membrana}
+
+\begin{applicazione}{l'elettrocardiogramma e l'elettroencefalogramma}
+Durante il battito le fibre del cuore si depolarizzano una dopo l'altra, e in ogni istante la parte già depolarizzata e quella ancora a riposo hanno cariche di segno opposto sulla superficie esterna. Visto da lontano, il cuore si comporta come un dipolo elettrico, che cambia intensità e direzione durante il ciclo. Il suo potenziale arriva fino alla pelle, perché i liquidi dei tessuti contengono ioni liberi di muoversi (sezione~\ref{sec:ud6-materia}), e due elettrodi posti in punti diversi misurano una differenza di potenziale. L'\textbf{elettrocardiogramma} (ECG) registra queste differenze nel tempo: il picco più alto, l'onda R, vale circa \SI{1}{\milli\volt}. Ogni coppia di elettrodi (una \textbf{derivazione}) guarda il dipolo da una direzione diversa, e per il principio di sovrapposizione il potenziale misurato è la somma dei contributi di tutte le fibre. L'\textbf{elettroencefalogramma} (EEG) misura allo stesso modo l'attività dei neuroni della corteccia, con segnali molto più deboli, da circa \SI{10}{\micro\volt} a \SI{100}{\micro\volt}, attenuati dal cranio.
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{Conduttori e dielettrici}
+\label{sec:ud6-materia}
+
+\subsection{Conduttori e isolanti}
+
+Nei materiali \textbf{conduttori} alcune cariche sono libere di muoversi: nei metalli sono gli elettroni più esterni degli atomi, che non appartengono più a un atomo solo; nelle \textbf{soluzioni elettrolitiche}, come il sangue, la saliva e i liquidi dei tessuti, sono gli ioni disciolti, positivi e negativi. Negli \textbf{isolanti} (o dielettrici: vetro, plastica, gomma, aria secca) le cariche restano legate ai loro atomi o molecole e possono solo spostarsi un poco.
+
+In un conduttore carico e in equilibrio, cioè con le cariche ferme:
+\begin{itemize}
+  \item il campo all'interno è nullo: se non lo fosse, spingerebbe le cariche libere, che non sarebbero ferme;
+  \item la carica in eccesso sta tutta sulla superficie esterna, perché le cariche dello stesso segno si respingono e si allontanano il più possibile;
+  \item tutto il conduttore è allo stesso potenziale, e il campo appena fuori dalla superficie è perpendicolare a essa.
+\end{itemize}
+Un involucro metallico chiuso, la \textbf{gabbia di Faraday}, scherma quindi il suo interno dai campi elettrici esterni: le cariche libere del metallo si ridistribuiscono finché il campo dentro si annulla. Per questo un'automobile colpita da un fulmine protegge chi sta dentro.
+
+\subsection{L'induzione elettrostatica}
+
+Se si avvicina un corpo carico a un conduttore neutro, senza toccarlo, le cariche libere del conduttore si spostano: con una bacchetta negativa, gli elettroni della sfera sono respinti sul lato lontano, e il lato vicino resta positivo (figura~\ref{fig:ud6-induzione}a). È l'\textbf{induzione elettrostatica}. La carica totale della sfera resta zero, ma la sfera è attirata dalla bacchetta: le cariche positive, più vicine, sono attratte più di quanto le negative, più lontane, siano respinte, perché la forza di Coulomb diminuisce con la distanza. Allontanando la bacchetta, le cariche tornano al loro posto.
+
+L'induzione permette di caricare un conduttore senza toccarlo. Con la bacchetta negativa vicina si collega la sfera a terra con un filo: la Terra è un conduttore enorme, e gli elettroni respinti dalla bacchetta scendono a terra. Si stacca il filo e poi si allontana la bacchetta: la sfera resta con un difetto di elettroni, cioè carica positivamente. La carica per induzione ha segno opposto a quella del corpo induttore.
+
+\begin{figure}[h]
+\centering
+\input{ud6/figure/induzione}
+\caption{(a) Induzione elettrostatica: una bacchetta negativa respinge gli elettroni liberi della sfera metallica sul lato lontano; la sfera resta neutra, ma è attratta. (b) Polarizzazione di un isolante: le molecole non hanno cariche libere, ma si deformano o si orientano come piccoli dipoli, con il lato positivo verso la bacchetta.}
+\label{fig:ud6-induzione}
+\end{figure}
+
+\input{ud6/generati/lampo-ud6-induzione}
+
+\subsection{La polarizzazione dei dielettrici}
+
+Anche un isolante neutro è attratto da un corpo carico: il pettine strofinato solleva i pezzetti di carta. Nell'isolante non ci sono cariche libere, ma ogni molecola, sotto l'azione del campo, si \textbf{polarizza} (figura~\ref{fig:ud6-induzione}b): se la molecola non è un dipolo, il campo sposta un poco gli elettroni da una parte e il nucleo dall'altra, e la trasforma in un piccolo dipolo; se è già un dipolo, come l'acqua, il campo tende a orientarlo lungo le linee di forza. In entrambi i casi le molecole mostrano al corpo carico il loro lato di segno opposto, e l'isolante è attratto, più debolmente di un conduttore.
+
+La polarizzazione ha una conseguenza importante: le cariche spostate nelle molecole producono un campo opposto a quello esterno, e lo indeboliscono. Dentro un dielettrico che riempie lo spazio, il campo e la forza fra due cariche sono più piccoli che nel vuoto di un fattore $\varepsilon_r$, la \textbf{costante dielettrica relativa} del materiale, un numero puro maggiore di 1:
+\begin{formula}[Cariche in un dielettrico]
+E = \frac{E_0}{\varepsilon_r}
+\qquad\qquad
+F = \frac{1}{\varepsilon_r}\,k\,\frac{|q_1 q_2|}{r^{2}}
+\end{formula}
+dove $E_0$ è il campo che le stesse cariche producono nel vuoto. Alcuni valori: vuoto 1 (per definizione), aria 1,0006 (in pratica 1), plastiche da 2 a 4, vetro da 4 a 10, acqua circa 80.
+
+L'alta costante dielettrica dell'acqua spiega perché scioglie i sali: nel cristallo di sale gli ioni $\mathrm{Na^{+}}$ e $\mathrm{Cl^{-}}$ sono tenuti insieme dall'attrazione di Coulomb, che in acqua diventa 80 volte più debole, e l'agitazione termica basta a separarli. Per questo i liquidi del corpo contengono ioni liberi, le cariche che si muovono nel potenziale d'azione e nei segnali dell'ECG.
+
+% -------------------------------------------------------------------------
+\section{La corrente elettrica}
+\label{sec:ud6-corrente}
+
+\subsection{Intensità di corrente e generatore}
+
+Una \textbf{corrente elettrica} è un moto ordinato di cariche. L'\textbf{intensità di corrente} $I$ attraverso una sezione di un conduttore è la carica che la attraversa nell'unità di tempo:
+\begin{formula}[Intensità di corrente]
+I = \frac{\Delta q}{\Delta t}
+\qquad\qquad
+\SI{1}{\ampere} = \SI{1}{\coulomb\per\second}
+\end{formula}
+L'unità è l'\textbf{ampere}; ne viene la definizione del coulomb, $\SI{1}{\coulomb} = \SI{1}{\ampere} \cdot \SI{1}{\second}$. Per convenzione il verso della corrente è quello in cui si muoverebbero le cariche positive, dal potenziale più alto al più basso. Nei metalli si muovono gli elettroni, nel verso opposto a quello della corrente; nelle soluzioni si muovono ioni positivi e negativi, in versi opposti, e contribuiscono entrambi alla corrente. Se l'intensità non cambia nel tempo, la corrente è \textbf{continua}.
+
+Perché la corrente duri, serve un \textbf{generatore}: un dispositivo che mantiene una differenza di potenziale fra i suoi due poli, spendendo un'altra forma di energia (chimica in una pila, meccanica in una dinamo). Collegando i poli con un conduttore si forma un \textbf{circuito}: fuori dal generatore le cariche positive vanno dal polo positivo al negativo, dentro il generatore vengono riportate al polo positivo a spese dell'energia del generatore. Il lavoro che il generatore compie per ogni coulomb che lo attraversa si chiama \textbf{forza elettromotrice} (fem), si indica con $\mathcal E$ e si misura in volt (nonostante il nome, non è una forza). Un \textbf{generatore ideale} mantiene fra i poli una differenza di potenziale uguale alla sua fem, qualunque sia la corrente che eroga. La figura~\ref{fig:ud6-circuito} mostra il circuito più semplice.
+
+\begin{figure}[h]
+\centering
+\input{ud6/figure/circuito}
+\caption{Un generatore di forza elettromotrice $\mathcal E$ collegato a un resistore $R$. Fuori dal generatore la corrente $I$ va dal polo positivo (la barretta più lunga del simbolo) al negativo; gli elettroni nel filo si muovono in verso opposto.}
+\label{fig:ud6-circuito}
+\end{figure}
+
+Per esempio, una corrente di \SI{0,5}{\ampere} per un minuto porta $\Delta q = I\,\Delta t = 0{,}5 \cdot 60\,\si{\coulomb} = \SI{30}{\coulomb}$, cioè $30/\num{1,6e-19} \approx \num{1,9e20}$ elettroni.
+
+\subsection{Le leggi di Ohm}
+
+In molti conduttori, i metalli a temperatura costante e con buona approssimazione le soluzioni elettrolitiche, la corrente è direttamente proporzionale alla differenza di potenziale applicata. È la \textbf{prima legge di Ohm}; i conduttori che la seguono si dicono \textbf{ohmici}. La costante di proporzionalità definisce la \textbf{resistenza} $R$ del conduttore, che si misura in \textbf{ohm} ($\Omega$). La resistenza di un filo dipende dal materiale e dalla forma: cresce con la lunghezza $L$ e diminuisce con l'area $A$ della sezione, secondo la \textbf{seconda legge di Ohm}.
+\begin{formula}[Leggi di Ohm]
+V = R\,I
+\qquad\qquad
+\SI{1}{\ohm} = \SI{1}{\volt\per\ampere}
+\\
+R = \rho\,\frac{L}{A}
+\end{formula}
+La costante $\rho$ (rho) è la \textbf{resistività} del materiale, in \si{\ohm\metre}: dipende solo dal materiale e dalla temperatura. Qui $\rho$ non è la densità della UD3, e $R$ maiuscola è la resistenza, non un raggio. La resistività dei metalli cresce con la temperatura: un filo che si scalda conduce un po' peggio. Qualche valore indicativo:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lc@{\qquad}lc@{}}
+\toprule
+Materiale & $\rho$ (\si{\ohm\metre}) & Materiale & $\rho$ (\si{\ohm\metre}) \\
+\midrule
+rame & \num{1,7e-8} & sangue & circa 1,5 \\
+alluminio & \num{2,7e-8} & tessuto adiposo & circa 25 \\
+nichel-cromo & \num{1,1e-6} & acqua pura & \num{1,8e5} \\
+acqua di mare & circa 0,2 & vetro & da $10^{10}$ a $10^{14}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Fra i tessuti, quelli ricchi di acqua e di ioni (sangue, muscolo) conducono meglio di quelli poveri di acqua (grasso, osso, pelle secca).
+
+\begin{richiamo}{l'area del cerchio e il diametro}
+L'area di un cerchio di raggio $r$ è $A = \pi r^{2}$; con il diametro $D = 2r$ diventa $A = \pi D^{2}/4$. L'area è proporzionale al quadrato del diametro: un filo di diametro doppio ha sezione quattro volte più grande, e a parità di lunghezza resistenza quattro volte più piccola. E le aree vanno nel SI: $\SI{1}{\milli\metre\squared} = (\SI{e-3}{\metre})^{2} = \SI{e-6}{\metre\squared}$, non \SI{e-3}{\metre\squared}.
+\end{richiamo}
+
+\begin{esempio}
+Una prolunga ha due fili di rame lunghi \SI{25}{\metre} ciascuno, con sezione di \SI{2,5}{\milli\metre\squared}. (a) Quanto vale la resistenza dei due fili insieme? (b) Quanto vale la differenza di potenziale ai loro capi quando portano \SI{10}{\ampere}?
+
+(a) La corrente percorre un filo all'andata e l'altro al ritorno: in tutto $L = \SI{50}{\metre}$, con $A = \SI{2,5e-6}{\metre\squared}$:
+\[
+  R = \rho\,\frac{L}{A} = \SI{1,7e-8}{\ohm\metre} \cdot \frac{\SI{50}{\metre}}{\SI{2,5e-6}{\metre\squared}} = \num{1,7e-8} \cdot \num{2e7}\,\si{\ohm} = \SI{0,34}{\ohm}
+\]
+(b) Per la prima legge di Ohm, $V = RI = \SI{0,34}{\ohm} \cdot \SI{10}{\ampere} = \SI{3,4}{\volt}$: dei \SI{230}{\volt} della presa, \SI{3,4}{\volt} si perdono nella prolunga.
+\end{esempio}
+
+\subsection{La potenza e l'effetto Joule}
+
+Quando la carica $\Delta q$ attraversa un resistore, scende di potenziale di $V$ e perde l'energia potenziale $\Delta q\,V$. Nel resistore questa energia non diventa energia cinetica delle cariche, che urtano di continuo gli atomi del materiale: diventa agitazione degli atomi, cioè energia interna, e il resistore si scalda. È l'\textbf{effetto Joule}. La \textbf{potenza} è l'energia trasformata per unità di tempo, in watt, $\SI{1}{\watt} = \SI{1}{\joule\per\second}$ (UD2). Dividendo $\Delta q\,V$ per il tempo $\Delta t$ e usando $I = \Delta q/\Delta t$ si trova $P = VI$, e con la legge di Ohm le altre due forme:
+\begin{formula}[Potenza elettrica ed effetto Joule]
+P = V\,I = R\,I^{2} = \frac{V^{2}}{R}
+\qquad\qquad
+\text{energia trasformata nel tempo } \Delta t = P\,\Delta t
+\end{formula}
+$P = VI$ vale per qualunque dispositivo (la potenza assorbita da un motore o erogata da un generatore); le altre due solo per un resistore ohmico. Le bollette misurano l'energia in chilowattora: $\SI{1}{\kilo\watt\hour} = \SI{1000}{\watt} \cdot \SI{3600}{\second} = \SI{3,6e6}{\joule}$.
+
+\begin{esempio}
+Un bollitore da \SI{2000}{\watt} funziona a \SI{230}{\volt}. (a) Quanta corrente assorbe e quanto vale la sua resistenza? (b) Quanto tempo impiega a portare \SI{1}{\litre} d'acqua da \SI{20}{\celsius} a \SI{100}{\celsius}, se tutta l'energia va all'acqua?
+
+(a) Da $P = VI$, $I = P/V = 2000/230\,\si{\ampere} = 200/23\,\si{\ampere} \approx \SI{8,7}{\ampere}$. La resistenza è $R = V^{2}/P = \num{52900}/2000\,\si{\ohm} \approx \SI{26}{\ohm}$.
+
+(b) Un litro d'acqua ha massa \SI{1}{\kilo\gram}. Il calore che serve è (UD5)
+\[
+  Q = m\,c\,\Delta T = \SI{1}{\kilo\gram} \cdot \SI{4200}{\joule\per\kilo\gram\per\kelvin} \cdot \SI{80}{\kelvin} = \SI{336000}{\joule}
+\]
+e il tempo è $\Delta t = Q/P = \num{336000}/2000\,\si{\second} = \SI{168}{\second}$, poco meno di tre minuti. L'energia consumata è $\SI{336000}{\joule}/\SI{3,6e6}{\joule\per\kilo\watt\hour} \approx \SI{0,09}{\kilo\watt\hour}$.
+\end{esempio}
+
+\input{ud6/generati/lampo-ud6-joule}
+
+\begin{applicazione}{l'elettrobisturi}
+L'elettrobisturi taglia e coagula i tessuti con l'effetto Joule. Una corrente alternata, cioè una corrente che inverte il suo verso molte volte al secondo (sezione~\ref{sec:ud6-induzione}), ad alta frequenza, fra circa \SI{300}{\kilo\hertz} e qualche megahertz, entra nel corpo dalla punta sottile dello strumento ed esce da una piastra larga, la piastra di ritorno, appoggiata sulla pelle del paziente. L'alta frequenza non eccita nervi e muscoli, che rispondono solo alle correnti lente.
+
+Perché il tessuto si scalda solo sotto la punta? Un piccolo cilindro di tessuto, lungo $L$ e di sezione $A$, ha resistenza $\rho L/A$ e dissipa $P = RI^{2} = \rho L I^{2}/A$; diviso il volume $AL$, la potenza per unità di volume è $\rho\,(I/A)^{2}$, e va con il quadrato della corrente per unità di area. La stessa corrente passa per una punta di circa \SI{1}{\milli\metre\squared} e per una piastra di circa \SI{100}{\centi\metre\squared} $= \SI{e4}{\milli\metre\squared}$: sotto la punta la corrente per unità di area è $10^{4}$ volte più grande, e la potenza per unità di volume $(10^{4})^{2} = 10^{8}$ volte più grande. Il tessuto vicino alla punta vaporizza, quello sotto la piastra si scalda appena; se la piastra si stacca in parte, la corrente si concentra e il paziente rischia un'ustione proprio lì.
+\end{applicazione}
+
+\subsection{Resistenze in serie e in parallelo}
+
+Due resistori sono in \textbf{serie} se sono collegati uno dopo l'altro, senza diramazioni (figura~\ref{fig:ud6-serie-parallelo}a): la stessa corrente $I$ li attraversa, perché la carica non si accumula e non si perde lungo il filo. La differenza di potenziale totale è la somma delle due, $V = V_1 + V_2 = R_1 I + R_2 I = (R_1 + R_2)\,I$. La \textbf{resistenza equivalente}, quella di un unico resistore che con la stessa $V$ porta la stessa $I$, è quindi $R_1 + R_2$.
+
+Due resistori sono in \textbf{parallelo} se sono collegati agli stessi due punti (figura~\ref{fig:ud6-serie-parallelo}b): hanno la stessa differenza di potenziale $V$. La corrente si divide fra i due rami, e per la conservazione della carica la corrente che arriva al punto di diramazione (un \textbf{nodo}) è uguale alla somma di quelle che ne escono: $I = I_1 + I_2 = V/R_1 + V/R_2$. Dividendo per $V$ si trova l'inverso della resistenza equivalente.
+\begin{formula}[Resistenze in serie e in parallelo]
+\text{serie:}\quad R_{\text{eq}} = R_1 + R_2 + \dots
+\qquad\qquad
+\text{parallelo:}\quad \frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots
+\\
+\text{due in parallelo:}\quad R_{\text{eq}} = \frac{R_1 R_2}{R_1 + R_2}
+\end{formula}
+
+\begin{figure}[h]
+\centering
+\input{ud6/figure/serie-parallelo}
+\caption{(a) Due resistori in serie: la stessa corrente, le differenze di potenziale si sommano. (b) Due resistori in parallelo: la stessa differenza di potenziale, le correnti si sommano. (c) Il circuito dell'esempio: $R_1$ in serie con il parallelo di $R_2$ e $R_3$.}
+\label{fig:ud6-serie-parallelo}
+\end{figure}
+
+\begin{richiamo}{la somma di frazioni}
+Per sommare due frazioni si portano allo stesso denominatore, il minimo comune multiplo dei denominatori: $\frac16 + \frac1{12} = \frac2{12} + \frac1{12} = \frac3{12} = \frac14$. Il risultato del parallelo è l'\emph{inverso} della resistenza: da $1/R_{\text{eq}} = 1/4$ si ricava $R_{\text{eq}} = 4$. La formula «prodotto diviso somma» fa lo stesso conto per due resistori: $\frac{6 \cdot 12}{6 + 12} = \frac{72}{18} = 4$.
+\end{richiamo}
+
+\begin{esempio}
+Nel circuito della figura~\ref{fig:ud6-serie-parallelo}c un generatore ideale da \SI{24}{\volt} alimenta $R_1 = \SI{4}{\ohm}$ in serie con il parallelo di $R_2 = \SI{6}{\ohm}$ e $R_3 = \SI{12}{\ohm}$. Trova la corrente in ogni resistore e la potenza totale.
+
+Prima il parallelo: $R_{23} = (6 \cdot 12)/(6 + 12)\,\si{\ohm} = 72/18\,\si{\ohm} = \SI{4}{\ohm}$. Poi la serie: $R_{\text{eq}} = R_1 + R_{23} = 4 + 4 = \SI{8}{\ohm}$. La corrente erogata dal generatore, che attraversa $R_1$, è
+\[
+  I_1 = \frac{V}{R_{\text{eq}}} = \frac{\SI{24}{\volt}}{\SI{8}{\ohm}} = \SI{3}{\ampere}
+\]
+Ai capi di $R_1$ ci sono $V_1 = R_1 I_1 = 4 \cdot 3 = \SI{12}{\volt}$; ai capi del parallelo il resto, $24 - 12 = \SI{12}{\volt}$. Quindi $I_2 = 12/6 = \SI{2}{\ampere}$ e $I_3 = 12/12 = \SI{1}{\ampere}$, e infatti $I_2 + I_3 = \SI{3}{\ampere} = I_1$. La potenza totale è $P = V I_1 = 24 \cdot 3 = \SI{72}{\watt}$; resistore per resistore, $4 \cdot 3^{2} + 6 \cdot 2^{2} + 12 \cdot 1^{2} = 36 + 24 + 12 = \SI{72}{\watt}$.
+\end{esempio}
+
+\begin{attenzione}[il parallelo abbassa la resistenza]
+La resistenza equivalente di un parallelo è sempre \emph{più piccola} della più piccola delle resistenze: aggiungere un ramo apre una strada in più alla corrente. Due resistori uguali in parallelo danno metà della resistenza di uno; $n$ resistori uguali, un $n$-esimo. In casa gli elettrodomestici sono collegati in parallelo, tutti alla stessa differenza di potenziale di \SI{230}{\volt}: accenderne uno in più abbassa la resistenza equivalente e aumenta la corrente totale, finché l'interruttore automatico scatta.
+\end{attenzione}
+
+\input{ud6/generati/lampo-ud6-parallelo}
+
+\begin{applicazione}{la sicurezza elettrica e il microshock}
+Gli effetti di una corrente sul corpo dipendono dalla sua intensità, non dalla differenza di potenziale in sé. Per una corrente alternata a \SI{50}{\hertz} che va da una mano all'altra, i valori di riferimento sono circa \SI{1}{\milli\ampere} per sentirla, circa \SI{10}{\milli\ampere} per la contrazione dei muscoli che impedisce di lasciare la presa, circa \SI{100}{\milli\ampere} per la \textbf{fibrillazione ventricolare}, in cui il cuore smette di pompare. È il \textbf{macroshock}: la corrente entra ed esce dalla pelle, e solo una piccola parte attraversa il cuore.
+
+La resistenza del corpo fra le due mani dipende soprattutto dalla pelle: circa \SI{100}{\kilo\ohm} con la pelle asciutta, circa \SI{1}{\kilo\ohm} con la pelle bagnata. Toccando i \SI{230}{\volt} di rete, per la legge di Ohm:
+\[
+  I_{\text{asciutta}} = \frac{\SI{230}{\volt}}{\SI{1e5}{\ohm}} = \SI{2,3e-3}{\ampere} = \SI{2,3}{\milli\ampere}
+  \qquad
+  I_{\text{bagnata}} = \frac{\SI{230}{\volt}}{\SI{1e3}{\ohm}} = \SI{0,23}{\ampere} = \SI{230}{\milli\ampere}
+\]
+Con la pelle asciutta la scossa si sente; con la pelle bagnata la corrente supera la soglia di fibrillazione. L'interruttore differenziale (il «salvavita») interrompe il circuito quando una corrente di circa \SI{30}{\milli\ampere} prende una strada diversa dai fili, per esempio attraverso una persona verso terra.
+
+In ospedale c'è un rischio in più. Un catetere cardiaco o il filo di un pacemaker temporaneo portano la corrente direttamente nel cuore, saltando la resistenza della pelle: bastano correnti di circa \SI{100}{\micro\ampere}, mille volte meno che nel macroshock, per scatenare la fibrillazione. È il \textbf{microshock}. Con una resistenza del percorso interno di circa \SI{1}{\kilo\ohm}, quella corrente richiede solo $V = RI = \num{1e3} \cdot \num{1e-4}\,\si{\volt} = \SI{0,1}{\volt}$: una tensione che nessuno sentirebbe toccando l'apparecchio con le mani. Per questo gli apparecchi a contatto con il cuore devono disperdere verso il paziente al massimo una decina di microampere, e tutte le masse metalliche della stanza sono collegate alla stessa terra.
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{Capacità e condensatori}
+\label{sec:ud6-condensatori}
+
+\subsection{La capacità}
+
+Un \textbf{condensatore} è formato da due conduttori vicini, le \textbf{armature}, separati da un isolante. Collegandolo a un generatore, le armature si caricano con cariche uguali e opposte, $+Q$ e $-Q$, e fra loro si stabilisce una differenza di potenziale $V$. La carica accumulata è proporzionale alla differenza di potenziale, e la costante di proporzionalità è la \textbf{capacità} del condensatore:
+\begin{formula}[Capacità]
+C = \frac{Q}{V}
+\qquad\qquad
+\SI{1}{\farad} = \SI{1}{\coulomb\per\volt}
+\end{formula}
+L'unità è il \textbf{farad}. È un'unità enorme: i condensatori comuni hanno capacità di picofarad, nanofarad o microfarad. Qui $Q$ è la carica di un'armatura (non il calore della UD5), e $C$ in corsivo è la capacità, mentre \si{\coulomb} in tondo è l'unità della carica.
+
+\subsection{Il condensatore piano}
+
+Il condensatore più semplice è il \textbf{condensatore piano}: due lastre metalliche parallele di area $A$, a distanza $d$ piccola rispetto alle loro dimensioni (figura~\ref{fig:ud6-condensatore}). Fra le armature il campo è uniforme, come nella figura~\ref{fig:ud6-piastre}a, e si dimostra che vale $E = Q/(\varepsilon_0 A)$: è proporzionale alla carica per unità di area. La differenza di potenziale è $V = Ed = Qd/(\varepsilon_0 A)$, e dividendo $Q$ per $V$ si ottiene la capacità. Se fra le armature c'è un dielettrico, il campo, a parità di carica, è $\varepsilon_r$ volte più piccolo, e la capacità $\varepsilon_r$ volte più grande:
+\begin{formula}[Capacità del condensatore piano]
+C = \varepsilon_0\,\frac{A}{d}
+\qquad\qquad
+\text{con un dielettrico:}\quad C = \varepsilon_r\,\varepsilon_0\,\frac{A}{d}
+\end{formula}
+La capacità cresce con l'area e diminuisce con la distanza: armature grandi e vicine accumulano molta carica con poca differenza di potenziale.
+
+\begin{figure}[h]
+\centering
+\input{ud6/figure/condensatore}
+\caption{Condensatore piano: due armature di area $A$ a distanza $d$, con cariche $+Q$ e $-Q$. Fra le armature il campo $\vec E$ è uniforme; a destra, il simbolo del condensatore negli schemi elettrici.}
+\label{fig:ud6-condensatore}
+\end{figure}
+
+\begin{esempio}
+(a) Qual è la capacità di un condensatore piano nel vuoto con armature di \SI{100}{\centi\metre\squared} a \SI{1}{\milli\metre} di distanza? (b) Quanto dovrebbe essere grande l'area per avere \SI{1}{\micro\farad} alla stessa distanza?
+
+(a) Nel SI, $A = \SI{100}{\centi\metre\squared} = 100 \cdot \SI{e-4}{\metre\squared} = \SI{e-2}{\metre\squared}$ e $d = \SI{e-3}{\metre}$:
+\[
+  C = \varepsilon_0\,\frac{A}{d} = \SI{8,85e-12}{\farad\per\metre} \cdot \frac{\SI{e-2}{\metre\squared}}{\SI{e-3}{\metre}} = \num{8,85e-12} \cdot 10\,\si{\farad} \approx \SI{8,9e-11}{\farad} = \SI{89}{\pico\farad}
+\]
+(b) Da $C = \varepsilon_0 A/d$ si ricava $A = Cd/\varepsilon_0$:
+\[
+  A = \frac{\SI{e-6}{\farad} \cdot \SI{e-3}{\metre}}{\SI{8,85e-12}{\farad\per\metre}} = \frac{10^{-9}}{\num{8,85e-12}}\,\si{\metre\squared} = \frac{1000}{8{,}85}\,\si{\metre\squared} \approx \SI{113}{\metre\squared}
+\]
+Più di cento metri quadrati: per questo i condensatori reali usano armature sottilissime arrotolate, distanze molto piccole e dielettrici con $\varepsilon_r$ alto.
+\end{esempio}
+
+\begin{attenzione}[il dielettrico con il generatore collegato o staccato]
+Inserendo un dielettrico la capacità diventa $\varepsilon_r$ volte più grande, ma che cosa succede a carica e differenza di potenziale dipende dal circuito. Se il condensatore resta collegato al generatore, $V$ non cambia e la carica cresce: $Q = CV$ diventa $\varepsilon_r$ volte più grande. Se il condensatore è stato caricato e poi staccato, la carica non ha dove andare e resta la stessa: è $V = Q/C$ a diventare $\varepsilon_r$ volte più piccola.
+\end{attenzione}
+
+\input{ud6/generati/lampo-ud6-dielettrico}
+
+\subsection{L'energia di un condensatore}
+
+Per caricare un condensatore il generatore deve portare la carica da un'armatura all'altra contro la differenza di potenziale, e il lavoro che compie resta immagazzinato come energia potenziale elettrica. All'inizio le armature sono scariche e la differenza di potenziale è zero; man mano che la carica $q$ cresce da 0 a $Q$, la differenza di potenziale $q/C$ cresce in proporzione da 0 a $V$. Il lavoro per portare un po' di carica $\Delta q$ è $V\,\Delta q$, cioè l'area di un rettangolino sotto la retta nel grafico della differenza di potenziale in funzione della carica; sommando tutti i rettangolini si ottiene l'area del triangolo di base $Q$ e altezza $V$, cioè $\frac12 QV$: la metà del rettangolo $QV$ che si avrebbe se la differenza di potenziale valesse $V$ fin dall'inizio (l'area di un triangolo è metà base per altezza).
+
+\begin{formula}[Energia di un condensatore carico]
+U = \frac12\,Q\,V = \frac12\,C\,V^{2} = \frac{Q^{2}}{2C}
+\end{formula}
+Le tre forme si passano l'una nell'altra con $Q = CV$.
+
+\begin{applicazione}{il defibrillatore}
+Nella fibrillazione ventricolare le fibre del cuore si contraggono in modo disordinato, e il cuore non pompa più sangue. Il \textbf{defibrillatore} fa passare nel torace una scarica intensa e breve che depolarizza insieme quasi tutte le fibre, così che il pacemaker naturale possa riprendere a dare il ritmo. L'energia viene da un condensatore, caricato in pochi secondi da una batteria e scaricato attraverso il paziente con due piastre.
+
+Si prenda un condensatore da \SI{100}{\micro\farad} caricato a \SI{2000}{\volt}. L'energia immagazzinata e la carica sono
+\begin{gather*}
+  U = \frac12 C V^{2} = \frac12 \cdot \SI{1e-4}{\farad} \cdot (\SI{2e3}{\volt})^{2} = \frac12 \cdot \num{1e-4} \cdot \num{4e6}\,\si{\joule} = \SI{200}{\joule}
+  \\
+  Q = CV = \num{1e-4} \cdot \num{2e3}\,\si{\coulomb} = \SI{0,2}{\coulomb}
+\end{gather*}
+Il torace del paziente fra le due piastre ha una resistenza di circa \SI{50}{\ohm}: all'inizio della scarica la corrente è $I = V/R = 2000/50\,\si{\ampere} = \SI{40}{\ampere}$, poi cala man mano che il condensatore si scarica. Se la scarica dura circa \SI{10}{\milli\second}, la potenza media è $P = U/\Delta t = \SI{200}{\joule}/\SI{0,01}{\second} = \SI{20}{\kilo\watt}$: una potenza enorme, per un tempo brevissimo.
+\end{applicazione}
+
+\input{ud6/generati/lampo-ud6-defibrillatore}
+
+\subsection{Condensatori in serie e in parallelo}
+
+In \textbf{parallelo} i condensatori hanno la stessa differenza di potenziale, e le loro cariche si sommano: $Q = C_1 V + C_2 V = (C_1 + C_2)\,V$. In \textbf{serie} hanno la stessa carica (l'armatura negativa del primo e quella positiva del secondo, collegate fra loro e isolate dal resto, partono neutre e restano neutre in totale), e le differenze di potenziale si sommano: $V = Q/C_1 + Q/C_2$.
+\begin{formula}[Condensatori in parallelo e in serie]
+\text{parallelo:}\quad C_{\text{eq}} = C_1 + C_2 + \dots
+\qquad\qquad
+\text{serie:}\quad \frac{1}{C_{\text{eq}}} = \frac{1}{C_1} + \frac{1}{C_2} + \dots
+\end{formula}
+
+\begin{attenzione}[le regole sono rovesciate rispetto ai resistori]
+Per i condensatori si sommano direttamente le capacità \emph{in parallelo} e gli inversi \emph{in serie}; per i resistori è il contrario. Un trucco per ricordarlo: mettere due condensatori in parallelo equivale ad allargare le armature (la capacità cresce con l'area), metterli in serie equivale ad allontanarle (la capacità diminuisce con la distanza).
+\end{attenzione}
+
+\begin{esempio}
+Due condensatori, $C_1 = \SI{2}{\micro\farad}$ e $C_2 = \SI{6}{\micro\farad}$, sono collegati a un generatore da \SI{16}{\volt}. Trova capacità equivalente, carica e differenza di potenziale di ciascuno (a) in serie, (b) in parallelo.
+
+(a) In serie: $1/C_{\text{eq}} = 1/2 + 1/6 = 3/6 + 1/6 = 4/6$, quindi $C_{\text{eq}} = 6/4 = \SI{1,5}{\micro\farad}$. La carica, la stessa su tutti e due, è $Q = C_{\text{eq}} V = 1{,}5 \cdot 16 = \SI{24}{\micro\coulomb}$. Le differenze di potenziale: $V_1 = Q/C_1 = 24/2 = \SI{12}{\volt}$ e $V_2 = 24/6 = \SI{4}{\volt}$; la somma è \SI{16}{\volt}, come deve. Il condensatore più piccolo prende la differenza di potenziale più grande.
+
+(b) In parallelo: $C_{\text{eq}} = 2 + 6 = \SI{8}{\micro\farad}$; tutti e due hanno \SI{16}{\volt}, con $Q_1 = 2 \cdot 16 = \SI{32}{\micro\coulomb}$ e $Q_2 = 6 \cdot 16 = \SI{96}{\micro\coulomb}$, in tutto $\SI{128}{\micro\coulomb} = C_{\text{eq}} V$.
+\end{esempio}
+
+\begin{applicazione}{la membrana cellulare come condensatore}
+La membrana di una cellula è un condensatore: due soluzioni conduttrici, il citoplasma e il liquido extracellulare, separate da un sottile strato isolante di lipidi. La sua capacità per unità di area è circa \SI{1}{\micro\farad\per\centi\metre\squared}, cioè $\SI{e-6}{\farad}/\SI{e-4}{\metre\squared} = \SI{e-2}{\farad\per\metre\squared}$. Con uno spessore di \SI{7}{\nano\metre}, dalla formula del condensatore piano si ricava una costante dielettrica efficace
+\[
+  \varepsilon_r = \frac{C}{A} \cdot \frac{d}{\varepsilon_0} = \frac{\num{e-2} \cdot \num{7e-9}}{\num{8,85e-12}} = \frac{\num{7e-11}}{\num{8,85e-12}} = \frac{70}{8{,}85} \approx 8
+\]
+Quanti ioni servono per tenere la membrana a \SI{70}{\milli\volt}? Per ogni metro quadrato di membrana la carica è $Q/A = (C/A)\,V = \num{e-2} \cdot 0{,}070\,\si{\coulomb\per\metre\squared} = \SI{7e-4}{\coulomb\per\metre\squared}$. Su un micrometro quadrato, $\SI{1}{\micro\metre\squared} = \SI{e-12}{\metre\squared}$, la carica è $\SI{7e-16}{\coulomb}$, e gli ioni monovalenti sono
+\[
+  n = \frac{\SI{7e-16}{\coulomb}}{\SI{1,6e-19}{\coulomb}} \approx \num{4,4e3}
+\]
+Un micrometro cubo di citoplasma ($\SI{e-15}{\litre}$), con il potassio a circa \SI{0,14}{\mole\per\litre}, contiene invece $0{,}14 \cdot 10^{-15} \cdot \num{6e23} \approx \num{8,4e7}$ ioni potassio. Per caricare la membrana basta spostare pochissimi ioni, e le concentrazioni restano in pratica le stesse.
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{Il campo magnetico}
+\label{sec:ud6-magnetico}
+
+\subsection{Magneti e campo magnetico}
+
+Un magnete attira il ferro e ha due \textbf{poli}, nord e sud: poli dello stesso nome si respingono, poli di nome diverso si attraggono. Diversamente dalle cariche elettriche, i poli non si separano: spezzando un magnete si ottengono due magneti più piccoli, ciascuno con il suo nord e il suo sud. L'ago di una bussola è un piccolo magnete libero di ruotare, e il suo polo nord punta verso il nord geografico perché la Terra stessa si comporta come un grande magnete.
+
+Intorno a un magnete c'è un \textbf{campo magnetico} $\vec B$, un vettore che in ogni punto ha la direzione in cui si dispone l'ago di una bussola, con il verso che va dal suo polo sud al suo polo nord. Le linee del campo magnetico escono dal polo nord del magnete, rientrano nel polo sud e, dentro il magnete, si richiudono: a differenza delle linee del campo elettrico, sono sempre chiuse. Il campo magnetico si misura in \textbf{tesla} (\si{\tesla}), un'unità definita fra poco con la forza che il campo esercita su una carica in moto. Il campo magnetico terrestre vale circa \SI{5e-5}{\tesla}, quello di una calamita da frigorifero qualche millitesla, quello di un tomografo a risonanza magnetica \SI{1,5}{\tesla} o \SI{3}{\tesla}.
+
+\subsection{Le correnti producono campi magnetici: l'esperimento di Oersted}
+
+Nel 1820 Hans Christian Oersted notò che l'ago di una bussola posta vicino a un filo si girava quando nel filo passava corrente, e tornava nella sua posizione quando la corrente cessava. Era la prima prova di un legame fra elettricità e magnetismo: \emph{una corrente elettrica produce un campo magnetico}. Oggi sappiamo che è l'unica origine del campo magnetico: anche i magneti devono il loro campo a correnti microscopiche, gli elettroni che ruotano negli atomi.
+
+Le linee del campo di un filo rettilineo percorso dalla corrente $I$ sono circonferenze con centro sul filo, in piani perpendicolari al filo (figura~\ref{fig:ud6-filo}). Il verso si trova con la \textbf{regola della mano destra}: se il pollice della mano destra indica il verso della corrente, le altre dita, chiudendosi intorno al filo, indicano il verso delle linee di campo. Il modulo del campo è direttamente proporzionale alla corrente e inversamente proporzionale alla distanza $r$ dal filo (\textbf{legge di Biot-Savart}):
+\begin{formula}[Campo magnetico di un filo rettilineo]
+B = \frac{\mu_0}{2\pi}\,\frac{I}{r}
+\qquad\qquad
+\mu_0 = 4\pi \cdot \SI{e-7}{\tesla\metre\per\ampere}
+\qquad
+\frac{\mu_0}{2\pi} = \SI{2e-7}{\tesla\metre\per\ampere}
+\\
+\text{solenoide:}\quad B = \mu_0\,n\,I
+\end{formula}
+La costante $\mu_0$ è la \textbf{permeabilità magnetica del vuoto}. Avvolgendo il filo in una lunga bobina di spire fitte, un \textbf{solenoide}, i campi delle spire si sommano: dentro il solenoide il campo è quasi uniforme, parallelo all'asse, e vale $\mu_0 n I$, dove $n$ è il numero di spire per metro di lunghezza. È il modo più semplice per produrre un campo magnetico intenso e uniforme.
+
+\begin{figure}[h]
+\centering
+\input{ud6/figure/filo}
+\caption{(a) Le linee del campo magnetico di un filo percorso da corrente sono circonferenze centrate sul filo; il verso è dato dalla regola della mano destra: pollice lungo la corrente, le dita chiuse indicano $\vec B$. (b) Vista dall'alto, con la corrente che esce dal foglio ($\odot$): il campo gira in senso antiorario e si indebolisce allontanandosi dal filo, come $1/r$. Gli aghi delle bussole si dispongono lungo le linee, come nell'esperimento di Oersted.}
+\label{fig:ud6-filo}
+\end{figure}
+
+\begin{esempio}
+Quanto vale il campo magnetico a \SI{5}{\centi\metre} da un filo rettilineo percorso da una corrente di \SI{10}{\ampere}?
+\[
+  B = \frac{\mu_0}{2\pi}\,\frac{I}{r} = \SI{2e-7}{\tesla\metre\per\ampere} \cdot \frac{\SI{10}{\ampere}}{\SI{0,05}{\metre}} = \num{2e-7} \cdot 200\,\si{\tesla} = \SI{4e-5}{\tesla}
+\]
+È quasi uguale al campo magnetico terrestre: per questo la bussola di Oersted, vicino al filo, si girava in modo ben visibile.
+\end{esempio}
+
+\subsection{La forza di Lorentz}
+
+Un campo magnetico non agisce su una carica ferma, ma su una carica in moto sì. Su una carica $q$ che si muove con velocità $\vec v$ in un campo $\vec B$ agisce la \textbf{forza di Lorentz}, che si scrive con il prodotto vettoriale (UD1):
+\begin{formula}[Forza di Lorentz]
+\vec F = q\,\vec v \times \vec B
+\qquad\qquad
+F = |q|\,v\,B\,\sin\theta
+\\
+\SI{1}{\tesla} = \SI{1}{\newton\per\ampere\per\metre}
+\end{formula}
+dove $\theta$ è l'angolo fra $\vec v$ e $\vec B$. Le sue proprietà vengono tutte dal prodotto vettoriale (figura~\ref{fig:ud6-lorentz}a):
+\begin{itemize}
+  \item la forza è perpendicolare sia alla velocità sia al campo;
+  \item il verso, per una carica positiva, è quello di $\vec v \times \vec B$, dato dalla regola della mano destra (pollice lungo $\vec v$, indice lungo $\vec B$, il medio indica $\vec F$); per una carica negativa è il verso opposto;
+  \item il modulo è massimo, $|q|vB$, se la velocità è perpendicolare al campo, ed è nullo se la velocità è parallela al campo ($\sin\ang{0} = 0$).
+\end{itemize}
+Il tesla è il campo che esercita la forza di \SI{1}{\newton} su una carica di \SI{1}{\coulomb} che si muove a \SI{1}{\metre\per\second} perpendicolarmente al campo; poiché $\si{\coulomb\metre\per\second} = \si{\ampere\metre}$, $\SI{1}{\tesla} = \SI{1}{\newton\per\ampere\per\metre}$. Qui $T$ maiuscola in corsivo sarà un periodo, mentre \si{\tesla} in tondo è l'unità del campo.
+
+Poiché la forza è sempre perpendicolare alla velocità, la forza magnetica non compie lavoro ($\cos\ang{90} = 0$): cambia la direzione del moto, ma non il modulo della velocità, né l'energia cinetica.
+
+\begin{richiamo}{seno e coseno degli angoli notevoli}
+Nella forza di Lorentz compare il seno dell'angolo fra velocità e campo, nel flusso magnetico (sezione~\ref{sec:ud6-induzione}) il coseno dell'angolo fra campo e normale. I valori da ricordare (UD1): $\sin\ang{0} = 0$, $\sin\ang{30} = \frac12$, $\sin\ang{45} = \frac{\sqrt2}{2} \approx 0{,}71$, $\sin\ang{60} = \frac{\sqrt3}{2} \approx 0{,}87$, $\sin\ang{90} = 1$; il coseno va al contrario, $\cos\ang{0} = 1$, $\cos\ang{60} = \frac12$, $\cos\ang{90} = 0$. Il seno è massimo per angoli retti, il coseno per angoli nulli.
+\end{richiamo}
+
+\begin{figure}[h]
+\centering
+\input{ud6/figure/lorentz}
+\caption{(a) Forza di Lorentz su una carica positiva: $\vec F = q\,\vec v \times \vec B$ è perpendicolare al piano di $\vec v$ e $\vec B$. (b) In un campo uniforme che entra nel foglio ($\otimes$), un protone con velocità perpendicolare al campo percorre una circonferenza: la forza di Lorentz punta sempre verso il centro.}
+\label{fig:ud6-lorentz}
+\end{figure}
+
+\begin{esempio}
+Un protone si muove a \SI{1e6}{\metre\per\second} in un campo magnetico di \SI{0,5}{\tesla}. Quanto vale la forza su di lui se la velocità è (a) perpendicolare al campo, (b) a \ang{30} dal campo, (c) parallela al campo?
+
+(a) $F = evB = \SI{1,6e-19}{\coulomb} \cdot \SI{1e6}{\metre\per\second} \cdot \SI{0,5}{\tesla} = \SI{8e-14}{\newton}$. (b) Con $\sin\ang{30} = \frac12$, la forza è la metà: \SI{4e-14}{\newton}. (c) Con $\sin\ang{0} = 0$ la forza è nulla: il protone prosegue in linea retta lungo il campo.
+\end{esempio}
+
+\input{ud6/generati/lampo-ud6-lorentz}
+
+\subsection{La forza su un filo percorso da corrente}
+
+Un filo percorso da corrente in un campo magnetico contiene cariche in moto, e la somma delle forze di Lorentz su di esse è una forza sul filo. In un tratto di filo lungo $L$ la carica in moto $q$ impiega il tempo $\Delta t = L/v$ a percorrerlo, quindi $qv = q L/\Delta t = IL$, e la forza $qvB\sin\theta$ diventa
+\begin{formula}[Forza su un filo percorso da corrente]
+F = I\,L\,B\,\sin\theta
+\end{formula}
+dove $\theta$ è l'angolo fra il filo (con il verso della corrente) e il campo. La forza è perpendicolare al filo e al campo, con il verso dato dalla regola della mano destra con il pollice lungo la corrente. Su questa forza si basano i motori elettrici: una spira percorsa da corrente in un campo magnetico subisce forze opposte sui due lati e ruota. Due fili paralleli percorsi da corrente si esercitano una forza, perché ciascuno sta nel campo dell'altro: si attraggono se le correnti hanno lo stesso verso, si respingono se hanno versi opposti.
+
+Per esempio, su un filo lungo \SI{20}{\centi\metre}, percorso da \SI{5}{\ampere} e perpendicolare a un campo di \SI{0,4}{\tesla}, agisce la forza $F = ILB = 5 \cdot 0{,}2 \cdot 0{,}4\,\si{\newton} = \SI{0,4}{\newton}$; se il filo forma con il campo un angolo di \ang{30}, la forza si dimezza, $\SI{0,4}{\newton} \cdot \sin\ang{30} = \SI{0,2}{\newton}$.
+
+\subsection{Il moto di una carica in un campo magnetico uniforme}
+
+Una carica che entra in un campo magnetico uniforme con velocità perpendicolare al campo risente di una forza di modulo costante, $|q|vB$, sempre perpendicolare alla velocità. Una forza così è proprio quella del \textbf{moto circolare uniforme} (UD2): un corpo che percorre una circonferenza di raggio $r$ a velocità costante $v$ ha un'accelerazione diretta verso il centro, $a = v^{2}/r$, e la forza che lo tiene sulla circonferenza è $mv^{2}/r$. La forza di Lorentz fa da forza centripeta (figura~\ref{fig:ud6-lorentz}b):
+\[
+  |q|\,v\,B = \frac{m v^{2}}{r}
+  \quad\Longrightarrow\quad
+  r = \frac{m v}{|q|\,B}
+\]
+Il periodo, cioè il tempo di un giro, è la circonferenza diviso la velocità, $T = 2\pi r/v$:
+\begin{formula}[Moto circolare in un campo magnetico uniforme]
+r = \frac{m\,v}{|q|\,B}
+\qquad\qquad
+T = \frac{2\pi\,m}{|q|\,B}
+\qquad (\vec v \perp \vec B)
+\end{formula}
+Il raggio cresce con la massa e con la velocità, e diminuisce con il campo. Il periodo, invece, non dipende dalla velocità: una particella più veloce percorre una circonferenza più grande nello stesso tempo. Se la velocità non è perpendicolare al campo, la componente parallela al campo non subisce forza, e la traiettoria è un'elica che si avvolge intorno alle linee di campo.
+
+\begin{esempio}
+Un protone si muove a \SI{1e6}{\metre\per\second} perpendicolarmente a un campo magnetico uniforme di \SI{1}{\tesla}. Calcola il raggio dell'orbita e il periodo. Che raggio avrebbe un elettrone con la stessa velocità?
+\[
+  r = \frac{m_p v}{eB} = \frac{\SI{1,67e-27}{\kilo\gram} \cdot \SI{1e6}{\metre\per\second}}{\SI{1,6e-19}{\coulomb} \cdot \SI{1}{\tesla}} = \frac{1{,}67}{1{,}6} \cdot 10^{-21+19}\,\si{\metre} \approx \SI{1,04e-2}{\metre} \approx \SI{1}{\centi\metre}
+\]
+\[
+  T = \frac{2\pi\,m_p}{eB} = \frac{6{,}28 \cdot \num{1,67e-27}}{\num{1,6e-19} \cdot 1}\,\si{\second} = \frac{\num{10,5e-27}}{\num{1,6e-19}}\,\si{\second} \approx \SI{6,6e-8}{\second}
+\]
+con $6{,}28 \cdot 1{,}67 \approx 10{,}5$ e $10{,}5/1{,}6 \approx 6{,}6$. Il protone fa $1/T = 1/(\num{6,6e-8}\,\si{\second}) \approx \num{1,5e7}$ giri al secondo. Per l'elettrone basta sostituire la massa: $r = \num{9,1e-31} \cdot \num{1e6}/\num{1,6e-19}\,\si{\metre} \approx \SI{5,7e-6}{\metre}$, circa 1800 volte meno, come il rapporto fra le masse.
+\end{esempio}
+
+\input{ud6/generati/lampo-ud6-raggio}
+
+Che il periodo non dipenda dalla velocità è il principio del \textbf{ciclotrone}, l'acceleratore con cui alcuni ospedali producono i radionuclidi della PET (UD7): i protoni girano in un campo magnetico uniforme e a ogni mezzo giro una differenza di potenziale alternata, sincronizzata con il periodo, li accelera; il raggio cresce a ogni giro, ma il tempo di un giro resta lo stesso.
+
+\begin{applicazione}{il magnete della risonanza magnetica}
+Il tomografo a risonanza magnetica (RM) ha bisogno di un campo magnetico intenso e uniforme in tutto il volume in cui sta il paziente: di solito \SI{1,5}{\tesla} o \SI{3}{\tesla}, cioè $1{,}5/\num{5e-5} = \num{3e4}$ e $3/\num{5e-5} = \num{6e4}$ volte il campo terrestre. Lo produce un grande solenoide. Per avere \SI{1,5}{\tesla} serve
+\[
+  n\,I = \frac{B}{\mu_0} = \frac{\SI{1,5}{\tesla}}{4\pi \cdot \SI{e-7}{\tesla\metre\per\ampere}} = \frac{\num{1,5e7}}{12{,}6}\,\si{\ampere\per\metre} \approx \SI{1,2e6}{\ampere\per\metre}
+\]
+per esempio 3000 spire per metro percorse da \SI{400}{\ampere}. Con un filo di rame una corrente così fonderebbe il magnete per effetto Joule; per questo le spire sono di un \textbf{superconduttore}, che raffreddato con elio liquido a circa \SI{4}{\kelvin} ha resistenza nulla. La corrente circola da sola e il campo è sempre acceso: un oggetto di ferro (una bombola d'ossigeno, una forbice) viene attirato con violenza verso il magnete e diventa un proiettile, e alcuni dispositivi impiantati, come certi pacemaker, sono una controindicazione all'esame.
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{L'induzione elettromagnetica}
+\label{sec:ud6-induzione}
+
+\subsection{Il flusso del campo magnetico}
+
+Oersted aveva mostrato che una corrente produce un campo magnetico. Pochi anni dopo, nel 1831, Michael Faraday scoprì il fenomeno inverso: un campo magnetico può produrre una corrente, ma solo se \emph{cambia}. Un magnete fermo vicino a una bobina collegata a un amperometro non fa nulla; se lo si avvicina o lo si allontana, nella bobina passa corrente, tanto più intensa quanto più rapido è il moto. Lo stesso succede tenendo fermo il magnete e muovendo la bobina, o accendendo e spegnendo la corrente in una seconda bobina vicina. È l'\textbf{induzione elettromagnetica}, e la corrente che compare si chiama \textbf{corrente indotta}.
+
+La grandezza che deve cambiare è il \textbf{flusso del campo magnetico} attraverso la superficie delimitata dal circuito. Per una spira piana di area $A$ in un campo uniforme $\vec B$ il flusso è
+\begin{formula}[Flusso del campo magnetico]
+\Phi = B\,A\,\cos\theta
+\qquad\qquad
+\SI{1}{\weber} = \SI{1}{\tesla\metre\squared}
+\end{formula}
+dove $\theta$ è l'angolo fra il campo e la \textbf{normale} alla spira, cioè la retta perpendicolare al suo piano. Il flusso conta le linee di campo che attraversano la spira: è massimo, $BA$, se il campo è perpendicolare alla spira ($\theta = \ang{0}$), nullo se il campo è parallelo al piano della spira ($\theta = \ang{90}$). Per una bobina di $N$ spire il flusso totale è $N$ volte quello di una spira. L'unità è il \textbf{weber} (\si{\weber}).
+
+\subsection{La legge di Faraday-Neumann-Lenz}
+
+Quando il flusso attraverso un circuito cambia, nel circuito compare una forza elettromotrice indotta, uguale alla rapidità con cui il flusso cambia:
+\begin{formula}[Legge di Faraday-Neumann-Lenz]
+\mathcal E = -N\,\frac{\Delta\Phi}{\Delta t}
+\qquad\qquad
+I = \frac{|\mathcal E|}{R}
+\end{formula}
+Qui $\Delta\Phi$ è la variazione del flusso in una spira nel tempo $\Delta t$, e $\mathcal E$ è la forza elettromotrice media in quel tempo. Se il circuito è chiuso e ha resistenza $R$, la fem fa circolare la corrente indotta $I = |\mathcal E|/R$. Il flusso può cambiare in tre modi, perché $\Phi = BA\cos\theta$: cambia il campo $B$ (un magnete che si avvicina, una corrente che si accende), cambia l'area $A$ (un circuito che si allarga), cambia l'angolo $\theta$ (una spira che ruota). Conta la \emph{variazione}: un flusso grande ma costante non induce nulla.
+
+Il segno meno è la \textbf{legge di Lenz}: \emph{la corrente indotta ha il verso che produce un campo magnetico che si oppone alla variazione del flusso che l'ha generata}. Se il flusso aumenta, il campo della corrente indotta è opposto al campo esterno; se il flusso diminuisce, è concorde, e cerca di mantenerlo. Avvicinando il polo nord di un magnete a una spira, la corrente indotta fa della faccia della spira rivolta verso il magnete un polo nord, che respinge il magnete (figura~\ref{fig:ud6-lenz}); allontanandolo, la faccia diventa un polo sud, che lo trattiene. In entrambi i casi chi muove il magnete deve compiere un lavoro, ed è proprio questo lavoro che diventa l'energia della corrente indotta. Se la corrente indotta favorisse la variazione, il magnete accelererebbe da solo e si creerebbe energia dal nulla: la legge di Lenz è la conservazione dell'energia.
+
+\begin{figure}[h]
+\centering
+\input{ud6/figure/lenz}
+\caption{Legge di Lenz. Il polo nord di un magnete si avvicina alla spira e il flusso del campo $\vec B$ attraverso la spira aumenta. La corrente indotta $I$ produce un campo $\vec B_{\text{ind}}$ opposto, che si oppone all'aumento: la faccia della spira rivolta verso il magnete diventa un polo nord e respinge il magnete.}
+\label{fig:ud6-lenz}
+\end{figure}
+
+\begin{esempio}
+Una bobina di 200 spire, ciascuna di area \SI{5}{\centi\metre\squared}, ha resistenza \SI{6}{\ohm} ed è perpendicolare a un campo magnetico uniforme. In \SI{0,01}{\second} il campo passa da zero a \SI{0,3}{\tesla}. Quanto valgono la fem media indotta e la corrente indotta?
+
+L'area in metri quadrati è $A = 5 \cdot \SI{e-4}{\metre\squared} = \SI{5e-4}{\metre\squared}$. Il campo è perpendicolare alle spire, $\cos\ang{0} = 1$, e il flusso in una spira passa da zero a $BA = 0{,}3 \cdot \num{5e-4}\,\si{\weber} = \SI{1,5e-4}{\weber}$:
+\[
+  |\mathcal E| = N\,\frac{|\Delta\Phi|}{\Delta t} = 200 \cdot \frac{\SI{1,5e-4}{\weber}}{\SI{0,01}{\second}} = \frac{\SI{3e-2}{\weber}}{\SI{1e-2}{\second}} = \SI{3}{\volt}
+  \qquad
+  I = \frac{|\mathcal E|}{R} = \frac{\SI{3}{\volt}}{\SI{6}{\ohm}} = \SI{0,5}{\ampere}
+\]
+Per la legge di Lenz la corrente gira nel verso che produce, dentro la bobina, un campo opposto a quello che sta crescendo. Se lo stesso aumento di campo avvenisse in \SI{0,1}{\second}, dieci volte più lentamente, la fem sarebbe dieci volte più piccola, \SI{0,3}{\volt}.
+\end{esempio}
+
+\begin{attenzione}[l'angolo del flusso è quello con la normale]
+In $\Phi = BA\cos\theta$ l'angolo è fra il campo e la normale alla spira, non fra il campo e il piano della spira. Una spira «perpendicolare al campo» ha la normale parallela al campo: $\theta = \ang{0}$ e il flusso è massimo. Una spira con il piano parallelo alle linee di campo non è attraversata da nessuna linea: $\theta = \ang{90}$ e il flusso è nullo. E la fem dipende da quanto \emph{rapidamente} il flusso cambia, non da quanto vale.
+\end{attenzione}
+
+\input{ud6/generati/lampo-ud6-faraday}
+
+\subsection{Correnti indotte nei conduttori in moto}
+
+Una sbarretta metallica lunga $L$ che scorre con velocità $v$ su due binari conduttori, perpendicolare a un campo uniforme $B$, chiude un circuito la cui area cresce di $Lv$ ogni secondo. Il flusso cresce allora di $BLv$ al secondo, e la fem indotta vale, in modulo, $\mathcal E = BLv$. Si può leggere anche con la forza di Lorentz: gli elettroni della sbarretta si muovono con lei nel campo, e la forza $evB$ li spinge lungo la sbarretta. Con $B = \SI{0,5}{\tesla}$, $L = \SI{0,2}{\metre}$ e $v = \SI{2}{\metre\per\second}$, $\mathcal E = 0{,}5 \cdot 0{,}2 \cdot 2\,\si{\volt} = \SI{0,2}{\volt}$.
+
+Una bobina che ruota in un campo magnetico vede cambiare di continuo l'angolo $\theta$, e quindi il flusso: la fem indotta cambia verso a ogni mezzo giro. È il principio dell'\textbf{alternatore}, che nelle centrali produce la \textbf{corrente alternata} della rete elettrica, in Italia a \SI{230}{\volt} e \SI{50}{\hertz}. In un blocco di metallo immerso in un campo che cambia circolano \textbf{correnti parassite} (o di Foucault), che lo scaldano per effetto Joule: è il principio dei piani a induzione.
+
+\begin{applicazione}{la stimolazione magnetica transcranica e la sicurezza in risonanza}
+La \textbf{stimolazione magnetica transcranica} (TMS) eccita i neuroni della corteccia senza elettrodi e senza dolore. Una bobina appoggiata sulla testa è percorsa da un impulso di corrente intenso e brevissimo, che produce un campo magnetico di circa \SI{1}{\tesla} in circa \SI{0,1}{\milli\second}. Il campo che cambia così in fretta induce correnti nel tessuto cerebrale, che è conduttore. Per una circonferenza di tessuto di raggio \SI{1}{\centi\metre}, di area $\pi r^{2} = 3{,}14 \cdot \SI{e-4}{\metre\squared}$, la fem indotta è
+\[
+  |\mathcal E| = \frac{\Delta B\,A}{\Delta t} = \frac{\SI{1}{\tesla} \cdot \SI{3,14e-4}{\metre\squared}}{\SI{1e-4}{\second}} \approx \SI{3}{\volt}
+\]
+abbastanza per depolarizzare i neuroni. La TMS si usa per studiare le vie motorie e per trattare alcune forme di depressione.
+
+Lo stesso fenomeno riguarda la sicurezza in risonanza magnetica: i campi che durante l'esame si accendono e si spengono inducono correnti che possono stimolare i nervi periferici, e un cavo che forma un anello sulla pelle del paziente può scaldarsi fino a causare un'ustione. Per questo i cavi si stendono dritti.
+\end{applicazione}
+
+\riepilogoformule

@@ -1,0 +1,35 @@
+% Campo magnetico di un filo rettilineo: (a) in prospettiva, (b) vista dall'alto.
+\begin{tikzpicture}[>=Stealth, font=\small,
+    campo/.style={medica, thick, postaction={decorate},
+      decoration={markings, mark=at position 0.75 with {\arrow{Stealth}}}}]
+  % (a) prospettiva
+  \begin{scope}
+    \foreach \y/\r in {0.6/0.7, 1.6/1.2, 2.6/0.7} {
+      % metà posteriore, dietro il filo
+      \draw[medica!60, thick] (\r,\y) arc[start angle=0, end angle=180, x radius=\r, y radius=0.3*\r];
+    }
+    \draw[line width=2.5pt, esempio!80!black] (0,-0.3) -- (0,3.5);
+    \draw[->, very thick, attenzione] (0,2.9) -- (0,3.7) node[right] {$I$};
+    \foreach \y/\r in {0.6/0.7, 1.6/1.2, 2.6/0.7} {
+      % metà anteriore, davanti al filo: verso antiorario visto dall'alto
+      \draw[campo] (-\r,\y) arc[start angle=180, end angle=360, x radius=\r, y radius=0.3*\r];
+    }
+    \node[medica] at (1.55,1.95) {$\vec B$};
+    \node at (0,-0.8) {(a)};
+  \end{scope}
+  % (b) vista dall'alto
+  \begin{scope}[xshift=6cm, yshift=1.6cm]
+    \foreach \r in {0.6,1.1,1.6} \draw[campo] (\r,0) arc[start angle=0, end angle=360, radius=\r];
+    \draw[thick, fill=white] (0,0) circle (0.18); \fill (0,0) circle (0.06);
+    \node[anchor=west] at (0.15,-0.25) {$I$};
+    % aghi di bussola tangenti
+    \foreach \a in {45,135,225,315} {
+      \begin{scope}[shift={(\a:2.05)}, rotate=\a+90]
+        \fill[attenzione] (0,0.06) -- (0.28,0) -- (0,-0.06) -- cycle;
+        \fill[formula] (0,0.06) -- (-0.28,0) -- (0,-0.06) -- cycle;
+      \end{scope}
+    }
+    \node[medica] at (1.35,1.35) {$\vec B$};
+    \node at (0,-2.4) {(b)};
+  \end{scope}
+\end{tikzpicture}

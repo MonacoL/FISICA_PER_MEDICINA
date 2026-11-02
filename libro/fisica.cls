@@ -39,7 +39,9 @@
 \RequirePackage{caption}
 \captionsetup{font=small,labelfont=bf}
 \RequirePackage{tikz}
-\usetikzlibrary{arrows.meta,decorations.pathreplacing,calc}
+\usetikzlibrary{arrows.meta,decorations.pathreplacing,decorations.markings,calc}
+% schemi elettrici (UD6), resistori a rettangolo come nei testi italiani
+\RequirePackage[european]{circuitikz}
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=1.18}
 

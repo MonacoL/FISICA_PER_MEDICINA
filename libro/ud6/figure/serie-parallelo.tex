@@ -1,0 +1,26 @@
+% (a) resistori in serie, (b) in parallelo, (c) il circuito dell'esempio.
+\begin{circuitikz}[european, >=Stealth, font=\small]
+  % (a) serie
+  \begin{scope}
+    \draw (0,0) node[circ]{} node[left]{$A$} to[short, i=$I$] (0.8,0)
+          to[R, l=$R_1$, v_>=$V_1$] (2.2,0) to[R, l=$R_2$, v_>=$V_2$] (3.6,0)
+          node[circ]{} node[right]{$B$};
+    \node at (1.8,-1.6) {(a) serie};
+  \end{scope}
+  % (b) parallelo
+  \begin{scope}[xshift=5.2cm]
+    \draw (0,0) node[circ]{} node[left]{$A$} to[short, i=$I$] (0.8,0);
+    \draw (0.8,0) node[circ]{} -- (0.8,0.7) to[R, l=$R_1$, i=$I_1$] (2.8,0.7) -- (2.8,0) node[circ]{};
+    \draw (0.8,0) -- (0.8,-0.7) to[R, l_=$R_2$, i_=$I_2$] (2.8,-0.7) -- (2.8,0);
+    \draw (2.8,0) -- (3.4,0) node[circ]{} node[right]{$B$};
+    \node at (1.7,-1.6) {(b) parallelo};
+  \end{scope}
+  % (c) circuito misto
+  \begin{scope}[xshift=11cm, yshift=-1cm]
+    \draw (0,0) to[battery1, l=\SI{24}{\volt}, invert] (0,2.2)
+          to[R, l=$R_1$, i=$I_1$] (2.2,2.2) -- (2.6,2.2);
+    \draw (2.6,2.2) node[circ]{} to[R, l_=$R_2$] (2.6,0) node[circ]{};
+    \draw (2.6,2.2) -- (4,2.2) to[R, l=$R_3$] (4,0) -- (2.6,0) -- (0,0);
+    \node at (2,-0.6) {(c)};
+  \end{scope}
+\end{circuitikz}

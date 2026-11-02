@@ -1,0 +1,34 @@
+% (a) Campo uniforme fra due piastre; (b) elettrone deviato lungo una parabola.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % (a)
+  \begin{scope}
+    \fill[attenzione!30] (0,2.4) rectangle (4,2.6);
+    \fill[formula!30] (0,0) rectangle (4,-0.2);
+    \foreach \x in {0.3,0.8,...,3.8} {
+      \node[attenzione, font=\footnotesize\bfseries] at (\x,2.8) {$+$};
+      \node[formula, font=\footnotesize\bfseries] at (\x,-0.4) {$-$};
+    }
+    \foreach \x in {0.5,1.25,...,3.5} \draw[->, thick, formula] (\x,2.35) -- (\x,0.05);
+    \node[formula, fill=white, inner sep=1pt] at (2.1,1.2) {$\vec E$};
+    \draw[<->] (4.4,0) -- (4.4,2.4) node[midway, right] {$d$};
+    \node[anchor=west, attenzione] at (4.2,2.85) {potenziale alto};
+    \node[anchor=west, formula] at (4.2,-0.45) {potenziale basso};
+    \node at (2,-1.1) {(a)};
+  \end{scope}
+  % (b)
+  \begin{scope}[xshift=8.4cm]
+    \fill[attenzione!30] (0,2.4) rectangle (4,2.6);
+    \fill[formula!30] (0,0) rectangle (4,-0.2);
+    \foreach \x in {0.3,0.8,...,3.8} {
+      \node[attenzione, font=\footnotesize\bfseries] at (\x,2.8) {$+$};
+      \node[formula, font=\footnotesize\bfseries] at (\x,-0.4) {$-$};
+    }
+    \foreach \x in {0.5,1.5,...,3.5} \draw[->, formula!45] (\x,2.35) -- (\x,0.05);
+    \draw[very thick, esempio, domain=0:4, samples=40] plot (\x, {0.7 + 0.09*\x*\x});
+    \draw[esempio, dashed] (4,{0.7+1.44}) -- (5.2,{0.7+1.44+0.86});
+    \fill[esempio] (-0.9,0.7) circle (2.5pt);
+    \draw[->, thick, esempio] (-0.9,0.7) -- (-0.1,0.7) node[midway, below] {$\vec v_0$};
+    \node[esempio] at (-0.9,1.05) {$e^-$};
+    \node at (2,-1.1) {(b)};
+  \end{scope}
+\end{tikzpicture}

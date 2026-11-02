@@ -1,0 +1,23 @@
+% Legge di Lenz: un magnete si avvicina a una spira, la corrente indotta si oppone.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % magnete
+  \fill[formula!35] (-2.6,-0.35) rectangle (-1.3,0.35);
+  \fill[attenzione!45] (-1.3,-0.35) rectangle (0,0.35);
+  \draw[thick] (-2.6,-0.35) rectangle (0,0.35);
+  \node[font=\bfseries] at (-1.95,0) {S};
+  \node[font=\bfseries] at (-0.65,0) {N};
+  \draw[->, very thick] (-1.6,0.7) -- (-0.4,0.7) node[midway, above] {moto};
+  % linee del campo del magnete
+  \foreach \s in {-1,1} \draw[->, medica, thick] (0.05,0.15*\s) to[out=0, in=180] (3.0,0.7*\s);
+  \draw[->, medica, thick] (0.05,0) -- (3.0,0);
+  \node[medica] at (1.3,1.05) {$\vec B$ del magnete};
+  % spira: metà posteriore
+  \draw[thick, richiamo] (3.6,1.3) arc[start angle=90, end angle=270, x radius=0.45, y radius=1.3];
+  % B indotto
+  \draw[->, very thick, esempio] (4.8,0) -- (3.2,0.0);
+  \node[esempio, anchor=west] at (4.85,0) {$\vec B_{\text{ind}}$};
+  % spira: metà anteriore, con la corrente che sale
+  \draw[thick, richiamo] (3.6,-1.3) arc[start angle=-90, end angle=90, x radius=0.45, y radius=1.3];
+  \draw[->, very thick, attenzione] ($(3.6,0)+(-10:0.45 and 1.3)$) arc[start angle=-10, end angle=25, x radius=0.45, y radius=1.3];
+  \node[attenzione, anchor=west] at (4.1,0.75) {$I$};
+\end{tikzpicture}

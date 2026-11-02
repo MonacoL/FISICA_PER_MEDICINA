@@ -1,0 +1,13 @@
+% Circuito semplice: generatore ideale e resistore.
+\begin{circuitikz}[european, >=Stealth, font=\small]
+  \draw (0,0) to[battery1, l=$\mathcal E$, invert] (0,2.6)
+        to[short, i=$I$] (3.6,2.6)
+        to[R, l=$R$] (3.6,0)
+        -- (0,0);
+  \node[attenzione, font=\bfseries] at (-0.55,1.75) {$+$};
+  \node[formula, font=\bfseries] at (-0.55,0.85) {$-$};
+  \draw[->, formula] (1.0,-0.35) -- (2.6,-0.35);
+  \node[formula, font=\footnotesize, below] at (1.8,-0.35) {elettroni};
+  \draw[->, attenzione] (2.6,0.35) -- (1.0,0.35);
+  \node[attenzione, font=\footnotesize, above] at (1.8,0.35) {corrente $I$};
+\end{circuitikz}
