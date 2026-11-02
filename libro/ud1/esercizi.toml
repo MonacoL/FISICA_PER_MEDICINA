@@ -1,0 +1,163 @@
+# Esercizi della UD1: fonte unica (ADR 0006). `uv run controllo ud1` ne ricava
+# generati/eserciziario.tex, un generati/lampo-<id>.tex per ogni quesito lampo,
+# la pagina web build/web/ud1.html, e ricalcola ogni risultato.
+#
+# Il formato è descritto in testa a libro/ud7/esercizi.toml.
+# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
+# arrivano con il ticket #20.
+
+titolo = "Eserciziario UD1 · Introduzione ai metodi della fisica"
+
+[costanti]
+sin30 = 0.5
+cos30 = 0.87
+sin45 = 0.71
+sin60 = 0.87
+cos60 = 0.5
+
+# ==================================================================== quesiti lampo, in ordine di dispensa
+
+[[quesito]]
+id = "ud1-notazione"
+tipo = "completamento"
+lampo = true
+testo = '''Il quoziente $\dfrac{6 \cdot 10^{-4}}{3 \cdot 10^{-9}}$, scritto in notazione scientifica, è $2 \cdot 10^{n}$ con $n =$ \completa.'''
+calcolo = "math.log10((6e-4 / 3e-9) / 2)"
+risposta = "5"
+soluzione = '''Si dividono fra loro le mantisse e le potenze di 10. Per dividere due potenze di 10 si sottraggono gli esponenti, facendo attenzione al segno meno davanti a un esponente negativo:
+\[
+  \frac{6 \cdot 10^{-4}}{3 \cdot 10^{-9}} = \frac{6}{3} \cdot 10^{-4-(-9)} = 2 \cdot 10^{-4+9} = 2 \cdot 10^{5}
+\]
+La mantissa 2 è già fra 1 e 10, quindi $n = 5$. Chi scrive $-13$ ha sommato gli esponenti invece di sottrarli; chi scrive $-5$ ha sbagliato il segno: $-4-(-9) = -4+9 = +5$.'''
+
+[[quesito]]
+id = "ud1-conversione"
+tipo = "multipla"
+lampo = true
+testo = '''Un'ambulanza viaggia a {{v}}. La sua velocità in metri al secondo è'''
+dati.v = { valore = 36, unita = "\\kilo\\metre\\per\\hour" }
+corretta = "C"
+calcolo = "v * 1000 / 3600"
+soluzione = '''Un chilometro è \SI{1000}{\metre} e un'ora è \SI{3600}{\second}. Si sostituiscono le unità:
+\[
+  \SI{36}{\kilo\metre\per\hour} = 36 \cdot \frac{\SI{1000}{\metre}}{\SI{3600}{\second}} = \frac{36}{3{,}6}\,\si{\metre\per\second} = \SI{10}{\metre\per\second}
+\]
+In pratica, da \si{\kilo\metre\per\hour} a \si{\metre\per\second} si divide per 3,6.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0,01}{\metre\per\second}'''
+  commento = '''Divide per i \SI{3600}{\second} dell'ora ma lascia la distanza in chilometri: \SI{0,01}{\kilo\metre\per\second}, non metri al secondo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,6}{\metre\per\second}'''
+  commento = '''Divide per 60, come se un'ora avesse 60 secondi, e lascia la distanza in chilometri.'''
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\metre\per\second}'''
+  valore = 10
+  [[quesito.opzione]]
+  testo = '''\SI{129,6}{\metre\per\second}'''
+  commento = '''Moltiplica per 3,6 invece di dividere. Un controllo di buon senso: un metro al secondo è poco, quindi lo stesso valore in metri al secondo deve essere più piccolo che in chilometri all'ora.'''
+  [[quesito.opzione]]
+  testo = '''\SI{36000}{\metre\per\second}'''
+  commento = '''Converte i chilometri in metri ma dimentica di convertire le ore in secondi: \SI{36000}{\metre\per\hour}.'''
+
+[[quesito]]
+id = "ud1-ordine"
+tipo = "multipla"
+lampo = true
+testo = '''A riposo il cuore batte circa {{f}} volte al minuto. L'ordine di grandezza del numero di battiti in un giorno è'''
+dati.f = { valore = 70 }
+corretta = "D"
+calcolo = "10**round(math.log10(f * 60 * 24))"
+soluzione = '''Un giorno ha 24 ore da 60 minuti. Si arrotonda per fare il conto a mente:
+\[
+  70 \cdot 60 \cdot 24 = 4200 \cdot 24 \approx 4 \cdot 10^{3} \cdot 2{,}5 \cdot 10^{1} = 10 \cdot 10^{4} = 10^{5}
+\]
+Il conto esatto dà \num{100800} $\approx 1{,}0 \cdot 10^{5}$: la mantissa è minore di 3, quindi l'ordine di grandezza è $10^{5}$.'''
+
+  [[quesito.opzione]]
+  testo = '''$10^{2}$'''
+  commento = '''È l'ordine di grandezza dei battiti in un minuto, $70 = 7 \cdot 10^{1}$: dimentica di moltiplicare per i minuti del giorno.'''
+  [[quesito.opzione]]
+  testo = '''$10^{3}$'''
+  commento = '''Moltiplica solo per le 24 ore, $70 \cdot 24 \approx 1{,}7 \cdot 10^{3}$, come se 70 fossero i battiti in un'ora.'''
+  [[quesito.opzione]]
+  testo = '''$10^{4}$'''
+  commento = '''È l'ordine di grandezza dei battiti in un'ora, $70 \cdot 60 = 4200 \approx 4 \cdot 10^{3}$, che si arrotonda a $10^{4}$: dimentica le 24 ore.'''
+  [[quesito.opzione]]
+  testo = '''$10^{5}$'''
+  valore = 1e5
+  [[quesito.opzione]]
+  testo = '''$10^{7}$'''
+  commento = '''Moltiplica ancora per 60, come se 70 fossero i battiti al secondo: $70 \cdot 60 \cdot 60 \cdot 24 \approx 6 \cdot 10^{6}$, che si arrotonda a $10^{7}$.'''
+
+[[quesito]]
+id = "ud1-trigonometria"
+tipo = "completamento"
+lampo = true
+testo = '''Una rampa per carrozzine è lunga {{c}} e forma con il pavimento un angolo di \ang{30}. Il dislivello che supera, in metri, è \completa.'''
+dati.c = { valore = 4, unita = "m" }
+calcolo = "c * sin30"
+risposta = "2"
+soluzione = '''La rampa è l'ipotenusa di un triangolo rettangolo; il dislivello è il cateto opposto all'angolo di \ang{30}, quindi si usa il seno:
+\[
+  h = c \sin\ang{30} = \SI{4}{\metre} \cdot \frac{1}{2} = \SI{2}{\metre}
+\]
+Chi scrive circa 3,5 ha usato il coseno ($4 \cdot 0{,}87$), che dà invece la distanza percorsa in orizzontale.'''
+
+[[quesito]]
+id = "ud1-somma"
+tipo = "multipla"
+lampo = true
+testo = '''Due forze, di modulo {{F1}} e {{F2}}, agiscono sullo stesso punto e sono perpendicolari fra loro. Il modulo della loro somma vale'''
+dati.F1 = { valore = 6, unita = "\\newton" }
+dati.F2 = { valore = 8, unita = "\\newton" }
+corretta = "B"
+calcolo = "math.sqrt(F1**2 + F2**2)"
+soluzione = '''Le due forze perpendicolari sono i cateti di un triangolo rettangolo, e la loro somma è l'ipotenusa. Per il teorema di Pitagora:
+\[
+  F = \sqrt{F_1^2 + F_2^2} = \sqrt{(\SI{6}{\newton})^2 + (\SI{8}{\newton})^2} = \sqrt{36 + 64}\,\si{\newton} = \sqrt{100}\,\si{\newton} = \SI{10}{\newton}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\newton}'''
+  commento = '''Sottrae i moduli: vale solo per due forze con la stessa direzione e verso opposto.'''
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\newton}'''
+  valore = 10
+  [[quesito.opzione]]
+  testo = '''\SI{14}{\newton}'''
+  commento = '''Somma i moduli: vale solo per due forze con la stessa direzione e lo stesso verso.'''
+  [[quesito.opzione]]
+  testo = '''\SI{48}{\newton}'''
+  commento = '''Moltiplica i moduli: la somma di due vettori non è un prodotto, e il risultato non sarebbe nemmeno una forza.'''
+  [[quesito.opzione]]
+  testo = '''\SI{100}{\newton}'''
+  commento = '''Applica Pitagora ma dimentica la radice quadrata: $36 + 64 = 100$ è il quadrato del modulo.'''
+
+[[quesito]]
+id = "ud1-vettoriale"
+tipo = "multipla"
+lampo = true
+testo = '''Due vettori $\vec a$ e $\vec b$, di modulo $a = 4$ e $b = 3$, formano un angolo di \ang{30}. Il modulo del prodotto vettoriale $\vec a \times \vec b$ vale'''
+corretta = "E"
+calcolo = "4 * 3 * sin30"
+soluzione = '''Il modulo del prodotto vettoriale è $ab\sin\theta$:
+\[
+  |\vec a \times \vec b| = 4 \cdot 3 \cdot \sin\ang{30} = 12 \cdot \frac{1}{2} = 6
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''$12$'''
+  commento = '''Moltiplica i moduli e dimentica il seno: $ab$ è il modulo del prodotto vettoriale solo se i vettori sono perpendicolari.'''
+  [[quesito.opzione]]
+  testo = '''circa $10{,}4$'''
+  commento = '''Usa il coseno, $12 \cdot 0{,}87 \approx 10{,}4$: questo è il prodotto scalare $\vec a \cdot \vec b$, non il modulo del prodotto vettoriale.'''
+  [[quesito.opzione]]
+  testo = '''$7$'''
+  commento = '''Somma i moduli, $4 + 3$: il prodotto vettoriale è un prodotto, non una somma.'''
+  [[quesito.opzione]]
+  testo = '''$0$'''
+  commento = '''Il prodotto vettoriale è zero solo per vettori paralleli ($\theta = \ang{0}$ o \ang{180}); qui formano \ang{30}.'''
+  [[quesito.opzione]]
+  testo = '''$6$'''
+  valore = 6

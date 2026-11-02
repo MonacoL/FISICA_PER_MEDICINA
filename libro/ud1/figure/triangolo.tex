@@ -1,0 +1,23 @@
+% Triangolo rettangolo: ipotenusa c, cateto a opposto ad alpha, cateto b adiacente.
+% Scala: b = 4, a = 2,6 (alpha circa 33 gradi)
+\begin{tikzpicture}[font=\small]
+  \coordinate (A) at (0,0);
+  \coordinate (C) at (4,0);
+  \coordinate (B) at (4,2.6);
+  \fill[formula!10] (A) -- (C) -- (B) -- cycle;
+  \draw[thick] (A) -- (C) -- (B) -- cycle;
+  % angolo retto
+  \draw (3.7,0) -- (3.7,0.3) -- (4,0.3);
+  % angolo alpha
+  \draw[esempio, thick] (0.9,0) arc[start angle=0, end angle=33, radius=0.9];
+  \node[esempio] at (16:1.25) {$\alpha$};
+  % lati
+  \node[below] at (2,0) {$b$ cateto adiacente ad $\alpha$};
+  \node[right, align=left] at (4,1.3) {$a$ cateto\\opposto ad $\alpha$};
+  \node[above left] at (2,1.35) {$c$ ipotenusa};
+  % formule a lato
+  \node[anchor=west, align=left] at (7.2,1.3)
+    {$\sin\alpha = \dfrac{a}{c}$\\[0.5em]
+     $\cos\alpha = \dfrac{b}{c}$\\[0.5em]
+     $\tan\alpha = \dfrac{a}{b}$};
+\end{tikzpicture}

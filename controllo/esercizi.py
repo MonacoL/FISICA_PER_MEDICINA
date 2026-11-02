@@ -203,14 +203,20 @@ def eserciziario_latex(fonte: dict) -> str:
     problemi = sorted(fonte.get("problema", []), key=lambda p: p["livello"])
     esame = [q for q in fonte.get("quesito", []) if not q.get("lampo")]
     lampo = [q for q in fonte.get("quesito", []) if q.get("lampo")]
-    out = ["% Generato da esercizi.toml: non modificare qui.", "", r"\section*{Problemi}"]
+    # Le sezioni vuote non si scrivono: una UD può avere per ora solo i quesiti lampo.
+    out = ["% Generato da esercizi.toml: non modificare qui."]
+    if problemi:
+        out += ["", r"\section*{Problemi}"]
     for livello in (1, 2, 3):
+        if not any(p["livello"] == livello for p in problemi):
+            continue
         out += ["", rf"\livello{{{livello}}}{{{NOMI_LIVELLO[livello]}}}"]
         for p in (p for p in problemi if p["livello"] == livello):
             out += ["", rf"\problema\label{{pb:{p['id']}}}", riempi(p["testo"], p.get("dati", {}))]
             if len(p["parte"]) > 1:
                 out += ["", *(x + "\n" for x in parti([riempi(parte["domanda"], p.get("dati", {})) for parte in p["parte"]]))]
-    out += ["", r"\section*{Quesiti d'esame}"]
+    if esame:
+        out += ["", r"\section*{Quesiti d'esame}"]
     for q in esame:
         out += ["", rf"\quesito\label{{qe:{q['id']}}}", testo_quesito(q)]
 
@@ -225,15 +231,19 @@ def eserciziario_latex(fonte: dict) -> str:
             r"\toprule", r"Esercizio & Risultato \\", r"\midrule", r"\endhead", *righe,
             r"\bottomrule", r"\end{longtable}"]
 
-    out += ["", r"\section*{Soluzioni svolte}", "", r"\subsection*{Problemi}"]
+    out += ["", r"\section*{Soluzioni svolte}"]
+    if problemi:
+        out += ["", r"\subsection*{Problemi}"]
     for p in problemi:
         out += ["", rf"\solproblema{{pb:{p['id']}}}"]
         soluzioni = [parte["soluzione"] for parte in p["parte"]]
         out += soluzioni if len(soluzioni) == 1 else [x + "\n" for x in parti(soluzioni)]
-    out += ["", r"\subsection*{Quesiti d'esame}"]
+    if esame:
+        out += ["", r"\subsection*{Quesiti d'esame}"]
     for q in esame:
         out += ["", rf"\solquesito{{qe:{q['id']}}}", soluzione_quesito(q)]
-    out += ["", r"\subsection*{Quesiti lampo}"]
+    if lampo:
+        out += ["", r"\subsection*{Quesiti lampo}"]
     for q in lampo:
         out += ["", rf"\soluzionelampo{{ql:{q['id']}}}", soluzione_quesito(q)]
     return "\n".join(out) + "\n"

@@ -1,0 +1,27 @@
+% Somma di due vettori: (a) punta-coda, (b) regola del parallelogramma,
+% (c) differenza a - b = a + (-b). a = (2,5; 0,5), b = (0,8; 1,6)
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % (a) punta-coda
+  \begin{scope}
+    \draw[->, very thick, formula] (0,0) -- (2.5,0.5) node[midway, below] {$\vec a$};
+    \draw[->, very thick, medica] (2.5,0.5) -- (3.3,2.1) node[midway, right] {$\vec b$};
+    \draw[->, very thick, esempio] (0,0) -- (3.3,2.1) node[midway, above left] {$\vec a + \vec b$};
+    \node at (1.65,-0.9) {(a) punta-coda};
+  \end{scope}
+  % (b) parallelogramma
+  \begin{scope}[xshift=4.6cm]
+    \draw[dashed, gray] (2.5,0.5) -- (3.3,2.1) -- (0.8,1.6);
+    \draw[->, very thick, formula] (0,0) -- (2.5,0.5) node[midway, below] {$\vec a$};
+    \draw[->, very thick, medica] (0,0) -- (0.8,1.6) node[midway, left] {$\vec b$};
+    \draw[->, very thick, esempio] (0,0) -- (3.3,2.1) node[pos=0.4, below right, inner sep=1pt] {$\vec a + \vec b$};
+    \node at (1.65,-0.9) {(b) parallelogramma};
+  \end{scope}
+  % (c) differenza
+  \begin{scope}[xshift=9.2cm, yshift=0.6cm]
+    \draw[->, very thick, formula] (0,0) -- (2.5,0.5) node[midway, below] {$\vec a$};
+    \draw[->, thick, medica!60, dashed] (0,0) -- (0.8,1.6) node[midway, left] {$\vec b$};
+    \draw[->, very thick, medica] (2.5,0.5) -- (1.7,-1.1) node[midway, right] {$-\vec b$};
+    \draw[->, very thick, attenzione] (0,0) -- (1.7,-1.1) node[midway, below left] {$\vec a - \vec b$};
+    \node at (1.65,-1.5) {(c) differenza};
+  \end{scope}
+\end{tikzpicture}
