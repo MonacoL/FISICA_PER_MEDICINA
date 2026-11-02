@@ -24,6 +24,8 @@
   per-mode              = symbol,
   group-minimum-digits  = 5,
 }
+% la caloria non è un'unità del SI, ma in medicina si usa (UD5)
+\DeclareSIUnit{\calorie}{cal}
 % nuclide: \nuclide{226}{88}{Ra}
 \newcommand{\nuclide}[3]{\prescript{#1}{#2}{\mathrm{#3}}}
 

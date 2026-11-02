@@ -1,0 +1,764 @@
+% UD5 — Dispensa
+% Scritta da zero (non esisteva un materiale UD5). I quesiti lampo vengono da
+% esercizi.toml (ADR 0006): si modificano lì.
+\dispensa
+
+\begin{tcolorbox}[fisbox={formula}{formulaBg},title={Obiettivi dell'unità}]
+Al termine di questa unità sai:
+\begin{itemize}
+  \item distinguere sistema e ambiente, descrivere lo stato di un sistema con pressione, volume e temperatura e riconoscere una funzione di stato;
+  \item passare fra le scale Celsius, kelvin e Fahrenheit e usare l'equazione di stato dei gas perfetti, $pV = nRT$;
+  \item calcolare il calore che serve per scaldare un corpo o per fargli cambiare stato, e trovare la temperatura di equilibrio di una miscela;
+  \item riconoscere conduzione, convezione e irraggiamento e stimare con le loro leggi il calore scambiato dal corpo umano;
+  \item applicare il primo principio, $\Delta U = Q - W$, alle trasformazioni isocora, isobara, isoterma e adiabatica di un gas perfetto, e leggerle nel piano $pV$;
+  \item enunciare il secondo principio, calcolare il rendimento di una macchina termica e il rendimento massimo di Carnot, e usare l'entropia per dire in che verso va un processo spontaneo.
+\end{itemize}
+\end{tcolorbox}
+
+La termodinamica studia gli scambi di energia sotto forma di calore e di lavoro, e il modo in cui cambiano la temperatura, la pressione e il volume dei corpi. È la fisica della febbre e del brivido, del sudore che rinfresca, del cibo che diventa energia per i muscoli, dell'aria che entra nei polmoni. Le sue leggi valgono per un motore come per una cellula: nessuna delle due può creare energia dal nulla, ed entrambe ne disperdono una parte come calore.
+
+In questa unità servono alcuni strumenti della UD1: la notazione scientifica, le conversioni di unità e il passaggio dai gradi Celsius ai kelvin. Servono anche tre grandezze della meccanica, che qui si richiamano in una riga ciascuna: il lavoro e l'energia (UD2) e la pressione (UD3).
+
+% -------------------------------------------------------------------------
+\section{Sistemi, stati e temperatura}
+\label{sec:ud5-stato}
+
+\subsection{Sistema e ambiente}
+
+Il \textbf{sistema} è la parte di mondo che si sceglie di studiare: il gas in una bombola, l'acqua in un bicchiere, il corpo di un paziente. Tutto il resto è l'\textbf{ambiente}. Fra i due c'è un confine, reale (la parete della bombola) o immaginario (la pelle). La scelta del sistema spetta a chi studia il problema, e va fatta per prima: le leggi della termodinamica parlano dell'energia che attraversa quel confine.
+
+Un sistema è \textbf{aperto} se scambia con l'ambiente energia e materia (il corpo umano, che respira, mangia e suda), \textbf{chiuso} se scambia energia ma non materia (una flebo sigillata che si scalda a temperatura ambiente), \textbf{isolato} se non scambia né energia né materia (un buon thermos chiuso ci si avvicina, per un tempo breve).
+
+\subsection{Variabili termodinamiche e stato}
+
+Un gas contiene un numero enorme di molecole, e non si può seguire ciascuna. Lo si descrive invece con poche grandezze misurabili su tutto il sistema, le \textbf{variabili termodinamiche}. Per un gas bastano tre:
+\begin{itemize}
+  \item il \textbf{volume} $V$, in \si{\metre\cubed} (in medicina spesso in litri, $\SI{1}{\litre} = \SI{e-3}{\metre\cubed}$);
+  \item la \textbf{pressione} $p$: la forza che il gas esercita su ogni metro quadrato della parete, $p = F/A$, in pascal, $\SI{1}{\pascal} = \SI{1}{\newton\per\metre\squared}$ (la vedrai per esteso nella UD3, sui fluidi). La pressione dell'aria al livello del mare è circa $\SI{1}{atm} = \SI{1,013e5}{\pascal} \approx \SI{1,0e5}{\pascal} = \SI{760}{mmHg}$; si usa anche il bar, $\SI{1}{bar} = \SI{e5}{\pascal}$;
+  \item la \textbf{temperatura} $T$, di cui parla il prossimo paragrafo.
+\end{itemize}
+Quando queste grandezze hanno lo stesso valore in tutto il sistema e non cambiano nel tempo, il sistema è in \textbf{equilibrio termodinamico}, e i loro valori definiscono il suo \textbf{stato}. Lo stato di un gas in equilibrio si rappresenta come un punto nel \textbf{piano $pV$}, con il volume in ascissa e la pressione in ordinata. Una \textbf{trasformazione} è il passaggio da uno stato iniziale a uno stato finale.
+
+Una \textbf{funzione di stato} è una grandezza che dipende solo dallo stato del sistema, non da come il sistema ci è arrivato. Pressione, volume e temperatura lo sono per definizione. Un esempio dalla vita di tutti i giorni è l'altitudine: un rifugio sta a \SI{2000}{\metre} sia che lo si raggiunga per il sentiero sia in funivia, mentre la strada percorsa e la fatica fatta dipendono dal percorso. La differenza fra le due cose è il centro della termodinamica: vedremo che l'energia interna e l'entropia sono funzioni di stato, il calore e il lavoro no.
+
+\subsection{La temperatura e le sue scale}
+
+Al tatto un corpo è caldo o freddo, ma la sensazione inganna: una maniglia di metallo sembra più fredda del legno della porta, anche se sono alla stessa temperatura (la sezione~\ref{sec:ud5-trasmissione} spiega perché). Per misurare la temperatura serve un'osservazione più solida. Due corpi a contatto, lasciati a sé, cambiano finché smettono di cambiare: si dice che hanno raggiunto l'\textbf{equilibrio termico}. E vale il \textbf{principio zero della termodinamica}:
+
+\emph{se due corpi A e B sono ciascuno in equilibrio termico con un terzo corpo C, allora A e B sono in equilibrio termico fra loro.}
+
+La \textbf{temperatura} è la grandezza che ha lo stesso valore per due corpi in equilibrio termico. Il terzo corpo C è il \textbf{termometro}: lo si mette a contatto con il paziente, si aspetta l'equilibrio e si legge una grandezza che varia con la temperatura (la lunghezza di una colonna di liquido, una resistenza elettrica, la radiazione infrarossa emessa).
+
+Le scale di temperatura più usate sono tre.
+\begin{itemize}
+  \item La \textbf{scala Celsius} fissa \SI{0}{\celsius} per il ghiaccio che fonde e \SI{100}{\celsius} per l'acqua che bolle, alla pressione di \SI{1}{atm}, e divide l'intervallo in cento gradi.
+  \item La \textbf{scala Kelvin}, o assoluta, è quella del SI. Ha gradi della stessa ampiezza dei gradi Celsius, ma parte dallo \textbf{zero assoluto}, $\SI{0}{\kelvin} = \SI{-273,15}{\celsius}$: la temperatura più bassa possibile, alla quale l'agitazione delle molecole è minima. Non esistono temperature negative in kelvin. Come nella UD1, nei conti $T = t + 273$, con $T$ in kelvin e $t$ in gradi Celsius.
+  \item La \textbf{scala Fahrenheit}, usata nei paesi anglosassoni, fissa il ghiaccio che fonde a $32\,^{\circ}\mathrm{F}$ e l'acqua che bolle a $212\,^{\circ}\mathrm{F}$. Fra i due punti ci sono $212 - 32 = 180$ gradi Fahrenheit contro 100 gradi Celsius, quindi un grado Celsius vale $180/100 = 9/5$ gradi Fahrenheit.
+\end{itemize}
+
+\begin{formula}[Scale di temperatura]
+T\,[\si{\kelvin}] = t\,[\si{\celsius}] + 273
+\qquad\qquad
+t_F\,[^{\circ}\mathrm{F}] = \frac{9}{5}\,t\,[\si{\celsius}] + 32
+\\
+\Delta T\,[\si{\kelvin}] = \Delta t\,[\si{\celsius}]
+\end{formula}
+
+\begin{esempio}
+Un paziente arriva da un viaggio negli Stati Uniti con un referto che riporta una temperatura di $102{,}2\,^{\circ}\mathrm{F}$. Ha la febbre? Quanto vale la temperatura in kelvin?
+
+Si ricava $t$ dalla formula della scala Fahrenheit. Prima si toglie 32, poi si divide per $9/5$, cioè si moltiplica per $5/9$:
+\[
+  t = \frac{5}{9}\,(t_F - 32) = \frac{5}{9}\,(102{,}2 - 32) = \frac{5}{9} \cdot 70{,}2 = \frac{351}{9} = \SI{39}{\celsius}
+\]
+Il paziente ha \SI{39}{\celsius}: ha la febbre. In kelvin, $T = 39 + 273 = \SI{312}{\kelvin}$. Controllo con la temperatura normale: $\frac{9}{5} \cdot 37 + 32 = 66{,}6 + 32 = 98{,}6\,^{\circ}\mathrm{F}$, meno di $102{,}2$.
+\end{esempio}
+
+\begin{attenzione}[temperature e differenze di temperatura]
+Una \emph{differenza} di temperatura ha lo stesso valore in gradi Celsius e in kelvin: un aumento da \SI{37}{\celsius} a \SI{39}{\celsius} è un aumento di \SI{2}{\kelvin}. Una temperatura, invece, no: \SI{39}{\celsius} sono \SI{312}{\kelvin}. Nelle formule in cui compare $T$ da sola (i gas, l'irraggiamento, il rendimento, l'entropia) si usano sempre i kelvin. In quelle con $\Delta T$ va bene anche la scala Celsius.
+\end{attenzione}
+
+\subsection{Il gas perfetto e la sua equazione di stato}
+
+Un \textbf{gas perfetto} (o gas ideale) è un modello: le molecole sono puntiformi, si muovono a caso e non si attraggono, e interagiscono solo negli urti, fra loro e con le pareti. I gas reali gli assomigliano quando sono rarefatti, cioè a pressione non troppo alta e temperatura non troppo bassa: l'aria, l'ossigeno, l'azoto e l'anidride carbonica nelle condizioni del corpo umano si comportano quasi come gas perfetti.
+
+La quantità di gas si misura in \textbf{moli}. Una mole contiene il \textbf{numero di Avogadro} di particelle, $N_A \approx \num{6,0e23}$; $n$ moli contengono $N = n N_A$ molecole. La massa di una mole è la \textbf{massa molare}: \SI{32}{\gram} per l'ossigeno $\mathrm{O_2}$, \SI{28}{\gram} per l'azoto $\mathrm{N_2}$, \SI{18}{\gram} per l'acqua.
+
+Gli esperimenti sui gas rarefatti hanno dato tre leggi, ciascuna con una variabile tenuta fissa:
+\begin{itemize}
+  \item a temperatura costante, la pressione è inversamente proporzionale al volume, $pV = \text{costante}$ (\textbf{legge di Boyle});
+  \item a pressione costante, il volume è direttamente proporzionale alla temperatura assoluta, $V/T = \text{costante}$ (\textbf{prima legge di Gay-Lussac}, o di Charles);
+  \item a volume costante, la pressione è direttamente proporzionale alla temperatura assoluta, $p/T = \text{costante}$ (\textbf{seconda legge di Gay-Lussac}).
+\end{itemize}
+Le tre leggi sono casi particolari di un'unica relazione, l'\textbf{equazione di stato dei gas perfetti}:
+
+\begin{formula}[Equazione di stato dei gas perfetti]
+pV = nRT
+\qquad\qquad
+R \approx \SI{8,3}{\joule\per\mole\per\kelvin} \approx \SI{0,082}{\litre\,atm\per\mole\per\kelvin}
+\\
+\frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2} \quad \text{(stessa quantità di gas)}
+\end{formula}
+
+$R$ è la \textbf{costante dei gas}; il suo valore preciso è \SI{8,314}{\joule\per\mole\per\kelvin}, e nei conti a mano si usa 8,3. Con $p$ in pascal e $V$ in metri cubi si usa $R$ in \si{\joule\per\mole\per\kelvin} (un pascal per un metro cubo è un joule); con $p$ in atmosfere e $V$ in litri si usa \SI{0,082}{\litre\,atm\per\mole\per\kelvin}. La seconda riga del box viene dalla prima: se $n$ non cambia, $pV/T = nR$ è lo stesso nello stato 1 e nello stato 2.
+
+\begin{richiamo}{proporzionalità diretta e inversa}
+Due grandezze $y$ e $x$ sono \textbf{direttamente proporzionali} se $y = kx$, con $k$ costante: se $x$ raddoppia, anche $y$ raddoppia, e il rapporto $y/x$ resta uguale. Il grafico è una retta che passa per l'origine. Sono \textbf{inversamente proporzionali} se $y = k/x$: se $x$ raddoppia, $y$ si dimezza, e il prodotto $xy$ resta uguale. Il grafico è un ramo di iperbole, che si avvicina agli assi senza toccarli. Nei quesiti d'esame conviene ragionare sui rapporti: se $p$ è inversamente proporzionale a $V$ e il volume diventa un terzo, la pressione diventa il triplo, senza bisogno di conoscere $k$.
+\end{richiamo}
+
+Nel piano $pV$, una trasformazione a temperatura costante segue un'iperbole $p = nRT/V$, che si chiama \textbf{isoterma}. Più alta è la temperatura, più l'iperbole sta lontano dagli assi (figura~\ref{fig:ud5-isoterme}).
+
+\begin{figure}[h]
+\centering
+\input{ud5/figure/isoterme}
+\caption{Isoterme di un gas perfetto nel piano $pV$. Ogni curva è un'iperbole $p = nRT/V$; a temperatura più alta, a parità di volume, la pressione è più alta.}
+\label{fig:ud5-isoterme}
+\end{figure}
+
+\begin{esempio}
+(a) Quante moli d'aria contengono i polmoni di un adulto alla fine di un'inspirazione profonda, se il volume è \SI{6}{\litre}, la pressione \SI{1,0e5}{\pascal} e la temperatura \SI{37}{\celsius}? (b) Un'inspirazione normale porta nei polmoni \SI{500}{\milli\litre} d'aria a \SI{20}{\celsius}. Che volume occupa quell'aria quando si è scaldata a \SI{37}{\celsius}, a pressione costante?
+
+(a) Si portano le grandezze nel SI: $V = \SI{6}{\litre} = \SI{6e-3}{\metre\cubed}$ e $T = 37 + 273 = \SI{310}{\kelvin}$. Dall'equazione di stato:
+\[
+  n = \frac{pV}{RT} = \frac{\SI{1,0e5}{\pascal} \cdot \SI{6e-3}{\metre\cubed}}{\SI{8,3}{\joule\per\mole\per\kelvin} \cdot \SI{310}{\kelvin}} = \frac{\SI{600}{\joule}}{\SI{2573}{\joule\per\mole}} \approx \SI{0,23}{\mole}
+\]
+Per il conto a mano: $8{,}3 \cdot 310 = 2573 \approx 2600$, e $600/2600 = 6/26 \approx 0{,}23$. Sono circa $0{,}23 \cdot \num{6,0e23} \approx \num{1,4e23}$ molecole.
+
+(b) A pressione costante, $V_1/T_1 = V_2/T_2$, con le temperature in kelvin: $T_1 = 20 + 273 = \SI{293}{\kelvin}$, $T_2 = \SI{310}{\kelvin}$. Quindi
+\[
+  V_2 = V_1\,\frac{T_2}{T_1} = \SI{500}{\milli\litre} \cdot \frac{310}{293} \approx \SI{500}{\milli\litre} \cdot 1{,}06 = \SI{530}{\milli\litre}
+\]
+dove $310/293 = 1 + 17/293$ e $17/293 \approx 17/300 \approx 0{,}06$. L'aria si dilata di circa il 6\%.
+\end{esempio}
+
+\begin{attenzione}[nelle leggi dei gas la temperatura va in kelvin]
+Il volume di un gas a pressione costante è proporzionale alla temperatura in kelvin, non in gradi Celsius. Scaldare un gas da \SI{10}{\celsius} a \SI{20}{\celsius} non raddoppia il suo volume: la temperatura assoluta passa da \SI{283}{\kelvin} a \SI{293}{\kelvin}, e il volume cresce solo di $10/283 \approx 3{,}5\%$. Con i gradi Celsius si arriverebbe all'assurdo di un volume nullo a \SI{0}{\celsius}.
+\end{attenzione}
+
+\input{ud5/generati/lampo-ud5-isocora}
+
+\begin{applicazione}{la respirazione e la legge di Boyle}
+I polmoni non aspirano l'aria: è la legge di Boyle a farla entrare. Nell'inspirazione il diaframma si abbassa e i muscoli intercostali allargano la gabbia toracica; il volume dei polmoni aumenta e, a temperatura costante, la pressione dell'aria negli alveoli diminuisce. Basta che scenda di circa \SI{1}{mmHg} sotto la pressione atmosferica (\SI{760}{mmHg}) perché l'aria entri dalla bocca e dal naso, dalla pressione più alta verso quella più bassa. Nell'espirazione il volume diminuisce, la pressione negli alveoli sale di poco sopra quella atmosferica e l'aria esce.
+\end{applicazione}
+
+\input{ud5/generati/lampo-ud5-boyle}
+
+\begin{approfondimento}{le pressioni parziali e i gas del sangue}
+In una miscela di gas perfetti la pressione totale è la somma delle \textbf{pressioni parziali} dei singoli gas (legge di Dalton), e la pressione parziale di un gas è la pressione totale per la sua frazione di molecole. L'aria contiene circa il 21\% di ossigeno, quindi al livello del mare la pressione parziale dell'ossigeno è $0{,}21 \cdot \SI{760}{mmHg} \approx \SI{160}{mmHg}$; in alta montagna la pressione totale è più bassa, e con lei quella dell'ossigeno. Le emogasanalisi riportano proprio le pressioni parziali di ossigeno e anidride carbonica nel sangue arterioso ($p\mathrm{O_2}$ e $p\mathrm{CO_2}$).
+\end{approfondimento}
+
+% -------------------------------------------------------------------------
+\section{Calore e capacità termica}
+\label{sec:ud5-calore}
+
+\subsection{Il calore è energia in transito}
+
+Se si mette una borsa dell'acqua calda su una mano fredda, la borsa si raffredda e la mano si scalda finché raggiungono la stessa temperatura. Fra le due passa qualcosa: l'\textbf{energia}, la grandezza che misura la capacità di un sistema di compiere lavoro (UD2). Il \textbf{calore} $Q$ è l'energia che passa da un sistema a un altro \emph{perché hanno temperature diverse}, sempre dal più caldo al più freddo.
+
+Il calore non è qualcosa che un corpo \emph{contiene}: è energia \emph{in transito}. Un corpo contiene energia interna (sezione~\ref{sec:ud5-primo}), e la scambia sotto forma di calore o di lavoro. Il calore si misura quindi in joule, come ogni energia. In medicina e in dietologia si usa anche la \textbf{caloria}, nata come il calore che scalda di \SI{1}{\celsius} un grammo d'acqua:
+\[
+  \SI{1}{\calorie} = \SI{4,186}{\joule} \approx \SI{4,2}{\joule}
+  \qquad\qquad
+  \SI{1}{\kilo\calorie} = \SI{1000}{\calorie} \approx \SI{4,2}{\kilo\joule}
+\]
+La «caloria» delle etichette degli alimenti (a volte scritta Cal, con la maiuscola) è in realtà una chilocaloria.
+
+\subsection{Capacità termica e calore specifico}
+
+Dare la stessa quantità di calore a corpi diversi non li scalda allo stesso modo. La \textbf{capacità termica} $C$ di un corpo è il calore che serve per alzare la sua temperatura di un kelvin: $C = Q/\Delta T$, in \si{\joule\per\kelvin}. È una grandezza estensiva: una vasca d'acqua ha una capacità termica molto più grande di un bicchiere. Dividendo per la massa si ottiene una proprietà del materiale, il \textbf{calore specifico} $c = C/m$: il calore che serve per scaldare di un kelvin un chilogrammo di quella sostanza.
+
+\begin{formula}[Capacità termica e calore specifico]
+C = \frac{Q}{\Delta T}
+\qquad\qquad
+c = \frac{C}{m} = \frac{Q}{m\,\Delta T}
+\qquad\qquad
+Q = m\,c\,\Delta T
+\\
+c_{\text{acqua}} \approx \SI{4,2}{\kilo\joule\per\kilo\gram\per\kelvin} = \SI{1}{\calorie\per\gram\per\celsius}
+\end{formula}
+
+Se $\Delta T > 0$ il corpo si scalda e $Q > 0$: il calore è assorbito. Se $\Delta T < 0$ il corpo si raffredda e $Q < 0$: il calore è ceduto. Qualche valore del calore specifico:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lc@{\qquad}lc@{}}
+\toprule
+Sostanza & $c$ (\si{\kilo\joule\per\kilo\gram\per\kelvin}) & Sostanza & $c$ (\si{\kilo\joule\per\kilo\gram\per\kelvin}) \\
+\midrule
+acqua & 4,2 & corpo umano (media) & 3,5 \\
+ghiaccio & 2,1 & alluminio & 0,90 \\
+vapore acqueo & 2,0 & ferro & 0,45 \\
+aria (a pressione costante) & 1,0 & rame & 0,39 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+L'acqua ha uno dei calori specifici più alti fra le sostanze comuni: si scalda e si raffredda lentamente. Il corpo umano, che è fatto per circa il 60\% di acqua, ha un calore specifico medio vicino a quello dell'acqua.
+
+\begin{esempio}
+(a) Quanto calore serve per scaldare \SI{250}{\gram} d'acqua per il tè da \SI{20}{\celsius} a \SI{100}{\celsius}? Dai il risultato in chilocalorie e in kilojoule. (b) Un paziente di \SI{70}{\kilo\gram} ha la febbre: la sua temperatura sale da \SI{37}{\celsius} a \SI{39}{\celsius}. Quanta energia è servita?
+
+(a) Con la caloria il conto è immediato, perché il calore specifico dell'acqua è \SI{1}{\calorie\per\gram\per\celsius}:
+\[
+  Q = m\,c\,\Delta T = \SI{250}{\gram} \cdot \SI{1}{\calorie\per\gram\per\celsius} \cdot (100 - 20)\,\si{\celsius} = 250 \cdot 80\,\si{\calorie} = \SI{20000}{\calorie} = \SI{20}{\kilo\calorie}
+\]
+In kilojoule: $\SI{20}{\kilo\calorie} \cdot \SI{4,2}{\kilo\joule\per\kilo\calorie} = \SI{84}{\kilo\joule}$.
+
+(b) Con il calore specifico medio del corpo umano e $\Delta T = 39 - 37 = \SI{2}{\kelvin}$:
+\[
+  Q = m\,c\,\Delta T = \SI{70}{\kilo\gram} \cdot \SI{3,5}{\kilo\joule\per\kilo\gram\per\kelvin} \cdot \SI{2}{\kelvin} = 70 \cdot 7\,\si{\kilo\joule} = \SI{490}{\kilo\joule}
+\]
+che sono $490/4{,}2 \approx \SI{117}{\kilo\calorie}$.
+\end{esempio}
+
+\begin{attenzione}[le unità del calore specifico]
+In $Q = mc\,\Delta T$ le unità devono andare d'accordo. Con $c$ in \si{\kilo\joule\per\kilo\gram\per\kelvin} la massa va in chilogrammi; con $c$ in \si{\calorie\per\gram\per\celsius} va in grammi. Mettere \SI{250}{\gram} come «250» in una formula con \SI{4,2}{\kilo\joule\per\kilo\gram\per\kelvin} dà un risultato mille volte troppo grande.
+\end{attenzione}
+
+\input{ud5/generati/lampo-ud5-calore}
+
+\begin{applicazione}{la febbre e l'ipotermia}
+La temperatura del corpo è regolata dall'ipotalamo intorno a \SI{37}{\celsius}. Nella febbre il valore di riferimento sale, e il corpo si scalda finché lo raggiunge: riduce le perdite di calore restringendo i vasi della pelle (che diventa pallida e fredda) e aumenta la produzione con i brividi, contrazioni muscolari che producono calore senza compiere lavoro utile. L'esempio precedente dice quanta energia serve: circa \SI{490}{\kilo\joule} per due gradi. A riposo il corpo produce circa \SI{100}{\watt}, cioè \SI{100}{\joule} al secondo (il watt è l'unità della potenza, energia diviso tempo, UD2). Se non perdesse calore, gli servirebbero
+\[
+  \Delta t = \frac{Q}{P} = \frac{\SI{490000}{\joule}}{\SI{100}{\joule\per\second}} = \SI{4900}{\second} \approx \SI{1,4}{\hour}
+\]
+Con i brividi, che possono moltiplicare la produzione di calore per tre o più, la salita è più rapida.
+
+Nell'\textbf{ipotermia} succede il contrario: il corpo perde più calore di quanto ne produce e la temperatura centrale scende sotto \SI{35}{\celsius}. L'alto calore specifico del corpo aiuta nei due versi: la temperatura cambia lentamente, e un'ipotermia si corregge altrettanto lentamente.
+\end{applicazione}
+
+\subsection{Il calore specifico dei gas}
+
+Per un gas il calore che serve per scaldarlo dipende da \emph{come} lo si scalda. Se il volume è tenuto fisso, tutto il calore va ad aumentare la temperatura. Se invece è fissa la pressione, il gas, scaldandosi, si espande e spinge l'ambiente: una parte del calore se ne va in questo lavoro, e per avere lo stesso aumento di temperatura ne serve di più. Per i gas si usano i \textbf{calori specifici molari}, riferiti a una mole invece che a un chilogrammo: $Q = n\,c\,\Delta T$, con $c$ in \si{\joule\per\mole\per\kelvin}. Si indicano con $c_V$ a volume costante e con $c_p$ a pressione costante. Per un gas perfetto valgono:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Gas perfetto & $c_V$ & $c_p$ & $\gamma = c_p / c_V$ \\
+\midrule
+monoatomico (elio, argon) & $\frac{3}{2}R \approx \SI{12,5}{\joule\per\mole\per\kelvin}$ & $\frac{5}{2}R \approx \SI{20,8}{\joule\per\mole\per\kelvin}$ & $\frac{5}{3} \approx 1{,}67$ \\ \addlinespace[3pt]
+biatomico (ossigeno, azoto, aria) & $\frac{5}{2}R \approx \SI{20,8}{\joule\per\mole\per\kelvin}$ & $\frac{7}{2}R \approx \SI{29,1}{\joule\per\mole\per\kelvin}$ & $\frac{7}{5} = 1{,}4$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+In entrambi i casi $c_p - c_V = R$: la differenza è proprio il lavoro di espansione, come mostra la sezione~\ref{sec:ud5-primo}. Il rapporto $\gamma$ serve per le trasformazioni adiabatiche.
+
+\subsection{I cambiamenti di stato e il calore latente}
+
+La materia si presenta in tre stati di aggregazione: solido, liquido e gassoso. I passaggi fra uno stato e l'altro hanno un nome:
+\begin{itemize}
+  \item \textbf{fusione} (da solido a liquido) e \textbf{solidificazione} (da liquido a solido);
+  \item \textbf{vaporizzazione} (da liquido a gas) e \textbf{condensazione} (da gas a liquido). La vaporizzazione si chiama \textbf{evaporazione} quando avviene solo dalla superficie del liquido, a qualunque temperatura (il sudore sulla pelle), ed \textbf{ebollizione} quando avviene in tutto il liquido, con le bolle, alla temperatura di ebollizione (\SI{100}{\celsius} per l'acqua a \SI{1}{atm});
+  \item \textbf{sublimazione} (da solido a gas, come il ghiaccio secco) e \textbf{brinamento} (da gas a solido).
+\end{itemize}
+
+Mentre una sostanza pura cambia stato a pressione costante, la sua temperatura \emph{non cambia}, anche se continua a ricevere calore. Un cubetto di ghiaccio a \SI{0}{\celsius} assorbe calore e diventa acqua a \SI{0}{\celsius}: l'energia serve a rompere i legami fra le molecole del solido, non ad agitarle di più. Il calore che serve per far cambiare stato a un chilogrammo di sostanza si chiama \textbf{calore latente} («nascosto», perché non si vede come aumento di temperatura).
+
+\begin{formula}[Calore latente]
+Q = m\,L
+\\
+\text{acqua:}\quad L_f \approx \SI{334}{\kilo\joule\per\kilo\gram} \approx \SI{80}{\calorie\per\gram}
+\qquad
+L_v \approx \SI{2260}{\kilo\joule\per\kilo\gram} \approx \SI{540}{\calorie\per\gram} \ (\text{a } \SI{100}{\celsius})
+\end{formula}
+
+$L_f$ è il calore latente di fusione, $L_v$ quello di vaporizzazione. Lo stesso calore va ceduto nel passaggio inverso: l'acqua che solidifica cede \SI{334}{\kilo\joule} per ogni chilogrammo, il vapore che condensa ne cede \num{2260}. Il calore latente di vaporizzazione dipende un po' dalla temperatura: per l'acqua che evapora dalla pelle, a circa \SI{35}{\celsius}, vale circa \SI{2400}{\kilo\joule\per\kilo\gram}.
+
+\begin{figure}[h]
+\centering
+\input{ud5/figure/curva-riscaldamento}
+\caption{Curva di riscaldamento di \SI{1}{\kilo\gram} d'acqua a \SI{1}{atm}, da ghiaccio a \SI{-20}{\celsius} a vapore a \SI{120}{\celsius}. Nei tratti inclinati la temperatura sale e $Q = mc\,\Delta T$; nei tratti orizzontali la sostanza cambia stato a temperatura costante e $Q = mL$.}
+\label{fig:ud5-riscaldamento}
+\end{figure}
+
+La figura~\ref{fig:ud5-riscaldamento} mostra che cosa succede a \SI{1}{\kilo\gram} di ghiaccio a \SI{-20}{\celsius} a cui si dà calore a ritmo costante. Con i calori specifici della tabella, i cinque tratti richiedono: per scaldare il ghiaccio fino a \SI{0}{\celsius}, $1 \cdot 2{,}1 \cdot 20 = \SI{42}{\kilo\joule}$; per fonderlo, $1 \cdot 334 = \SI{334}{\kilo\joule}$; per scaldare l'acqua fino a \SI{100}{\celsius}, $1 \cdot 4{,}2 \cdot 100 = \SI{420}{\kilo\joule}$; per farla bollire, $1 \cdot 2260 = \SI{2260}{\kilo\joule}$; per scaldare il vapore fino a \SI{120}{\celsius}, $1 \cdot 2{,}0 \cdot 20 = \SI{40}{\kilo\joule}$.
+Il tratto più lungo, di gran lunga, è l'ebollizione: far evaporare un chilo d'acqua costa più di cinque volte che portarla da \SI{0}{\celsius} a \SI{100}{\celsius} ($2260/420 \approx 5{,}4$). Per questo le ustioni da vapore sono più gravi di quelle da acqua bollente: il vapore che condensa sulla pelle le cede il suo grande calore latente.
+
+\begin{applicazione}{la sudorazione}
+Il sudore raffredda il corpo perché, evaporando, prende dalla pelle il calore latente di vaporizzazione, circa \SI{2400}{\kilo\joule} per ogni chilogrammo (cioè per ogni litro) di sudore. Per smaltire con il solo sudore i \SI{100}{\watt} prodotti a riposo, in un'ora il corpo deve eliminare $Q = \SI{100}{\joule\per\second} \cdot \SI{3600}{\second} = \SI{360}{\kilo\joule}$, e quindi far evaporare
+\[
+  m = \frac{Q}{L_v} = \frac{\SI{360}{\kilo\joule}}{\SI{2400}{\kilo\joule\per\kilo\gram}} = \SI{0,15}{\kilo\gram}
+\]
+cioè circa \SI{150}{\milli\litre} all'ora. Durante uno sforzo intenso la produzione di calore può arrivare a circa \SI{1000}{\watt}, dieci volte tanto, e il sudore necessario a circa \SI{1,5}{\litre} all'ora: da qui il rischio di disidratazione. Conta solo il sudore che evapora. Quello che gocciola via non toglie calore latente, e in aria molto umida l'evaporazione rallenta: per questo il caldo umido si sopporta peggio del caldo secco.
+\end{applicazione}
+
+\input{ud5/generati/lampo-ud5-sudore}
+
+\subsection{La calorimetria}
+
+La \textbf{calorimetria} misura gli scambi di calore. Il principio è semplice: se due o più corpi a temperature diverse sono messi a contatto in un recipiente isolato, il \textbf{calorimetro}, il calore ceduto dai corpi caldi è uguale al calore assorbito da quelli freddi, perché l'energia non esce dal recipiente. Con i segni del paragrafo precedente, la somma di tutti i calori scambiati è zero.
+
+\begin{formula}[Bilancio calorimetrico]
+Q_1 + Q_2 + \dots = 0
+\qquad\Longleftrightarrow\qquad
+\text{calore ceduto} = \text{calore assorbito}
+\\
+\text{due masse della stessa sostanza:}\quad
+T_{\text{eq}} = \frac{m_1 T_1 + m_2 T_2}{m_1 + m_2}
+\end{formula}
+
+La seconda formula vale per due corpi della stessa sostanza, senza cambiamenti di stato. Viene dal bilancio: il corpo 1 cede $m_1 c\,(T_1 - T_{\text{eq}})$, il corpo 2 assorbe $m_2 c\,(T_{\text{eq}} - T_2)$. Uguagliando e semplificando $c$:
+\[
+  m_1 T_1 - m_1 T_{\text{eq}} = m_2 T_{\text{eq}} - m_2 T_2
+  \quad\Longrightarrow\quad
+  m_1 T_1 + m_2 T_2 = (m_1 + m_2)\,T_{\text{eq}}
+\]
+
+\begin{richiamo}{la media pesata}
+La \textbf{media pesata} di due valori $x_1$ e $x_2$ con pesi $w_1$ e $w_2$ è $\bar x = (w_1 x_1 + w_2 x_2)/(w_1 + w_2)$. Sta sempre fra $x_1$ e $x_2$, più vicina al valore con il peso maggiore; con pesi uguali è la media aritmetica. La temperatura di equilibrio è la media delle due temperature pesata con le masse (con sostanze diverse, con le capacità termiche $mc$). Per esempio, \SI{300}{\gram} d'acqua a \SI{20}{\celsius} e \SI{100}{\gram} a \SI{60}{\celsius} danno $(300 \cdot 20 + 100 \cdot 60)/400 = \num{12000}/400 = \SI{30}{\celsius}$.
+\end{richiamo}
+
+\begin{esempio}
+In un thermos si mettono \SI{400}{\gram} d'acqua a \SI{50}{\celsius} e un cubetto di ghiaccio da \SI{100}{\gram} a \SI{0}{\celsius}. Qual è la temperatura finale? Si trascuri il calore scambiato con il thermos.
+
+Si usano le calorie: $c = \SI{1}{\calorie\per\gram\per\celsius}$ e $L_f = \SI{80}{\calorie\per\gram}$. Prima si controlla se il ghiaccio fonde tutto. Per fonderlo servono $m L_f = 100 \cdot 80 = \SI{8000}{\calorie}$. L'acqua calda, raffreddandosi fino a \SI{0}{\celsius}, potrebbe cederne $400 \cdot 1 \cdot 50 = \SI{20000}{\calorie}$: sono più che sufficienti, quindi il ghiaccio fonde tutto e la temperatura finale $T$ è sopra \SI{0}{\celsius}.
+
+Il calore ceduto dall'acqua calda che va da \SI{50}{\celsius} a $T$ è uguale al calore assorbito dal ghiaccio, che prima fonde e poi, diventato acqua, si scalda da \SI{0}{\celsius} a $T$:
+\[
+  400 \cdot 1 \cdot (50 - T) = 100 \cdot 80 + 100 \cdot 1 \cdot (T - 0)
+\]
+\[
+  20000 - 400\,T = 8000 + 100\,T
+  \quad\Longrightarrow\quad
+  12000 = 500\,T
+  \quad\Longrightarrow\quad
+  T = \SI{24}{\celsius}
+\]
+Senza la fusione, la media pesata darebbe $(400 \cdot 50 + 100 \cdot 0)/500 = \SI{40}{\celsius}$: il calore latente abbassa la temperatura finale di \SI{16}{\celsius}.
+\end{esempio}
+
+\input{ud5/generati/lampo-ud5-miscela}
+
+% -------------------------------------------------------------------------
+\section{La trasmissione del calore}
+\label{sec:ud5-trasmissione}
+
+Il calore passa da un corpo caldo a uno freddo in tre modi: per conduzione, per convezione e per irraggiamento. Il corpo umano li usa tutti e tre, e in più si raffredda con l'evaporazione del sudore.
+
+\subsection{La conduzione}
+
+Nella \textbf{conduzione} il calore passa attraverso un materiale senza che il materiale si sposti: le molecole più agitate della parte calda urtano quelle vicine e passano loro energia, e così via fino alla parte fredda. È il modo in cui il calore attraversa un muro, il manico di una pentola o lo strato di grasso sotto la pelle.
+
+Consideriamo una lastra di spessore $d$ e area $A$, con le due facce alle temperature $T_1$ e $T_2 < T_1$ (figura~\ref{fig:ud5-conduzione}). Il calore $Q$ che la attraversa nel tempo $\Delta t$ cresce con l'area e con la differenza di temperatura, e diminuisce con lo spessore. La \textbf{potenza} trasmessa, cioè il calore al secondo, $P = Q/\Delta t$, in watt, è data dalla \textbf{legge di Fourier}:
+
+\begin{formula}[Conduzione: legge di Fourier]
+P = \frac{Q}{\Delta t} = k\,A\,\frac{T_1 - T_2}{d}
+\end{formula}
+
+La costante $k$ è la \textbf{conducibilità termica} del materiale, in \si{\watt\per\metre\per\kelvin}. I metalli sono buoni conduttori; aria, grasso e lana sono buoni isolanti:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lc@{\qquad}lc@{}}
+\toprule
+Materiale & $k$ (\si{\watt\per\metre\per\kelvin}) & Materiale & $k$ (\si{\watt\per\metre\per\kelvin}) \\
+\midrule
+rame & 400 & tessuto muscolare & 0,5 \\
+acciaio & 50 & grasso & 0,2 \\
+vetro & 1 & lana & 0,04 \\
+acqua & 0,6 & aria ferma & 0,025 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[h]
+\centering
+\input{ud5/figure/conduzione}
+\caption{Conduzione attraverso una lastra di spessore $d$ e area $A$. Il calore va dal lato caldo, a temperatura $T_1$, al lato freddo, a temperatura $T_2$.}
+\label{fig:ud5-conduzione}
+\end{figure}
+
+\begin{esempio}
+Sotto la pelle c'è uno strato di grasso. Stima la potenza che lo attraversa per conduzione se ha uno spessore medio di \SI{2}{\centi\metre}, un'area di \SI{2}{\metre\squared}, conducibilità $k = \SI{0,2}{\watt\per\metre\per\kelvin}$, e le sue due facce sono a \SI{37}{\celsius} (verso i muscoli) e a \SI{33}{\celsius} (verso la pelle).
+
+La differenza di temperatura è $37 - 33 = \SI{4}{\celsius} = \SI{4}{\kelvin}$; lo spessore in metri è $d = \SI{0,02}{\metre}$. Con la legge di Fourier:
+\[
+  P = k A\,\frac{T_1 - T_2}{d} = \SI{0,2}{\watt\per\metre\per\kelvin} \cdot \SI{2}{\metre\squared} \cdot \frac{\SI{4}{\kelvin}}{\SI{0,02}{\metre}} = 0{,}4 \cdot 200\,\si{\watt} = \SI{80}{\watt}
+\]
+È dello stesso ordine della potenza prodotta a riposo, circa \SI{100}{\watt}. Con uno strato di grasso doppio, a parità di differenza di temperatura, la potenza si dimezzerebbe: il grasso è un isolante.
+\end{esempio}
+
+\begin{attenzione}[proporzionalità nella legge di Fourier]
+La potenza è direttamente proporzionale ad $A$, a $k$ e a $T_1 - T_2$, e inversamente proporzionale allo spessore $d$. Nei quesiti conviene ragionare sui fattori: raddoppiando lo spessore e raddoppiando l'area la potenza non cambia; dimezzando lo spessore e triplicando la differenza di temperatura diventa sei volte più grande. E la maniglia di metallo sembra più fredda del legno perché, alla stessa temperatura, conduce via dalla mano molto più calore al secondo.
+\end{attenzione}
+
+\subsection{La convezione}
+
+Nella \textbf{convezione} il calore è trasportato da un fluido, liquido o gas, che si muove. L'aria a contatto con un termosifone si scalda, diventa meno densa e sale; al suo posto arriva aria fredda, che a sua volta si scalda e sale. Si forma una corrente che porta il calore in tutta la stanza. Se il fluido si muove da solo, per le differenze di densità, la convezione è \textbf{naturale}; se lo spinge una pompa, un ventilatore o il vento, è \textbf{forzata}.
+
+La convezione è molto più efficace della conduzione nello stesso fluido, perché porta via di continuo il fluido già scaldato e lo sostituisce con fluido freddo. La potenza scambiata fra una superficie e il fluido intorno è ancora proporzionale all'area e alla differenza di temperatura, $P = h\,A\,\Delta T$, con un coefficiente $h$ che cresce con la velocità del fluido: per questo il vento fa sentire più freddo, a parità di temperatura dell'aria.
+
+Nel corpo umano la convezione forzata più importante è interna: il sangue, spinto dal cuore, porta il calore dagli organi profondi, dove si produce, alla pelle, dove si disperde. Restringendo o allargando i vasi della pelle (vasocostrizione e vasodilatazione) il corpo regola quanto calore arriva in superficie.
+
+\subsection{L'irraggiamento}
+
+Ogni corpo emette onde elettromagnetiche per il solo fatto di avere una temperatura (le onde elettromagnetiche sono l'argomento della UD7). A temperatura ambiente e a quella del corpo umano la radiazione emessa è quasi tutta nell'infrarosso, invisibile all'occhio; un corpo molto caldo, come il filamento di una lampadina, emette anche luce visibile. L'\textbf{irraggiamento} è lo scambio di calore attraverso questa radiazione. È l'unico dei tre modi che non ha bisogno di un mezzo: il calore del Sole arriva sulla Terra attraverso il vuoto.
+
+La potenza emessa da un corpo è data dalla \textbf{legge di Stefan-Boltzmann}:
+
+\begin{formula}[Irraggiamento: legge di Stefan-Boltzmann]
+P = e\,\sigma\,A\,T^{4}
+\qquad\qquad
+\sigma \approx \SI{5,7e-8}{\watt\per\metre\squared\per\kelvin\tothe{4}}
+\\
+P_{\text{netta}} = e\,\sigma\,A\,\left(T^{4} - T_{\text{amb}}^{4}\right)
+\end{formula}
+
+$A$ è l'area della superficie che emette, $T$ la sua temperatura \emph{assoluta} e $\sigma$ la \textbf{costante di Stefan-Boltzmann}. L'\textbf{emissività} $e$ è un numero puro fra 0 e 1: vale 1 per un corpo che assorbe tutta la radiazione che lo colpisce (il «corpo nero») e meno di 1 per una superficie lucida, che ne riflette una parte. La pelle umana, nell'infrarosso, ha $e \approx 0{,}98$, quasi 1, qualunque sia il suo colore. Un corpo emette e intanto assorbe la radiazione dell'ambiente: se l'ambiente è alla temperatura $T_{\text{amb}}$, la potenza persa davvero è la differenza fra le due, $P_{\text{netta}}$.
+
+\begin{esempio}
+Stima la potenza netta che un adulto svestito perde per irraggiamento in una stanza le cui pareti sono a \SI{17}{\celsius}. La pelle è a \SI{27}{\celsius}, l'area $A = \SI{2}{\metre\squared}$, l'emissività $e \approx 1$.
+
+Le temperature vanno in kelvin: $T = 27 + 273 = \SI{300}{\kelvin}$ e $T_{\text{amb}} = 17 + 273 = \SI{290}{\kelvin}$. Le quarte potenze, con la notazione scientifica:
+\begin{gather*}
+  300^{4} = (3 \cdot 10^{2})^{4} = 81 \cdot 10^{8} = \num{8,1e9}
+  \\
+  290^{4} = (2{,}9 \cdot 10^{2})^{4} = (2{,}9^{2})^{2} \cdot 10^{8} = 8{,}41^{2} \cdot 10^{8} \approx \num{7,07e9}
+\end{gather*}
+dove $8{,}41^{2} \approx 70{,}7$. La potenza emessa e quella assorbita sono
+\[
+  P = \sigma A T^{4} \approx \num{5,7e-8} \cdot 2 \cdot \num{8,1e9}\,\si{\watt} = 5{,}7 \cdot 2 \cdot 81\,\si{\watt} \approx \SI{923}{\watt}
+  \qquad
+  P_{\text{ass}} \approx 5{,}7 \cdot 2 \cdot 70{,}7\,\si{\watt} \approx \SI{806}{\watt}
+\]
+Si è usato $10^{-8} \cdot 10^{9} = 10$, quindi $\num{8,1e9} \cdot 10^{-8} = 81$, e poi $5{,}7 \cdot 2 = 11{,}4$, $11{,}4 \cdot 81 \approx 923$ e $11{,}4 \cdot 70{,}7 \approx 806$. La potenza netta è $923 - 806 \approx \SI{120}{\watt}$. Il corpo emette e assorbe potenze grandi, quasi uguali; conta la loro differenza, che è dello stesso ordine della potenza prodotta a riposo.
+\end{esempio}
+
+\begin{attenzione}[nell'irraggiamento conta la quarta potenza della temperatura assoluta]
+Se la temperatura assoluta raddoppia, la potenza emessa diventa $2^{4} = 16$ volte più grande, non il doppio. E la temperatura va in kelvin: passare da \SI{10}{\celsius} a \SI{20}{\celsius} non vuol dire raddoppiare $T$, che va da \SI{283}{\kelvin} a \SI{293}{\kelvin}.
+\end{attenzione}
+
+\input{ud5/generati/lampo-ud5-irraggiamento}
+
+\begin{applicazione}{la termoregolazione}
+A riposo, svestito, in una stanza a circa \SI{20}{\celsius}, il corpo perde calore soprattutto per irraggiamento (circa metà del totale), poi per conduzione e convezione verso l'aria e per evaporazione dalla pelle e dalle vie respiratorie (una parte ciascuna, intorno a un quarto). Le proporzioni cambiano con l'ambiente:
+\begin{itemize}
+  \item quando l'aria e le pareti sono più calde della pelle, irraggiamento, conduzione e convezione portano calore \emph{dentro} il corpo, e l'unica via di raffreddamento rimasta è l'evaporazione del sudore;
+  \item in acqua fredda la perdita di calore è molto più rapida che in aria alla stessa temperatura: l'acqua conduce circa $0{,}6/0{,}025 = 24$ volte meglio dell'aria ferma e, quando si muove, la convezione è ancora più efficace. Per questo in acqua l'ipotermia arriva in fretta;
+  \item i vestiti intrappolano aria ferma, che conduce poco e non fa convezione; la coperta isotermica, metallizzata, riflette verso il corpo la radiazione infrarossa.
+\end{itemize}
+L'irraggiamento serve anche a misurare la temperatura: i termometri a infrarossi (auricolari o frontali) e le termocamere misurano la radiazione emessa dalla pelle, che per Stefan-Boltzmann dipende dalla sua temperatura.
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{Il primo principio della termodinamica}
+\label{sec:ud5-primo}
+
+\subsection{Il lavoro di un gas}
+
+Il \textbf{lavoro} di una forza costante $F$ che sposta il suo punto di applicazione di $s$ nella sua stessa direzione è $W = F s$, in joule (UD1 e UD2). Un gas chiuso in un cilindro con un pistone mobile di area $A$ spinge il pistone con la forza $F = pA$. Se si espande a pressione costante e il pistone si sposta di $s$, il volume aumenta di $\Delta V = A s$ e il gas compie il lavoro
+\[
+  W = F s = p A s = p\,\Delta V
+\]
+Se il gas si espande ($\Delta V > 0$) il lavoro è positivo: il gas cede energia all'ambiente spingendolo. Se viene compresso ($\Delta V < 0$) il lavoro è negativo: è l'ambiente che compie lavoro sul gas. Se il volume non cambia, il lavoro è zero.
+
+Quando la pressione cambia durante la trasformazione, si divide la trasformazione in tanti piccoli passi, in ciascuno dei quali la pressione è quasi costante, e si sommano i lavori $p\,\Delta V$. Nel piano $pV$ ogni passo è un rettangolino di base $\Delta V$ e altezza $p$, e la somma è l'area sotto la curva (figura~\ref{fig:ud5-lavoro}).
+
+\begin{richiamo}{l'area sotto un grafico}
+Se in un grafico l'asse orizzontale porta una grandezza $x$ e quello verticale una grandezza $y$, l'area fra la curva e l'asse $x$ ha le unità del prodotto $x \cdot y$. Nel piano velocità-tempo l'area è uno spazio (\si{\metre\per\second} per \si{\second}); nel piano $pV$ è un lavoro (\si{\pascal} per \si{\metre\cubed} fa \si{\joule}). Per un rettangolo l'area è base per altezza; per un trapezio è la semisomma delle basi per l'altezza; per un triangolo è base per altezza diviso 2. Le aree di figure più complicate si stimano scomponendole in rettangoli e triangoli.
+\end{richiamo}
+
+\begin{formula}[Lavoro di un gas]
+W = p\,\Delta V \quad (\text{pressione costante})
+\qquad\qquad
+W = \text{area sotto la curva nel piano } pV
+\end{formula}
+
+\begin{figure}[h]
+\centering
+\input{ud5/figure/lavoro}
+\caption{Il lavoro compiuto dal gas è l'area sotto la curva della trasformazione nel piano $pV$: (a) per un'isobara è un rettangolo, $p\,\Delta V$; (b) per una trasformazione qualsiasi è l'area sotto la curva; (c) in un ciclo percorso in senso orario il lavoro totale è l'area racchiusa.}
+\label{fig:ud5-lavoro}
+\end{figure}
+
+Il lavoro dipende dal percorso. Due trasformazioni con lo stesso stato iniziale e lo stesso stato finale possono avere curve diverse nel piano $pV$, e quindi aree diverse: il lavoro \emph{non} è una funzione di stato. Lo stesso vale per il calore, come vedremo fra poco.
+
+\subsection{L'energia interna}
+
+L'\textbf{energia interna} $U$ di un sistema è la somma di tutte le energie delle sue molecole: l'energia cinetica del loro moto disordinato e l'energia dei legami e delle interazioni fra loro. È una funzione di stato. Per un gas perfetto le molecole non interagiscono, e l'energia interna è solo cinetica: dipende soltanto dalla temperatura. Per $n$ moli di un gas perfetto, in ogni trasformazione,
+\[
+  \Delta U = n\,c_V\,\Delta T
+\]
+anche se il volume non resta costante: $c_V$ serve solo come coefficiente, perché $U$ dipende solo da $T$. Per un gas monoatomico, con $c_V = \frac32 R$, si ha $U = \frac32 nRT$. La teoria cinetica dei gas spiega questo risultato: l'energia cinetica media di una molecola (l'energia del moto, $\frac12 mv^2$, UD2) è $\frac32 k_B T$, dove $k_B = R/N_A \approx \SI{1,38e-23}{\joule\per\kelvin}$ è la \textbf{costante di Boltzmann}, e $N = nN_A$ molecole hanno in tutto $\frac32 nN_A k_B T = \frac32 nRT$. La temperatura assoluta misura quindi quanto si agitano in media le molecole: per questo nelle leggi dei gas entra $T$ in kelvin. In particolare, \emph{se la temperatura di un gas perfetto non cambia, la sua energia interna non cambia}.
+
+\subsection{Il primo principio}
+
+Un sistema può scambiare energia con l'ambiente in due modi: come calore, per una differenza di temperatura, e come lavoro, per esempio spostando un pistone. Il \textbf{primo principio della termodinamica} dice che l'energia interna cambia esattamente di quanto il sistema ha ricevuto meno quanto ha dato:
+
+\begin{formula}[Primo principio della termodinamica]
+\Delta U = Q - W
+\\
+Q > 0 \text{ calore assorbito dal sistema} \qquad W > 0 \text{ lavoro compiuto dal sistema}
+\end{formula}
+
+È il principio di conservazione dell'energia esteso ai fenomeni termici: l'energia non si crea e non si distrugge, cambia solo forma o passa da un sistema all'altro. Il calore assorbito $Q$ in parte resta nel sistema come energia interna e in parte esce come lavoro. Una conseguenza è che nessuna macchina può produrre lavoro dal nulla: una macchina che lavora in ciclo torna allo stato iniziale, quindi $\Delta U = 0$ e $W = Q$, e il lavoro che dà è al massimo il calore che riceve.
+
+Due trasformazioni fra gli stessi stati hanno lo stesso $\Delta U$, perché l'energia interna è una funzione di stato, ma possono dividerlo in modo diverso fra calore e lavoro, che non lo sono.
+
+\begin{esempio}
+Un gas riceve \SI{800}{\joule} di calore e la sua energia interna aumenta di \SI{300}{\joule}. Quanto lavoro ha compiuto? Il gas si è espanso o è stato compresso?
+
+Dal primo principio, $W = Q - \Delta U = \SI{800}{\joule} - \SI{300}{\joule} = \SI{500}{\joule}$. Il lavoro è positivo: il gas lo ha compiuto sull'ambiente, quindi si è espanso. Dei \SI{800}{\joule} ricevuti, \SI{300}{\joule} sono rimasti nel gas e \SI{500}{\joule} sono usciti come lavoro.
+\end{esempio}
+
+\begin{attenzione}[i segni di calore e lavoro]
+In questo libro $W$ è il lavoro compiuto \emph{dal} sistema, e il primo principio si scrive $\Delta U = Q - W$. Alcuni testi usano il lavoro compiuto \emph{sul} sistema e scrivono $\Delta U = Q + W$: le due forme dicono la stessa cosa. Prima di fare un conto, fissa i segni: calore che entra positivo, calore che esce negativo; lavoro positivo se il gas si espande, negativo se è compresso.
+\end{attenzione}
+
+\input{ud5/generati/lampo-ud5-primo}
+
+\subsection{Trasformazioni reversibili e irreversibili}
+
+Una trasformazione è \textbf{reversibile} se si può percorrere al contrario riportando allo stato iniziale sia il sistema sia l'ambiente, senza lasciare traccia. Per essere reversibile deve essere \textbf{quasi statica}, cioè così lenta che il sistema passa per una successione di stati di equilibrio, e senza attriti né scambi di calore fra corpi a temperature diverse. Solo le trasformazioni quasi statiche si disegnano come una curva nel piano $pV$: in ogni istante pressione e temperatura hanno un valore definito in tutto il gas.
+
+Una trasformazione è \textbf{irreversibile} se questo non è possibile. Lo sono tutte le trasformazioni reali, in misura maggiore o minore: il calore che passa da un corpo caldo a uno freddo non torna indietro da solo; l'attrito trasforma lavoro in calore, ma un freno scaldato non rimette in moto l'auto; un gas che si espande nel vuoto (espansione libera) o due liquidi che si mescolano non si separano più da soli.
+Le trasformazioni reversibili sono un'idealizzazione, come il gas perfetto: servono a calcolare il caso limite, al quale le trasformazioni reali possono solo avvicinarsi.
+
+\subsection{Le trasformazioni del gas perfetto}
+
+Le trasformazioni più semplici di un gas perfetto tengono costante una grandezza. Sono quattro, e per ciascuna il primo principio dice come si dividono calore, lavoro e variazione di energia interna. Nei conti che seguono, \SI{2}{\mole} di gas perfetto monoatomico ($c_V = \frac32 R \approx \SI{12,5}{\joule\per\mole\per\kelvin}$).
+
+\textbf{Isocora} (volume costante). Il gas non si espande, quindi $W = 0$, e tutto il calore va in energia interna: $Q = \Delta U = n\,c_V\,\Delta T$. Pressione e temperatura sono proporzionali (seconda legge di Gay-Lussac). Nel piano $pV$ è un segmento verticale. Per scaldare il gas di \SI{100}{\kelvin}:
+\[
+  Q = \Delta U = n\,c_V\,\Delta T = 2 \cdot \tfrac32 \cdot 8{,}3 \cdot 100\,\si{\joule} = 3 \cdot 830\,\si{\joule} = \SI{2490}{\joule}
+\]
+
+\textbf{Isobara} (pressione costante). Il volume è proporzionale alla temperatura (prima legge di Gay-Lussac). Il gas compie il lavoro $W = p\,\Delta V$, che con l'equazione di stato ($p\,\Delta V = nR\,\Delta T$ a $p$ costante) diventa $W = nR\,\Delta T$. Il calore è $Q = \Delta U + W = n\,c_V\,\Delta T + nR\,\Delta T = n\,(c_V + R)\,\Delta T$, e per definizione è anche $n\,c_p\,\Delta T$: ecco perché $c_p = c_V + R$ (\textbf{relazione di Mayer}). Nel piano $pV$ è un segmento orizzontale. Per scaldare il gas di \SI{100}{\kelvin}:
+\[
+  W = nR\,\Delta T = 2 \cdot 8{,}3 \cdot 100\,\si{\joule} = \SI{1660}{\joule}
+  \qquad
+  \Delta U = \SI{2490}{\joule}
+  \qquad
+  Q = 2490 + 1660 = \SI{4150}{\joule}
+\]
+A parità di $\Delta T$ serve più calore che nell'isocora, \SI{1660}{\joule} in più: il lavoro di espansione.
+
+\textbf{Isoterma} (temperatura costante). L'energia interna non cambia, $\Delta U = 0$, quindi $Q = W$: tutto il calore assorbito esce come lavoro, o tutto il lavoro fatto sul gas esce come calore. Pressione e volume sono inversamente proporzionali (legge di Boyle). Nel piano $pV$ è un'iperbole, e il lavoro, che è l'area sotto l'iperbole, vale
+\[
+  W = nRT\,\ln\frac{V_f}{V_i}
+\]
+Per $n = \SI{1}{\mole}$ a \SI{300}{\kelvin} che raddoppia il suo volume: $W = 8{,}3 \cdot 300 \cdot \ln 2\,\si{\joule} \approx 2490 \cdot 0{,}69\,\si{\joule}$. Per il conto a mano, $2490 \cdot 0{,}69 = 2490 \cdot 0{,}7 - 2490 \cdot 0{,}01 = 1743 - 25 = 1718$, quindi $W \approx \SI{1720}{\joule}$, e il gas assorbe lo stesso calore.
+
+\begin{richiamo}{il logaritmo naturale}
+Il logaritmo naturale $\ln x$ è l'esponente a cui elevare il numero $e \approx 2{,}72$ per ottenere $x$: $\ln x = y$ vuol dire $e^{y} = x$. I valori da ricordare: $\ln 1 = 0$, $\ln 2 \approx 0{,}69$, $\ln 10 \approx 2{,}3$. La proprietà più utile è $\ln(1/x) = -\ln x$: per una compressione isoterma che dimezza il volume, $\ln(1/2) = -0{,}69$, e il lavoro è negativo. Il logaritmo cresce lentamente: $\ln 4 = \ln(2 \cdot 2) = 2 \ln 2 \approx 1{,}38$.
+\end{richiamo}
+
+\textbf{Adiabatica} (nessuno scambio di calore, $Q = 0$). Succede se il gas è isolato termicamente, o se la trasformazione è così rapida che il calore non fa in tempo a passare. Il primo principio dà $\Delta U = -W$: se il gas si espande compie lavoro a spese della sua energia interna, e si raffredda; se è compresso si scalda. In una trasformazione adiabatica reversibile pressione e volume sono legati da
+\[
+  p\,V^{\gamma} = \text{costante}
+  \qquad\qquad
+  \gamma = \frac{c_p}{c_V} > 1
+\]
+Nel piano $pV$ l'adiabatica scende più ripida dell'isoterma che passa per lo stesso punto: espandendosi il gas perde pressione sia perché il volume aumenta sia perché la temperatura diminuisce. Se il nostro gas compie \SI{500}{\joule} di lavoro in un'espansione adiabatica, $\Delta U = \SI{-500}{\joule}$ e la temperatura scende di
+\[
+  \Delta T = \frac{\Delta U}{n\,c_V} = \frac{\SI{-500}{\joule}}{2 \cdot \SI{12,5}{\joule\per\kelvin}} = \frac{-500}{25}\,\si{\kelvin} = \SI{-20}{\kelvin}
+\]
+
+\begin{figure}[h]
+\centering
+\input{ud5/figure/trasformazioni}
+\caption{Le quattro trasformazioni di un gas perfetto che partono dallo stesso stato $A$. Isobara orizzontale, isocora verticale; l'adiabatica scende più ripida dell'isoterma, perché nell'espansione adiabatica il gas si raffredda.}
+\label{fig:ud5-trasformazioni}
+\end{figure}
+
+\begin{formula}[Le trasformazioni del gas perfetto]
+\renewcommand{\arraystretch}{1.4}
+\begin{array}{@{}lllll@{}}
+\toprule
+ & \text{costante} & W & \Delta U & Q \\
+\midrule
+\text{isocora} & V & 0 & n c_V \Delta T & n c_V \Delta T \\
+\text{isobara} & p & p\,\Delta V = nR\,\Delta T & n c_V \Delta T & n c_p \Delta T \\
+\text{isoterma} & T & nRT \ln(V_f/V_i) & 0 & W \\
+\text{adiabatica} & pV^{\gamma} & -\Delta U & n c_V \Delta T & 0 \\
+\bottomrule
+\end{array}
+\\
+\Delta U = n\,c_V\,\Delta T \qquad c_p - c_V = R \qquad \gamma = \frac{c_p}{c_V}
+\end{formula}
+
+Il confronto qualitativo, a partire dallo stesso stato (figura~\ref{fig:ud5-trasformazioni}): espandendo il gas fino allo stesso volume finale, l'isobara compie più lavoro di tutte (l'area sotto il segmento orizzontale è la più grande) e scalda il gas; l'isoterma ne compie meno e tiene la temperatura fissa; l'adiabatica ne compie ancora meno e raffredda il gas; l'isocora non compie lavoro e, se il gas è raffreddato, ne fa solo scendere la pressione.
+
+\begin{attenzione}[adiabatica non vuol dire isoterma]
+In un'adiabatica non c'è scambio di calore, ma la temperatura cambia: comprimendo in fretta l'aria in una pompa da bicicletta la pompa si scalda, e il gas che esce da una bomboletta spray la raffredda. Viceversa in un'isoterma la temperatura resta costante, ma il gas scambia calore, tanto quanto il lavoro. «Senza calore» e «a temperatura costante» sono due cose diverse.
+\end{attenzione}
+
+\input{ud5/generati/lampo-ud5-trasformazioni}
+
+\begin{applicazione}{il metabolismo e il primo principio}
+Il corpo umano è un sistema aperto, ma il primo principio vale anche per lui. L'energia entra con il cibo, come energia chimica; esce come lavoro, quando i muscoli spostano il corpo o un oggetto, e come calore, verso l'ambiente. Un'alimentazione di \SI{2000}{\kilo\calorie} al giorno corrisponde a una potenza media di
+\[
+  P = \frac{\SI{2000}{\kilo\calorie} \cdot \SI{4,2}{\kilo\joule\per\kilo\calorie}}{\SI{86400}{\second}} = \frac{\SI{8,4e6}{\joule}}{\SI{8,64e4}{\second}} \approx \SI{97}{\watt} \approx \SI{100}{\watt}
+\]
+(un giorno ha $24 \cdot 3600 = \num{86400}$ secondi). È il valore di riferimento di un adulto a riposo usato in questa unità. Se il corpo riceve più energia di quanta ne spende, il resto si accumula come energia interna, nelle riserve di grasso.
+
+I muscoli trasformano in lavoro solo una parte dell'energia chimica che consumano, circa il 20--25\%; il resto diventa calore. Per salire tre metri di scale, una persona di \SI{70}{\kilo\gram} compie contro la gravità il lavoro $W = mgh \approx \SI{70}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{3}{\metre} = \SI{2100}{\joule}$ (UD2). Con un rendimento del 25\% consuma $\SI{2100}{\joule} / 0{,}25 = \SI{8400}{\joule}$ di energia chimica, e $8400 - 2100 = \SI{6300}{\joule}$ diventano calore. È per questo che lo sforzo fisico scalda e fa sudare.
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{Il secondo principio della termodinamica}
+\label{sec:ud5-secondo}
+
+\subsection{Gli enunciati e l'irreversibilità}
+
+Il primo principio dice che l'energia si conserva, ma non dice in che verso vanno i processi. Una tazza di caffè caldo su un tavolo si raffredda e scalda un po' l'aria intorno; il processo inverso, in cui il caffè si scalda prendendo calore dall'aria più fredda, conserverebbe l'energia altrettanto bene, ma non succede mai. Il \textbf{secondo principio della termodinamica} fissa il verso dei processi naturali. Ha due enunciati classici, che si dimostrano equivalenti (se uno fosse falso, lo sarebbe anche l'altro):
+\begin{itemize}
+  \item \textbf{enunciato di Clausius}: è impossibile realizzare una trasformazione il cui \emph{unico} risultato sia il passaggio di calore da un corpo più freddo a uno più caldo;
+  \item \textbf{enunciato di Kelvin-Planck}: è impossibile realizzare una trasformazione il cui \emph{unico} risultato sia trasformare in lavoro tutto il calore preso da una sola sorgente a temperatura uniforme.
+\end{itemize}
+La parola chiave è «unico». Un frigorifero porta calore dall'interno freddo alla cucina più calda, ma solo spendendo lavoro elettrico: non è l'unico risultato. Nell'espansione isoterma di un gas tutto il calore assorbito diventa lavoro, ma intanto il gas si è espanso: anche qui non è l'unico risultato, e per ripetere l'operazione il gas va ricompresso.
+
+\subsection{Cicli e macchine termiche}
+
+Un \textbf{ciclo} è una successione di trasformazioni che riporta il sistema allo stato iniziale. Poiché l'energia interna è una funzione di stato, in un ciclo $\Delta U = 0$, e il primo principio dà $W = Q$: il lavoro totale è uguale al calore totale scambiato. Nel piano $pV$ un ciclo è una curva chiusa, e il lavoro totale è l'area racchiusa (figura~\ref{fig:ud5-lavoro}c), positivo se il ciclo è percorso in senso orario.
+
+Una \textbf{macchina termica} è un dispositivo che, lavorando in ciclo, trasforma calore in lavoro: il motore di un'automobile, una turbina a vapore. Per il secondo principio non può farlo con una sola sorgente: ne servono due, a temperature diverse (figura~\ref{fig:ud5-macchina}). In ogni ciclo la macchina assorbe il calore $Q_c$ dalla sorgente calda, alla temperatura $T_c$, compie il lavoro $W$ e cede il calore $|Q_f|$ alla sorgente fredda, alla temperatura $T_f$ (di solito l'ambiente). Per il primo principio, $W = Q_c - |Q_f|$.
+
+\begin{figure}[h]
+\centering
+\input{ud5/figure/macchina}
+\caption{Schema di una macchina termica. In ogni ciclo assorbe $Q_c$ dalla sorgente calda, compie il lavoro $W$ e cede $|Q_f|$ alla sorgente fredda. Lo spessore delle frecce indica la quantità di energia.}
+\label{fig:ud5-macchina}
+\end{figure}
+
+Il \textbf{rendimento} $\eta$ (eta) è la frazione del calore assorbito che diventa lavoro:
+
+\begin{formula}[Rendimento di una macchina termica]
+\eta = \frac{W}{Q_c} = \frac{Q_c - |Q_f|}{Q_c} = 1 - \frac{|Q_f|}{Q_c}
+\end{formula}
+
+È un numero puro, e per il secondo principio è sempre minore di 1: una parte del calore deve finire nella sorgente fredda. Si dà spesso in percentuale.
+
+\begin{esempio}
+Un motore assorbe in ogni ciclo \SI{2000}{\joule} dalla sorgente calda e ne cede \SI{1500}{\joule} all'ambiente. Quanto lavoro compie in un ciclo? Qual è il suo rendimento?
+
+Il lavoro è la differenza fra il calore assorbito e quello ceduto: $W = 2000 - 1500 = \SI{500}{\joule}$. Il rendimento è
+\[
+  \eta = \frac{W}{Q_c} = \frac{\SI{500}{\joule}}{\SI{2000}{\joule}} = \frac14 = 0{,}25 = 25\%
+\]
+\end{esempio}
+
+Un \textbf{frigorifero} è una macchina termica che lavora al contrario: spendendo il lavoro $W$, prende il calore $Q_f$ dall'interno freddo e cede $Q_f + W$ alla cucina. Come chiede l'enunciato di Clausius, senza lavoro non funziona.
+
+\subsection{Il ciclo di Carnot}
+
+Qual è il rendimento più alto possibile per una macchina che lavora fra due sorgenti a temperature $T_c$ e $T_f$? La risposta l'ha data Sadi Carnot nel 1824, con un ciclo ideale fatto solo di trasformazioni reversibili. Il \textbf{ciclo di Carnot} ha quattro tratti (figura~\ref{fig:ud5-carnot}):
+\begin{enumerate}
+  \item un'espansione isoterma alla temperatura $T_c$ (da $A$ a $B$), in cui il gas assorbe il calore $Q_c$ dalla sorgente calda;
+  \item un'espansione adiabatica (da $B$ a $C$), in cui il gas si raffredda da $T_c$ a $T_f$;
+  \item una compressione isoterma alla temperatura $T_f$ (da $C$ a $D$), in cui il gas cede il calore $|Q_f|$ alla sorgente fredda;
+  \item una compressione adiabatica (da $D$ ad $A$), in cui il gas si scalda da $T_f$ a $T_c$ e torna allo stato iniziale.
+\end{enumerate}
+Il calore si scambia solo nelle isoterme, quando il gas ha la stessa temperatura della sorgente: non ci sono passaggi di calore fra corpi a temperature diverse, e il ciclo è reversibile.
+
+\begin{figure}[h]
+\centering
+\input{ud5/figure/carnot}
+\caption{Il ciclo di Carnot nel piano $pV$: due isoterme, alle temperature $T_c$ e $T_f$, e due adiabatiche. L'area racchiusa (in verde) è il lavoro compiuto in un ciclo.}
+\label{fig:ud5-carnot}
+\end{figure}
+
+Per il ciclo di Carnot il rapporto fra i calori scambiati è uguale al rapporto fra le temperature assolute delle sorgenti, $|Q_f|/Q_c = T_f/T_c$ (la sezione sull'entropia mostra perché). Il rendimento dipende quindi solo dalle due temperature:
+
+\begin{formula}[Rendimento di Carnot]
+\eta_{\text{Carnot}} = 1 - \frac{T_f}{T_c} \qquad (T \text{ in kelvin})
+\end{formula}
+
+Il \textbf{teorema di Carnot} afferma che nessuna macchina che lavora fra le stesse due temperature può avere un rendimento maggiore di quello di Carnot, e che tutte le macchine reversibili hanno questo stesso rendimento; quelle reali, irreversibili, lo hanno minore. Il rendimento si avvicina a 1 solo se $T_f$ è molto più piccola di $T_c$, e varrebbe 1 solo con $T_f = \SI{0}{\kelvin}$, che non si può raggiungere.
+
+\begin{esempio}
+Una centrale a vapore lavora fra il vapore a \SI{527}{\celsius} e l'acqua di raffreddamento a \SI{27}{\celsius}. Qual è il suo rendimento massimo? Che cosa si otterrebbe usando per sbaglio i gradi Celsius?
+
+Le temperature in kelvin sono $T_c = 527 + 273 = \SI{800}{\kelvin}$ e $T_f = 27 + 273 = \SI{300}{\kelvin}$:
+\[
+  \eta_{\text{Carnot}} = 1 - \frac{T_f}{T_c} = 1 - \frac{300}{800} = 1 - \frac38 = \frac58 = 0{,}625 = 62{,}5\%
+\]
+Con i gradi Celsius si troverebbe $1 - 27/527 \approx 1 - 0{,}05 = 95\%$: un rendimento sbagliato e molto più alto. Le centrali reali arrivano intorno al 40\%, sotto il limite di Carnot.
+\end{esempio}
+
+\input{ud5/generati/lampo-ud5-carnot}
+
+\begin{applicazione}{il corpo umano non è una macchina termica}
+Se i muscoli trasformassero in lavoro il calore, come un motore, lavorerebbero fra la temperatura del corpo, \SI{310}{\kelvin}, e quella dell'ambiente, per esempio \SI{293}{\kelvin}. Il loro rendimento massimo sarebbe
+\[
+  \eta_{\text{Carnot}} = 1 - \frac{293}{310} = \frac{310 - 293}{310} = \frac{17}{310} \approx 0{,}055 = 5{,}5\%
+\]
+I muscoli arrivano invece al 20--25\%, ben oltre questo limite. Non è una violazione del secondo principio: vuol dire che i muscoli non sono macchine termiche. Trasformano direttamente l'energia chimica (dell'ATP) in lavoro meccanico, senza passare per il calore, e il limite di Carnot non si applica. Il calore che producono è lo scarto della trasformazione, non il suo combustibile.
+\end{applicazione}
+
+\subsection{L'entropia}
+
+Il secondo principio si può esprimere con una sola grandezza, l'\textbf{entropia} $S$. Quando un sistema assorbe in modo reversibile il calore $Q$ alla temperatura assoluta costante $T$, la sua entropia aumenta di
+\begin{formula}[Variazione di entropia]
+\Delta S = \frac{Q}{T} \qquad (\text{trasformazione reversibile a } T \text{ costante, } T \text{ in kelvin})
+\end{formula}
+L'entropia si misura in \si{\joule\per\kelvin}. Se il sistema cede calore, $Q < 0$ e la sua entropia diminuisce. Se la temperatura cambia durante la trasformazione, si divide in tanti piccoli passi a temperatura quasi costante e si sommano i $Q/T$ di ciascuno.
+
+L'entropia è una \textbf{funzione di stato}: la sua variazione dipende solo dallo stato iniziale e da quello finale. Per questo si può calcolare anche per una trasformazione irreversibile: si immagina una trasformazione reversibile fra gli stessi due stati e si calcola $\Delta S$ su quella. Il secondo principio diventa:
+
+\emph{in un sistema isolato l'entropia non diminuisce mai: aumenta nelle trasformazioni irreversibili e resta costante in quelle reversibili.}
+\[
+  \Delta S_{\text{isolato}} \geq 0
+\]
+Un sistema non isolato può diminuire la sua entropia, ma solo se quella dell'ambiente aumenta almeno altrettanto: considerando insieme il sistema e l'ambiente, che formano un sistema isolato, l'entropia totale non diminuisce.
+
+\begin{esempio}
+(a) Di quanto aumenta l'entropia di \SI{1}{\kilo\gram} di ghiaccio che fonde a \SI{0}{\celsius}? (b) \SI{1000}{\joule} di calore passano da un corpo a \SI{400}{\kelvin} a un corpo a \SI{200}{\kelvin}, così grandi che le loro temperature non cambiano. Come varia l'entropia totale?
+
+(a) Il ghiaccio fonde a temperatura costante, $T = \SI{273}{\kelvin}$, assorbendo $Q = m L_f = \SI{334}{\kilo\joule} = \SI{334000}{\joule}$:
+\[
+  \Delta S = \frac{Q}{T} = \frac{\SI{334000}{\joule}}{\SI{273}{\kelvin}} \approx \SI{1220}{\joule\per\kelvin}
+\]
+Per il conto a mano: $273 \cdot 1200 = \num{327600}$, e i \num{6400} che restano fanno circa altre $6400/273 \approx 23$ unità. L'acqua liquida, più disordinata del ghiaccio, ha più entropia.
+
+(b) Il corpo caldo cede il calore, il freddo lo assorbe:
+\[
+  \Delta S_{\text{caldo}} = \frac{\SI{-1000}{\joule}}{\SI{400}{\kelvin}} = \SI{-2,5}{\joule\per\kelvin}
+  \qquad
+  \Delta S_{\text{freddo}} = \frac{\SI{1000}{\joule}}{\SI{200}{\kelvin}} = \SI{5}{\joule\per\kelvin}
+\]
+\[
+  \Delta S_{\text{tot}} = -2{,}5 + 5 = \SI{2,5}{\joule\per\kelvin} > 0
+\]
+L'entropia totale aumenta: il passaggio di calore dal caldo al freddo è spontaneo. Il passaggio inverso darebbe $\Delta S_{\text{tot}} = \SI{-2,5}{\joule\per\kelvin}$, e il secondo principio lo vieta.
+\end{esempio}
+
+L'esempio (b) mostra il legame fra entropia e verso dei processi. Lo stesso calore $Q$ fa \emph{perdere} al corpo caldo l'entropia $Q/T_c$ e fa \emph{guadagnare} al corpo freddo l'entropia $Q/T_f$, che è più grande perché $T_f < T_c$. Quindi il passaggio dal caldo al freddo fa sempre aumentare l'entropia totale, ed è il verso naturale: è l'enunciato di Clausius detto con l'entropia.
+
+L'entropia spiega anche il rendimento di Carnot. In un ciclo reversibile l'entropia del gas torna al valore iniziale, ed essendo il ciclo reversibile non aumenta neppure quella delle sorgenti: l'entropia che il gas prende dalla sorgente calda, $Q_c/T_c$, è uguale a quella che cede alla fredda, $|Q_f|/T_f$. Quindi $|Q_f|/Q_c = T_f/T_c$, e $\eta = 1 - T_f/T_c$. Una macchina che cedesse meno calore alla sorgente fredda farebbe diminuire l'entropia totale.
+
+\begin{attenzione}[l'entropia di un sistema può diminuire]
+Il secondo principio non dice che l'entropia di ogni corpo aumenta: dice che non diminuisce l'entropia \emph{totale} di un sistema isolato. Nell'esempio (b) l'entropia del corpo caldo diminuisce, ma quella del corpo freddo aumenta di più. Un errore frequente nei quesiti è sommare i valori assoluti ($2{,}5 + 5$) invece di tenere i segni. E in $\Delta S = Q/T$ la temperatura va in kelvin: con i gradi Celsius, a \SI{0}{\celsius}, si dividerebbe per zero.
+\end{attenzione}
+
+\input{ud5/generati/lampo-ud5-entropia}
+
+\subsection{L'interpretazione statistica dell'entropia}
+
+Perché l'entropia aumenta? La risposta viene dal modo in cui si comportano un numero enorme di molecole. Lo stato termodinamico di un gas (la sua pressione, il suo volume, la sua temperatura) si chiama \textbf{macrostato}. Lo stesso macrostato si può realizzare in moltissimi modi diversi, cambiando le posizioni e le velocità delle singole molecole: ogni configurazione delle molecole è un \textbf{microstato}. Ludwig Boltzmann ha mostrato che l'entropia di un macrostato è legata al numero $\Omega$ dei microstati che lo realizzano:
+
+\begin{formula}[Entropia di Boltzmann]
+S = k_B \ln \Omega
+\qquad\qquad
+k_B = \frac{R}{N_A} \approx \SI{1,38e-23}{\joule\per\kelvin}
+\end{formula}
+
+Un macrostato con più microstati ha più entropia. E le molecole, muovendosi a caso, passano per tutti i microstati con la stessa probabilità: il sistema finisce quasi certamente nel macrostato che ha più microstati, cioè con l'entropia più grande.
+
+Un esempio. Un recipiente è diviso in due metà da una parete, e tutto il gas sta nella metà di sinistra. Si toglie la parete: il gas si espande nel vuoto e riempie tutto il recipiente. Ogni molecola ora può stare in due metà invece che in una, quindi per $N$ molecole il numero dei microstati si moltiplica per $2 \cdot 2 \cdots 2 = 2^{N}$. Il processo inverso, in cui tutte le molecole tornano da sole nella metà di sinistra, non è vietato dalle leggi del moto, ma ha probabilità $(1/2)^{N}$. Con 4 molecole è $1/16$, e capita spesso; con una mole, $N \approx \num{6e23}$, è un numero così piccolo che non capiterà mai nella vita dell'universo. L'irreversibilità è una questione di probabilità: i processi spontanei vanno verso i macrostati più probabili.
+
+L'aumento di entropia nell'espansione libera si trova anche con la formula di Boltzmann. Per una mole di gas che raddoppia il volume,
+\[
+  \Delta S = k_B \ln 2^{N_A} = N_A\,k_B \ln 2 = R \ln 2 \approx 8{,}3 \cdot 0{,}69\,\si{\joule\per\kelvin} \approx \SI{5,7}{\joule\per\kelvin}
+\]
+dove si è usato $\ln 2^{N} = N \ln 2$ e $N_A k_B = R$. È lo stesso risultato che dà la definizione $\Delta S = Q/T$ applicata all'espansione isoterma reversibile fra gli stessi due stati, in cui $Q = W = RT\ln 2$: l'entropia è una funzione di stato, e le due strade devono dare lo stesso numero.
+
+Per questo l'entropia si descrive spesso come una misura del disordine: un gas sparso in tutto il recipiente, un liquido rispetto al suo cristallo, due sostanze mescolate hanno più microstati, e più entropia, delle situazioni «ordinate» corrispondenti.
+
+\begin{applicazione}{la vita e l'entropia}
+Un organismo vivente costruisce e mantiene strutture molto ordinate: proteine con una sequenza precisa, membrane, cellule organizzate in tessuti. La sua entropia resta bassa, e a volte diminuisce, come durante la crescita. Non è una violazione del secondo principio, perché l'organismo è un sistema aperto. Prende dall'ambiente molecole ordinate e ricche di energia, come il glucosio, e restituisce molecole più semplici e disordinate, anidride carbonica e acqua, insieme al calore che disperde. Contando l'organismo e l'ambiente, l'entropia totale aumenta. Il calore che il corpo cede di continuo all'ambiente più freddo, circa \SI{100}{\watt}, fa parte di questo bilancio: a \SI{300}{\kelvin}, ogni secondo l'entropia dell'ambiente cresce di $\SI{100}{\joule} / \SI{300}{\kelvin} \approx \SI{0,33}{\joule\per\kelvin}$. Per restare in vita un organismo deve produrre entropia e cederla all'ambiente; quando smette, va verso l'equilibrio con l'ambiente, cioè verso la morte.
+\end{applicazione}
+
+\riepilogoformule
