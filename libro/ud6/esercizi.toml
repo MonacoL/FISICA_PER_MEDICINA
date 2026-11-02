@@ -3,8 +3,6 @@
 # la pagina web build/web/ud6.html, e ricalcola ogni risultato.
 #
 # Il formato è descritto in testa a libro/ud7/esercizi.toml.
-# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
-# arrivano con un ticket successivo.
 
 titolo = "Eserciziario UD6 · Elettricità e magnetismo"
 
@@ -12,6 +10,2503 @@ titolo = "Eserciziario UD6 · Elettricità e magnetismo"
 k = 9e9
 e = 1.6e-19
 eps0 = 8.85e-12
+me = 9.1e-31
+mp = 1.67e-27
+g = 9.8
+mu0su2pi = 2e-07
+sin30 = 0.5
+sin60 = 0.87
+
+# ==================================================================== quesiti lampo, in ordine di dispensa
+
+# ==================================================================== problemi
+
+[[problema]]
+id = "ud6-elettrostatica-elettroni"
+livello = 1
+testo = '''Camminando su una moquette in una giornata secca, una persona si carica fino a {{q}}. Quanti elettroni ha in eccesso?'''
+dati.q = { valore = "-0,80", unita = "\\micro\\coulomb" }
+
+  [[problema.parte]]
+  calcolo = "abs(q) * 1e-6 / e"
+  risultato = { valore = 5.0e12, cifre = 2 }
+  soluzione = '''La carica è negativa: la persona ha elettroni in eccesso. Il loro numero è il modulo della carica diviso la carica elementare, con $|q| = \SI{0,80}{\micro\coulomb} = \SI{8,0e-7}{\coulomb}$:
+\[
+  n = \frac{|q|}{e} = \frac{\SI{8,0e-7}{\coulomb}}{\SI{1,6e-19}{\coulomb}} = \frac{8{,}0}{1{,}6} \cdot 10^{-7-(-19)} = 5{,}0 \cdot 10^{12}
+\]
+Cinquemila miliardi di elettroni: abbastanza per una piccola scossa quando la persona tocca una maniglia di metallo.'''
+
+[[problema]]
+id = "ud6-elettrostatica-forza"
+livello = 1
+testo = '''Due piccole sfere cariche, che si possono trattare come cariche puntiformi, hanno cariche $q_1 = {{q1}}$ e $q_2 = {{q2}}$ e sono ferme nel vuoto a {{r}} l'una dall'altra. Calcola il modulo della forza fra loro e di' se è attrattiva o repulsiva.'''
+dati.q1 = { valore = "+4,0", unita = "\\nano\\coulomb" }
+dati.q2 = { valore = "+6,0", unita = "\\nano\\coulomb" }
+dati.r = { valore = "2,0", unita = "cm" }
+
+  [[problema.parte]]
+  calcolo = "k * q1 * 1e-9 * q2 * 1e-9 / (r * 1e-2)**2"
+  risultato = { valore = 5.4e-4, unita = "\\newton", cifre = 2 }
+  rapido = '''$F = \SI{5,4e-4}{\newton}$; repulsiva'''
+  soluzione = '''Le cariche hanno lo stesso segno: la forza è repulsiva. Nel SI le cariche sono $q_1 = \SI{4,0e-9}{\coulomb}$ e $q_2 = \SI{6,0e-9}{\coulomb}$, la distanza $r = \SI{0,020}{\metre}$, quindi $r^{2} = \SI{4,0e-4}{\metre\squared}$. Il prodotto delle cariche è $4{,}0 \cdot 6{,}0 \cdot 10^{-9-9} = \SI{24e-18}{\coulomb\squared}$:
+\[
+  F = k\,\frac{|q_1 q_2|}{r^{2}} = \SI{9e9}{\newton\metre\squared\per\coulomb\squared} \cdot \frac{\SI{24e-18}{\coulomb\squared}}{\SI{4,0e-4}{\metre\squared}} = \frac{9 \cdot 24}{4{,}0} \cdot 10^{9-18-(-4)}\,\si{\newton} = 54 \cdot 10^{-5}\,\si{\newton} = \SI{5,4e-4}{\newton}
+\]'''
+
+[[problema]]
+id = "ud6-elettrostatica-campo-punto"
+livello = 1
+testo = '''Calcola il modulo del campo elettrico prodotto da una carica puntiforme di {{q}} in un punto a {{r}} da essa. Il campo punta verso la carica o in verso opposto?'''
+dati.q = { valore = "-5,0", unita = "\\nano\\coulomb" }
+dati.r = { valore = 30, unita = "cm" }
+
+  [[problema.parte]]
+  calcolo = "k * abs(q) * 1e-9 / (r * 1e-2)**2"
+  risultato = { valore = 500, unita = "\\newton\\per\\coulomb", cifre = 2 }
+  rapido = '''$E = \SI{500}{\newton\per\coulomb}$; verso la carica'''
+  soluzione = '''Il modulo del campo si calcola con il modulo della carica, $|q| = \SI{5,0e-9}{\coulomb}$, e con $r = \SI{0,30}{\metre}$, $r^{2} = \SI{0,09}{\metre\squared}$:
+\[
+  E = k\,\frac{|q|}{r^{2}} = \SI{9e9}{\newton\metre\squared\per\coulomb\squared} \cdot \frac{\SI{5,0e-9}{\coulomb}}{\SI{0,09}{\metre\squared}} = \frac{45}{0{,}09}\,\si{\newton\per\coulomb} = \SI{500}{\newton\per\coulomb}
+\]
+dove $9 \cdot 5{,}0 \cdot 10^{9-9} = 45$. La carica è negativa: il campo è entrante, cioè punta verso la carica. Una carica di prova positiva messa in quel punto sarebbe attirata.'''
+
+[[problema]]
+id = "ud6-elettrostatica-potenziale-punto"
+livello = 1
+testo = '''Calcola il potenziale elettrico a {{r}} da una carica puntiforme di {{q}}, con il potenziale nullo all'infinito.'''
+dati.q = { valore = "-3,0", unita = "\\nano\\coulomb" }
+dati.r = { valore = 15, unita = "cm" }
+
+  [[problema.parte]]
+  calcolo = "k * q * 1e-9 / (r * 1e-2)"
+  risultato = { valore = -180, unita = "\\volt", cifre = 2 }
+  soluzione = '''Il potenziale di una carica puntiforme è $V = kq/r$, con la carica \emph{con il suo segno} e la distanza alla prima potenza. Con $q = \SI{-3,0e-9}{\coulomb}$ e $r = \SI{0,15}{\metre}$:
+\[
+  V = k\,\frac{q}{r} = \SI{9e9}{\newton\metre\squared\per\coulomb\squared} \cdot \frac{\SI{-3,0e-9}{\coulomb}}{\SI{0,15}{\metre}} = \frac{-27}{0{,}15}\,\si{\volt} = \SI{-180}{\volt}
+\]
+dove $9 \cdot (-3{,}0) \cdot 10^{9-9} = -27$. Il potenziale è negativo, come la carica che lo produce.'''
+
+[[problema]]
+id = "ud6-elettrostatica-cloro"
+livello = 1
+testo = '''A riposo l'interno di una fibra muscolare è a {{V}} rispetto all'esterno, che si prende a potenziale zero. Uno ione cloro $\mathrm{Cl^{-}}$, di carica $-e$, passa dall'esterno all'interno della fibra. Di quanto cambia la sua energia potenziale elettrica, in elettronvolt e in joule? Aumenta o diminuisce?'''
+dati.V = { valore = -90, unita = "\\milli\\volt" }
+
+  [[problema.parte]]
+  calcolo = "(-e) * (V * 1e-3 - 0)"
+  risultato = { valore = 1.4e-20, unita = "J", cifre = 2 }
+  rapido = '''$\Delta U = \SI{+0,090}{\electronvolt} \approx \SI{1,4e-20}{\joule}$; aumenta'''
+  soluzione = '''La variazione di energia potenziale è $\Delta U = q\,\Delta V$, con la carica e la differenza di potenziale con i loro segni. Lo ione va dall'esterno ($V = 0$) all'interno ($V = \SI{-0,090}{\volt}$), quindi
+\[
+  \Delta V = V_\text{dentro} - V_\text{fuori} = \SI{-0,090}{\volt} - 0 = \SI{-0,090}{\volt}
+\]
+\[
+  \Delta U = q\,\Delta V = (-e) \cdot (\SI{-0,090}{\volt}) = \SI{+0,090}{\electronvolt}
+\]
+In joule: $0{,}090 \cdot \SI{1,6e-19}{\joule} = \SI{0,144e-19}{\joule} \approx \SI{1,4e-20}{\joule}$. L'energia potenziale aumenta: l'interno negativo respinge lo ione negativo, e la forza elettrica si oppone al suo ingresso.'''
+
+[[problema]]
+id = "ud6-elettrostatica-goccia"
+livello = 1
+testo = '''Vicino al suolo, con il bel tempo, nell'atmosfera c'è un campo elettrico di circa {{E}}, diretto verso il basso. Una gocciolina di pioggia ha carica {{q}}. Calcola il modulo della forza elettrica sulla gocciolina e di' se punta verso l'alto o verso il basso.'''
+dati.E = { valore = 150, unita = "\\newton\\per\\coulomb" }
+dati.q = { valore = -20, unita = "\\pico\\coulomb" }
+
+  [[problema.parte]]
+  calcolo = "abs(q) * 1e-12 * E"
+  risultato = { valore = 3.0e-9, unita = "\\newton", cifre = 2 }
+  rapido = '''$F = \SI{3,0e-9}{\newton}$; verso l'alto'''
+  soluzione = '''Noto il campo, la forza su una carica è $\vec F = q\vec E$. Il modulo si calcola con $|q| = \SI{20}{\pico\coulomb} = \SI{2,0e-11}{\coulomb}$:
+\[
+  F = |q|\,E = \SI{2,0e-11}{\coulomb} \cdot \SI{150}{\newton\per\coulomb} = 300 \cdot 10^{-11}\,\si{\newton} = \SI{3,0e-9}{\newton}
+\]
+La carica è negativa, quindi la forza ha verso opposto al campo: punta verso l'alto.'''
+
+[[problema]]
+id = "ud6-elettrostatica-cariche-uguali"
+livello = 2
+testo = '''Due piccole sfere identiche, con la stessa carica positiva, sono ferme nel vuoto a {{r}} l'una dall'altra e si respingono con una forza di {{F}}.'''
+dati.r = { valore = "4,0", unita = "cm" }
+dati.F = { valore = "0,90", unita = "\\newton" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la carica di ciascuna sfera?'''
+  calcolo = "(r * 1e-2) * math.sqrt(F / k) * 1e6"
+  risultato = { valore = 0.40, unita = "\\micro\\coulomb", cifre = 2 }
+  soluzione = '''Le cariche sono uguali, $q_1 = q_2 = q$, e la legge di Coulomb diventa $F = kq^{2}/r^{2}$. Si ricava $q$:
+\[
+  q^{2} = \frac{F r^{2}}{k}
+  \quad\Longrightarrow\quad
+  q = r\,\sqrt{\frac{F}{k}}
+\]
+Con $r = \SI{0,040}{\metre}$ e $F/k = 0{,}90/\num{9e9} = \num{0,10e-9} = \num{1,0e-10}\,\si{\coulomb\squared\per\metre\squared}$:
+\[
+  q = \SI{0,040}{\metre} \cdot \sqrt{\num{1,0e-10}}\,\si{\coulomb\per\metre} = \num{0,040} \cdot \num{1,0e-5}\,\si{\coulomb} = \SI{4,0e-7}{\coulomb} = \SI{0,40}{\micro\coulomb}
+\]
+dove $\sqrt{10^{-10}} = 10^{-5}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti elettroni mancano a ciascuna sfera?'''
+  calcolo = "(r * 1e-2) * math.sqrt(F / k) / e"
+  risultato = { valore = 2.5e12, cifre = 2 }
+  soluzione = '''Le sfere sono positive: hanno elettroni in difetto. Il loro numero è la carica del punto precedente divisa la carica elementare:
+\[
+  n = \frac{q}{e} = \frac{\SI{4,0e-7}{\coulomb}}{\SI{1,6e-19}{\coulomb}} = \frac{4{,}0}{1{,}6} \cdot 10^{-7-(-19)} = 2{,}5 \cdot 10^{12}
+\]'''
+
+[[problema]]
+id = "ud6-elettrostatica-gel"
+livello = 2
+testo = '''In un'elettroforesi delle proteine del siero si applica una differenza di potenziale di {{V}} ai capi di un gel lungo {{L}}. Nel gel il campo si può considerare uniforme. Una molecola di albumina ha una carica netta di $-20e$.'''
+dati.V = { valore = 180, unita = "\\volt" }
+dati.L = { valore = 12, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il campo elettrico nel gel?'''
+  calcolo = "V / (L * 1e-2)"
+  risultato = { valore = 1.5e3, unita = "\\volt\\per\\metre", cifre = 2 }
+  soluzione = '''In un campo uniforme $E = \Delta V/d$, con la lunghezza in metri, $d = \SI{0,12}{\metre}$:
+\[
+  E = \frac{\Delta V}{d} = \frac{\SI{180}{\volt}}{\SI{0,12}{\metre}} = \SI{1500}{\volt\per\metre} = \SI{1,5e3}{\volt\per\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza elettrica sulla molecola di albumina? Verso quale polo si muove?'''
+  calcolo = "20 * e * V / (L * 1e-2)"
+  risultato = { valore = 4.8e-15, unita = "\\newton", cifre = 2 }
+  rapido = '''$F = \SI{4,8e-15}{\newton}$; verso il polo positivo'''
+  soluzione = '''La carica della molecola, in modulo, è $|q| = 20e = 20 \cdot \SI{1,6e-19}{\coulomb} = \SI{3,2e-18}{\coulomb}$. Con il campo del punto precedente:
+\[
+  F = |q|\,E = \SI{3,2e-18}{\coulomb} \cdot \SI{1,5e3}{\volt\per\metre} = 4{,}8 \cdot 10^{-18+3}\,\si{\newton} = \SI{4,8e-15}{\newton}
+\]
+La carica è negativa: la forza è opposta al campo, e la molecola si muove verso il polo positivo. Il gel la frena, e presto la molecola viaggia a velocità costante.'''
+
+[[problema]]
+id = "ud6-elettrostatica-elettrone-campo"
+livello = 2
+testo = '''Un elettrone parte da fermo, nel vuoto, in un campo elettrico uniforme di {{E}}. Il peso è trascurabile.'''
+dati.E = { valore = "2,0e3", unita = "\\newton\\per\\coulomb" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la sua accelerazione? In che verso si muove?'''
+  calcolo = "e * E / me"
+  risultato = { valore = 3.5e14, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  rapido = '''$a \approx \SI{3,5e14}{\metre\per\second\squared}$; in verso opposto al campo'''
+  soluzione = '''Sull'elettrone agisce la forza costante di modulo $eE$, e per la seconda legge della dinamica:
+\[
+  a = \frac{eE}{m_e} = \frac{\SI{1,6e-19}{\coulomb} \cdot \SI{2,0e3}{\newton\per\coulomb}}{\SI{9,1e-31}{\kilo\gram}} = \frac{\SI{3,2e-16}{\newton}}{\SI{9,1e-31}{\kilo\gram}} \approx 0{,}35 \cdot 10^{-16-(-31)}\,\si{\metre\per\second\squared} = \SI{3,5e14}{\metre\per\second\squared}
+\]
+dove $3{,}2/9{,}1 \approx 0{,}35$. La carica è negativa: l'elettrone accelera in verso opposto al campo.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto tempo impiega a raggiungere la velocità di \SI{7,0e6}{\metre\per\second}?'''
+  calcolo = "7.0e6 / (e * E / me)"
+  risultato = { valore = 2.0e-8, unita = "s", cifre = 2 }
+  soluzione = '''Partendo da fermo con accelerazione costante, la velocità è $v = at$. Con l'accelerazione del punto precedente:
+\[
+  t = \frac{v}{a} = \frac{\SI{7,0e6}{\metre\per\second}}{\SI{3,5e14}{\metre\per\second\squared}} = \frac{7{,}0}{3{,}5} \cdot 10^{6-14}\,\si{\second} = \SI{2,0e-8}{\second}
+\]
+Venti nanosecondi.'''
+
+[[problema]]
+id = "ud6-elettrostatica-potenziale-due"
+livello = 2
+testo = '''Un punto $P$ dista {{r1}} da una carica puntiforme $q_1 = {{q1}}$ e {{r2}} da una seconda carica puntiforme $q_2 = {{q2}}$. Le cariche sono nel vuoto, e il potenziale è nullo all'infinito.'''
+dati.r1 = { valore = 10, unita = "cm" }
+dati.q1 = { valore = "+3,0", unita = "\\nano\\coulomb" }
+dati.r2 = { valore = "5,0", unita = "cm" }
+dati.q2 = { valore = "-1,0", unita = "\\nano\\coulomb" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il potenziale in $P$?'''
+  calcolo = "k * q1 * 1e-9 / (r1 * 1e-2) + k * q2 * 1e-9 / (r2 * 1e-2)"
+  risultato = { valore = 90, unita = "\\volt", cifre = 2 }
+  soluzione = '''Il potenziale è uno scalare: si sommano i potenziali delle due cariche, ciascuno con il suo segno. Con $r_1 = \SI{0,10}{\metre}$ e $r_2 = \SI{0,050}{\metre}$:
+\[
+  V_P = k\,\frac{q_1}{r_1} + k\,\frac{q_2}{r_2} = \frac{\num{9e9} \cdot \num{3,0e-9}}{0{,}10}\,\si{\volt} + \frac{\num{9e9} \cdot (\num{-1,0e-9})}{0{,}050}\,\si{\volt}
+\]
+\[
+  V_P = \frac{27}{0{,}10}\,\si{\volt} - \frac{9}{0{,}050}\,\si{\volt} = \SI{270}{\volt} - \SI{180}{\volt} = \SI{90}{\volt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto lavoro bisogna fare dall'esterno per portare lentamente una carica di \SI{+2,0}{\nano\coulomb} dall'infinito fino a $P$?'''
+  calcolo = "2.0e-9 * (k * q1 * 1e-9 / (r1 * 1e-2) + k * q2 * 1e-9 / (r2 * 1e-2))"
+  risultato = { valore = 1.8e-7, unita = "J", cifre = 2 }
+  soluzione = '''Portando la carica lentamente, l'energia cinetica resta nulla, e il lavoro fatto dall'esterno è tutto variazione di energia potenziale. La carica passa dal potenziale zero dell'infinito al potenziale $V_P$ del punto precedente:
+\[
+  W = \Delta U = q\,(V_P - 0) = \SI{2,0e-9}{\coulomb} \cdot \SI{90}{\volt} = \SI{180e-9}{\joule} = \SI{1,8e-7}{\joule}
+\]
+Il lavoro è positivo: nel punto $P$ prevale la carica positiva $q_1$, che respinge la carica che arriva.'''
+
+[[problema]]
+id = "ud6-elettrostatica-energia-sistema"
+livello = 2
+testo = '''Su un piano orizzontale senza attrito, una sferetta con carica {{q2}} e massa {{m}} è tenuta ferma a {{r}} da una seconda sferetta, fissa, con carica {{q1}}. Poi la prima sferetta viene lasciata libera.'''
+dati.q1 = { valore = "+2,0", unita = "\\micro\\coulomb" }
+dati.q2 = { valore = "+4,0", unita = "\\micro\\coulomb" }
+dati.m = { valore = "1,5", unita = "\\gram" }
+dati.r = { valore = "6,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'energia potenziale elettrica del sistema all'inizio?'''
+  calcolo = "k * q1 * 1e-6 * q2 * 1e-6 / (r * 1e-2)"
+  risultato = { valore = 1.2, unita = "J", cifre = 2 }
+  soluzione = '''L'energia potenziale di due cariche puntiformi è $U = k\,q_1 q_2/r$, con le cariche con il loro segno e la distanza alla prima potenza. Il prodotto delle cariche è $2{,}0 \cdot 4{,}0 \cdot 10^{-6-6} = \SI{8,0e-12}{\coulomb\squared}$, e $r = \SI{0,060}{\metre}$:
+\[
+  U = \SI{9e9}{\newton\metre\squared\per\coulomb\squared} \cdot \frac{\SI{8,0e-12}{\coulomb\squared}}{\SI{0,060}{\metre}} = \frac{\SI{7,2e-2}{\joule\metre}}{\SI{6,0e-2}{\metre}} = \SI{1,2}{\joule}
+\]
+È positiva: le cariche hanno lo stesso segno e si respingono.'''
+
+  [[problema.parte]]
+  domanda = '''Che velocità raggiunge la sferetta quando è ormai molto lontana?'''
+  calcolo = "math.sqrt(2 * k * q1 * 1e-6 * q2 * 1e-6 / (r * 1e-2) / (m * 1e-3))"
+  risultato = { valore = 40, unita = "m/s", cifre = 2 }
+  soluzione = '''Agisce solo la forza elettrica, e l'energia si conserva. Lontanissimo l'energia potenziale è zero: tutta l'energia potenziale iniziale è diventata energia cinetica, $\frac12 mv^{2} = U$. Con $m = \SI{1,5e-3}{\kilo\gram}$ e $U$ del punto precedente:
+\[
+  v = \sqrt{\frac{2U}{m}} = \sqrt{\frac{2 \cdot \SI{1,2}{\joule}}{\SI{1,5e-3}{\kilo\gram}}} = \sqrt{\frac{2{,}4}{1{,}5} \cdot 10^{3}}\,\si{\metre\per\second} = \sqrt{1600}\,\si{\metre\per\second} = \SI{40}{\metre\per\second}
+\]'''
+
+[[problema]]
+id = "ud6-elettrostatica-acqua"
+livello = 2
+testo = '''Uno ione sodio $\mathrm{Na^{+}}$ (carica $+e$) e uno ione cloro $\mathrm{Cl^{-}}$ (carica $-e$) sono a {{r}} l'uno dall'altro.'''
+dati.r = { valore = "0,24", unita = "\\nano\\metre" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza di attrazione fra i due ioni nel vuoto?'''
+  calcolo = "k * e**2 / (r * 1e-9)**2"
+  risultato = { valore = 4.0e-9, unita = "\\newton", cifre = 2 }
+  soluzione = '''Nel SI la distanza è $r = \SI{0,24}{\nano\metre} = 0{,}24 \cdot \SI{e-9}{\metre} = \SI{2,4e-10}{\metre}$. Con la legge di Coulomb, $e^{2} = (\SI{1,6e-19}{\coulomb})^{2} = \SI{2,56e-38}{\coulomb\squared}$ e $r^{2} = (\SI{2,4e-10}{\metre})^{2} = \SI{5,76e-20}{\metre\squared}$:
+\[
+  F_0 = k\,\frac{e^{2}}{r^{2}} = \frac{\num{9e9} \cdot \num{2,56e-38}}{\num{5,76e-20}}\,\si{\newton} = \frac{\num{2,304e-28}}{\num{5,76e-20}}\,\si{\newton} = 0{,}40 \cdot 10^{-28-(-20)}\,\si{\newton} = \SI{4,0e-9}{\newton}
+\]
+dove $9 \cdot 2{,}56 = 23{,}04$ e $2{,}304/5{,}76 = 0{,}40$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza se i due ioni sono in acqua, con costante dielettrica relativa $\varepsilon_r = 80$?'''
+  calcolo = "k * e**2 / (r * 1e-9)**2 / 80"
+  risultato = { valore = 5.0e-11, unita = "\\newton", cifre = 2 }
+  soluzione = '''Nel dielettrico la forza è quella nel vuoto divisa per $\varepsilon_r$:
+\[
+  F = \frac{F_0}{\varepsilon_r} = \frac{\SI{4,0e-9}{\newton}}{80} = 0{,}050 \cdot 10^{-9}\,\si{\newton} = \SI{5,0e-11}{\newton}
+\]
+L'attrazione è ottanta volte più debole: per questo l'acqua scioglie il sale da cucina, e l'agitazione termica basta a separare gli ioni.'''
+
+[[problema]]
+id = "ud6-elettrostatica-tre-cariche"
+livello = 3
+testo = '''Tre cariche puntiformi sono ferme nel vuoto sull'asse $x$: $q_1 = {{q1}}$ in $x = 0$, $q_2 = {{q2}}$ in $x = \SI{30}{\centi\metre}$ e $q_3 = {{q3}}$ in $x = \SI{60}{\centi\metre}$.'''
+dati.q1 = { valore = "+4,0", unita = "\\micro\\coulomb" }
+dati.q2 = { valore = "-2,0", unita = "\\micro\\coulomb" }
+dati.q3 = { valore = "+1,0", unita = "\\micro\\coulomb" }
+
+  [[problema.parte]]
+  domanda = '''Calcola modulo, direzione e verso della forza totale su $q_3$.'''
+  calcolo = "abs(k * q3 * 1e-6 * (q1 * 1e-6 / 0.60**2 + q2 * 1e-6 / 0.30**2))"
+  risultato = { valore = 0.10, unita = "\\newton", cifre = 2 }
+  rapido = '''$F = \SI{0,10}{\newton}$, lungo l'asse $x$, verso $-x$'''
+  soluzione = '''Per il principio di sovrapposizione, la forza su $q_3$ è la somma delle forze di $q_1$ e di $q_2$. La carica $q_3$ dista \SI{0,60}{\metre} da $q_1$ e \SI{0,30}{\metre} da $q_2$. I moduli:
+\begin{gather*}
+  F_{13} = \num{9e9} \cdot \frac{\num{4,0e-6} \cdot \num{1,0e-6}}{(0{,}60)^{2}}\,\si{\newton} = \frac{\num{3,6e-2}}{0{,}36}\,\si{\newton} = \SI{0,10}{\newton}
+  \\
+  F_{23} = \num{9e9} \cdot \frac{\num{2,0e-6} \cdot \num{1,0e-6}}{(0{,}30)^{2}}\,\si{\newton} = \frac{\num{1,8e-2}}{0{,}09}\,\si{\newton} = \SI{0,20}{\newton}
+\end{gather*}
+$q_1$ e $q_3$ sono positive e si respingono: $q_1$ spinge $q_3$ verso $+x$. $q_2$ è negativa e attira $q_3$ verso di sé, cioè verso $-x$. Le due forze sono sulla stessa retta con versi opposti:
+\[
+  F = F_{23} - F_{13} = \SI{0,20}{\newton} - \SI{0,10}{\newton} = \SI{0,10}{\newton}
+\]
+diretta lungo l'asse $x$, verso $-x$. La carica $q_1$ è doppia di $q_2$ in modulo, ma è al doppio della distanza: il quadrato della distanza la indebolisce di 4 volte.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia potenziale elettrica del sistema delle tre cariche. Che cosa significa il suo segno?'''
+  calcolo = "k * (q1 * q2 * 1e-12 / 0.30 + q1 * q3 * 1e-12 / 0.60 + q2 * q3 * 1e-12 / 0.30)"
+  risultato = { valore = -0.24, unita = "J", cifre = 2 }
+  rapido = '''$U = \SI{-0,24}{\joule}$; sistema legato'''
+  soluzione = '''L'energia potenziale è la somma delle energie delle tre coppie, con le cariche con il loro segno:
+\begin{gather*}
+  U_{12} = \num{9e9} \cdot \frac{(\num{4,0e-6}) \cdot (\num{-2,0e-6})}{0{,}30}\,\si{\joule} = \frac{\num{-7,2e-2}}{0{,}30}\,\si{\joule} = \SI{-0,24}{\joule}
+  \\
+  U_{13} = \num{9e9} \cdot \frac{(\num{4,0e-6}) \cdot (\num{1,0e-6})}{0{,}60}\,\si{\joule} = \frac{\num{3,6e-2}}{0{,}60}\,\si{\joule} = \SI{+0,060}{\joule}
+  \\
+  U_{23} = \num{9e9} \cdot \frac{(\num{-2,0e-6}) \cdot (\num{1,0e-6})}{0{,}30}\,\si{\joule} = \frac{\num{-1,8e-2}}{0{,}30}\,\si{\joule} = \SI{-0,060}{\joule}
+\end{gather*}
+\[
+  U = U_{12} + U_{13} + U_{23} = -0{,}24 + 0{,}060 - 0{,}060 = \SI{-0,24}{\joule}
+\]
+L'energia è negativa: il sistema è legato. Per portare le tre cariche lontanissime l'una dall'altra, dove $U = 0$, bisogna fornire \SI{0,24}{\joule}.'''
+
+[[problema]]
+id = "ud6-elettrostatica-campo-nullo"
+livello = 3
+testo = '''Due cariche puntiformi positive sono fisse nel vuoto sull'asse $x$: $q_1 = {{q1}}$ in $x = 0$ e $q_2 = {{q2}}$ in $x = {{d}}$.'''
+dati.q1 = { valore = "4,0", unita = "\\nano\\coulomb" }
+dati.q2 = { valore = "1,0", unita = "\\nano\\coulomb" }
+dati.d = { valore = 30, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''In quale punto dell'asse $x$ il campo elettrico totale è nullo?'''
+  calcolo = "d * math.sqrt(q1) / (math.sqrt(q1) + math.sqrt(q2))"
+  risultato = { valore = 20, unita = "cm", cifre = 2 }
+  soluzione = '''Il campo totale è la somma vettoriale dei due campi, ed è nullo solo dove i due campi hanno lo stesso modulo e versi opposti. Le cariche sono positive, e i loro campi sono uscenti. A sinistra di $q_1$ puntano entrambi verso $-x$, a destra di $q_2$ entrambi verso $+x$: lì si sommano. Fra le due cariche, invece, il campo di $q_1$ punta verso $+x$ e quello di $q_2$ verso $-x$: il punto cercato è fra le due cariche, a una distanza $x$ da $q_1$ e $\SI{0,30}{\metre} - x$ da $q_2$. I moduli sono uguali se
+\[
+  k\,\frac{q_1}{x^{2}} = k\,\frac{q_2}{(0{,}30 - x)^{2}}
+  \quad\Longrightarrow\quad
+  \frac{4{,}0}{x^{2}} = \frac{1{,}0}{(0{,}30 - x)^{2}}
+\]
+Le distanze sono positive, e si può prendere la radice quadrata dei due membri: $2/x = 1/(0{,}30 - x)$, cioè $2\,(0{,}30 - x) = x$, $0{,}60 = 3x$:
+\[
+  x = \SI{0,20}{\metre} = \SI{20}{\centi\metre}
+\]
+Il punto è più vicino alla carica piccola: la carica quattro volte più grande deve stare al doppio della distanza.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il potenziale in quel punto, con il potenziale nullo all'infinito?'''
+  calcolo = "k * q1 * 1e-9 / 0.20 + k * q2 * 1e-9 / 0.10"
+  risultato = { valore = 270, unita = "\\volt", cifre = 2 }
+  soluzione = '''Il punto dista \SI{0,20}{\metre} da $q_1$ e \SI{0,10}{\metre} da $q_2$. I potenziali si sommano con i loro segni, qui entrambi positivi:
+\[
+  V = k\,\frac{q_1}{0{,}20} + k\,\frac{q_2}{0{,}10} = \frac{\num{9e9} \cdot \num{4,0e-9}}{0{,}20}\,\si{\volt} + \frac{\num{9e9} \cdot \num{1,0e-9}}{0{,}10}\,\si{\volt}
+\]
+\[
+  V = \frac{36}{0{,}20}\,\si{\volt} + \frac{9}{0{,}10}\,\si{\volt} = 180 + 90 = \SI{270}{\volt}
+\]
+Il campo è nullo ma il potenziale no: campo nullo vuol dire che il potenziale non cambia spostandosi di poco, non che vale zero. Un elettrone messo in quel punto resterebbe fermo, ma avrebbe un'energia potenziale diversa da zero.'''
+
+[[problema]]
+id = "ud6-elettrostatica-millikan"
+livello = 3
+testo = '''Nell'esperimento di Millikan una goccia d'olio di massa {{m}} resta ferma fra due piastre orizzontali distanti {{d}}, fra cui c'è una differenza di potenziale di {{V}}. La piastra superiore è quella positiva. Usa $g = \SI{9,8}{\metre\per\second\squared}$.'''
+dati.m = { valore = "4,9e-15", unita = "\\kilo\\gram" }
+dati.d = { valore = "1,0", unita = "cm" }
+dati.V = { valore = 1500, unita = "\\volt" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il campo elettrico fra le piastre? Che direzione e verso ha?'''
+  calcolo = "V / (d * 1e-2)"
+  risultato = { valore = 1.5e5, unita = "\\volt\\per\\metre", cifre = 2 }
+  rapido = '''$E = \SI{1,5e5}{\volt\per\metre}$, verticale verso il basso'''
+  soluzione = '''Il campo fra le piastre è uniforme, con $d = \SI{0,010}{\metre}$:
+\[
+  E = \frac{\Delta V}{d} = \frac{\SI{1500}{\volt}}{\SI{0,010}{\metre}} = \SI{1,5e5}{\volt\per\metre}
+\]
+Il campo va dalla piastra positiva alla negativa: è verticale e punta verso il basso.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale, in modulo, la carica della goccia?'''
+  calcolo = "m * g / (V / (d * 1e-2))"
+  risultato = { valore = 3.2e-19, unita = "\\coulomb", cifre = 2 }
+  soluzione = '''La goccia è ferma: la forza elettrica equilibra il peso, $|q|\,E = mg$. Il peso è $mg = \num{4,9e-15} \cdot 9{,}8\,\si{\newton} \approx \SI{4,8e-14}{\newton}$, perché $4{,}9 \cdot 9{,}8 = 48{,}02$. Con il campo del punto precedente:
+\[
+  |q| = \frac{mg}{E} = \frac{\SI{4,8e-14}{\newton}}{\SI{1,5e5}{\newton\per\coulomb}} = \frac{4{,}8}{1{,}5} \cdot 10^{-14-5}\,\si{\coulomb} = \SI{3,2e-19}{\coulomb}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''A quante cariche elementari corrisponde? La goccia ha elettroni in eccesso o in difetto?'''
+  calcolo = "m * g / (V / (d * 1e-2)) / e"
+  risultato = { valore = 2, cifre = 1 }
+  rapido = '''$|q| = 2e$; due elettroni in eccesso'''
+  soluzione = '''Il rapporto con la carica elementare è
+\[
+  \frac{|q|}{e} = \frac{\SI{3,2e-19}{\coulomb}}{\SI{1,6e-19}{\coulomb}} = 2
+\]
+Un numero intero, come deve essere: la carica è quantizzata. Il peso punta verso il basso, quindi la forza elettrica deve puntare verso l'alto, in verso opposto al campo: la carica è negativa. La goccia ha due elettroni in eccesso.'''
+
+[[problema]]
+id = "ud6-elettrostatica-deflessione"
+livello = 3
+testo = '''Un elettrone entra con velocità orizzontale {{v}} fra due piastre parallele orizzontali, lunghe {{L}} e distanti {{D}}, passando a metà strada fra le due. Fra le piastre c'è un campo elettrico uniforme verticale di {{E}}. Il peso è trascurabile.'''
+dati.v = { valore = "2,0e7", unita = "m/s" }
+dati.L = { valore = "5,0", unita = "cm" }
+dati.D = { valore = "3,0", unita = "cm" }
+dati.E = { valore = "2,0e4", unita = "\\newton\\per\\coulomb" }
+
+  [[problema.parte]]
+  domanda = '''Quanto tempo resta l'elettrone fra le piastre?'''
+  calcolo = "(L * 1e-2) / v"
+  risultato = { valore = 2.5e-9, unita = "s", cifre = 2 }
+  soluzione = '''Il campo è verticale, e nella direzione orizzontale sull'elettrone non agisce nessuna forza: in orizzontale si muove di moto uniforme, con la velocità con cui è entrato. Con $L = \SI{0,050}{\metre}$:
+\[
+  t = \frac{L}{v} = \frac{\SI{5,0e-2}{\metre}}{\SI{2,0e7}{\metre\per\second}} = 2{,}5 \cdot 10^{-2-7}\,\si{\second} = \SI{2,5e-9}{\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la sua accelerazione?'''
+  calcolo = "e * E / me"
+  risultato = { valore = 3.5e15, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  soluzione = '''In verticale agisce la forza costante $eE$, e l'accelerazione è
+\[
+  a = \frac{eE}{m_e} = \frac{\SI{1,6e-19}{\coulomb} \cdot \SI{2,0e4}{\newton\per\coulomb}}{\SI{9,1e-31}{\kilo\gram}} = \frac{\SI{3,2e-15}{\newton}}{\SI{9,1e-31}{\kilo\gram}} \approx 0{,}352 \cdot 10^{-15-(-31)}\,\si{\metre\per\second\squared} \approx \SI{3,5e15}{\metre\per\second\squared}
+\]
+È verticale, verso la piastra positiva, perché l'elettrone ha carica negativa.'''
+
+  [[problema.parte]]
+  domanda = '''Di quanto è deviato in verticale quando esce dalle piastre? Riesce a uscire senza toccarle?'''
+  calcolo = "0.5 * (e * E / me) * ((L * 1e-2) / v)**2 * 100"
+  risultato = { valore = 1.1, unita = "cm", cifre = 2 }
+  rapido = '''$\SI{1,1}{\centi\metre}$; esce senza toccarle'''
+  soluzione = '''In verticale l'elettrone parte con velocità nulla e accelera in modo costante, come un sasso lanciato in orizzontale che cade. Nel tempo del punto (a), $t^{2} = (\SI{2,5e-9}{\second})^{2} = \SI{6,25e-18}{\second\squared}$:
+\[
+  y = \tfrac12 a t^{2} = \tfrac12 \cdot \SI{3,52e15}{\metre\per\second\squared} \cdot \SI{6,25e-18}{\second\squared} = 11{,}0 \cdot 10^{15-18}\,\si{\metre} = \SI{1,1e-2}{\metre} = \SI{1,1}{\centi\metre}
+\]
+dove $\frac12 \cdot 3{,}52 \cdot 6{,}25 = 11{,}0$. L'elettrone è entrato a metà strada, a \SI{1,5}{\centi\metre} da ciascuna piastra: è deviato di \SI{1,1}{\centi\metre} verso la piastra positiva, ed esce senza toccarla.'''
+
+[[problema]]
+id = "ud6-elettrostatica-protone-elettrone"
+livello = 3
+testo = '''In una regione di vuoto c'è un campo elettrico. Il punto $A$ è al potenziale {{VA}}, il punto $B$ al potenziale {{VB}}. Sulle particelle agisce solo la forza elettrica.'''
+dati.VA = { valore = "+200", unita = "\\volt" }
+dati.VB = { valore = "-100", unita = "\\volt" }
+
+  [[problema.parte]]
+  domanda = '''Un protone parte da fermo in $A$. Con che velocità arriva in $B$?'''
+  calcolo = "math.sqrt(2 * e * (VA - VB) / mp)"
+  risultato = { valore = 2.4e5, unita = "m/s", cifre = 2 }
+  soluzione = '''Il protone è positivo e va spontaneamente verso i potenziali più bassi, da $A$ a $B$. La differenza di potenziale che attraversa è $V_A - V_B = 200 - (-100) = \SI{300}{\volt}$, e per la conservazione dell'energia guadagna l'energia cinetica
+\[
+  K = e\,|\Delta V| = \SI{300}{\electronvolt} = 300 \cdot \SI{1,6e-19}{\joule} = \SI{4,8e-17}{\joule}
+\]
+Da $K = \frac12 m_p v^{2}$:
+\[
+  v = \sqrt{\frac{2K}{m_p}} = \sqrt{\frac{\SI{9,6e-17}{\joule}}{\SI{1,67e-27}{\kilo\gram}}} = \sqrt{\num{5,75e10}}\,\si{\metre\per\second} \approx \SI{2,4e5}{\metre\per\second}
+\]
+dove $9{,}6/1{,}67 \approx 5{,}75$, $10^{-17-(-27)} = 10^{10}$ e $\sqrt{5{,}75} \approx 2{,}4$, perché $2{,}4^{2} = 5{,}76$. La potenza di 10 è $\sqrt{10^{10}} = 10^{5}$, perché la radice dimezza l'esponente.'''
+
+  [[problema.parte]]
+  domanda = '''Un elettrone viene lasciato fermo in $B$. Si muove da solo verso $A$ o si allontana da $A$? Con che velocità arriva in $A$?'''
+  calcolo = "math.sqrt(2 * e * (VA - VB) / me)"
+  risultato = { valore = 1.0e7, unita = "m/s", cifre = 2 }
+  rapido = '''verso $A$; $v \approx \SI{1,0e7}{\metre\per\second}$'''
+  soluzione = '''L'elettrone è negativo e va spontaneamente verso i potenziali più alti: da $B$ verso $A$. Attraversa la stessa differenza di potenziale di \SI{300}{\volt} e guadagna la stessa energia cinetica, $K = \SI{300}{\electronvolt} = \SI{4,8e-17}{\joule}$:
+\[
+  v = \sqrt{\frac{2K}{m_e}} = \sqrt{\frac{\SI{9,6e-17}{\joule}}{\SI{9,1e-31}{\kilo\gram}}} = \sqrt{\num{1,05e14}}\,\si{\metre\per\second} \approx \SI{1,0e7}{\metre\per\second}
+\]
+dove $9{,}6/9{,}1 \approx 1{,}05$, $10^{-17-(-31)} = 10^{14}$ $\sqrt{1{,}05} \approx 1{,}0$ e $\sqrt{10^{14}} = 10^{7}$.
+
+Stessa energia, ma da $v = \sqrt{2K/m}$ la velocità va come $1/\sqrt{m}$. L'elettrone è circa 1800 volte più leggero, e quindi va circa $\sqrt{1800} \approx 42$ volte più veloce (infatti $42^2 = 1764$).'''
+
+[[problema]]
+id = "ud6-elettrostatica-alfa"
+livello = 3
+testo = '''Il radio-223, usato in medicina nucleare contro le metastasi delle ossa, emette particelle alfa (nuclei di elio, carica $+2e$) con energia cinetica di circa {{K}}. Una particella alfa punta dritta verso un nucleo di calcio dell'osso, di carica $+20e$, che si può considerare fermo. Usa $e = \SI{1,6e-19}{\coulomb}$ e $k = \SI{9e9}{\newton\metre\squared\per\coulomb\squared}$.'''
+dati.K = { valore = "5,7", unita = "\\mega\\electronvolt" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale in joule l'energia cinetica della particella alfa?'''
+  calcolo = "K * 1e6 * e"
+  risultato = { valore = 9.1e-13, unita = "J", cifre = 2 }
+  soluzione = '''Un elettronvolt vale \SI{1,6e-19}{\joule}, e $\SI{5,7}{\mega\electronvolt} = \SI{5,7e6}{\electronvolt}$:
+\[
+  K = \num{5,7e6} \cdot \SI{1,6e-19}{\joule} = 9{,}12 \cdot 10^{6-19}\,\si{\joule} \approx \SI{9,1e-13}{\joule}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''A che distanza minima dal centro del nucleo arriva la particella?'''
+  calcolo = "k * (2 * e) * (20 * e) / (K * 1e6 * e)"
+  risultato = { valore = 1.0e-14, unita = "m", cifre = 2 }
+  soluzione = '''Avvicinandosi la particella è frenata dalla repulsione del nucleo. Nel punto più vicino si ferma: tutta la sua energia cinetica è diventata energia potenziale, $K = k\,q_1 q_2/r_\text{min}$, con $q_1 = 2e$ e $q_2 = 20e$ (lontano dal nucleo l'energia potenziale è zero). Quindi
+\[
+  r_\text{min} = \frac{k \cdot 2e \cdot 20e}{K}
+\]
+Conviene lasciare $K = \num{5,7e6}\,e \cdot \si{\volt}$: una $e$ si semplifica.
+\[
+  r_\text{min} = \frac{k \cdot 40\,e}{\SI{5,7e6}{\volt}} = \frac{\num{9e9} \cdot 40 \cdot \num{1,6e-19}}{\num{5,7e6}}\,\si{\metre} = \frac{\num{5,76e-8}}{\num{5,7e6}}\,\si{\metre} \approx \SI{1,0e-14}{\metre}
+\]
+dove $9 \cdot 40 \cdot 1{,}6 = 576$, cioè $576 \cdot 10^{9-19} = \num{5,76e-8}$, e $5{,}76/5{,}7 \approx 1{,}0$ con $10^{-8-6} = 10^{-14}$. Il nucleo di calcio ha un raggio di circa \SI{4e-15}{\metre}: la particella si ferma a circa due volte e mezzo il raggio, senza toccarlo.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la distanza minima se la stessa particella punta verso un nucleo di ossigeno, di carica $+8e$?'''
+  calcolo = "k * (2 * e) * (8 * e) / (K * 1e6 * e)"
+  risultato = { valore = 4.0e-15, unita = "m", cifre = 2 }
+  soluzione = '''A parità di energia, $r_\text{min}$ è proporzionale alla carica del nucleo. La carica passa da $20e$ a $8e$, cioè si moltiplica per $8/20 = 0{,}40$:
+\[
+  r'_\text{min} = \SI{1,0e-14}{\metre} \cdot 0{,}40 = \SI{4,0e-15}{\metre}
+\]
+Il nucleo di ossigeno ha un raggio di circa \SI{3e-15}{\metre}: questa volta la particella arriva quasi a sfiorarlo.'''
+
+[[problema]]
+id = "ud6-corrente-ionoforesi"
+livello = 1
+testo = '''Nella ionoforesi un farmaco in forma di ioni viene spinto attraverso la pelle da una corrente continua debole. Una seduta usa una corrente di {{I}} per {{t}}. Quanta carica attraversa la pelle durante la seduta?'''
+dati.I = { valore = "2,0", unita = "\\milli\\ampere" }
+dati.t = { valore = 20, unita = "\\minute" }
+
+  [[problema.parte]]
+  calcolo = "I * 1e-3 * t * 60"
+  risultato = { valore = 2.4, unita = "\\coulomb", cifre = 2 }
+  soluzione = '''Si portano le grandezze in unità del SI: $I = \SI{2,0}{\milli\ampere} = \SI{2,0e-3}{\ampere}$ e $\Delta t = 20 \cdot \SI{60}{\second} = \SI{1200}{\second}$. Dalla definizione di intensità di corrente, $I = \Delta q/\Delta t$:
+\[
+  \Delta q = I\,\Delta t = \SI{2,0e-3}{\ampere} \cdot \SI{1,2e3}{\second} = 2{,}0 \cdot 1{,}2 \cdot 10^{-3+3}\,\si{\coulomb} = \SI{2,4}{\coulomb}
+\]'''
+
+[[problema]]
+id = "ud6-corrente-tens"
+livello = 1
+testo = '''Un elettrostimolatore per la terapia del dolore (TENS) applica una differenza di potenziale di {{V}} fra due elettrodi appoggiati sulla pelle. La resistenza fra i due elettrodi è {{R}}. Quale corrente attraversa il tessuto?'''
+dati.V = { valore = 30, unita = "\\volt" }
+dati.R = { valore = "1,5", unita = "\\kilo\\ohm" }
+
+  [[problema.parte]]
+  calcolo = "V / (R * 1e3) * 1e3"
+  risultato = { valore = 20, unita = "\\milli\\ampere", cifre = 2 }
+  soluzione = '''La resistenza in ohm è $R = \SI{1,5}{\kilo\ohm} = \SI{1,5e3}{\ohm}$. Dalla prima legge di Ohm, $V = RI$:
+\[
+  I = \frac{V}{R} = \frac{\SI{30}{\volt}}{\SI{1,5e3}{\ohm}} = \frac{30}{1{,}5} \cdot 10^{-3}\,\si{\ampere} = 20 \cdot 10^{-3}\,\si{\ampere} = \SI{20}{\milli\ampere}
+\]'''
+
+[[problema]]
+id = "ud6-corrente-sangue"
+livello = 1
+testo = '''Un conduttimetro misura la resistenza di un campione di sangue chiuso in una piccola cella: i due elettrodi distano {{L}} e il sangue fra loro forma un cilindro di sezione {{A}}. La resistività del sangue è circa {{rho}}. Quanto vale la resistenza del campione?'''
+dati.L = { valore = "2,0", unita = "cm" }
+dati.A = { valore = "1,0", unita = "\\centi\\metre\\squared" }
+dati.rho = { valore = "1,5", unita = "\\ohm\\metre" }
+
+  [[problema.parte]]
+  calcolo = "rho * L * 1e-2 / (A * 1e-4)"
+  risultato = { valore = 300, unita = "\\ohm", cifre = 2 }
+  soluzione = '''Le lunghezze vanno in metri e le aree in metri quadrati: $L = \SI{2,0}{\centi\metre} = \SI{2,0e-2}{\metre}$ e, poiché $\SI{1}{\centi\metre\squared} = (\SI{e-2}{\metre})^{2} = \SI{e-4}{\metre\squared}$, $A = \SI{1,0e-4}{\metre\squared}$. Per la seconda legge di Ohm:
+\[
+  R = \rho\,\frac{L}{A} = \SI{1,5}{\ohm\metre} \cdot \frac{\SI{2,0e-2}{\metre}}{\SI{1,0e-4}{\metre\squared}} = 1{,}5 \cdot 2{,}0 \cdot 10^{-2-(-4)}\,\si{\ohm} = 3{,}0 \cdot 10^{2}\,\si{\ohm} = \SI{300}{\ohm}
+\]
+Un filo di rame con la stessa forma avrebbe una resistenza circa cento milioni di volte più piccola: il sangue conduce grazie ai suoi ioni, molto peggio di un metallo.'''
+
+[[problema]]
+id = "ud6-corrente-termoforo"
+livello = 1
+testo = '''Un termoforo, il cuscinetto riscaldante che si appoggia su una parte dolorante, ha una resistenza di {{R}} e funziona alla differenza di potenziale di rete di {{V}}. Quale potenza dissipa per effetto Joule?'''
+dati.R = { valore = 529, unita = "\\ohm" }
+dati.V = { valore = 230, unita = "\\volt" }
+
+  [[problema.parte]]
+  calcolo = "V**2 / R"
+  risultato = { valore = 100, unita = "W", cifre = 2 }
+  soluzione = '''Sono note la differenza di potenziale e la resistenza, quindi conviene la forma $P = V^{2}/R$. Il conto si semplifica notando che $529 = 23^{2}$ e $230 = 10 \cdot 23$:
+\[
+  P = \frac{V^{2}}{R} = \frac{(\SI{230}{\volt})^{2}}{\SI{529}{\ohm}} = \frac{230^{2}}{23^{2}}\,\si{\watt} = \left(\frac{230}{23}\right)^{2}\si{\watt} = 10^{2}\,\si{\watt} = \SI{100}{\watt}
+\]'''
+
+[[problema]]
+id = "ud6-corrente-pila"
+livello = 1
+testo = '''La pila di un apparecchio acustico ha una forza elettromotrice di {{fem}}. Durante la sua vita fa circolare nel circuito dell'apparecchio una carica di {{q}}. Considerando la pila un generatore ideale, quanto lavoro compie in tutto?'''
+dati.fem = { valore = "1,4", unita = "\\volt" }
+dati.q = { valore = 2000, unita = "\\coulomb" }
+
+  [[problema.parte]]
+  calcolo = "fem * q"
+  risultato = { valore = 2.8e3, unita = "J", cifre = 2 }
+  soluzione = '''La forza elettromotrice è il lavoro che il generatore compie per ogni coulomb che lo attraversa, $\mathcal E = W/\Delta q$. Quindi
+\[
+  W = \mathcal E\,\Delta q = \SI{1,4}{\volt} \cdot \SI{2000}{\coulomb} = 1{,}4 \cdot 2 \cdot 10^{3}\,\si{\joule} = \SI{2,8e3}{\joule}
+\]
+Un volt per un coulomb fa un joule: $\SI{1}{\volt} = \SI{1}{\joule\per\coulomb}$.'''
+
+[[problema]]
+id = "ud6-corrente-incubatrice"
+livello = 2
+testo = '''Il riscaldatore di un'incubatrice neonatale assorbe una potenza di {{P}} dalla rete, a {{V}}.'''
+dati.P = { valore = 460, unita = "W" }
+dati.V = { valore = 230, unita = "\\volt" }
+
+  [[problema.parte]]
+  domanda = '''Quale corrente assorbe il riscaldatore?'''
+  calcolo = "P / V"
+  risultato = { valore = 2.0, unita = "\\ampere", cifre = 2 }
+  soluzione = '''Da $P = VI$:
+\[
+  I = \frac{P}{V} = \frac{\SI{460}{\watt}}{\SI{230}{\volt}} = \SI{2,0}{\ampere}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Nella nursery più incubatrici uguali sono collegate in parallelo alla stessa linea, protetta da un interruttore automatico che scatta quando la corrente totale supera \SI{16}{\ampere}. Quante incubatrici, al massimo, possono avere il riscaldatore acceso insieme?'''
+  calcolo = "16 // (P / V)"
+  risultato = { valore = 8, cifre = 1 }
+  soluzione = '''In parallelo ogni incubatrice ha la stessa differenza di potenziale di \SI{230}{\volt} e assorbe la sua corrente di \SI{2,0}{\ampere}, come se fosse sola. Al nodo da cui parte la linea le correnti dei rami si sommano: con $n$ incubatrici accese la corrente totale è $n \cdot \SI{2,0}{\ampere}$. Perché l'interruttore non scatti deve essere
+\[
+  n \cdot \SI{2,0}{\ampere} \le \SI{16}{\ampere}
+  \quad\Longrightarrow\quad
+  n \le \frac{16}{2{,}0} = 8
+\]
+Al massimo 8 riscaldatori accesi insieme: con il nono la corrente totale salirebbe a \SI{18}{\ampere}.'''
+
+[[problema]]
+id = "ud6-corrente-nichelcromo"
+livello = 2
+testo = '''Per l'elemento riscaldante di uno scaldasangue si vuole un resistore da {{R}}, fatto con un filo di nichel-cromo di resistività {{rho}} e di diametro {{d}}.'''
+dati.R = { valore = 10, unita = "\\ohm" }
+dati.rho = { valore = "1,1e-6", unita = "\\ohm\\metre" }
+dati.d = { valore = "0,50", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'area della sezione del filo?'''
+  calcolo = "math.pi * (d * 1e-3 / 2)**2"
+  risultato = { valore = 1.96e-7, unita = "\\metre\\squared", cifre = 3 }
+  soluzione = '''Il raggio è metà del diametro, $r = \SI{0,25}{\milli\metre} = \SI{2,5e-4}{\metre}$. L'area del cerchio è
+\[
+  A = \pi r^{2} = 3{,}14 \cdot (\SI{2,5e-4}{\metre})^{2} = 3{,}14 \cdot 6{,}25 \cdot 10^{-8}\,\si{\metre\squared} \approx \SI{19,6e-8}{\metre\squared} = \SI{1,96e-7}{\metre\squared}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto deve essere lungo il filo?'''
+  calcolo = "R * math.pi * (d * 1e-3 / 2)**2 / rho"
+  risultato = { valore = 1.8, unita = "m", cifre = 2 }
+  soluzione = '''Dalla seconda legge di Ohm, $R = \rho L/A$, si ricava la lunghezza. Con l'area del punto (a):
+\[
+  L = \frac{R\,A}{\rho} = \frac{\SI{10}{\ohm} \cdot \SI{1,96e-7}{\metre\squared}}{\SI{1,1e-6}{\ohm\metre}} = \frac{1{,}96}{1{,}1} \cdot 10^{1-7-(-6)}\,\si{\metre} \approx 1{,}8 \cdot 10^{0}\,\si{\metre} = \SI{1,8}{\metre}
+\]
+Il filo si avvolge a spirale, così sta in poco spazio.'''
+
+[[problema]]
+id = "ud6-corrente-serie"
+livello = 2
+testo = '''Due resistori, $R_1 = {{R1}}$ e $R_2 = {{R2}}$, sono collegati in serie a un generatore ideale di forza elettromotrice {{fem}}.'''
+dati.R1 = { valore = "4,0", unita = "\\ohm" }
+dati.R2 = { valore = "8,0", unita = "\\ohm" }
+dati.fem = { valore = 24, unita = "\\volt" }
+
+  [[problema.parte]]
+  domanda = '''Quale corrente circola nel circuito?'''
+  calcolo = "fem / (R1 + R2)"
+  risultato = { valore = 2.0, unita = "\\ampere", cifre = 2 }
+  soluzione = '''In serie le resistenze si sommano: $R_{\text{eq}} = R_1 + R_2 = 4{,}0 + 8{,}0 = \SI{12}{\ohm}$. Il generatore ideale tiene ai capi della serie una differenza di potenziale uguale alla sua forza elettromotrice, quindi
+\[
+  I = \frac{\mathcal E}{R_{\text{eq}}} = \frac{\SI{24}{\volt}}{\SI{12}{\ohm}} = \SI{2,0}{\ampere}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la differenza di potenziale ai capi di ciascun resistore?'''
+  calcolo = "R2 * fem / (R1 + R2)"
+  risultato = { valore = 16, unita = "\\volt", cifre = 2 }
+  rapido = '''$V_1 = \SI{8,0}{\volt}$, $V_2 = \SI{16}{\volt}$'''
+  soluzione = '''La stessa corrente del punto (a) attraversa i due resistori. Per la prima legge di Ohm applicata a ciascuno:
+\[
+  V_1 = R_1 I = \SI{4,0}{\ohm} \cdot \SI{2,0}{\ampere} = \SI{8,0}{\volt}
+  \qquad
+  V_2 = R_2 I = \SI{8,0}{\ohm} \cdot \SI{2,0}{\ampere} = \SI{16}{\volt}
+\]
+La somma è $8{,}0 + 16 = \SI{24}{\volt}$, la forza elettromotrice del generatore. In serie la differenza di potenziale si divide in proporzione alle resistenze: il resistore più grande ne prende di più.'''
+
+[[problema]]
+id = "ud6-corrente-parallelo"
+livello = 2
+testo = '''Due resistori, $R_1 = {{R1}}$ e $R_2 = {{R2}}$, sono collegati in parallelo ai poli di un generatore ideale di forza elettromotrice {{fem}}.'''
+dati.R1 = { valore = 10, unita = "\\ohm" }
+dati.R2 = { valore = 15, unita = "\\ohm" }
+dati.fem = { valore = 12, unita = "\\volt" }
+
+  [[problema.parte]]
+  domanda = '''Quale corrente attraversa ciascun resistore?'''
+  calcolo = "fem / R1"
+  risultato = { valore = 1.2, unita = "\\ampere", cifre = 2 }
+  rapido = '''$I_1 = \SI{1,2}{\ampere}$, $I_2 = \SI{0,80}{\ampere}$'''
+  soluzione = '''In parallelo i due resistori hanno ai capi la stessa differenza di potenziale, quella del generatore, \SI{12}{\volt}. Per la prima legge di Ohm:
+\[
+  I_1 = \frac{V}{R_1} = \frac{\SI{12}{\volt}}{\SI{10}{\ohm}} = \SI{1,2}{\ampere}
+  \qquad
+  I_2 = \frac{V}{R_2} = \frac{\SI{12}{\volt}}{\SI{15}{\ohm}} = \SI{0,80}{\ampere}
+\]
+Passa più corrente nel resistore più piccolo.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto valgono la corrente erogata dal generatore e la resistenza equivalente?'''
+  calcolo = "fem / (fem / R1 + fem / R2)"
+  risultato = { valore = 6.0, unita = "\\ohm", cifre = 2 }
+  rapido = '''$I = \SI{2,0}{\ampere}$, $R_{\text{eq}} = \SI{6,0}{\ohm}$'''
+  soluzione = '''Al nodo la corrente del generatore si divide fra i due rami, quindi è la somma delle correnti del punto (a):
+\[
+  I = I_1 + I_2 = 1{,}2 + 0{,}80 = \SI{2,0}{\ampere}
+\]
+La resistenza equivalente è quella che con la stessa differenza di potenziale porta la stessa corrente:
+\[
+  R_{\text{eq}} = \frac{V}{I} = \frac{\SI{12}{\volt}}{\SI{2,0}{\ampere}} = \SI{6,0}{\ohm}
+\]
+Lo conferma il prodotto diviso la somma, $(10 \cdot 15)/(10 + 15) = 150/25 = \SI{6,0}{\ohm}$: meno della più piccola delle due resistenze.'''
+
+[[problema]]
+id = "ud6-corrente-pacemaker"
+livello = 2
+testo = '''La carica che una batteria può far circolare si indica spesso in ampere-ora (\si{\ampere\hour}): \SI{1}{\ampere\hour} è la carica portata da una corrente di \SI{1}{\ampere} in un'ora. La batteria di un pacemaker ha una carica utile di {{Q}}, e il pacemaker assorbe una corrente media di {{I}}.'''
+dati.Q = { valore = "1,2", unita = "\\ampere\\hour" }
+dati.I = { valore = 12, unita = "\\micro\\ampere" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale in coulomb la carica utile della batteria?'''
+  calcolo = "Q * 3600"
+  risultato = { valore = 4.32e3, unita = "\\coulomb", cifre = 3 }
+  soluzione = '''Un'ora sono \SI{3600}{\second}, e $\SI{1}{\ampere} \cdot \SI{1}{\second} = \SI{1}{\coulomb}$, quindi $\SI{1}{\ampere\hour} = \SI{3600}{\coulomb}$:
+\[
+  \Delta q = 1{,}2 \cdot \SI{3600}{\coulomb} = \SI{4320}{\coulomb} = \SI{4,32e3}{\coulomb}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Per quanto tempo può funzionare il pacemaker? Esprimi il risultato in secondi e in anni (un anno dura circa \SI{3,15e7}{\second}).'''
+  calcolo = "Q * 3600 / (I * 1e-6)"
+  risultato = { valore = 3.6e8, unita = "s", cifre = 2 }
+  rapido = '''\SI{3,6e8}{\second}, circa 11 anni'''
+  soluzione = '''Da $I = \Delta q/\Delta t$, con la carica del punto (a) e $I = \SI{12}{\micro\ampere} = \SI{1,2e-5}{\ampere}$:
+\[
+  \Delta t = \frac{\Delta q}{I} = \frac{\SI{4,32e3}{\coulomb}}{\SI{1,2e-5}{\ampere}} = \frac{4{,}32}{1{,}2} \cdot 10^{3-(-5)}\,\si{\second} = 3{,}6 \cdot 10^{8}\,\si{\second}
+\]
+In anni:
+\[
+  \frac{\SI{3,6e8}{\second}}{\SI{3,15e7}{\second}} = \frac{36}{3{,}15} \approx 11
+\]
+Circa 11 anni, la durata tipica della batteria di un pacemaker.'''
+
+[[problema]]
+id = "ud6-corrente-misto"
+livello = 3
+testo = '''Un generatore ideale di forza elettromotrice {{fem}} alimenta il resistore $R_1 = {{R1}}$, collegato in serie con il parallelo di $R_2 = {{R2}}$ e $R_3 = {{R3}}$: la corrente del generatore attraversa $R_1$ e poi si divide fra $R_2$ e $R_3$.'''
+dati.fem = { valore = 18, unita = "\\volt" }
+dati.R1 = { valore = "6,0", unita = "\\ohm" }
+dati.R2 = { valore = 12, unita = "\\ohm" }
+dati.R3 = { valore = "4,0", unita = "\\ohm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la resistenza equivalente del circuito?'''
+  calcolo = "R1 + R2 * R3 / (R2 + R3)"
+  risultato = { valore = 9.0, unita = "\\ohm", cifre = 2 }
+  soluzione = '''Prima il parallelo, con il prodotto diviso la somma:
+\[
+  R_{23} = \frac{R_2 R_3}{R_2 + R_3} = \frac{12 \cdot 4{,}0}{12 + 4{,}0}\,\si{\ohm} = \frac{48}{16}\,\si{\ohm} = \SI{3,0}{\ohm}
+\]
+Poi la serie con $R_1$: $R_{\text{eq}} = R_1 + R_{23} = 6{,}0 + 3{,}0 = \SI{9,0}{\ohm}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quale corrente attraversa ciascun resistore?'''
+  calcolo = "fem / (R1 + R2 * R3 / (R2 + R3))"
+  risultato = { valore = 2.0, unita = "\\ampere", cifre = 2 }
+  rapido = '''$I_1 = \SI{2,0}{\ampere}$, $I_2 = \SI{0,50}{\ampere}$, $I_3 = \SI{1,5}{\ampere}$'''
+  soluzione = '''La corrente erogata dal generatore attraversa $R_1$:
+\[
+  I_1 = \frac{\mathcal E}{R_{\text{eq}}} = \frac{\SI{18}{\volt}}{\SI{9,0}{\ohm}} = \SI{2,0}{\ampere}
+\]
+Ai capi di $R_1$ ci sono $V_1 = R_1 I_1 = 6{,}0 \cdot 2{,}0 = \SI{12}{\volt}$; ai capi del parallelo resta $18 - 12 = \SI{6,0}{\volt}$ (lo stesso che $R_{23} I_1 = 3{,}0 \cdot 2{,}0$). Quindi
+\[
+  I_2 = \frac{\SI{6,0}{\volt}}{\SI{12}{\ohm}} = \SI{0,50}{\ampere}
+  \qquad
+  I_3 = \frac{\SI{6,0}{\volt}}{\SI{4,0}{\ohm}} = \SI{1,5}{\ampere}
+\]
+Al nodo la corrente si conserva: $I_2 + I_3 = 0{,}50 + 1{,}5 = \SI{2,0}{\ampere} = I_1$.'''
+
+  [[problema.parte]]
+  domanda = '''Quale potenza eroga il generatore?'''
+  calcolo = "fem**2 / (R1 + R2 * R3 / (R2 + R3))"
+  risultato = { valore = 36, unita = "W", cifre = 2 }
+  soluzione = '''La potenza erogata è $P = \mathcal E\,I_1 = 18 \cdot 2{,}0 = \SI{36}{\watt}$. Resistore per resistore, con $P = RI^{2}$:
+\[
+  6{,}0 \cdot 2{,}0^{2} + 12 \cdot 0{,}50^{2} + 4{,}0 \cdot 1{,}5^{2} = 24 + 3{,}0 + 9{,}0 = \SI{36}{\watt}
+\]
+Tutta l'energia erogata dal generatore si trasforma in calore nei resistori.'''
+
+  [[problema.parte]]
+  domanda = '''Il resistore $R_3$ si interrompe, e nel suo ramo non passa più corrente. Quale corrente eroga ora il generatore?'''
+  calcolo = "fem / (R1 + R2)"
+  risultato = { valore = 1.0, unita = "\\ampere", cifre = 2 }
+  soluzione = '''Senza il ramo di $R_3$ restano $R_1$ e $R_2$ in serie: $R_{\text{eq}}' = 6{,}0 + 12 = \SI{18}{\ohm}$, e
+\[
+  I' = \frac{\mathcal E}{R_{\text{eq}}'} = \frac{\SI{18}{\volt}}{\SI{18}{\ohm}} = \SI{1,0}{\ampere}
+\]
+Togliere un ramo del parallelo chiude una strada alla corrente: la resistenza equivalente sale da \SI{9,0}{\ohm} a \SI{18}{\ohm} e la corrente si dimezza.'''
+
+[[problema]]
+id = "ud6-corrente-lampadine"
+livello = 3
+testo = '''La lampadina A porta l'indicazione «\SI{12}{\volt}, \SI{24}{\watt}», la lampadina B l'indicazione «\SI{12}{\volt}, \SI{12}{\watt}»: sono la differenza di potenziale di funzionamento e la potenza che la lampadina assorbe a quella differenza di potenziale. Considera costanti le resistenze delle due lampadine.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la resistenza di ciascuna lampadina?'''
+  calcolo = "12**2 / 24"
+  risultato = { valore = 6.0, unita = "\\ohm", cifre = 2 }
+  rapido = '''$R_A = \SI{6,0}{\ohm}$, $R_B = \SI{12}{\ohm}$'''
+  soluzione = '''Da $P = V^{2}/R$ si ricava $R = V^{2}/P$, con i valori di funzionamento:
+\[
+  R_A = \frac{(\SI{12}{\volt})^{2}}{\SI{24}{\watt}} = \frac{144}{24}\,\si{\ohm} = \SI{6,0}{\ohm}
+  \qquad
+  R_B = \frac{(\SI{12}{\volt})^{2}}{\SI{12}{\watt}} = \frac{144}{12}\,\si{\ohm} = \SI{12}{\ohm}
+\]
+A parità di differenza di potenziale, la lampadina più potente ha la resistenza più piccola.'''
+
+  [[problema.parte]]
+  domanda = '''Le due lampadine si collegano in serie a una batteria ideale da \SI{12}{\volt}. Quale corrente le attraversa?'''
+  calcolo = "12 / (12**2 / 24 + 12**2 / 12)"
+  risultato = { valore = 0.67, unita = "\\ampere", cifre = 2 }
+  soluzione = '''In serie le resistenze del punto (a) si sommano: $R_{\text{eq}} = 6{,}0 + 12 = \SI{18}{\ohm}$. Quindi
+\[
+  I = \frac{V}{R_{\text{eq}}} = \frac{\SI{12}{\volt}}{\SI{18}{\ohm}} = \frac{2}{3}\,\si{\ampere} \approx \SI{0,67}{\ampere}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quale potenza dissipa ciascuna lampadina nel collegamento in serie? Quale delle due fa più luce?'''
+  calcolo = "(12**2 / 12) * (12 / (12**2 / 24 + 12**2 / 12))**2"
+  risultato = { valore = 5.3, unita = "W", cifre = 2 }
+  rapido = '''$P_A \approx \SI{2,7}{\watt}$, $P_B \approx \SI{5,3}{\watt}$: fa più luce B'''
+  soluzione = '''La stessa corrente, $I = \frac23\,\si{\ampere}$, attraversa le due lampadine, quindi conviene $P = RI^{2}$, con $I^{2} = \frac49\,\si{\ampere\squared}$:
+\[
+  P_A = \SI{6,0}{\ohm} \cdot \frac49\,\si{\ampere\squared} = \frac{24}{9}\,\si{\watt} \approx \SI{2,7}{\watt}
+  \qquad
+  P_B = \SI{12}{\ohm} \cdot \frac49\,\si{\ampere\squared} = \frac{48}{9}\,\si{\watt} \approx \SI{5,3}{\watt}
+\]
+La somma, $\frac{72}{9} = \SI{8}{\watt}$, è la potenza erogata dalla batteria, $V^{2}/R_{\text{eq}} = 144/18 = \SI{8}{\watt}$. Fa più luce B, la lampadina da \SI{12}{\watt}: in serie la corrente è la stessa, e dissipa di più quella con la resistenza maggiore. Entrambe sono molto sotto la loro potenza nominale, perché ciascuna ha ai capi solo una parte dei \SI{12}{\volt}. Collegate in parallelo alla stessa batteria, invece, ognuna avrebbe i suoi \SI{12}{\volt} e farebbe più luce A, con \SI{24}{\watt}.'''
+
+[[problema]]
+id = "ud6-corrente-scaldafluidi"
+livello = 3
+testo = '''Nelle emergenze le soluzioni infuse rapidamente in vena vanno scaldate, perché grandi volumi di liquido freddo raffreddano il paziente. Uno scaldafluidi elettrico, alimentato a {{V}}, porta una soluzione fisiologica da {{T1}} a {{T2}} mentre scorre con una portata di {{q}}. La soluzione ha calore specifico {{c}} e un litro ha massa \SI{1}{\kilo\gram}. Supponi che tutta l'energia elettrica vada alla soluzione.'''
+dati.V = { valore = 230, unita = "\\volt" }
+dati.T1 = { valore = 17, unita = "\\celsius" }
+dati.T2 = { valore = 37, unita = "\\celsius" }
+dati.q = { valore = "0,50", unita = "\\litre\\per\\minute" }
+dati.c = { valore = 4200, unita = "\\joule\\per\\kilo\\gram\\per\\kelvin" }
+
+  [[problema.parte]]
+  domanda = '''Quale potenza deve dissipare il resistore dello scaldafluidi?'''
+  calcolo = "q / 60 * c * (T2 - T1)"
+  risultato = { valore = 700, unita = "W", cifre = 2 }
+  soluzione = '''In un minuto passano \SI{0,50}{\litre} di soluzione, cioè $m = \SI{0,50}{\kilo\gram}$, da scaldare di $\Delta T = 37 - 17 = \SI{20}{\kelvin}$. Il calore che serve in un minuto è (UD5)
+\[
+  Q = m\,c\,\Delta T = \SI{0,50}{\kilo\gram} \cdot \SI{4200}{\joule\per\kilo\gram\per\kelvin} \cdot \SI{20}{\kelvin} = \SI{42000}{\joule}
+\]
+La potenza è l'energia per unità di tempo:
+\[
+  P = \frac{Q}{\Delta t} = \frac{\SI{42000}{\joule}}{\SI{60}{\second}} = \SI{700}{\watt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quale corrente assorbe lo scaldafluidi?'''
+  calcolo = "q / 60 * c * (T2 - T1) / V"
+  risultato = { valore = 3.0, unita = "\\ampere", cifre = 2 }
+  soluzione = '''Da $P = VI$, con la potenza del punto (a):
+\[
+  I = \frac{P}{V} = \frac{\SI{700}{\watt}}{\SI{230}{\volt}} = \frac{70}{23}\,\si{\ampere} \approx \SI{3,0}{\ampere}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanta energia consuma lo scaldafluidi in mezz'ora di funzionamento? Esprimila in chilowattora.'''
+  calcolo = "q / 60 * c * (T2 - T1) * 30 * 60 / 3.6e6"
+  risultato = { valore = 0.35, unita = "\\kilo\\watt\\hour", cifre = 2 }
+  soluzione = '''L'energia è la potenza per il tempo. Con la potenza in chilowatt, $P = \SI{0,700}{\kilo\watt}$, e il tempo in ore, $\Delta t = \SI{0,5}{\hour}$, il risultato è già in chilowattora:
+\[
+  W = P\,\Delta t = \SI{0,700}{\kilo\watt} \cdot \SI{0,5}{\hour} = \SI{0,35}{\kilo\watt\hour}
+\]
+In joule sono $0{,}35 \cdot \SI{3,6e6}{\joule} = \SI{1,26e6}{\joule}$; lo stesso numero viene da $\SI{700}{\watt} \cdot \SI{1800}{\second}$.'''
+
+[[problema]]
+id = "ud6-corrente-bioimpedenza"
+livello = 3
+testo = '''L'analisi della bioimpedenza stima la composizione del corpo facendo passare una corrente debole fra due elettrodi. Un tratto di braccio lungo {{L}} si può pensare come due conduttori in parallelo, lunghi entrambi {{L}}: il tessuto magro, ricco di acqua e di ioni, di resistività {{rho1}} e sezione {{A1}}, e il tessuto adiposo, di resistività {{rho2}} e sezione {{A2}}. L'apparecchio usa una corrente alternata ad alta frequenza; qui trattala come una corrente continua.'''
+dati.L = { valore = 30, unita = "cm" }
+dati.rho1 = { valore = "2,0", unita = "\\ohm\\metre" }
+dati.A1 = { valore = 40, unita = "\\centi\\metre\\squared" }
+dati.rho2 = { valore = 25, unita = "\\ohm\\metre" }
+dati.A2 = { valore = 20, unita = "\\centi\\metre\\squared" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la resistenza di ciascuno dei due tessuti?'''
+  calcolo = "rho1 * L * 1e-2 / (A1 * 1e-4)"
+  risultato = { valore = 150, unita = "\\ohm", cifre = 2 }
+  rapido = '''tessuto magro \SI{150}{\ohm}, tessuto adiposo \SI{3750}{\ohm}'''
+  soluzione = '''In unità del SI, $L = \SI{0,30}{\metre}$, $A_1 = 40 \cdot \SI{e-4}{\metre\squared} = \SI{4,0e-3}{\metre\squared}$, $A_2 = \SI{2,0e-3}{\metre\squared}$. Per la seconda legge di Ohm:
+\[
+  R_1 = \rho_1 \frac{L}{A_1} = \SI{2,0}{\ohm\metre} \cdot \frac{\SI{0,30}{\metre}}{\SI{4,0e-3}{\metre\squared}} = \frac{0{,}60}{4{,}0} \cdot 10^{3}\,\si{\ohm} = \SI{150}{\ohm}
+\]
+\[
+  R_2 = \rho_2 \frac{L}{A_2} = \SI{25}{\ohm\metre} \cdot \frac{\SI{0,30}{\metre}}{\SI{2,0e-3}{\metre\squared}} = \frac{7{,}5}{2{,}0} \cdot 10^{3}\,\si{\ohm} = \SI{3750}{\ohm}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la resistenza del tratto di braccio?'''
+  calcolo = "1 / (1 / (rho1 * L * 1e-2 / (A1 * 1e-4)) + 1 / (rho2 * L * 1e-2 / (A2 * 1e-4)))"
+  risultato = { valore = 144, unita = "\\ohm", cifre = 3 }
+  soluzione = '''I due tessuti sono in parallelo. Con le resistenze del punto (a), e notando che $3750 = 25 \cdot 150$:
+\[
+  \frac{1}{R_{\text{eq}}} = \frac{1}{150\,\Omega} + \frac{1}{3750\,\Omega} = \frac{25}{3750\,\Omega} + \frac{1}{3750\,\Omega} = \frac{26}{3750\,\Omega}
+  \quad\Longrightarrow\quad
+  R_{\text{eq}} = \frac{3750}{26}\,\si{\ohm} \approx \SI{144}{\ohm}
+\]
+È poco meno della resistenza del solo tessuto magro: il grasso, che conduce molto peggio, cambia poco il risultato.'''
+
+  [[problema.parte]]
+  domanda = '''L'apparecchio fa passare una corrente totale di \SI{0,52}{\milli\ampere}. Quanto vale la differenza di potenziale fra gli elettrodi? Quale corrente passa in ciascun tessuto?'''
+  calcolo = "0.52e-3 / (1 / (rho1 * L * 1e-2 / (A1 * 1e-4)) + 1 / (rho2 * L * 1e-2 / (A2 * 1e-4))) * 1e3"
+  risultato = { valore = 75, unita = "\\milli\\volt", cifre = 2 }
+  rapido = '''\SI{75}{\milli\volt}; \SI{0,50}{\milli\ampere} nel tessuto magro, \SI{0,020}{\milli\ampere} nel tessuto adiposo'''
+  soluzione = '''Per la prima legge di Ohm, con la resistenza del punto (b) e $I = \SI{0,52e-3}{\ampere}$:
+\[
+  V = R_{\text{eq}}\,I = \frac{3750}{26}\,\si{\ohm} \cdot \SI{0,52e-3}{\ampere} = 3750 \cdot \frac{\num{0,52e-3}}{26}\,\si{\volt} = 3750 \cdot \num{0,02e-3}\,\si{\volt} = \SI{75e-3}{\volt} = \SI{75}{\milli\volt}
+\]
+perché $0{,}52/26 = 0{,}02$ e $3750 \cdot 0{,}02 = 75$.
+Questa differenza di potenziale è la stessa ai capi dei due tessuti, che sono in parallelo:
+\[
+  I_1 = \frac{\SI{0,075}{\volt}}{\SI{150}{\ohm}} = \SI{5,0e-4}{\ampere} = \SI{0,50}{\milli\ampere}
+  \qquad
+  I_2 = \frac{\SI{0,075}{\volt}}{\SI{3750}{\ohm}} = \SI{2,0e-5}{\ampere} = \SI{0,020}{\milli\ampere}
+\]
+La somma è $0{,}50 + 0{,}020 = \SI{0,52}{\milli\ampere}$. Quasi tutta la corrente passa nel tessuto magro: la misura dice soprattutto quanta acqua e quanti ioni contiene il braccio, e da qui si stima la massa magra.'''
+
+[[problema]]
+id = "ud6-corrente-sicurezza"
+livello = 3
+testo = '''Per una corrente che attraversa il corpo, la soglia di fibrillazione è circa \SI{100}{\milli\ampere} se la corrente entra ed esce dalla pelle (macroshock), circa \SI{100}{\micro\ampere} se arriva direttamente al cuore (microshock); sotto circa \SI{1}{\milli\ampere} la corrente non si sente. Fra le due mani bagnate la corrente attraversa la pelle di una mano (circa {{Rp}}), l'interno del corpo (circa {{Ri}}) e la pelle dell'altra mano (ancora circa {{Rp}}).'''
+dati.Rp = { valore = 400, unita = "\\ohm" }
+dati.Ri = { valore = 200, unita = "\\ohm" }
+
+  [[problema.parte]]
+  domanda = '''Con le mani bagnate, quale differenza di potenziale basta per raggiungere la soglia di fibrillazione nel macroshock?'''
+  calcolo = "(2 * Rp + Ri) * 100e-3"
+  risultato = { valore = 100, unita = "\\volt", cifre = 2 }
+  soluzione = '''I tre tratti sono attraversati uno dopo l'altro dalla stessa corrente: sono in serie, e le loro resistenze si sommano,
+\[
+  R = (400 + 200 + 400)\,\si{\ohm} = \SI{1000}{\ohm} = \SI{1,0e3}{\ohm}
+\]
+Per la prima legge di Ohm, con questa resistenza e $I = \SI{100}{\milli\ampere} = \SI{0,100}{\ampere}$:
+\[
+  V = R\,I = \SI{1,0e3}{\ohm} \cdot \SI{0,100}{\ampere} = \SI{100}{\volt}
+\]
+La tensione di rete, \SI{230}{\volt}, è più del doppio.'''
+
+  [[problema.parte]]
+  domanda = '''Per un guasto, la carcassa metallica di un apparecchio accanto al letto si trova a \SI{0,30}{\volt} rispetto a terra. Un infermiere con le mani bagnate tocca con una mano la carcassa e con l'altra il letto, collegato a terra. Quale corrente lo attraversa? La sente?'''
+  calcolo = "0.30 / (2 * Rp + Ri) * 1e3"
+  risultato = { valore = 0.30, unita = "\\milli\\ampere", cifre = 2 }
+  rapido = '''\SI{0,30}{\milli\ampere}: non la sente'''
+  soluzione = '''La corrente va da una mano all'altra, attraverso la resistenza in serie del punto (a), \SI{1,0}{\kilo\ohm}:
+\[
+  I = \frac{V}{R} = \frac{\SI{0,30}{\volt}}{\SI{1,0e3}{\ohm}} = \SI{3,0e-4}{\ampere} = \SI{0,30}{\milli\ampere}
+\]
+È sotto la soglia di \SI{1}{\milli\ampere}: l'infermiere non sente niente, e il guasto passa inosservato.'''
+
+  [[problema.parte]]
+  domanda = '''Un paziente ha un catetere cardiaco collegato all'apparecchio guasto. Il percorso dalla carcassa, attraverso il catetere e il cuore, fino al letto collegato a terra ha una resistenza di circa \SI{500}{\ohm}. Quale corrente attraversa il cuore del paziente?'''
+  calcolo = "0.30 / 500 * 1e6"
+  risultato = { valore = 600, unita = "\\micro\\ampere", cifre = 2 }
+  soluzione = '''La differenza di potenziale è la stessa, ma il catetere salta la resistenza della pelle:
+\[
+  I = \frac{V}{R} = \frac{\SI{0,30}{\volt}}{\SI{500}{\ohm}} = \SI{6,0e-4}{\ampere} = \SI{600}{\micro\ampere}
+\]
+È sei volte la soglia del microshock, $600/100 = 6$: il paziente rischia la fibrillazione con una tensione che l'infermiere non avverte nemmeno.'''
+
+  [[problema.parte]]
+  domanda = '''Le norme chiedono che verso un paziente con un catetere cardiaco non passino più di \SI{10}{\micro\ampere}. Con lo stesso percorso da \SI{500}{\ohm}, quale differenza di potenziale massima può avere la carcassa rispetto a terra?'''
+  calcolo = "500 * 10e-6 * 1e3"
+  risultato = { valore = 5.0, unita = "\\milli\\volt", cifre = 2 }
+  soluzione = '''Per la prima legge di Ohm, con $I = \SI{10}{\micro\ampere} = \SI{1,0e-5}{\ampere}$:
+\[
+  V = R\,I = \SI{500}{\ohm} \cdot \SI{1,0e-5}{\ampere} = 5 \cdot 10^{2-5}\,\si{\volt} = \SI{5,0e-3}{\volt} = \SI{5,0}{\milli\volt}
+\]
+Pochi millivolt: per questo tutte le masse metalliche della stanza si collegano alla stessa terra, così fra l'una e l'altra non c'è differenza di potenziale.'''
+
+[[problema]]
+id = "ud6-condensatori-carica"
+livello = 1
+testo = '''Un condensatore da {{C}} è collegato a una batteria da {{V}}. Quanta carica si accumula su ciascuna armatura?'''
+dati.C = { valore = 10, unita = "\\micro\\farad" }
+dati.V = { valore = 12, unita = "\\volt" }
+
+  [[problema.parte]]
+  calcolo = "C * 1e-6 * V"
+  risultato = { valore = 1.2e-4, unita = "\\coulomb", cifre = 2 }
+  soluzione = '''La capacità in farad è $C = \SI{10}{\micro\farad} = 10 \cdot \SI{e-6}{\farad} = \SI{e-5}{\farad}$. Dalla definizione di capacità, $C = Q/V$:
+\[
+  Q = CV = \SI{e-5}{\farad} \cdot \SI{12}{\volt} = 12 \cdot \SI{e-5}{\coulomb} = \SI{1,2e-4}{\coulomb}
+\]
+cioè \SI{120}{\micro\coulomb}. Un'armatura porta $+Q$, l'altra $-Q$.'''
+
+[[problema]]
+id = "ud6-condensatori-piano"
+livello = 1
+testo = '''Un condensatore piano nel vuoto ha armature di area {{A}} a una distanza di {{d}}. Calcola la sua capacità.'''
+dati.A = { valore = "0,020", unita = "\\metre\\squared" }
+dati.d = { valore = "1,0", unita = "mm" }
+
+  [[problema.parte]]
+  calcolo = "eps0 * A / (d * 1e-3)"
+  risultato = { valore = 1.8e-10, unita = "\\farad", cifre = 2 }
+  soluzione = '''La distanza in metri è $d = \SI{1,0}{\milli\metre} = \SI{1,0e-3}{\metre}$. Il rapporto fra area e distanza è
+\[
+  \frac{A}{d} = \frac{\SI{2,0e-2}{\metre\squared}}{\SI{1,0e-3}{\metre}} = 2{,}0 \cdot 10^{-2-(-3)}\,\si{\metre} = \SI{20}{\metre}
+\]
+e la capacità del condensatore piano è
+\[
+  C = \varepsilon_0\,\frac{A}{d} = \SI{8,85e-12}{\farad\per\metre} \cdot \SI{20}{\metre} = 177 \cdot \SI{e-12}{\farad} \approx \SI{1,8e-10}{\farad}
+\]
+cioè circa \SI{180}{\pico\farad}.'''
+
+[[problema]]
+id = "ud6-condensatori-retinografo"
+livello = 1
+testo = '''Il flash di un retinografo, la fotocamera che fotografa il fondo dell'occhio, prende l'energia da un condensatore da {{C}} caricato a {{V}}. Quanta energia è immagazzinata nel condensatore?'''
+dati.C = { valore = 500, unita = "\\micro\\farad" }
+dati.V = { valore = 200, unita = "\\volt" }
+
+  [[problema.parte]]
+  calcolo = "0.5 * C * 1e-6 * V**2"
+  risultato = { valore = 10, unita = "J", cifre = 2 }
+  soluzione = '''La capacità in farad è $C = \SI{500}{\micro\farad} = 500 \cdot \SI{e-6}{\farad} = \SI{5e-4}{\farad}$, e $V^{2} = (\SI{2e2}{\volt})^{2} = \SI{4e4}{\volt\squared}$. L'energia del condensatore carico è
+\[
+  U = \frac12\,C V^{2} = \frac12 \cdot \SI{5e-4}{\farad} \cdot \SI{4e4}{\volt\squared} = \frac12 \cdot 5 \cdot 4 \cdot 10^{-4+4}\,\si{\joule} = \frac12 \cdot 20\,\si{\joule} = \SI{10}{\joule}
+\]'''
+
+[[problema]]
+id = "ud6-condensatori-serie"
+livello = 1
+testo = '''Due condensatori da {{C1}} e da {{C2}} sono collegati in serie. Calcola la capacità equivalente.'''
+dati.C1 = { valore = "4,0", unita = "\\micro\\farad" }
+dati.C2 = { valore = 12, unita = "\\micro\\farad" }
+
+  [[problema.parte]]
+  calcolo = "1 / (1 / C1 + 1 / C2)"
+  risultato = { valore = 3.0, unita = "\\micro\\farad", cifre = 2 }
+  soluzione = '''In serie si sommano gli inversi delle capacità. Lavorando in microfarad, con il denominatore comune 12:
+\[
+  \frac{1}{C_\text{eq}} = \frac{1}{4{,}0} + \frac{1}{12} = \frac{3}{12} + \frac{1}{12} = \frac{4}{12}
+  \quad\Rightarrow\quad
+  C_\text{eq} = \frac{12}{4}\,\si{\micro\farad} = \SI{3,0}{\micro\farad}
+\]
+La capacità equivalente in serie è più piccola della più piccola delle due: mettere condensatori in serie è come allontanare le armature.'''
+
+[[problema]]
+id = "ud6-condensatori-collegato"
+livello = 2
+testo = '''Un condensatore piano ha nel vuoto una capacità di {{C0}} ed è collegato a una batteria da {{V}}. Senza staccare la batteria, si riempie lo spazio fra le armature con un dielettrico di costante dielettrica relativa $\varepsilon_r = 4{,}0$.'''
+dati.C0 = { valore = 50, unita = "\\pico\\farad" }
+dati.V = { valore = 10, unita = "\\volt" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la capacità con il dielettrico?'''
+  calcolo = "4.0 * C0"
+  risultato = { valore = 200, unita = "\\pico\\farad", cifre = 2 }
+  soluzione = '''Il dielettrico moltiplica la capacità per $\varepsilon_r$:
+\[
+  C = \varepsilon_r\,C_0 = 4{,}0 \cdot \SI{50}{\pico\farad} = \SI{200}{\pico\farad}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanta carica in più porta la batteria su ciascuna armatura, mentre si inserisce il dielettrico?'''
+  calcolo = "(4.0 * C0 - C0) * 1e-12 * V"
+  risultato = { valore = 1.5e-9, unita = "\\coulomb", cifre = 2 }
+  soluzione = '''La batteria resta collegata, quindi la differenza di potenziale resta \SI{10}{\volt}, e la carica cresce con la capacità. Prima, con $C_0 = \SI{50}{\pico\farad} = \SI{5,0e-11}{\farad}$:
+\[
+  Q_0 = C_0 V = \SI{5,0e-11}{\farad} \cdot \SI{10}{\volt} = \SI{5,0e-10}{\coulomb}
+\]
+Dopo, con $C = \SI{200}{\pico\farad} = \SI{2,0e-10}{\farad}$:
+\[
+  Q = C V = \SI{2,0e-10}{\farad} \cdot \SI{10}{\volt} = \SI{2,0e-9}{\coulomb}
+\]
+La batteria porta quindi in più
+\[
+  \Delta Q = Q - Q_0 = \SI{2,0e-9}{\coulomb} - \SI{0,5e-9}{\coulomb} = \SI{1,5e-9}{\coulomb}
+\]
+cioè \SI{1,5}{\nano\coulomb}. La carica è diventata 4 volte più grande, come la capacità.'''
+
+[[problema]]
+id = "ud6-condensatori-parallelo"
+livello = 2
+testo = '''Tre condensatori da {{C1}}, {{C2}} e {{C3}} sono collegati in parallelo a un generatore da {{V}}.'''
+dati.C1 = { valore = "2,0", unita = "\\micro\\farad" }
+dati.C2 = { valore = "3,0", unita = "\\micro\\farad" }
+dati.C3 = { valore = "5,0", unita = "\\micro\\farad" }
+dati.V = { valore = 20, unita = "\\volt" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la capacità equivalente.'''
+  calcolo = "C1 + C2 + C3"
+  risultato = { valore = 10, unita = "\\micro\\farad", cifre = 2 }
+  soluzione = '''In parallelo le capacità si sommano:
+\[
+  C_\text{eq} = C_1 + C_2 + C_3 = (2{,}0 + 3{,}0 + 5{,}0)\,\si{\micro\farad} = \SI{10}{\micro\farad}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia immagazzinata in tutto nei tre condensatori.'''
+  calcolo = "0.5 * (C1 + C2 + C3) * 1e-6 * V**2"
+  risultato = { valore = 2.0e-3, unita = "J", cifre = 2 }
+  soluzione = '''I tre condensatori hanno tutti la differenza di potenziale \SI{20}{\volt}, e si comportano come un solo condensatore da $C_\text{eq} = \SI{10}{\micro\farad} = \SI{1,0e-5}{\farad}$. Con $V^{2} = (\SI{20}{\volt})^{2} = \SI{400}{\volt\squared}$:
+\[
+  U = \frac12\,C_\text{eq} V^{2} = \frac12 \cdot \SI{1,0e-5}{\farad} \cdot \SI{400}{\volt\squared} = 200 \cdot \SI{e-5}{\joule} = \SI{2,0e-3}{\joule}
+\]
+È la somma delle energie dei tre condensatori: $\frac12 (C_1 + C_2 + C_3) V^{2} = \frac12 C_1 V^{2} + \frac12 C_2 V^{2} + \frac12 C_3 V^{2}$.'''
+
+[[problema]]
+id = "ud6-condensatori-campo"
+livello = 2
+testo = '''Un condensatore piano di capacità {{C}} porta su ciascuna armatura una carica di {{Q}}. Le armature distano {{d}}.'''
+dati.C = { valore = "4,0", unita = "\\nano\\farad" }
+dati.Q = { valore = 60, unita = "\\nano\\coulomb" }
+dati.d = { valore = "0,50", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la differenza di potenziale fra le armature.'''
+  calcolo = "Q / C"
+  risultato = { valore = 15, unita = "\\volt", cifre = 2 }
+  soluzione = '''Dalla definizione di capacità, $V = Q/C$. Carica e capacità hanno lo stesso prefisso, nano, che si semplifica:
+\[
+  V = \frac{Q}{C} = \frac{\SI{60e-9}{\coulomb}}{\SI{4,0e-9}{\farad}} = \frac{60}{4{,}0}\,\si{\volt} = \SI{15}{\volt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola il campo elettrico fra le armature.'''
+  calcolo = "(Q / C) / (d * 1e-3)"
+  risultato = { valore = 3.0e4, unita = "\\volt\\per\\metre", cifre = 2 }
+  soluzione = '''Fra le armature il campo è uniforme, e vale la differenza di potenziale divisa per la distanza. Con $d = \SI{0,50}{\milli\metre} = \SI{5,0e-4}{\metre}$:
+\[
+  E = \frac{V}{d} = \frac{\SI{15}{\volt}}{\SI{5,0e-4}{\metre}} = \frac{15}{5{,}0} \cdot 10^{4}\,\si{\volt\per\metre} = \SI{3,0e4}{\volt\per\metre}
+\]'''
+
+[[problema]]
+id = "ud6-condensatori-serie-energia"
+livello = 2
+testo = '''Due condensatori da {{C1}} e da {{C2}} sono collegati in serie a una batteria da {{V}}.'''
+dati.C1 = { valore = "3,0", unita = "\\micro\\farad" }
+dati.C2 = { valore = "6,0", unita = "\\micro\\farad" }
+dati.V = { valore = 12, unita = "\\volt" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la carica su ciascun condensatore.'''
+  calcolo = "1 / (1 / C1 + 1 / C2) * V"
+  risultato = { valore = 24, unita = "\\micro\\coulomb", cifre = 2 }
+  soluzione = '''In serie i due condensatori hanno la stessa carica, quella del condensatore equivalente. In microfarad:
+\[
+  \frac{1}{C_\text{eq}} = \frac{1}{3{,}0} + \frac{1}{6{,}0} = \frac{2}{6} + \frac{1}{6} = \frac{3}{6}
+  \quad\Rightarrow\quad
+  C_\text{eq} = \frac{6}{3}\,\si{\micro\farad} = \SI{2,0}{\micro\farad}
+\]
+La carica è
+\[
+  Q = C_\text{eq} V = \SI{2,0}{\micro\farad} \cdot \SI{12}{\volt} = \SI{24}{\micro\coulomb}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia immagazzinata nel condensatore da \SI{3,0}{\micro\farad}.'''
+  calcolo = "(1 / (1 / C1 + 1 / C2) * V * 1e-6)**2 / (2 * C1 * 1e-6)"
+  risultato = { valore = 9.6e-5, unita = "J", cifre = 2 }
+  soluzione = '''Il condensatore da \SI{3,0}{\micro\farad} ha la carica $Q = \SI{24}{\micro\coulomb}$, e la differenza di potenziale
+\[
+  V_1 = \frac{Q}{C_1} = \frac{\SI{24}{\micro\coulomb}}{\SI{3,0}{\micro\farad}} = \SI{8,0}{\volt}
+\]
+(il resto, \SI{4,0}{\volt}, è ai capi dell'altro). La sua energia, con $C_1 = \SI{3,0e-6}{\farad}$ e $V_1^{2} = \SI{64}{\volt\squared}$, è
+\[
+  U_1 = \frac12\,C_1 V_1^{2} = \frac12 \cdot \SI{3,0e-6}{\farad} \cdot \SI{64}{\volt\squared} = 96 \cdot \SI{e-6}{\joule} = \SI{9,6e-5}{\joule}
+\]
+Il condensatore più piccolo ha la differenza di potenziale più grande, e anche l'energia più grande: l'altro ha $\frac12 \cdot \num{6,0e-6} \cdot 16\,\si{\joule} = \SI{4,8e-5}{\joule}$, la metà.'''
+
+[[problema]]
+id = "ud6-condensatori-defibrillatore"
+livello = 3
+testo = '''Un defibrillatore contiene un condensatore da {{C}} caricato a {{V}}. La scarica attraverso il torace del paziente dura circa {{dt}}. Supponi che il condensatore si scarichi del tutto e che tutta la sua energia arrivi al paziente.'''
+dati.C = { valore = 32, unita = "\\micro\\farad" }
+dati.V = { valore = 5000, unita = "\\volt" }
+dati.dt = { valore = 10, unita = "\\milli\\second" }
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia immagazzinata nel condensatore.'''
+  calcolo = "0.5 * C * 1e-6 * V**2"
+  risultato = { valore = 400, unita = "J", cifre = 2 }
+  soluzione = '''Con $C = \SI{32}{\micro\farad} = \SI{3,2e-5}{\farad}$ e $V^{2} = (\SI{5e3}{\volt})^{2} = \SI{2,5e7}{\volt\squared}$:
+\[
+  U = \frac12\,C V^{2} = \frac12 \cdot \SI{3,2e-5}{\farad} \cdot \SI{2,5e7}{\volt\squared} = \frac12 \cdot 3{,}2 \cdot 2{,}5 \cdot 10^{-5+7}\,\si{\joule} = \frac12 \cdot 8 \cdot 100\,\si{\joule} = \SI{400}{\joule}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la carica che attraversa il paziente e la corrente media della scarica.'''
+  calcolo = "C * 1e-6 * V / (dt * 1e-3)"
+  risultato = { valore = 16, unita = "\\ampere", cifre = 2 }
+  rapido = '''$Q = \SI{0,16}{\coulomb}$; $I = \SI{16}{\ampere}$'''
+  soluzione = '''Il condensatore si scarica del tutto, quindi attraverso il paziente passa tutta la carica di un'armatura:
+\[
+  Q = CV = \SI{3,2e-5}{\farad} \cdot \SI{5e3}{\volt} = 3{,}2 \cdot 5 \cdot 10^{-5+3}\,\si{\coulomb} = 16 \cdot \SI{e-2}{\coulomb} = \SI{0,16}{\coulomb}
+\]
+La corrente media è la carica divisa per il tempo, con $\Delta t = \SI{10}{\milli\second} = \SI{0,010}{\second}$:
+\[
+  I = \frac{Q}{\Delta t} = \frac{\SI{0,16}{\coulomb}}{\SI{0,010}{\second}} = \SI{16}{\ampere}
+\]
+All'inizio della scarica la corrente è più alta, poi cala man mano che il condensatore si scarica.'''
+
+  [[problema.parte]]
+  domanda = '''Per un bambino si usa un'energia di \SI{100}{\joule}. A quale differenza di potenziale va caricato lo stesso condensatore?'''
+  calcolo = "(2 * 100 / (C * 1e-6))**0.5"
+  risultato = { valore = 2500, unita = "\\volt", cifre = 2 }
+  soluzione = '''L'energia è proporzionale a $V^{2}$. L'energia voluta, \SI{100}{\joule}, è un quarto di \SI{400}{\joule}, quindi $V^{2}$ deve diventare 4 volte più piccolo, e $V$ la metà, perché $2^{2} = 4$:
+\[
+  V' = \frac{\SI{5000}{\volt}}{2} = \SI{2500}{\volt}
+\]
+Lo stesso risultato si ottiene ricavando $V$ da $U = \frac12 C V^{2}$:
+\[
+  V'^{2} = \frac{2U}{C} = \frac{2 \cdot \SI{100}{\joule}}{\SI{3,2e-5}{\farad}} = \frac{200}{3{,}2} \cdot 10^{5}\,\si{\volt\squared} = 62{,}5 \cdot 10^{5}\,\si{\volt\squared} = \SI{6,25e6}{\volt\squared}
+\]
+e $\sqrt{\num{6,25e6}} = 2{,}5 \cdot 10^{3}$, cioè \SI{2500}{\volt}. Chi dimezzasse l'energia dimezzando la tensione sbaglierebbe: a \SI{2500}{\volt} l'energia è un quarto.'''
+
+[[problema]]
+id = "ud6-condensatori-isolato"
+livello = 3
+testo = '''Un condensatore piano ha armature di area {{A}} a una distanza di {{d}}, nel vuoto. Viene caricato a {{V0}} e poi staccato dalla batteria. Poi lo spazio fra le armature viene riempito con un dielettrico di costante dielettrica relativa $\varepsilon_r = 5{,}0$.'''
+dati.A = { valore = "0,010", unita = "\\metre\\squared" }
+dati.d = { valore = "2,0", unita = "mm" }
+dati.V0 = { valore = 100, unita = "\\volt" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la capacità e la carica prima di inserire il dielettrico.'''
+  calcolo = "eps0 * A / (d * 1e-3) * V0"
+  risultato = { valore = 4.4e-9, unita = "\\coulomb", cifre = 2 }
+  rapido = '''$C_0 \approx \SI{44}{\pico\farad}$; $Q \approx \SI{4,4e-9}{\coulomb}$'''
+  soluzione = '''Con $d = \SI{2,0e-3}{\metre}$, il rapporto fra area e distanza è $A/d = \SI{1,0e-2}{\metre\squared}/\SI{2,0e-3}{\metre} = 0{,}5 \cdot 10^{-2-(-3)}\,\si{\metre} = \SI{5,0}{\metre}$, e
+\[
+  C_0 = \varepsilon_0\,\frac{A}{d} = \SI{8,85e-12}{\farad\per\metre} \cdot \SI{5,0}{\metre} \approx \SI{44e-12}{\farad} = \SI{44}{\pico\farad}
+\]
+La carica è
+\[
+  Q = C_0 V_0 = \SI{44e-12}{\farad} \cdot \SI{100}{\volt} = \SI{4400e-12}{\coulomb} = \SI{4,4e-9}{\coulomb}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la capacità e la differenza di potenziale dopo l'inserimento del dielettrico.'''
+  calcolo = "V0 / 5.0"
+  risultato = { valore = 20, unita = "\\volt", cifre = 2 }
+  rapido = '''$C \approx \SI{220}{\pico\farad}$; $V = \SI{20}{\volt}$'''
+  soluzione = '''Il dielettrico moltiplica la capacità per $\varepsilon_r$:
+\[
+  C = \varepsilon_r\,C_0 = 5{,}0 \cdot \SI{44}{\pico\farad} = \SI{220}{\pico\farad}
+\]
+Il condensatore è staccato dalla batteria: la carica non ha dove andare e resta $Q = \SI{4,4e-9}{\coulomb}$. La differenza di potenziale diventa $\varepsilon_r$ volte più piccola:
+\[
+  V = \frac{Q}{C} = \frac{V_0}{\varepsilon_r} = \frac{\SI{100}{\volt}}{5{,}0} = \SI{20}{\volt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia immagazzinata prima e dopo l'inserimento del dielettrico.'''
+  calcolo = "0.5 * eps0 * A / (d * 1e-3) * V0 * V0 / 5.0"
+  risultato = { valore = 4.4e-8, unita = "J", cifre = 2 }
+  rapido = '''$U_0 \approx \SI{2,2e-7}{\joule}$; $U \approx \SI{4,4e-8}{\joule}$, cinque volte meno'''
+  soluzione = '''La carica è la stessa prima e dopo, quindi conviene la forma $U = \frac12 QV$. Prima:
+\[
+  U_0 = \frac12\,Q V_0 = \frac12 \cdot \SI{4,4e-9}{\coulomb} \cdot \SI{100}{\volt} = \SI{2,2e-7}{\joule}
+\]
+Dopo:
+\[
+  U = \frac12\,Q V = \frac12 \cdot \SI{4,4e-9}{\coulomb} \cdot \SI{20}{\volt} = \SI{44e-9}{\joule} = \SI{4,4e-8}{\joule}
+\]
+A carica fissa l'energia $Q^{2}/(2C)$ diventa $\varepsilon_r$ volte più piccola, come la differenza di potenziale. L'energia che manca non è sparita: il campo del condensatore polarizza il dielettrico e lo tira dentro, fra le armature, compiendo lavoro su di esso.'''
+
+[[problema]]
+id = "ud6-condensatori-membrana"
+livello = 3
+testo = '''Una cellula è una sfera di diametro {{D}}. La sua membrana ha una capacità per unità di area di {{cA}}, come quella di quasi tutte le cellule. A riposo l'interno della cellula è a {{V0}} rispetto all'esterno.'''
+dati.D = { valore = 10, unita = "\\micro\\metre" }
+dati.cA = { valore = 1, unita = "\\micro\\farad\\per\\centi\\metre\\squared" }
+dati.V0 = { valore = -70, unita = "\\milli\\volt" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la capacità della membrana. L'area di una sfera di raggio $r$ è $4\pi r^{2}$.'''
+  calcolo = "cA * 1e-2 * 4 * math.pi * (D / 2 * 1e-6)**2"
+  risultato = { valore = 3.1e-12, unita = "\\farad", cifre = 2 }
+  soluzione = '''La capacità per unità di area nel SI è $\SI{1}{\micro\farad\per\centi\metre\squared} = \SI{e-6}{\farad}/\SI{e-4}{\metre\squared} = \SI{e-2}{\farad\per\metre\squared}$. Il raggio è $r = \SI{5}{\micro\metre} = \SI{5e-6}{\metre}$, e l'area della membrana è
+\[
+  A = 4\pi r^{2} = 4 \cdot 3{,}14 \cdot (\SI{5e-6}{\metre})^{2} = 4 \cdot 3{,}14 \cdot \SI{25e-12}{\metre\squared} = \SI{314e-12}{\metre\squared} = \SI{3,14e-10}{\metre\squared}
+\]
+La capacità è la capacità per unità di area per l'area:
+\[
+  C =\SI{e-2}{\farad\per\metre\squared} \cdot \SI{3,14e-10}{\metre\squared} = 3{,}14 \cdot 10^{-2-10}\,\si{\farad} \approx \SI{3,1e-12}{\farad}
+\]
+circa \SI{3}{\pico\farad}.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti ioni monovalenti separati dalla membrana servono per tenerla a \SI{70}{\milli\volt}? La carica elementare è $e = \SI{1,6e-19}{\coulomb}$.'''
+  calcolo = "cA * 1e-2 * 4 * math.pi * (D / 2 * 1e-6)**2 * 0.070 / e"
+  risultato = { valore = 1.4e6, cifre = 2 }
+  soluzione = '''La carica su ciascuna faccia della membrana è
+\[
+  Q = CV = \SI{3,14e-12}{\farad} \cdot \SI{0,070}{\volt} = 3{,}14 \cdot 7 \cdot 10^{-12-2}\,\si{\coulomb} \approx \SI{22e-14}{\coulomb} = \SI{2,2e-13}{\coulomb}
+\]
+negativa sulla faccia interna, positiva su quella esterna. Ogni ione monovalente porta la carica $e$, quindi gli ioni sono
+\[
+  n = \frac{Q}{e} = \frac{\SI{2,2e-13}{\coulomb}}{\SI{1,6e-19}{\coulomb}} = \frac{2{,}2}{1{,}6} \cdot 10^{-13-(-19)} \approx 1{,}4 \cdot 10^{6}
+\]
+Circa un milione e mezzo di ioni: pochissimi, rispetto alle decine di miliardi di ioni potassio che la cellula contiene.'''
+
+  [[problema.parte]]
+  domanda = '''Durante il potenziale d'azione l'interno passa da \SI{-70}{\milli\volt} a \SI{+30}{\milli\volt}, perché entrano ioni sodio $\mathrm{Na^{+}}$. Quanti ioni sodio devono entrare, come minimo?'''
+  calcolo = "cA * 1e-2 * 4 * math.pi * (D / 2 * 1e-6)**2 * 0.100 / e"
+  risultato = { valore = 2.0e6, cifre = 2 }
+  soluzione = '''La faccia interna della membrana passa da una carica negativa, $-C \cdot \SI{70}{\milli\volt}$, a una positiva, $+C \cdot \SI{30}{\milli\volt}$. La carica che deve entrare è la differenza, $C$ per la variazione della differenza di potenziale, $\Delta V = \SI{30}{\milli\volt} - (\SI{-70}{\milli\volt}) = \SI{100}{\milli\volt} = \SI{0,10}{\volt}$:
+\[
+  \Delta Q = C\,\Delta V = \SI{3,14e-12}{\farad} \cdot \SI{0,10}{\volt} = \SI{3,14e-13}{\coulomb}
+\]
+Gli ioni sodio sono
+\[
+  n = \frac{\Delta Q}{e} = \frac{\SI{3,14e-13}{\coulomb}}{\SI{1,6e-19}{\coulomb}} = \frac{3{,}14}{1{,}6} \cdot 10^{-13-(-19)} \approx 1{,}96 \cdot 10^{6} \approx 2{,}0 \cdot 10^{6}
+\]
+È un minimo, perché nello stesso tempo un po' di potassio esce. Anche così, le concentrazioni di sodio e potassio nella cellula cambiano pochissimo a ogni impulso.'''
+
+[[problema]]
+id = "ud6-condensatori-misto"
+livello = 3
+testo = '''Un condensatore $C_1 = {{C1}}$ è collegato in serie a un gruppo di due condensatori in parallelo, $C_2 = {{C2}}$ e $C_3 = {{C3}}$. Il tutto è collegato a un generatore da {{V}}.'''
+dati.C1 = { valore = "4,0", unita = "\\micro\\farad" }
+dati.C2 = { valore = "2,0", unita = "\\micro\\farad" }
+dati.C3 = { valore = "6,0", unita = "\\micro\\farad" }
+dati.V = { valore = 12, unita = "\\volt" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la capacità equivalente del circuito.'''
+  calcolo = "1 / (1 / C1 + 1 / (C2 + C3))"
+  risultato = { valore = 2.7, unita = "\\micro\\farad", cifre = 2 }
+  soluzione = '''Prima il gruppo in parallelo, dove le capacità si sommano:
+\[
+  C_{23} = C_2 + C_3 = (2{,}0 + 6{,}0)\,\si{\micro\farad} = \SI{8,0}{\micro\farad}
+\]
+Poi la serie di $C_1$ con $C_{23}$, dove si sommano gli inversi. In microfarad:
+\[
+  \frac{1}{C_\text{eq}} = \frac{1}{4{,}0} + \frac{1}{8{,}0} = \frac{2}{8} + \frac{1}{8} = \frac{3}{8}
+  \quad\Rightarrow\quad
+  C_\text{eq} = \frac{8}{3}\,\si{\micro\farad} \approx \SI{2,7}{\micro\farad}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la carica su $C_1$ e la differenza di potenziale ai capi di $C_1$ e del gruppo in parallelo.'''
+  calcolo = "1 / (1 / C1 + 1 / (C2 + C3)) * V"
+  risultato = { valore = 32, unita = "\\micro\\coulomb", cifre = 2 }
+  rapido = '''$Q_1 = \SI{32}{\micro\coulomb}$; $V_1 = \SI{8,0}{\volt}$; $V_{23} = \SI{4,0}{\volt}$'''
+  soluzione = '''$C_1$ e il gruppo $C_{23}$ sono in serie: hanno la stessa carica, quella del condensatore equivalente. Conviene tenere la frazione $8/3$:
+\[
+  Q_1 = C_\text{eq} V = \frac{8}{3}\,\si{\micro\farad} \cdot \SI{12}{\volt} = 8 \cdot 4\,\si{\micro\coulomb} = \SI{32}{\micro\coulomb}
+\]
+Le differenze di potenziale sono
+\[
+  V_1 = \frac{Q_1}{C_1} = \frac{\SI{32}{\micro\coulomb}}{\SI{4,0}{\micro\farad}} = \SI{8,0}{\volt}
+  \qquad
+  V_{23} = \frac{Q_1}{C_{23}} = \frac{\SI{32}{\micro\coulomb}}{\SI{8,0}{\micro\farad}} = \SI{4,0}{\volt}
+\]
+e la loro somma è \SI{12}{\volt}, come deve.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la carica su $C_2$ e su $C_3$.'''
+  calcolo = "C3 * 1 / (1 / C1 + 1 / (C2 + C3)) * V / (C2 + C3)"
+  risultato = { valore = 24, unita = "\\micro\\coulomb", cifre = 2 }
+  rapido = '''$Q_2 = \SI{8,0}{\micro\coulomb}$; $Q_3 = \SI{24}{\micro\coulomb}$'''
+  soluzione = '''$C_2$ e $C_3$ sono in parallelo, quindi hanno tutti e due la differenza di potenziale del gruppo, $V_{23} = \SI{4,0}{\volt}$:
+\[
+  Q_2 = C_2 V_{23} = \SI{2,0}{\micro\farad} \cdot \SI{4,0}{\volt} = \SI{8,0}{\micro\coulomb}
+  \qquad
+  Q_3 = C_3 V_{23} = \SI{6,0}{\micro\farad} \cdot \SI{4,0}{\volt} = \SI{24}{\micro\coulomb}
+\]
+La somma, \SI{32}{\micro\coulomb}, è la carica di $C_1$: la carica che arriva al gruppo si divide fra i due condensatori, in proporzione alle capacità.'''
+
+[[problema]]
+id = "ud6-magnetismo-cavo"
+livello = 1
+testo = '''In una ripetizione dell'esperimento di Oersted un filo rettilineo molto lungo è percorso da una corrente di {{I}}. Calcola il campo magnetico a {{r}} dal filo e confrontalo con il campo magnetico terrestre, circa \SI{5e-5}{\tesla}. Usa $\mu_0/2\pi = \SI{2e-7}{\tesla\metre\per\ampere}$.'''
+dati.I = { valore = 15, unita = "\\ampere" }
+dati.r = { valore = "2,0", unita = "cm" }
+
+  [[problema.parte]]
+  calcolo = "mu0su2pi * I / (r * 1e-2)"
+  risultato = { valore = 1.5e-4, unita = "\\tesla", cifre = 2 }
+  soluzione = '''La distanza in metri è $r = \SI{2,0}{\centi\metre} = \SI{2,0e-2}{\metre}$. Per il campo di un filo rettilineo lungo:
+\[
+  B = \frac{\mu_0}{2\pi}\,\frac{I}{r} = \SI{2e-7}{\tesla\metre\per\ampere} \cdot \frac{\SI{15}{\ampere}}{\SI{2,0e-2}{\metre}} = 2 \cdot \frac{15}{2{,}0} \cdot 10^{-7-(-2)}\,\si{\tesla} = 15 \cdot 10^{-5}\,\si{\tesla} = \SI{1,5e-4}{\tesla}
+\]
+Il rapporto con il campo terrestre è $\num{1,5e-4}/\num{5e-5} = 0{,}3 \cdot 10^{-4-(-5)} = 3$: a due centimetri dal filo il campo è tre volte quello della Terra, e una bussola appoggiata lì non indicherebbe più il nord.'''
+
+[[problema]]
+id = "ud6-magnetismo-elettrone-angolo"
+livello = 1
+testo = '''Dentro un tomografo a risonanza magnetica, dove il campo magnetico è {{B}}, un elettrone si muove a {{v}} lungo una direzione che forma un angolo di \ang{30} con il campo. Calcola il modulo della forza di Lorentz sull'elettrone. La carica elementare è $e = \SI{1,6e-19}{\coulomb}$.'''
+dati.B = { valore = "1,5", unita = "\\tesla" }
+dati.v = { valore = "3,0e6", unita = "m/s" }
+
+  [[problema.parte]]
+  calcolo = "e * v * B * sin30"
+  risultato = { valore = 3.6e-13, unita = "\\newton", cifre = 2 }
+  soluzione = '''Il modulo della forza di Lorentz è $F = |q|\,vB\sin\theta$, con $|q| = e$ e $\sin\ang{30} = \frac12$:
+\[
+  F = \SI{1,6e-19}{\coulomb} \cdot \SI{3,0e6}{\metre\per\second} \cdot \SI{1,5}{\tesla} \cdot \frac12 = \frac{1{,}6 \cdot 3{,}0 \cdot 1{,}5}{2} \cdot 10^{-19+6}\,\si{\newton} = \frac{7{,}2}{2} \cdot 10^{-13}\,\si{\newton} = \SI{3,6e-13}{\newton}
+\]
+con $1{,}6 \cdot 3{,}0 = 4{,}8$ e $4{,}8 \cdot 1{,}5 = 7{,}2$. Il segno negativo della carica cambia il verso della forza, non il suo modulo.'''
+
+[[problema]]
+id = "ud6-magnetismo-forza-filo"
+livello = 1
+testo = '''Un tratto di filo rettilineo lungo {{L}} è percorso da una corrente di {{I}} ed è perpendicolare a un campo magnetico uniforme di {{B}}. Calcola il modulo della forza che il campo esercita sul filo.'''
+dati.L = { valore = 50, unita = "cm" }
+dati.I = { valore = "8,0", unita = "\\ampere" }
+dati.B = { valore = "0,25", unita = "\\tesla" }
+
+  [[problema.parte]]
+  calcolo = "I * (L * 1e-2) * B"
+  risultato = { valore = 1.0, unita = "\\newton", cifre = 2 }
+  soluzione = '''La lunghezza in metri è $L = \SI{50}{\centi\metre} = \SI{0,50}{\metre}$. Il filo è perpendicolare al campo, quindi $\sin\ang{90} = 1$ e
+\[
+  F = I\,L\,B = \SI{8,0}{\ampere} \cdot \SI{0,50}{\metre} \cdot \SI{0,25}{\tesla} = 4{,}0 \cdot 0{,}25\,\si{\newton} = \SI{1,0}{\newton}
+\]'''
+
+[[problema]]
+id = "ud6-magnetismo-solenoide"
+livello = 1
+testo = '''Un solenoide da laboratorio è lungo {{L}} e ha {{N}} spire, percorse da una corrente di {{I}}. Calcola il campo magnetico al suo interno. Usa $\mu_0 = 4\pi \cdot \SI{e-7}{\tesla\metre\per\ampere}$.'''
+dati.L = { valore = 50, unita = "cm" }
+dati.N = { valore = 1000 }
+dati.I = { valore = "2,0", unita = "\\ampere" }
+
+  [[problema.parte]]
+  calcolo = "4 * math.pi * 1e-7 * N / (L * 1e-2) * I"
+  risultato = { valore = 5.0e-3, unita = "\\tesla", cifre = 2 }
+  soluzione = '''Il numero di spire per metro è $n = N/L = 1000/(\SI{0,50}{\metre}) = \SI{2000}{\per\metre}$. Dentro il solenoide
+\[
+  B = \mu_0\,n\,I = 4\pi \cdot \SI{e-7}{\tesla\metre\per\ampere} \cdot \SI{2000}{\per\metre} \cdot \SI{2,0}{\ampere} = 4\pi \cdot 4000 \cdot 10^{-7}\,\si{\tesla} = 16\pi \cdot 10^{-4}\,\si{\tesla}
+\]
+Con $16\pi \approx 16 \cdot 3{,}14 \approx 50$: $B \approx 50 \cdot 10^{-4}\,\si{\tesla} = \SI{5,0e-3}{\tesla}$, cento volte il campo terrestre ma trecento volte meno del campo di un tomografo a risonanza magnetica.'''
+
+[[problema]]
+id = "ud6-magnetismo-flusso-cala"
+livello = 1
+testo = '''Il flusso del campo magnetico attraverso una spira passa da {{Phi1}} a {{Phi2}} in {{t}}. Calcola il modulo della forza elettromotrice media indotta nella spira.'''
+dati.Phi1 = { valore = "0,080", unita = "\\weber" }
+dati.Phi2 = { valore = "0,020", unita = "\\weber" }
+dati.t = { valore = "0,12", unita = "\\second" }
+
+  [[problema.parte]]
+  calcolo = "abs(Phi2 - Phi1) / t"
+  risultato = { valore = 0.50, unita = "\\volt", cifre = 2 }
+  soluzione = '''La variazione del flusso è $\Delta\Phi = \SI{0,020}{\weber} - \SI{0,080}{\weber} = \SI{-0,060}{\weber}$. Con una spira sola ($N = 1$), per la legge di Faraday-Neumann-Lenz:
+\[
+  |\mathcal E| = \frac{|\Delta\Phi|}{\Delta t} = \frac{\SI{0,060}{\weber}}{\SI{0,12}{\second}} = \SI{0,50}{\volt}
+\]
+Il segno della variazione serve solo per il verso della corrente indotta: il flusso diminuisce, e la corrente indotta produce un campo concorde con quello esterno.'''
+
+[[problema]]
+id = "ud6-magnetismo-protone-energia"
+livello = 2
+testo = '''Un protone percorre una circonferenza di raggio {{r}} in un campo magnetico uniforme di {{B}}, perpendicolare alla sua velocità. La carica del protone è $e = \SI{1,6e-19}{\coulomb}$, la sua massa $m_p = \SI{1,67e-27}{\kilo\gram}$.'''
+dati.r = { valore = "5,0", unita = "cm" }
+dati.B = { valore = "0,50", unita = "\\tesla" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la velocità del protone.'''
+  calcolo = "e * B * (r * 1e-2) / mp"
+  risultato = { valore = 2.4e6, unita = "m/s", cifre = 2 }
+  soluzione = '''Dal raggio dell'orbita, $r = m_p v/(eB)$, si ricava la velocità: $v = eBr/m_p$. Con $r = \SI{5,0e-2}{\metre}$:
+\[
+  v = \frac{\SI{1,6e-19}{\coulomb} \cdot \SI{0,50}{\tesla} \cdot \SI{5,0e-2}{\metre}}{\SI{1,67e-27}{\kilo\gram}} = \frac{\num{4,0e-21}}{\num{1,67e-27}}\,\si{\metre\per\second} = \frac{4{,}0}{1{,}67} \cdot 10^{-21-(-27)}\,\si{\metre\per\second} \approx \SI{2,4e6}{\metre\per\second}
+\]
+con $1{,}6 \cdot 0{,}50 \cdot 5{,}0 = 4{,}0$ e $4{,}0/1{,}67 \approx 2{,}4$.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia cinetica del protone, in joule e in elettronvolt.'''
+  calcolo = "0.5 * mp * (e * B * (r * 1e-2) / mp)**2"
+  risultato = { valore = 4.8e-15, unita = "J", cifre = 2 }
+  rapido = '''\SI{4,8e-15}{\joule} $\approx$ \SI{3,0e4}{\electronvolt}'''
+  soluzione = '''Con la velocità della parte precedente:
+\[
+  K = \frac12 m_p v^2 = \frac12 \cdot \SI{1,67e-27}{\kilo\gram} \cdot (\SI{2,4e6}{\metre\per\second})^2 = \frac12 \cdot 1{,}67 \cdot 5{,}76 \cdot 10^{-27+12}\,\si{\joule} \approx \SI{4,8e-15}{\joule}
+\]
+con $2{,}4^2 = 5{,}76$ e $1{,}67 \cdot 5{,}76/2 \approx 4{,}8$. In elettronvolt, dividendo per $\SI{1,6e-19}{\joule\per\electronvolt}$:
+\[
+  K = \frac{\num{4,8e-15}}{\num{1,6e-19}}\,\si{\electronvolt} = 3{,}0 \cdot 10^{-15-(-19)}\,\si{\electronvolt} = \SI{3,0e4}{\electronvolt}
+\]
+La forza magnetica non compie lavoro: finché il protone resta nel campo, questa energia non cambia.'''
+
+[[problema]]
+id = "ud6-magnetismo-spira-inclinata"
+livello = 2
+testo = '''Una spira di area {{A}} si trova in un campo magnetico uniforme di {{B}}; le linee del campo formano un angolo di \ang{30} con il piano della spira. In {{t}} il campo si annulla.'''
+dati.A = { valore = 50, unita = "\\centi\\metre\\squared" }
+dati.B = { valore = "0,20", unita = "\\tesla" }
+dati.t = { valore = 20, unita = "\\milli\\second" }
+
+  [[problema.parte]]
+  domanda = '''Calcola il flusso del campo magnetico attraverso la spira prima che il campo cominci a diminuire.'''
+  calcolo = "B * A * 1e-4 * sin30"
+  risultato = { valore = 5.0e-4, unita = "\\weber", cifre = 2 }
+  soluzione = '''Nel flusso $\Phi = BA\cos\theta$ l'angolo $\theta$ è quello fra il campo e la normale alla spira, non quello con il piano. La normale è perpendicolare al piano, quindi se il campo forma \ang{30} con il piano forma con la normale l'angolo $\theta = \ang{90} - \ang{30} = \ang{60}$, e $\cos\ang{60} = \frac12$. L'area in metri quadrati è $A = 50 \cdot \SI{e-4}{\metre\squared} = \SI{5,0e-3}{\metre\squared}$:
+\[
+  \Phi = BA\cos\theta = \SI{0,20}{\tesla} \cdot \SI{5,0e-3}{\metre\squared} \cdot \frac12 = \SI{5,0e-4}{\weber}
+\]
+Con il coseno di \ang{30}, cioè con l'angolo misurato dal piano, si troverebbe per errore $\SI{8,7e-4}{\weber}$.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola il modulo della forza elettromotrice media indotta mentre il campo si annulla.'''
+  calcolo = "B * A * 1e-4 * sin30 / (t * 1e-3)"
+  risultato = { valore = 2.5e-2, unita = "\\volt", cifre = 2 }
+  soluzione = '''Il flusso della parte precedente passa da \SI{5,0e-4}{\weber} a zero in $\Delta t = \SI{20}{\milli\second} = \SI{2,0e-2}{\second}$:
+\[
+  |\mathcal E| = \frac{|\Delta\Phi|}{\Delta t} = \frac{\SI{5,0e-4}{\weber}}{\SI{2,0e-2}{\second}} = 2{,}5 \cdot 10^{-4-(-2)}\,\si{\volt} = \SI{2,5e-2}{\volt}
+\]'''
+
+[[problema]]
+id = "ud6-magnetismo-sbarretta"
+livello = 2
+testo = '''Una sbarretta metallica lunga {{L}} scorre a velocità costante di {{v}} su due binari conduttori paralleli, collegati a un'estremità da un resistore di {{R}}. Il circuito è immerso in un campo magnetico uniforme di {{B}}, perpendicolare al piano dei binari. Trascura la resistenza della sbarretta e dei binari.'''
+dati.L = { valore = 40, unita = "cm" }
+dati.v = { valore = "5,0", unita = "m/s" }
+dati.R = { valore = "2,0", unita = "\\ohm" }
+dati.B = { valore = "0,60", unita = "\\tesla" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la forza elettromotrice indotta.'''
+  calcolo = "B * (L * 1e-2) * v"
+  risultato = { valore = 1.2, unita = "\\volt", cifre = 2 }
+  soluzione = '''In ogni secondo l'area del circuito cresce di $Lv$, e il flusso di $BLv$. La fem indotta è quindi, in modulo, $\mathcal E = BLv$, con $L = \SI{40}{\centi\metre} = \SI{0,40}{\metre}$:
+\[
+  \mathcal E = BLv = \SI{0,60}{\tesla} \cdot \SI{0,40}{\metre} \cdot \SI{5,0}{\metre\per\second} = 0{,}24 \cdot 5{,}0\,\si{\volt} = \SI{1,2}{\volt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la corrente indotta nel circuito.'''
+  calcolo = "B * (L * 1e-2) * v / R"
+  risultato = { valore = 0.60, unita = "\\ampere", cifre = 2 }
+  soluzione = '''Con la fem della parte precedente e la resistenza del circuito:
+\[
+  I = \frac{\mathcal E}{R} = \frac{\SI{1,2}{\volt}}{\SI{2,0}{\ohm}} = \SI{0,60}{\ampere}
+\]'''
+
+[[problema]]
+id = "ud6-magnetismo-fili-paralleli"
+livello = 2
+testo = '''Due cavi rettilinei lunghi e paralleli, a {{d}} l'uno dall'altro, sono percorsi ciascuno da una corrente di {{I}}, nello stesso verso. Usa $\mu_0/2\pi = \SI{2e-7}{\tesla\metre\per\ampere}$.'''
+dati.d = { valore = "5,0", unita = "mm" }
+dati.I = { valore = 10, unita = "\\ampere" }
+
+  [[problema.parte]]
+  domanda = '''Calcola il campo magnetico che il primo cavo produce nel punto in cui si trova il secondo.'''
+  calcolo = "mu0su2pi * I / (d * 1e-3)"
+  risultato = { valore = 4.0e-4, unita = "\\tesla", cifre = 2 }
+  soluzione = '''La distanza in metri è $d = \SI{5,0}{\milli\metre} = \SI{5,0e-3}{\metre}$. Il campo di un filo rettilineo lungo a questa distanza è
+\[
+  B = \frac{\mu_0}{2\pi}\,\frac{I}{d} = \SI{2e-7}{\tesla\metre\per\ampere} \cdot \frac{\SI{10}{\ampere}}{\SI{5,0e-3}{\metre}} = 2 \cdot \frac{10}{5{,}0} \cdot 10^{-7-(-3)}\,\si{\tesla} = \SI{4,0e-4}{\tesla}
+\]
+Le linee del campo sono circonferenze intorno al primo cavo: nel punto in cui passa il secondo cavo il campo è perpendicolare a esso.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la forza su un tratto lungo \SI{2,0}{\metre} del secondo cavo, e di' se i due cavi si attraggono o si respingono.'''
+  calcolo = "I * 2.0 * mu0su2pi * I / (d * 1e-3)"
+  risultato = { valore = 8.0e-3, unita = "\\newton", cifre = 2 }
+  rapido = '''\SI{8,0e-3}{\newton}; si attraggono'''
+  soluzione = '''Il secondo cavo è percorso da corrente ed è immerso, perpendicolarmente, nel campo del primo, calcolato nella parte precedente. Su un tratto lungo $L = \SI{2,0}{\metre}$:
+\[
+  F = I\,L\,B = \SI{10}{\ampere} \cdot \SI{2,0}{\metre} \cdot \SI{4,0e-4}{\tesla} = 80 \cdot 10^{-4}\,\si{\newton} = \SI{8,0e-3}{\newton}
+\]
+Con le correnti nello stesso verso i due cavi si attraggono. È una forza piccola: per questo i cavi percorsi da correnti ordinarie non si muovono in modo visibile.'''
+
+[[problema]]
+id = "ud6-magnetismo-elettrone-rm"
+livello = 2
+testo = '''Un elettrone si muove a {{v}} perpendicolarmente al campo magnetico di {{B}} di un tomografo a risonanza magnetica. La carica elementare è $e = \SI{1,6e-19}{\coulomb}$, la massa dell'elettrone $m_e = \SI{9,1e-31}{\kilo\gram}$.'''
+dati.v = { valore = "2,0e6", unita = "m/s" }
+dati.B = { valore = "1,5", unita = "\\tesla" }
+
+  [[problema.parte]]
+  domanda = '''Calcola il raggio della sua traiettoria.'''
+  calcolo = "me * v / (e * B)"
+  risultato = { valore = 7.6e-6, unita = "m", cifre = 2 }
+  soluzione = '''La forza di Lorentz fa da forza centripeta, e il raggio dell'orbita è
+\[
+  r = \frac{m_e v}{eB} = \frac{\SI{9,1e-31}{\kilo\gram} \cdot \SI{2,0e6}{\metre\per\second}}{\SI{1,6e-19}{\coulomb} \cdot \SI{1,5}{\tesla}} = \frac{\num{18,2e-25}}{\num{2,4e-19}}\,\si{\metre} = \frac{18{,}2}{2{,}4} \cdot 10^{-25-(-19)}\,\si{\metre} \approx \SI{7,6e-6}{\metre}
+\]
+con $9{,}1 \cdot 2{,}0 = 18{,}2$, $1{,}6 \cdot 1{,}5 = 2{,}4$ e $18{,}2/2{,}4 \approx 7{,}6$: pochi micrometri, circa quanto il diametro di un globulo rosso.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola il tempo che l'elettrone impiega a percorrere un giro. Dipende dalla sua velocità?'''
+  calcolo = "2 * math.pi * (me * v / (e * B)) / v"
+  risultato = { valore = 2.4e-11, unita = "s", cifre = 2 }
+  rapido = '''\SI{2,4e-11}{\second}; non dipende dalla velocità'''
+  soluzione = '''Il tempo di un giro è la circonferenza dell'orbita diviso la velocità, con il raggio della parte precedente:
+\[
+  T = \frac{2\pi r}{v} = \frac{6{,}28 \cdot \SI{7,6e-6}{\metre}}{\SI{2,0e6}{\metre\per\second}} = \frac{47{,}7}{2{,}0} \cdot 10^{-6-6}\,\si{\second} \approx 23{,}9 \cdot 10^{-12}\,\si{\second} \approx \SI{2,4e-11}{\second}
+\]
+Non dipende dalla velocità: sostituendo $r = m_e v/(eB)$ si trova $T = 2\pi m_e/(eB)$, dove $v$ non compare. Un elettrone due volte più veloce percorrerebbe una circonferenza di raggio doppio nello stesso tempo.'''
+
+[[problema]]
+id = "ud6-magnetismo-spettrometro"
+livello = 3
+testo = '''Il test del respiro per l'\emph{Helicobacter pylori} misura quanto carbonio-13 il paziente espira, dopo aver bevuto urea marcata con questo isotopo. La misura si fa con uno spettrometro di massa. In un modello semplificato, ioni $^{12}\mathrm{C}^{+}$ (massa \SI{2,00e-26}{\kilo\gram}) e $^{13}\mathrm{C}^{+}$ (massa \SI{2,16e-26}{\kilo\gram}), tutti con carica $e = \SI{1,6e-19}{\coulomb}$ e con la stessa velocità {{v}}, entrano perpendicolarmente in un campo magnetico uniforme di {{B}}. Dopo mezzo giro colpiscono un rivelatore piano, posto sulla linea da cui sono entrati.'''
+dati.v = { valore = "1,0e5", unita = "m/s" }
+dati.B = { valore = "0,40", unita = "\\tesla" }
+
+  [[problema.parte]]
+  domanda = '''Calcola il raggio della traiettoria degli ioni $^{12}\mathrm{C}^{+}$ e quello degli ioni $^{13}\mathrm{C}^{+}$.'''
+  calcolo = "2.00e-26 * v / (e * B)"
+  risultato = { valore = 3.1e-2, unita = "m", cifre = 2 }
+  rapido = '''$^{12}\mathrm{C}^{+}$: \SI{3,1e-2}{\metre}; $^{13}\mathrm{C}^{+}$: \SI{3,4e-2}{\metre}'''
+  soluzione = '''Il denominatore è lo stesso per i due ioni: $eB = \SI{1,6e-19}{\coulomb} \cdot \SI{0,40}{\tesla} = \num{0,64e-19} = \num{6,4e-20}$ in unità del SI. Per $^{12}\mathrm{C}^{+}$:
+\[
+  r_{12} = \frac{mv}{eB} = \frac{\SI{2,00e-26}{\kilo\gram} \cdot \SI{1,0e5}{\metre\per\second}}{\num{6,4e-20}\,\si{\coulomb\tesla}} = \frac{2{,}00}{6{,}4} \cdot 10^{-21-(-20)}\,\si{\metre} \approx 0{,}31 \cdot 10^{-1}\,\si{\metre} = \SI{3,1e-2}{\metre}
+\]
+Per $^{13}\mathrm{C}^{+}$, con la massa \SI{2,16e-26}{\kilo\gram}:
+\[
+  r_{13} = \frac{2{,}16}{6{,}4} \cdot 10^{-1}\,\si{\metre} \approx 0{,}34 \cdot 10^{-1}\,\si{\metre} = \SI{3,4e-2}{\metre}
+\]
+A parità di velocità e di carica il raggio è proporzionale alla massa: lo ione più pesante descrive la circonferenza più larga.'''
+
+  [[problema.parte]]
+  domanda = '''A che distanza l'uno dall'altro arrivano sul rivelatore i due tipi di ioni?'''
+  calcolo = "2 * (2.16e-26 - 2.00e-26) * v / (e * B)"
+  risultato = { valore = 5.0e-3, unita = "m", cifre = 2 }
+  soluzione = '''Dopo mezzo giro ogni ione arriva sul rivelatore a una distanza dal punto d'ingresso uguale al diametro della sua circonferenza, $2r$. La distanza fra i due punti d'arrivo è la differenza dei diametri. Conviene calcolarla in un colpo solo, con la differenza delle masse, $\Delta m = \SI{0,16e-26}{\kilo\gram}$, per non perdere cifre:
+\[
+  2r_{13} - 2r_{12} = \frac{2\,\Delta m\,v}{eB} = \frac{2 \cdot \num{0,16e-26} \cdot \num{1,0e5}}{\num{6,4e-20}}\,\si{\metre}
+\]
+\[
+  2r_{13} - 2r_{12} = \frac{0{,}32}{6{,}4} \cdot 10^{-21-(-20)}\,\si{\metre} = 0{,}05 \cdot 10^{-1}\,\si{\metre} = \SI{5,0e-3}{\metre}
+\]
+Cinque millimetri: abbastanza per contare separatamente i due isotopi con due rivelatori affiancati.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto tempo impiega uno ione $^{12}\mathrm{C}^{+}$ a percorrere il mezzo giro?'''
+  calcolo = "math.pi * 2.00e-26 / (e * B)"
+  risultato = { valore = 9.8e-7, unita = "s", cifre = 2 }
+  soluzione = '''Il mezzo giro dura metà del periodo, $T/2 = \pi m/(eB)$:
+\[
+  \frac{T}{2} = \frac{\pi m}{eB} = \frac{3{,}14 \cdot \SI{2,00e-26}{\kilo\gram}}{\num{6,4e-20}\,\si{\coulomb\tesla}} = \frac{6{,}28}{6{,}4} \cdot 10^{-26-(-20)}\,\si{\second} \approx 0{,}98 \cdot 10^{-6}\,\si{\second} = \SI{9,8e-7}{\second}
+\]
+Lo stesso risultato si ottiene come $\pi r/v$, con il raggio della prima parte. Non dipende dalla velocità, ma dipende dalla massa: gli ioni $^{13}\mathrm{C}^{+}$ arrivano poco più tardi.'''
+
+[[problema]]
+id = "ud6-magnetismo-ciclotrone"
+livello = 3
+testo = '''Un piccolo ciclotrone, simile a quelli con cui alcuni ospedali producono i radionuclidi della PET, accelera protoni. Il campo magnetico, uniforme, vale {{B}}. A ogni mezzo giro i protoni attraversano una differenza di potenziale di {{dV}}, alternata in sincronia con il loro moto, ed escono dalla macchina con velocità {{v}}. La carica del protone è $e = \SI{1,6e-19}{\coulomb}$, la sua massa $m_p = \SI{1,67e-27}{\kilo\gram}$.'''
+dati.B = { valore = "1,5", unita = "\\tesla" }
+dati.dV = { valore = 50, unita = "\\kilo\\volt" }
+dati.v = { valore = "3,0e7", unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Calcola il periodo del moto dei protoni e la frequenza della differenza di potenziale alternata.'''
+  calcolo = "2 * math.pi * mp / (e * B)"
+  risultato = { valore = 4.4e-8, unita = "s", cifre = 2 }
+  rapido = '''$T \approx \SI{4,4e-8}{\second}$; $f \approx \SI{2,3e7}{\hertz}$'''
+  soluzione = '''Il periodo non dipende dalla velocità:
+\[
+  T = \frac{2\pi m_p}{eB} = \frac{6{,}28 \cdot \SI{1,67e-27}{\kilo\gram}}{\SI{1,6e-19}{\coulomb} \cdot \SI{1,5}{\tesla}} = \frac{10{,}5}{2{,}4} \cdot 10^{-27-(-19)}\,\si{\second} \approx 4{,}4 \cdot 10^{-8}\,\si{\second}
+\]
+con $6{,}28 \cdot 1{,}67 \approx 10{,}5$, $1{,}6 \cdot 1{,}5 = 2{,}4$ e $10{,}5/2{,}4 \approx 4{,}4$. La differenza di potenziale deve cambiare verso a ogni mezzo giro, cioè compiere un'oscillazione completa in un periodo del protone. La sua frequenza è
+\[
+  f = \frac1T = \frac{1}{\SI{4,4e-8}{\second}} \approx 0{,}23 \cdot 10^{8}\,\si{\hertz} = \SI{2,3e7}{\hertz}
+\]
+circa \SI{23}{\mega\hertz}, la stessa per tutto il tempo dell'accelerazione.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola il raggio dell'orbita dei protoni quando escono dal ciclotrone.'''
+  calcolo = "mp * v / (e * B)"
+  risultato = { valore = 0.21, unita = "m", cifre = 2 }
+  soluzione = '''All'uscita la velocità è la più grande, e così il raggio:
+\[
+  r = \frac{m_p v}{eB} = \frac{\SI{1,67e-27}{\kilo\gram} \cdot \SI{3,0e7}{\metre\per\second}}{\num{2,4e-19}\,\si{\coulomb\tesla}} = \frac{5{,}0}{2{,}4} \cdot 10^{-27+7-(-19)}\,\si{\metre} \approx 2{,}1 \cdot 10^{-1}\,\si{\metre} = \SI{0,21}{\metre}
+\]
+con $1{,}67 \cdot 3{,}0 \approx 5{,}0$. Il magnete deve avere un diametro di almeno una quarantina di centimetri.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia cinetica dei protoni all'uscita, in joule e in elettronvolt.'''
+  calcolo = "0.5 * mp * v**2"
+  risultato = { valore = 7.5e-13, unita = "J", cifre = 2 }
+  rapido = '''\SI{7,5e-13}{\joule} $\approx$ \SI{4,7}{\mega\electronvolt}'''
+  soluzione = '''Partono quasi da fermi, quindi
+\[
+  K = \frac12 m_p v^2 = \frac12 \cdot \SI{1,67e-27}{\kilo\gram} \cdot (\SI{3,0e7}{\metre\per\second})^2 = \frac12 \cdot 1{,}67 \cdot 9{,}0 \cdot 10^{-27+14}\,\si{\joule} \approx 7{,}5 \cdot 10^{-13}\,\si{\joule}
+\]
+con $1{,}67 \cdot 9{,}0 \approx 15{,}0$. In elettronvolt:
+\[
+  K = \frac{\num{7,5e-13}}{\num{1,6e-19}}\,\si{\electronvolt} \approx 4{,}7 \cdot 10^{-13-(-19)}\,\si{\electronvolt} = \SI{4,7e6}{\electronvolt} = \SI{4,7}{\mega\electronvolt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanti giri compiono, circa, i protoni prima di uscire?'''
+  calcolo = "0.5 * mp * v**2 / e / (2 * dV * 1e3)"
+  risultato = { valore = 47, cifre = 2 }
+  soluzione = '''A ogni passaggio attraverso la differenza di potenziale il protone guadagna l'energia $e\,\Delta V = \SI{50}{\kilo\electronvolt}$, per la conservazione dell'energia. In un giro i passaggi sono due, e il guadagno è \SI{100}{\kilo\electronvolt} $= \SI{1e5}{\electronvolt}$. Per arrivare all'energia della parte precedente servono
+\[
+  \frac{\SI{4,7e6}{\electronvolt}}{\SI{1e5}{\electronvolt}} = 4{,}7 \cdot 10^{6-5} = 47 \text{ giri}
+\]
+Tutti durano lo stesso tempo $T$, anche se il raggio cresce a ogni giro: in tutto $47 \cdot \SI{4,4e-8}{\second} \approx \SI{2e-6}{\second}$.'''
+
+[[problema]]
+id = "ud6-magnetismo-bobina-ruota"
+livello = 3
+testo = '''Una bobina circolare di {{N}} spire, di raggio {{r}}, ha l'asse parallelo a un campo magnetico uniforme di {{B}}. In {{t}} viene ruotata fino a disporre l'asse perpendicolare al campo. La bobina è chiusa e ha resistenza {{R}}.'''
+dati.N = { valore = 100 }
+dati.r = { valore = "4,0", unita = "cm" }
+dati.B = { valore = "0,50", unita = "\\tesla" }
+dati.t = { valore = 50, unita = "\\milli\\second" }
+dati.R = { valore = "5,0", unita = "\\ohm" }
+
+  [[problema.parte]]
+  domanda = '''Calcola il modulo della forza elettromotrice media indotta durante la rotazione. Il campo magnetico prodotto dalla corrente indotta, dentro la bobina, ha lo stesso verso del campo esterno o verso opposto?'''
+  calcolo = "N * B * math.pi * (r * 1e-2)**2 / (t * 1e-3)"
+  risultato = { valore = 5.0, unita = "\\volt", cifre = 2 }
+  rapido = '''\SI{5,0}{\volt}; lo stesso verso del campo esterno'''
+  soluzione = '''L'area di una spira è $A = \pi r^2 = 3{,}14 \cdot (\SI{4,0e-2}{\metre})^2 = 3{,}14 \cdot \SI{16e-4}{\metre\squared} \approx \SI{5,0e-3}{\metre\squared}$. All'inizio l'asse della bobina, cioè la normale alle spire, è parallelo al campo: $\theta = \ang{0}$ e il flusso in una spira è massimo, $BA = 0{,}50 \cdot \num{5,0e-3}\,\si{\weber} = \SI{2,5e-3}{\weber}$. Alla fine la normale è perpendicolare al campo, $\cos\ang{90} = 0$, e il flusso è nullo. Con $\Delta t = \SI{50}{\milli\second} = \SI{5,0e-2}{\second}$:
+\[
+  |\mathcal E| = N\,\frac{|\Delta\Phi|}{\Delta t} = 100 \cdot \frac{\SI{2,5e-3}{\weber}}{\SI{5,0e-2}{\second}} = 100 \cdot 0{,}50 \cdot 10^{-3-(-2)}\,\si{\volt} = \SI{5,0}{\volt}
+\]
+Il flusso diminuisce, dal massimo a zero. Per la legge di Lenz la corrente indotta si oppone a questa diminuzione: produce dentro la bobina un campo con lo stesso verso del campo esterno, che cerca di mantenere il flusso. Per la stessa ragione chi ruota la bobina deve compiere un lavoro, che diventa l'energia dissipata per effetto Joule.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la corrente media indotta e la carica che attraversa la bobina durante la rotazione. Che cosa cambia se la bobina si ruota in metà tempo?'''
+  calcolo = "N * B * math.pi * (r * 1e-2)**2 / R"
+  risultato = { valore = 5.0e-2, unita = "\\coulomb", cifre = 2 }
+  rapido = '''$I \approx \SI{1,0}{\ampere}$; $Q \approx \SI{5,0e-2}{\coulomb}$; in metà tempo la corrente raddoppia, la carica non cambia'''
+  soluzione = '''Con la fem della parte precedente la corrente media è
+\[
+  I = \frac{|\mathcal E|}{R} = \frac{\SI{5,0}{\volt}}{\SI{5,0}{\ohm}} = \SI{1,0}{\ampere}
+\]
+La carica è la corrente per il tempo:
+\[
+  Q = I\,\Delta t = \SI{1,0}{\ampere} \cdot \SI{5,0e-2}{\second} = \SI{5,0e-2}{\coulomb}
+\]
+Scritta per esteso, $Q = \frac{N|\Delta\Phi|}{R\,\Delta t}\,\Delta t = \frac{N|\Delta\Phi|}{R}$: il tempo si semplifica. Ruotando la bobina in metà tempo la fem e la corrente raddoppiano, ma la carica che passa resta la stessa.'''
+
+[[problema]]
+id = "ud6-magnetismo-cavo-rm"
+livello = 3
+testo = '''Durante un esame di risonanza magnetica il cavo di un elettrodo per l'elettrocardiogramma è rimasto avvolto ad anello sul torace del paziente, e racchiude un'area di {{A}}, perpendicolare al campo magnetico. A ogni impulso dei gradienti il campo attraverso l'anello cambia di {{dB}} in {{t}}. La resistenza dell'anello di cavo, chiuso attraverso la pelle, è {{R}}.'''
+dati.A = { valore = 100, unita = "\\centi\\metre\\squared" }
+dati.dB = { valore = 20, unita = "\\milli\\tesla" }
+dati.t = { valore = "0,50", unita = "\\milli\\second" }
+dati.R = { valore = "2,0", unita = "\\ohm" }
+
+  [[problema.parte]]
+  domanda = '''Calcola il modulo della forza elettromotrice media indotta nell'anello durante un impulso.'''
+  calcolo = "(dB * 1e-3) * (A * 1e-4) / (t * 1e-3)"
+  risultato = { valore = 0.40, unita = "\\volt", cifre = 2 }
+  soluzione = '''Si portano i dati in unità del SI: $A = 100 \cdot \SI{e-4}{\metre\squared} = \SI{e-2}{\metre\squared}$, $\Delta B = \SI{20e-3}{\tesla} = \SI{2,0e-2}{\tesla}$, $\Delta t = \SI{0,50e-3}{\second} = \SI{5,0e-4}{\second}$. Il campo è perpendicolare all'anello, quindi $\Delta\Phi = \Delta B \cdot A$ e
+\[
+  |\mathcal E| = \frac{\Delta B\,A}{\Delta t} = \frac{\SI{2,0e-2}{\tesla} \cdot \SI{e-2}{\metre\squared}}{\SI{5,0e-4}{\second}} = \frac{2{,}0}{5{,}0} \cdot 10^{-2-2-(-4)}\,\si{\volt} = \SI{0,40}{\volt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la corrente indotta.'''
+  calcolo = "(dB * 1e-3) * (A * 1e-4) / (t * 1e-3) / R"
+  risultato = { valore = 0.20, unita = "\\ampere", cifre = 2 }
+  soluzione = '''Con la fem della parte precedente:
+\[
+  I = \frac{|\mathcal E|}{R} = \frac{\SI{0,40}{\volt}}{\SI{2,0}{\ohm}} = \SI{0,20}{\ampere}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la potenza dissipata per effetto Joule durante l'impulso. Che cosa cambia se il cavo è steso dritto?'''
+  calcolo = "((dB * 1e-3) * (A * 1e-4) / (t * 1e-3) / R)**2 * R"
+  risultato = { valore = 8.0e-2, unita = "\\watt", cifre = 2 }
+  rapido = '''\SI{8,0e-2}{\watt}; steso dritto non racchiude area, e la fem è in pratica nulla'''
+  soluzione = '''La potenza dissipata in una resistenza è
+\[
+  P = R\,I^2 = \SI{2,0}{\ohm} \cdot (\SI{0,20}{\ampere})^2 = 2{,}0 \cdot 0{,}040\,\si{\watt} = \SI{8,0e-2}{\watt}
+\]
+È poco: gli impulsi dei gradienti scaldano appena il cavo. Ma il tomografo produce anche un campo a radiofrequenza, che a \SI{1,5}{\tesla} oscilla circa 64 milioni di volte al secondo e cambia molto più in fretta dei gradienti. Per la stessa legge di Faraday-Neumann-Lenz, anche se è più debole, induce nell'anello forze elettromotrici molto più grandi. Concentrata nel piccolo tratto di pelle in cui il cavo tocca il paziente, la potenza che ne viene può causare un'ustione. Un cavo steso dritto non racchiude un'area: il flusso che lo attraversa è in pratica nullo, e così la fem indotta. Per questo in risonanza i cavi non si avvolgono ad anello.'''
+
+[[problema]]
+id = "ud6-magnetismo-flussimetro"
+livello = 3
+testo = '''Un flussimetro elettromagnetico misura la velocità del sangue in un'arteria durante un intervento. Due piccoli magneti producono attraverso il vaso un campo uniforme di {{B}}, perpendicolare all'arteria, e due elettrodi appoggiati ai lati del vaso misurano la differenza di potenziale fra le pareti opposte. Il sangue contiene ioni positivi e negativi, e la colonna di sangue che scorre si comporta come una sbarretta conduttrice in moto, lunga quanto il diametro del vaso, {{d}}. Prendi una terna destrorsa: il sangue scorre lungo $+x$, il campo è diretto lungo $+y$.'''
+dati.B = { valore = "0,050", unita = "\\tesla" }
+dati.d = { valore = "8,0", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Uno ione sodio $\mathrm{Na^{+}}$, di carica $e = \SI{1,6e-19}{\coulomb}$, è trascinato dal sangue a \SI{0,25}{\metre\per\second}. Calcola il modulo della forza magnetica su di lui e trova verso dove spinge gli ioni positivi e verso dove quelli negativi.'''
+  calcolo = "e * 0.25 * B"
+  risultato = { valore = 2.0e-21, unita = "\\newton", cifre = 2 }
+  rapido = '''\SI{2,0e-21}{\newton}; positivi verso $+z$, negativi verso $-z$'''
+  soluzione = '''La velocità è perpendicolare al campo, $\sin\ang{90} = 1$:
+\[
+  F = evB = \SI{1,6e-19}{\coulomb} \cdot \SI{0,25}{\metre\per\second} \cdot \SI{0,050}{\tesla} = 1{,}6 \cdot 0{,}0125 \cdot 10^{-19}\,\si{\newton} = \SI{2,0e-21}{\newton}
+\]
+con $0{,}25 \cdot 0{,}050 = 0{,}0125$. Il verso, per una carica positiva, è quello di $\vec v \times \vec B$: con $\vec v$ lungo $+x$ e $\vec B$ lungo $+y$, $\hat\imath \times \hat\jmath = \hat k$, quindi lungo $+z$. Gli ioni negativi sono spinti nel verso opposto, lungo $-z$. Gli elettrodi vanno quindi messi sulle pareti del vaso lungo l'asse $z$: quello dalla parte di $+z$ si carica positivamente.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la differenza di potenziale fra gli elettrodi quando il sangue scorre a \SI{0,25}{\metre\per\second}.'''
+  calcolo = "B * (d * 1e-3) * 0.25"
+  risultato = { valore = 1.0e-4, unita = "\\volt", cifre = 2 }
+  soluzione = '''Come per la sbarretta, la fem indotta è $\mathcal E = BLv$, con $L$ uguale al diametro del vaso, $d = \SI{8,0e-3}{\metre}$:
+\[
+  \mathcal E = Bdv = \SI{0,050}{\tesla} \cdot \SI{8,0e-3}{\metre} \cdot \SI{0,25}{\metre\per\second} = 0{,}050 \cdot 2{,}0 \cdot 10^{-3}\,\si{\volt} = \SI{1,0e-4}{\volt}
+\]
+con $8{,}0 \cdot 0{,}25 = 2{,}0$. È un decimo di millivolt: un segnale piccolo, ma che un buon amplificatore misura senza difficoltà.'''
+
+  [[problema.parte]]
+  domanda = '''In un altro momento gli elettrodi misurano \SI{0,16}{\milli\volt}. Quanto vale la velocità del sangue?'''
+  calcolo = "0.16e-3 / (B * d * 1e-3)"
+  risultato = { valore = 0.40, unita = "m/s", cifre = 2 }
+  soluzione = '''La fem è proporzionale alla velocità, quindi $v = \mathcal E/(Bd)$. Il prodotto $Bd$ vale $\SI{0,050}{\tesla} \cdot \SI{8,0e-3}{\metre} = \SI{4,0e-4}{\tesla\metre}$:
+\[
+  v = \frac{\mathcal E}{Bd} = \frac{\SI{1,6e-4}{\volt}}{\SI{4,0e-4}{\tesla\metre}} = \SI{0,40}{\metre\per\second}
+\]
+Lo stesso si trova con la proporzione sulla parte precedente: la fem è passata da \SI{0,10}{\milli\volt} a \SI{0,16}{\milli\volt}, $1{,}6$ volte tanto, e la velocità è $1{,}6 \cdot \SI{0,25}{\metre\per\second} = \SI{0,40}{\metre\per\second}$.'''
+
+# ==================================================================== quesiti d'esame
+
+[[quesito]]
+id = "ud6-elettrostatica-quantizzata"
+tipo = "multipla"
+testo = '''La carica elementare vale $e = \SI{1,6e-19}{\coulomb}$. Quale di questi valori \emph{non} può essere la carica elettrica di un corpo?'''
+corretta = "C"
+soluzione = '''La carica è quantizzata: ogni carica è un multiplo intero della carica elementare, $q = \pm ne$. Basta dividere ogni valore per $e$:
+\[
+  \frac{\num{-4,8e-19}}{\num{1,6e-19}} = -3 \qquad \frac{\num{3,2e-19}}{\num{1,6e-19}} = 2 \qquad \frac{\num{8,0e-20}}{\num{1,6e-19}} = 0{,}5
+\]
+\[
+  \frac{\num{1,6e-18}}{\num{1,6e-19}} = 10 \qquad \frac{\num{-1,6e-19}}{\num{1,6e-19}} = -1
+\]
+Solo \SI{8,0e-20}{\coulomb} non è un multiplo intero di $e$: sarebbe mezza carica elementare.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{-4,8e-19}{\coulomb}'''
+  commento = '''È $-3e$: un corpo con tre elettroni in eccesso. Una carica negativa è possibile quanto una positiva.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3,2e-19}{\coulomb}'''
+  commento = '''È $2e$: un corpo con due elettroni in difetto. Una carica può essere un multiplo qualsiasi di $e$, non solo $e$ stessa.'''
+  [[quesito.opzione]]
+  testo = '''\SI{8,0e-20}{\coulomb}'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,6e-18}{\coulomb}'''
+  commento = '''È $10e$: con l'esponente $-18$ invece di $-19$ il valore è dieci volte $e$, non un decimo. Dieci elettroni in difetto.'''
+  [[quesito.opzione]]
+  testo = '''\SI{-1,6e-19}{\coulomb}'''
+  commento = '''È $-e$, la carica di un elettrone: un corpo con un solo elettrone in eccesso, per esempio uno ione negativo.'''
+
+[[quesito]]
+id = "ud6-elettrostatica-linee"
+tipo = "multipla"
+testo = '''Le linee di forza del campo elettrico di un dipolo, formato da due cariche puntiformi $+q$ e $-q$ vicine fra loro,'''
+corretta = "E"
+soluzione = '''Le linee di forza partono dalle cariche positive e finiscono sulle cariche negative: in un dipolo escono da $+q$ e si richiudono su $-q$. Sono più fitte vicino alle cariche, dove il campo è più intenso, e non si incrociano mai, perché in ogni punto il campo ha una sola direzione.'''
+
+  [[quesito.opzione]]
+  testo = '''si incrociano nel punto medio fra le due cariche'''
+  commento = '''Due linee di forza non si incrociano mai: nel punto d'incrocio il campo avrebbe due direzioni. Nel punto medio il campo ha una direzione sola, verso $-q$.'''
+  [[quesito.opzione]]
+  testo = '''partono dalla carica negativa e finiscono sulla carica positiva'''
+  commento = '''Rovescia il verso. Il campo ha il verso della forza su una carica di prova \emph{positiva}, che è respinta da $+q$ e attirata da $-q$: le linee escono dalla carica positiva.'''
+  [[quesito.opzione]]
+  testo = '''sono più fitte lontano dalle cariche'''
+  commento = '''Le linee sono più fitte dove il campo è più intenso, cioè vicino alle cariche: lontano il campo si indebolisce, e le linee si diradano.'''
+  [[quesito.opzione]]
+  testo = '''sono circonferenze chiuse intorno a ciascuna carica'''
+  commento = '''Le linee del campo elettrico partono dalle cariche positive e finiscono su quelle negative, non girano intorno alle cariche. Le linee chiuse intorno a qualcosa sono quelle del campo magnetico di un filo percorso da corrente.'''
+  [[quesito.opzione]]
+  testo = '''partono dalla carica positiva e finiscono sulla carica negativa'''
+
+[[quesito]]
+id = "ud6-elettrostatica-raggi-x"
+tipo = "multipla"
+testo = '''In un tubo a raggi X un elettrone parte da fermo ed è accelerato da una differenza di potenziale di {{V}}. Con $e = \SI{1,6e-19}{\coulomb}$, l'energia cinetica con cui arriva sull'anodo è'''
+dati.V = { valore = 80, unita = "\\kilo\\volt" }
+corretta = "A"
+calcolo = "V * 1e3 * e"
+soluzione = '''Partendo da fermo, l'elettrone guadagna l'energia cinetica $K = e\,\Delta V$: \SI{80}{\kilo\electronvolt}. In joule, con $\Delta V = \SI{8e4}{\volt}$:
+\[
+  K = e\,\Delta V = \SI{1,6e-19}{\coulomb} \cdot \SI{8e4}{\volt} = 12{,}8 \cdot 10^{-19+4}\,\si{\joule} = \SI{1,28e-14}{\joule}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{1,28e-14}{\joule}'''
+  valore = 1.28e-14
+  [[quesito.opzione]]
+  testo = '''\SI{8e4}{\joule}'''
+  commento = '''Confonde l'elettronvolt con il joule: l'energia è \SI{8e4}{\electronvolt}, e ogni elettronvolt vale solo \SI{1,6e-19}{\joule}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5e23}{\joule}'''
+  commento = '''Divide per la carica elementare invece di moltiplicare: $\num{8e4}/\num{1,6e-19} = \num{5e23}$. Per passare da elettronvolt a joule si moltiplica per \num{1,6e-19}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,28e-17}{\joule}'''
+  commento = '''Lascia la differenza di potenziale in kilovolt, $80 \cdot \num{1,6e-19} = \num{1,28e-17}$: il risultato è mille volte troppo piccolo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6,4e-15}{\joule}'''
+  commento = '''Aggiunge un fattore $\frac12$, come nell'energia di un condensatore: $\frac12 \cdot \num{1,28e-14} = \num{6,4e-15}$. Una carica che attraversa la differenza di potenziale $\Delta V$ guadagna tutta l'energia $e\,\Delta V$.'''
+
+[[quesito]]
+id = "ud6-elettrostatica-piastre-moto"
+tipo = "multipla"
+testo = '''Due piastre metalliche piane e parallele, con cariche uguali e opposte, sono nel vuoto. Un elettrone è lasciato fermo fra le piastre. Trascurando il peso, l'elettrone'''
+corretta = "D"
+soluzione = '''Fra le piastre il campo è uniforme e punta dalla piastra positiva alla negativa. Sull'elettrone agisce la forza $\vec F = -e\vec E$, costante e opposta al campo: verso la piastra positiva. Una forza costante dà un'accelerazione costante, e l'elettrone, partito da fermo, si muove lungo una linea di forza di moto uniformemente accelerato.'''
+
+  [[quesito.opzione]]
+  testo = '''si muove verso la piastra negativa, di moto uniformemente accelerato'''
+  commento = '''È il moto di una carica positiva, che accelera nel verso del campo. L'elettrone è negativo e accelera nel verso opposto, verso la piastra positiva.'''
+  [[quesito.opzione]]
+  testo = '''si muove verso la piastra positiva, con velocità costante'''
+  commento = '''Una forza costante non dà una velocità costante ma un'accelerazione costante ($F = ma$). Nell'elettroforesi le molecole vanno a velocità costante perché il gel le frena; nel vuoto non c'è niente che freni l'elettrone.'''
+  [[quesito.opzione]]
+  testo = '''resta fermo, perché il campo fra le piastre è uniforme'''
+  commento = '''Confonde campo uniforme con campo nullo. Uniforme vuol dire uguale in ogni punto, non zero: la forza $eE$ c'è, ed è la stessa ovunque fra le piastre.'''
+  [[quesito.opzione]]
+  testo = '''si muove verso la piastra positiva, di moto uniformemente accelerato'''
+  [[quesito.opzione]]
+  testo = '''si muove verso la piastra positiva lungo un arco di parabola'''
+  commento = '''La traiettoria è un arco di parabola solo se l'elettrone entra con una velocità perpendicolare al campo. Partendo da fermo si muove in linea retta, lungo la linea di forza.'''
+
+[[quesito]]
+id = "ud6-elettrostatica-equipotenziale"
+tipo = "multipla"
+testo = '''Una carica di {{q}} si sposta di {{s}} lungo una superficie equipotenziale, su cui il potenziale vale {{V}}. Il lavoro compiuto dalla forza elettrica sulla carica è'''
+dati.q = { valore = "2,0", unita = "\\micro\\coulomb" }
+dati.s = { valore = "5,0", unita = "cm" }
+dati.V = { valore = 100, unita = "\\volt" }
+corretta = "B"
+soluzione = '''Il lavoro della forza elettrica è $W = -\Delta U = -q\,\Delta V$, e dipende solo dalla differenza di potenziale fra il punto di partenza e quello di arrivo. Su una superficie equipotenziale il potenziale è lo stesso ovunque, $\Delta V = 0$: il lavoro è nullo, qualunque sia il valore del potenziale e qualunque sia la distanza percorsa. Il campo è perpendicolare alla superficie, e quindi allo spostamento.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{2,0e-4}{\joule}'''
+  commento = '''Calcola $qV = \num{2,0e-6} \cdot 100 = \num{2,0e-4}$, che è l'energia potenziale della carica sulla superficie, non il lavoro. Il lavoro dipende dalla \emph{differenza} di potenziale, che qui è zero.'''
+  [[quesito.opzione]]
+  testo = '''zero'''
+  [[quesito.opzione]]
+  testo = '''\SI{200}{\joule}'''
+  commento = '''Calcola $qV$ lasciando la carica in microcoulomb, $2{,}0 \cdot 100 = 200$, e per di più è l'energia potenziale, non il lavoro. Il lavoro dipende dalla \emph{differenza} di potenziale, che qui è zero.'''
+  [[quesito.opzione]]
+  testo = '''non si può calcolare senza conoscere l'intensità del campo elettrico'''
+  commento = '''Pensa al lavoro come $W = qEs$ e cerca il campo. Ma il lavoro della forza elettrica è $W = -q\,\Delta V$, e lungo una superficie equipotenziale $\Delta V = 0$ qualunque sia il campo: il campo è perpendicolare allo spostamento.'''
+  [[quesito.opzione]]
+  testo = '''\SI{-2,0e-4}{\joule}'''
+  commento = '''Usa $W = -qV$, con il potenziale al posto della differenza di potenziale. Vale $W = -q\,\Delta V$, e $\Delta V = 0$.'''
+
+[[quesito]]
+id = "ud6-elettrostatica-sfera-cava"
+tipo = "multipla"
+testo = '''Una sfera metallica cava, sostenuta da un supporto isolante, ha una carica $+Q$ ed è in equilibrio. Il campo elettrico in un punto dentro la cavità, lontano dalle pareti,'''
+corretta = "E"
+soluzione = '''In un conduttore in equilibrio la carica in eccesso sta sulla superficie esterna, e le cariche libere si dispongono in modo che il campo all'interno sia nullo: se non lo fosse, le cariche si muoverebbero. Una sfera metallica chiusa è una gabbia di Faraday, e dentro la cavità il campo è nullo in ogni punto.'''
+
+  [[quesito.opzione]]
+  testo = '''è diretto verso il centro della sfera'''
+  commento = '''Pensa che la carica positiva della superficie spinga verso il centro. Ma la carica è distribuita su tutta la superficie: i contributi dei lati opposti si compensano, e le cariche libere si dispongono proprio in modo che il campo dentro si annulli.'''
+  [[quesito.opzione]]
+  testo = '''è diretto verso l'esterno, come fuori dalla sfera'''
+  commento = '''Estende all'interno il campo che c'è fuori. Fuori il campo è uscente, ma dentro un conduttore in equilibrio il campo è nullo.'''
+  [[quesito.opzione]]
+  testo = '''vale $kQ/r^{2}$, con $r$ la distanza dal centro'''
+  commento = '''Tratta la carica come se fosse concentrata nel centro. Questo vale per il campo fuori dalla sfera, non dentro: la carica sta sulla superficie, e dentro il campo è nullo.'''
+  [[quesito.opzione]]
+  testo = '''è uguale a quello appena fuori dalla superficie'''
+  commento = '''Pensa che il campo sia continuo attraverso la parete. Le cariche sulla superficie fanno da schermo: appena fuori il campo è perpendicolare alla superficie e diverso da zero, dentro è nullo.'''
+  [[quesito.opzione]]
+  testo = '''è nullo'''
+
+[[quesito]]
+id = "ud6-elettrostatica-tensione"
+tipo = "completamento"
+testo = '''Un elettrone parte da fermo e, attraversando una differenza di potenziale, acquista un'energia cinetica di \SI{3,2e-16}{\joule}. Con $e = \SI{1,6e-19}{\coulomb}$, la differenza di potenziale vale \completa\ \si{\volt}.'''
+calcolo = "3.2e-16 / e"
+risposta = "2000"
+soluzione = '''Partendo da fermo l'elettrone guadagna l'energia cinetica $K = e\,\Delta V$, quindi
+\[
+  \Delta V = \frac{K}{e} = \frac{\SI{3,2e-16}{\joule}}{\SI{1,6e-19}{\coulomb}} = 2 \cdot 10^{-16-(-19)}\,\si{\volt} = \SI{2000}{\volt}
+\]
+L'energia è \SI{2000}{\electronvolt}, cioè \SI{2}{\kilo\electronvolt}. Chi scrive 200 sbaglia l'esponente, $10^{-16+19} = 10^{3}$; chi scrive 2 dà il risultato in kilovolt invece che in volt.'''
+
+[[quesito]]
+id = "ud6-elettrostatica-olio"
+tipo = "completamento"
+testo = '''Due cariche puntiformi nel vuoto si attraggono con una forza di modulo $F$. Si immergono in un olio di costante dielettrica relativa $\varepsilon_r = 2{,}5$ e si dimezza la loro distanza. Il modulo della forza diventa $F$ moltiplicato per \completa.'''
+calcolo = "(1 / 0.5**2) / 2.5"
+risposta = "1,6"
+soluzione = '''Nel dielettrico la forza è $F = \frac{1}{\varepsilon_r}\,k\,|q_1 q_2|/r^{2}$. I due cambiamenti si contano separatamente e poi si moltiplicano:
+\begin{itemize}
+  \item la distanza si dimezza: $r^{2}$ diventa $r^{2}/4$, e la forza si moltiplica per 4;
+  \item l'olio divide la forza per $\varepsilon_r = 2{,}5$.
+\end{itemize}
+\[
+  \frac{F'}{F} = \frac{4}{2{,}5} = 1{,}6
+\]
+Chi scrive 0,8 dimentica il quadrato della distanza ($2/2{,}5$); chi scrive 10 moltiplica per $\varepsilon_r$ invece di dividere ($4 \cdot 2{,}5$).'''
+
+[[quesito]]
+id = "ud6-elettrostatica-contatto"
+tipo = "completamento"
+testo = '''Due sferette metalliche identiche, con cariche di $+\SI{6,0}{\nano\coulomb}$ e \SI{-2,0}{\nano\coulomb}, sono ferme nel vuoto a \SI{3,0}{\centi\metre} di distanza. Si mettono a contatto e poi si riportano a \SI{3,0}{\centi\metre}. Con $k = \SI{9e9}{\newton\metre\squared\per\coulomb\squared}$, la forza fra le sferette vale ora \completa\ \si{\micro\newton}.'''
+calcolo = "k * (2.0e-9)**2 / 0.030**2 * 1e6"
+risposta = "40"
+soluzione = '''La carica si conserva: durante il contatto gli elettroni passano da una sferetta all'altra, ma la carica totale resta
+\[
+  Q = +\SI{6,0}{\nano\coulomb} + (\SI{-2,0}{\nano\coulomb}) = +\SI{4,0}{\nano\coulomb}
+\]
+Le sferette sono identiche, e nessuna delle due è privilegiata: la carica totale si divide a metà, $+\SI{2,0}{\nano\coulomb}$ ciascuna. Con $q = \SI{2,0e-9}{\coulomb}$ e $r = \SI{3,0e-2}{\metre}$:
+\[
+  F = k\,\frac{q^{2}}{r^{2}} = \SI{9e9}{\newton\metre\squared\per\coulomb\squared} \cdot \frac{(\SI{2,0e-9}{\coulomb})^{2}}{(\SI{3,0e-2}{\metre})^{2}} = 9 \cdot 10^{9} \cdot \frac{4{,}0 \cdot 10^{-18}}{9{,}0 \cdot 10^{-4}}\,\si{\newton}
+\]
+\[
+  F = 4{,}0 \cdot 10^{9-18+4}\,\si{\newton} = \SI{4,0e-5}{\newton} = \SI{40}{\micro\newton}
+\]
+dove il 9 del numeratore si semplifica con il 9,0 del denominatore.
+Ora la forza è repulsiva, perché le due cariche hanno lo stesso segno. Prima del contatto era attrattiva e valeva
+\[
+  F_0 = 9 \cdot 10^{9} \cdot \frac{\num{6,0e-9} \cdot \num{2,0e-9}}{\num{9,0e-4}}\,\si{\newton} = 9 \cdot 10^{9} \cdot \frac{\num{12e-18}}{\num{9,0e-4}}\,\si{\newton} = \SI{1,2e-4}{\newton} = \SI{120}{\micro\newton}
+\]
+
+Chi scrive 120 dà la forza prima del contatto. Chi scrive 160 somma i moduli delle cariche, $6{,}0 + 2{,}0 = \SI{8,0}{\nano\coulomb}$, e le dà \SI{4,0}{\nano\coulomb} ciascuna: ma la carica che si conserva è la somma con il segno. Chi scrive 1,2 dimentica il quadrato della distanza.'''
+
+[[quesito]]
+id = "ud6-corrente-fili"
+tipo = "multipla"
+testo = '''Due fili, A e B, sono fatti dello stesso materiale. Il filo B è lungo il doppio del filo A e ha un diametro doppio. Il rapporto $R_B/R_A$ fra le loro resistenze è'''
+corretta = "A"
+calcolo = "2 / 2**2"
+soluzione = '''Per la seconda legge di Ohm, $R = \rho L/A$: la resistenza è direttamente proporzionale alla lunghezza e inversamente proporzionale all'area della sezione. L'area va con il quadrato del diametro, $A = \pi D^{2}/4$: con il diametro doppio l'area è $2^{2} = 4$ volte più grande. Quindi
+\[
+  \frac{R_B}{R_A} = \frac{L_B}{L_A} \cdot \frac{A_A}{A_B} = 2 \cdot \frac14 = \frac12
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''$\frac12$'''
+  valore = 0.5
+  [[quesito.opzione]]
+  testo = '''1'''
+  commento = '''Tratta l'area come proporzionale al diametro: $2 \cdot \frac12 = 1$. L'area di un cerchio va con il quadrato del diametro, e un diametro doppio dà un'area quadrupla.'''
+  [[quesito.opzione]]
+  testo = '''2'''
+  commento = '''Tiene conto solo della lunghezza doppia e dimentica la sezione più grande, che riduce la resistenza.'''
+  [[quesito.opzione]]
+  testo = '''8'''
+  commento = '''Moltiplica per il fattore dell'area invece di dividere: $2 \cdot 4 = 8$. Una sezione più grande apre più strada alla corrente, e la resistenza diminuisce.'''
+  [[quesito.opzione]]
+  testo = '''$\frac14$'''
+  commento = '''Tiene conto solo dell'area quadrupla e dimentica che la lunghezza doppia raddoppia la resistenza.'''
+
+[[quesito]]
+id = "ud6-corrente-aerosol"
+tipo = "multipla"
+testo = '''Un apparecchio per aerosol da {{P}} viene usato {{t}} al giorno per {{n}} giorni. L'energia elettrica consumata in tutto è'''
+dati.P = { valore = 150, unita = "W" }
+dati.t = { valore = 20, unita = "\\minute" }
+dati.n = { valore = 30 }
+corretta = "D"
+calcolo = "P / 1000 * t / 60 * n"
+soluzione = '''Conviene la potenza in chilowatt e il tempo in ore: il prodotto è già in chilowattora. La potenza è $P = \SI{150}{\watt} = \SI{0,15}{\kilo\watt}$; il tempo di funzionamento è $30 \cdot \SI{20}{\minute} = \SI{600}{\minute} = \SI{10}{\hour}$. Quindi
+\[
+  W = P\,\Delta t = \SI{0,15}{\kilo\watt} \cdot \SI{10}{\hour} = \SI{1,5}{\kilo\watt\hour}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{90}{\kilo\watt\hour}'''
+  commento = '''Conta i minuti come se fossero ore: $0{,}15 \cdot 20 \cdot 30 = 90$. Venti minuti sono un terzo d'ora.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1500}{\kilo\watt\hour}'''
+  commento = '''Lascia la potenza in watt: $150 \cdot 10 = 1500$ sono wattora, cioè \SI{1,5}{\kilo\watt\hour}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,05}{\kilo\watt\hour}'''
+  commento = '''È l'energia di un solo giorno, $0{,}15 \cdot \frac13 = 0{,}05$: manca il fattore 30.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,5}{\kilo\watt\hour}'''
+  valore = 1.5
+  [[quesito.opzione]]
+  testo = '''\SI{5,4e6}{\kilo\watt\hour}'''
+  commento = '''Calcola bene l'energia in joule, $150 \cdot \SI{36000}{\second} = \SI{5,4e6}{\joule}$, ma la scrive in chilowattora. Un chilowattora vale \SI{3,6e6}{\joule}.'''
+
+[[quesito]]
+id = "ud6-corrente-tre"
+tipo = "multipla"
+testo = '''Due resistori da {{R}} sono collegati in parallelo, e il gruppo è collegato in serie a un terzo resistore, anch'esso da {{R}}. La resistenza equivalente dei tre resistori è'''
+dati.R = { valore = 6, unita = "\\ohm" }
+corretta = "B"
+calcolo = "R / 2 + R"
+soluzione = '''Prima il parallelo: due resistori uguali in parallelo valgono metà di uno, $6/2 = \SI{3}{\ohm}$. Poi la serie con il terzo:
+\[
+  R_{\text{eq}} = \SI{3}{\ohm} + \SI{6}{\ohm} = \SI{9}{\ohm}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{18}{\ohm}'''
+  commento = '''Mette tutti e tre i resistori in serie: $6 + 6 + 6 = 18$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{9}{\ohm}'''
+  valore = 9
+  [[quesito.opzione]]
+  testo = '''\SI{4}{\ohm}'''
+  commento = '''Scambia serie e parallelo: due resistori in serie, \SI{12}{\ohm}, in parallelo con il terzo, $(12 \cdot 6)/(12 + 6) = 72/18 = 4$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\ohm}'''
+  commento = '''Mette tutti e tre i resistori in parallelo: tre resistori uguali in parallelo valgono un terzo di uno, $6/3 = 2$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3}{\ohm}'''
+  commento = '''È la resistenza del solo parallelo: manca il terzo resistore, che è in serie e si somma.'''
+
+[[quesito]]
+id = "ud6-corrente-elettroni"
+tipo = "multipla"
+testo = '''Un elettrostimolatore fa passare negli elettrodi una corrente di {{I}}. Con $e = \SI{1,6e-19}{\coulomb}$, il numero di elettroni che attraversano ogni secondo una sezione del filo è circa'''
+dati.I = { valore = "3,2", unita = "\\milli\\ampere" }
+corretta = "C"
+calcolo = "I * 1e-3 / e"
+soluzione = '''In un secondo passa la carica $\Delta q = I\,\Delta t = \SI{3,2e-3}{\ampere} \cdot \SI{1}{\second} = \SI{3,2e-3}{\coulomb}$. Ogni elettrone porta la carica $e$ in modulo, quindi il numero di elettroni è
+\[
+  N = \frac{\Delta q}{e} = \frac{\SI{3,2e-3}{\coulomb}}{\SI{1,6e-19}{\coulomb}} = 2 \cdot 10^{-3-(-19)} = 2 \cdot 10^{16}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''$2 \cdot 10^{19}$'''
+  commento = '''Lascia la corrente in milliampere, come se valesse \SI{3,2}{\ampere}: $3{,}2/(1{,}6 \cdot 10^{-19}) = 2 \cdot 10^{19}$, mille volte troppo.'''
+  [[quesito.opzione]]
+  testo = '''$5{,}1 \cdot 10^{-22}$'''
+  commento = '''Moltiplica la carica per $e$ invece di dividerla: $3{,}2 \cdot 10^{-3} \cdot 1{,}6 \cdot 10^{-19} \approx 5{,}1 \cdot 10^{-22}$. Un numero di elettroni più piccolo di uno non ha senso.'''
+  [[quesito.opzione]]
+  testo = '''$2 \cdot 10^{16}$'''
+  valore = 2e16
+  [[quesito.opzione]]
+  testo = '''$2 \cdot 10^{13}$'''
+  commento = '''Scambia milli con micro: $3{,}2 \cdot 10^{-6}/(1{,}6 \cdot 10^{-19}) = 2 \cdot 10^{13}$. Il prefisso milli vale $10^{-3}$.'''
+  [[quesito.opzione]]
+  testo = '''$5 \cdot 10^{-17}$'''
+  commento = '''Rovescia il rapporto, $e/\Delta q = 1{,}6 \cdot 10^{-19}/(3{,}2 \cdot 10^{-3}) = 5 \cdot 10^{-17}$: un numero di elettroni deve essere grande, non minuscolo.'''
+
+[[quesito]]
+id = "ud6-corrente-microshock"
+tipo = "multipla"
+testo = '''Un paziente ha un catetere cardiaco collegato a un apparecchio elettrico. Rispetto a una persona che tocca lo stesso apparecchio con le mani, quale affermazione è corretta?'''
+corretta = "E"
+soluzione = '''Gli effetti dipendono dalla corrente che attraversa il cuore. Quando la corrente entra ed esce dalla pelle, si distribuisce in tutto il torace e solo una piccola parte attraversa il cuore: per la fibrillazione servono circa \SI{100}{\milli\ampere}. Il catetere porta invece la corrente direttamente nel cuore, e tutta la corrente passa di lì: bastano circa \SI{100}{\micro\ampere}, mille volte meno. È il microshock. In più il percorso salta la resistenza della pelle: con circa \SI{1}{\kilo\ohm} di resistenza interna, quella corrente la produce una differenza di potenziale di $V = RI = \num{1e3} \cdot \num{1e-4}\,\si{\volt} = \SI{0,1}{\volt}$, che con le mani nessuno sentirebbe.'''
+
+  [[quesito.opzione]]
+  testo = '''il pericolo è lo stesso, perché la differenza di potenziale dell'apparecchio è la stessa'''
+  commento = '''Il pericolo dipende dalla corrente nel cuore, non dalla differenza di potenziale in sé. Con la stessa differenza di potenziale, il percorso attraverso il catetere ha una resistenza molto più piccola e porta tutta la corrente al cuore.'''
+  [[quesito.opzione]]
+  testo = '''il pericolo è maggiore perché il catetere aumenta la resistenza del percorso della corrente'''
+  commento = '''Con una resistenza più grande la corrente sarebbe più piccola, e il pericolo minore. Il catetere fa il contrario: salta la resistenza della pelle.'''
+  [[quesito.opzione]]
+  testo = '''una differenza di potenziale di pochi decimi di volt non è pericolosa, perché nessuno la sente toccando l'apparecchio con le mani'''
+  commento = '''Con le mani la pelle limita la corrente a valori che non si sentono; attraverso il catetere la stessa differenza di potenziale basta a superare la soglia del microshock, circa \SI{100}{\micro\ampere}.'''
+  [[quesito.opzione]]
+  testo = '''la pelle protegge comunque il cuore, perché ha una resistenza di circa \SI{100}{\kilo\ohm}'''
+  commento = '''La resistenza della pelle protegge solo se la corrente la deve attraversare. Il catetere porta la corrente dentro il corpo, fino al cuore, senza passare dalla pelle.'''
+  [[quesito.opzione]]
+  testo = '''bastano correnti di circa \SI{100}{\micro\ampere} per la fibrillazione, perché il catetere porta la corrente direttamente nel cuore'''
+
+[[quesito]]
+id = "ud6-corrente-serie-parallelo"
+tipo = "completamento"
+testo = '''Due resistori uguali, collegati in serie a un generatore ideale, dissipano in tutto la potenza $P$. Se si collegano invece in parallelo allo stesso generatore, la potenza totale diventa $P$ moltiplicato per \completa.'''
+calcolo = "(1 / 0.5) / (1 / 2)"
+risposta = "4"
+soluzione = '''Il generatore ideale tiene la stessa differenza di potenziale $V$ in tutti e due i casi, quindi conviene $P = V^{2}/R_{\text{eq}}$. Con due resistori uguali di resistenza $R$, in serie $R_{\text{eq}} = 2R$, in parallelo $R_{\text{eq}} = R/2$:
+\[
+  \frac{P'}{P} = \frac{V^{2}/(R/2)}{V^{2}/(2R)} = \frac{2R}{R/2} = 4
+\]
+La resistenza equivalente diventa quattro volte più piccola, e a parità di $V$ la potenza quattro volte più grande. Chi scrive $\frac14$ usa $P = RI^{2}$ come se la corrente restasse la stessa, ma cambiando la resistenza cambia anche la corrente; chi scrive 2 confronta il parallelo con un solo resistore invece che con la serie.'''
+
+[[quesito]]
+id = "ud6-corrente-quanti"
+tipo = "completamento"
+testo = '''Si collegano in parallelo $n$ resistori uguali, ciascuno da {{R}}, e la resistenza equivalente risulta {{Req}}. Il numero $n$ dei resistori è \completa.'''
+dati.R = { valore = 60, unita = "\\ohm" }
+dati.Req = { valore = 12, unita = "\\ohm" }
+calcolo = "R / Req"
+risposta = "5"
+soluzione = '''In parallelo si sommano gli inversi delle resistenze. Con $n$ resistori uguali di resistenza $R$:
+\[
+  \frac{1}{R_{\text{eq}}} = \underbrace{\frac1R + \frac1R + \dots + \frac1R}_{n} = \frac{n}{R}
+  \quad\Longrightarrow\quad
+  R_{\text{eq}} = \frac{R}{n}
+\]
+Quindi $n = R/R_{\text{eq}} = 60/12 = 5$. Chi pensa alla serie cerca $n \cdot 60 = 12$ e non trova un numero intero: in serie la resistenza equivalente è più grande di ciascuna, mai più piccola.'''
+
+[[quesito]]
+id = "ud6-condensatori-distanza"
+tipo = "multipla"
+testo = '''Un condensatore piano viene caricato e poi staccato dal generatore. Poi si allontanano le armature fino a raddoppiarne la distanza. L'energia immagazzinata nel condensatore'''
+corretta = "B"
+soluzione = '''Il condensatore è staccato, quindi la carica $Q$ resta la stessa. La capacità $C = \varepsilon_0 A/d$ è inversamente proporzionale alla distanza: raddoppiando $d$ si dimezza. L'energia, scritta con la carica, è
+\[
+  U = \frac{Q^{2}}{2C}
+\]
+e con $Q$ fisso e $C$ dimezzata raddoppia. Lo stesso con $U = \frac12 QV$: la differenza di potenziale $V = Q/C$ raddoppia, e con lei l'energia. L'energia in più viene dal lavoro fatto per allontanare le armature, che si attraggono.'''
+
+  [[quesito.opzione]]
+  testo = '''si dimezza'''
+  commento = '''Usa $U = \frac12 CV^{2}$ con $V$ fisso, come se il condensatore fosse ancora collegato al generatore: allora sì, l'energia si dimezzerebbe. Ma il condensatore è staccato: è la carica a restare fissa, e $V$ raddoppia.'''
+  [[quesito.opzione]]
+  testo = '''raddoppia'''
+  [[quesito.opzione]]
+  testo = '''resta la stessa'''
+  commento = '''Pensa che, se la carica non cambia, non cambi neanche l'energia. Ma l'energia dipende anche dalla capacità, $U = Q^{2}/(2C)$, e la capacità si dimezza.'''
+  [[quesito.opzione]]
+  testo = '''diventa quattro volte più grande'''
+  commento = '''Vede che $V = Q/C$ raddoppia e lo mette al quadrato in $\frac12 CV^{2}$, ma tiene $C$ fissa: $\frac12 C (2V)^{2} = 4U$. La capacità però si dimezza, e il risultato è $\frac12 \cdot \frac{C}{2} \cdot (2V)^{2} = 2U$.'''
+  [[quesito.opzione]]
+  testo = '''diventa quattro volte più piccola'''
+  commento = '''Ragiona come con la legge di Coulomb, dove la forza cala con il quadrato della distanza, e applica lo stesso fattore 4 all'energia. Ma il campo fra le armature è uniforme e, a carica fissa, non dipende dalla distanza; a dipendere da $d$ è la capacità, in modo inverso e non con il quadrato.'''
+
+[[quesito]]
+id = "ud6-condensatori-tre-serie"
+tipo = "multipla"
+testo = '''Tre condensatori uguali, ciascuno di capacità {{C}}, sono collegati in serie. La capacità equivalente è'''
+dati.C = { valore = 6, unita = "\\micro\\farad" }
+corretta = "A"
+calcolo = "1 / (3 / C)"
+soluzione = '''In serie si sommano gli inversi delle capacità:
+\[
+  \frac{1}{C_\text{eq}} = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = \frac{3}{6} = \frac12
+  \quad\Rightarrow\quad
+  C_\text{eq} = \SI{2}{\micro\farad}
+\]
+Con $n$ condensatori uguali in serie la capacità diventa $n$ volte più piccola: è come allontanare le armature $n$ volte di più.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\micro\farad}'''
+  valore = 2
+  [[quesito.opzione]]
+  testo = '''\SI{18}{\micro\farad}'''
+  commento = '''Somma le capacità, $6 + 6 + 6 = 18$: è la regola del parallelo. Per i condensatori la somma diretta vale in parallelo, quella degli inversi in serie, al contrario dei resistori.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3}{\micro\farad}'''
+  commento = '''Usa la formula «prodotto diviso somma» su due condensatori soli, $6 \cdot 6/(6+6) = 3$, e si dimentica del terzo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,5}{\micro\farad}'''
+  commento = '''Somma gli inversi, $3/6 = 1/2$, ma si ferma lì: $1/2$ è $1/C_\text{eq}$, in \si{\per\micro\farad}, e va ancora invertito.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,056}{\micro\farad}'''
+  commento = '''Mescola le due regole: somma le capacità, $6 + 6 + 6 = 18$, e poi prende l'inverso, $1/18 \approx 0{,}056$. In serie si sommano gli inversi, non le capacità.'''
+
+[[quesito]]
+id = "ud6-condensatori-carica-dielettrico"
+tipo = "multipla"
+testo = '''Un condensatore piano ha nel vuoto una capacità di {{C}} ed è collegato a un generatore da {{V}}. Senza staccarlo dal generatore, si riempie lo spazio fra le armature con un dielettrico di costante dielettrica relativa $\varepsilon_r = 3{,}0$. La carica su ciascuna armatura diventa'''
+dati.C = { valore = "2,0", unita = "\\nano\\farad" }
+dati.V = { valore = "9,0", unita = "\\volt" }
+corretta = "D"
+calcolo = "3.0 * C * V"
+soluzione = '''Il dielettrico moltiplica la capacità per $\varepsilon_r$: $C' = 3{,}0 \cdot \SI{2,0}{\nano\farad} = \SI{6,0}{\nano\farad}$. Il generatore resta collegato, quindi la differenza di potenziale resta \SI{9,0}{\volt}, e la carica è
+\[
+  Q' = C' V = \SI{6,0}{\nano\farad} \cdot \SI{9,0}{\volt} = \SI{54}{\nano\coulomb}
+\]
+tre volte la carica di prima, \SI{18}{\nano\coulomb}: la carica in più la porta il generatore.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{18}{\nano\coulomb}'''
+  commento = '''È la carica prima del dielettrico, $2{,}0 \cdot 9{,}0 = 18$. Resterebbe la stessa se il condensatore fosse staccato; collegato al generatore, a restare fissa è la differenza di potenziale, e la carica cresce con la capacità.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6,0}{\nano\coulomb}'''
+  commento = '''Divide la carica per $\varepsilon_r$, $18/3 = 6$, come se il dielettrico indebolisse la carica come indebolisce il campo. Il dielettrico invece fa crescere la capacità, e a parità di $V$ la carica.'''
+  [[quesito.opzione]]
+  testo = '''\SI{27}{\nano\coulomb}'''
+  commento = '''Usa $\frac12 C'V$, confondendo la carica con la formula dell'energia: $\frac12 \cdot 6{,}0 \cdot 9{,}0 = 27$. La carica è $Q = CV$, senza il fattore $\frac12$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{54}{\nano\coulomb}'''
+  valore = 54
+  [[quesito.opzione]]
+  testo = '''\SI{162}{\nano\coulomb}'''
+  commento = '''Moltiplica per $\varepsilon_r$ due volte, $18 \cdot 3 \cdot 3 = 162$, come se crescessero sia la capacità sia la differenza di potenziale. Il generatore collegato tiene $V$ fissa a \SI{9,0}{\volt}.'''
+
+[[quesito]]
+id = "ud6-condensatori-energia-parallelo"
+tipo = "multipla"
+testo = '''Due condensatori, da {{C1}} e da {{C2}}, sono collegati in parallelo a un generatore da {{V}}. L'energia immagazzinata in tutto nei due condensatori è'''
+dati.C1 = { valore = 2, unita = "\\micro\\farad" }
+dati.C2 = { valore = 3, unita = "\\micro\\farad" }
+dati.V = { valore = 10, unita = "\\volt" }
+corretta = "C"
+calcolo = "0.5 * (C1 + C2) * 1e-6 * V**2"
+soluzione = '''In parallelo le capacità si sommano: $C_\text{eq} = 2 + 3 = \SI{5}{\micro\farad} = \SI{5e-6}{\farad}$. Con $V^{2} = \SI{100}{\volt\squared}$:
+\[
+  U = \frac12\,C_\text{eq} V^{2} = \frac12 \cdot \SI{5e-6}{\farad} \cdot \SI{100}{\volt\squared} = 250 \cdot \SI{e-6}{\joule} = \SI{2,5e-4}{\joule}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{5,0e-4}{\joule}'''
+  commento = '''Dimentica il fattore $\frac12$: $C_\text{eq} V^{2} = \num{5e-6} \cdot 100 = \num{5e-4}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6,0e-5}{\joule}'''
+  commento = '''Calcola la capacità come in serie, $2 \cdot 3/(2+3) = \SI{1,2}{\micro\farad}$, e trova $\frac12 \cdot \num{1,2e-6} \cdot 100 = \num{6e-5}$. In parallelo le capacità si sommano.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,5e-4}{\joule}'''
+  valore = 2.5e-4
+  [[quesito.opzione]]
+  testo = '''\SI{2,5e-5}{\joule}'''
+  commento = '''Usa $\frac12 C V$ senza il quadrato: $\frac12 \cdot \num{5e-6} \cdot 10 = \num{2,5e-5}$. L'energia va con $V^{2}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{250}{\joule}'''
+  commento = '''Lascia la capacità in microfarad, come se valesse \SI{5}{\farad}: $\frac12 \cdot 5 \cdot 100 = 250$, un milione di volte troppo.'''
+
+[[quesito]]
+id = "ud6-condensatori-energia-carica"
+tipo = "completamento"
+testo = '''Un condensatore da {{C}} porta su ciascuna armatura una carica di {{Q}}. L'energia immagazzinata nel condensatore vale \completa\ \si{\micro\joule}.'''
+dati.C = { valore = 4, unita = "\\micro\\farad" }
+dati.Q = { valore = 20, unita = "\\micro\\coulomb" }
+calcolo = "(Q * 1e-6)**2 / (2 * C * 1e-6) * 1e6"
+risposta = "50"
+soluzione = '''Con la carica e la capacità conviene la forma $U = Q^{2}/(2C)$. Con $Q = \SI{2e-5}{\coulomb}$, $Q^{2} = \SI{4e-10}{\coulomb\squared}$, e $2C = \SI{8e-6}{\farad}$:
+\[
+  U = \frac{Q^{2}}{2C} = \frac{\num{4e-10}}{\num{8e-6}}\,\si{\joule} = 0{,}5 \cdot 10^{-10-(-6)}\,\si{\joule} = \SI{0,5e-4}{\joule} = \SI{50e-6}{\joule} = \SI{50}{\micro\joule}
+\]
+Lo stesso con $V = Q/C = 20/4 = \SI{5}{\volt}$ e $U = \frac12 QV = \frac12 \cdot \SI{20}{\micro\coulomb} \cdot \SI{5}{\volt} = \SI{50}{\micro\joule}$.'''
+
+[[quesito]]
+id = "ud6-condensatori-uguali"
+tipo = "completamento"
+testo = '''Due condensatori uguali, collegati in parallelo, hanno una capacità equivalente di {{Cp}}. Collegati in serie, gli stessi due condensatori hanno una capacità equivalente di \completa\ \si{\micro\farad}.'''
+dati.Cp = { valore = 8, unita = "\\micro\\farad" }
+calcolo = "(Cp / 2) / 2"
+risposta = "2"
+soluzione = '''In parallelo le capacità si sommano: $C + C = \SI{8}{\micro\farad}$, quindi ciascuno ha $C = \SI{4}{\micro\farad}$. In serie si sommano gli inversi: $1/C_\text{eq} = 1/4 + 1/4 = 1/2$, quindi $C_\text{eq} = \SI{2}{\micro\farad}$. Due condensatori uguali in serie hanno metà della capacità di ciascuno, in parallelo il doppio: il rapporto fra le due configurazioni è 4.'''
+
+[[quesito]]
+id = "ud6-magnetismo-campo-filo"
+tipo = "multipla"
+testo = '''Un filo rettilineo molto lungo è percorso da una corrente di {{I}}. Con $\mu_0 = 4\pi \cdot \SI{e-7}{\tesla\metre\per\ampere}$, cioè $\mu_0/2\pi = \SI{2e-7}{\tesla\metre\per\ampere}$, il modulo del campo magnetico a {{r}} dal filo è'''
+dati.I = { valore = 5, unita = "\\ampere" }
+dati.r = { valore = 1, unita = "cm" }
+corretta = "E"
+calcolo = "mu0su2pi * I / (r * 1e-2)"
+soluzione = '''Per il campo di un filo rettilineo lungo, $B = \frac{\mu_0}{2\pi}\,\frac{I}{r}$, con la distanza in metri, $r = \SI{1}{\centi\metre} = \SI{e-2}{\metre}$:
+\[
+  B = \SI{2e-7}{\tesla\metre\per\ampere} \cdot \frac{\SI{5}{\ampere}}{\SI{e-2}{\metre}} = 10 \cdot 10^{-7-(-2)}\,\si{\tesla} = 10 \cdot 10^{-5}\,\si{\tesla} = \SI{e-4}{\tesla}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{e-6}{\tesla}'''
+  commento = '''Lascia la distanza in centimetri, $\num{2e-7} \cdot 5/1 = \num{e-6}$: il risultato è cento volte troppo piccolo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6,3e-4}{\tesla}'''
+  commento = '''Usa $\mu_0$ al posto di $\mu_0/2\pi$, cioè $B = \mu_0 I/r = 4\pi \cdot \num{e-7} \cdot 5/\num{e-2} \approx \num{6,3e-4}$: dimentica il $2\pi$ al denominatore.'''
+  [[quesito.opzione]]
+  testo = '''\SI{e-2}{\tesla}'''
+  commento = '''Divide per il quadrato della distanza, $\num{2e-7} \cdot 5/\num{e-4} = \num{e-2}$, come nella legge di Coulomb. Il campo di un filo va come $1/r$, non come $1/r^2$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{e-8}{\tesla}'''
+  commento = '''Moltiplica per la distanza invece di dividere, $\num{2e-7} \cdot 5 \cdot \num{e-2} = \num{e-8}$: così il campo crescerebbe allontanandosi dal filo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{e-4}{\tesla}'''
+  valore = 1e-4
+
+[[quesito]]
+id = "ud6-magnetismo-verso-indotta"
+tipo = "multipla"
+testo = '''Una spira circolare conduttrice giace nel piano del foglio, in un campo magnetico uniforme che entra nel foglio. L'intensità del campo diminuisce. Per chi guarda il foglio, la corrente indotta nella spira circola'''
+corretta = "C"
+soluzione = '''Il flusso attraverso la spira diminuisce. Per la legge di Lenz la corrente indotta produce un campo che si oppone alla diminuzione, cioè che cerca di mantenere il flusso: dentro la spira il suo campo entra nel foglio, come quello esterno.
+
+Per trovare il verso della corrente si applica la regola del filo (pollice lungo la corrente, dita intorno al filo) a un tratto della spira. Nel tratto in alto una corrente oraria va verso destra. Con il pollice verso destra, le dita che si chiudono intorno al filo entrano nel foglio sotto il filo, cioè dentro la spira. Lo stesso vale per ogni tratto: una corrente oraria produce dentro la spira un campo che entra nel foglio. Quindi la corrente indotta circola in senso orario.'''
+
+  [[quesito.opzione]]
+  testo = '''in senso antiorario, perché il campo della corrente indotta è sempre opposto al campo esterno'''
+  commento = '''Applica la legge di Lenz come se il campo indotto fosse sempre opposto a quello esterno. Si oppone alla \emph{variazione} del flusso: se il flusso diminuisce, il campo indotto è concorde con quello esterno.'''
+  [[quesito.opzione]]
+  testo = '''in nessun senso: in un campo uniforme non c'è corrente indotta'''
+  commento = '''Confonde un campo uniforme, uguale in tutti i punti, con un campo costante nel tempo. Qui il campo diminuisce, il flusso cambia, e la corrente indotta c'è.'''
+  [[quesito.opzione]]
+  testo = '''in senso orario, e il suo campo dentro la spira entra nel foglio'''
+  [[quesito.opzione]]
+  testo = '''in senso orario, e il suo campo dentro la spira esce dal foglio'''
+  commento = '''Il verso della corrente è giusto, ma il campo no: applicando la regola del filo a un tratto della spira si vede che una corrente in senso orario produce dentro la spira un campo che entra nel foglio. Un campo che esce dal foglio, poi, si opporrebbe al campo esterno, mentre qui deve sostenerlo.'''
+  [[quesito.opzione]]
+  testo = '''in senso antiorario, e il suo campo dentro la spira entra nel foglio'''
+  commento = '''Il campo indotto è quello giusto, concorde con il campo esterno che diminuisce, ma il verso della corrente no: applicando la regola del filo a un tratto della spira si vede che una corrente antioraria produce dentro la spira un campo che esce dal foglio. Per un campo che entra nel foglio serve una corrente oraria.'''
+
+[[quesito]]
+id = "ud6-magnetismo-ciclotrone-raddoppio"
+tipo = "multipla"
+testo = '''In un ciclotrone un protone percorre un'orbita di raggio \SI{10}{\centi\metre} con periodo $T$, in un campo magnetico uniforme perpendicolare alla sua velocità. Quando la sua velocità è raddoppiata, il raggio dell'orbita e il tempo di un giro sono'''
+corretta = "A"
+soluzione = '''Il raggio è $r = mv/(qB)$: è proporzionale alla velocità, e raddoppia, $r' = \SI{20}{\centi\metre}$. Il periodo è $T = 2\pi m/(qB)$, dove la velocità non compare: resta $T$. Il protone percorre una circonferenza due volte più lunga a velocità doppia, nello stesso tempo. È il principio su cui funziona il ciclotrone.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\centi\metre} e $T$'''
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\centi\metre} e $2T$'''
+  commento = '''Il raggio è giusto, ma fa crescere il periodo con la circonferenza e dimentica che anche la velocità è raddoppiata: $T = 2\pi r/v$ resta uguale.'''
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\centi\metre} e $T/2$'''
+  commento = '''Tratta l'orbita come una pista fissa, su cui un protone più veloce fa il giro in metà tempo. Il raggio dipende dalla velocità, $r = mv/(qB)$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{40}{\centi\metre} e $T$'''
+  commento = '''Lega il raggio all'energia cinetica, che quadruplica, invece che alla velocità: $r = mv/(qB)$ è proporzionale a $v$, non a $v^2$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5}{\centi\metre} e $T/4$'''
+  commento = '''Rovescia la proporzionalità, come se un protone più veloce curvasse di più: $r = mv/(qB)$ cresce con la velocità. Con il raggio dimezzato e la velocità doppia, $T = 2\pi r/v$ diventerebbe davvero $T/4$, ma il punto di partenza è sbagliato.'''
+
+[[quesito]]
+id = "ud6-magnetismo-flusso-angolo"
+tipo = "multipla"
+testo = '''Una spira di area {{A}} si trova in un campo magnetico uniforme di {{B}}. Le linee del campo formano un angolo di \ang{60} con il piano della spira. Con $\cos\ang{30} \approx 0{,}87$ e $\cos\ang{60} = 0{,}5$, il flusso del campo magnetico attraverso la spira è'''
+dati.A = { valore = 20, unita = "\\centi\\metre\\squared" }
+dati.B = { valore = "0,50", unita = "\\tesla" }
+corretta = "D"
+calcolo = "B * A * 1e-4 * sin60"
+soluzione = '''Nel flusso $\Phi = BA\cos\theta$ l'angolo è quello fra il campo e la normale alla spira. La normale è perpendicolare al piano, quindi un campo a \ang{60} dal piano è a $\theta = \ang{90} - \ang{60} = \ang{30}$ dalla normale. L'area in metri quadrati è $A = 20 \cdot \SI{e-4}{\metre\squared} = \SI{2,0e-3}{\metre\squared}$:
+\[
+  \Phi = BA\cos\ang{30} = \SI{0,50}{\tesla} \cdot \SI{2,0e-3}{\metre\squared} \cdot 0{,}87 = \num{1,0e-3} \cdot 0{,}87\,\si{\weber} = \SI{8,7e-4}{\weber}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{5,0e-4}{\weber}'''
+  commento = '''Usa l'angolo con il piano della spira, \ang{60}, invece di quello con la normale: $\num{1,0e-3} \cdot \cos\ang{60} = \num{5,0e-4}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,0e-3}{\weber}'''
+  commento = '''Ignora l'angolo, come se il campo fosse perpendicolare alla spira: $BA = \num{1,0e-3}$ è il flusso massimo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{8,7}{\weber}'''
+  commento = '''Lascia l'area in centimetri quadrati, $0{,}50 \cdot 20 \cdot 0{,}87 = 8{,}7$: diecimila volte troppo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{8,7e-4}{\weber}'''
+  valore = 8.7e-4
+  [[quesito.opzione]]
+  testo = '''\SI{8,7e-2}{\weber}'''
+  commento = '''Converte i centimetri quadrati con $10^{-2}$, come se fossero centimetri: $\SI{1}{\centi\metre\squared} = (\SI{e-2}{\metre})^2 = \SI{e-4}{\metre\squared}$, e il risultato è cento volte troppo grande.'''
+
+[[quesito]]
+id = "ud6-magnetismo-tms"
+tipo = "multipla"
+testo = '''Nella stimolazione magnetica transcranica un impulso fa crescere il campo magnetico in una zona della corteccia da zero a {{B}} in {{t}}. Il campo è perpendicolare a un anello di tessuto cerebrale di area {{A}}. Il modulo della forza elettromotrice media indotta lungo l'anello è'''
+dati.B = { valore = "2,0", unita = "\\tesla" }
+dati.t = { valore = "0,20", unita = "\\milli\\second" }
+dati.A = { valore = "2,0", unita = "\\centi\\metre\\squared" }
+corretta = "B"
+calcolo = "B * A * 1e-4 / (t * 1e-3)"
+soluzione = '''Si portano i dati in unità del SI: $A = \SI{2,0e-4}{\metre\squared}$, $\Delta t = \SI{0,20e-3}{\second} = \SI{2,0e-4}{\second}$. Il flusso passa da zero a $BA = 2{,}0 \cdot \num{2,0e-4}\,\si{\weber} = \SI{4,0e-4}{\weber}$, e per la legge di Faraday-Neumann-Lenz
+\[
+  |\mathcal E| = \frac{|\Delta\Phi|}{\Delta t} = \frac{\SI{4,0e-4}{\weber}}{\SI{2,0e-4}{\second}} = \SI{2,0}{\volt}
+\]
+Abbastanza per depolarizzare i neuroni dell'anello.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{2,0e-3}{\volt}'''
+  commento = '''Lascia il tempo in millisecondi, come se fosse \SI{0,20}{\second}: $\num{4,0e-4}/0{,}20 = \num{2,0e-3}$, mille volte troppo poco.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,0}{\volt}'''
+  valore = 2.0
+  [[quesito.opzione]]
+  testo = '''\SI{2,0e4}{\volt}'''
+  commento = '''Lascia l'area in centimetri quadrati: $2{,}0 \cdot 2{,}0/\num{2,0e-4} = \num{2,0e4}$, diecimila volte troppo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,0e4}{\volt}'''
+  commento = '''Calcola solo la rapidità con cui cambia il campo, $\Delta B/\Delta t = 2{,}0/\num{2,0e-4} = \SI{1,0e4}{\tesla\per\second}$, e dimentica l'area: la fem dipende dalla variazione del flusso, $\Delta B \cdot A$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{8,0e-8}{\volt}'''
+  commento = '''Moltiplica la variazione di flusso per il tempo invece di dividerla: $\num{4,0e-4} \cdot \num{2,0e-4} = \num{8,0e-8}$. Un impulso più breve darebbe una fem più piccola, al contrario di quello che succede.'''
+
+[[quesito]]
+id = "ud6-magnetismo-corrente-solenoide"
+tipo = "completamento"
+testo = '''Un solenoide da laboratorio ha {{n}} spire per metro di lunghezza. Con $\mu_0 = 4\pi \cdot \SI{e-7}{\tesla\metre\per\ampere}$, per produrre al suo interno un campo di $4\pi \cdot \SI{e-3}{\tesla}$ serve una corrente di \completa\ \si{\ampere}.'''
+dati.n = { valore = 2000 }
+calcolo = "4 * math.pi * 1e-3 / (4 * math.pi * 1e-7 * n)"
+risposta = "5"
+soluzione = '''Dal campo del solenoide, $B = \mu_0 n I$, si ricava $I = B/(\mu_0 n)$. Il fattore $4\pi$ si semplifica:
+\[
+  I = \frac{4\pi \cdot \SI{e-3}{\tesla}}{4\pi \cdot \SI{e-7}{\tesla\metre\per\ampere} \cdot \SI{2000}{\per\metre}} = \frac{10^{-3-(-7)}}{2000}\,\si{\ampere} = \frac{10^{4}}{2000}\,\si{\ampere} = \SI{5}{\ampere}
+\]
+Chi scrive $2 \cdot 10^{7}$ moltiplica per $n$ invece di dividere ($10^4 \cdot 2000$).'''
+
+[[quesito]]
+id = "ud6-magnetismo-alternatore"
+tipo = "completamento"
+testo = '''Un alternatore produce la corrente alternata della rete elettrica, a {{f}}: la sua bobina compie 50 giri al secondo in un campo magnetico. La forza elettromotrice indotta nella bobina cambia verso \completa\ volte al secondo.'''
+dati.f = { valore = 50, unita = "Hz" }
+calcolo = "2 * f"
+risposta = "100"
+soluzione = '''Mentre la bobina ruota, il flusso attraverso di essa aumenta e diminuisce, e la fem indotta cambia verso a ogni mezzo giro. In un giro cambia verso due volte; in un secondo, con 50 giri, $2 \cdot 50 = 100$ volte. Chi scrive 50 conta un cambio di verso per giro.'''
+
+[[quesito]]
+id = "ud6-magnetismo-corrente-spira"
+tipo = "completamento"
+testo = '''Il flusso del campo magnetico attraverso una spira di resistenza {{R}} diminuisce in modo uniforme di {{dPhi}} in {{t}}. La corrente indotta nella spira vale \completa\ \si{\ampere}.'''
+dati.R = { valore = "0,50", unita = "\\ohm" }
+dati.dPhi = { valore = "3,0e-3", unita = "\\weber" }
+dati.t = { valore = "2,0", unita = "\\milli\\second" }
+calcolo = "dPhi / (t * 1e-3) / R"
+risposta = "3"
+soluzione = '''Il tempo in secondi è $\Delta t = \SI{2,0e-3}{\second}$. La fem indotta è
+\[
+  |\mathcal E| = \frac{|\Delta\Phi|}{\Delta t} = \frac{\SI{3,0e-3}{\weber}}{\SI{2,0e-3}{\second}} = \SI{1,5}{\volt}
+\]
+e la corrente $I = |\mathcal E|/R = \SI{1,5}{\volt}/\SI{0,50}{\ohm} = \SI{3}{\ampere}$. Chi scrive 0,75 moltiplica per la resistenza invece di dividere ($1{,}5 \cdot 0{,}50$); chi scrive 0,003 lascia il tempo in millisecondi ($\num{3,0e-3}/2{,}0/0{,}50$).'''
 
 # ==================================================================== quesiti lampo, in ordine di dispensa
 
@@ -90,8 +2585,8 @@ soluzione = '''In un campo uniforme la differenza di potenziale è il campo per 
   testo = '''\SI{36}{\volt\per\metre}'''
   commento = '''Moltiplica la differenza di potenziale per la distanza, e per di più in millimetri. Il campo è $\Delta V/d$: più vicine sono le piastre, più il campo è intenso.'''
   [[quesito.opzione]]
-  testo = '''\SI{0,036}{\volt\per\metre}'''
-  commento = '''Moltiplica la differenza di potenziale per la distanza in metri, $12 \cdot 0{,}003$: il prodotto $\Delta V \cdot d$ non ha le unità di un campo.'''
+  testo = '''\SI{4e-3}{\volt\per\metre}'''
+  commento = '''Converte i millimetri al contrario: moltiplica $12/3 = 4$ per $10^{-3}$ invece di dividere, $4 \cdot 10^{-3}$. Ma dividere per $\num{3e-3}$ moltiplica per $10^{3}$: un campo fra piastre vicine pochi millimetri è grande, non minuscolo.'''
   [[quesito.opzione]]
   testo = '''\SI{2,5e-4}{\volt\per\metre}'''
   commento = '''Rovescia il rapporto, $d/\Delta V = 0{,}003/12$: il risultato non ha nemmeno le unità di un campo.'''
