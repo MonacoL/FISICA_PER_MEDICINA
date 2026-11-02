@@ -188,7 +188,7 @@
    \end{tcolorbox}}
 
 \newcommand{\soluzionelampo}[1]{%
-  \par\medskip\phantomsection\label{sol-#1}%
+  \par\medskip\noindent\phantomsection\label{sol-#1}%
   \textbf{Quesito lampo~\ref{#1}} {\small(pag.~\pageref{#1})}.\ }
 
 % --- Esercizi (provvisorio: il formato vero lo decide il ticket "Fonte unica

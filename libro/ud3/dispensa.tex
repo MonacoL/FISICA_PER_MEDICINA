@@ -1,0 +1,860 @@
+% UD3 — Dispensa
+% Scritta da zero (non esisteva materiale UD3). I quesiti lampo vengono da
+% esercizi.toml (ADR 0006): si modificano lì.
+% Voce UD3.3 del syllabus: si contrappongono moto laminare e moto turbolento e
+% si tratta a parte il moto stazionario (scelta del corso, nota di trascrizione 2
+% in docs/research/syllabus-fisica.md).
+\dispensa
+
+\begin{tcolorbox}[fisbox={formula}{formulaBg},title={Obiettivi dell'unità}]
+Al termine di questa unità sai:
+\begin{itemize}
+  \item spiegare che cosa distingue un fluido da un solido, e usare densità e pressione con le loro unità di misura, compresi i millimetri di mercurio;
+  \item calcolare la pressione in un liquido in funzione della profondità con la legge di Stevino, e spiegare i vasi comunicanti, la pressione arteriosa nelle diverse posture e l'altezza della sacca di una flebo;
+  \item usare il principio di Pascal per il torchio idraulico e la siringa, e il principio di Archimede per decidere se un corpo galleggia e quanta parte ne resta immersa;
+  \item descrivere l'esperimento di Torricelli, il manometro e lo sfigmomanometro, e distinguere la pressione assoluta da quella relativa;
+  \item definire portata e flusso, distinguere il moto stazionario da quello che cambia nel tempo e il moto laminare da quello turbolento, e usare l'equazione di continuità;
+  \item applicare il teorema di Bernoulli, anche a una stenosi e a un aneurisma;
+  \item spiegare la viscosità, il profilo parabolico della velocità e il gradiente di velocità, e usare la legge di Poiseuille e le resistenze idrauliche in serie e in parallelo;
+  \item descrivere la tensione superficiale, la capillarità e la pressione di curvatura con la legge di Laplace, e il ruolo del surfattante negli alveoli.
+\end{itemize}
+\end{tcolorbox}
+
+Il sangue che scorre nei vasi, l'aria che entra negli alveoli, la soluzione che scende da una flebo, il liquido che esce da una siringa sono fluidi in equilibrio o in movimento. Questa unità parte dalle due grandezze che li descrivono, la densità e la pressione, studia i fluidi fermi (idrostatica) e poi quelli in movimento (idrodinamica), prima nel modello ideale e poi con l'attrito interno, la viscosità; chiude con i fenomeni che avvengono sulla superficie dei liquidi.
+
+Gli strumenti di matematica che servono sono le potenze di 10 (UD1, sezione «La notazione scientifica»), le conversioni fra unità di misura (UD1, sezione «Grandezze fisiche e unità di misura») e il coseno di un angolo (UD1, sezione «Le funzioni trigonometriche»). Dalla meccanica, che è l'argomento della UD2, servono poche idee, richiamate in una riga quando compaiono: la forza, che si misura in newton (\si{\newton}); il peso di un corpo di massa $m$, $P = mg$, con l'accelerazione di gravità $g \approx \SI{9,8}{\metre\per\second\squared}$; il lavoro e l'energia, in joule (\si{\joule}). Nei conti useremo $g = \SI{9,8}{\metre\per\second\squared}$, oppure $g \approx \SI{10}{\metre\per\second\squared}$ quando lo diremo, per rendere il conto più rapido.
+
+% -------------------------------------------------------------------------
+\section{I fluidi: densità e pressione}
+\label{sec:ud3-fluidi}
+
+\subsection{Solidi, liquidi e gas}
+
+La materia si presenta in tre stati di aggregazione:
+\begin{itemize}
+  \item un \textbf{solido} ha forma e volume propri: le sue molecole sono legate con forza in posizioni fisse, intorno alle quali possono solo oscillare;
+  \item un \textbf{liquido} ha volume proprio ma non forma propria: le molecole restano vicine, ma scorrono le une sulle altre, e il liquido prende la forma del recipiente;
+  \item un \textbf{gas} non ha né forma né volume propri: le molecole sono lontane fra loro, si muovono quasi libere e occupano tutto il volume a disposizione.
+\end{itemize}
+Liquidi e gas si chiamano insieme \textbf{fluidi}, perché \emph{scorrono}. La differenza fondamentale da un solido è questa: un solido resiste a una forza che cerca di far scorrere uno strato sull'altro (una forza di taglio, parallela alla superficie) e si deforma solo un poco; un fluido fermo non resiste, e sotto una forza di taglio, anche piccola, si mette in movimento. Per questo un fluido fermo può esercitare su una parete solo forze perpendicolari alla parete.
+
+Liquidi e gas differiscono per la comprimibilità. Un liquido è quasi \textbf{incomprimibile}: anche con pressioni molto grandi il suo volume cambia pochissimo. Un gas è molto comprimibile: dimezzando il volume di un gas a temperatura costante la sua pressione raddoppia (lo vedremo nella UD5). In questa unità tratteremo i liquidi, e il sangue, come incomprimibili.
+
+\subsection{La densità}
+
+La \textbf{densità} $\rho$ (rho) di un corpo omogeneo è la sua massa divisa per il volume: dice quanta massa c'è in un metro cubo. Nel SI si misura in \si{\kilo\gram\per\metre\cubed}; si usa spesso anche il \si{\gram\per\centi\metre\cubed}.
+
+\begin{formula}[Densità]
+\rho = \frac{m}{V}
+\qquad\qquad
+\SI{1}{\gram\per\centi\metre\cubed} = \SI{1000}{\kilo\gram\per\metre\cubed}
+\end{formula}
+
+\begin{richiamo}{le unità di volume}
+Un metro cubo è un cubo di \SI{1}{\metre} di lato: $\SI{1}{\metre\cubed} = (\SI{100}{\centi\metre})^3 = \SI{e6}{\centi\metre\cubed}$. Un litro è un decimetro cubo: $\SI{1}{\litre} = (\SI{10}{\centi\metre})^3 = \SI{1000}{\centi\metre\cubed} = \SI{e-3}{\metre\cubed}$, e quindi un millilitro è un centimetro cubo, $\SI{1}{\milli\litre} = \SI{1}{\centi\metre\cubed}$. Il fattore fra le due unità di densità viene da qui: $\SI{1}{\gram\per\centi\metre\cubed} = \SI{e-3}{\kilo\gram}/\SI{e-6}{\metre\cubed} = \SI{e3}{\kilo\gram\per\metre\cubed}$. Le conversioni di unità elevate al cubo sono spiegate nella UD1, sezione «Grandezze fisiche e unità di misura».
+\end{richiamo}
+
+Alcuni valori da ricordare:
+
+\begin{center}
+\small
+\begin{tabular}{@{}l r@{}}
+\toprule
+Sostanza & $\rho$ (\si{\kilo\gram\per\metre\cubed}) \\
+\midrule
+aria (\SI{20}{\celsius}, al livello del mare) & 1,2 \\
+olio d'oliva & 920 \\
+ghiaccio & 920 \\
+acqua & 1000 \\
+plasma & 1025 \\
+sangue & 1060 \\
+osso compatto & circa 1900 \\
+mercurio & \num{13600} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Il sangue è un po' più denso dell'acqua perché contiene proteine e cellule; nei conti useremo $\rho_\text{sangue} = \SI{1060}{\kilo\gram\per\metre\cubed}$, oppure, quando basta una stima, lo stesso valore dell'acqua.
+
+\begin{esempio}
+Un adulto ha circa \SI{5,0}{\litre} di sangue. Quanto pesa, cioè qual è la sua massa?
+
+Il volume nel SI è $V = 5{,}0 \cdot \SI{e-3}{\metre\cubed} = \SI{5,0e-3}{\metre\cubed}$. Dalla definizione di densità:
+\[
+  m = \rho V = \SI{1060}{\kilo\gram\per\metre\cubed} \cdot \SI{5,0e-3}{\metre\cubed} = 1060 \cdot 5{,}0 \cdot 10^{-3}\,\si{\kilo\gram} = 5300 \cdot 10^{-3}\,\si{\kilo\gram} = \SI{5,3}{\kilo\gram}
+\]
+Lo stesso conto in grammi: $\SI{5,0}{\litre} = \SI{5000}{\centi\metre\cubed}$ e $m = \SI{1,06}{\gram\per\centi\metre\cubed} \cdot \SI{5000}{\centi\metre\cubed} = \SI{5300}{\gram}$.
+\end{esempio}
+
+\input{ud3/generati/lampo-ud3-densita}
+
+\subsection{La pressione}
+
+Spingendo lo stantuffo di una siringa con il pollice si esercita una forza; il liquido nella siringa la sente distribuita su tutta la superficie dello stantuffo. Per descrivere come una forza si distribuisce su una superficie si usa la pressione. Se una forza di modulo $F$ agisce perpendicolarmente su una superficie di area $S$, la \textbf{pressione} è
+\begin{formula}[Pressione]
+p = \frac{F}{S}
+\qquad\qquad
+\SI{1}{\pascal} = \SI{1}{\newton\per\metre\squared}
+\end{formula}
+Nel SI si misura in pascal (\si{\pascal}). Se la forza è inclinata, conta solo la sua componente perpendicolare alla superficie (UD1, sezione «I vettori»). La pressione è una grandezza scalare: in un punto di un fluido fermo ha lo stesso valore qualunque sia l'orientazione della superficie su cui la si misura, e spinge su ogni parete perpendicolarmente alla parete.
+
+A parità di forza, la pressione è tanto più grande quanto più piccola è la superficie: per questo un ago, con una punta di area minuscola, attraversa la pelle con una forza modesta, e un coltello affilato taglia meglio di uno smussato.
+
+\begin{esempio}
+Un infermiere spinge con una forza di \SI{20}{\newton} lo stantuffo di una siringa che ha una sezione di \SI{2,0}{\centi\metre\squared}. Quale pressione esercita sul liquido?
+
+L'area nel SI: $\SI{1}{\centi\metre\squared} = (\SI{e-2}{\metre})^2 = \SI{e-4}{\metre\squared}$, quindi $S = \SI{2,0e-4}{\metre\squared}$. La pressione è
+\[
+  p = \frac{F}{S} = \frac{\SI{20}{\newton}}{\SI{2,0e-4}{\metre\squared}} = 10 \cdot 10^{4}\,\si{\pascal} = \SI{1,0e5}{\pascal}
+\]
+È una pressione in più rispetto a quella dell'aria, che preme già su tutte le superfici; vedremo subito che vale anch'essa circa \SI{1e5}{\pascal}.
+\end{esempio}
+
+Densità e pressione sono le due grandezze che governano il comportamento dei fluidi. Nei fluidi fermi, la pressione cresce con la profondità in proporzione alla densità (legge di Stevino, sezione~\ref{sec:ud3-stevino}) e la densità decide se un corpo galleggia (principio di Archimede, sezione~\ref{sec:ud3-archimede}). Nei fluidi in movimento sono le differenze di pressione a spingere il fluido, e la densità dice quanta massa c'è da mettere in moto in ogni metro cubo (teorema di Bernoulli, sezione~\ref{sec:ud3-bernoulli}).
+
+\subsection{Le unità di misura della pressione}
+
+L'aria che ci circonda preme su tutte le superfici con la \textbf{pressione atmosferica}, che al livello del mare vale in media
+\[
+  \SI{1}{atm} = \SI{1,013e5}{\pascal} \approx \SI{1,0e5}{\pascal} = \SI{760}{\mmHg}
+\]
+Il valore \SI{760}{\mmHg}, in millimetri di mercurio, viene dall'esperimento di Torricelli (sezione~\ref{sec:ud3-misura}): la pressione atmosferica sostiene una colonna di mercurio alta \SI{760}{\milli\metre}. In medicina si usano tre unità diverse dal pascal:
+\begin{itemize}
+  \item il \textbf{millimetro di mercurio} (\si{\mmHg}), per la pressione arteriosa: $\SI{1}{\mmHg} \approx \SI{133}{\pascal}$;
+  \item il \textbf{centimetro d'acqua} (\si{cm\,H_2O}), per le pressioni piccole, come quella venosa centrale e quelle della respirazione: $\SI{1}{cm\,H_2O} \approx \SI{98}{\pascal}$;
+  \item l'\textbf{atmosfera} (\si{atm}) e il \textbf{bar} ($\SI{1}{\bar} = \SI{e5}{\pascal}$), per le pressioni grandi, come quella delle bombole di ossigeno o della camera iperbarica.
+\end{itemize}
+
+\begin{formula}[Unità di pressione]
+\SI{1}{atm} = \SI{1,013e5}{\pascal} = \SI{760}{\mmHg}
+\qquad
+\SI{1}{\mmHg} \approx \SI{133}{\pascal}
+\qquad
+\SI{1}{cm\,H_2O} \approx \SI{98}{\pascal}
+\end{formula}
+
+Il valore di \SI{1}{\mmHg} si ricava dalla prima uguaglianza: $\SI{1,013e5}{\pascal}/760 \approx \SI{133}{\pascal}$. Per esempio una pressione massima di \SI{120}{\mmHg} vale $120 \cdot \SI{133}{\pascal} = \SI{15960}{\pascal} \approx \SI{16}{\kilo\pascal}$.
+
+\begin{attenzione}[la pressione non è una forza]
+Pressione e forza non vanno confuse: la forza si misura in newton e ha una direzione; la pressione si misura in pascal ed è la forza \emph{per unità di area}. La stessa pressione produce una forza grande su una superficie grande e una forza piccola su una superficie piccola: $F = pS$. Attenzione anche alle lettere: $p$ minuscola è la pressione, $P$ maiuscola il peso.
+\end{attenzione}
+
+% -------------------------------------------------------------------------
+\section{La legge di Stevino}
+\label{sec:ud3-stevino}
+
+\subsection{La pressione cresce con la profondità}
+
+Chi si immerge in piscina sente la pressione sui timpani crescere man mano che scende. Il motivo è il peso dell'acqua sovrastante. Si consideri in un liquido fermo, di densità $\rho$, una colonna verticale con base di area $S$ e altezza $h$, che arriva fino alla superficie (figura~\ref{fig:ud3-stevino}a). La colonna è ferma, quindi la forza che il liquido sottostante esercita verso l'alto sulla sua base, $pS$, equilibra le due forze verso il basso: quella dell'aria sulla superficie, $p_0 S$, e il peso del liquido della colonna. Il volume della colonna è $V = Sh$, la sua massa $m = \rho V = \rho S h$ e il suo peso $mg = \rho S h g$. Quindi
+\[
+  pS = p_0 S + \rho g h S
+\]
+e dividendo per $S$:
+
+\begin{formula}[Legge di Stevino]
+p = p_0 + \rho g h
+\end{formula}
+
+Qui $p_0$ è la pressione sulla superficie libera (di solito la pressione atmosferica) e $h$ è la profondità, misurata in verticale dalla superficie. La legge vale per un liquido fermo e incomprimibile, con densità uguale in tutti i punti. Fra due punti dello stesso liquido con un dislivello $\Delta h$ la differenza di pressione è $\Delta p = \rho g \Delta h$.
+
+\begin{figure}[h]
+\centering
+\input{ud3/figure/stevino}
+\caption{(a) Legge di Stevino: la pressione $p$ alla profondità $h$ sostiene la pressione atmosferica $p_0$ e il peso della colonna di liquido sovrastante. (b) Vasi comunicanti: in recipienti di forma diversa collegati alla base il liquido si porta alla stessa altezza, e nei punti alla stessa quota, come A, B e C, la pressione è la stessa.}
+\label{fig:ud3-stevino}
+\end{figure}
+
+\begin{esempio}
+Di quanto aumenta la pressione scendendo di \SI{10}{\metre} sott'acqua? Quanto vale la pressione assoluta a quella profondità?
+
+L'aumento di pressione è
+\[
+  \rho g h = \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{10}{\metre} = \SI{98000}{\pascal} = \SI{9,8e4}{\pascal} \approx \SI{1}{atm}
+\]
+Controllo delle unità: $\si{\kilo\gram\per\metre\cubed} \cdot \si{\metre\per\second\squared} \cdot \si{\metre} = \si{\kilo\gram\per\metre\per\second\squared} = (\si{\kilo\gram\metre\per\second\squared})/\si{\metre\squared} = \si{\newton\per\metre\squared} = \si{\pascal}$. La pressione assoluta è $p = p_0 + \rho g h \approx \SI{1,0e5}{\pascal} + \SI{0,98e5}{\pascal} \approx \SI{2,0e5}{\pascal}$, circa due atmosfere: una dell'aria e una dei \SI{10}{\metre} d'acqua. Allo stesso modo un centimetro d'acqua dà $\SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{0,01}{\metre} = \SI{98}{\pascal}$: è il valore di \SI{1}{cm\,H_2O}.
+\end{esempio}
+
+\input{ud3/generati/lampo-ud3-stevino}
+
+\subsection{Le conseguenze della legge di Stevino}
+
+La legge di Stevino dice che la pressione dipende solo dalla profondità, e non dalla forma del recipiente né dalla quantità di liquido. Da qui vengono tre conseguenze.
+\begin{itemize}
+  \item Tutti i punti di uno stesso liquido fermo che si trovano alla stessa quota hanno la stessa pressione. Per questo la superficie libera di un liquido fermo è orizzontale.
+  \item In \textbf{vasi comunicanti}, cioè recipienti collegati alla base, lo stesso liquido si porta alla stessa altezza in tutti i rami, qualunque sia la loro forma (figura~\ref{fig:ud3-stevino}b): se in un ramo il livello fosse più alto, alla base la pressione sarebbe maggiore da quella parte, e il liquido scorrerebbe verso l'altro ramo finché i livelli non si uguagliano.
+  \item Un recipiente stretto e alto e uno largo, pieni dello stesso liquido fino alla stessa altezza, hanno sul fondo la stessa pressione, anche se il secondo contiene molto più liquido (è il \emph{paradosso idrostatico}).
+\end{itemize}
+
+Se in un tubo a U si versano due liquidi che non si mescolano, per esempio acqua e olio, i livelli non sono più alla stessa altezza. Al livello della superficie di separazione fra i due liquidi la pressione è la stessa nei due rami; sopra quel livello c'è, da una parte, una colonna di olio di altezza $h_\text{o}$, dall'altra una colonna d'acqua di altezza $h_\text{a}$, tutte e due con la pressione atmosferica in cima. Quindi $\rho_\text{o} g h_\text{o} = \rho_\text{a} g h_\text{a}$: il liquido meno denso forma una colonna più alta. Con $\rho_\text{o} = \SI{920}{\kilo\gram\per\metre\cubed}$, una colonna di olio di \SI{10,0}{\centi\metre} è equilibrata da $h_\text{a} = h_\text{o}\,\rho_\text{o}/\rho_\text{a} = \SI{10,0}{\centi\metre} \cdot 0{,}92 = \SI{9,2}{\centi\metre}$ d'acqua.
+
+\begin{attenzione}[la profondità si misura in verticale]
+Nella legge di Stevino $h$ è il dislivello verticale fra i due punti, non la lunghezza del tubo che li collega. Un tubo di flebo lungo \SI{2}{\metre} che scende di \SI{1}{\metre} dà la stessa differenza di pressione di un tubo verticale lungo \SI{1}{\metre}. E la pressione cresce scendendo: il punto più basso è quello a pressione maggiore.
+\end{attenzione}
+
+\begin{applicazione}{la pressione arteriosa in piedi e sdraiati}
+Il sangue nei vasi segue anche lui la legge di Stevino. Per il sangue ($\rho = \SI{1060}{\kilo\gram\per\metre\cubed}$) un dislivello di \SI{1}{\metre} vale
+\[
+  \rho g h = \SI{1060}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{1}{\metre} \approx \SI{1,04e4}{\pascal}
+  \qquad\qquad
+  \frac{\SI{1,04e4}{\pascal}}{\SI{133}{\pascal\per\mmHg}} \approx \SI{78}{\mmHg}
+\]
+(infatti $133 \cdot 78 = \num{10374}$), cioè circa \SI{0,8}{\mmHg} per ogni centimetro di dislivello. In una persona in piedi con una pressione arteriosa media di \SI{100}{\mmHg} al livello del cuore, nelle arterie dei piedi, \SI{1,2}{\metre} più in basso, la pressione media è circa $100 + 1{,}2 \cdot 78 \approx 100 + 94 = \SI{194}{\mmHg}$; in quelle della testa, \SI{40}{\centi\metre} più in alto, circa $100 - 0{,}40 \cdot 78 \approx 100 - 31 = \SI{69}{\mmHg}$. Da sdraiati le differenze quasi spariscono, perché cuore, testa e piedi sono alla stessa quota. Per lo stesso motivo le vene delle gambe, in piedi, sono sottoposte a una pressione alta, che con gli anni può dilatarle (vene varicose), e chi si alza di scatto può avere un capogiro: il sangue al cervello arriva con una pressione più bassa finché la circolazione non si adatta.
+\end{applicazione}
+
+\begin{esempio}[l'altezza della sacca di una flebo]
+La soluzione di una flebo, con densità $\rho = \SI{1000}{\kilo\gram\per\metre\cubed}$, deve entrare in una vena del braccio in cui la pressione è di \SI{10}{\mmHg} sopra quella atmosferica. Di quanto deve stare, come minimo, la superficie del liquido nella sacca sopra il braccio?
+
+La sacca è aperta all'aria (o è morbida e la pressione atmosferica la schiaccia), quindi sulla superficie del liquido c'è la pressione atmosferica. Per la legge di Stevino, all'altezza del braccio, un dislivello $h$ più in basso, il liquido ha una pressione di $\rho g h$ sopra quella atmosferica. Perché il liquido entri nella vena serve $\rho g h$ più grande della pressione venosa:
+\[
+  \rho g h > \SI{10}{\mmHg} = 10 \cdot \SI{133}{\pascal} = \SI{1330}{\pascal}
+\]
+\[
+  h > \frac{\SI{1330}{\pascal}}{\SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared}} = \frac{1330}{9800}\,\si{\metre} \approx \SI{0,14}{\metre}
+\]
+(infatti $9800 \cdot 0{,}14 = 1372$, poco più di 1330). Basterebbero quindi una quindicina di centimetri. In pratica la sacca si appende un metro o più sopra il braccio: con $h = \SI{1}{\metre}$ la pressione disponibile è $\rho g h = \SI{9800}{\pascal}$, circa $9800/133 \approx \SI{74}{\mmHg}$, molto più di quella venosa, e la differenza serve a vincere la resistenza del tubicino e dell'ago (sezione~\ref{sec:ud3-viscosita}). Se la sacca scendesse a meno di una quindicina di centimetri sopra il braccio, e a maggior ragione sotto il livello della vena, la pressione venosa supererebbe quella del liquido e il sangue risalirebbe nel tubo.
+\end{esempio}
+
+% -------------------------------------------------------------------------
+\section{Il principio di Pascal}
+\label{sec:ud3-pascal}
+
+Se si aumenta la pressione sulla superficie di un liquido, per esempio spingendo un pistone, nella legge di Stevino aumenta $p_0$, e la pressione aumenta della stessa quantità in tutti i punti del liquido. È il \textbf{principio di Pascal}: \emph{una variazione di pressione prodotta in un punto di un fluido incomprimibile e fermo si trasmette invariata a tutti i punti del fluido e alle pareti del recipiente.}
+
+L'applicazione classica è il \textbf{torchio idraulico} (figura~\ref{fig:ud3-pascal}): due cilindri di sezione diversa, $S_1$ piccola e $S_2$ grande, collegati e pieni di liquido, chiusi da due pistoni. Una forza $F_1$ sul pistone piccolo produce nel liquido una pressione $p = F_1/S_1$, che arriva uguale sotto il pistone grande e lo spinge con la forza $F_2 = pS_2$. Quindi
+\begin{formula}[Principio di Pascal: torchio idraulico]
+\frac{F_1}{S_1} = \frac{F_2}{S_2}
+\qquad\qquad
+F_2 = F_1\,\frac{S_2}{S_1}
+\end{formula}
+Le forze stanno nel rapporto delle aree: con un pistone grande di area cento volte maggiore, si solleva un peso cento volte più grande della forza che si esercita. (Si suppongono i due pistoni alla stessa quota, altrimenti si aggiunge la differenza di pressione $\rho g \Delta h$, di solito trascurabile.)
+
+\begin{figure}[h]
+\centering
+\input{ud3/figure/pascal}
+\caption{Il torchio idraulico. La pressione $p = F_1/S_1$ prodotta dal pistone piccolo si trasmette a tutto il liquido e spinge il pistone grande con la forza $F_2 = pS_2$. Per sollevare il pistone grande di un tratto $\Delta x_2$, il piccolo deve scendere di un tratto $\Delta x_1$ molto più lungo.}
+\label{fig:ud3-pascal}
+\end{figure}
+
+Il torchio non crea energia. Il liquido è incomprimibile: il volume che esce dal cilindro piccolo, $S_1\,\Delta x_1$, entra in quello grande, $S_2\,\Delta x_2$. Se il pistone piccolo scende di $\Delta x_1$, il grande sale di $\Delta x_2 = \Delta x_1\,S_1/S_2$, molto meno. Il lavoro (forza per spostamento, UD2) è lo stesso dalle due parti: $F_2\,\Delta x_2 = F_1\,(S_2/S_1)\cdot \Delta x_1\,(S_1/S_2) = F_1\,\Delta x_1$. Si guadagna in forza quello che si perde in spostamento.
+
+\begin{richiamo}{area del cerchio e rapporto delle aree}
+L'area di un cerchio di raggio $r$ e diametro $d = 2r$ è
+\[
+  S = \pi r^2 = \frac{\pi d^2}{4}
+\]
+L'area è proporzionale al \emph{quadrato} del raggio (o del diametro): nel rapporto fra due aree $\pi$ e il 4 si semplificano, e resta $S_2/S_1 = (r_2/r_1)^2 = (d_2/d_1)^2$. Raddoppiando il diametro l'area diventa $2^2 = 4$ volte più grande; triplicandolo, $3^2 = 9$ volte; dimezzandolo, $(1/2)^2 = 1/4$.
+\end{richiamo}
+
+\begin{esempio}
+La poltrona di un ambulatorio dentistico è sollevata da un sistema idraulico: il pistone piccolo ha diametro \SI{2,0}{\centi\metre}, quello grande \SI{10}{\centi\metre}. Poltrona e paziente pesano insieme \SI{1500}{\newton}. (a) Quale forza serve sul pistone piccolo? (b) Di quanto deve scendere il pistone piccolo per sollevare la poltrona di \SI{10}{\centi\metre}?
+
+(a) Il rapporto delle aree è il quadrato del rapporto dei diametri:
+\[
+  \frac{S_2}{S_1} = \left(\frac{\SI{10}{\centi\metre}}{\SI{2,0}{\centi\metre}}\right)^{2} = 5^2 = 25
+  \qquad\qquad
+  F_1 = F_2\,\frac{S_1}{S_2} = \frac{\SI{1500}{\newton}}{25} = \SI{60}{\newton}
+\]
+(b) Il volume che esce dal cilindro piccolo entra nel grande, $S_1\,\Delta x_1 = S_2\,\Delta x_2$:
+\[
+  \Delta x_1 = \Delta x_2\,\frac{S_2}{S_1} = \SI{10}{\centi\metre} \cdot 25 = \SI{250}{\centi\metre} = \SI{2,5}{\metre}
+\]
+Il pistone piccolo non scende di \SI{2,5}{\metre} in un colpo solo: la pompa lavora a colpi brevi, e una valvola fa rientrare altro liquido nel cilindro piccolo fra un colpo e l'altro.
+\end{esempio}
+
+\input{ud3/generati/lampo-ud3-pascal}
+
+\begin{applicazione}{siringhe e iniezioni}
+Nella siringa la pressione prodotta dallo stantuffo si trasmette a tutto il liquido, fino alla punta dell'ago. A parità di forza del pollice, una siringa sottile produce una pressione molto più alta di una larga: con \SI{10}{\newton} su uno stantuffo di \SI{0,2}{\centi\metre\squared} la pressione è $\SI{10}{\newton}/\SI{2e-5}{\metre\squared} = \SI{5e5}{\pascal}$, su uno di \SI{3}{\centi\metre\squared} è $\SI{10}{\newton}/\SI{3e-4}{\metre\squared} \approx \SI{3e4}{\pascal}$, circa 15 volte meno. Per questo per iniettare in un tessuto che oppone resistenza si preferiscono siringhe di piccolo diametro, e con una siringa sottile si possono raggiungere pressioni pericolose per un catetere. Allo stesso modo, nel cranio, un aumento di pressione prodotto in un punto (per esempio da un ematoma) si trasmette a tutto il liquido cerebrospinale.
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{Il principio di Archimede e il galleggiamento}
+\label{sec:ud3-archimede}
+
+\subsection{La spinta di Archimede}
+
+Un corpo immerso in un liquido sembra più leggero: in acqua si solleva facilmente una persona che fuori dall'acqua sarebbe pesante. Il motivo è ancora la legge di Stevino. Si consideri un cubo di lato $\ell$ immerso in un liquido di densità $\rho_\text{f}$ (figura~\ref{fig:ud3-archimede}). Le forze sulle facce laterali si annullano a due a due, perché le facce opposte stanno alla stessa profondità. La faccia inferiore, alla profondità $h_2$, è spinta verso l'alto con una pressione maggiore di quella con cui la faccia superiore, alla profondità $h_1$, è spinta verso il basso. Le due facce hanno area $S = \ell^2$, e la forza risultante verso l'alto è
+\[
+  F_A = (p_2 - p_1)\,S = \rho_\text{f} g (h_2 - h_1)\,S = \rho_\text{f} g\,\ell\,\ell^2 = \rho_\text{f}\,g\,V
+\]
+dove $V = \ell^3$ è il volume del cubo. Il prodotto $\rho_\text{f} V$ è la massa del liquido che starebbe nel volume occupato dal corpo, e $\rho_\text{f} V g$ è il suo peso. Il risultato vale per un corpo di forma qualsiasi, anche immerso solo in parte: conta il volume della parte immersa, $V_\text{imm}$. È il \textbf{principio di Archimede}: \emph{un corpo immerso in un fluido riceve una spinta verso l'alto pari al peso del fluido spostato.}
+
+\begin{formula}[Principio di Archimede]
+F_A = \rho_\text{f}\,V_\text{imm}\,g
+\end{formula}
+
+\begin{figure}[h]
+\centering
+\input{ud3/figure/archimede}
+\caption{La spinta di Archimede. Sulla faccia inferiore del cubo, più profonda, la pressione è maggiore che su quella superiore: la differenza delle due forze è la spinta $F_A$ verso l'alto. Le forze sulle facce laterali si annullano. Il peso $P$ è applicato al centro del cubo; $\rho_\text{c}$ è la densità del corpo, $\rho_\text{f}$ quella del liquido.}
+\label{fig:ud3-archimede}
+\end{figure}
+
+Il principio vale anche nei gas: l'aria dà a ogni corpo una spinta pari al peso dell'aria spostata, ed è così che sale un pallone pieno di elio. Per i corpi solidi e liquidi la spinta dell'aria è trascurabile, perché l'aria è circa mille volte meno densa dell'acqua.
+
+\subsection{Le condizioni di galleggiamento}
+
+Su un corpo di volume $V$ e densità media $\rho_\text{c}$, completamente immerso, agiscono due forze verticali: il peso verso il basso, $P = \rho_\text{c} V g$, e la spinta verso l'alto, $F_A = \rho_\text{f} V g$. Il confronto fra le due dipende solo dalle densità, perché $V$ e $g$ sono gli stessi:
+\begin{itemize}
+  \item se $\rho_\text{c} > \rho_\text{f}$ il peso vince e il corpo \textbf{affonda} (un sasso in acqua);
+  \item se $\rho_\text{c} = \rho_\text{f}$ il corpo resta in equilibrio dove lo si lascia, a qualsiasi profondità (un pesce, o un subacqueo con la zavorra giusta);
+  \item se $\rho_\text{c} < \rho_\text{f}$ la spinta vince e il corpo sale fino a \textbf{galleggiare} in superficie, con una parte fuori dal liquido.
+\end{itemize}
+Un corpo che galleggia è in equilibrio: la spinta, che ora dipende solo dal volume immerso, è uguale al peso, $\rho_\text{f} V_\text{imm} g = \rho_\text{c} V g$. Da qui la frazione immersa:
+
+\begin{formula}[Galleggiamento]
+\frac{V_\text{imm}}{V} = \frac{\rho_\text{c}}{\rho_\text{f}}
+\qquad (\rho_\text{c} < \rho_\text{f})
+\end{formula}
+
+Il ghiaccio ($\rho = \SI{920}{\kilo\gram\per\metre\cubed}$) galleggia in acqua con $920/1000 = 0{,}92$, cioè il 92\%, del volume immerso: degli iceberg si vede solo la punta.
+
+Quando un corpo più denso del liquido è appeso a una bilancia ed è immerso, la bilancia segna il \textbf{peso apparente}, il peso meno la spinta: $P_\text{app} = P - F_A$.
+
+\begin{attenzione}[la spinta non dipende dalla profondità né dal corpo]
+La spinta di Archimede dipende dalla densità del \emph{fluido} e dal volume \emph{immerso}, non dalla densità del corpo né dalla profondità a cui si trova: un sasso sul fondo di una piscina profonda \SI{3}{\metre} riceve la stessa spinta che a \SI{1}{\metre}. La densità del corpo serve solo per il peso, e quindi per decidere se affonda o galleggia.
+\end{attenzione}
+
+\begin{esempio}[la pesata idrostatica]
+Per misurare la densità media del corpo, e da questa stimare la percentuale di grasso, si pesa una persona in aria e poi completamente immersa in acqua, dopo aver espirato il più possibile. Una persona ha massa \SI{80}{\kilo\gram}; immersa, la bilancia segna \SI{4,0}{\kilo\gram}. Quanto vale la sua densità media?
+
+La bilancia immersa misura il peso apparente: $P_\text{app} = (\SI{4,0}{\kilo\gram})\,g$, mentre il peso è $P = (\SI{80}{\kilo\gram})\,g$. La spinta è la differenza:
+\[
+  F_A = P - P_\text{app} = (\SI{80}{\kilo\gram} - \SI{4,0}{\kilo\gram})\,g = (\SI{76}{\kilo\gram})\,g
+\]
+Per il principio di Archimede $F_A = \rho_\text{acqua} V g$: semplificando $g$, il volume del corpo è
+\[
+  V = \frac{\SI{76}{\kilo\gram}}{\rho_\text{acqua}} = \frac{\SI{76}{\kilo\gram}}{\SI{1000}{\kilo\gram\per\metre\cubed}} = \SI{0,076}{\metre\cubed}
+\]
+e la densità media
+\[
+  \rho = \frac{m}{V} = \frac{\SI{80}{\kilo\gram}}{\SI{0,076}{\metre\cubed}} = \frac{80}{76} \cdot 1000\,\si{\kilo\gram\per\metre\cubed} \approx \SI{1050}{\kilo\gram\per\metre\cubed}
+\]
+perché $80/76 = 20/19 \approx 1{,}05$. Il grasso è meno denso dell'acqua (circa \SI{900}{\kilo\gram\per\metre\cubed}), muscoli e ossa più densi: più bassa è la densità media, più alta è la percentuale di grasso. Nel conto si trascura l'aria rimasta nei polmoni, che le misure vere stimano e sottraggono.
+\end{esempio}
+
+\input{ud3/generati/lampo-ud3-archimede}
+
+\begin{applicazione}{idroterapia e riabilitazione in acqua}
+Un paziente immerso in piscina fino al collo riceve una spinta quasi uguale al suo peso, perché la densità media del corpo è vicina a quella dell'acqua: articolazioni e ossa delle gambe sopportano solo una piccola parte del carico. Per questo la riabilitazione dopo un intervento all'anca o al ginocchio comincia spesso in acqua; variando la profondità, e quindi il volume immerso, si regola il carico.
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{La misura della pressione}
+\label{sec:ud3-misura}
+
+\subsection{L'esperimento di Torricelli}
+
+Nel 1643 Evangelista Torricelli riempì di mercurio un tubo di vetro lungo circa un metro, chiuso a un'estremità, lo capovolse tappandolo con un dito e lo immerse in una bacinella piena di mercurio (figura~\ref{fig:ud3-misura}a). Tolto il dito, il mercurio scese nel tubo, ma si fermò a un'altezza di circa \SI{760}{\milli\metre} sopra il livello della bacinella. Sopra la colonna restò uno spazio quasi vuoto, in cui la pressione è praticamente zero.
+
+La spiegazione viene dalla legge di Stevino. Alla quota della superficie della bacinella la pressione dentro il tubo è uguale a quella fuori, che è la pressione atmosferica. Dentro il tubo, a quella quota, c'è la pressione di una colonna di mercurio alta $h$ con il vuoto sopra: $p = 0 + \rho_\text{Hg} g h$. Quindi la pressione atmosferica è uguale al peso per unità di area della colonna:
+\[
+  p_\text{atm} = \rho_\text{Hg}\,g\,h = \SI{13600}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{0,760}{\metre} \approx \SI{1,013e5}{\pascal}
+\]
+Il conto a mano: $13{,}6 \cdot 0{,}76 = 10{,}34$ (perché $13{,}6 \cdot 0{,}75 = 10{,}2$ e $13{,}6 \cdot 0{,}01 = 0{,}136$), poi $10{,}34 \cdot 9{,}8 = 103{,}4 - 2{,}07 \approx 101{,}3$; con il fattore $10^{3}$ della densità si ottiene $101{,}3 \cdot 10^{3}\,\si{\pascal} = \SI{1,013e5}{\pascal}$. Da qui il millimetro di mercurio: la pressione di una colonna di mercurio alta \SI{1}{\milli\metre} è $\SI{13600}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{e-3}{\metre} \approx \SI{133}{\pascal}$.
+
+Con l'acqua, 13,6 volte meno densa del mercurio, la colonna sarebbe 13,6 volte più alta: $0{,}76 \cdot 13{,}6 \approx \SI{10,3}{\metre}$. Per questo nei barometri si usa il mercurio, e per lo stesso motivo una pompa aspirante non riesce a sollevare l'acqua di più di circa \SI{10}{\metre}.
+
+\begin{figure}[h]
+\centering
+\input{ud3/figure/misura}
+\caption{(a) Il barometro di Torricelli: la pressione atmosferica sostiene una colonna di mercurio alta circa \SI{760}{\milli\metre}, con il vuoto sopra. (b) Il manometro a tubo aperto: la differenza di livello $\Delta h$ del liquido nei due rami misura la differenza fra la pressione $p$ del gas nel recipiente e quella atmosferica.}
+\label{fig:ud3-misura}
+\end{figure}
+
+\subsection{Il manometro e la pressione relativa}
+
+Il \textbf{manometro a tubo aperto} è un tubo a U che contiene un liquido; un ramo è collegato al recipiente di cui si vuole la pressione $p$, l'altro è aperto all'aria (figura~\ref{fig:ud3-misura}b). Se $p$ è maggiore della pressione atmosferica, il liquido è spinto in basso nel ramo collegato e sale nell'altro, finché la differenza di livello $\Delta h$ compensa la differenza di pressione:
+\[
+  p - p_\text{atm} = \rho\,g\,\Delta h
+\]
+Il manometro misura quindi la differenza fra la pressione e quella atmosferica. Si chiama \textbf{pressione relativa} (o manometrica), mentre quella misurata a partire dal vuoto si chiama \textbf{pressione assoluta}:
+
+\begin{formula}[Pressione assoluta e relativa]
+p_\text{rel} = p_\text{ass} - p_\text{atm}
+\qquad\qquad
+p - p_\text{atm} = \rho\,g\,\Delta h \ \ \text{(manometro)}
+\end{formula}
+
+In medicina le pressioni sono quasi sempre relative: una pressione arteriosa massima di \SI{120}{\mmHg} vuol dire \SI{120}{\mmHg} sopra quella atmosferica, cioè una pressione assoluta di $760 + 120 = \SI{880}{\mmHg}$. Una pressione relativa può essere negativa: la pressione nello spazio fra i due foglietti della pleura è di qualche centimetro d'acqua sotto quella atmosferica, ed è quella che tiene i polmoni espansi contro la parete del torace.
+
+\begin{esempio}[la pressione venosa centrale]
+La pressione venosa centrale, cioè quella del sangue nella vena cava vicino al cuore, si può misurare con un manometro ad acqua collegato a un catetere venoso. La colonna d'acqua si ferma \SI{12}{\centi\metre} sopra il livello del cuore. Quanto vale la pressione venosa centrale in \si{\pascal} e in \si{\mmHg}?
+
+È una pressione relativa di \SI{12}{cm\,H_2O}. In pascal:
+\[
+  \rho g \Delta h = \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{0,12}{\metre} = \SI{1176}{\pascal} \approx \SI{1,2e3}{\pascal}
+\]
+In millimetri di mercurio: $\SI{1176}{\pascal}/\SI{133}{\pascal\per\mmHg} \approx \SI{8,8}{\mmHg}$ (infatti $133 \cdot 8{,}8 = 1170$). Lo stesso risultato si ottiene ricordando che il mercurio è 13,6 volte più denso dell'acqua: $\SI{12}{cm\,H_2O} = \SI{120}{\milli\metre}$ d'acqua $= 120/13{,}6 \approx \SI{8,8}{\mmHg}$. È un valore un po' alto: i valori normali sono fra circa 2 e \SI{8}{\mmHg}.
+\end{esempio}
+
+\begin{applicazione}{lo sfigmomanometro}
+La pressione arteriosa si misura con lo sfigmomanometro: un manicotto gonfiabile avvolto intorno al braccio, collegato a un manometro (a mercurio, oggi quasi abbandonato perché il mercurio è tossico, aneroide o elettronico). Si gonfia il manicotto finché la sua pressione supera quella massima nell'arteria, che si chiude: il sangue non passa. Poi lo si sgonfia lentamente, ascoltando con il fonendoscopio sull'arteria sotto il manicotto.
+\begin{itemize}
+  \item Quando la pressione del manicotto scende sotto la pressione massima (\textbf{sistolica}), a ogni battito l'arteria si apre per un istante: il sangue passa a scatti, veloce e in modo turbolento, cioè formando vortici (sezione~\ref{sec:ud3-moto}), e si sentono dei colpi (i \emph{toni di Korotkoff}). La pressione letta al primo colpo è la sistolica.
+  \item Quando la pressione del manicotto scende sotto la pressione minima (\textbf{diastolica}), l'arteria resta sempre aperta, il flusso torna regolare e i colpi spariscono. La pressione letta in quel momento è la diastolica.
+\end{itemize}
+Un valore normale è intorno a \SI{120}{\mmHg} di sistolica e \SI{80}{\mmHg} di diastolica, e si scrive 120/80. Per la legge di Stevino il manicotto va tenuto all'altezza del cuore: più in basso la lettura è più alta, più in alto è più bassa, di circa \SI{0,8}{\mmHg} per centimetro.
+\end{applicazione}
+
+\input{ud3/generati/lampo-ud3-braccio}
+
+% -------------------------------------------------------------------------
+\section{I fluidi in movimento}
+\label{sec:ud3-moto}
+
+\subsection{Come si descrive il moto di un fluido}
+
+Per descrivere un fluido in movimento non si segue ogni sua particella: si guarda, in ogni punto del tubo o del vaso, con che velocità passa il fluido in quel punto. Una \textbf{linea di corrente} è una linea che in ogni suo punto è tangente alla velocità del fluido; un fascio di linee di corrente forma un \textbf{tubo di flusso}, che si comporta come un tubo con le pareti: il fluido scorre lungo le linee di corrente e non le attraversa. Il moto di un fluido può essere classificato in due modi diversi, che non vanno confusi: secondo come cambia nel tempo, e secondo come è ordinato.
+
+\textbf{Moto stazionario.} Il moto è \textbf{stazionario} se in ogni punto la velocità del fluido non cambia nel tempo. La velocità può essere diversa da un punto all'altro (più alta in un restringimento, per esempio), ma in un punto fissato è sempre la stessa. In un moto stazionario le linee di corrente restano sempre le stesse, e coincidono con le traiettorie delle particelle. È stazionario, con buona approssimazione, il flusso dell'acqua in un tubo collegato a un rubinetto aperto sempre allo stesso modo, o quello della soluzione di una flebo. Il flusso del sangue nelle grandi arterie invece non è stazionario: è \emph{pulsatile}, accelera a ogni sistole e rallenta nella diastole. Nei capillari e nelle vene diventa quasi continuo, e lo si può trattare come stazionario.
+
+\textbf{Moto laminare e moto turbolento.} Il moto è \textbf{laminare} quando il fluido scorre in strati (lamine) paralleli, che scivolano gli uni sugli altri senza mescolarsi: le linee di corrente sono regolari e non si incrociano (figura~\ref{fig:ud3-regimi}a). Il moto è \textbf{turbolento} quando il fluido forma vortici e si rimescola: la velocità in ogni punto cambia di continuo, in modo irregolare, sia in intensità sia in direzione (figura~\ref{fig:ud3-regimi}b). A parità di fluido e di tubo, il moto è laminare a velocità basse e diventa turbolento quando la velocità supera un certo valore critico; la turbolenza compare più facilmente nei tubi larghi, dopo un restringimento, una biforcazione o una valvola. Il moto turbolento dissipa molta più energia di quello laminare ed è rumoroso: il sangue che scorre in modo turbolento produce vibrazioni che si sentono con il fonendoscopio (i \emph{soffi}).
+
+\begin{figure}[h]
+\centering
+\input{ud3/figure/regimi}
+\caption{(a) Moto laminare: il fluido scorre in strati paralleli, le linee di corrente sono regolari. (b) Moto turbolento: dopo un restringimento il fluido forma vortici e si rimescola, e la velocità in ogni punto cambia di continuo.}
+\label{fig:ud3-regimi}
+\end{figure}
+
+\begin{attenzione}[stazionario non vuol dire laminare]
+«Stazionario» riguarda il \emph{tempo}: la velocità in ogni punto è costante. «Laminare» riguarda l'\emph{ordine} del moto: il fluido scorre in strati che non si mescolano. Un moto turbolento non è mai stazionario nel dettaglio, perché la velocità in ogni punto fluttua; un moto laminare può essere stazionario (una flebo) o non stazionario (il sangue che accelera e rallenta in un'arteria sana). Il contrario di turbolento è laminare; il contrario di stazionario è variabile nel tempo.
+\end{attenzione}
+
+\subsection{Portata e flusso}
+
+La \textbf{portata} $Q$ di un condotto è il volume di fluido che attraversa una sua sezione in un secondo: $Q = \Delta V/\Delta t$. Nel SI si misura in \si{\metre\cubed\per\second}; in medicina si usano spesso i litri al minuto o i millilitri al secondo.
+
+Si consideri un tubo di sezione $S$ in cui il fluido scorre con velocità $v$ (figura~\ref{fig:ud3-continuita}). In un intervallo $\Delta t$ il fluido che attraversa la sezione avanza di un tratto $v\,\Delta t$, e occupa un cilindro di base $S$ e altezza $v\,\Delta t$, cioè di volume $\Delta V = S v\,\Delta t$. Dividendo per $\Delta t$:
+\begin{formula}[Portata]
+Q = \frac{\Delta V}{\Delta t} = S\,v
+\qquad\qquad
+\SI{1}{\litre\per\minute} = \frac{\SI{e-3}{\metre\cubed}}{\SI{60}{\second}} \approx \SI{1,7e-5}{\metre\cubed\per\second}
+\end{formula}
+Nei vasi reali la velocità non è la stessa in tutti i punti della sezione (sezione~\ref{sec:ud3-viscosita}): $v$ è allora la velocità media sulla sezione.
+
+La parola \textbf{flusso} si usa in due sensi. In senso generale indica lo scorrere stesso del fluido («il flusso sanguigno nel rene»). In senso quantitativo è il \emph{flusso della velocità attraverso una superficie}: il prodotto dell'area della superficie per la componente della velocità perpendicolare a essa, $\Phi = S\,v\cos\alpha$ (il coseno: UD1, sezione «Le funzioni trigonometriche»), dove $\alpha$ è l'angolo fra la velocità e la perpendicolare alla superficie. Per una sezione del tubo, perpendicolare alla velocità, $\alpha = 0$ e $\cos\alpha = 1$: il flusso è proprio la portata, $\Phi = Sv = Q$. Una superficie parallela alla velocità ($\alpha = \ang{90}$, $\cos\alpha = 0$) non è attraversata da nessun fluido, e il flusso è zero.
+
+\begin{esempio}[la portata cardiaca]
+A riposo il ventricolo sinistro espelle a ogni battito circa \SI{70}{\milli\litre} di sangue (la gittata sistolica), con una frequenza di 70 battiti al minuto. (a) Quanto vale la portata cardiaca? (b) Con che velocità media scorre il sangue nell'aorta, che ha un raggio di circa \SI{1,0}{\centi\metre}?
+
+(a) La portata è il volume espulso in un minuto:
+\[
+  Q = \SI{70}{\milli\litre} \cdot 70\ \text{battiti al minuto} = \SI{4900}{\milli\litre\per\minute} \approx \SI{4,9}{\litre\per\minute}
+\]
+circa \SI{5}{\litre} al minuto: in un minuto passa per il cuore quasi tutto il sangue del corpo. Nel SI, con $\SI{1}{\litre} = \SI{e-3}{\metre\cubed}$ e $\SI{1}{\minute} = \SI{60}{\second}$:
+\[
+  Q = \frac{\SI{4,9e-3}{\metre\cubed}}{\SI{60}{\second}} = \frac{4{,}9}{6} \cdot 10^{-4}\,\si{\metre\cubed\per\second} \approx \SI{8,2e-5}{\metre\cubed\per\second}
+\]
+(b) La sezione dell'aorta è $S = \pi r^2 = 3{,}14 \cdot (\SI{1,0e-2}{\metre})^2 = \SI{3,14e-4}{\metre\squared}$. Da $Q = Sv$:
+\[
+  v = \frac{Q}{S} = \frac{\SI{8,2e-5}{\metre\cubed\per\second}}{\SI{3,14e-4}{\metre\squared}} = \frac{8{,}2}{3{,}14} \cdot 10^{-1}\,\si{\metre\per\second} \approx \SI{0,26}{\metre\per\second}
+\]
+perché $3{,}14 \cdot 2{,}6 \approx 8{,}2$. È una media su tutto il ciclo: durante la sistole il sangue nell'aorta arriva a circa \SI{1}{\metre\per\second}, nella diastole quasi si ferma.
+\end{esempio}
+
+\subsection{L'equazione di continuità}
+
+Nel moto stazionario in un tubo senza ramificazioni né perdite, la massa di fluido che entra in un tratto in un secondo è uguale a quella che ne esce: altrimenti il fluido si accumulerebbe nel tratto, o ne sparirebbe. È la conservazione della massa. La massa che attraversa una sezione in un secondo è la densità per la portata, $\rho S v$; quindi fra due sezioni qualsiasi, 1 e 2, dello stesso tubo di flusso vale $\rho_1 S_1 v_1 = \rho_2 S_2 v_2$. Per un fluido incomprimibile la densità è la stessa ovunque, e si semplifica:
+
+\begin{formula}[Equazione di continuità]
+S_1\,v_1 = S_2\,v_2
+\qquad\qquad
+Q = S\,v = \text{costante}
+\end{formula}
+
+\begin{figure}[h]
+\centering
+\input{ud3/figure/continuita}
+\caption{Equazione di continuità. Nello stesso tempo $\Delta t$ attraversa la sezione larga $S_1$ e quella stretta $S_2$ lo stesso volume di fluido: il cilindro corto e largo e quello lungo e stretto hanno lo stesso volume. Nel tratto stretto il fluido è più veloce.}
+\label{fig:ud3-continuita}
+\end{figure}
+
+Dove il tubo si restringe il fluido accelera, dove si allarga rallenta: la velocità è inversamente proporzionale all'area della sezione. Si vede aprendo un rubinetto: il getto d'acqua che scende accelera e si assottiglia. Se il condotto si ramifica, la portata del condotto principale è la somma delle portate dei rami, e nell'equazione di continuità $S_2$ è l'area totale delle sezioni dei rami.
+
+\begin{attenzione}[la velocità va con il quadrato del diametro]
+L'area della sezione è $S = \pi d^2/4$: se il diametro di un vaso si dimezza, l'area diventa un quarto e la velocità diventa quattro volte più grande, non due. Il conto si fa sempre con le aree.
+\end{attenzione}
+
+\begin{esempio}[la velocità del sangue nei capillari]
+Il sangue che esce dall'aorta, con la portata dell'esempio precedente, $Q = \SI{8,2e-5}{\metre\cubed\per\second}$, si distribuisce in miliardi di capillari, che messi insieme hanno una sezione totale di circa \SI{3000}{\centi\metre\squared}. Con che velocità media scorre il sangue nei capillari?
+
+La sezione totale nel SI è $\SI{3000}{\centi\metre\squared} = \num{3000} \cdot \SI{e-4}{\metre\squared} = \SI{0,30}{\metre\squared}$. Tutto il sangue che passa nell'aorta passa anche, nello stesso tempo, nei capillari: la portata è la stessa. Quindi
+\[
+  v_\text{cap} = \frac{Q}{S_\text{cap}} = \frac{\SI{8,2e-5}{\metre\cubed\per\second}}{\SI{0,30}{\metre\squared}} \approx \SI{2,7e-4}{\metre\per\second} \approx \SI{0,3}{\milli\metre\per\second}
+\]
+perché $8{,}2/3{,}0 \approx 2{,}7$ e $10^{-5}/10^{-1} = 10^{-4}$. Lo stesso risultato con il rapporto delle aree: la sezione dell'aorta è \SI{3,14}{\centi\metre\squared}, circa mille volte più piccola di quella dei capillari, quindi nei capillari il sangue è circa mille volte più lento che nell'aorta: $\SI{0,26}{\metre\per\second}/1000 \approx \SI{0,26}{\milli\metre\per\second}$. Un capillare è lungo circa un millimetro: il sangue lo attraversa in qualche secondo, il tempo che serve per gli scambi di ossigeno, anidride carbonica e nutrienti con i tessuti.
+\end{esempio}
+
+\input{ud3/generati/lampo-ud3-continuita}
+
+% -------------------------------------------------------------------------
+\section{Il teorema di Bernoulli}
+\label{sec:ud3-bernoulli}
+
+\subsection{L'energia di un fluido in movimento}
+
+Per un \textbf{fluido ideale} (incomprimibile e senza attrito interno, cioè non viscoso) in moto stazionario, la pressione, la velocità e la quota lungo un tubo di flusso sono legate da una sola equazione, che esprime la conservazione dell'energia (UD2). Si seguono due idee della meccanica: un corpo di massa $m$ con velocità $v$ ha un'\emph{energia cinetica} $\frac{1}{2}mv^2$, e alla quota $h$ un'\emph{energia potenziale} $mgh$; il lavoro fatto su di lui dalle forze che lo spingono (forza per spostamento) è uguale all'aumento della sua energia.
+
+Si segue un piccolo volume $\Delta V$ di fluido, di massa $\rho\,\Delta V$, che passa da una sezione 1 a una sezione 2 del tubo, che può anche salire o scendere fra la quota $h_1$ e la quota $h_2$. Il fluido che gli sta dietro lo spinge con la forza $p_1 S_1$, quello che gli sta davanti lo frena con la forza $p_2 S_2$. Nella sezione 1 la forza $p_1S_1$ spinge il fluido avanti di un tratto $\Delta x_1$ e fa il lavoro $p_1S_1\,\Delta x_1 = p_1\,\Delta V$. Nella sezione 2 la forza $p_2S_2$ agisce contro il moto, mentre il fluido avanza di $\Delta x_2$, e fa il lavoro negativo $-p_2S_2\,\Delta x_2 = -p_2\,\Delta V$. I due volumi sono uguali per l'equazione di continuità, $S_1\,\Delta x_1 = S_2\,\Delta x_2 = \Delta V$, e il lavoro totale delle forze di pressione è $(p_1 - p_2)\,\Delta V$. Questo lavoro è uguale all'aumento di energia cinetica e potenziale del volume:
+\[
+  (p_1 - p_2)\,\Delta V = \tfrac{1}{2}\rho\,\Delta V\,(v_2^2 - v_1^2) + \rho\,\Delta V\,g\,(h_2 - h_1)
+\]
+Dividendo per $\Delta V$ e portando a sinistra tutto quello che riguarda la sezione 1 e a destra quello che riguarda la 2, si ottiene $p_1 + \frac{1}{2}\rho v_1^2 + \rho g h_1 = p_2 + \frac{1}{2}\rho v_2^2 + \rho g h_2$. Poiché le sezioni 1 e 2 sono qualsiasi:
+
+\begin{formula}[Teorema di Bernoulli]
+p + \tfrac{1}{2}\rho v^2 + \rho g h = \text{costante lungo un tubo di flusso}
+\end{formula}
+
+I tre termini sono energie per unità di volume: $\frac{1}{2}\rho v^2$ è l'energia cinetica di un metro cubo di fluido, $\rho g h$ la sua energia potenziale, e la pressione $p$ è il lavoro che le forze di pressione possono fare su un metro cubo. Infatti $\si{\pascal} = \si{\newton\per\metre\squared} = \si{\newton\metre\per\metre\cubed} = \si{\joule\per\metre\cubed}$.
+
+\begin{attenzione}[qui $h$ è la quota]
+Nel teorema di Bernoulli $h$ è la \emph{quota} del punto, misurata verso l'alto a partire da un livello qualsiasi; nella legge di Stevino era la \emph{profondità}, misurata verso il basso dalla superficie. Le due leggi sono coerenti: con il fluido fermo ($v = 0$) il teorema di Bernoulli dice $p + \rho g h = \text{costante}$, cioè la pressione cresce quando la quota diminuisce, $p_2 - p_1 = \rho g (h_1 - h_2)$, che è la legge di Stevino.
+\end{attenzione}
+
+Il teorema vale solo nelle sue condizioni: fluido incomprimibile, non viscoso, moto stazionario, e punti sullo stesso tubo di flusso. Il sangue è viscoso, e lungo un vaso perde pressione per attrito (sezione~\ref{sec:ud3-viscosita}); il teorema di Bernoulli descrive bene solo quello che succede in tratti brevi, dove la velocità cambia molto, come in un restringimento.
+
+\subsection{Dove il fluido è più veloce, la pressione è più bassa}
+
+In un tubo orizzontale $h$ è la stessa ovunque, e il teorema di Bernoulli diventa
+\[
+  p_1 + \tfrac{1}{2}\rho v_1^2 = p_2 + \tfrac{1}{2}\rho v_2^2
+  \qquad\qquad
+  p_1 - p_2 = \tfrac{1}{2}\rho\left(v_2^2 - v_1^2\right)
+\]
+Nel restringimento il fluido accelera (equazione di continuità), e per accelerare deve essere spinto da una pressione più alta dietro che davanti: \emph{dove la velocità è più alta, la pressione è più bassa} (effetto Venturi, figura~\ref{fig:ud3-stenosi}). È un risultato che sorprende, perché verrebbe da pensare che in un tubo stretto il fluido sia «più schiacciato».
+
+\begin{figure}[h]
+\centering
+\input{ud3/figure/stenosi}
+\caption{Un fluido ideale scorre in un tubo orizzontale con un restringimento. Nel tratto stretto la velocità è maggiore e la pressione è minore: lo mostrano i tubicini verticali, in cui il liquido sale tanto più quanto più alta è la pressione nel punto sotto di loro.}
+\label{fig:ud3-stenosi}
+\end{figure}
+
+\subsection{Stenosi e aneurisma}
+
+Una \textbf{stenosi} è un restringimento di un vaso, per esempio per una placca aterosclerotica. Per l'equazione di continuità nel tratto ristretto il sangue accelera, e per il teorema di Bernoulli la sua pressione cala. Due conseguenze:
+\begin{itemize}
+  \item se la pressione nel tratto ristretto scende sotto quella dei tessuti che circondano il vaso, la parete può essere schiacciata e il vaso chiudersi per un istante; poi il flusso si ferma, la pressione risale, il vaso si riapre, e così via. Il vaso vibra e il flusso diventa irregolare;
+  \item a valle del restringimento il getto veloce diventa facilmente turbolento: si sente un soffio con il fonendoscopio, e i vortici sollecitano la parete e favoriscono la formazione di trombi.
+\end{itemize}
+
+Un \textbf{aneurisma} è una dilatazione della parete di un'arteria, per esempio dell'aorta addominale. Nel tratto dilatato la sezione è più grande, quindi il sangue rallenta e la pressione è un po' più alta che nel tratto sano: la parete, già indebolita, è spinta ancora di più verso l'esterno.
+
+\begin{esempio}
+(a) In un'arteria il sangue ($\rho = \SI{1060}{\kilo\gram\per\metre\cubed}$) scorre a \SI{0,50}{\metre\per\second}. Una placca riduce l'area della sezione a un quarto. Di quanto cala la pressione nel tratto ristretto? (b) In un altro tratto la velocità è \SI{0,40}{\metre\per\second} e un aneurisma raddoppia l'area della sezione. Di quanto aumenta la pressione nell'aneurisma? Si trascuri la viscosità.
+
+(a) Per l'equazione di continuità, con l'area divisa per 4 la velocità si moltiplica per 4: $v_2 = 4 \cdot \SI{0,50}{\metre\per\second} = \SI{2,0}{\metre\per\second}$. Il vaso si può considerare orizzontale, quindi
+\[
+  p_1 - p_2 = \tfrac{1}{2}\rho\left(v_2^2 - v_1^2\right) = 530\,\si{\kilo\gram\per\metre\cubed} \cdot (4{,}0 - 0{,}25)\,\si{\metre\squared\per\second\squared} = 530 \cdot 3{,}75\,\si{\pascal} \approx \SI{2,0e3}{\pascal}
+\]
+dove $\frac{1}{2} \cdot 1060 = 530$ e $530 \cdot 3{,}75 = 1590 + 397{,}5 = 1987{,}5$. In millimetri di mercurio: $\SI{2000}{\pascal}/\SI{133}{\pascal\per\mmHg} \approx \SI{15}{\mmHg}$ (infatti $133 \cdot 15 = 1995$).
+
+(b) Con l'area doppia la velocità si dimezza: $v_2 = \SI{0,20}{\metre\per\second}$. Ora la velocità diminuisce e la pressione aumenta di
+\[
+  p_2 - p_1 = \tfrac{1}{2}\rho\left(v_1^2 - v_2^2\right) = 530 \cdot (0{,}16 - 0{,}04)\,\si{\pascal} = 530 \cdot 0{,}12\,\si{\pascal} \approx \SI{64}{\pascal}
+\]
+circa $64/133 \approx \SI{0,5}{\mmHg}$: un aumento piccolo. Nell'aneurisma l'effetto Bernoulli conta poco; il pericolo vero, come vedremo con la legge di Laplace (sezione~\ref{sec:ud3-superficie}), è che in un vaso più largo la parete deve reggere una tensione più grande.
+\end{esempio}
+
+\input{ud3/generati/lampo-ud3-bernoulli}
+
+\begin{applicazione}{l'ecocardiografia e la stenosi aortica}
+Quando la valvola aortica è stenotica, il sangue che esce dal ventricolo deve passare per un orifizio stretto, e lo attraversa a grande velocità. L'eco-Doppler (UD4) misura questa velocità, e dal teorema di Bernoulli il cardiologo ricava la differenza di pressione fra il ventricolo e l'aorta. Se la velocità prima della valvola è trascurabile, la differenza è $\Delta p = \frac{1}{2}\rho v^2 = 530\,v^2$ in pascal, con $v$ in metri al secondo; in millimetri di mercurio $530/133 \approx 4$, e si ottiene la regola usata in ecocardiografia:
+\[
+  \Delta p\ (\text{in } \si{\mmHg}) \approx 4\,v^2\ (v \text{ in } \si{\metre\per\second})
+\]
+Una velocità di \SI{4}{\metre\per\second} attraverso la valvola corrisponde a $4 \cdot 4^2 = \SI{64}{\mmHg}$: il ventricolo deve produrre una pressione di \SI{64}{\mmHg} più alta di quella dell'aorta. Una velocità di \SI{4}{\metre\per\second} o più è uno dei criteri della stenosi aortica grave.
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{I fluidi reali: la viscosità}
+\label{sec:ud3-viscosita}
+
+\subsection{L'attrito interno dei fluidi}
+
+Un fluido reale, come il sangue, oppone resistenza allo scorrimento di uno strato sull'altro: ha un attrito interno, la \textbf{viscosità}. Il miele è molto viscoso, l'acqua poco. Per vederla si mette uno strato di fluido di spessore $\Delta y$ fra due lastre parallele di area $S$ (figura~\ref{fig:ud3-viscosita}a). La lastra di sotto è ferma; quella di sopra si muove con velocità costante $v$, tirata da una forza $F$. Lo strato di fluido a contatto con ciascuna lastra si muove con lei (il fluido aderisce alle pareti); gli strati intermedi scivolano gli uni sugli altri, con una velocità che cresce in modo uniforme da 0 a $v$. Ogni strato è frenato da quello più lento sotto di lui e trascinato da quello più veloce sopra.
+
+Il rapporto fra la differenza di velocità di due strati e la loro distanza, $\Delta v/\Delta y$, si chiama \textbf{gradiente di velocità}: dice quanto rapidamente cambia la velocità passando da uno strato all'altro, e si misura in $(\si{\metre\per\second})/\si{\metre} = \si{\per\second}$. Fra le due lastre il gradiente è lo stesso ovunque, $v/\Delta y$. Per molti fluidi, come l'acqua e il plasma, la forza che serve per mantenere il moto è proporzionale all'area e al gradiente di velocità:
+\begin{formula}[Viscosità (legge di Newton)]
+F = \eta\,S\,\frac{\Delta v}{\Delta y}
+\qquad\qquad
+[\eta] = \si{\pascal\second}
+\end{formula}
+La costante $\eta$ (eta) è il \textbf{coefficiente di viscosità} del fluido. Dalla formula, $\eta = F/(S\cdot\Delta v/\Delta y)$ si misura in $\si{\newton\per\metre\squared}\cdot\si{\second} = \si{\pascal\second}$. I fluidi che seguono questa legge, con $\eta$ costante, si chiamano \emph{newtoniani}. La viscosità dei liquidi diminuisce molto quando la temperatura aumenta (il miele scaldato scorre meglio). Per il sangue conta anche l'\emph{ematocrito}, la frazione del volume del sangue occupata dai globuli rossi, che normalmente è intorno al 40-45\%.
+
+\begin{center}
+\small
+\begin{tabular}{@{}l r@{}}
+\toprule
+Fluido & $\eta$ (\si{\pascal\second}) \\
+\midrule
+aria (\SI{20}{\celsius}) & \num{1,8e-5} \\
+acqua (\SI{20}{\celsius}) & \num{1,0e-3} \\
+acqua (\SI{37}{\celsius}) & \num{0,7e-3} \\
+plasma (\SI{37}{\celsius}) & \num{1,2e-3} \\
+sangue (\SI{37}{\celsius}, ematocrito normale) & da \num{3e-3} a \num{4e-3} \\
+olio d'oliva (\SI{20}{\celsius}) & \num{8e-2} \\
+glicerina (\SI{20}{\celsius}) & \num{1,4} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[h]
+\centering
+\input{ud3/figure/viscosita}
+\caption{(a) Un fluido viscoso fra una lastra ferma e una che si muove con velocità $v$: la velocità degli strati cresce in modo uniforme da 0 a $v$, e il gradiente di velocità è $v/\Delta y$. (b) Moto laminare in un tubo: la velocità è massima sull'asse e nulla sulla parete, con un profilo a parabola. Il gradiente di velocità, cioè la pendenza del profilo, è massimo vicino alla parete e nullo sull'asse.}
+\label{fig:ud3-viscosita}
+\end{figure}
+
+\subsection{Il moto laminare in un tubo: il profilo parabolico}
+
+In un tubo cilindrico di raggio $r$ un fluido viscoso in moto laminare scorre in strati a forma di cilindri concentrici, che scivolano gli uni dentro gli altri come i tubi di un cannocchiale. Lo strato a contatto con la parete è fermo; ogni strato è frenato da quello che lo circonda, più lento, e la velocità cresce verso l'asse, dove è massima. Il calcolo, che non serve ricordare, mostra che la velocità a distanza $x$ dall'asse è
+\begin{formula}[Profilo parabolico della velocità]
+v(x) = v_\text{max}\left(1 - \frac{x^2}{r^2}\right)
+\qquad\qquad
+v_\text{media} = \frac{v_\text{max}}{2}
+\end{formula}
+È una parabola (figura~\ref{fig:ud3-viscosita}b): $v = v_\text{max}$ sull'asse ($x = 0$) e $v = 0$ sulla parete ($x = r$). Il gradiente di velocità non è più lo stesso ovunque: è nullo sull'asse, dove il profilo è piatto, e massimo vicino alla parete, dove la velocità cambia più rapidamente. La velocità media sulla sezione, quella che compare nella portata $Q = Sv$, è metà di quella massima.
+
+\begin{richiamo}{la parabola}
+Il grafico di $y = a(1 - x^2/r^2)$ è una parabola con il vertice in $x = 0$, dove vale $a$, simmetrica, che si annulla in $x = \pm r$. La sua pendenza è nulla nel vertice e cresce allontanandosi da esso. Con $a = 1$ e $r = 1$, cioè $y = 1 - x^2$: da $x = 0$ a $x = 0{,}1$ la funzione passa da 1 a $1 - 0{,}01 = 0{,}99$ e scende di $0{,}01$; da $x = 0{,}9$ a $x = 1$ passa da $1 - 0{,}81 = 0{,}19$ a 0 e scende di $0{,}19$, diciannove volte di più sullo stesso tratto. Nel tubo: vicino all'asse gli strati scorrono quasi alla stessa velocità, vicino alla parete con velocità molto diverse.
+\end{richiamo}
+
+\subsection{La legge di Poiseuille}
+
+In un fluido viscoso una differenza di pressione serve anche quando il tubo è orizzontale e di sezione costante: senza una spinta, l'attrito interno fermerebbe il fluido. Lungo un tubo la pressione cala, e la differenza di pressione $\Delta p$ fra i due estremi è ciò che mantiene il moto. Per un fluido newtoniano in moto laminare e stazionario, in un tubo cilindrico rigido di raggio $r$ e lunghezza $L$, la portata è data dalla \textbf{legge di Poiseuille}:
+
+\begin{formula}[Legge di Poiseuille]
+Q = \frac{\pi\,r^4\,\Delta p}{8\,\eta\,L}
+\end{formula}
+
+La portata è proporzionale alla differenza di pressione e inversamente proporzionale alla viscosità e alla lunghezza del tubo. Soprattutto, è proporzionale alla \emph{quarta potenza} del raggio. Il motivo: un raggio più grande dà una sezione più grande, proporzionale a $r^2$, e in più, poiché il fluido al centro è più lontano dalle pareti che lo frenano, una velocità media più grande, anch'essa proporzionale a $r^2$ (si ricava dividendo la portata per l'area: $v_\text{media} = Q/(\pi r^2) = r^2\,\Delta p/(8\eta L)$). Il prodotto va con $r^4$. Per un fluido ideale, senza viscosità, la legge non vale: non servirebbe alcuna differenza di pressione per mantenere il moto in un tubo orizzontale.
+
+\begin{richiamo}{le potenze di un rapporto}
+Se una grandezza è proporzionale a $r^4$ e il raggio si moltiplica per un fattore $k$, la grandezza si moltiplica per $k^4$. Per fare il conto a mente si eleva al quadrato due volte: $k^4 = (k^2)^2$. Con il raggio dimezzato, $k = 1/2$: $(1/2)^2 = 1/4$ e $(1/4)^2 = 1/16$. Con il raggio ridotto del 20\%, $k = 0{,}8$: $0{,}8^2 = 0{,}64$ e $0{,}64^2 \approx 0{,}41$. Con il raggio aumentato del 19\%, $k = 1{,}19$: $1{,}19^2 \approx 1{,}42$ e $1{,}42^2 \approx 2{,}0$.
+\end{richiamo}
+
+Gli ultimi due conti del richiamo dicono che piccole variazioni del raggio cambiano molto la portata: un'arteriola che si restringe del 20\% (vasocostrizione) lascia passare, a parità di pressione, solo il 41\% del sangue di prima; una che si allarga del 19\% (vasodilatazione) ne fa passare il doppio. È così che l'organismo distribuisce il sangue fra gli organi: regolando il raggio delle arteriole.
+
+\input{ud3/generati/lampo-ud3-poiseuille}
+
+\subsection{La resistenza idraulica}
+
+La legge di Poiseuille si scrive come $\Delta p = Q R$, dove la \textbf{resistenza idraulica} $R$ del tubo dipende solo dal tubo e dal fluido:
+\begin{formula}[Resistenza idraulica]
+\Delta p = Q\,R
+\qquad\qquad
+R = \frac{8\,\eta\,L}{\pi\,r^4}
+\qquad\qquad
+[R] = \si{\pascal\second\per\metre\cubed}
+\end{formula}
+(Attenzione alle lettere: in questa unità $r$ minuscola è il raggio del tubo, $R$ maiuscola la resistenza.) La resistenza dice quanta differenza di pressione serve per avere una portata di \SI{1}{\metre\cubed\per\second}. La relazione $\Delta p = QR$ vale per qualsiasi condotto in moto laminare, anche non cilindrico; la formula per $R$ vale per il tubo cilindrico. È la stessa forma della legge di Ohm per la corrente elettrica che si vedrà nella UD6, con la differenza di pressione al posto della differenza di potenziale e la portata al posto della corrente.
+
+\begin{esempio}
+Un tratto di arteria ha raggio $r = \SI{2,0}{\milli\metre}$ e lunghezza $L = \SI{10}{\centi\metre}$; il sangue ha viscosità $\eta = \SI{4,0e-3}{\pascal\second}$ e la portata è $Q = \SI{5,0e-6}{\metre\cubed\per\second}$ (\SI{0,3}{\litre\per\minute}). Quanta pressione perde il sangue lungo il tratto, se il moto è laminare?
+
+La quarta potenza del raggio: $r^4 = (\SI{2,0e-3}{\metre})^4 = 16 \cdot 10^{-12}\,\si{\metre\tothe{4}}$, e $\pi r^4 = 3{,}14 \cdot 16 \cdot 10^{-12}\,\si{\metre\tothe{4}} \approx 50 \cdot 10^{-12}\,\si{\metre\tothe{4}} = \SI{5,0e-11}{\metre\tothe{4}}$. Al numeratore $8\eta L = 8 \cdot \SI{4,0e-3}{\pascal\second} \cdot \SI{0,10}{\metre} = \SI{3,2e-3}{\pascal\second\metre}$. La resistenza è
+\[
+  R = \frac{8\eta L}{\pi r^4} = \frac{\SI{3,2e-3}{\pascal\second\metre}}{\SI{5,0e-11}{\metre\tothe{4}}} = 0{,}64 \cdot 10^{8}\,\si{\pascal\second\per\metre\cubed} = \SI{6,4e7}{\pascal\second\per\metre\cubed}
+\]
+e la caduta di pressione
+\[
+  \Delta p = QR = \SI{5,0e-6}{\metre\cubed\per\second} \cdot \SI{6,4e7}{\pascal\second\per\metre\cubed} = 32 \cdot 10^{1}\,\si{\pascal} = \SI{320}{\pascal}
+\]
+circa $320/133 \approx \SI{2,4}{\mmHg}$. Nelle arterie grandi e medie il sangue perde poca pressione; la perde quasi tutta nelle arteriole, dove il raggio è di qualche centesimo di millimetro e la resistenza, con la quarta potenza, è enorme.
+\end{esempio}
+
+\begin{applicazione}{aghi, cannule e flebo}
+La legge di Poiseuille spiega perché il calibro di un ago o di una cannula conta tanto. A parità di lunghezza e di differenza di pressione, una cannula con diametro interno doppio fa passare, in moto laminare, $2^4 = 16$ volte più liquido; una cannula lunga il doppio, la metà. Per questo, quando bisogna infondere molto liquido in fretta (in un'emorragia, per esempio), si scelgono cannule di grosso calibro e corte. In pratica il guadagno è minore di 16, perché il tubo della flebo, in serie con la cannula, ha anch'esso la sua resistenza, e perché a portate alte il moto può diventare turbolento. La viscosità conta allo stesso modo: il sangue per una trasfusione, tre-quattro volte più viscoso di una soluzione fisiologica, scende più lentamente a parità di altezza della sacca, e un farmaco oleoso richiede un ago più grosso di uno acquoso.
+\end{applicazione}
+
+\subsection{Resistenze in serie e in parallelo}
+
+I vasi del corpo sono collegati in due modi (figura~\ref{fig:ud3-circuiti}).
+\begin{itemize}
+  \item \textbf{In serie}, uno dopo l'altro, come l'aorta, un'arteria, un'arteriola: tutto il sangue passa per tutti i tratti, la portata è la stessa, e le cadute di pressione dei singoli tratti si sommano. Da $\Delta p = \Delta p_1 + \Delta p_2 = QR_1 + QR_2$ si ha $R = R_1 + R_2$.
+  \item \textbf{In parallelo}, uno accanto all'altro, come le arterie che portano il sangue ai diversi organi, o i capillari di un letto capillare: tutti i rami hanno agli estremi la stessa differenza di pressione, e le portate dei rami si sommano. Da $Q = Q_1 + Q_2 = \Delta p/R_1 + \Delta p/R_2$ si ha $1/R = 1/R_1 + 1/R_2$.
+\end{itemize}
+
+\begin{formula}[Resistenze in serie e in parallelo]
+R_\text{serie} = R_1 + R_2 + \dots
+\qquad\qquad
+\frac{1}{R_\text{parallelo}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots
+\end{formula}
+
+La resistenza in serie è più grande di ciascuna delle resistenze; quella in parallelo è più piccola della più piccola delle resistenze, perché il fluido ha più strade. Per $n$ rami uguali in parallelo, ciascuno di resistenza $R_1$, la resistenza equivalente è $R_1/n$: per questo i capillari, ciascuno con una resistenza grandissima, messi insieme in parallelo a miliardi hanno una resistenza totale modesta.
+
+\begin{figure}[h]
+\centering
+\input{ud3/figure/circuiti}
+\caption{(a) Due vasi in serie: la portata $Q$ è la stessa, le cadute di pressione si sommano. (b) Due vasi in parallelo: la differenza di pressione $\Delta p$ è la stessa, le portate si sommano, $Q = Q_1 + Q_2$.}
+\label{fig:ud3-circuiti}
+\end{figure}
+
+\begin{richiamo}{la somma degli inversi}
+Per sommare due frazioni con denominatori diversi si portano allo stesso denominatore: $\frac{1}{3} + \frac{1}{6} = \frac{2}{6} + \frac{1}{6} = \frac{3}{6} = \frac{1}{2}$. Il risultato è $1/R$, non $R$: alla fine si capovolge la frazione, e qui $R = 2$. Per due sole resistenze c'è una scorciatoia: $R = R_1 R_2/(R_1 + R_2)$, «prodotto diviso somma»; con 3 e 6, $18/9 = 2$.
+\end{richiamo}
+
+\begin{esempio}[un'embolia in una biforcazione]
+Un'arteria di resistenza $R_0 = \SI{1,0e8}{\pascal\second\per\metre\cubed}$ porta il sangue a una biforcazione, da cui partono due rami in parallelo con $R_1 = \SI{3,0e8}{\pascal\second\per\metre\cubed}$ e $R_2 = \SI{6,0e8}{\pascal\second\per\metre\cubed}$, che sboccano nello stesso vaso. La differenza di pressione fra l'inizio dell'arteria e la fine dei rami è $\Delta p = \SI{6,0e3}{\pascal}$ (circa \SI{45}{\mmHg}). (a) Calcola la portata totale e quella in ciascun ramo. (b) Un embolo chiude il ramo 2: come cambiano le portate?
+
+(a) Le resistenze sono tutte multipli di $10^{8}$: si lavora in queste unità e si rimette $10^{8}$ alla fine. I due rami in parallelo: $1/R_\text{p} = 1/3 + 1/6 = 1/2$ (come nel richiamo), quindi $R_\text{p} = \SI{2,0e8}{\pascal\second\per\metre\cubed}$. L'arteria è in serie con i due rami: $R = R_0 + R_\text{p} = (1{,}0 + 2{,}0) \cdot 10^{8} = \SI{3,0e8}{\pascal\second\per\metre\cubed}$. La portata totale:
+\[
+  Q = \frac{\Delta p}{R} = \frac{\SI{6,0e3}{\pascal}}{\SI{3,0e8}{\pascal\second\per\metre\cubed}} = \SI{2,0e-5}{\metre\cubed\per\second}
+\]
+La differenza di pressione ai capi dei due rami è quella che resta dopo l'arteria: $\Delta p_\text{p} = Q R_\text{p} = \SI{2,0e-5}{\metre\cubed\per\second} \cdot \SI{2,0e8}{\pascal\second\per\metre\cubed} = \SI{4,0e3}{\pascal}$. Quindi
+\[
+  Q_1 = \frac{\SI{4,0e3}{\pascal}}{\SI{3,0e8}{\pascal\second\per\metre\cubed}} \approx \SI{1,33e-5}{\metre\cubed\per\second}
+  \qquad
+  Q_2 = \frac{\SI{4,0e3}{\pascal}}{\SI{6,0e8}{\pascal\second\per\metre\cubed}} \approx \SI{0,67e-5}{\metre\cubed\per\second}
+\]
+Controllo: $1{,}33 + 0{,}67 = 2{,}0$. Il ramo con resistenza doppia porta metà sangue.
+
+(b) Con il ramo 2 chiuso resta una sola strada, in serie: $R' = R_0 + R_1 = (1{,}0 + 3{,}0) \cdot 10^{8} = \SI{4,0e8}{\pascal\second\per\metre\cubed}$, e tutto il sangue passa nel ramo 1:
+\[
+  Q' = Q_1' = \frac{\SI{6,0e3}{\pascal}}{\SI{4,0e8}{\pascal\second\per\metre\cubed}} = \SI{1,5e-5}{\metre\cubed\per\second}
+\]
+La portata totale cala del 25\%, da 2,0 a $\SI{1,5e-5}{\metre\cubed\per\second}$; nel ramo 1 cresce un poco, da 1,33 a $\SI{1,5e-5}{\metre\cubed\per\second}$; il tessuto servito dal ramo 2 non riceve più sangue (ischemia), se non ha altre vie di rifornimento.
+\end{esempio}
+
+\input{ud3/generati/lampo-ud3-parallelo}
+
+\begin{applicazione}{la resistenza periferica e la viscosità del sangue}
+Per tutta la circolazione sistemica vale $\Delta p = QR$: la differenza fra la pressione arteriosa media (circa \SI{90}{\mmHg}) e quella nell'atrio destro (quasi zero) è uguale alla portata cardiaca per la \emph{resistenza periferica totale}. Con $\Delta p = 90 \cdot \SI{133}{\pascal} \approx \SI{1,2e4}{\pascal}$ e $Q = \SI{5}{\litre\per\minute} = \SI{8,3e-5}{\metre\cubed\per\second}$:
+\[
+  R = \frac{\Delta p}{Q} = \frac{\SI{1,2e4}{\pascal}}{\SI{8,3e-5}{\metre\cubed\per\second}} = \frac{1{,}2}{8{,}3} \cdot 10^{9}\,\si{\pascal\second\per\metre\cubed} \approx \SI{1,4e8}{\pascal\second\per\metre\cubed}
+\]
+Se le arteriole si restringono, $R$ aumenta e, a parità di portata, aumenta la pressione arteriosa: è uno dei meccanismi dell'ipertensione. Anche la viscosità del sangue entra nella resistenza. Dipende soprattutto dall'ematocrito, la frazione di globuli rossi già incontrata nella tabella delle viscosità: nella policitemia, o nella disidratazione, il sangue è più viscoso e il cuore deve lavorare di più; nell'anemia è meno viscoso. Il sangue inoltre non è un fluido newtoniano: la sua viscosità diminuisce quando il gradiente di velocità aumenta, perché i globuli rossi si allineano con il flusso.
+\end{applicazione}
+
+\begin{approfondimento}{il numero di Reynolds}
+Il passaggio dal moto laminare a quello turbolento si prevede con un numero puro, il \textbf{numero di Reynolds}, che il syllabus non chiede ma che a volte compare nelle prove d'esame. Per un fluido di densità $\rho$ e viscosità $\eta$ che scorre con velocità media $v$ in un tubo di diametro $D$:
+\[
+  N_\text{R} = \frac{\rho\,v\,D}{\eta}
+\]
+In un tubo liscio il moto è laminare se $N_\text{R}$ è minore di circa 2000, turbolento se è maggiore di circa 3000; in mezzo è instabile. La turbolenza è favorita da velocità alte, tubi larghi e fluidi poco viscosi. Nell'aorta, con $\rho \approx \SI{1,0e3}{\kilo\gram\per\metre\cubed}$, $v = \SI{0,30}{\metre\per\second}$, $D = \SI{2,0e-2}{\metre}$ e $\eta = \SI{4,0e-3}{\pascal\second}$:
+\[
+  N_\text{R} = \frac{10^{3} \cdot 0{,}30 \cdot 2{,}0 \cdot 10^{-2}}{4{,}0 \cdot 10^{-3}} = \frac{6{,}0}{4{,}0 \cdot 10^{-3}} = 1500
+\]
+Il moto medio è laminare, ma nel picco della sistole la velocità è tre volte più alta e il numero di Reynolds si avvicina alla soglia. Una stenosi (velocità più alta) o un'anemia (viscosità più bassa) bastano per superarla: è l'origine dei soffi, e anche dei toni di Korotkoff dello sfigmomanometro.
+\end{approfondimento}
+
+% -------------------------------------------------------------------------
+\section{I fenomeni di superficie}
+\label{sec:ud3-superficie}
+
+\subsection{La tensione superficiale}
+
+Un ago d'acciaio, appoggiato con delicatezza, galleggia sull'acqua, anche se l'acciaio è otto volte più denso; alcuni insetti camminano sulla superficie di uno stagno; una goccia d'acqua che cade, o un po' d'acqua su una superficie cerata, prende la forma di una sfera. La superficie di un liquido si comporta come una membrana elastica tesa.
+
+Il motivo è nelle forze di attrazione fra le molecole del liquido (le forze di \emph{coesione}). Una molecola all'interno è attirata in tutte le direzioni dalle molecole che la circondano, e le attrazioni si compensano. Una molecola in superficie ha vicine solo le molecole sotto e di lato, ed è attirata verso l'interno. Per portare una molecola dall'interno alla superficie bisogna quindi fare un lavoro, e allargare la superficie costa energia: il liquido tende ad avere la superficie più piccola possibile. A parità di volume, la sfera è la forma con la superficie minima, e le gocce piccole sono sferiche.
+
+Si misura con un telaio a U su cui scorre un filo mobile di lunghezza $\ell$ (qui $\ell$ è la lunghezza del filo, non il lato del cubo della sezione~\ref{sec:ud3-archimede}), con una lamina di liquido tesa fra telaio e filo (figura~\ref{fig:ud3-telaio}). La lamina ha due superfici, una davanti e una dietro, e ciascuna tira il filo con una forza proporzionale alla lunghezza del filo. La \textbf{tensione superficiale} $\gamma$ (gamma) è la forza per unità di lunghezza che \emph{una} superficie esercita, parallela a se stessa, su un bordo; è anche il lavoro che serve per aumentare la superficie di \SI{1}{\metre\squared}:
+\begin{formula}[Tensione superficiale]
+\gamma = \frac{F}{\ell}
+\qquad\qquad
+[\gamma] = \si{\newton\per\metre} = \si{\joule\per\metre\squared}
+\end{formula}
+Nel telaio le superfici sono due, e la forza totale sul filo è $F_\text{filo} = 2\gamma\ell$: per ricavare $\gamma$ dalla forza misurata sul filo si divide per $2\ell$, $\gamma = F_\text{filo}/(2\ell)$.
+
+\begin{figure}[h]
+\centering
+\input{ud3/figure/telaio}
+\caption{Il telaio a U per misurare la tensione superficiale. La lamina di liquido, tesa fra il telaio e il filo mobile di lunghezza $\ell$, tira il filo verso il telaio. La lamina ha due superfici: la forza sul filo è $2\gamma\ell$.}
+\label{fig:ud3-telaio}
+\end{figure}
+
+La tensione superficiale diminuisce con la temperatura, e si abbassa molto se nel liquido si scioglie un \emph{tensioattivo}, come il sapone.
+
+\begin{center}
+\small
+\begin{tabular}{@{}l r@{}}
+\toprule
+Liquido & $\gamma$ (\si{\newton\per\metre}) \\
+\midrule
+alcol etilico (\SI{20}{\celsius}) & 0,022 \\
+acqua saponata (\SI{20}{\celsius}) & circa 0,025 \\
+acqua (\SI{37}{\celsius}) & 0,070 \\
+acqua (\SI{20}{\celsius}) & 0,073 \\
+mercurio (\SI{20}{\celsius}) & 0,49 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Le forze di tensione superficiale sono proporzionali a una lunghezza, il peso a un volume. Riducendo le dimensioni di un oggetto di un fattore 10, la forza di tensione superficiale sul suo bordo diventa 10 volte più piccola, il suo peso $10^3 = 1000$ volte più piccolo. Per questo la tensione superficiale conta per le piccole quantità di liquido (gocce, film sottili, liquido nei capillari e negli alveoli) e per gli oggetti piccoli (l'ago, l'insetto), e diventa trascurabile per le grandi masse d'acqua.
+
+\subsection{Le interfacce: liquidi che bagnano e che non bagnano}
+
+Dove un liquido tocca un solido contano anche le forze di attrazione fra le molecole del liquido e quelle del solido (le forze di \emph{adesione}). Se l'adesione prevale sulla coesione il liquido \textbf{bagna} il solido e si allarga su di esso: l'acqua sul vetro pulito. Se prevale la coesione il liquido \textbf{non bagna} e si raccoglie in gocce: il mercurio sul vetro, l'acqua su una superficie cerata. Il bordo del liquido forma con la parete un \textbf{angolo di contatto} $\theta$: minore di \ang{90} per un liquido che bagna (circa \ang{0} per l'acqua sul vetro pulito), maggiore di \ang{90} per uno che non bagna (circa \ang{140} per il mercurio sul vetro). In un tubo la superficie del liquido, il \emph{menisco}, è concava (incurvata verso il basso al centro) se il liquido bagna, convessa se non bagna (figura~\ref{fig:ud3-capillarita}).
+
+\subsection{La capillarità}
+
+In un tubo sottile, un \textbf{capillare}, immerso in un liquido che lo bagna, il liquido risale sopra il livello esterno; in un liquido che non lo bagna, si abbassa (figura~\ref{fig:ud3-capillarita}). È la \textbf{capillarità}. Il liquido che bagna è tirato verso l'alto lungo tutto il bordo del menisco, che è la circonferenza interna del tubo, lunga $2\pi r$. Sul bordo la superficie del liquido tira lungo se stessa, cioè lungo la tangente al menisco, che forma l'angolo $\theta$ con la parete verticale del tubo (figura~\ref{fig:ud3-capillarita}a): la superficie tira ogni metro di bordo con la forza $\gamma$, e di questa la parte verticale è $\gamma\cos\theta$ (UD1, sezione «Le funzioni trigonometriche»). La componente verticale della forza di tensione superficiale, $2\pi r\,\gamma\cos\theta$, sostiene il peso della colonna sollevata, che ha volume $\pi r^2 h$ e peso $\rho\,\pi r^2 h\,g$. Uguagliando e semplificando $\pi r$:
+\begin{formula}[Capillarità (legge di Jurin)]
+h = \frac{2\,\gamma\cos\theta}{\rho\,g\,r}
+\end{formula}
+L'altezza è inversamente proporzionale al raggio del tubo: in un capillare con raggio metà il liquido sale il doppio. Se il liquido non bagna, $\theta > \ang{90}$: $\cos\theta$ è negativo per angoli fra \ang{90} e \ang{180} (UD1, sottosezione «Angoli maggiori di \ang{90}»), e così anche $h$: il liquido si abbassa.
+
+\begin{figure}[h]
+\centering
+\input{ud3/figure/capillarita}
+\caption{Capillarità. (a) L'acqua bagna il vetro: il menisco è concavo e l'acqua risale nel capillare di un'altezza $h$, tanto maggiore quanto più sottile è il tubo. (b) Il mercurio non bagna il vetro: il menisco è convesso e il mercurio si abbassa. (c) L'angolo di contatto $\theta$ si misura dentro il liquido, fra la superficie solida e la tangente alla superficie del liquido nel punto di contatto: minore di \ang{90} se il liquido bagna, maggiore se non bagna. In (a) è segnato nel capillare largo, fra la parete e la tangente al menisco.}
+\label{fig:ud3-capillarita}
+\end{figure}
+
+\begin{esempio}
+Di quanto sale l'acqua ($\gamma = \SI{0,073}{\newton\per\metre}$, $\theta \approx \ang{0}$) in un capillare di vetro di raggio \SI{0,10}{\milli\metre}?
+
+Con $\cos\ang{0} = 1$ e $r = \SI{1,0e-4}{\metre}$:
+\[
+  h = \frac{2\gamma}{\rho g r} = \frac{2 \cdot \SI{0,073}{\newton\per\metre}}{\SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{1,0e-4}{\metre}} = \frac{0{,}146}{0{,}98}\,\si{\metre} \approx \SI{0,15}{\metre}
+\]
+perché al denominatore $1000 \cdot 9{,}8 \cdot 10^{-4} = 0{,}98$. Circa \SI{15}{\centi\metre}: in un capillare dieci volte più largo, con raggio di \SI{1}{\milli\metre}, l'acqua salirebbe solo di \SI{1,5}{\centi\metre}.
+\end{esempio}
+
+\begin{applicazione}{prelievi capillari e garze}
+Per il prelievo di una goccia di sangue dal polpastrello, per esempio per misurare l'ematocrito, si avvicina alla goccia un tubicino di vetro sottile: il sangue, che bagna il vetro, entra da solo per capillarità. Il tubicino si tiene quasi orizzontale: così il peso della colonna non frena la risalita, e il tubicino si riempie per buona parte della sua lunghezza. Per capillarità funzionano anche le garze e le medicazioni assorbenti, fatte di fibre fitte con spazi sottili fra loro, che il liquido di una ferita riempie da solo.
+\end{applicazione}
+
+\subsection{La pressione di curvatura e la legge di Laplace}
+
+Una superficie di liquido piana non esercita alcuna forza perpendicolare a se stessa: tira solo lungo il proprio piano, e la pressione dalle sue due parti è la stessa. Una superficie \emph{curva}, invece, come quella di una goccia o di una bolla, tende ad appiattirsi, come una membrana elastica tesa su una sfera, e spinge verso l'interno della curvatura. All'equilibrio la pressione dalla parte concava (l'interno della goccia o della bolla) è più alta di quella dalla parte convessa. Questa differenza è la \textbf{pressione di curvatura}, e la sua relazione con il raggio è la \textbf{legge di Laplace}:
+
+\begin{formula}[Legge di Laplace]
+\Delta p = \frac{2\gamma}{r} \ \ \text{(goccia, bolla in un liquido)}
+\qquad
+\Delta p = \frac{4\gamma}{r} \ \ \text{(bolla di sapone)}
+\end{formula}
+
+Una bolla di sapone ha due superfici, quella interna e quella esterna della lamina, e la pressione di curvatura raddoppia. Il significato da ricordare è qualitativo:
+\begin{itemize}
+  \item la pressione di curvatura è tanto più grande quanto più piccolo è il raggio: una goccia piccola o una bolla piccola hanno dentro una pressione più alta di una grande;
+  \item per una superficie piana ($r$ infinitamente grande) la pressione di curvatura è nulla;
+  \item a parità di raggio, è proporzionale alla tensione superficiale: un tensioattivo la riduce.
+\end{itemize}
+
+\input{ud3/generati/lampo-ud3-laplace}
+
+\begin{applicazione}{gli alveoli e il surfattante}
+Gli alveoli polmonari sono piccole sacche di raggio intorno a \SI{0,1}{\milli\metre}, rivestite all'interno da un velo di liquido: ciascuno è come una bolla in un liquido: ha una sola superficie curva, quella fra il liquido e l'aria dell'alveolo, e vale quindi $\Delta p = 2\gamma/r$. Se quel liquido fosse acqua ($\gamma = \SI{0,070}{\newton\per\metre}$ a \SI{37}{\celsius}), per tenere aperto un alveolo servirebbe una differenza di pressione
+\[
+  \Delta p = \frac{2\gamma}{r} = \frac{2 \cdot \SI{0,070}{\newton\per\metre}}{\SI{1,0e-4}{\metre}} = \SI{1400}{\pascal} \approx \SI{14}{cm\,H_2O}
+\]
+($1400/98 \approx 14$). Ci sono due problemi: respirare richiederebbe molto lavoro, e gli alveoli sarebbero instabili, perché quelli più piccoli, con una pressione di curvatura maggiore, si svuoterebbero in quelli più grandi, come le bolle del quesito lampo. Il liquido alveolare contiene invece il \textbf{surfattante}, una miscela di fosfolipidi e proteine prodotta dagli pneumociti di tipo II, che abbassa la tensione superficiale: con $\gamma \approx \SI{0,025}{\newton\per\metre}$ la pressione necessaria scende a $2 \cdot 0{,}025/10^{-4} = \SI{500}{\pascal} \approx \SI{5}{cm\,H_2O}$. In più il surfattante è più concentrato, e quindi più efficace, quando l'alveolo è piccolo: la tensione superficiale cala proprio dove la legge di Laplace la renderebbe più pericolosa, e gli alveoli restano stabili. I neonati molto prematuri non producono ancora abbastanza surfattante: i loro alveoli tendono a collassare (sindrome da distress respiratorio del neonato), e si cura somministrando surfattante nei polmoni.
+\end{applicazione}
+
+\begin{applicazione}{la parete dei vasi e l'aneurisma}
+La legge di Laplace vale anche per un vaso sanguigno, che è un tubo di raggio $r$ con dentro una pressione $\Delta p$ più alta di fuori. Per un cilindro, la tensione $T$ che la parete deve sopportare (la forza per unità di lunghezza che tiene unita la parete, in \si{\newton\per\metre}, come $\gamma$) è
+\[
+  T = \Delta p\;r
+\]
+È la stessa legge di Laplace, scritta per la parete: una sfera è curva in due direzioni e dà $\Delta p = 2T/r$, come la goccia; un cilindro è curvo in una sola direzione, intorno all'asse, e dà $\Delta p = T/r$, cioè $T = \Delta p\,r$. Qui $T$ non è una proprietà di un liquido, come $\gamma$, ma la tensione che il tessuto della parete deve reggere. Nell'aorta, con $r = \SI{1,2}{\centi\metre}$ e $\Delta p = \SI{100}{\mmHg} = 100 \cdot \SI{133}{\pascal} = \SI{1,33e4}{\pascal}$, la tensione è $T = \SI{1,33e4}{\pascal} \cdot \SI{1,2e-2}{\metre} \approx \SI{160}{\newton\per\metre}$ (infatti $1{,}33 \cdot 1{,}2 \approx 1{,}6$). In un capillare, con $r = \SI{4}{\micro\metre}$ e $\Delta p = \SI{25}{\mmHg} \approx \SI{3,3e3}{\pascal}$, è $T = \SI{3,3e3}{\pascal} \cdot \SI{4e-6}{\metre} \approx \SI{1,3e-2}{\newton\per\metre}$, più di diecimila volte meno: per questo il capillare può avere una parete sottilissima, fatta di un solo strato di cellule, che lascia passare gli scambi. In un aneurisma il raggio cresce, e con esso la tensione sulla parete, già indebolita: la parete si sfianca ancora, il raggio cresce di più, e il circolo vizioso può portare alla rottura.
+\end{applicazione}
+
+\begin{applicazione}{l'embolia gassosa}
+Una bolla d'aria entrata in un vaso, per esempio con un'iniezione endovenosa o da un catetere, viaggia con il sangue finché non arriva a un vaso troppo stretto per lei. Lì si incastra e si deforma: per spingerla avanti il menisco davanti deve incurvarsi più di quello dietro, e per la legge di Laplace serve una differenza di pressione in più fra i due lati della bolla. Poiché la pressione di curvatura è inversamente proporzionale al raggio, nei vasi più sottili questa pressione in più è grande; più bolle in fila sommano le loro resistenze, come resistenze in serie, e possono fermare del tutto il flusso. È l'\textbf{embolia gassosa}: il tessuto a valle resta senza sangue. Per questo prima di un'iniezione endovenosa si eliminano le bolle d'aria dalla siringa e dal deflussore, e per lo stesso motivo è pericolosa la risalita troppo rapida dei subacquei, durante la quale si formano bolle di gas nel sangue.
+\end{applicazione}
+
+\riepilogoformule

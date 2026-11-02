@@ -1,0 +1,33 @@
+% (a) Fluido viscoso fra due lastre: profilo lineare. (b) Moto laminare in un tubo:
+% profilo parabolico, v = vmax (1 - x^2/r^2).
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % (a)
+  \fill[richiamo!50] (0,-0.15) rectangle (4,0);
+  \fill[richiamo!50] (0,1.6) rectangle (4,1.75);
+  \fill[formula!10] (0,0) rectangle (4,1.6);
+  \draw (0,-0.15) rectangle (4,0) (0,1.6) rectangle (4,1.75);
+  \foreach \y in {0.2,0.47,0.73,1.0,1.27} {
+    \draw[->, formula, thick] (0.6,\y) -- ({0.6+1.7*\y/1.6},\y);
+  }
+  \draw[dashed, richiamo] (0.6,0) -- (0.6+1.7,1.6);
+  \draw[->, very thick, attenzione] (2.6,1.95) -- (3.7,1.95) node[right] {$v$};
+  \node[left] at (0,1.68) {mobile};
+  \node[left] at (0,-0.08) {ferma};
+  \draw[|<->|] (3.6,0) -- (3.6,1.6) node[midway, right] {$\Delta y$};
+  \node at (2,-0.55) {(a)};
+
+  % (b)
+  \begin{scope}[xshift=6.3cm, yshift=0.8cm]
+    \fill[formula!10] (0,-1) rectangle (4.2,1);
+    \draw[very thick] (0,-1) -- (4.2,-1) (0,1) -- (4.2,1);
+    \draw[dashed, richiamo] (0,0) -- (4.2,0);
+    \foreach \y in {-0.85,-0.6,-0.3,0,0.3,0.6,0.85} {
+      \draw[->, formula, thick] (0.8,\y) -- ({0.8+2.2*(1-\y*\y)},\y);
+    }
+    \draw[esempio, thick, domain=-1:1, samples=40] plot ({0.8+2.2*(1-\x*\x)}, \x);
+    \draw (0.8,-1) -- (0.8,1);
+    \node[right] at (3.0,0.15) {$v_\text{max}$};
+    \draw[|<->|] (-0.25,0) -- (-0.25,1) node[midway, left] {$r$};
+    \node at (2.1,-1.35) {(b)};
+  \end{scope}
+\end{tikzpicture}

@@ -1,0 +1,257 @@
+# Esercizi della UD3: fonte unica (ADR 0006). `uv run controllo ud3` ne ricava
+# generati/eserciziario.tex, un generati/lampo-<id>.tex per ogni quesito lampo,
+# la pagina web build/web/ud3.html, e ricalcola ogni risultato.
+#
+# Il formato è descritto in testa a libro/ud7/esercizi.toml.
+# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
+# arriveranno con il ticket dell'eserciziario UD3.
+
+titolo = "Eserciziario UD3 · Meccanica dei fluidi"
+
+# ==================================================================== quesiti lampo, in ordine di dispensa
+
+[[quesito]]
+id = "ud3-densita"
+tipo = "completamento"
+lampo = true
+testo = '''Una sacca contiene {{V}} di sangue, che ha densità {{rho}}. La massa del sangue nella sacca, in grammi, è \completa.'''
+dati.V = { valore = 500, unita = "\\milli\\litre" }
+dati.rho = { valore = "1,06", unita = "\\gram\\per\\centi\\metre\\cubed" }
+calcolo = "rho * V"
+risposta = "530"
+soluzione = '''Un millilitro è un centimetro cubo, quindi il volume è $V = \SI{500}{\centi\metre\cubed}$. Dalla definizione di densità, $\rho = m/V$:
+\[
+  m = \rho V = \SI{1,06}{\gram\per\centi\metre\cubed} \cdot \SI{500}{\centi\metre\cubed} = \SI{530}{\gram}
+\]
+Il conto a mente: $1{,}06 \cdot 500 = 500 + 0{,}06 \cdot 500 = 500 + 30 = 530$. Chi scrive 500 ha preso la densità del sangue uguale a quella dell'acqua; chi scrive 0,53 ha dato la massa in kilogrammi.'''
+
+[[quesito]]
+id = "ud3-stevino"
+tipo = "multipla"
+lampo = true
+testo = '''Un subacqueo si trova a {{h}} di profondità in un lago. Con la densità dell'acqua {{rho}}, $g = \SI{10}{\metre\per\second\squared}$ e la pressione atmosferica {{p0}}, la pressione assoluta a cui si trova il subacqueo è'''
+dati.h = { valore = 20, unita = "m" }
+dati.rho = { valore = 1000, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.p0 = { valore = "1,0e5", unita = "\\pascal" }
+corretta = "D"
+calcolo = "p0 + rho * 10 * h"
+soluzione = '''Per la legge di Stevino la pressione alla profondità $h$ è quella in superficie più il peso della colonna d'acqua sovrastante, per unità di area:
+\[
+  p = p_0 + \rho g h = \SI{1,0e5}{\pascal} + \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{20}{\metre}
+\]
+Il secondo termine vale $10^{3} \cdot 10 \cdot 20\,\si{\pascal} = 2 \cdot 10^{5}\,\si{\pascal}$, quindi
+\[
+  p = \SI{1,0e5}{\pascal} + \SI{2,0e5}{\pascal} = \SI{3,0e5}{\pascal}
+\]
+circa tre atmosfere: una per l'aria sopra il lago e una ogni \SI{10}{\metre} d'acqua.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{2,0e5}{\pascal}'''
+  commento = '''È solo $\rho g h$, la pressione relativa. La pressione assoluta comprende anche la pressione atmosferica che preme sulla superficie del lago.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,2e5}{\pascal}'''
+  commento = '''Usa una profondità di \SI{2}{\metre} invece di \SI{20}{\metre}: $\rho g h$ viene $2 \cdot 10^{4}$ invece di $2 \cdot 10^{5}\,\si{\pascal}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,0e5}{\pascal}'''
+  commento = '''Scrive la densità in \si{\gram\per\centi\metre\cubed} ($\rho = 1$) dentro una formula in unità del SI: $\rho g h$ viene \SI{200}{\pascal}, trascurabile. Nel SI la densità dell'acqua è \SI{1000}{\kilo\gram\per\metre\cubed}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3,0e5}{\pascal}'''
+  valore = 3.0e5
+  [[quesito.opzione]]
+  testo = '''\SI{2,1e6}{\pascal}'''
+  commento = '''Sbaglia gli zeri: $1000 \cdot 10 \cdot 20 = \num{200000} = 2 \cdot 10^{5}$, non $2 \cdot 10^{6}$.'''
+
+[[quesito]]
+id = "ud3-pascal"
+tipo = "multipla"
+lampo = true
+testo = '''In un sollevatore idraulico il pistone piccolo ha diametro {{d1}} e quello grande {{d2}}. Se sul pistone piccolo si esercita una forza di {{F1}}, il pistone grande spinge con una forza di'''
+dati.d1 = { valore = 1, unita = "cm" }
+dati.d2 = { valore = 3, unita = "cm" }
+dati.F1 = { valore = 50, unita = "\\newton" }
+corretta = "B"
+calcolo = "F1 * (d2 / d1)**2"
+soluzione = '''Per il principio di Pascal la pressione è la stessa sotto i due pistoni: $F_1/S_1 = F_2/S_2$, cioè $F_2 = F_1\,S_2/S_1$. L'area di un cerchio è proporzionale al quadrato del diametro, $S = \pi d^2/4$, quindi
+\[
+  \frac{S_2}{S_1} = \left(\frac{d_2}{d_1}\right)^{2} = \left(\frac{\SI{3}{\centi\metre}}{\SI{1}{\centi\metre}}\right)^{2} = 9
+  \qquad\qquad
+  F_2 = 9 \cdot \SI{50}{\newton} = \SI{450}{\newton}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{150}{\newton}'''
+  commento = '''Usa il rapporto dei diametri, 3, invece di quello delle aree: le forze stanno come le aree, e l'area cresce con il quadrato del diametro.'''
+  [[quesito.opzione]]
+  testo = '''\SI{450}{\newton}'''
+  valore = 450
+  [[quesito.opzione]]
+  testo = '''\SI{50}{\newton}'''
+  commento = '''Confonde la forza con la pressione: è la pressione a trasmettersi uguale in tutto il liquido, non la forza.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5,6}{\newton}'''
+  commento = '''Rovescia il rapporto: $50/9 \approx 5{,}6$. Il pistone grande, che ha l'area maggiore, riceve la forza maggiore.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1350}{\newton}'''
+  commento = '''Eleva il rapporto dei diametri al cubo, $3^3 = 27$, come se contasse il volume: contano le aree, $3^2 = 9$.'''
+
+[[quesito]]
+id = "ud3-archimede"
+tipo = "multipla"
+lampo = true
+testo = '''Con i polmoni pieni d'aria una persona ha una densità media di {{rho}} e galleggia ferma in una piscina d'acqua dolce ({{rhoa}}). La frazione del suo volume che resta fuori dall'acqua è'''
+dati.rho = { valore = 950, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.rhoa = { valore = 1000, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+corretta = "E"
+calcolo = "1 - rho / rhoa"
+soluzione = '''Un corpo che galleggia è in equilibrio: la spinta di Archimede è uguale al peso, $\rho_\text{a} V_\text{imm} g = \rho V g$. La frazione immersa è quindi il rapporto delle densità:
+\[
+  \frac{V_\text{imm}}{V} = \frac{\rho}{\rho_\text{a}} = \frac{950}{1000} = 0{,}95 = 95\%
+\]
+La frazione che resta fuori è il resto: $1 - 0{,}95 = 0{,}05 = 5\%$.'''
+
+  [[quesito.opzione]]
+  testo = '''95\%'''
+  commento = '''È la frazione immersa, non quella che resta fuori.'''
+  [[quesito.opzione]]
+  testo = '''50\%'''
+  commento = '''Pensa che un corpo che galleggia stia sempre mezzo dentro e mezzo fuori: la frazione immersa dipende dal rapporto fra le densità.'''
+  [[quesito.opzione]]
+  testo = '''0\%, perché la persona affonda'''
+  commento = '''Affonda solo un corpo più denso del liquido: qui la densità della persona, \SI{950}{\kilo\gram\per\metre\cubed}, è minore di quella dell'acqua.'''
+  [[quesito.opzione]]
+  testo = '''5,3\%'''
+  commento = '''Rovescia il rapporto delle densità: $1000/950 - 1 \approx 0{,}053$. La frazione immersa è $\rho/\rho_\text{a}$, con la densità del corpo al numeratore.'''
+  [[quesito.opzione]]
+  testo = '''5\%'''
+  valore = 0.05
+
+[[quesito]]
+id = "ud3-braccio"
+tipo = "completamento"
+lampo = true
+testo = '''Si misura la pressione arteriosa con il manicotto dello sfigmomanometro {{h}} sotto il livello del cuore, perché il paziente tiene il braccio disteso lungo il fianco. Ogni centimetro di dislivello nel sangue corrisponde a circa {{k}}. La pressione misurata supera quella al livello del cuore di circa \completa{} mmHg.'''
+dati.h = { valore = 25, unita = "cm" }
+dati.k = { valore = "0,8", unita = "\\mmHg" }
+calcolo = "h * k"
+risposta = "20"
+soluzione = '''Per la legge di Stevino, scendendo nel sangue di un dislivello $h$ la pressione aumenta di $\rho g h$, proporzionale al dislivello. A \SI{25}{\centi\metre} sotto il cuore l'aumento è
+\[
+  \Delta p = 25 \cdot \SI{0,8}{\mmHg} = \SI{20}{\mmHg}
+\]
+Per esempio una pressione massima di \SI{120}{\mmHg} al livello del cuore verrebbe letta come \SI{140}{\mmHg}: il manicotto va tenuto all'altezza del cuore. Attenzione al verso: scendendo nel liquido la pressione aumenta, quindi la lettura è più alta, non più bassa.'''
+
+[[quesito]]
+id = "ud3-continuita"
+tipo = "multipla"
+lampo = true
+testo = '''In un tratto di arteria con una placca il diametro interno si riduce a metà di quello del tratto sano. Considerando il sangue un fluido incomprimibile, nel tratto ristretto la velocità media del sangue'''
+corretta = "A"
+calcolo = "2**2"
+soluzione = '''La portata è la stessa in tutti i tratti del vaso (equazione di continuità): $S_1 v_1 = S_2 v_2$, quindi $v_2 = v_1\,S_1/S_2$. L'area della sezione è $S = \pi d^2/4$, proporzionale al quadrato del diametro: con il diametro dimezzato,
+\[
+  \frac{S_2}{S_1} = \left(\frac{1}{2}\right)^{2} = \frac{1}{4}
+  \qquad\qquad
+  v_2 = v_1 \cdot \frac{S_1}{S_2} = 4\,v_1
+\]
+La velocità diventa 4 volte più grande.'''
+
+  [[quesito.opzione]]
+  testo = '''diventa 4 volte più grande'''
+  valore = 4
+  [[quesito.opzione]]
+  testo = '''raddoppia'''
+  commento = '''Usa il rapporto dei diametri invece di quello delle aree: la portata è area per velocità, e l'area dipende dal quadrato del diametro.'''
+  [[quesito.opzione]]
+  testo = '''diventa un quarto'''
+  commento = '''Rovescia la proporzione: con la stessa portata, dove la sezione è più piccola il sangue deve andare più veloce.'''
+  [[quesito.opzione]]
+  testo = '''diventa 16 volte più grande'''
+  commento = '''Usa la quarta potenza del raggio, che compare nella legge di Poiseuille per la portata a parità di pressione, non nell'equazione di continuità.'''
+  [[quesito.opzione]]
+  testo = '''resta la stessa, perché la portata non cambia'''
+  commento = '''La portata resta la stessa, ma è il prodotto dell'area per la velocità: se l'area diminuisce, la velocità deve aumentare.'''
+
+[[quesito]]
+id = "ud3-bernoulli"
+tipo = "completamento"
+lampo = true
+testo = '''In un tubo orizzontale scorre acqua, che si può trattare come un fluido ideale di densità {{rho}}. Nel tratto largo la velocità è {{v1}}, nel tratto stretto {{v2}}. La pressione nel tratto largo supera quella nel tratto stretto di \completa{} Pa.'''
+dati.rho = { valore = 1000, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.v1 = { valore = "1,0", unita = "m/s" }
+dati.v2 = { valore = "3,0", unita = "m/s" }
+calcolo = "0.5 * rho * (v2**2 - v1**2)"
+risposta = "4000"
+soluzione = '''Il tubo è orizzontale, quindi il termine $\rho g h$ è lo stesso nei due tratti e il teorema di Bernoulli diventa $p_1 + \frac{1}{2}\rho v_1^2 = p_2 + \frac{1}{2}\rho v_2^2$. Quindi
+\[
+  p_1 - p_2 = \frac{1}{2}\rho\left(v_2^2 - v_1^2\right) = \frac{1}{2} \cdot \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \left(9{,}0 - 1{,}0\right)\si{\metre\squared\per\second\squared} = 500 \cdot 8{,}0\,\si{\pascal} = \SI{4000}{\pascal}
+\]
+Chi scrive 2000 ha usato il quadrato della differenza delle velocità, $(3 - 1)^2 = 4$, invece della differenza dei quadrati, $9 - 1 = 8$; chi scrive 8000 ha dimenticato il fattore $1/2$.'''
+
+[[quesito]]
+id = "ud3-poiseuille"
+tipo = "multipla"
+lampo = true
+testo = '''Un vaso sanguigno si restringe e il suo raggio diventa la metà. Se la differenza di pressione fra i suoi estremi resta la stessa e il moto resta laminare, la portata'''
+corretta = "C"
+calcolo = "1 / 2**4"
+soluzione = '''Per la legge di Poiseuille la portata è $Q = \pi r^4 \Delta p / (8\eta L)$: a parità di $\Delta p$, $\eta$ e $L$ è proporzionale alla quarta potenza del raggio. Con $r' = r/2$:
+\[
+  \frac{Q'}{Q} = \left(\frac{r'}{r}\right)^{4} = \left(\frac{1}{2}\right)^{4} = \frac{1}{16}
+\]
+La portata diventa un sedicesimo di quella di partenza.'''
+
+  [[quesito.opzione]]
+  testo = '''si dimezza'''
+  commento = '''Tratta la portata come proporzionale al raggio. Nella legge di Poiseuille il raggio compare alla quarta potenza.'''
+  [[quesito.opzione]]
+  testo = '''diventa un quarto'''
+  commento = '''Pensa solo all'area della sezione, che va con $r^2$. Ma a parità di $\Delta p$ anche la velocità media del sangue diminuisce come $r^2$, perché in un vaso stretto l'attrito con la parete frena di più: la portata, area per velocità, va con $r^4$.'''
+  [[quesito.opzione]]
+  testo = '''diventa un sedicesimo'''
+  valore = 0.0625
+  [[quesito.opzione]]
+  testo = '''diventa 16 volte più grande'''
+  commento = '''Il fattore 16 è giusto, ma il verso no: un vaso più stretto oppone una resistenza maggiore, e a parità di pressione lascia passare meno sangue.'''
+  [[quesito.opzione]]
+  testo = '''diventa un ottavo'''
+  commento = '''Usa la terza potenza del raggio, $(1/2)^3 = 1/8$. La potenza giusta è la quarta.'''
+
+[[quesito]]
+id = "ud3-parallelo"
+tipo = "completamento"
+lampo = true
+testo = '''Un'arteria si divide in due rami in parallelo, con resistenze idrauliche $R_1 = {{R1}}\cdot\SI{e8}{\pascal\second\per\metre\cubed}$ e $R_2 = {{R2}}\cdot\SI{e8}{\pascal\second\per\metre\cubed}$. La resistenza equivalente dei due rami, in unità di \SI{e8}{\pascal\second\per\metre\cubed}, è \completa.'''
+dati.R1 = { valore = 2 }
+dati.R2 = { valore = 6 }
+calcolo = "1 / (1 / R1 + 1 / R2)"
+risposta = "1,5"
+soluzione = '''Per due resistenze in parallelo si sommano gli inversi: $1/R = 1/R_1 + 1/R_2$. In unità di \SI{e8}{\pascal\second\per\metre\cubed}:
+\[
+  \frac{1}{R} = \frac{1}{2} + \frac{1}{6} = \frac{3}{6} + \frac{1}{6} = \frac{4}{6} = \frac{2}{3}
+  \qquad\qquad
+  R = \frac{3}{2} = 1{,}5
+\]
+La resistenza equivalente è più piccola della minore delle due: il sangue ha due strade invece di una. Chi scrive 8 le ha sommate come se fossero in serie; chi scrive 4 ha fatto la media.'''
+
+[[quesito]]
+id = "ud3-laplace"
+tipo = "multipla"
+lampo = true
+testo = '''Due bolle di sapone, una di raggio \SI{1}{\centi\metre} e una di raggio \SI{2}{\centi\metre}, sono collegate da un tubicino con un rubinetto chiuso. Quando si apre il rubinetto'''
+corretta = "B"
+soluzione = '''Per la legge di Laplace la pressione dentro una bolla supera quella fuori di $\Delta p = 4\gamma/r$: è più grande nella bolla più piccola. Aprendo il rubinetto l'aria va dalla pressione più alta a quella più bassa, cioè dalla bolla piccola a quella grande. Svuotandosi, la bolla piccola diventa ancora più piccola e la sua pressione cresce ancora: si svuota nella grande, fino a ridursi a una piccola calotta sull'imboccatura del tubicino. È il motivo per cui gli alveoli polmonari, senza il surfattante, sarebbero instabili.'''
+
+  [[quesito.opzione]]
+  testo = '''la bolla grande si svuota nella piccola, perché contiene più aria'''
+  commento = '''Il verso del flusso lo decide la differenza di pressione, non la quantità d'aria: la pressione è maggiore nella bolla piccola.'''
+  [[quesito.opzione]]
+  testo = '''la bolla piccola si svuota nella grande'''
+  [[quesito.opzione]]
+  testo = '''le due bolle diventano uguali, metà dell'aria per ciascuna'''
+  commento = '''Due bolle uguali sarebbero in equilibrio, ma è un equilibrio instabile: appena una diventa un po' più piccola la sua pressione cresce e continua a svuotarsi.'''
+  [[quesito.opzione]]
+  testo = '''non succede nulla, perché le due bolle sono alla stessa pressione'''
+  commento = '''La pressione dentro una bolla dipende dal raggio, $\Delta p = 4\gamma/r$: le due bolle hanno pressioni diverse.'''
+  [[quesito.opzione]]
+  testo = '''le due bolle si gonfiano tutte e due'''
+  commento = '''Il sistema è chiuso: l'aria che entra in una bolla deve uscire dall'altra.'''

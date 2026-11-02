@@ -1,0 +1,27 @@
+% Torchio idraulico: pistone piccolo S1 con forza F1, pistone grande S2 con forza F2.
+% Tratteggiate le posizioni iniziali dei pistoni: d1 (lungo) e d2 (corto).
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % liquido
+  \fill[formula!15] (0,0) -- (0,1.8) -- (0.6,1.8) -- (0.6,0.5) -- (2.4,0.5) -- (2.4,1.8)
+    -- (4.8,1.8) -- (4.8,0) -- cycle;
+  % pareti
+  \draw[very thick] (0,3.2) -- (0,0) -- (4.8,0) -- (4.8,3.2);
+  \draw[very thick] (0.6,3.2) -- (0.6,0.5) -- (2.4,0.5) -- (2.4,3.2);
+  % pistoni
+  \fill[richiamo!50] (0,1.8) rectangle (0.6,1.95);
+  \draw[thick] (0,1.8) rectangle (0.6,1.95);
+  \fill[richiamo!50] (2.4,1.8) rectangle (4.8,1.95);
+  \draw[thick] (2.4,1.8) rectangle (4.8,1.95);
+  % posizioni iniziali
+  \draw[dashed, richiamo] (-0.15,2.9) -- (0.75,2.9);
+  \draw[dashed, richiamo] (2.25,1.55) -- (4.95,1.55);
+  \draw[|<->|] (-0.45,1.8) -- (-0.45,2.9) node[midway, left] {$\Delta x_1$};
+  \draw[|<->|] (5.15,1.55) -- (5.15,1.8) node[midway, right] {$\Delta x_2$};
+  % forze
+  \draw[->, very thick, attenzione] (0.3,3.0) -- (0.3,2.0) node[pos=0, above] {$F_1$};
+  \draw[->, very thick, attenzione] (3.6,2.0) -- (3.6,3.3) node[above] {$F_2$};
+  % etichette
+  \node at (0.3,1.2) {$S_1$};
+  \node at (3.6,1.2) {$S_2$};
+  \node[formula] at (1.5,0.25) {$p$};
+\end{tikzpicture}

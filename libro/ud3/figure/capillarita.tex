@@ -1,0 +1,57 @@
+% Capillarità: (a) acqua, menisco concavo, risale di più nel tubo più sottile;
+% (b) mercurio, menisco convesso, si abbassa; (c) angolo di contatto.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % (a) acqua
+  \fill[formula!20] (0,0) rectangle (3,0.8);
+  \draw[very thick] (0,1.2) -- (0,0) -- (3,0) -- (3,1.2);
+  % tubo largo
+  \fill[formula!20] (0.6,0.3) -- (0.6,1.55) .. controls (0.75,1.38) and (1.05,1.38) .. (1.2,1.55) -- (1.2,0.3) -- cycle;
+  \draw[thick] (0.6,0.3) -- (0.6,3.2) (1.2,0.3) -- (1.2,3.2);
+  \draw[formula, thick] (0.6,1.55) .. controls (0.75,1.38) and (1.05,1.38) .. (1.2,1.55);
+  % angolo di contatto fra la parete e la tangente al menisco
+  \draw (0.6,1.55) -- ++(-48.6:0.45);
+  \draw (0.6,1.30) arc[start angle=-90, end angle=-48.6, radius=0.25];
+  \node[font=\footnotesize] at (0.70,1.12) {$\theta$};
+  % tubo sottile
+  \fill[formula!20] (1.9,0.3) -- (1.9,2.65) .. controls (1.97,2.55) and (2.13,2.55) .. (2.2,2.65) -- (2.2,0.3) -- cycle;
+  \draw[thick] (1.9,0.3) -- (1.9,3.2) (2.2,0.3) -- (2.2,3.2);
+  \draw[formula, thick] (1.9,2.65) .. controls (1.97,2.55) and (2.13,2.55) .. (2.2,2.65);
+  \draw[formula, thick] (0,0.8) -- (0.6,0.8) (1.2,0.8) -- (1.9,0.8) (2.2,0.8) -- (3,0.8);
+  \draw[dashed, richiamo] (2.2,0.8) -- (2.8,0.8);
+  \draw[dashed, richiamo] (2.2,2.58) -- (2.8,2.58);
+  \draw[|<->|] (2.65,0.8) -- (2.65,2.58) node[midway, right] {$h$};
+  \node at (1.5,-0.45) {(a) acqua};
+
+  % (b) mercurio
+  \begin{scope}[xshift=4.2cm]
+    \fill[richiamo!45] (0,0) rectangle (2.2,1.4);
+    \draw[very thick] (0,1.8) -- (0,0) -- (2.2,0) -- (2.2,1.8);
+    \fill[white] (0.8,0.3) rectangle (1.4,1.4);
+    \fill[richiamo!45] (0.8,0.3) -- (0.8,0.85) .. controls (0.95,1.05) and (1.25,1.05) .. (1.4,0.85) -- (1.4,0.3) -- cycle;
+    \draw[thick] (0.8,0.3) -- (0.8,2.6) (1.4,0.3) -- (1.4,2.6);
+    \draw[richiamo, thick] (0.8,0.85) .. controls (0.95,1.05) and (1.25,1.05) .. (1.4,0.85);
+    \draw[dashed, richiamo] (1.4,1.4) -- (2.0,1.4);
+    \node at (1.1,-0.45) {(b) mercurio};
+  \end{scope}
+
+  % (c) angolo di contatto: calotte sferiche su una superficie piana
+  \begin{scope}[xshift=7.2cm, yshift=0.2cm, scale=1.45]
+    % goccia che bagna: centro (1,1.1), raggio 0,8, theta = 51 gradi
+    \fill[formula!20] (0.3755,1.6) arc[start angle=141.3, end angle=38.7, radius=0.8] -- cycle;
+    \draw[formula, thick] (0.3755,1.6) arc[start angle=141.3, end angle=38.7, radius=0.8];
+    \draw[thick] (0,1.6) -- (2.2,1.6);
+    \draw (0.3755,1.6) -- ++(51.3:0.6);
+    \draw (0.6755,1.6) arc[start angle=0, end angle=51.3, radius=0.3];
+    \node[font=\footnotesize] at (0.78,1.78) {$\theta$};
+    \node[font=\footnotesize, align=center] at (1.0,1.15) {bagna: $\theta < \ang{90}$};
+    % goccia che non bagna: centro (1,0,25), raggio 0,45, theta = 124 gradi
+    \fill[richiamo!45] (0.626,0) arc[start angle=213.8, end angle=-33.8, radius=0.45] -- cycle;
+    \draw[richiamo, thick] (0.626,0) arc[start angle=213.8, end angle=-33.8, radius=0.45];
+    \draw[thick] (0,0) -- (2.2,0);
+    \draw (0.626,0) -- ++(123.8:0.5);
+    \draw (0.876,0) arc[start angle=0, end angle=123.8, radius=0.25];
+    \node[font=\footnotesize] at (0.62,0.42) {$\theta$};
+    \node[font=\footnotesize, align=center] at (1.0,-0.35) {non bagna: $\theta > \ang{90}$};
+    \node at (1.0,-0.95) {(c)};
+  \end{scope}
+\end{tikzpicture}
