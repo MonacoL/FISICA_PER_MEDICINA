@@ -3,12 +3,9 @@
 # la pagina web build/web/ud4.html, e ricalcola ogni risultato.
 #
 # Il formato è descritto in testa a libro/ud7/esercizi.toml.
-# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
-# arriveranno con il ticket dell'eserciziario UD4.
 
 titolo = "Eserciziario UD4 · Onde meccaniche"
 
-# ==================================================================== quesiti lampo, in ordine di dispensa
 
 [costanti]
 v_tessuti = 1540
@@ -32,7 +29,7 @@ dati.f = { valore = 880, unita = "Hz" }
 \[
   T = \frac{1}{f} = \frac{1}{\SI{880}{\hertz}} = \frac{1}{8{,}8 \cdot 10^{2}}\,\si{\second} \approx 0{,}114 \cdot 10^{-2}\,\si{\second} = \SI{1,14e-3}{\second} \approx \SI{1,1}{\milli\second}
 \]
-La pulsazione è $2\pi$ volte la frequenza, con $2\pi \approx 6{,}28$:
+perché $8{,}8 \cdot 0{,}114 \approx 1{,}0$. La pulsazione è $2\pi$ volte la frequenza, con $2\pi \approx 6{,}28$:
 \[
   \omega = 2\pi f = 6{,}28 \cdot \SI{880}{\hertz} \approx \SI{5526}{\radian\per\second} \approx \SI{5,5e3}{\radian\per\second}
 \]'''
@@ -121,9 +118,9 @@ dati.T = { valore = "1,2", unita = "s" }
   risultato = { valore = 73, unita = "\\kilo\\gram", cifre = 2 }
   soluzione = '''Da $\omega = \sqrt{k/m}$, elevando al quadrato, $\omega^2 = k/m$, quindi $m = k/\omega^2$. Con la pulsazione del punto (a), $\omega^2 = 5{,}23^2 \approx 27{,}4$ (infatti $5^2 = 25$ e $5{,}23^2 = 25 + 2 \cdot 5 \cdot 0{,}23 + 0{,}23^2 \approx 25 + 2{,}3 + 0{,}05$):
 \[
-  m = \frac{k}{\omega^2} = \frac{\SI{2000}{\newton\per\metre}}{\SI{27,4}{\per\second\squared}} \approx \SI{73}{\kilo\gram}
+  m = \frac{k}{\omega^2} = \frac{\SI{2000}{\newton\per\metre}}{\SI{27,4}{\per\second\squared}}
 \]
-Controllo: $27{,}4 \cdot 73 = 2000{,}2$. Il metodo funziona anche senza peso, perché il periodo dipende dalla massa e non dalla gravità.'''
+La divisione si fa per tentativi: $27{,}4 \cdot 70 = 1918$; mancano $2000 - 1918 = 82$, e $82/27{,}4 \approx 3$ (perché $27{,}4 \cdot 3 = 82{,}2$). Quindi $m \approx 70 + 3 = \SI{73}{\kilo\gram}$. Controllo: $27{,}4 \cdot 73 = 2000{,}2$. Il metodo funziona anche senza peso, perché il periodo dipende dalla massa e non dalla gravità.'''
 
 [[problema]]
 id = "ud4-onda-grasso-muscolo"
@@ -156,7 +153,7 @@ Il conto diretto dà lo stesso: $\lambda_\text{m} = (\SI{1580}{\metre\per\second
 [[problema]]
 id = "ud4-onda-scrivi-equazione"
 livello = 2
-testo = '''Su una corda si propaga, verso le $x$ negative, un'onda armonica di ampiezza {{A}}, frequenza {{f}} e velocità {{v}}.'''
+testo = '''Su una corda si propaga, verso le $x$ negative, un'onda armonica di ampiezza {{A}}, frequenza {{f}} e velocità {{v}}. Scrivi l'equazione nella forma $y(x,t) = A\sin(kx \pm \omega t)$.'''
 dati.A = { valore = "2,0", unita = "mm" }
 dati.f = { valore = 50, unita = "Hz" }
 dati.v = { valore = 10, unita = "m/s" }
@@ -351,45 +348,45 @@ Il periodo invece resta \SI{0,31}{\second}: dipende solo da $m$ e $k$, non dall'
 id = "ud4-onda-sfigmica"
 livello = 3
 testo = '''A ogni battito il cuore produce un'onda di pressione, l'onda sfigmica, che si propaga lungo le arterie. Per misurarne la velocità si registra il polso alla carotide e alla femorale, che lungo il percorso delle arterie distano {{d}}: il polso arriva alla femorale {{dt}} dopo che alla carotide. Il paziente ha una frequenza cardiaca di {{n}} battiti al minuto.'''
-dati.d = { valore = "0,60", unita = "m" }
-dati.dt = { valore = 75, unita = "\\milli\\second" }
+dati.d = { valore = "0,56", unita = "m" }
+dati.dt = { valore = 80, unita = "\\milli\\second" }
 dati.n = { valore = 72 }
 
   [[problema.parte]]
   domanda = '''Calcola la velocità dell'onda sfigmica.'''
   calcolo = "d / (dt * 1e-3)"
-  risultato = { valore = 8.0, unita = "m/s", cifre = 2 }
-  soluzione = '''La velocità di propagazione è la distanza percorsa dall'onda divisa per il tempo impiegato. Il ritardo in secondi è $\SI{75}{\milli\second} = \SI{75e-3}{\second} = \SI{0,075}{\second}$:
+  risultato = { valore = 7.0, unita = "m/s", cifre = 2 }
+  soluzione = '''La velocità di propagazione è la distanza percorsa dall'onda divisa per il tempo impiegato. Il ritardo in secondi è $\SI{80}{\milli\second} = \SI{80e-3}{\second} = \SI{0,080}{\second}$:
 \[
-  v = \frac{d}{\Delta t} = \frac{\SI{0,60}{\metre}}{\SI{0,075}{\second}} = \frac{600}{75}\,\si{\metre\per\second} = \SI{8,0}{\metre\per\second}
+  v = \frac{d}{\Delta t} = \frac{\SI{0,56}{\metre}}{\SI{0,080}{\second}} = \frac{560}{80}\,\si{\metre\per\second} = \SI{7,0}{\metre\per\second}
 \]'''
 
   [[problema.parte]]
   domanda = '''Quanto vale la lunghezza d'onda dell'onda sfigmica?'''
   calcolo = "d / (dt * 1e-3) / (n / 60)"
-  risultato = { valore = 6.7, unita = "m", cifre = 2 }
+  risultato = { valore = 5.8, unita = "m", cifre = 2 }
   soluzione = '''La sorgente è il cuore: la frequenza dell'onda è quella cardiaca. Un minuto è \SI{60}{\second}:
 \[
   f = \frac{72}{\SI{60}{\second}} = \SI{1,2}{\hertz}
 \]
 Con la velocità del punto (a):
 \[
-  \lambda = \frac{v}{f} = \frac{\SI{8,0}{\metre\per\second}}{\SI{1,2}{\hertz}} = \frac{80}{12}\,\si{\metre} \approx \SI{6,7}{\metre}
+  \lambda = \frac{v}{f} = \frac{\SI{7,0}{\metre\per\second}}{\SI{1,2}{\hertz}} = \frac{70}{12}\,\si{\metre} \approx \SI{5,8}{\metre}
 \]
-È molto più del percorso fra cuore e femorale: lungo le arterie del corpo c'è, in ogni istante, solo una piccola parte di una lunghezza d'onda.'''
+perché $12 \cdot 5{,}8 = 69{,}6 \approx 70$. È molto più del percorso fra cuore e femorale: lungo le arterie del corpo c'è, in ogni istante, solo una piccola parte di una lunghezza d'onda.'''
 
   [[problema.parte]]
-  domanda = '''In un paziente anziano, con le arterie più rigide, l'onda viaggia a \SI{12}{\metre\per\second}. Con la stessa distanza e la stessa frequenza cardiaca, quanto valgono il ritardo fra carotide e femorale e la lunghezza d'onda?'''
-  calcolo = "d / 12 * 1e3"
-  risultato = { valore = 50, unita = "\\milli\\second", cifre = 2 }
-  rapido = '''$\Delta t = \SI{50}{\milli\second}$; $\lambda = \SI{10}{\metre}$'''
+  domanda = '''In un paziente anziano, con le arterie più rigide, l'onda viaggia a \SI{14}{\metre\per\second}. Con la stessa distanza e la stessa frequenza cardiaca, quanto valgono il ritardo fra carotide e femorale e la lunghezza d'onda?'''
+  calcolo = "d / 14 * 1e3"
+  risultato = { valore = 40, unita = "\\milli\\second", cifre = 2 }
+  rapido = '''$\Delta t = \SI{40}{\milli\second}$; $\lambda \approx \SI{12}{\metre}$'''
   soluzione = '''Il ritardo è il tempo che l'onda impiega a percorrere la stessa distanza:
 \[
-  \Delta t = \frac{d}{v} = \frac{\SI{0,60}{\metre}}{\SI{12}{\metre\per\second}} = \SI{0,050}{\second} = \SI{50}{\milli\second}
+  \Delta t = \frac{d}{v} = \frac{\SI{0,56}{\metre}}{\SI{14}{\metre\per\second}} = \SI{0,040}{\second} = \SI{40}{\milli\second}
 \]
-La frequenza resta \SI{1,2}{\hertz}, perché la fissa il cuore; cambia la velocità, e con lei la lunghezza d'onda:
+perché $14 \cdot 0{,}04 = 0{,}56$. La frequenza resta \SI{1,2}{\hertz}, perché la fissa il cuore; cambia la velocità, e con lei la lunghezza d'onda:
 \[
-  \lambda = \frac{v}{f} = \frac{\SI{12}{\metre\per\second}}{\SI{1,2}{\hertz}} = \SI{10}{\metre}
+  \lambda = \frac{v}{f} = \frac{\SI{14}{\metre\per\second}}{\SI{1,2}{\hertz}} = \frac{140}{12}\,\si{\metre} \approx \SI{11,7}{\metre} \approx \SI{12}{\metre}
 \]
 In clinica una velocità sopra circa \SI{10}{\metre\per\second} è considerata un segno di rigidità delle arterie.'''
 
@@ -520,7 +517,7 @@ dati.rho = { valore = 1025, unita = "\\kilo\\gram\\per\\metre\\cubed" }
 \[
   \frac{B}{\rho} = \frac{\SI{2,3e9}{\pascal}}{\SI{1,025e3}{\kilo\gram\per\metre\cubed}} = \frac{2{,}3}{1{,}025} \cdot 10^{9-3}\,\si{\metre\squared\per\second\squared} \approx 2{,}24 \cdot 10^{6}\,\si{\metre\squared\per\second\squared}
 \]
-dove $2{,}3/1{,}025$ è poco meno di 2,3, perché il denominatore è poco più di 1. La radice:
+Dividere per un numero poco più grande di 1 è come moltiplicare per uno poco più piccolo di 1: $2{,}3/1{,}025 \approx 2{,}3 \cdot (1 - 0{,}025) = 2{,}3 - 0{,}06 \approx 2{,}24$. La radice:
 \[
   v = \sqrt{2{,}24 \cdot 10^{6}}\,\si{\metre\per\second} = \sqrt{2{,}24} \cdot 10^{3}\,\si{\metre\per\second} \approx \SI{1,5e3}{\metre\per\second}
 \]
@@ -529,18 +526,18 @@ perché $1{,}5^2 = 2{,}25$. È quasi la velocità in acqua: il plasma è fatto s
 [[problema]]
 id = "ud4-vel-osso"
 livello = 1
-testo = '''Un ultrasuono di frequenza {{f}} ha, nell'osso compatto, una lunghezza d'onda di {{lam}}. Quanto vale la velocità del suono nell'osso?'''
-dati.f = { valore = "1,0", unita = "MHz" }
-dati.lam = { valore = "4,0", unita = "mm" }
+testo = '''Nell'osso compatto il suono viaggia a {{v}}. Quanto vale la lunghezza d'onda di un ultrasuono di frequenza {{f}}?'''
+dati.v = { valore = 3600, unita = "m/s" }
+dati.f = { valore = "2,0", unita = "MHz" }
 
   [[problema.parte]]
-  calcolo = "(lam * 1e-3) * (f * 1e6)"
-  risultato = { valore = 4.0e3, unita = "m/s", cifre = 2 }
-  soluzione = '''In unità del SI $f = \SI{1,0}{\mega\hertz} = \SI{1,0e6}{\hertz}$ e $\lambda = \SI{4,0}{\milli\metre} = \SI{4,0e-3}{\metre}$. Dalla relazione $v = \lambda f$:
+  calcolo = "v / (f * 1e6) * 1e3"
+  risultato = { valore = 1.8, unita = "mm", cifre = 2 }
+  soluzione = '''In unità del SI la frequenza è $f = \SI{2,0}{\mega\hertz} = \SI{2,0e6}{\hertz}$. Dalla relazione $v = \lambda f$:
 \[
-  v = \lambda f = \SI{4,0e-3}{\metre} \cdot \SI{1,0e6}{\hertz} = 4{,}0 \cdot 10^{-3+6}\,\si{\metre\per\second} = \SI{4,0e3}{\metre\per\second}
+  \lambda = \frac{v}{f} = \frac{\SI{3600}{\metre\per\second}}{\SI{2,0e6}{\hertz}} = \frac{3600}{2{,}0} \cdot 10^{-6}\,\si{\metre} = 1800 \cdot 10^{-6}\,\si{\metre} = \SI{1,8e-3}{\metre} = \SI{1,8}{\milli\metre}
 \]
-È più di due volte e mezzo la velocità nei tessuti molli (\SI{1540}{\metre\per\second}): l'osso è un solido, molto più rigido.'''
+Nei tessuti molli, alla stessa frequenza, sarebbe $1540/(\num{2,0e6})\,\si{\metre} = \SI{0,77}{\milli\metre}$: a frequenza fissata la lunghezza d'onda è proporzionale alla velocità del mezzo.'''
 
 [[problema]]
 id = "ud4-vel-polso"
@@ -664,7 +661,7 @@ testo = '''Due altoparlanti collegati allo stesso amplificatore emettono in fase
 dati.f = { valore = 850, unita = "Hz" }
 dati.v = { valore = 340, unita = "m/s" }
 dati.r1 = { valore = "4,0", unita = "m" }
-dati.r2 = { valore = "5,0", unita = "m" }
+dati.r2 = { valore = "5,2", unita = "m" }
 
   [[problema.parte]]
   domanda = '''Quanto vale la lunghezza d'onda del suono?'''
@@ -679,13 +676,13 @@ perché $85 \cdot 0{,}4 = 34$.'''
   [[problema.parte]]
   domanda = '''A quante lunghezze d'onda corrisponde la differenza di cammino? Nel punto dell'ascoltatore l'interferenza è costruttiva o distruttiva?'''
   calcolo = "(r2 - r1) / (v / f)"
-  risultato = { valore = 2.5, cifre = 2 }
-  rapido = '''2,5 lunghezze d'onda; distruttiva'''
-  soluzione = '''La differenza di cammino è $\Delta r = \SI{5,0}{\metre} - \SI{4,0}{\metre} = \SI{1,0}{\metre}$. Con la lunghezza d'onda del punto (a):
+  risultato = { valore = 3.0, cifre = 2 }
+  rapido = '''3 lunghezze d'onda; costruttiva'''
+  soluzione = '''La differenza di cammino è $\Delta r = \SI{5,2}{\metre} - \SI{4,0}{\metre} = \SI{1,2}{\metre}$. Con la lunghezza d'onda del punto (a):
 \[
-  \frac{\Delta r}{\lambda} = \frac{\SI{1,0}{\metre}}{\SI{0,40}{\metre}} = 2{,}5 = 2 + \frac{1}{2}
+  \frac{\Delta r}{\lambda} = \frac{\SI{1,2}{\metre}}{\SI{0,40}{\metre}} = 3
 \]
-È un numero intero di lunghezze d'onda più mezza ($n = 2$): le due onde arrivano in opposizione di fase e l'interferenza è distruttiva. L'ascoltatore sente il suono molto attenuato.'''
+È un numero intero di lunghezze d'onda ($n = 3$): le due onde arrivano in fase e l'interferenza è costruttiva. L'ascoltatore sente il suono rinforzato.'''
 
 [[problema]]
 id = "ud4-interf-impulsi"
@@ -724,11 +721,10 @@ Lo spostamento è di \SI{2,0}{\centi\metre} verso l'alto. Dopo l'incontro i due 
 [[problema]]
 id = "ud4-vel-sfigmica"
 livello = 3
-testo = '''La velocità dell'onda sfigmica fra carotide e femorale si usa come indice della rigidità delle arterie. In un paziente giovane e sano la distanza fra i due punti di misura, lungo le arterie, è {{d}}, e l'onda impiega {{t1}} a percorrerla. Il cuore batte {{n}} volte al minuto.'''
+testo = '''La velocità dell'onda sfigmica fra carotide e femorale si usa come indice della rigidità delle arterie: è proporzionale alla radice quadrata della rigidità della parete, come sulla corda è proporzionale alla radice della tensione. In un paziente giovane e sano la distanza fra i due punti di misura, lungo le arterie, è {{d}}, e l'onda impiega {{t1}} a percorrerla.'''
 dati.d = { valore = "0,50", unita = "m" }
 dati.t1 = { valore = 100, unita = "\\milli\\second" }
 dati.t2 = { valore = 50, unita = "\\milli\\second" }
-dati.n = { valore = 72 }
 
   [[problema.parte]]
   domanda = '''Quanto vale la velocità dell'onda sfigmica?'''
@@ -740,32 +736,32 @@ dati.n = { valore = 72 }
 \]'''
 
   [[problema.parte]]
-  domanda = '''L'onda sfigmica si ripete a ogni battito: la sua frequenza è quella cardiaca. Quanto vale la sua lunghezza d'onda?'''
-  calcolo = "(d / (t1 * 1e-3)) / (n / 60)"
-  risultato = { valore = 4.2, unita = "m", cifre = 2 }
-  soluzione = '''Un minuto è \SI{60}{\second}, quindi la frequenza è
+  domanda = '''In un secondo paziente la parete è 2,25 volte più rigida che nel giovane. Quanto impiega l'onda a percorrere lo stesso tratto?'''
+  calcolo = "d / (math.sqrt(2.25) * d / (t1 * 1e-3)) * 1e3"
+  risultato = { valore = 67, unita = "\\milli\\second", cifre = 2 }
+  soluzione = '''La velocità è proporzionale alla radice della rigidità, quindi cresce del fattore $\sqrt{2{,}25} = 1{,}5$ (perché $1{,}5^2 = 2{,}25$). Con la velocità del punto (a):
 \[
-  f = \frac{72}{\SI{60}{\second}} = \SI{1,2}{\hertz}
+  v' = 1{,}5 \cdot \SI{5,0}{\metre\per\second} = \SI{7,5}{\metre\per\second}
 \]
-Con la velocità del punto (a):
+Il tempo per percorrere lo stesso tratto è
 \[
-  \lambda = \frac{v}{f} = \frac{\SI{5,0}{\metre\per\second}}{\SI{1,2}{\hertz}} \approx \SI{4,2}{\metre}
+  t' = \frac{d}{v'} = \frac{\SI{0,50}{\metre}}{\SI{7,5}{\metre\per\second}} = \frac{1{,}0}{15}\,\si{\second} \approx \SI{0,067}{\second} = \SI{67}{\milli\second}
 \]
-perché $1{,}2 \cdot 4{,}2 \approx 5{,}0$. La lunghezza d'onda è più grande del corpo: quando un'onda arriva alla femorale, la successiva non è ancora partita dal cuore.'''
+Lo stesso si ottiene dividendo per 1,5 il tempo del giovane: $100/1{,}5 \approx 67$. Una parete più rigida accorcia il tempo di percorrenza.'''
 
   [[problema.parte]]
-  domanda = '''In un paziente anziano con arteriosclerosi, sullo stesso tratto, l'onda impiega {{t2}}. La velocità dell'onda è proporzionale alla radice quadrata della rigidità della parete, come sulla corda è proporzionale alla radice della tensione. Di che fattore è più rigida l'arteria del paziente anziano?'''
+  domanda = '''In un paziente anziano con arteriosclerosi, sullo stesso tratto, l'onda impiega {{t2}}. Di che fattore è più rigida la sua arteria rispetto a quella del giovane?'''
   calcolo = "((d / (t2 * 1e-3)) / (d / (t1 * 1e-3)))**2"
   risultato = { valore = 4.0, cifre = 2 }
   soluzione = '''Nel paziente anziano la velocità è
 \[
-  v' = \frac{\SI{0,50}{\metre}}{\SI{0,050}{\second}} = \SI{10}{\metre\per\second}
+  v'' = \frac{\SI{0,50}{\metre}}{\SI{0,050}{\second}} = \SI{10}{\metre\per\second}
 \]
 il doppio di quella del giovane. Se la velocità è proporzionale alla radice della rigidità, la rigidità è proporzionale al quadrato della velocità:
 \[
-  \frac{\text{rigidità}'}{\text{rigidità}} = \left(\frac{v'}{v}\right)^{2} = \left(\frac{\SI{10}{\metre\per\second}}{\SI{5,0}{\metre\per\second}}\right)^{2} = 2^2 = 4
+  \frac{\text{rigidità}''}{\text{rigidità}} = \left(\frac{v''}{v}\right)^{2} = \left(\frac{\SI{10}{\metre\per\second}}{\SI{5,0}{\metre\per\second}}\right)^{2} = 2^2 = 4
 \]
-L'arteria è circa quattro volte più rigida. Una velocità di \SI{10}{\metre\per\second} fra carotide e femorale è già considerata un segno di danno arterioso.'''
+L'arteria è circa quattro volte più rigida: per raddoppiare la velocità dell'onda la rigidità deve quadruplicare.'''
 
 [[problema]]
 id = "ud4-interf-trasduttori"
@@ -825,8 +821,9 @@ e il ritardo minimo è $T/2 = \SI{0,50}{\milli\second}$. In questo tempo il suon
 
   [[problema.parte]]
   domanda = '''L'onda delle cuffie ha un'ampiezza pari al 90\% di quella del rumore. Di che fattore si riduce l'intensità del suono nell'orecchio?'''
-  calcolo = "(1 - 0.90)**2"
-  risultato = { valore = 0.010, cifre = 2 }
+  calcolo = "1 / (1 - 0.90)**2"
+  risultato = { valore = 100, cifre = 2 }
+  rapido = '''intensità divisa per 100 (diventa 0,010 di quella del rumore)'''
   soluzione = '''In opposizione di fase l'ampiezza risultante è la differenza delle ampiezze:
 \[
   A = A_\text{rumore} - 0{,}90\,A_\text{rumore} = 0{,}10\,A_\text{rumore}
@@ -835,7 +832,7 @@ L'intensità è proporzionale al quadrato dell'ampiezza, quindi
 \[
   \frac{I}{I_\text{rumore}} = \left(\frac{A}{A_\text{rumore}}\right)^{2} = (0{,}10)^2 = 0{,}010
 \]
-L'intensità diventa un centesimo di quella del rumore. L'energia del rumore non sparisce: nei punti in cui la cancellazione non funziona, lontano dall'orecchio, le onde si sommano.'''
+L'intensità si riduce di un fattore 100: diventa un centesimo di quella del rumore. L'energia del rumore non sparisce: nei punti in cui la cancellazione non funziona, lontano dall'orecchio, le onde si sommano.'''
 
   [[problema.parte]]
   domanda = '''Quanto vale il livello di intensità sonora con le cuffie?'''
@@ -864,7 +861,7 @@ dati.f1 = { valore = 120, unita = "Hz" }
 \]'''
 
   [[problema.parte]]
-  domanda = '''Per alzare la voce i muscoli della laringe aumentano la tensione delle corde vocali del 44\%, senza cambiarne lunghezza e densità lineare. Quale frequenza fondamentale si ottiene?'''
+  domanda = '''Per emettere una nota più acuta i muscoli della laringe aumentano la tensione delle corde vocali del 44\%, senza cambiarne lunghezza e densità lineare. Quale frequenza fondamentale si ottiene?'''
   calcolo = "f1 * math.sqrt(1.44)"
   risultato = { valore = 144, unita = "Hz", cifre = 3 }
   soluzione = '''Aumentare la tensione del 44\% vuol dire moltiplicarla per 1,44. Da $v = \sqrt{F/\mu}$, con $\mu$ invariata:
@@ -893,7 +890,7 @@ dati.D = { valore = "2,5", unita = "cm" }
 \[
   v^2 = (\SI{1,57e3}{\metre\per\second})^2 = 1{,}57^2 \cdot 10^{6}\,\si{\metre\squared\per\second\squared} \approx 2{,}46 \cdot 10^{6}\,\si{\metre\squared\per\second\squared}
 \]
-perché $1{,}57^2 = 1{,}57 + 0{,}57 \cdot 1{,}57 = 1{,}57 + 0{,}89 = 2{,}46$. Quindi
+perché $1{,}57^2 = 1{,}57 + 0{,}57 \cdot 1{,}57 = 1{,}57 + 0{,}89 = 2{,}46$, dove $0{,}57 \cdot 1{,}57 = 0{,}57 + 0{,}57 \cdot 0{,}57 \approx 0{,}57 + 0{,}32 = 0{,}89$. Quindi
 \[
   B = \rho v^2 = \SI{1,06e3}{\kilo\gram\per\metre\cubed} \cdot 2{,}46 \cdot 10^{6}\,\si{\metre\squared\per\second\squared} = 1{,}06 \cdot 2{,}46 \cdot 10^{3+6}\,\si{\pascal} \approx \SI{2,6e9}{\pascal}
 \]
@@ -957,7 +954,8 @@ dati.r = { valore = "5,0", unita = "m" }
 La potenza è $\SI{2,0}{\milli\watt} = \SI{2,0e-3}{\watt}$, quindi
 \[
   I = \frac{P}{4\pi r^2} = \frac{\SI{2,0e-3}{\watt}}{\SI{3,14e2}{\metre\squared}} = \frac{2{,}0}{3{,}14} \cdot 10^{-3-2}\,\si{\watt\per\metre\squared} \approx 0{,}64 \cdot 10^{-5}\,\si{\watt\per\metre\squared} = \SI{6,4e-6}{\watt\per\metre\squared}
-\]'''
+\]
+perché $3{,}14 \cdot 0{,}64 \approx 2{,}0$.'''
 
 [[problema]]
 id = "ud4-int-triplo"
@@ -1117,7 +1115,7 @@ dati.t = { valore = "5,0", unita = "\\minute" }
 [[problema]]
 id = "ud4-int-annunci"
 livello = 2
-testo = '''Nel sistema di annunci di un pronto soccorso ci sono due altoparlanti diversi, che si possono trattare come sorgenti isotrope: il primo emette una potenza sonora di {{PA}}, il secondo di {{PB}}.'''
+testo = '''Nel sistema di annunci di un pronto soccorso ci sono due altoparlanti diversi, montati uno accanto all'altro, che si possono trattare come sorgenti isotrope: il primo emette una potenza sonora di {{PA}}, il secondo di {{PB}}. La soglia di udibilità è $I_0 = \SI{e-12}{\watt\per\metre\squared}$; usa $\log_{10} 2 \approx 0{,}3$.'''
 dati.PA = { valore = 10, unita = "mW" }
 dati.PB = { valore = 40, unita = "mW" }
 dati.r = { valore = "1,0", unita = "m" }
@@ -1129,21 +1127,35 @@ dati.r = { valore = "1,0", unita = "m" }
   soluzione = '''La superficie della sfera di raggio \SI{1,0}{\metre} è $4\pi r^2 = 4 \cdot 3{,}14 \cdot \SI{1,0}{\metre\squared} \approx \SI{12,6}{\metre\squared}$, e la potenza è $\SI{10}{\milli\watt} = \SI{1,0e-2}{\watt}$:
 \[
   I_A = \frac{P_A}{4\pi r^2} = \frac{\SI{1,0e-2}{\watt}}{\SI{12,6}{\metre\squared}} = \frac{1{,}0}{12{,}6} \cdot 10^{-2}\,\si{\watt\per\metre\squared} \approx 0{,}080 \cdot 10^{-2}\,\si{\watt\per\metre\squared} = \SI{8,0e-4}{\watt\per\metre\squared}
+\]
+perché $12{,}6 \cdot 0{,}08 \approx 1{,}0$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il livello sonoro a {{r}} dal primo altoparlante?'''
+  calcolo = "10 * math.log10((PA * 1e-3) / (4 * math.pi * r**2) / I0)"
+  risultato = { valore = 89, unita = "\\deci\\bel", cifre = 2 }
+  soluzione = '''Con l'intensità del punto (a):
+\[
+  \beta = 10 \log_{10}\frac{\SI{8,0e-4}{\watt\per\metre\squared}}{\SI{e-12}{\watt\per\metre\squared}} = 10 \log_{10}\left(8 \cdot 10^{-4-(-12)}\right) = 10\,(\log_{10} 8 + 8)
+\]
+Con $\log_{10} 8 = \log_{10} 2^3 = 3\log_{10} 2 \approx 0{,}9$:
+\[
+  \beta \approx 10 \cdot (0{,}9 + 8)\,\si{\deci\bel} = \SI{89}{\deci\bel}
 \]'''
 
   [[problema.parte]]
-  domanda = '''A che distanza dal secondo altoparlante si ha la stessa intensità?'''
-  calcolo = "r * math.sqrt(PB / PA)"
-  risultato = { valore = 2.0, unita = "m", cifre = 2 }
-  soluzione = '''Si cerca la distanza $r_B$ per cui $P_B/(4\pi r_B^2)$ è uguale a $P_A/(4\pi r^2)$. Il fattore $4\pi$ si semplifica:
+  domanda = '''Si accende anche il secondo altoparlante, insieme al primo. Quanto vale ora il livello sonoro allo stesso punto, a {{r}} da tutti e due?'''
+  calcolo = "10 * math.log10(((PA + PB) * 1e-3) / (4 * math.pi * r**2) / I0)"
+  risultato = { valore = 96, unita = "\\deci\\bel", cifre = 2 }
+  soluzione = '''Alla stessa distanza l'intensità è proporzionale alla potenza: il secondo altoparlante, quattro volte più potente, dà $I_B = 4 I_A$. I due suoni sono indipendenti e si sommano le intensità:
 \[
-  \frac{P_B}{r_B^2} = \frac{P_A}{r^2}
-  \quad\Rightarrow\quad
-  r_B^2 = r^2\,\frac{P_B}{P_A} = (\SI{1,0}{\metre})^2 \cdot \frac{40}{10} = \SI{4,0}{\metre\squared}
-  \quad\Rightarrow\quad
-  r_B = \SI{2,0}{\metre}
+  I = I_A + I_B = 5\,I_A = 5 \cdot \SI{8,0e-4}{\watt\per\metre\squared} = \SI{4,0e-3}{\watt\per\metre\squared}
 \]
-Una sorgente quattro volte più potente dà la stessa intensità a una distanza doppia, perché $2^2 = 4$.'''
+Un'intensità 5 volte più grande aggiunge al livello del punto (b) $10\log_{10} 5 = 10\,(1 - \log_{10} 2) \approx 10 \cdot 0{,}7 = \SI{7}{\deci\bel}$:
+\[
+  \beta' \approx \SI{89}{\deci\bel} + \SI{7}{\deci\bel} = \SI{96}{\deci\bel}
+\]
+Il conto diretto dà lo stesso: $10\log_{10}(4 \cdot 10^{9}) = 10\,(0{,}6 + 9) = \SI{96}{\deci\bel}$. Si sommano le intensità, non i livelli: quintuplicare l'intensità aggiunge solo \SI{7}{\deci\bel}.'''
 
 [[problema]]
 id = "ud4-int-hifu"
@@ -1152,7 +1164,7 @@ testo = '''Negli ultrasuoni focalizzati ad alta intensità (HIFU) un trasduttore
 dati.P = { valore = 50, unita = "W" }
 dati.S1 = { valore = 20, unita = "\\centi\\metre\\squared" }
 dati.S2 = { valore = "2,0", unita = "\\milli\\metre\\squared" }
-dati.t = { valore = "4,0", unita = "s" }
+dati.D = { valore = "1,0e8", unita = "\\joule\\per\\metre\\squared" }
 
   [[problema.parte]]
   domanda = '''Quanto vale l'intensità sulla superficie del trasduttore?'''
@@ -1176,17 +1188,22 @@ A parità di potenza l'intensità è inversamente proporzionale alla superficie.
 \[
   \frac{I_2}{I_1} = \frac{S_1}{S_2} = \frac{\SI{2,0e-3}{\metre\squared}}{\SI{2,0e-6}{\metre\squared}} = 10^{-3-(-6)} = 10^{3} = 1000
 \]
-Sulla pelle, dove il fascio è largo, l'intensità è mille volte più bassa che nel fuoco: per questo il tessuto si scalda solo nella zona da trattare.'''
+Sulla pelle, dove il fascio è largo, l'intensità è mille volte più bassa che nel fuoco.'''
 
   [[problema.parte]]
-  domanda = '''Quanta energia riceve la zona focale in un'esposizione di {{t}}?'''
-  calcolo = "P * t"
-  risultato = { valore = 2.0e2, unita = "J", cifre = 2 }
-  soluzione = '''Tutta la potenza arriva nel fuoco, e l'energia è la potenza per il tempo:
+  domanda = '''Il tessuto del fibroma si distrugge quando riceve circa {{D}}. Quanto deve durare l'esposizione? Quanta energia per metro quadrato riceve nello stesso tempo la pelle sopra il trasduttore?'''
+  calcolo = "D / (P / (S2 * 1e-6))"
+  risultato = { valore = 4.0, unita = "s", cifre = 2 }
+  rapido = '''\SI{4,0}{\second}; la pelle riceve \SI{1,0e5}{\joule\per\metre\squared}, mille volte meno'''
+  soluzione = '''L'intensità è l'energia che arriva in un secondo su un metro quadrato. Nel fuoco, con l'intensità del punto (b), il tessuto riceve \SI{2,5e7}{\joule\per\metre\squared} ogni secondo; per arrivare a \SI{1,0e8}{\joule\per\metre\squared} serve il tempo
 \[
-  E = P t = \SI{50}{\watt} \cdot \SI{4,0}{\second} = \SI{200}{\joule} = \SI{2,0e2}{\joule}
+  t = \frac{\SI{1,0e8}{\joule\per\metre\squared}}{\SI{2,5e7}{\watt\per\metre\squared}} = \frac{1{,}0}{2{,}5} \cdot 10^{8-7}\,\si{\second} = 0{,}40 \cdot 10\,\si{\second} = \SI{4,0}{\second}
 \]
-Duecento joule ceduti in pochi secondi a una zona così piccola la scaldano fino a distruggere il tessuto, mentre la pelle, attraversata dalla stessa energia su una superficie mille volte più grande, resta quasi fredda.'''
+Nello stesso tempo la pelle, con l'intensità del punto (a), riceve
+\[
+  \SI{2,5e4}{\watt\per\metre\squared} \cdot \SI{4,0}{\second} = \SI{1,0e5}{\joule\per\metre\squared}
+\]
+mille volte meno del fuoco, come il rapporto delle intensità: il tessuto si distrugge solo nella zona da trattare, mentre la pelle resta quasi fredda.'''
 
 [[problema]]
 id = "ud4-int-testina"
@@ -1228,7 +1245,7 @@ Controllo: $(f_2/f_1)^2 (A_2/A_1)^2 = 3^2 \cdot (1/3)^2 = 9 \cdot 1/9 = 1$.'''
 \[
   \lambda = \frac{v}{f} = \frac{\SI{1540}{\metre\per\second}}{\SI{3e6}{\hertz}} = \frac{1540}{3} \cdot 10^{-6}\,\si{\metre} \approx 513 \cdot 10^{-6}\,\si{\metre} = 0{,}513 \cdot 10^{-3}\,\si{\metre} \approx \SI{0,51}{\milli\metre}
 \]
-I tessuti assorbono gli ultrasuoni tanto più quanto più la frequenza è alta. A \SI{3}{\mega\hertz} l'energia viene ceduta nei primi centimetri, e scalda il tendine superficiale; a \SI{1}{\mega\hertz} il fascio arriva più in profondità, e si usa per i muscoli profondi. Per un tendine superficiale conviene \SI{3}{\mega\hertz}.'''
+I tessuti assorbono gli ultrasuoni tanto più quanto più la frequenza è alta. A \SI{3}{\mega\hertz} l'energia viene ceduta nei primi centimetri, e scalda il tendine superficiale; a \SI{1}{\mega\hertz} il fascio arriva più in profondità, e si usa per i muscoli profondi. Per un tendine superficiale conviene \SI{3}{\mega\hertz}. In terapia non si cerca un'immagine, quindi la lunghezza d'onda non decide la scelta: conta dove viene assorbita l'energia, che nel tessuto diventa calore.'''
 
 [[problema]]
 id = "ud4-int-corda"
@@ -1280,9 +1297,9 @@ Raddoppia la potenza, non quadruplica: la tensione entra sotto radice nella velo
 [[problema]]
 id = "ud4-int-neonatale"
 livello = 3
-testo = '''In una terapia intensiva neonatale un monitor, che si può trattare come una sorgente sonora isotropa, è a {{r1}} da un'incubatrice. Lì il suono del monitor ha intensità {{I1}}. Per le incubatrici si raccomanda di non superare \SI{45}{\deci\bel}. La soglia di udibilità è $I_0 = \SI{e-12}{\watt\per\metre\squared}$; usa $\log_{10} 4 \approx 0{,}6$.'''
+testo = '''In una terapia intensiva neonatale un monitor, che si può trattare come una sorgente sonora isotropa, è a {{r1}} da un'incubatrice. Lì il suono del monitor ha intensità {{I1}}. Per le incubatrici si raccomanda di non superare \SI{45}{\deci\bel}. La soglia di udibilità è $I_0 = \SI{e-12}{\watt\per\metre\squared}$.'''
 dati.r1 = { valore = "2,0", unita = "m" }
-dati.r2 = { valore = "4,0", unita = "m" }
+dati.r2 = { valore = 20, unita = "m" }
 dati.I1 = { valore = "1,0e-6", unita = "W/m^2" }
 
   [[problema.parte]]
@@ -1306,19 +1323,19 @@ dati.I1 = { valore = "1,0e-6", unita = "W/m^2" }
 È \SI{15}{\deci\bel} sopra il limite raccomandato: troppo.'''
 
   [[problema.parte]]
-  domanda = '''Il monitor viene spostato a {{r2}} dall'incubatrice. Quanto valgono l'intensità e il livello sonoro? Di che fattore si riduce l'ampiezza dell'onda?'''
+  domanda = '''Gli allarmi sonori vengono spostati sulla centrale di monitoraggio del reparto, a {{r2}} dall'incubatrice, con lo stesso volume. Quanto valgono ora l'intensità e il livello sonoro all'incubatrice? Di che fattore si riduce l'ampiezza dell'onda?'''
   calcolo = "10 * math.log10(I1 * (r1 / r2)**2 / I0)"
-  risultato = { valore = 54, unita = "\\deci\\bel", cifre = 2 }
-  rapido = '''\SI{2,5e-7}{\watt\per\metre\squared}; \SI{54}{\deci\bel}, ancora sopra il limite; ampiezza dimezzata'''
-  soluzione = '''La distanza raddoppia, quindi l'intensità si divide per $2^2 = 4$:
+  risultato = { valore = 40, unita = "\\deci\\bel", cifre = 2 }
+  rapido = '''\SI{1,0e-8}{\watt\per\metre\squared}; \SI{40}{\deci\bel}, sotto il limite; ampiezza divisa per 10'''
+  soluzione = '''La distanza diventa $20/2{,}0 = 10$ volte più grande, quindi l'intensità si divide per $10^2 = 100$:
 \[
-  I_2 = I_1 \left(\frac{r_1}{r_2}\right)^{2} = \frac{\SI{1,0e-6}{\watt\per\metre\squared}}{4} = \SI{0,25e-6}{\watt\per\metre\squared} = \SI{2,5e-7}{\watt\per\metre\squared}
+  I_2 = I_1 \left(\frac{r_1}{r_2}\right)^{2} = \frac{\SI{1,0e-6}{\watt\per\metre\squared}}{100} = \SI{1,0e-8}{\watt\per\metre\squared}
 \]
-Il livello si ottiene più in fretta dalla differenza: dividere l'intensità per 4 toglie $10\log_{10} 4 \approx 10 \cdot 0{,}6 = \SI{6}{\deci\bel}$, quindi
+Il livello si ottiene più in fretta dalla differenza: dividere l'intensità per 100 toglie $10\log_{10} 100 = \SI{20}{\deci\bel}$, quindi
 \[
-  \beta_2 = \SI{60}{\deci\bel} - \SI{6}{\deci\bel} = \SI{54}{\deci\bel}
+  \beta_2 = \SI{60}{\deci\bel} - \SI{20}{\deci\bel} = \SI{40}{\deci\bel}
 \]
-A frequenza fissata l'ampiezza va come la radice dell'intensità: con un'intensità 4 volte più piccola l'ampiezza è $\sqrt{4} = 2$ volte più piccola, cioè si dimezza. Allontanare il monitor non basta per arrivare a \SI{45}{\deci\bel}: conviene abbassarne il volume.'''
+sotto il limite raccomandato. A frequenza fissata l'ampiezza va come la radice dell'intensità: con un'intensità 100 volte più piccola l'ampiezza è $\sqrt{100} = 10$ volte più piccola. Per questo nei reparti neonatali gli allarmi si fanno suonare lontano dalle incubatrici.'''
 
 [[problema]]
 id = "ud4-int-pulsata"
@@ -1343,11 +1360,11 @@ dati.E = { valore = 960, unita = "J" }
   domanda = '''Quanto vale la potenza media, cioè l'energia erogata in un secondo, tenendo conto delle pause?'''
   calcolo = "I * S * 1e-4 * tau / T"
   risultato = { valore = 1.6, unita = "W", cifre = 2 }
-  soluzione = '''In ogni impulso la sonda eroga l'energia
+  soluzione = '''In ogni impulso, che dura $\tau = \SI{2,0}{\milli\second}$, la sonda eroga l'energia
 \[
   E_1 = P\,\tau = \SI{8,0}{\watt} \cdot \SI{2,0e-3}{\second} = \SI{1,6e-2}{\joule}
 \]
-e un impulso parte ogni $T = \SI{10}{\milli\second} = \SI{1,0e-2}{\second}$. La potenza media è l'energia di un ciclo divisa per la durata del ciclo:
+e un impulso parte ogni $T = \SI{10}{\milli\second} = \SI{1,0e-2}{\second}$ (qui $T$ è il tempo fra due impulsi, non il periodo degli ultrasuoni). La potenza media è l'energia di un ciclo divisa per la durata del ciclo:
 \[
   P_\text{media} = \frac{E_1}{T} = \frac{\SI{1,6e-2}{\joule}}{\SI{1,0e-2}{\second}} = \SI{1,6}{\watt}
 \]
@@ -1381,18 +1398,18 @@ Il quoziente $1/1{,}54 \approx 0{,}65$ si controlla moltiplicando: $1{,}54 \cdot
 [[problema]]
 id = "ud4-suono-osso"
 livello = 1
-testo = '''Un ultrasuono di frequenza {{f}} ha, nell'osso compatto, una lunghezza d'onda di {{lam}}. Quanto vale la velocità del suono nell'osso?'''
-dati.f = { valore = "1,0", unita = "MHz" }
-dati.lam = { valore = "4,0", unita = "mm" }
+testo = '''Un impulso ultrasonoro attraversa {{d}} di osso corticale, dove il suono viaggia a {{v}}. Quanto tempo impiega?'''
+dati.d = { valore = "6,0", unita = "mm" }
+dati.v = { valore = 3000, unita = "m/s" }
 
   [[problema.parte]]
-  calcolo = "lam * 1e-3 * f * 1e6"
-  risultato = { valore = 4.0e3, unita = "m/s", cifre = 2 }
-  soluzione = '''Si portano le grandezze in unità del SI: $f = \SI{1,0}{\mega\hertz} = \SI{1,0e6}{\hertz}$ e $\lambda = \SI{4,0}{\milli\metre} = \SI{4,0e-3}{\metre}$. Dalla relazione $v = \lambda f$:
+  calcolo = "d * 1e-3 / v * 1e6"
+  risultato = { valore = 2.0, unita = "\\micro\\second", cifre = 2 }
+  soluzione = '''Lo spessore in metri è $\SI{6,0}{\milli\metre} = \SI{6,0e-3}{\metre}$, e la velocità è $\SI{3000}{\metre\per\second} = \SI{3,0e3}{\metre\per\second}$. Il tempo è la distanza divisa per la velocità:
 \[
-  v = \lambda f = \SI{4,0e-3}{\metre} \cdot \SI{1,0e6}{\hertz} = 4{,}0 \cdot 10^{-3+6}\,\si{\metre\per\second} = \SI{4,0e3}{\metre\per\second}
+  t = \frac{d}{v} = \frac{\SI{6,0e-3}{\metre}}{\SI{3,0e3}{\metre\per\second}} = \frac{6{,}0}{3{,}0} \cdot 10^{-3-3}\,\si{\second} = \SI{2,0e-6}{\second} = \SI{2,0}{\micro\second}
 \]
-È più del doppio che nei tessuti molli (\SI{1540}{\metre\per\second}): l'osso è molto più rigido, e nella tabella della dispensa sta fra 3000 e \SI{4000}{\metre\per\second}.'''
+Nei tessuti molli lo stesso spessore richiederebbe circa il doppio, $6{,}0 \cdot 10^{-3}/1540\,\si{\second} \approx \SI{3,9}{\micro\second}$: nell'osso il suono è molto più veloce.'''
 
 [[problema]]
 id = "ud4-db-concerto"
@@ -1413,16 +1430,16 @@ Sono solo \SI{10}{\deci\bel} sotto la soglia del dolore, e ben oltre gli \SI{85}
 id = "ud4-db-sala-macchine"
 livello = 1
 testo = '''Nella sala macchine di un ospedale, accanto ai gruppi elettrogeni, il livello sonoro è {{b}}. Quanto vale l'intensità del suono?'''
-dati.b = { valore = 95, unita = "\\deci\\bel" }
+dati.b = { valore = 105, unita = "\\deci\\bel" }
 
   [[problema.parte]]
   calcolo = "I0 * 10**(b / 10)"
-  risultato = { valore = 3.2e-3, unita = "W/m^2", cifre = 2 }
-  soluzione = '''Dalla forma inversa della definizione, $I = I_0 \cdot 10^{\beta/10}$, con $\beta/10 = 95/10 = 9{,}5$. Si spezza l'esponente in una parte intera e mezza: $10^{9{,}5} = 10^{9} \cdot 10^{0{,}5}$, e $10^{0{,}5} = \sqrt{10} \approx 3{,}2$. Quindi
+  risultato = { valore = 3.2e-2, unita = "W/m^2", cifre = 2 }
+  soluzione = '''Dalla forma inversa della definizione, $I = I_0 \cdot 10^{\beta/10}$, con $\beta/10 = 105/10 = 10{,}5$. Si spezza l'esponente in una parte intera e mezza: $10^{10{,}5} = 10^{10} \cdot 10^{0{,}5}$, e $10^{0{,}5} = \sqrt{10} \approx 3{,}2$. Quindi
 \[
-  I = \SI{e-12}{\watt\per\metre\squared} \cdot 10^{9} \cdot 10^{0{,}5} \approx 3{,}2 \cdot 10^{-12+9}\,\si{\watt\per\metre\squared} = \SI{3,2e-3}{\watt\per\metre\squared}
+  I = \SI{e-12}{\watt\per\metre\squared} \cdot 10^{10} \cdot 10^{0{,}5} \approx 3{,}2 \cdot 10^{-12+10}\,\si{\watt\per\metre\squared} = \SI{3,2e-2}{\watt\per\metre\squared}
 \]
-È dieci volte l'intensità del limite per l'esposizione al lavoro (\SI{85}{\deci\bel}, circa \SI{3e-4}{\watt\per\metre\squared}): chi entra nella sala deve portare le cuffie.'''
+È cento volte l'intensità del limite per l'esposizione al lavoro (\SI{85}{\deci\bel}, circa \SI{3e-4}{\watt\per\metre\squared}): chi entra nella sala deve portare le cuffie.'''
 
 [[problema]]
 id = "ud4-eco-profondita"
@@ -1499,27 +1516,28 @@ Si arriva allo stesso risultato con le differenze di livello: intensità per 4 v
 id = "ud4-eco-dettaglio"
 livello = 2
 testo = '''In un'ecografia dei tendini della mano si vogliono distinguere strutture di {{s}}. Si assume che il dettaglio più piccolo visibile sia pari alla lunghezza d'onda, e che nei tessuti il suono viaggi a \SI{1540}{\metre\per\second}.'''
-dati.s = { valore = "0,20", unita = "mm" }
+dati.s = { valore = "0,14", unita = "mm" }
 
   [[problema.parte]]
   domanda = '''Qual è la frequenza minima della sonda?'''
   calcolo = "v_tessuto / (s * 1e-3) / 1e6"
-  risultato = { valore = 7.7, unita = "MHz", cifre = 2 }
-  soluzione = '''Serve una lunghezza d'onda non più grande di $\SI{0,20}{\milli\metre} = \SI{2,0e-4}{\metre}$. Da $v = \lambda f$, a $\lambda$ più piccola corrisponde $f$ più grande, quindi la frequenza minima è quella che dà proprio $\lambda = \SI{2,0e-4}{\metre}$:
+  risultato = { valore = 11, unita = "MHz", cifre = 2 }
+  soluzione = '''Serve una lunghezza d'onda non più grande di $\SI{0,14}{\milli\metre} = \SI{1,4e-4}{\metre}$. Da $v = \lambda f$, a $\lambda$ più piccola corrisponde $f$ più grande, quindi la frequenza minima è quella che dà proprio $\lambda = \SI{1,4e-4}{\metre}$:
 \[
-  f = \frac{v}{\lambda} = \frac{\SI{1540}{\metre\per\second}}{\SI{2,0e-4}{\metre}} = \frac{1540}{2{,}0} \cdot 10^{4}\,\si{\hertz} = 770 \cdot 10^{4}\,\si{\hertz} = \SI{7,7e6}{\hertz} = \SI{7,7}{\mega\hertz}
-\]'''
+  f = \frac{v}{\lambda} = \frac{\SI{1540}{\metre\per\second}}{\SI{1,4e-4}{\metre}} = \frac{1540}{1{,}4} \cdot 10^{4}\,\si{\hertz} = 1100 \cdot 10^{4}\,\si{\hertz} = \SI{1,1e7}{\hertz} = \SI{11}{\mega\hertz}
+\]
+perché $1{,}4 \cdot 1100 = 1540$.'''
 
   [[problema.parte]]
-  domanda = '''L'ambulatorio ha una sonda da \SI{3,5}{\mega\hertz} e una da \SI{10}{\mega\hertz}. Quale si usa? Quanto vale la sua lunghezza d'onda nei tessuti?'''
-  calcolo = "v_tessuto / 10e6 * 1e3"
-  risultato = { valore = 0.15, unita = "mm", cifre = 2 }
-  rapido = '''la sonda da \SI{10}{\mega\hertz}; $\lambda \approx \SI{0,15}{\milli\metre}$'''
-  soluzione = '''Serve una frequenza di almeno \SI{7,7}{\mega\hertz}: va bene solo la sonda da \SI{10}{\mega\hertz}. La sua lunghezza d'onda è
+  domanda = '''L'ambulatorio ha una sonda da \SI{7,5}{\mega\hertz} e una da \SI{15}{\mega\hertz}. Quale si usa? Quanto vale la sua lunghezza d'onda nei tessuti?'''
+  calcolo = "v_tessuto / 15e6 * 1e3"
+  risultato = { valore = 0.10, unita = "mm", cifre = 2 }
+  rapido = '''la sonda da \SI{15}{\mega\hertz}; $\lambda \approx \SI{0,10}{\milli\metre}$'''
+  soluzione = '''Serve una frequenza di almeno \SI{11}{\mega\hertz}: va bene solo la sonda da \SI{15}{\mega\hertz}. La sua lunghezza d'onda è
 \[
-  \lambda = \frac{v}{f} = \frac{\SI{1540}{\metre\per\second}}{\SI{e7}{\hertz}} = \SI{1,54e-4}{\metre} \approx \SI{0,15}{\milli\metre}
+  \lambda = \frac{v}{f} = \frac{\SI{1540}{\metre\per\second}}{\SI{1,5e7}{\hertz}} = \frac{1540}{1{,}5} \cdot 10^{-7}\,\si{\metre} \approx 1030 \cdot 10^{-7}\,\si{\metre} \approx \SI{1,0e-4}{\metre} = \SI{0,10}{\milli\metre}
 \]
-più piccola di \SI{0,20}{\milli\metre}, come serve. Con la sonda da \SI{3,5}{\mega\hertz} la lunghezza d'onda sarebbe $1540/(\num{3,5e6})\,\si{\metre} = \SI{4,4e-4}{\metre} = \SI{0,44}{\milli\metre}$, troppo grande. I tendini della mano sono sotto la pelle, quindi l'assorbimento maggiore dell'alta frequenza non è un problema.'''
+più piccola di \SI{0,14}{\milli\metre}, come serve. Con la sonda da \SI{7,5}{\mega\hertz} la lunghezza d'onda sarebbe il doppio, circa \SI{0,21}{\milli\metre}, troppo grande. I tendini della mano sono sotto la pelle, quindi l'assorbimento maggiore dell'alta frequenza non è un problema.'''
 
 [[problema]]
 id = "ud4-eco-ripetizione"
@@ -1550,7 +1568,7 @@ Cinquemila impulsi al secondo. Se si vuole guardare più in profondità bisogna 
 [[problema]]
 id = "ud4-db-audiometria"
 livello = 2
-testo = '''All'esame audiometrico un lavoratore esposto per anni al rumore ha, alla frequenza di \SI{4}{\kilo\hertz}, una soglia uditiva di {{b}}, mentre un orecchio sano ha soglia \SI{0}{\deci\bel}.'''
+testo = '''All'esame audiometrico un lavoratore esposto per anni al rumore ha, alla frequenza di \SI{4}{\kilo\hertz}, una soglia uditiva di {{b}}, mentre un orecchio sano ha soglia \SI{0}{\deci\bel}. Assumi che la soglia di un orecchio sano a \SI{4}{\kilo\hertz} sia $I_0 = \SI{e-12}{\watt\per\metre\squared}$.'''
 dati.b = { valore = 45, unita = "\\deci\\bel" }
 
   [[problema.parte]]
@@ -1563,7 +1581,7 @@ dati.b = { valore = 45, unita = "\\deci\\bel" }
   domanda = '''Quanto vale l'intensità del suono più debole che il lavoratore riesce a sentire a quella frequenza?'''
   calcolo = "I0 * 10**(b / 10)"
   risultato = { valore = 3.2e-8, unita = "W/m^2", cifre = 2 }
-  soluzione = '''La soglia normale è $I_0 = \SI{e-12}{\watt\per\metre\squared}$. Moltiplicando per il fattore del punto (a):
+  soluzione = '''La soglia di un orecchio sano, per ipotesi, è $I_0 = \SI{e-12}{\watt\per\metre\squared}$. Moltiplicando per il fattore del punto (a):
 \[
   I = I_0 \cdot 10^{4{,}5} \approx \SI{e-12}{\watt\per\metre\squared} \cdot \num{3,2e4} = 3{,}2 \cdot 10^{-12+4}\,\si{\watt\per\metre\squared} = \SI{3,2e-8}{\watt\per\metre\squared}
 \]
@@ -1643,7 +1661,7 @@ e passa da \SI{65}{\deci\bel} a circa \SI{59}{\deci\bel}: ancora troppo.'''
 \[
   10^{1{,}4} = \frac{10^{2}}{10^{0{,}6}} \approx \frac{100}{4} = 25
 \]
-L'allontanamento da solo non basta: per scendere di \SI{20}{\deci\bel} con la sola distanza il monitor andrebbe messo dieci volte più lontano, a \SI{20}{\metre}, fuori dalla stanza.'''
+L'allontanamento da solo non basta. Con la sola distanza, partendo da \SI{4,0}{\metre}, l'intensità andrebbe divisa per 25, quindi la distanza moltiplicata per $\sqrt{25} = 5$: il monitor andrebbe messo a \SI{20}{\metre}, fuori dalla stanza.'''
 
 [[problema]]
 id = "ud4-db-trapano"
@@ -1726,7 +1744,7 @@ La profondità vera è la somma dei due tratti: $\SI{2,9}{\centi\metre} + \SI{3,
 \[
   d = \frac{v\,t}{2} = \frac{\SI{1540}{\metre\per\second} \cdot \SI{8,0e-5}{\second}}{2} = 1540 \cdot 4{,}0 \cdot 10^{-5}\,\si{\metre} = \SI{6,16e-2}{\metre} \approx \SI{6,2}{\centi\metre}
 \]
-Lo schermo mostra la struttura $6{,}16 - 6{,}06 = \SI{0,10}{\centi\metre} = \SI{1}{\milli\metre}$ più in profondità di dove è davvero: nel grasso il suono è più lento di \SI{1540}{\metre\per\second}, quindi l'impulso ci mette di più e l'ecografo crede che abbia fatto più strada. L'errore è piccolo, ma nel grasso spesso pesa.'''
+Lo schermo mostra la struttura $6{,}16 - 6{,}06 = \SI{0,10}{\centi\metre} = \SI{1}{\milli\metre}$ più in profondità di dove è davvero. Nel grasso il suono è più lento di \SI{1540}{\metre\per\second}: lì l'ecografo sovrastima il tratto di circa \SI{1,8}{\milli\metre} ($\SI{1540}{\metre\per\second} \cdot \SI{20}{\micro\second} = \SI{3,08}{\centi\metre}$ invece di \SI{2,9}{\centi\metre}). Nel muscolo è più veloce, e il tratto viene sottostimato di circa \SI{0,8}{\milli\metre} (\SI{3,08}{\centi\metre} invece di \SI{3,16}{\centi\metre}). Prevale il grasso, e la struttura appare \SI{1}{\milli\metre} più in profondità. In un paziente con uno strato di grasso più spesso l'errore cresce.'''
 
 [[problema]]
 id = "ud4-doppler-carotide"
@@ -1758,7 +1776,7 @@ dove $2 \cdot 4 \cdot 0{,}77 = 8 \cdot 0{,}77 = 6{,}16 = 4 \cdot 1{,}54$.'''
 \[
   f' = f + \Delta f = \SI{4000000}{\hertz} + \SI{4000}{\hertz} = \SI{4004000}{\hertz} = \SI{4,004}{\mega\hertz}
 \]
-Per convenzione un flusso che si avvicina alla sonda è colorato in rosso. Lo spostamento è solo un millesimo della frequenza emessa, perché la velocità del sangue è circa un duemillesimo di quella del suono.'''
+Per convenzione un flusso che si avvicina alla sonda è colorato in rosso. Dalla formula, $\Delta f/f = 2 v_s/v = 2 \cdot 0{,}77/1540 = 2/2000 = 1/1000$: lo spostamento è un millesimo della frequenza emessa.'''
 
   [[problema.parte]]
   domanda = '''In un tratto ristretto da una placca (una stenosi) l'apparecchio misura uno spostamento di \SI{8,0}{\kilo\hertz}. Quanto vale la velocità del sangue nella stenosi? Lo spostamento si può sentire?'''
@@ -1958,39 +1976,10 @@ soluzione = '''Nei fluidi la velocità del suono è $v = \sqrt{B/\rho}$: la dens
   testo = '''in acqua il suono è un'onda trasversale, in aria longitudinale'''
   commento = '''Nei fluidi, liquidi e gas, si propagano solo onde longitudinali: un fluido non resiste allo scorrimento di uno strato sull'altro.'''
   [[quesito.opzione]]
-  testo = '''l'acqua è molto meno comprimibile: il suo modulo di compressibilità è più di diecimila volte quello dell'aria'''
+  testo = '''l'acqua è molto meno comprimibile dell'aria'''
   [[quesito.opzione]]
   testo = '''in acqua le onde sonore hanno un'ampiezza maggiore'''
   commento = '''La velocità di propagazione dipende dalle proprietà del mezzo, rigidità e densità, non dall'ampiezza dell'onda.'''
-
-[[quesito]]
-id = "ud4-vel-corda-grammi"
-tipo = "multipla"
-testo = '''Una corda di densità lineare {{mu}} è tesa con una forza di {{F}}. La velocità delle onde trasversali sulla corda è'''
-dati.mu = { valore = "4,0", unita = "\\gram\\per\\metre" }
-dati.F = { valore = 160, unita = "\\newton" }
-corretta = "B"
-calcolo = "math.sqrt(F / (mu * 1e-3))"
-soluzione = '''La densità lineare va in \si{\kilo\gram\per\metre}: $\mu = \SI{4,0}{\gram\per\metre} = \SI{4,0e-3}{\kilo\gram\per\metre}$. Quindi
-\[
-  v = \sqrt{\frac{F}{\mu}} = \sqrt{\frac{\SI{160}{\newton}}{\SI{4,0e-3}{\kilo\gram\per\metre}}} = \sqrt{40 \cdot 10^{3}}\,\si{\metre\per\second} = \sqrt{4 \cdot 10^{4}}\,\si{\metre\per\second} = \SI{200}{\metre\per\second}
-\]'''
-
-  [[quesito.opzione]]
-  testo = '''\SI{6,3}{\metre\per\second}'''
-  commento = '''Lascia la densità lineare in grammi al metro: $\sqrt{160/4{,}0} = \sqrt{40} \approx 6{,}3$.'''
-  [[quesito.opzione]]
-  testo = '''\SI{200}{\metre\per\second}'''
-  valore = 200
-  [[quesito.opzione]]
-  testo = '''\SI{4e4}{\metre\per\second}'''
-  commento = '''Dimentica la radice quadrata: $F/\mu = \num{4e4}$ è il quadrato della velocità, in \si{\metre\squared\per\second\squared}.'''
-  [[quesito.opzione]]
-  testo = '''\SI{5e-3}{\metre\per\second}'''
-  commento = '''Rovescia la frazione sotto la radice: $\sqrt{\mu/F} = \sqrt{\num{4e-3}/160} = \sqrt{\num{2,5e-5}} = \num{5e-3}$, che non è nemmeno una velocità.'''
-  [[quesito.opzione]]
-  testo = '''\SI{63}{\metre\per\second}'''
-  commento = '''Sbaglia la conversione dei grammi, dividendo per 100 invece che per 1000: con $\mu = \SI{0,04}{\kilo\gram\per\metre}$ viene $\sqrt{4000} \approx 63$.'''
 
 [[quesito]]
 id = "ud4-interf-sonda"
@@ -2044,8 +2033,8 @@ L'interferenza è distruttiva, ma l'onda si annulla del tutto solo se le due amp
   testo = '''\SI{4,0}{\milli\metre}'''
   commento = '''Fa la media delle due ampiezze, $(5{,}0 + 3{,}0)/2 = 4{,}0$: la sovrapposizione somma gli spostamenti, non ne fa la media.'''
   [[quesito.opzione]]
-  testo = '''\SI{1,0}{\milli\metre}'''
-  commento = '''Divide per due la differenza delle ampiezze, $(5{,}0 - 3{,}0)/2 = 1{,}0$, come per una media: la differenza va presa intera.'''
+  testo = '''\SI{5,8}{\milli\metre}'''
+  commento = '''Somma le ampiezze come due vettori perpendicolari (UD1), $\sqrt{5{,}0^2 + 3{,}0^2} = \sqrt{34} \approx 5{,}8$: gli spostamenti delle due onde sono lungo la stessa retta e si sommano con il loro segno.'''
 
 [[quesito]]
 id = "ud4-vel-arteriosclerosi"
@@ -2346,36 +2335,6 @@ soluzione = '''I dettagli più piccoli che l'ecografia distingue sono dell'ordin
   commento = '''A \SI{20}{\kilo\hertz} la lunghezza d'onda nei tessuti è $1540/\num{2e4} \approx \SI{0,077}{\metre} = \SI{7,7}{\centi\metre}$, più grande della tiroide stessa: non si vedrebbe nessun dettaglio. L'ecografia usa frequenze fra 2 e \SI{15}{\mega\hertz}.'''
 
 [[quesito]]
-id = "ud4-suono-grasso-muscolo"
-tipo = "multipla"
-testo = '''Un fascio ecografico di frequenza {{f}} passa dal grasso, dove il suono viaggia a {{vg}}, a un muscolo, dove viaggia a {{vm}}. Nel muscolo la frequenza e la lunghezza d'onda valgono'''
-dati.f = { valore = "5,0", unita = "MHz" }
-dati.vg = { valore = 1450, unita = "m/s" }
-dati.vm = { valore = 1580, unita = "m/s" }
-corretta = "E"
-calcolo = "vm / (f * 1e6)"
-soluzione = '''Da un mezzo all'altro la frequenza resta quella della sorgente, \SI{5,0}{\mega\hertz}; cambia la velocità, e con lei la lunghezza d'onda. Nel muscolo si usa la velocità del muscolo:
-\[
-  \lambda = \frac{v_m}{f} = \frac{\SI{1580}{\metre\per\second}}{\SI{5,0e6}{\hertz}} = 316 \cdot 10^{-6}\,\si{\metre} \approx \SI{0,32}{\milli\metre}
-\]'''
-
-  [[quesito.opzione]]
-  testo = '''\SI{5,4}{\mega\hertz} e \SI{0,29}{\milli\metre}'''
-  commento = '''Tiene fissa la lunghezza d'onda del grasso, $1450/\num{5e6} = \SI{0,29}{\milli\metre}$, e fa cambiare la frequenza: $1580/\num{2,9e-4} \approx \SI{5,4}{\mega\hertz}$. È il contrario: la frequenza la fissa la sorgente.'''
-  [[quesito.opzione]]
-  testo = '''\SI{5,0}{\mega\hertz} e \SI{0,29}{\milli\metre}'''
-  commento = '''Usa la velocità del grasso, $1450/\num{5e6} = \SI{0,29}{\milli\metre}$: è la lunghezza d'onda nel grasso, non nel muscolo.'''
-  [[quesito.opzione]]
-  testo = '''\SI{5,0}{\mega\hertz} e \SI{0,31}{\milli\metre}'''
-  commento = '''Usa la velocità media dei tessuti molli, $1540/\num{5e6} \approx \SI{0,31}{\milli\metre}$, invece di quella del muscolo che il testo dà.'''
-  [[quesito.opzione]]
-  testo = '''\SI{5,0}{\mega\hertz} e \SI{0,32}{\micro\metre}'''
-  commento = '''Legge i megahertz come gigahertz, $10^{9}$ invece di $10^{6}$: la lunghezza d'onda risulta mille volte troppo piccola.'''
-  [[quesito.opzione]]
-  testo = '''\SI{5,0}{\mega\hertz} e \SI{0,32}{\milli\metre}'''
-  valore = 3.16e-4
-
-[[quesito]]
 id = "ud4-db-audiometro"
 tipo = "multipla"
 testo = '''Durante un esame audiometrico si fa sentire al paziente un tono di \SI{40}{\deci\bel}. Con la soglia di udibilità $I_0 = \SI{e-12}{\watt\per\metre\squared}$, l'intensità del tono è'''
@@ -2441,6 +2400,50 @@ soluzione = '''La frequenza in hertz è $\SI{20}{\kilo\hertz} = \SI{2e4}{\hertz}
   \lambda = \frac{v}{f} = \frac{\SI{340}{\metre\per\second}}{\SI{2e4}{\hertz}} = 170 \cdot 10^{-4}\,\si{\metre} = \SI{1,7e-2}{\metre} = \SI{1,7}{\centi\metre}
 \]
 Chi scrive 0,017 ha dato il risultato in metri; chi scrive 17, in millimetri. Il suono più grave udibile, a \SI{20}{\hertz}, ha invece $\lambda = 340/20 = \SI{17}{\metre}$.'''
+
+[[quesito]]
+id = "ud4-doppler-osservatore"
+tipo = "multipla"
+testo = '''Un osservatore corre verso una sorgente sonora ferma. Rispetto alla frequenza emessa, la frequenza che percepisce è'''
+corretta = "B"
+soluzione = '''È l'effetto Doppler con l'osservatore in moto. La sorgente è ferma, quindi i fronti d'onda e la lunghezza d'onda nell'aria non cambiano. Ma l'osservatore va incontro ai fronti d'onda e ne incontra di più ogni secondo: la frequenza che percepisce è più alta di quella emessa. Se si allontanasse, ne incontrerebbe di meno e la frequenza sarebbe più bassa.'''
+
+  [[quesito.opzione]]
+  testo = '''uguale, perché la sorgente è ferma e i fronti d'onda non cambiano'''
+  commento = '''I fronti d'onda non cambiano davvero, ma l'osservatore che corre li incontra più spesso: l'effetto Doppler c'è anche quando si muove solo l'osservatore.'''
+  [[quesito.opzione]]
+  testo = '''più alta, perché l'osservatore incontra più fronti d'onda ogni secondo'''
+  [[quesito.opzione]]
+  testo = '''più alta, perché davanti all'osservatore la lunghezza d'onda si accorcia'''
+  commento = '''La conclusione è giusta, il motivo no: la lunghezza d'onda si accorcia davanti a una sorgente in moto. Qui la sorgente è ferma e la lunghezza d'onda resta la stessa; cambia il ritmo con cui l'osservatore incontra i fronti.'''
+  [[quesito.opzione]]
+  testo = '''più bassa, perché l'osservatore va contro il verso di propagazione dell'onda'''
+  commento = '''Rovescia l'effetto: andare incontro all'onda vuol dire incontrare più fronti al secondo, e la frequenza percepita sale.'''
+  [[quesito.opzione]]
+  testo = '''più alta, ma solo quando l'osservatore arriva vicino alla sorgente'''
+  commento = '''L'effetto Doppler dipende dalla velocità con cui la distanza cambia, non dalla distanza: la frequenza è più alta già da lontano, finché l'osservatore corre verso la sorgente.'''
+
+[[quesito]]
+id = "ud4-doppler-vena"
+tipo = "multipla"
+testo = '''In un ecocolordoppler del collo il sangue di una vena giugulare scorre allontanandosi dalla sonda. Rispetto alla frequenza emessa dalla sonda, l'eco riflessa dai globuli rossi torna con una frequenza'''
+corretta = "E"
+soluzione = '''I globuli rossi che riflettono gli ultrasuoni si allontanano dalla sonda: per l'effetto Doppler l'eco torna con una frequenza più bassa di quella emessa. Per convenzione un flusso che si allontana dalla sonda è colorato in blu, uno che si avvicina in rosso, che il vaso sia un'arteria o una vena.'''
+
+  [[quesito.opzione]]
+  testo = '''più alta, e il flusso appare in rosso'''
+  commento = '''Descrive un flusso che si avvicina alla sonda. Qui il sangue si allontana: la frequenza dell'eco scende, e il colore è il blu.'''
+  [[quesito.opzione]]
+  testo = '''più alta, e il flusso appare in blu'''
+  commento = '''Il colore è giusto, la frequenza no: il blu indica proprio un flusso che si allontana, cioè un'eco con frequenza più bassa di quella emessa.'''
+  [[quesito.opzione]]
+  testo = '''uguale, e il flusso appare in blu perché il vaso è una vena'''
+  commento = '''Il colore non dice se il vaso è un'arteria o una vena, ma il verso del flusso rispetto alla sonda. E la frequenza cambia, perché i globuli rossi che riflettono l'onda sono in moto.'''
+  [[quesito.opzione]]
+  testo = '''più bassa, e il flusso appare in rosso'''
+  commento = '''La frequenza è giusta, il colore no: per convenzione il rosso indica un flusso che si avvicina alla sonda, il blu uno che si allontana.'''
+  [[quesito.opzione]]
+  testo = '''più bassa, e il flusso appare in blu'''
 
 # ==================================================================== quesiti lampo, in ordine di dispensa
 
@@ -2551,8 +2554,8 @@ La differenza di cammino è un numero intero di lunghezze d'onda più mezza: le 
   testo = '''costruttiva, perché la differenza di cammino è \SI{3}{\metre}, un numero intero di metri'''
   commento = '''La differenza di cammino va confrontata con la lunghezza d'onda, non con il metro: \SI{3}{\metre} sono 1,5 lunghezze d'onda.'''
   [[quesito.opzione]]
-  testo = '''distruttiva, perché basta una differenza di cammino qualsiasi per avere interferenza distruttiva'''
-  commento = '''Se la differenza di cammino fosse un numero intero di lunghezze d'onda, per esempio \SI{4}{\metre}, l'interferenza sarebbe costruttiva.'''
+  testo = '''distruttiva, perché la differenza di cammino è più grande della lunghezza d'onda'''
+  commento = '''Una differenza di cammino più grande di $\lambda$ può dare qualunque tipo di interferenza: con \SI{4}{\metre}, due lunghezze d'onda, sarebbe costruttiva. Conta quante lunghezze d'onda ci stanno, non se $\Delta r$ supera $\lambda$.'''
   [[quesito.opzione]]
   testo = '''distruttiva, perché la differenza di cammino è una volta e mezza la lunghezza d'onda'''
   valore = 1.5
