@@ -206,3 +206,77 @@
   {\end{enumerate}}
 % Spazio per la risposta a Completamento
 \newcommand{\completa}{\underline{\hspace{2.5cm}}}
+
+% --- Copertina e colophon del Libro --------------------------------------
+\newcommand{\repourl}{https://github.com/MonacoL/FISICA_PER_MEDICINA}
+\newcommand{\autore}{Luca Monaco}
+
+\newcommand{\copertina}{%
+  \begin{titlepage}
+  \begin{tikzpicture}[remember picture, overlay]
+    % fascia superiore con onde dello spettro e curva di decadimento
+    \fill[formula] (current page.north west) rectangle ([yshift=-11cm]current page.north east);
+    \begin{scope}[shift={([yshift=-8.2cm]current page.north west)}, white, opacity=0.18, line width=1.2pt]
+      \foreach \k/\a in {1.0/0.9, 1.6/0.7, 2.6/0.5, 4.2/0.35}
+        \draw[domain=0:21, samples=300] plot (\x, {\a*sin(\k*\x r)});
+    \end{scope}
+    \draw[white, opacity=0.35, line width=1.5pt, domain=0:9, samples=80]
+      plot ([shift={([xshift=13cm,yshift=-1.2cm]current page.north west)}]{\x}, {-5+4.6*2^(-\x/1.3)});
+    % testo nella fascia
+    \node[anchor=north west, text=white, align=left, inner sep=0pt]
+      at ([xshift=2.4cm,yshift=-2.6cm]current page.north west)
+      {\scshape\large Corso di preparazione all'esame\\[3.2cm]
+       {\fontsize{64}{64}\selectfont\bfseries Fisica}\\[0.9cm]
+       {\LARGE per il semestre filtro di Medicina e Chirurgia}};
+    % linea colorata con i colori dei box
+    \foreach \c [count=\i from 0] in {formula,medica,esempio,approfondimento,attenzione,lampo,richiamo}
+      \fill[\c] ([xshift=\i*3cm, yshift=-11.2cm]current page.north west) rectangle ++(3cm,-0.25cm);
+    % contenuto
+    \node[anchor=north west, align=left, inner sep=0pt, text width=16cm]
+      at ([xshift=2.4cm,yshift=-12.6cm]current page.north west)
+      {\Large Dispense ed Eserciziari\\[0.2cm]
+       \large\color{richiamo} Teoria, Esempi svolti, Problemi su tre Livelli e Quesiti d'esame\\
+       nel formato della prova, con Soluzioni svolte e Simulazioni d'esame};
+    \node[anchor=north west, align=left, inner sep=0pt]
+      at ([xshift=2.4cm,yshift=-15.6cm]current page.north west)
+      {\begin{tabular}{@{}l@{\hspace{1em}}l@{}}
+         \color{formula}\bfseries UD1 & Metodi \\
+         \color{formula}\bfseries UD2 & Meccanica \\
+         \color{formula}\bfseries UD3 & Fluidi \\
+         \color{formula}\bfseries UD4 & Onde meccaniche \\
+         \color{formula}\bfseries UD5 & Termodinamica \\
+         \color{formula}\bfseries UD6 & Elettricità e magnetismo \\
+         \color{formula}\bfseries UD7 & Fisica delle radiazioni
+       \end{tabular}};
+    % autore e piede
+    \node[anchor=south west, align=left, inner sep=0pt]
+      at ([xshift=2.4cm,yshift=3.6cm]current page.south west)
+      {{\Large\bfseries \autore}\\[0.25cm]
+       \color{richiamo} Aggiornato al \today};
+    \draw[richiamo!40] ([xshift=2.4cm,yshift=2.9cm]current page.south west) -- ([xshift=-2.4cm,yshift=2.9cm]current page.south east);
+    \node[anchor=north west, inner sep=0pt, font=\small, text=richiamo]
+      at ([xshift=2.4cm,yshift=2.6cm]current page.south west)
+      {\href{\repourl}{\nolinkurl{github.com/MonacoL/FISICA_PER_MEDICINA}}};
+    \node[anchor=north east, inner sep=0pt, font=\small, text=richiamo]
+      at ([xshift=-2.4cm,yshift=2.6cm]current page.south east)
+      {Syllabus del semestre filtro 2026/27};
+  \end{tikzpicture}
+  \end{titlepage}%
+  % colophon
+  \thispagestyle{empty}
+  \null\vfill
+  {\small
+  \textbf{Fisica per il semestre filtro di Medicina e Chirurgia}\\
+  \autore\par\medskip
+  Versione aggiornata al \today. Il testo è in sviluppo: la versione più recente,
+  i sorgenti \LaTeX{} e i PDF delle singole Unità didattiche sono su\\
+  \url{\repourl}\par\medskip
+  Hai trovato un errore o un passaggio poco chiaro? Apri una segnalazione (issue)
+  sul repository GitHub.\par\medskip
+  Il programma segue il Syllabus ufficiale dell'insegnamento di Fisica del semestre
+  filtro. I Quesiti d'esame sono originali, costruiti sul modello delle prove reali:
+  all'esame non si usano calcolatrice né formulario.\par\medskip
+  Quest'opera è distribuita con licenza Creative Commons
+  Attribuzione -- Non commerciale -- Condividi allo stesso modo 4.0 Internazionale
+  (CC BY-NC-SA 4.0), \url{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it}.\par}
+  \clearpage}
