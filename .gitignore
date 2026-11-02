@@ -5,8 +5,9 @@
 .venv/
 __pycache__/
 
-# Worktree degli agenti
-.claude/
+# Worktree degli agenti; agenti e skill di progetto in .claude/ sono versionati
+.claude/worktrees/
+.claude/settings.local.json
 
 # Compilazione LaTeX
 libro/build/
