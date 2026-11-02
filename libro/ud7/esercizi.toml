@@ -321,7 +321,7 @@ dove $(1/2{,}5)^2 = 0{,}4^2 = 0{,}16$.'''
 \[
   \frac{\SI{3,2e-4}{\watt\per\metre\squared}}{\SI{2,0e-5}{\watt\per\metre\squared}} = 1{,}6 \cdot 10^{-4-(-5)} = 16 = 2^4
 \]
-cioè di 4 dimezzamenti: servono 4 spessori emivalenti, $4 \cdot \SI{3,0}{\milli\metre} = \SI{12}{\milli\metre}$ di piombo. Distanza e schermatura si sommano: la distanza riduce l'intensità di \num{6,25} volte, il piombo di altre 16.'''
+cioè di 4 dimezzamenti: servono 4 spessori emivalenti, $4 \cdot \SI{3,0}{\milli\metre} = \SI{12}{\milli\metre}$ di piombo. Gli effetti di distanza e schermatura si combinano moltiplicandosi: la distanza riduce l'intensità di \num{6,25} volte, il piombo di altre 16, in tutto $\num{6,25} \cdot 16 = 100$ volte.'''
 
 [[problema]]
 id = "ud7-spettro-saturimetro"
