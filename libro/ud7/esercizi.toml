@@ -18,6 +18,8 @@
 #   confronta con il risultato, arrotondato a `cifre` cifre significative. Per la
 #   risposta multipla l'opzione corretta ha `valore`, per il completamento conta
 #   la risposta;
+# - se una parte chiede più di un risultato, `rapido` (LaTeX) è il testo dei
+#   risultati rapidi per quella parte, es. rapido = '''\SI{140}{\metre}; spostamento nullo''';
 # - le costanti sono quelle che lo studente usa a mano.
 
 titolo = "Eserciziario UD7 · Fisica delle radiazioni"
@@ -1592,13 +1594,10 @@ Un raggio a \ang{60} supera l'angolo limite. La legge di Snell darebbe $\sin\the
 id = "ud7-onde-ampiezza"
 tipo = "multipla"
 testo = '''In un punto l'ampiezza del campo elettrico di un'onda elettromagnetica diventa tre volte più grande. L'intensità dell'onda in quel punto'''
-corretta = "A"
+corretta = "E"
 calcolo = "3**2"
 soluzione = '''L'intensità è proporzionale al quadrato dell'ampiezza, $I \propto E_0^2$. Se $E_0$ diventa $3E_0$, l'intensità si moltiplica per $3^2 = 9$.'''
 
-  [[quesito.opzione]]
-  testo = '''diventa 9 volte più grande'''
-  valore = 9
   [[quesito.opzione]]
   testo = '''diventa 3 volte più grande'''
   commento = '''Tratta l'intensità come proporzionale all'ampiezza, non al suo quadrato.'''
@@ -1611,6 +1610,9 @@ soluzione = '''L'intensità è proporzionale al quadrato dell'ampiezza, $I \prop
   [[quesito.opzione]]
   testo = '''diventa 9 volte più piccola'''
   commento = '''Confonde con la legge dell'inverso del quadrato, che riguarda la distanza dalla sorgente: un'ampiezza più grande vuol dire un'intensità più grande.'''
+  [[quesito.opzione]]
+  testo = '''diventa 9 volte più grande'''
+  valore = 9
 
 [[quesito]]
 id = "ud7-onde-distanza"
@@ -1618,7 +1620,7 @@ tipo = "multipla"
 testo = '''Durante un esame radiologico un tecnico si trova a {{r1}} dal paziente, che diffonde la radiazione come una sorgente piccola. Se il tecnico si allontana fino a {{r2}}, l'intensità della radiazione che lo raggiunge'''
 dati.r1 = { valore = 50, unita = "cm" }
 dati.r2 = { valore = "2,0", unita = "m" }
-corretta = "B"
+corretta = "D"
 calcolo = "(r1 / 100 / r2)**2"
 soluzione = '''La distanza passa da \SI{0,50}{\metre} a \SI{2,0}{\metre}: diventa $2{,}0/0{,}50 = 4$ volte più grande. Per la legge dell'inverso del quadrato l'intensità si divide per $4^2 = 16$: $I_2/I_1 = (r_1/r_2)^2 = (1/4)^2 = 1/16$.'''
 
@@ -1626,14 +1628,14 @@ soluzione = '''La distanza passa da \SI{0,50}{\metre} a \SI{2,0}{\metre}: divent
   testo = '''diventa un quarto'''
   commento = '''Divide per il rapporto delle distanze, 4, invece che per il suo quadrato.'''
   [[quesito.opzione]]
-  testo = '''diventa $1/16$'''
-  valore = 0.0625
-  [[quesito.opzione]]
   testo = '''diventa 16 volte più grande'''
   commento = '''Usa il quadrato giusto ma rovescia il rapporto: allontanandosi l'intensità diminuisce.'''
   [[quesito.opzione]]
   testo = '''diventa la metà'''
   commento = '''Prende la radice quadrata del rapporto delle distanze, $\sqrt{4} = 2$, invece del quadrato.'''
+  [[quesito.opzione]]
+  testo = '''diventa $1/16$'''
+  valore = 0.0625
   [[quesito.opzione]]
   testo = '''diventa circa $4/9$'''
   commento = '''Usa la differenza delle distanze, $\SI{2,0}{\metre} - \SI{0,50}{\metre} = \SI{1,5}{\metre}$, invece del loro rapporto: $(1/1{,}5)^2 = 4/9$.'''
@@ -1642,17 +1644,17 @@ soluzione = '''La distanza passa da \SI{0,50}{\metre} a \SI{2,0}{\metre}: divent
 id = "ud7-onde-campi"
 tipo = "multipla"
 testo = '''Un'onda elettromagnetica si propaga lungo l'asse $x$, e il suo campo elettrico oscilla lungo l'asse $y$. Il campo magnetico dell'onda'''
-corretta = "C"
+corretta = "A"
 soluzione = '''L'onda elettromagnetica è trasversale: $\vec E$ e $\vec B$ sono perpendicolari tra loro e alla direzione di propagazione. Con propagazione lungo $x$ ed $\vec E$ lungo $y$, $\vec B$ oscilla lungo $z$. I due campi oscillano insieme: sono massimi e nulli negli stessi punti e negli stessi istanti.'''
 
+  [[quesito.opzione]]
+  testo = '''oscilla lungo $z$, ed è massimo dove è massimo il campo elettrico'''
   [[quesito.opzione]]
   testo = '''oscilla lungo $x$, la direzione di propagazione'''
   commento = '''Tratta l'onda come longitudinale: nell'onda elettromagnetica entrambi i campi sono perpendicolari alla direzione di propagazione.'''
   [[quesito.opzione]]
   testo = '''oscilla lungo $y$, insieme al campo elettrico'''
   commento = '''Dimentica che $\vec E$ e $\vec B$ sono perpendicolari tra loro.'''
-  [[quesito.opzione]]
-  testo = '''oscilla lungo $z$, ed è massimo dove è massimo il campo elettrico'''
   [[quesito.opzione]]
   testo = '''non oscilla: è costante e diretto lungo $z$'''
   commento = '''Un campo magnetico costante non fa parte dell'onda: è proprio il campo elettrico che varia a generare un campo magnetico che varia, e viceversa.'''
@@ -1665,7 +1667,7 @@ id = "ud7-spettro-regione"
 tipo = "multipla"
 testo = '''Una radiazione elettromagnetica ha nel vuoto frequenza {{f}}. A quale regione dello spettro appartiene?'''
 dati.f = { valore = "1,0e15", unita = "Hz" }
-corretta = "D"
+corretta = "C"
 soluzione = '''Da $c = \lambda f$: $\lambda = c/f = (\SI{3e8}{\metre\per\second})/(\SI{1,0e15}{\hertz}) = 3 \cdot 10^{8-15}\,\si{\metre} = \SI{3e-7}{\metre} = \SI{300}{\nano\metre}$. È fra \SI{10}{\nano\metre} e \SI{400}{\nano\metre}: ultravioletto.'''
 
   [[quesito.opzione]]
@@ -1675,10 +1677,10 @@ soluzione = '''Da $c = \lambda f$: $\lambda = c/f = (\SI{3e8}{\metre\per\second}
   testo = '''luce visibile'''
   commento = '''Trova \SI{300}{\nano\metre} ma dimentica che il visibile comincia a \SI{400}{\nano\metre}, con il violetto: sotto c'è l'ultravioletto.'''
   [[quesito.opzione]]
+  testo = '''ultravioletto'''
+  [[quesito.opzione]]
   testo = '''raggi X'''
   commento = '''Associa una frequenza molto alta ai raggi X, che però hanno $\lambda$ sotto \SI{10}{\nano\metre}, cioè frequenze più di 30 volte maggiori.'''
-  [[quesito.opzione]]
-  testo = '''ultravioletto'''
   [[quesito.opzione]]
   testo = '''onde radio'''
   commento = '''Rovescia la formula, $\lambda = f/c = \num{1,0e15}/\num{3e8} \approx \SI{3e6}{\metre}$: la lunghezza d'onda è $c/f$.'''
@@ -1707,13 +1709,16 @@ id = "ud7-fotone-tripla"
 tipo = "multipla"
 testo = '''Un fotone ultravioletto ha un'energia di {{E0}}. Quanto vale l'energia di un fotone con lunghezza d'onda tre volte più grande?'''
 dati.E0 = { valore = 6, unita = "eV" }
-corretta = "E"
+corretta = "B"
 calcolo = "E0 / 3"
 soluzione = '''Da $E = hc/\lambda$ l'energia è inversamente proporzionale alla lunghezza d'onda: se $\lambda$ triplica, $E$ diventa un terzo, $\SI{6}{\electronvolt}/3 = \SI{2}{\electronvolt}$.'''
 
   [[quesito.opzione]]
   testo = '''\SI{18}{\electronvolt}'''
   commento = '''Tratta l'energia come direttamente proporzionale a $\lambda$: $6 \cdot 3 = 18$. È la frequenza, non la lunghezza d'onda, a essere proporzionale all'energia.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\electronvolt}'''
+  valore = 2
   [[quesito.opzione]]
   testo = '''\SI{6}{\electronvolt}'''
   commento = '''Pensa che tutti i fotoni abbiano la stessa energia, come hanno tutti la stessa velocità $c$ nel vuoto.'''
@@ -1723,9 +1728,6 @@ soluzione = '''Da $E = hc/\lambda$ l'energia è inversamente proporzionale alla 
   [[quesito.opzione]]
   testo = '''\SI{54}{\electronvolt}'''
   commento = '''Moltiplica per $3^2 = 9$: sbaglia due volte, verso della proporzionalità e quadrato.'''
-  [[quesito.opzione]]
-  testo = '''\SI{2}{\electronvolt}'''
-  valore = 2
 
 [[quesito]]
 id = "ud7-fotone-laser"
@@ -1733,7 +1735,7 @@ tipo = "multipla"
 testo = '''Un puntatore laser emette luce rossa con lunghezza d'onda {{lam}} e una potenza di {{P}}. Quanti fotoni emette al secondo?'''
 dati.lam = { valore = 620, unita = "nm" }
 dati.P = { valore = "1,6", unita = "mW" }
-corretta = "A"
+corretta = "C"
 calcolo = "P * 1e-3 / (hc_eVnm / lam * eV)"
 soluzione = '''Ogni fotone ha $E \approx 1240/620 = \SI{2}{\electronvolt} = 2 \cdot \SI{1,6e-19}{\joule} = \SI{3,2e-19}{\joule}$. Il laser emette $\SI{1,6}{\milli\watt} = \SI{1,6e-3}{\joule}$ al secondo, quindi
 \[
@@ -1741,14 +1743,14 @@ soluzione = '''Ogni fotone ha $E \approx 1240/620 = \SI{2}{\electronvolt} = 2 \c
 \]'''
 
   [[quesito.opzione]]
-  testo = '''$5 \cdot 10^{15}$'''
-  valore = 5e15
-  [[quesito.opzione]]
   testo = '''$2 \cdot 10^{-16}$'''
   commento = '''Divide l'energia del fotone per la potenza invece del contrario: $\num{3,2e-19}/\num{1,6e-3} = \num{2e-16}$. Un numero di fotoni minore di 1 al secondo è già un segnale d'errore.'''
   [[quesito.opzione]]
   testo = '''$5 \cdot 10^{12}$'''
   commento = '''Legge il prefisso milli come micro: $\SI{1,6}{\micro\watt} = \SI{1,6e-6}{\watt}$, e $\num{1,6e-6}/\num{3,2e-19} = \num{5e12}$.'''
+  [[quesito.opzione]]
+  testo = '''$5 \cdot 10^{15}$'''
+  valore = 5e15
   [[quesito.opzione]]
   testo = '''$1 \cdot 10^{16}$'''
   commento = '''Usa per il fotone \SI{1}{\electronvolt}, cioè \SI{1,6e-19}{\joule}, dimenticando che ne ha 2: $\num{1,6e-3}/\num{1,6e-19} = \num{e16}$.'''
@@ -1760,14 +1762,12 @@ soluzione = '''Ogni fotone ha $E \approx 1240/620 = \SI{2}{\electronvolt} = 2 \c
 id = "ud7-ioniz-quale"
 tipo = "multipla"
 testo = '''Per ionizzare una molecola biologica serve un'energia di circa \SI{10}{\electronvolt}. Quale di queste radiazioni può ionizzarla?'''
-corretta = "B"
+corretta = "E"
 soluzione = '''Conta l'energia del singolo fotone, $E \approx 1240/\lambda$. Per superare \SI{10}{\electronvolt} serve $\lambda$ minore di circa \SI{120}{\nano\metre}. Il fotone da \SI{60}{\nano\metre} ha $1240/60 \approx \SI{21}{\electronvolt}$: è ultravioletto lontano, ionizzante.'''
 
   [[quesito.opzione]]
   testo = '''luce violetta con $\lambda = \SI{400}{\nano\metre}$, il colore più energetico del visibile'''
   commento = '''Il violetto è il visibile più energetico, ma ogni fotone ha $1240/400 \approx \SI{3}{\electronvolt}$, meno della soglia.'''
-  [[quesito.opzione]]
-  testo = '''ultravioletto con $\lambda = \SI{60}{\nano\metre}$'''
   [[quesito.opzione]]
   testo = '''infrarosso con $\lambda = \SI{10}{\micro\metre}$'''
   commento = '''Lega la lunghezza d'onda grande a un'energia grande: è il contrario, $1240/10^4 \approx \SI{0,12}{\electronvolt}$.'''
@@ -1777,13 +1777,15 @@ soluzione = '''Conta l'energia del singolo fotone, $E \approx 1240/\lambda$. Per
   [[quesito.opzione]]
   testo = '''ultravioletto di una lampada abbronzante, con $\lambda = \SI{350}{\nano\metre}$'''
   commento = '''Pensa che tutto l'ultravioletto sia ionizzante: a \SI{350}{\nano\metre} il fotone ha $1240/350 \approx \SI{3,5}{\electronvolt}$. Può danneggiare la pelle, ma non ionizza.'''
+  [[quesito.opzione]]
+  testo = '''ultravioletto con $\lambda = \SI{60}{\nano\metre}$'''
 
 [[quesito]]
 id = "ud7-fotone-mammografia"
 tipo = "multipla"
 testo = '''In una mammografia si usano raggi X con lunghezza d'onda di circa {{lam}}. Quanto vale l'energia di un fotone?'''
 dati.lam = { valore = "0,062", unita = "nm" }
-corretta = "C"
+corretta = "B"
 calcolo = "hc_eVnm / lam / 1e3"
 soluzione = '''Con la formula pratica: $E \approx 1240/0{,}062\,\si{\electronvolt}$. Poiché $0{,}062 = 62 \cdot 10^{-3}$, $E \approx (1240/62) \cdot 10^{3}\,\si{\electronvolt} = 20 \cdot 10^{3}\,\si{\electronvolt} = \SI{20}{\kilo\electronvolt}$.'''
 
@@ -1791,11 +1793,11 @@ soluzione = '''Con la formula pratica: $E \approx 1240/0{,}062\,\si{\electronvol
   testo = '''\SI{20}{\electronvolt}'''
   commento = '''Calcola $1240/62$ e dimentica il fattore $10^{3}$ che viene da $0{,}062 = 62 \cdot 10^{-3}$.'''
   [[quesito.opzione]]
-  testo = '''\SI{2}{\kilo\electronvolt}'''
-  commento = '''Sbaglia la virgola, come se fosse $\lambda = \SI{0,62}{\nano\metre}$: $1240/0{,}62 = \SI{2000}{\electronvolt}$.'''
-  [[quesito.opzione]]
   testo = '''\SI{20}{\kilo\electronvolt}'''
   valore = 20
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\kilo\electronvolt}'''
+  commento = '''Sbaglia la virgola, come se fosse $\lambda = \SI{0,62}{\nano\metre}$: $1240/0{,}62 = \SI{2000}{\electronvolt}$.'''
   [[quesito.opzione]]
   testo = '''\SI{77}{\electronvolt}'''
   commento = '''Moltiplica invece di dividere: $1240 \cdot 0{,}062 \approx 77$.'''
@@ -1835,10 +1837,13 @@ soluzione = '''Se passa il \SI{10}{\percent}, $I_0/I = 10$ e $A = \log_{10} 10 =
 id = "ud7-lb-filtri"
 tipo = "multipla"
 testo = '''Un filtro di alluminio lascia passare $1/3$ dei fotoni di una certa energia che lo colpiscono. Quale frazione di quei fotoni passa attraverso due filtri uguali sovrapposti?'''
-corretta = "D"
+corretta = "A"
 calcolo = "(1/3)**2"
 soluzione = '''Ogni filtro lascia passare una frazione fissa di quello che gli arriva. Il primo lascia passare $1/3$ dei fotoni, il secondo $1/3$ di quel terzo: $1/3 \cdot 1/3 = 1/9$. Raddoppiare lo spessore eleva al quadrato la frazione trasmessa.'''
 
+  [[quesito.opzione]]
+  testo = '''$1/9$'''
+  valore = 0.1111111111111111
   [[quesito.opzione]]
   testo = '''$1/6$'''
   commento = '''Pensa che raddoppiare lo spessore dimezzi la frazione trasmessa: $\tfrac12 \cdot \tfrac13 = \tfrac16$. L'attenuazione è esponenziale, non lineare.'''
@@ -1849,9 +1854,6 @@ soluzione = '''Ogni filtro lascia passare una frazione fissa di quello che gli a
   testo = '''$2/9$'''
   commento = '''Moltiplica la frazione che passa il primo filtro, $1/3$, per quella che il secondo assorbe, $2/3$: così trova i fotoni fermati dal secondo filtro, non quelli che passano.'''
   [[quesito.opzione]]
-  testo = '''$1/9$'''
-  valore = 0.1111111111111111
-  [[quesito.opzione]]
   testo = '''$1/3$'''
   commento = '''Pensa che la frazione trasmessa dipenda solo dal materiale, come il coefficiente $\mu$. La frazione dipende anche dallo spessore: $e^{-\mu x}$.'''
 
@@ -1860,7 +1862,7 @@ id = "ud7-lb-concentrazione"
 tipo = "multipla"
 testo = '''Nello spettrofotometro una soluzione lascia passare il {{p}} della luce. Una soluzione della stessa sostanza, con concentrazione doppia, nella stessa cuvetta e alla stessa lunghezza d'onda, lascia passare'''
 dati.p = { valore = 50, unita = "\\percent" }
-corretta = "E"
+corretta = "C"
 calcolo = "100 * (p / 100)**2"
 soluzione = '''Per la legge di Beer $A = \varepsilon c \ell$: con concentrazione doppia l'assorbanza raddoppia. Se $I/I_0 = 10^{-A} = 1/2$, con $2A$ si ha $I/I_0 = 10^{-2A} = (10^{-A})^2 = (1/2)^2 = 1/4$, cioè il \SI{25}{\percent}.'''
 
@@ -1871,24 +1873,22 @@ soluzione = '''Per la legge di Beer $A = \varepsilon c \ell$: con concentrazione
   testo = '''il \SI{50}{\percent}'''
   commento = '''Pensa che l'assorbimento dipenda solo dalla sostanza e dalla cuvetta. Nella legge di Beer compare anche la concentrazione.'''
   [[quesito.opzione]]
+  testo = '''il \SI{25}{\percent}'''
+  valore = 25.0
+  [[quesito.opzione]]
   testo = '''il \SI{75}{\percent}'''
   commento = '''Trova bene che passa $1/4$ della luce, ma risponde con la frazione assorbita, $3/4$.'''
   [[quesito.opzione]]
   testo = '''il \SI{40}{\percent}'''
   commento = '''Prende l'assorbanza per la frazione assorbita: $A = 2 \cdot 0{,}30 = 0{,}60$, quindi passerebbe $1 - 0{,}60 = 0{,}40$. L'assorbanza è un logaritmo: $I/I_0 = 10^{-A}$.'''
-  [[quesito.opzione]]
-  testo = '''il \SI{25}{\percent}'''
-  valore = 25.0
 
 [[quesito]]
 id = "ud7-lb-pulsatile"
 tipo = "multipla"
 testo = '''Il saturimetro da dito usa solo la parte dell'assorbanza che varia a ogni battito. Perché?'''
-corretta = "A"
+corretta = "E"
 soluzione = '''A ogni battito arriva al dito un po' di sangue arterioso in più, e l'assorbanza cresce. Pelle, tessuti e sangue venoso assorbono anche loro, ma sempre allo stesso modo: usando solo la parte che pulsa lo strumento misura l'emoglobina del sangue arterioso.'''
 
-  [[quesito.opzione]]
-  testo = '''Per togliere il contributo di pelle, tessuti e sangue venoso, che resta costante.'''
   [[quesito.opzione]]
   testo = '''Perché i LED si accendono solo durante il battito.'''
   commento = '''I LED illuminano il dito di continuo: a ogni battito cambia lo spessore di sangue arterioso attraversato, non la luce emessa.'''
@@ -1901,22 +1901,24 @@ soluzione = '''A ogni battito arriva al dito un po' di sangue arterioso in più,
   [[quesito.opzione]]
   testo = '''Perché la parte che pulsa è dovuta al sangue venoso, che porta meno ossigeno.'''
   commento = '''A ogni battito arriva sangue arterioso; il sangue venoso dà un contributo che non pulsa, ed è proprio quello che lo strumento toglie.'''
+  [[quesito.opzione]]
+  testo = '''Per togliere il contributo di pelle, tessuti e sangue venoso, che resta costante.'''
 
 [[quesito]]
 id = "ud7-lb-calcestruzzo"
 tipo = "multipla"
 testo = '''La parete di una sala di radiologia deve ridurre l'intensità dei raggi X a circa un millesimo. Per questi raggi lo spessore emivalente del calcestruzzo è {{x12}}. Considera il fascio monocromatico. Lo spessore di calcestruzzo necessario è circa'''
 dati.x12 = { valore = "2,0", unita = "cm" }
-corretta = "B"
+corretta = "A"
 calcolo = "x12 * round(math.log2(1000))"
 soluzione = '''$2^{10} = 1024 \approx 1000$: per ridurre l'intensità a un millesimo servono circa 10 spessori emivalenti, cioè $10 \cdot \SI{2,0}{\centi\metre} = \SI{20}{\centi\metre}$.'''
 
   [[quesito.opzione]]
-  testo = '''\SI{6,0}{\centi\metre}'''
-  commento = '''Confonde $1/1000 = 1/10^3$ con $1/2^3$: conta 3 spessori emivalenti, che riducono l'intensità solo a $1/8$.'''
-  [[quesito.opzione]]
   testo = '''\SI{20}{\centi\metre}'''
   valore = 20.0
+  [[quesito.opzione]]
+  testo = '''\SI{6,0}{\centi\metre}'''
+  commento = '''Confonde $1/1000 = 1/10^3$ con $1/2^3$: conta 3 spessori emivalenti, che riducono l'intensità solo a $1/8$.'''
   [[quesito.opzione]]
   testo = '''\SI{9}{\centi\metre}'''
   commento = '''Usa il logaritmo in base 10, $\log_{10} 1000 = 3$, nella legge con l'esponenziale $e$: $x = 3/\mu = 3/(0{,}69/\SI{2,0}{\centi\metre}) \approx 3/\SI[per-mode=power]{0,35}{\centi\metre\tothe{-1}} \approx \SI{9}{\centi\metre}$. Con $e$ serve il logaritmo naturale, $\ln 1000 \approx 6{,}9$.'''
@@ -1940,20 +1942,20 @@ soluzione = '''$1/32 = 1/2^5$: \SI{1,5}{\milli\metre} sono 5 spessori emivalenti
 id = "ud7-beta"
 tipo = "multipla"
 testo = '''Il fosforo-32, $\nuclide{32}{15}{P}$, usato in alcune terapie, decade $\beta^-$. Quale nucleo si forma?'''
-corretta = "B"
+corretta = "D"
 soluzione = '''Nel decadimento $\beta^-$ un neutrone diventa protone ed esce un elettrone: il numero di massa resta 32, il numero atomico sale da 15 a 16, che è lo zolfo.'''
 
   [[quesito.opzione]]
   testo = '''$\nuclide{32}{14}{Si}$'''
   commento = '''$Z$ diminuisce di 1: è il decadimento $\beta^+$, non $\beta^-$.'''
   [[quesito.opzione]]
-  testo = '''$\nuclide{32}{16}{S}$'''
-  [[quesito.opzione]]
   testo = '''$\nuclide{31}{15}{P}$'''
   commento = '''Toglie un neutrone al nucleo: nessun decadimento $\beta$ cambia il numero di massa.'''
   [[quesito.opzione]]
   testo = '''$\nuclide{28}{13}{Al}$'''
   commento = '''$A - 4$ e $Z - 2$: è il decadimento $\alpha$.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{32}{16}{S}$'''
   [[quesito.opzione]]
   testo = '''$\nuclide{32}{15}{P}$'''
   commento = '''Il nucleo resta lo stesso: succede solo nel decadimento $\gamma$.'''
@@ -1962,17 +1964,17 @@ soluzione = '''Nel decadimento $\beta^-$ un neutrone diventa protone ed esce un 
 id = "ud7-radio-isotopi"
 tipo = "multipla"
 testo = '''Quale coppia è formata da due isotopi dello stesso elemento?'''
-corretta = "C"
+corretta = "B"
 soluzione = '''Gli isotopi hanno lo stesso numero atomico $Z$ e un diverso numero di neutroni $N = A - Z$. Lo iodio-123 e lo iodio-131 hanno entrambi $Z = 53$, e hanno $123 - 53 = 70$ e $131 - 53 = 78$ neutroni.'''
 
   [[quesito.opzione]]
   testo = '''$\nuclide{14}{6}{C}$ e $\nuclide{14}{7}{N}$'''
   commento = '''Hanno lo stesso numero di massa, ma $Z$ diverso: sono elementi diversi.'''
   [[quesito.opzione]]
+  testo = '''$\nuclide{123}{53}{I}$ e $\nuclide{131}{53}{I}$'''
+  [[quesito.opzione]]
   testo = '''$\nuclide{13}{6}{C}$ e $\nuclide{14}{7}{N}$'''
   commento = '''Hanno lo stesso numero di neutroni, $13 - 6 = 14 - 7 = 7$, ma $Z$ diverso: per essere isotopi deve essere uguale $Z$, non $N$.'''
-  [[quesito.opzione]]
-  testo = '''$\nuclide{123}{53}{I}$ e $\nuclide{131}{53}{I}$'''
   [[quesito.opzione]]
   testo = '''il tecnezio-99m e il tecnezio-99, entrambi con $Z = 43$ e $A = 99$'''
   commento = '''Hanno lo stesso $Z$ e anche lo stesso $N$: sono lo stesso nucleo, una volta eccitato e una volta no. Gli isotopi devono avere $N$ diverso.'''
@@ -1984,7 +1986,7 @@ soluzione = '''Gli isotopi hanno lo stesso numero atomico $Z$ e un diverso numer
 id = "ud7-radio-annichilazione"
 tipo = "multipla"
 testo = '''In un esame PET il fluoro-18 emette un positrone, che si annichila con un elettrone del tessuto. Che cosa rivela lo strumento?'''
-corretta = "D"
+corretta = "C"
 soluzione = '''Il positrone percorre pochi millimetri, incontra un elettrone e i due si annichilano: la loro massa diventa l'energia di due fotoni da \SI{511}{\kilo\electronvolt}, che partono in direzioni opposte. Lo strumento rivela le coppie di fotoni.'''
 
   [[quesito.opzione]]
@@ -1994,10 +1996,10 @@ soluzione = '''Il positrone percorre pochi millimetri, incontra un elettrone e i
   testo = '''il positrone, che esce dal corpo del paziente'''
   commento = '''Il positrone non esce: si ferma in pochi millimetri e si annichila quasi subito.'''
   [[quesito.opzione]]
+  testo = '''due fotoni da \SI{511}{\kilo\electronvolt} che partono in direzioni opposte'''
+  [[quesito.opzione]]
   testo = '''due fotoni da \SI{1022}{\kilo\electronvolt} che partono nella stessa direzione'''
   commento = '''Attribuisce a ogni fotone l'energia totale, $2 \cdot \SI{511}{\kilo\electronvolt}$, e sbaglia anche la direzione: i due fotoni partono in versi opposti.'''
-  [[quesito.opzione]]
-  testo = '''due fotoni da \SI{511}{\kilo\electronvolt} che partono in direzioni opposte'''
   [[quesito.opzione]]
   testo = '''un fotone $\gamma$ da \SI{140}{\kilo\electronvolt} emesso dal nucleo'''
   commento = '''Confonde la PET con la scintigrafia: i fotoni da \SI{140}{\kilo\electronvolt} sono quelli del tecnezio-99m.'''
@@ -2006,12 +2008,14 @@ soluzione = '''Il positrone percorre pochi millimetri, incontra un elettrone e i
 id = "ud7-radio-gamma"
 tipo = "multipla"
 testo = '''Quale affermazione sul decadimento $\gamma$ è corretta?'''
-corretta = "E"
+corretta = "B"
 soluzione = '''Nel decadimento $\gamma$ un nucleo eccitato cede l'energia in eccesso emettendo un fotone. Il fotone non contiene nucleoni e non ha carica, quindi $A$ e $Z$ non cambiano: il nucleo resta lo stesso, ma con meno energia.'''
 
   [[quesito.opzione]]
   testo = '''Il numero atomico del nucleo aumenta di 1.'''
   commento = '''Succede nel decadimento $\beta^-$, in cui un neutrone diventa protone.'''
+  [[quesito.opzione]]
+  testo = '''Il nucleo passa a uno stato di energia più bassa senza cambiare né $A$ né $Z$.'''
   [[quesito.opzione]]
   testo = '''I raggi $\gamma$ si fermano con un foglio di carta.'''
   commento = '''Confonde i raggi $\gamma$ con le particelle $\alpha$: i $\gamma$ sono i più penetranti, e per attenuarli servono centimetri di piombo.'''
@@ -2021,8 +2025,6 @@ soluzione = '''Nel decadimento $\gamma$ un nucleo eccitato cede l'energia in ecc
   [[quesito.opzione]]
   testo = '''Il numero di massa diminuisce di 1, perché il nucleo perde energia.'''
   commento = '''Confonde l'energia con i nucleoni: il fotone porta via energia, ma non contiene nucleoni.'''
-  [[quesito.opzione]]
-  testo = '''Il nucleo passa a uno stato di energia più bassa senza cambiare né $A$ né $Z$.'''
 
 [[quesito]]
 id = "ud7-radio-figlio"
@@ -2050,11 +2052,9 @@ soluzione = '''Da $\mathcal{A} = \lambda N$:
 id = "ud7-ottica-aria-acqua"
 tipo = "multipla"
 testo = '''Un fascio di luce passa dall'aria all'acqua ($n = 1{,}33$). Quale affermazione è corretta?'''
-corretta = "A"
+corretta = "E"
 soluzione = '''La frequenza la fissa la sorgente e non cambia passando da un mezzo all'altro. In acqua la velocità diventa $v = c/n$, più piccola di $c$. Poiché $v = \lambda f$ con $f$ fissa, anche la lunghezza d'onda si riduce dello stesso fattore: $\lambda = \lambda_0/n$.'''
 
-  [[quesito.opzione]]
-  testo = '''La frequenza resta uguale; velocità e lunghezza d'onda diminuiscono.'''
   [[quesito.opzione]]
   testo = '''La frequenza diminuisce; la velocità resta uguale.'''
   commento = '''Tratta la velocità della luce come se fosse $c$ in ogni mezzo, ma lo è solo nel vuoto; ed è la frequenza, non la velocità, a restare uguale.'''
@@ -2067,12 +2067,14 @@ soluzione = '''La frequenza la fissa la sorgente e non cambia passando da un mez
   [[quesito.opzione]]
   testo = '''La velocità aumenta, perché l'acqua è più densa dell'aria.'''
   commento = '''Pensa che in un mezzo più denso la luce vada più veloce, come succede al suono nei solidi. Per la luce un mezzo otticamente più denso, con $n$ più alto, vuol dire velocità più bassa: $v = c/n$.'''
+  [[quesito.opzione]]
+  testo = '''La frequenza resta uguale; velocità e lunghezza d'onda diminuiscono.'''
 
 [[quesito]]
 id = "ud7-ottica-trova-n"
 tipo = "multipla"
 testo = '''Un raggio di luce passa dall'aria a un materiale trasparente. L'angolo di incidenza è \ang{45} e l'angolo di rifrazione è \ang{30}. L'indice di rifrazione del materiale vale circa'''
-corretta = "C"
+corretta = "D"
 calcolo = "round(sin45 / sin30, 1)"
 soluzione = '''Dalla legge di Snell con $n_1 = 1$:
 \[
@@ -2087,11 +2089,11 @@ soluzione = '''Dalla legge di Snell con $n_1 = 1$:
   testo = '''$1{,}5$'''
   commento = '''Fa il rapporto fra gli angoli, $45/30 = 1{,}5$, invece che fra i loro seni.'''
   [[quesito.opzione]]
-  testo = '''$1{,}4$'''
-  valore = 1.4
-  [[quesito.opzione]]
   testo = '''$2{,}0$'''
   commento = '''Dimentica il seno dell'angolo di incidenza, come se valesse 1: $1/\sin\ang{30} = 1/0{,}5 = 2$.'''
+  [[quesito.opzione]]
+  testo = '''$1{,}4$'''
+  valore = 1.4
   [[quesito.opzione]]
   testo = '''$0{,}67$'''
   commento = '''Fa il rapporto fra gli angoli, e per di più rovesciato: $30/45 \approx 0{,}67$.'''
@@ -2101,10 +2103,13 @@ id = "ud7-ottica-diottrie"
 tipo = "multipla"
 testo = '''Una lente convergente per occhiali da lettura ha distanza focale di {{f}}. Il suo potere diottrico è'''
 dati.f = { valore = 40, unita = "cm" }
-corretta = "D"
+corretta = "A"
 calcolo = "1 / (f / 100)"
 soluzione = '''Il potere diottrico si calcola con la focale in metri: $f = \SI{40}{\centi\metre} = \SI{0,40}{\metre}$, quindi $D = 1/\SI{0,40}{\metre} = \SI{2,5}{D}$.'''
 
+  [[quesito.opzione]]
+  testo = '''\SI{2,5}{D}'''
+  valore = 2.5
   [[quesito.opzione]]
   testo = '''\SI{0,025}{D}'''
   commento = '''Lascia la focale in centimetri: $1/40 = 0{,}025$.'''
@@ -2115,9 +2120,6 @@ soluzione = '''Il potere diottrico si calcola con la focale in metri: $f = \SI{4
   testo = '''\SI{25}{D}'''
   commento = '''Sbaglia la conversione: \SI{40}{\centi\metre} sono \SI{0,40}{\metre}, non \SI{0,04}{\metre} ($1/0{,}04 = 25$).'''
   [[quesito.opzione]]
-  testo = '''\SI{2,5}{D}'''
-  valore = 2.5
-  [[quesito.opzione]]
   testo = '''\SI{40}{D}'''
   commento = '''Confonde il potere diottrico con la distanza focale in centimetri.'''
 
@@ -2127,7 +2129,7 @@ tipo = "multipla"
 testo = '''Un oggetto si trova a {{p}} da una lente convergente con distanza focale di {{f}}. L'immagine è'''
 dati.p = { valore = 5, unita = "cm" }
 dati.f = { valore = 10, unita = "cm" }
-corretta = "E"
+corretta = "D"
 calcolo = "1 / (1/f - 1/p)"
 soluzione = '''L'oggetto è fra la lente e il fuoco. Dalla legge dei punti coniugati $1/q = 1/10 - 1/5 = 1/10 - 2/10 = -1/10$, quindi $q = \SI{-10}{\centi\metre}$: l'immagine è virtuale, dalla stessa parte dell'oggetto. L'ingrandimento è $m = -q/p = -(-10)/5 = +2$: diritta e alta il doppio. È la lente d'ingrandimento.'''
 
@@ -2141,11 +2143,11 @@ soluzione = '''L'oggetto è fra la lente e il fuoco. Dalla legge dei punti coniu
   testo = '''reale e capovolta, a circa \SI{3,3}{\centi\metre} oltre la lente'''
   commento = '''Somma invece di sottrarre: $1/q = 1/10 + 1/5 = 3/10$, quindi $q \approx \SI{3,3}{\centi\metre}$.'''
   [[quesito.opzione]]
-  testo = '''non si forma: l'immagine va all'infinito'''
-  commento = '''L'immagine va all'infinito solo con l'oggetto nel fuoco, a \SI{10}{\centi\metre}; qui l'oggetto è più vicino.'''
-  [[quesito.opzione]]
   testo = '''virtuale e diritta, a \SI{10}{\centi\metre} davanti alla lente, ingrandita 2 volte'''
   valore = -10
+  [[quesito.opzione]]
+  testo = '''non si forma: l'immagine va all'infinito'''
+  commento = '''L'immagine va all'infinito solo con l'oggetto nel fuoco, a \SI{10}{\centi\metre}; qui l'oggetto è più vicino.'''
 
 [[quesito]]
 id = "ud7-ottica-ipermetrope"

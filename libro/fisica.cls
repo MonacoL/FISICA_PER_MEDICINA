@@ -31,6 +31,7 @@
 \RequirePackage{booktabs}
 \RequirePackage{tabularx}
 \RequirePackage{longtable}
+\RequirePackage{needspace}
 \RequirePackage[inline]{enumitem}
 \setlist{itemsep=0.15em,topsep=0.3em}
 \RequirePackage{caption}
@@ -62,7 +63,8 @@
 \newcommand{\parte}{}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small Fisica -- UD~\theunita: \udtitolo}
+% Fuori da una UD (indice, frontespizio) l'intestazione resta vuota.
+\fancyhead[L]{\small\ifx\udtitolo\empty\else Fisica -- UD~\theunita: \udtitolo\fi}
 \fancyhead[R]{\small\parte}
 \fancyfoot[C]{\small\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
@@ -86,7 +88,7 @@
   \setcounter{chapter}{\numexpr#1-1\relax}%
   \refstepcounter{chapter}%
   \renewcommand{\udtitolo}{#2}%
-  \addcontentsline{toc}{chapter}{UD~#1\quad #2}%
+  \addcontentsline{toc}{chapter}{UD~#1\texorpdfstring{\quad}{ } #2}%
   \thispagestyle{plain}%
   \begin{center}
     \vspace*{1.5em}
