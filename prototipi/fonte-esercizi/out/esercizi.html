@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eserciziario UD7 (prototipo)</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    macros: {
+      SI: ['#2\\,\\mathrm{#3}', 3, ''], num: ['#1', 1],
+      centi: 'c', metre: 'm', second: 's', hour: 'h', mega: 'M', giga: 'G', kilo: 'k',
+      becquerel: 'Bq', percent: '\\%', tothe: ['^{#1}', 1],
+      nuclide: ['{}^{#1}_{#2}\\mathrm{#3}', 3]
+    }
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js" defer></script>
+<style>
+  :root { --testo: #1c2430; --tenue: #5b6573; --linea: #d9dee5; --sfondo: #f7f8fa; --carta: #fff;
+          --accento: #1F4E79; --giusto: #2E6B30; --giustoBg: #e6f0e3; --errato: #A61B1B; --erratoBg: #fbe5e3; }
+  @media (prefers-color-scheme: dark) {
+    :root { --testo: #e5e9ef; --tenue: #9aa4b2; --linea: #2c3440; --sfondo: #12161c; --carta: #1a2028;
+            --accento: #7fb0e0; --giusto: #8fd18f; --giustoBg: #1f3322; --errato: #f09a9a; --erratoBg: #3a1f1f; }
+  }
+  body { margin: 0; background: var(--sfondo); color: var(--testo); font: 17px/1.55 Georgia, serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  .nota { font: 14px/1.5 system-ui, sans-serif; color: var(--tenue); border-left: 3px solid var(--accento); padding: 4px 12px; }
+  h1 { font-size: 26px; margin: 8px 0 4px; }
+  .es { background: var(--carta); border: 1px solid var(--linea); border-radius: 6px; padding: 16px 18px; margin: 18px 0; }
+  .titolo { font: 600 13px system-ui, sans-serif; text-transform: uppercase; letter-spacing: .04em; color: var(--accento); }
+  .opz { display: block; width: 100%; text-align: left; font: inherit; color: inherit; background: none;
+         border: 1px solid var(--linea); border-radius: 4px; padding: 6px 10px; margin: 6px 0; cursor: pointer; }
+  .opz.giusta { background: var(--giustoBg); border-color: var(--giusto); }
+  .opz.sbagliata { background: var(--erratoBg); border-color: var(--errato); }
+  .commento { font-size: 15px; color: var(--tenue); margin: 2px 0 8px 12px; }
+  button.azione { font: 14px system-ui, sans-serif; border: 1px solid var(--accento); color: var(--accento);
+                  background: none; border-radius: 4px; padding: 4px 10px; margin: 8px 8px 0 0; cursor: pointer; }
+  .nascosto { display: none; }
+  .soluzione { border-top: 1px dashed var(--linea); margin-top: 10px; padding-top: 8px; }
+  input { font: inherit; padding: 4px 8px; width: 9em; border: 1px solid var(--linea); border-radius: 4px; background: var(--carta); color: inherit; }
+  .esito { font: 14px system-ui, sans-serif; margin-left: 8px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="nota">Prototipo del ticket #3: questa pagina è generata dalla stessa fonte (<code>esercizi-ud7.toml</code>) che produce il LaTeX dell'eserciziario e il ricalcolo dei risultati. Serve a vedere se il formato regge, non è la versione finale.</p>
+  <h1>Eserciziario UD7 · Fisica delle radiazioni</h1>
+  <div id="esercizi"></div>
+</main>
+<script>
+const ESERCIZI = [{"tipo": "problema", "titolo": "Problema · livello 1", "testo": "Un tessuto ha coefficiente di attenuazione \\(\\SI[per-mode=power]{0,35}{\\centi\\metre\\tothe{-1}\\)} per i raggi X di una radiografia. Calcola lo spessore emivalente.", "parti": [{"domanda": "", "risultato": "\\(\\SI{2,0}{\\centi\\metre}\\)", "soluzione": "Lo spessore emivalente è quello per cui $e^{-\\mu x} = 1/2$:\n\\[\n  x_{1/2} = \\frac{\\ln 2}{\\mu} = \\frac{0{,}69}{\\SI[per-mode=power]{0,35}{\\centi\\metre\\tothe{-1}}} \\approx \\SI{2,0}{\\centi\\metre}\n\\]"}]}, {"tipo": "problema", "titolo": "Problema · livello 2", "testo": "Per certi raggi $\\gamma$ lo spessore emivalente del piombo è \\(\\SI{0,50}{\\centi\\metre}\\).", "parti": [{"domanda": "Quale spessore riduce l'intensità a $1/16$?", "risultato": "\\(\\SI{2,0}{\\centi\\metre}\\)", "soluzione": "$1/16 = 1/2^4$: servono 4 spessori emivalenti, cioè $4 \\cdot \\SI{0,50}{\\centi\\metre} = \\SI{2,0}{\\centi\\metre}$."}, {"domanda": "Quanti centimetri di piombo bisogna aggiungere ai precedenti perché passi meno dell'\\(\\SI{1}{\\percent}\\), in numero intero di spessori emivalenti?", "risultato": "\\(\\SI{1,5}{\\centi\\metre}\\)", "soluzione": "Con 6 spessori emivalenti passa $1/2^6 = 1/64$, più dell'\\(\\SI{1}{\\percent}\\); con 7 passa $1/128$, meno dell'\\(\\SI{1}{\\percent}\\). Servono 7 spessori in tutto, cioè $7 \\cdot \\SI{0,50}{\\centi\\metre} = \\SI{3,5}{\\centi\\metre}$: ai \\(\\SI{2,0}{\\centi\\metre}\\) di prima se ne aggiungono \\(\\SI{1,5}{\\centi\\metre}\\)."}]}, {"tipo": "problema", "titolo": "Problema · livello 3", "testo": "Per una scintigrafia un paziente deve ricevere alle 14:00 un radiofarmaco al tecnezio-99m (emivita \\(\\SI{6,0}{\\hour}\\)) con attività \\(\\SI{400}{\\mega\\becquerel}\\). La dose viene preparata alle 8:00 dello stesso giorno.", "parti": [{"domanda": "Quale attività deve avere alla preparazione?", "risultato": "\\(\\SI{800}{\\mega\\becquerel}\\)", "soluzione": "Dalle 8:00 alle 14:00 passano \\(\\SI{6}{\\hour}\\), cioè un'emivita: l'attività si dimezza. Alla preparazione serve il doppio, \\(\\SI{800}{\\mega\\becquerel}\\)."}, {"domanda": "Quanti nuclei di tecnezio-99m riceve il paziente?", "risultato": "\\(\\num{1,3e13}\\)", "soluzione": "Con l'emivita in secondi, $\\SI{6,0}{\\hour} = \\SI{21600}{\\second} \\approx \\SI{2,2e4}{\\second}$:\n\\[\n  \\lambda = \\frac{\\ln 2}{T_{1/2}} \\approx \\frac{0{,}69}{\\SI{2,2e4}{\\second}} \\approx \\SI[per-mode=power]{3,2e-5}{\\second\\tothe{-1}}\n  \\qquad\n  N = \\frac{\\mathcal{A}}{\\lambda} = \\frac{\\SI[per-mode=power]{4,0e8}{\\second\\tothe{-1}}}{\\SI[per-mode=power]{3,2e-5}{\\second\\tothe{-1}}} = 1{,}25 \\cdot 10^{8-(-5)} \\approx \\num{1,3e13}\n\\]"}, {"domanda": "Trascurando l'eliminazione biologica, quale attività resta nel paziente 24 ore dopo la somministrazione?", "risultato": "\\(\\SI{25}{\\mega\\becquerel}\\)", "soluzione": "\\(\\SI{24}{\\hour}\\) sono $24/6 = 4$ emivite: $\\SI{400}{\\mega\\becquerel} / 2^4 = \\SI{25}{\\mega\\becquerel}$. In realtà l'attività sarà ancora più bassa, perché una parte del radiofarmaco viene eliminata con le urine."}]}, {"tipo": "multipla", "titolo": "Quesito d'esame", "testo": "Il fosforo-32, usato in alcune terapie, decade $\\beta^-$. Quale nucleo si forma?", "soluzione": "Nel decadimento $\\beta^-$ un neutrone diventa protone ed esce un elettrone: il numero di massa resta 32, il numero atomico sale da 15 a 16, che è lo zolfo.", "opzioni": [{"testo": "$\\nuclide{32}{14}{Si}$", "commento": "$Z$ diminuisce di 1: è il decadimento $\\beta^+$, non $\\beta^-$."}, {"testo": "$\\nuclide{32}{16}{S}$", "commento": ""}, {"testo": "$\\nuclide{31}{15}{P}$", "commento": "Toglie un neutrone al nucleo: nessun decadimento $\\beta$ cambia il numero di massa."}, {"testo": "$\\nuclide{28}{13}{Al}$", "commento": "$A - 4$ e $Z - 2$: è il decadimento $\\alpha$."}, {"testo": "$\\nuclide{32}{15}{P}$", "commento": "Il nucleo resta lo stesso: succede solo nel decadimento $\\gamma$."}], "corretta": 1}, {"tipo": "completamento", "titolo": "Quesito d'esame", "testo": "Una soluzione lascia passare l'\\(\\SI{1}{\\percent}\\) della luce che la colpisce. La sua assorbanza vale ______.", "soluzione": "Se passa l'\\(\\SI{1}{\\percent}\\), $I_0/I = 100 = 10^2$ e $A = \\log_{10} 10^2 = 2$.", "risposta": "2"}, {"tipo": "multipla", "titolo": "Quesito lampo", "testo": "Dopo \\(\\SI{2}{\\centi\\metre}\\) di un certo materiale l'intensità di un fascio è ridotta a $1/4$ di quella iniziale. A quale frazione è ridotta dopo \\(\\SI{5}{\\centi\\metre}\\)?", "soluzione": "Ridurre a $1/4 = 1/2^2$ vuol dire attraversare 2 spessori emivalenti, quindi $x_{1/2} = \\SI{1}{\\centi\\metre}$. \\(\\SI{5}{\\centi\\metre}\\) sono 5 spessori emivalenti: $I/I_0 = 1/2^5 = 1/32$.", "opzioni": [{"testo": "$1/10$", "commento": "Tratta l'attenuazione come una proporzione: «$1/4$ in \\(\\SI{2}{\\centi\\metre}\\), quindi $1/10$ in \\(\\SI{5}{\\centi\\metre}\\)». L'attenuazione è esponenziale, non lineare."}, {"testo": "$1/16$", "commento": "È la frazione dopo \\(\\SI{4}{\\centi\\metre}\\): manca l'ultimo centimetro."}, {"testo": "$1/25$", "commento": "Applica la legge dell'inverso del quadrato, che dipende dalla distanza dalla sorgente, non dal materiale."}, {"testo": "$1/32$", "commento": ""}, {"testo": "circa $1/6$", "commento": "Scambia $1/4$ con $1/2$ e prende \\(\\SI{2}{\\centi\\metre}\\) come spessore emivalente: $1/2^{2,5} \\approx 1/6$."}], "corretta": 3}];
+const LETTERE = 'ABCDE';
+const box = document.getElementById('esercizi');
+
+function el(tag, cls, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html !== undefined) e.innerHTML = html; return e; }
+function interruttore(etichetta, contenuto) {
+  const b = el('button', 'azione', etichetta);
+  b.onclick = () => { contenuto.classList.toggle('nascosto'); if (window.MathJax?.typeset) MathJax.typeset([contenuto]); };
+  return b;
+}
+function normalizza(s) { return s.trim().replace(/\s+/g, '').toUpperCase(); }
+
+ESERCIZI.forEach(es => {
+  const c = el('section', 'es');
+  c.append(el('div', 'titolo', es.titolo), el('p', '', es.testo));
+  if (es.tipo === 'problema') {
+    es.parti.forEach((p, i) => {
+      if (p.domanda) c.append(el('p', '', `(${String.fromCharCode(97 + i)}) ${p.domanda}`));
+    });
+    const ris = el('div', 'soluzione nascosto', es.parti.map((p, i) => (es.parti.length > 1 ? `(${String.fromCharCode(97 + i)}) ` : '') + p.risultato).join('<br>'));
+    const sol = el('div', 'soluzione nascosto', es.parti.map((p, i) => (es.parti.length > 1 ? `(${String.fromCharCode(97 + i)}) ` : '') + p.soluzione).join('<br><br>'));
+    c.append(interruttore('Risultato', ris), interruttore('Soluzione svolta', sol), ris, sol);
+  } else if (es.tipo === 'multipla') {
+    es.opzioni.forEach((o, j) => {
+      const b = el('button', 'opz', `<b>${LETTERE[j]})</b> ${o.testo}`);
+      const nota = el('div', 'commento nascosto', j === es.corretta ? 'Risposta corretta.' : o.commento);
+      b.onclick = () => { b.classList.add(j === es.corretta ? 'giusta' : 'sbagliata'); nota.classList.remove('nascosto'); MathJax?.typeset?.([nota]); };
+      c.append(b, nota);
+    });
+    const sol = el('div', 'soluzione nascosto', es.soluzione);
+    c.append(interruttore('Soluzione svolta', sol), sol);
+  } else {
+    const inp = el('input'); inp.placeholder = 'risposta';
+    const esito = el('span', 'esito');
+    const prova = el('button', 'azione', 'Controlla');
+    prova.onclick = () => { const ok = normalizza(inp.value) === normalizza(es.risposta); esito.textContent = ok ? 'Giusto.' : 'Non è la risposta attesa.'; esito.style.color = ok ? 'var(--giusto)' : 'var(--errato)'; };
+    const sol = el('div', 'soluzione nascosto', `<b>Risposta: ${es.risposta}.</b> ${es.soluzione}`);
+    c.append(inp, prova, esito, el('br'), interruttore('Soluzione svolta', sol), sol);
+  }
+  box.append(c);
+});
+</script>
+</body>
+</html>

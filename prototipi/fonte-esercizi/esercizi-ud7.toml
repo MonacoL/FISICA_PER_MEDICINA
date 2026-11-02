@@ -1,0 +1,145 @@
+# PROTOTIPO (#3) — fonte unica degli esercizi della UD7, versione di prova
+# con 6 esercizi presi dall'eserciziario attuale. Da qui `genera.py` produce
+# il LaTeX dell'eserciziario, i quesiti lampo per la dispensa, la pagina web
+# e il ricalcolo dei risultati.
+#
+# Regole del formato:
+# - testo, soluzione e commenti sono LaTeX, in stringhe letterali '''...'''
+#   (le barre rovesciate si scrivono una volta sola);
+# - {{nome}} nel testo inserisce un dato, già formattato con virgola e unità;
+# - `calcolo` è un'espressione Python sui dati e sulle costanti: il ricalcolo
+#   la valuta e la confronta con `risultato`, arrotondato alle cifre indicate;
+# - le costanti sono quelle che lo studente usa a mano (ln 2 ≈ 0,69), così il
+#   ricalcolo controlla il conto del libro, non quello della calcolatrice.
+
+ud = 7
+
+[costanti]
+ln2 = 0.69
+ln10 = 2.3
+c = 3e8
+
+# --------------------------------------------------------------- problemi
+
+[[problema]]
+id = "ud7-hvl-tessuto"
+livello = 1
+testo = '''Un tessuto ha coefficiente di attenuazione {{mu}} per i raggi X di una radiografia. Calcola lo spessore emivalente.'''
+dati.mu = { valore = 0.35, unita = "cm^-1" }
+
+  [[problema.parte]]
+  calcolo = "ln2 / mu"
+  risultato = { valore = 2.0, unita = "cm", cifre = 2 }
+  soluzione = '''Lo spessore emivalente è quello per cui $e^{-\mu x} = 1/2$:
+\[
+  x_{1/2} = \frac{\ln 2}{\mu} = \frac{0{,}69}{\SI[per-mode=power]{0,35}{\centi\metre\tothe{-1}}} \approx \SI{2,0}{\centi\metre}
+\]'''
+
+[[problema]]
+id = "ud7-piombo"
+livello = 2
+testo = '''Per certi raggi $\gamma$ lo spessore emivalente del piombo è {{x12}}.'''
+dati.x12 = { valore = "0,50", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quale spessore riduce l'intensità a $1/16$?'''
+  calcolo = "4 * x12"
+  risultato = { valore = 2.0, unita = "cm", cifre = 2 }
+  soluzione = '''$1/16 = 1/2^4$: servono 4 spessori emivalenti, cioè $4 \cdot \SI{0,50}{\centi\metre} = \SI{2,0}{\centi\metre}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti centimetri di piombo bisogna aggiungere ai precedenti perché passi meno dell'\SI{1}{\percent}, in numero intero di spessori emivalenti?'''
+  calcolo = "7 * x12 - 4 * x12"
+  risultato = { valore = 1.5, unita = "cm", cifre = 2 }
+  soluzione = '''Con 6 spessori emivalenti passa $1/2^6 = 1/64$, più dell'\SI{1}{\percent}; con 7 passa $1/128$, meno dell'\SI{1}{\percent}. Servono 7 spessori in tutto, cioè $7 \cdot \SI{0,50}{\centi\metre} = \SI{3,5}{\centi\metre}$: ai \SI{2,0}{\centi\metre} di prima se ne aggiungono \SI{1,5}{\centi\metre}.'''
+
+[[problema]]
+id = "ud7-tecnezio"
+livello = 3
+testo = '''Per una scintigrafia un paziente deve ricevere alle 14:00 un radiofarmaco al tecnezio-99m (emivita {{T12}}) con attività {{A}}. La dose viene preparata alle 8:00 dello stesso giorno.'''
+dati.T12 = { valore = "6,0", unita = "h" }
+dati.A = { valore = 400, unita = "MBq" }
+
+  [[problema.parte]]
+  domanda = '''Quale attività deve avere alla preparazione?'''
+  calcolo = "A * 2**(6 / T12)"
+  risultato = { valore = 800, unita = "MBq", cifre = 2 }
+  soluzione = '''Dalle 8:00 alle 14:00 passano \SI{6}{\hour}, cioè un'emivita: l'attività si dimezza. Alla preparazione serve il doppio, \SI{800}{\mega\becquerel}.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti nuclei di tecnezio-99m riceve il paziente?'''
+  calcolo = "(A * 1e6) / (ln2 / (T12 * 3600))"
+  risultato = { valore = 1.3e13, cifre = 2 }
+  soluzione = '''Con l'emivita in secondi, $\SI{6,0}{\hour} = \SI{21600}{\second} \approx \SI{2,2e4}{\second}$:
+\[
+  \lambda = \frac{\ln 2}{T_{1/2}} \approx \frac{0{,}69}{\SI{2,2e4}{\second}} \approx \SI[per-mode=power]{3,2e-5}{\second\tothe{-1}}
+  \qquad
+  N = \frac{\mathcal{A}}{\lambda} = \frac{\SI[per-mode=power]{4,0e8}{\second\tothe{-1}}}{\SI[per-mode=power]{3,2e-5}{\second\tothe{-1}}} = 1{,}25 \cdot 10^{8-(-5)} \approx \num{1,3e13}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Trascurando l'eliminazione biologica, quale attività resta nel paziente 24 ore dopo la somministrazione?'''
+  calcolo = "A / 2**(24 / T12)"
+  risultato = { valore = 25, unita = "MBq", cifre = 2 }
+  soluzione = '''\SI{24}{\hour} sono $24/6 = 4$ emivite: $\SI{400}{\mega\becquerel} / 2^4 = \SI{25}{\mega\becquerel}$. In realtà l'attività sarà ancora più bassa, perché una parte del radiofarmaco viene eliminata con le urine.'''
+
+# --------------------------------------------------- quesiti d'esame e lampo
+# tipo = "multipla" (cinque opzioni, una corretta) | "completamento"
+# lampo = true: il testo va nella dispensa, la soluzione nell'eserciziario.
+
+[[quesito]]
+id = "ud7-beta"
+tipo = "multipla"
+testo = '''Il fosforo-32, usato in alcune terapie, decade $\beta^-$. Quale nucleo si forma?'''
+corretta = "B"
+soluzione = '''Nel decadimento $\beta^-$ un neutrone diventa protone ed esce un elettrone: il numero di massa resta 32, il numero atomico sale da 15 a 16, che è lo zolfo.'''
+
+  [[quesito.opzione]]
+  testo = '''$\nuclide{32}{14}{Si}$'''
+  commento = '''$Z$ diminuisce di 1: è il decadimento $\beta^+$, non $\beta^-$.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{32}{16}{S}$'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{31}{15}{P}$'''
+  commento = '''Toglie un neutrone al nucleo: nessun decadimento $\beta$ cambia il numero di massa.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{28}{13}{Al}$'''
+  commento = '''$A - 4$ e $Z - 2$: è il decadimento $\alpha$.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{32}{15}{P}$'''
+  commento = '''Il nucleo resta lo stesso: succede solo nel decadimento $\gamma$.'''
+
+[[quesito]]
+id = "ud7-assorbanza"
+tipo = "completamento"
+testo = '''Una soluzione lascia passare l'\SI{1}{\percent} della luce che la colpisce. La sua assorbanza vale \completa.'''
+calcolo = "math.log10(100)"
+risposta = "2"
+soluzione = '''Se passa l'\SI{1}{\percent}, $I_0/I = 100 = 10^2$ e $A = \log_{10} 10^2 = 2$.'''
+
+[[quesito]]
+id = "ud7-hvl"
+tipo = "multipla"
+lampo = true
+testo = '''Dopo {{x}} di un certo materiale l'intensità di un fascio è ridotta a $1/4$ di quella iniziale. A quale frazione è ridotta dopo {{x2}}?'''
+dati.x = { valore = 2, unita = "cm" }
+dati.x2 = { valore = 5, unita = "cm" }
+corretta = "D"
+calcolo = "2**(-x2 / (x / 2))"
+soluzione = '''Ridurre a $1/4 = 1/2^2$ vuol dire attraversare 2 spessori emivalenti, quindi $x_{1/2} = \SI{1}{\centi\metre}$. \SI{5}{\centi\metre} sono 5 spessori emivalenti: $I/I_0 = 1/2^5 = 1/32$.'''
+
+  [[quesito.opzione]]
+  testo = '''$1/10$'''
+  commento = '''Tratta l'attenuazione come una proporzione: «$1/4$ in \SI{2}{\centi\metre}, quindi $1/10$ in \SI{5}{\centi\metre}». L'attenuazione è esponenziale, non lineare.'''
+  [[quesito.opzione]]
+  testo = '''$1/16$'''
+  commento = '''È la frazione dopo \SI{4}{\centi\metre}: manca l'ultimo centimetro.'''
+  [[quesito.opzione]]
+  testo = '''$1/25$'''
+  commento = '''Applica la legge dell'inverso del quadrato, che dipende dalla distanza dalla sorgente, non dal materiale.'''
+  [[quesito.opzione]]
+  testo = '''$1/32$'''
+  valore = 0.03125
+  [[quesito.opzione]]
+  testo = '''circa $1/6$'''
+  commento = '''Scambia $1/4$ con $1/2$ e prende \SI{2}{\centi\metre} come spessore emivalente: $1/2^{2,5} \approx 1/6$.'''
