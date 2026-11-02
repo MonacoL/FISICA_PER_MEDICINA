@@ -1,4 +1,4 @@
-# Su ogni PR: compila ogni Unità didattica presente e il Libro, lancia i test
+# Su ogni PR: compila e controlla ogni Unità didattica presente e il Libro, lancia i test
 # e pubblica i PDF come artifact. È lo stesso comando che si usa in locale.
 name: Controllo
 
@@ -31,7 +31,7 @@ jobs:
           fi
           echo "$HOME/.TinyTeX/bin/x86_64-linux" >> "$GITHUB_PATH"
 
-      - name: Compila le Unità didattiche e il Libro
+      - name: Controlla le Unità didattiche e il Libro
         run: uv run controllo $(basename -s .tex libro/ud*.tex)
 
       - name: Test
