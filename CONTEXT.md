@@ -36,7 +36,7 @@ La parte di teoria di una Unità didattica: spiegazioni, figure, box ed Esempi s
 _Avoid_: lezione, appunti, teoria
 
 **Eserciziario**:
-La parte di esercizi di una Unità didattica: Problemi su tre Livelli, Quesiti d'esame, Risultati rapidi e Soluzioni svolte. Il numero di esercizi è proporzionale ai CFU dell'Unità didattica.
+La parte di esercizi di una Unità didattica: Problemi su tre Livelli, Quesiti d'esame, Risultati rapidi e Soluzioni svolte.
 _Avoid_: esercitazione, raccolta esercizi
 
 ### Esercizi
@@ -46,12 +46,16 @@ Esercizio a risposta aperta dell'Eserciziario, risolto con un calcolo.
 _Avoid_: esercizio (come termine generico va bene, ma non per distinguere i tipi)
 
 **Livello**:
-Il grado di difficoltà di un Problema: 1 = una formula; 2 = due passaggi, il primo risultato serve nel secondo; 3 = più concetti, spesso in un contesto medico.
+Il grado di difficoltà di un Problema: 1 = applicazione diretta di una formula; 2 = due passaggi, il primo risultato serve nel secondo; 3 = problema vero di media difficoltà, che combina più concetti, spesso in un contesto medico.
 _Avoid_: difficoltà, grado
 
 **Quesito d'esame**:
 Esercizio nel formato della Prova d'esame: a Risposta multipla oppure a Completamento.
 _Avoid_: quiz, domanda
+
+**Simulazione**:
+Una prova completa nel formato ufficiale (31 Quesiti d'esame su tutte le Unità didattiche, da svolgere in 50 minuti), con le soluzioni. Sta in fondo al Libro.
+_Avoid_: compito, mock
 
 **Risposta multipla**:
 Quesito d'esame con cinque opzioni (A–E), di cui una sola corretta.
