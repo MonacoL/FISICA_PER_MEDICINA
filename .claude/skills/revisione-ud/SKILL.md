@@ -12,7 +12,7 @@ Argomenti: la UD (`ud7`) e la parte (`dispensa` | `eserciziario`). Se mancano, c
 | Parte | Revisori (agente) |
 |---|---|
 | Dispensa | Revisore di fisica (`revisore-fisica`), Revisore Studente (`revisore-studente`) |
-| Eserciziario | non ancora disponibile: fermati e dillo |
+| Eserciziario | Revisore di fisica (`revisore-fisica`), Revisore Studente (`revisore-studente`), Revisore di formato (`revisore-formato`) |
 
 ## Procedura
 
@@ -21,9 +21,11 @@ Argomenti: la UD (`ud7`) e la parte (`dispensa` | `eserciziario`). Se mancano, c
 3. **Revisori.** Lancia in parallelo, con il tool Agent, un agente per ogni Revisore della tabella. Il prompt contiene solo UD, parte e questi percorsi, nient'altro:
    - `libro/build/<ud>.pdf`;
    - i sorgenti della parte: `libro/<ud>/dispensa.tex` o `libro/<ud>/eserciziario.tex`;
+   - per un Eserciziario, anche `libro/<ud>/dispensa.tex` come riferimento: è la Dispensa già unita della stessa UD;
    - `docs/research/syllabus-fisica.md`, con l'indicazione della sezione della UD;
    - `CONTEXT.md` e `docs/adr/0004-calibrazione-sul-formato-esame.md`;
-   - `.claude/skills/revisione-ud/rilievi.md`.
+   - `.claude/skills/revisione-ud/rilievi.md`;
+   - al Revisore di formato, anche `docs/research/regole-esame-semestre-filtro.md`.
 
    Il Revisore è indipendente: il prompt non riassume la conversazione, non spiega le scelte di scrittura e non anticipa i problemi noti.
 4. **Pubblicazione.** Per ogni rapporto: salvalo in un file temporaneo e pubblicalo così com'è con `gh pr comment <numero> --body-file <file>`, un commento per Revisore. Se un rapporto non segue il formato di `rilievi.md` (manca la gravità o la posizione di un Rilievo), rilancia quel Revisore una volta indicando che cosa manca.
