@@ -1,0 +1,20 @@
+% Isoterme di un gas perfetto nel piano pV: p = nRT/V per tre temperature.
+% Unità arbitrarie: nRT = 1, 2, 3.
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.6\linewidth, height=4.8cm,
+  axis lines=left, xmin=0, xmax=6.3, ymin=0, ymax=4.3,
+  xlabel={volume $V$}, ylabel={pressione $p$},
+  xtick=\empty, ytick=\empty,
+  label style={font=\small},
+  clip=false,
+]
+  \addplot[formula, very thick, domain=0.75:6, samples=80] {3/x};
+  \addplot[medica, very thick, domain=0.5:6, samples=80] {2/x};
+  \addplot[esempio, very thick, domain=0.25:6, samples=80] {1/x};
+  \node[formula, font=\small, fill=white, inner sep=1pt] at (axis cs:2.1,1.429) {$T_3$};
+  \node[medica, font=\small, fill=white, inner sep=1pt] at (axis cs:1.4,1.429) {$T_2$};
+  \node[esempio, font=\small, fill=white, inner sep=1pt] at (axis cs:0.7,1.429) {$T_1$};
+  \node[font=\small, anchor=west] at (axis cs:3.2,3.6) {$T_1 < T_2 < T_3$};
+\end{axis}
+\end{tikzpicture}

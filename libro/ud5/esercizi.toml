@@ -1,0 +1,253 @@
+# Esercizi della UD5: fonte unica (ADR 0006). `uv run controllo ud5` ne ricava
+# generati/eserciziario.tex, un generati/lampo-<id>.tex per ogni quesito lampo,
+# la pagina web build/web/ud5.html, e ricalcola ogni risultato.
+#
+# Il formato è descritto in testa a libro/ud7/esercizi.toml.
+# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
+# arrivano con un ticket successivo.
+
+titolo = "Eserciziario UD5 · Termodinamica"
+
+[costanti]
+R = 8.3
+c_acqua = 4.2
+ln2 = 0.69
+
+# ==================================================================== quesiti lampo, in ordine di dispensa
+
+[[quesito]]
+id = "ud5-isocora"
+tipo = "multipla"
+lampo = true
+testo = '''Un gas perfetto è chiuso in un recipiente rigido alla pressione di {{p}} e alla temperatura di \SI{27}{\celsius}. Lo si scalda fino a \SI{327}{\celsius}. La nuova pressione è'''
+dati.p = { valore = 2, unita = "atm" }
+corretta = "D"
+calcolo = "p * (327 + 273) / (27 + 273)"
+soluzione = '''Il recipiente è rigido, quindi il volume non cambia: a volume costante la pressione è direttamente proporzionale alla temperatura \emph{assoluta} (seconda legge di Gay-Lussac). Si portano le temperature in kelvin: $T_1 = 27 + 273 = \SI{300}{\kelvin}$ e $T_2 = 327 + 273 = \SI{600}{\kelvin}$. La temperatura assoluta raddoppia, e così la pressione:
+\[
+  p_2 = p_1\,\frac{T_2}{T_1} = \SI{2}{atm} \cdot \frac{600}{300} = \SI{4}{atm}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{1}{atm}'''
+  commento = '''Tratta pressione e temperatura come inversamente proporzionali, come pressione e volume nella legge di Boyle: a volume costante, invece, sono direttamente proporzionali.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2}{atm}'''
+  commento = '''Pensa che, se il volume non cambia, non cambi neanche la pressione. Ma il gas più caldo urta le pareti più spesso e più forte, e la pressione sale.'''
+  [[quesito.opzione]]
+  testo = '''circa \SI{24}{atm}'''
+  commento = '''Usa il rapporto fra le temperature in gradi Celsius, $327/27 \approx 12$. La proporzionalità vale solo con la temperatura assoluta, in kelvin.'''
+  [[quesito.opzione]]
+  testo = '''\SI{4}{atm}'''
+  valore = 4
+  [[quesito.opzione]]
+  testo = '''\SI{600}{atm}'''
+  commento = '''Moltiplica la pressione per l'aumento di temperatura, $\Delta T = \SI{300}{\kelvin}$, invece che per il rapporto fra le temperature assolute: il risultato non ha nemmeno le unità di una pressione.'''
+
+[[quesito]]
+id = "ud5-boyle"
+tipo = "completamento"
+lampo = true
+testo = '''Una bombola di ossigeno da {{V}} contiene il gas alla pressione di {{p1}}. A temperatura costante, il volume che lo stesso gas occupa alla pressione di {{p2}}, in litri, è \completa.'''
+dati.V = { valore = 10, unita = "\\litre" }
+dati.p1 = { valore = 200, unita = "bar" }
+dati.p2 = { valore = 1, unita = "bar" }
+calcolo = "V * p1 / p2"
+risposta = "2000"
+soluzione = '''A temperatura costante vale la legge di Boyle, $p_1 V_1 = p_2 V_2$: la pressione diventa 200 volte più piccola, quindi il volume diventa 200 volte più grande:
+\[
+  V_2 = V_1\,\frac{p_1}{p_2} = \SI{10}{\litre} \cdot \frac{\SI{200}{bar}}{\SI{1}{bar}} = \SI{2000}{\litre}
+\]
+Chi scrive 0,05 ha usato il rapporto rovesciato, $10 \cdot 1/200$, come se pressione e volume fossero direttamente proporzionali.'''
+
+[[quesito]]
+id = "ud5-calore"
+tipo = "multipla"
+lampo = true
+testo = '''Quanto calore serve per scaldare {{m}} d'acqua da \SI{20}{\celsius} a \SI{70}{\celsius}? Il calore specifico dell'acqua è \SI{4,2}{\kilo\joule\per\kilo\gram\per\kelvin}.'''
+dati.m = { valore = 2, unita = "\\kilo\\gram" }
+corretta = "B"
+calcolo = "m * c_acqua * (70 - 20)"
+soluzione = '''Si usa $Q = mc\,\Delta T$, con la variazione di temperatura $\Delta T = 70 - 20 = \SI{50}{\celsius} = \SI{50}{\kelvin}$:
+\[
+  Q = \SI{2}{\kilo\gram} \cdot \SI{4,2}{\kilo\joule\per\kilo\gram\per\kelvin} \cdot \SI{50}{\kelvin} = 8{,}4 \cdot 50\,\si{\kilo\joule} = \SI{420}{\kilo\joule}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{8,4}{\kilo\joule}'''
+  commento = '''Moltiplica massa e calore specifico e dimentica la variazione di temperatura: \SI{8,4}{\kilo\joule} scaldano i due chili d'acqua di un solo kelvin.'''
+  [[quesito.opzione]]
+  testo = '''\SI{420}{\kilo\joule}'''
+  valore = 420
+  [[quesito.opzione]]
+  testo = '''\SI{588}{\kilo\joule}'''
+  commento = '''Usa la temperatura finale, \SI{70}{\celsius}, al posto della variazione di temperatura: $2 \cdot 4{,}2 \cdot 70 = 588$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{168}{\kilo\joule}'''
+  commento = '''Usa la temperatura iniziale, \SI{20}{\celsius}, al posto della variazione di temperatura: $2 \cdot 4{,}2 \cdot 20 = 168$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{4,2e5}{\kilo\joule}'''
+  commento = '''Mette la massa in grammi, 2000, con il calore specifico riferito al chilogrammo: il risultato è mille volte troppo grande.'''
+
+[[quesito]]
+id = "ud5-sudore"
+tipo = "multipla"
+lampo = true
+testo = '''Durante una corsa evaporano dalla pelle di un atleta {{m}} di sudore. Il calore latente di evaporazione del sudore è circa {{L}}. Il calore sottratto al corpo dall'evaporazione è circa'''
+dati.m = { valore = "0,5", unita = "\\kilo\\gram" }
+dati.L = { valore = 2400, unita = "\\kilo\\joule\\per\\kilo\\gram" }
+corretta = "E"
+calcolo = "m * L"
+soluzione = '''Durante un cambiamento di stato la temperatura non cambia, e il calore è $Q = mL$:
+\[
+  Q = m L = \SI{0,5}{\kilo\gram} \cdot \SI{2400}{\kilo\joule\per\kilo\gram} = \SI{1200}{\kilo\joule}
+\]
+Il calore è preso dal corpo, che si raffredda: è il principio della sudorazione.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{4800}{\kilo\joule}'''
+  commento = '''Divide il calore latente per la massa invece di moltiplicare: $2400/0{,}5 = 4800$. Il calore deve crescere con la massa che evapora, non diminuire.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2400}{\kilo\joule}'''
+  commento = '''Dimentica la massa: \SI{2400}{\kilo\joule} è il calore che toglie l'evaporazione di un chilogrammo intero.'''
+  [[quesito.opzione]]
+  testo = '''\SI{210}{\kilo\joule}'''
+  commento = '''Usa $Q = mc\,\Delta T$, come se il sudore andasse scaldato di \SI{100}{\celsius}: $0{,}5 \cdot 4{,}2 \cdot 100 = 210$. Nell'evaporazione la temperatura non cambia, e il calore è $mL$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,2e6}{\kilo\joule}'''
+  commento = '''Mette la massa in grammi, 500, con il calore latente riferito al chilogrammo: il risultato è mille volte troppo grande.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1200}{\kilo\joule}'''
+  valore = 1200
+
+[[quesito]]
+id = "ud5-miscela"
+tipo = "completamento"
+lampo = true
+testo = '''In un recipiente isolato si mescolano {{m1}} d'acqua a \SI{10}{\celsius} e {{m2}} d'acqua a \SI{50}{\celsius}. La temperatura di equilibrio, in gradi Celsius, è \completa.'''
+dati.m1 = { valore = 1, unita = "\\kilo\\gram" }
+dati.m2 = { valore = 3, unita = "\\kilo\\gram" }
+calcolo = "(m1 * 10 + m2 * 50) / (m1 + m2)"
+risposta = "40"
+soluzione = '''Il calore ceduto dall'acqua calda è uguale a quello assorbito dall'acqua fredda. Per due masse della stessa sostanza, la temperatura di equilibrio è la media delle temperature pesata con le masse:
+\[
+  T_{\text{eq}} = \frac{m_1 T_1 + m_2 T_2}{m_1 + m_2} = \frac{1 \cdot 10 + 3 \cdot 50}{1 + 3}\,\si{\celsius} = \frac{160}{4}\,\si{\celsius} = \SI{40}{\celsius}
+\]
+Controllo: l'acqua fredda assorbe $1 \cdot c \cdot (40 - 10) = 30\,c$, quella calda cede $3 \cdot c \cdot (50 - 40) = 30\,c$. Chi scrive 30 ha fatto la media semplice, $(10 + 50)/2$, senza tener conto che l'acqua calda è il triplo di quella fredda.'''
+
+[[quesito]]
+id = "ud5-irraggiamento"
+tipo = "completamento"
+lampo = true
+testo = '''La temperatura assoluta di un corpo raddoppia, mentre la sua area e la sua emissività restano le stesse. La potenza che emette per irraggiamento si moltiplica per \completa.'''
+calcolo = "2**4"
+risposta = "16"
+soluzione = '''Per la legge di Stefan-Boltzmann, $P = e\sigma A T^{4}$, la potenza emessa è proporzionale alla quarta potenza della temperatura assoluta. Se $T$ diventa $2T$:
+\[
+  \frac{P_2}{P_1} = \frac{(2T)^{4}}{T^{4}} = 2^{4} = 16
+\]
+Chi scrive 2 tratta la potenza come proporzionale a $T$; chi scrive 4 come proporzionale a $T^{2}$.'''
+
+[[quesito]]
+id = "ud5-primo"
+tipo = "multipla"
+lampo = true
+testo = '''Un gas assorbe {{Q}} di calore e intanto compie sull'ambiente un lavoro di {{W}}. La variazione della sua energia interna è'''
+dati.Q = { valore = 500, unita = "\\joule" }
+dati.W = { valore = 200, unita = "\\joule" }
+corretta = "A"
+calcolo = "Q - W"
+soluzione = '''Per il primo principio $\Delta U = Q - W$, con $Q > 0$ perché il calore è assorbito e $W > 0$ perché il lavoro è compiuto dal gas:
+\[
+  \Delta U = Q - W = \SI{500}{\joule} - \SI{200}{\joule} = \SI{300}{\joule}
+\]
+Dei \SI{500}{\joule} ricevuti, \SI{200}{\joule} escono come lavoro e \SI{300}{\joule} restano nel gas.'''
+
+  [[quesito.opzione]]
+  testo = '''+\SI{300}{\joule}'''
+  valore = 300
+  [[quesito.opzione]]
+  testo = '''+\SI{700}{\joule}'''
+  commento = '''Somma calore e lavoro, come se il lavoro fosse fatto \emph{sul} gas. Il gas che compie lavoro cede energia all'ambiente, quindi il lavoro si sottrae.'''
+  [[quesito.opzione]]
+  testo = '''\SI{-300}{\joule}'''
+  commento = '''Scambia i ruoli di calore e lavoro, $W - Q = \SI{-300}{\joule}$: il gas riceve più energia come calore di quanta ne cede come lavoro, quindi la sua energia interna cresce.'''
+  [[quesito.opzione]]
+  testo = '''+\SI{200}{\joule}'''
+  commento = '''Confonde la variazione di energia interna con il lavoro: i \SI{200}{\joule} sono l'energia che esce dal gas, non quella che resta.'''
+  [[quesito.opzione]]
+  testo = '''zero'''
+  commento = '''Vale solo se $Q = W$, come in un'isoterma di un gas perfetto o in un ciclo. Qui il calore assorbito è maggiore del lavoro compiuto.'''
+
+[[quesito]]
+id = "ud5-trasformazioni"
+tipo = "multipla"
+lampo = true
+testo = '''In quale trasformazione di un gas perfetto tutto il calore assorbito si trasforma in lavoro compiuto dal gas?'''
+corretta = "C"
+soluzione = '''Il primo principio dice $Q = \Delta U + W$. Tutto il calore diventa lavoro, $Q = W$, solo se $\Delta U = 0$. L'energia interna di un gas perfetto dipende solo dalla temperatura, quindi non cambia se la temperatura resta costante: la trasformazione è un'isoterma.'''
+
+  [[quesito.opzione]]
+  testo = '''nell'isocora'''
+  commento = '''Nell'isocora il volume non cambia, quindi il lavoro è zero: tutto il calore va in energia interna, non in lavoro.'''
+  [[quesito.opzione]]
+  testo = '''nell'isobara'''
+  commento = '''Nell'isobara il gas compie lavoro, ma la temperatura cambia: solo una parte del calore diventa lavoro, $nR\,\Delta T$ su $nc_p\,\Delta T$; il resto aumenta l'energia interna.'''
+  [[quesito.opzione]]
+  testo = '''nell'isoterma'''
+  [[quesito.opzione]]
+  testo = '''nell'adiabatica'''
+  commento = '''Nell'adiabatica il gas non scambia calore, $Q = 0$: il lavoro che compie viene dalla sua energia interna, non da un calore assorbito.'''
+  [[quesito.opzione]]
+  testo = '''in nessuna: nell'isoterma il gas non scambia calore'''
+  commento = '''Confonde isoterma e adiabatica: nell'isoterma la temperatura resta costante, ma il gas scambia calore, tanto quanto il lavoro ($Q = W$).'''
+
+[[quesito]]
+id = "ud5-carnot"
+tipo = "completamento"
+lampo = true
+testo = '''Una macchina termica lavora fra una sorgente calda a \SI{127}{\celsius} e una sorgente fredda a \SI{27}{\celsius}. Il rendimento massimo che può avere, espresso in percentuale, è \completa.'''
+calcolo = "(1 - (27 + 273) / (127 + 273)) * 100"
+risposta = "25"
+soluzione = '''Il rendimento massimo è quello di Carnot, con le temperature in kelvin: $T_c = 127 + 273 = \SI{400}{\kelvin}$ e $T_f = 27 + 273 = \SI{300}{\kelvin}$.
+\[
+  \eta_{\text{Carnot}} = 1 - \frac{T_f}{T_c} = 1 - \frac{300}{400} = 1 - \frac34 = \frac14 = 25\%
+\]
+Chi usa i gradi Celsius trova $1 - 27/127 \approx 79\%$, un valore troppo alto; chi scrive 75 ha calcolato $T_f/T_c$, la frazione di calore ceduta alla sorgente fredda, invece del rendimento.'''
+
+[[quesito]]
+id = "ud5-entropia"
+tipo = "multipla"
+lampo = true
+testo = '''Un calore di {{Q}} passa spontaneamente da un corpo alla temperatura di {{T1}} a un corpo alla temperatura di {{T2}}. I due corpi sono così grandi che le loro temperature non cambiano. La variazione dell'entropia totale dei due corpi, in \si{\joule\per\kelvin}, è'''
+dati.Q = { valore = 600, unita = "\\joule" }
+dati.T1 = { valore = 300, unita = "\\kelvin" }
+dati.T2 = { valore = 200, unita = "\\kelvin" }
+corretta = "D"
+calcolo = "-Q / T1 + Q / T2"
+soluzione = '''Il corpo caldo cede il calore e la sua entropia diminuisce; il corpo freddo lo assorbe e la sua entropia aumenta. Con $\Delta S = Q/T$ per ciascuno:
+\[
+  \Delta S_{\text{caldo}} = \frac{\SI{-600}{\joule}}{\SI{300}{\kelvin}} = \SI{-2}{\joule\per\kelvin}
+  \qquad
+  \Delta S_{\text{freddo}} = \frac{\SI{600}{\joule}}{\SI{200}{\kelvin}} = \SI{3}{\joule\per\kelvin}
+\]
+\[
+  \Delta S_{\text{tot}} = -2 + 3 = \SI{1}{\joule\per\kelvin}
+\]
+L'entropia totale aumenta, come deve succedere in un processo spontaneo.'''
+
+  [[quesito.opzione]]
+  testo = '''$-1$'''
+  commento = '''Scambia i segni, come se il calore passasse dal corpo freddo a quello caldo: quel processo farebbe diminuire l'entropia totale, ed è vietato dal secondo principio.'''
+  [[quesito.opzione]]
+  testo = '''$0$'''
+  commento = '''Pensa che, conservandosi l'energia, si conservi anche l'entropia. Lo stesso calore, diviso per temperature diverse, dà variazioni di entropia diverse.'''
+  [[quesito.opzione]]
+  testo = '''$+5$'''
+  commento = '''Somma i valori assoluti, $2 + 3$, senza il segno meno dell'entropia persa dal corpo caldo.'''
+  [[quesito.opzione]]
+  testo = '''$+1$'''
+  valore = 1
+  [[quesito.opzione]]
+  testo = '''$+3$'''
+  commento = '''Conta solo l'entropia guadagnata dal corpo freddo e dimentica quella persa dal corpo caldo.'''

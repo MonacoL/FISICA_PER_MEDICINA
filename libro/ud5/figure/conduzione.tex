@@ -1,0 +1,18 @@
+% Conduzione attraverso una lastra di spessore d e area A, fra T1 (calda) e T2 (fredda).
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % lastra in prospettiva
+  \fill[esempio!25] (0,0) -- (1.4,0) -- (2.2,0.8) -- (2.2,3.6) -- (0.8,3.6) -- (0,2.8) -- cycle;
+  \fill[esempio!45] (0,0) rectangle (1.4,2.8);
+  \draw[thick] (0,0) rectangle (1.4,2.8);
+  \draw[thick] (0,2.8) -- (0.8,3.6) -- (2.2,3.6) -- (2.2,0.8) -- (1.4,0);
+  \draw[thick] (1.4,2.8) -- (2.2,3.6);
+  % lati caldo e freddo
+  \node[attenzione, align=center] at (-1.6,1.6) {lato caldo\\$T_1$};
+  \node[formula, align=center] at (3.8,1.6) {lato freddo\\$T_2 < T_1$};
+  % flusso di calore
+  \foreach \y in {0.9,1.6,2.3} \draw[->, very thick, attenzione] (-0.6,\y) -- (2.9,\y);
+  \node[attenzione, above] at (1.1,3.7) {calore $Q$ nel tempo $\Delta t$};
+  % spessore
+  \draw[<->] (0,-0.35) -- (1.4,-0.35) node[midway, below] {$d$};
+  \node[anchor=west, esempio!70!black] at (2.3,3.4) {area $A$};
+\end{tikzpicture}

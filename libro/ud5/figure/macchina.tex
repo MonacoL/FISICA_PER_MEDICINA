@@ -1,0 +1,9 @@
+% Schema di una macchina termica fra una sorgente calda e una fredda.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \node[draw, thick, fill=attenzione!15, minimum width=5cm, minimum height=0.9cm] (C) at (0,3) {sorgente calda, temperatura $T_c$};
+  \node[draw, thick, fill=formula!15, minimum width=5cm, minimum height=0.9cm] (F) at (0,-1) {sorgente fredda, temperatura $T_f$};
+  \node[draw, very thick, circle, fill=richiamoBg, minimum size=1.5cm, align=center] (M) at (0,1) {macchina};
+  \draw[->, line width=2.5pt, attenzione] (C.south) -- (M.north) node[midway, right] {$Q_c$};
+  \draw[->, line width=1.5pt, formula] (M.south) -- (F.north) node[midway, right] {$|Q_f|$};
+  \draw[->, line width=1pt, medica] (M.east) -- (3.2,1) node[right] {$W = Q_c - |Q_f|$};
+\end{tikzpicture}
