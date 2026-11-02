@@ -3,10 +3,2494 @@
 # la pagina web build/web/ud3.html, e ricalcola ogni risultato.
 #
 # Il formato è descritto in testa a libro/ud7/esercizi.toml.
-# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
-# arriveranno con il ticket dell'eserciziario UD3.
 
 titolo = "Eserciziario UD3 · Meccanica dei fluidi"
+
+# ==================================================================== quesiti lampo, in ordine di dispensa
+
+[costanti]
+g = 9.8
+rho_acqua = 1000
+rho_sangue = 1060
+rho_aria = 1.2
+rho_hg = 13600
+mmHg = 133
+cmH2O = 98
+pi = 3.14
+
+# ==================================================================== problemi
+
+[[problema]]
+id = "ud3-statica-osso"
+livello = 1
+testo = '''Un campione di osso compatto, prelevato con una biopsia e ripulito, ha massa {{m}} e volume {{V}}. Calcola la sua densità in \si{\kilo\gram\per\metre\cubed}.'''
+dati.m = { valore = "9,5", unita = "\\gram" }
+dati.V = { valore = "5,0", unita = "\\centi\\metre\\cubed" }
+
+  [[problema.parte]]
+  calcolo = "m / V * 1000"
+  risultato = { valore = 1.9e3, unita = "\\kilo\\gram\\per\\metre\\cubed", cifre = 2 }
+  soluzione = '''Dalla definizione di densità, con massa e volume nelle unità date:
+\[
+  \rho = \frac{m}{V} = \frac{\SI{9,5}{\gram}}{\SI{5,0}{\centi\metre\cubed}} = \SI{1,9}{\gram\per\centi\metre\cubed}
+\]
+Poiché $\SI{1}{\gram\per\centi\metre\cubed} = \SI{1000}{\kilo\gram\per\metre\cubed}$,
+\[
+  \rho = 1{,}9 \cdot \SI{1000}{\kilo\gram\per\metre\cubed} = \SI{1,9e3}{\kilo\gram\per\metre\cubed}
+\]
+È il valore della tabella della dispensa: l'osso compatto è quasi due volte più denso dell'acqua.'''
+
+[[problema]]
+id = "ud3-statica-decubito"
+livello = 1
+testo = '''Un paziente allettato appoggia il tallone sul materasso. Il tallone preme con una forza di {{F}}, distribuita su un'area di contatto di {{S}}. Calcola la pressione sulla pelle del tallone.'''
+dati.F = { valore = 12, unita = "\\newton" }
+dati.S = { valore = "8,0", unita = "\\centi\\metre\\squared" }
+
+  [[problema.parte]]
+  calcolo = "F / (S * 1e-4)"
+  risultato = { valore = 1.5e4, unita = "\\pascal", cifre = 2 }
+  soluzione = '''L'area nel SI: $\SI{1}{\centi\metre\squared} = (\SI{e-2}{\metre})^2 = \SI{e-4}{\metre\squared}$, quindi $S = \SI{8,0e-4}{\metre\squared}$. La pressione è la forza divisa per l'area:
+\[
+  p = \frac{F}{S} = \frac{\SI{12}{\newton}}{\SI{8,0e-4}{\metre\squared}} = \frac{12}{8{,}0} \cdot 10^{0-(-4)}\,\si{\pascal} = \SI{1,5e4}{\pascal}
+\]
+In millimetri di mercurio sono circa $\num{15000}/133 \approx \SI{110}{\mmHg}$, più della pressione del sangue nei capillari: il sangue fatica ad arrivare ai tessuti schiacciati, ed è per questo che nei pazienti che non si muovono si formano le piaghe da decubito. I materassi antidecubito allargano l'area di appoggio, e a parità di forza la pressione diminuisce.'''
+
+[[problema]]
+id = "ud3-statica-ventilatore"
+livello = 1
+testo = '''Durante la ventilazione meccanica il ventilatore segna nelle vie aeree una pressione massima di {{p}} sopra quella atmosferica. Esprimi questa pressione in millimetri di mercurio.'''
+dati.p = { valore = 30, unita = "cm\\,H_2O" }
+
+  [[problema.parte]]
+  calcolo = "p * cmH2O / mmHg"
+  risultato = { valore = 22, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''Si passa per il pascal. Con $\SI{1}{cm\,H_2O} \approx \SI{98}{\pascal}$:
+\[
+  p = 30 \cdot \SI{98}{\pascal} = \SI{2940}{\pascal}
+\]
+e con $\SI{1}{\mmHg} \approx \SI{133}{\pascal}$:
+\[
+  p = \frac{\SI{2940}{\pascal}}{\SI{133}{\pascal\per\mmHg}} \approx \SI{22}{\mmHg}
+\]
+(infatti $133 \cdot 22 = 2926$, poco meno di 2940). Si arriva allo stesso risultato ricordando che il mercurio è 13,6 volte più denso dell'acqua: $\SI{30}{cm\,H_2O}$ sono \SI{300}{\milli\metre} d'acqua, e $300/13{,}6 \approx 22$ millimetri di mercurio.'''
+
+[[problema]]
+id = "ud3-statica-piscina"
+livello = 1
+testo = '''La vasca di una piscina per la riabilitazione è profonda {{h}}. Calcola la pressione relativa dell'acqua sul fondo della vasca, cioè quanto la pressione sul fondo supera quella atmosferica.'''
+dati.h = { valore = "1,4", unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "rho_acqua * g * h"
+  risultato = { valore = 1.4e4, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Per la legge di Stevino la pressione sul fondo è $p = p_0 + \rho g h$; quella relativa è il solo termine $\rho g h$:
+\[
+  p - p_0 = \rho g h = \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{1,4}{\metre} = 9800 \cdot 1{,}4\,\si{\pascal} = \SI{13720}{\pascal} \approx \SI{1,4e4}{\pascal}
+\]
+dove $9800 \cdot 1{,}4 = 9800 + 3920 = 13720$. È circa un settimo della pressione atmosferica.'''
+
+[[problema]]
+id = "ud3-statica-palloncino"
+livello = 1
+testo = '''Nel reparto di pediatria un palloncino gonfiato con elio ha un volume di {{V}}. La densità dell'aria è {{rho}}. Calcola la spinta di Archimede che l'aria esercita sul palloncino.'''
+dati.V = { valore = 10, unita = "\\litre" }
+dati.rho = { valore = "1,2", unita = "\\kilo\\gram\\per\\metre\\cubed" }
+
+  [[problema.parte]]
+  calcolo = "rho * V * 1e-3 * g"
+  risultato = { valore = 0.12, unita = "\\newton", cifre = 2 }
+  soluzione = '''Il principio di Archimede vale anche nei gas: la spinta è il peso dell'aria spostata. Il volume nel SI è $V = 10 \cdot \SI{e-3}{\metre\cubed} = \SI{e-2}{\metre\cubed}$, quindi
+\[
+  F_A = \rho_\text{aria}\,V\,g = \SI{1,2}{\kilo\gram\per\metre\cubed} \cdot \SI{e-2}{\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} = 1{,}2 \cdot 9{,}8 \cdot 10^{-2}\,\si{\newton} \approx 11{,}8 \cdot 10^{-2}\,\si{\newton} \approx \SI{0,12}{\newton}
+\]
+È il peso di circa \SI{12}{\gram}. Il palloncino sale perché l'elio che contiene, più il palloncino stesso, pesa meno di così.'''
+
+[[problema]]
+id = "ud3-statica-barometro"
+livello = 1
+testo = '''In un ospedale di montagna il barometro a mercurio segna {{h}}. Calcola la pressione atmosferica in pascal.'''
+dati.h = { valore = 700, unita = "mm" }
+
+  [[problema.parte]]
+  calcolo = "rho_hg * g * h * 1e-3"
+  risultato = { valore = 9.3e4, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Come nell'esperimento di Torricelli, la pressione atmosferica è uguale alla pressione della colonna di mercurio, che ha il vuoto sopra: $p_\text{atm} = \rho_\text{Hg}\,g\,h$, con $h = \SI{700}{\milli\metre} = \SI{0,700}{\metre}$.
+\[
+  p_\text{atm} = \SI{13600}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{0,700}{\metre}
+\]
+Il conto a mano: $13600 \cdot 9{,}8 = 136000 - 2720 = 133280$, poi $133280 \cdot 0{,}7 \approx 93300$. Quindi
+\[
+  p_\text{atm} \approx \SI{93300}{\pascal} \approx \SI{9,3e4}{\pascal}
+\]
+Lo stesso risultato viene da $\SI{1}{\mmHg} \approx \SI{133}{\pascal}$: $700 \cdot 133 = \num{93100} \approx \SI{9,3e4}{\pascal}$. Salendo di quota l'aria sopra di noi è meno, e la pressione scende sotto i \SI{760}{\mmHg} del livello del mare.'''
+
+[[problema]]
+id = "ud3-statica-siringa"
+livello = 2
+testo = '''Per spingere una soluzione attraverso un catetere un'infermiera preme lo stantuffo di una siringa con una forza di {{F}}. Lo stantuffo è un cerchio di diametro {{d}}.'''
+dati.F = { valore = 12, unita = "\\newton" }
+dati.d = { valore = "2,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quale pressione, in più di quella atmosferica, esercita lo stantuffo sul liquido?'''
+  calcolo = "F / (math.pi * (d / 2 * 1e-2)**2)"
+  risultato = { valore = 3.8e4, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Il raggio è metà del diametro, $r = \SI{1,0}{\centi\metre} = \SI{1,0e-2}{\metre}$. L'area dello stantuffo è
+\[
+  S = \pi r^2 = 3{,}14 \cdot (\SI{1,0e-2}{\metre})^2 = \SI{3,14e-4}{\metre\squared}
+\]
+e la pressione
+\[
+  p = \frac{F}{S} = \frac{\SI{12}{\newton}}{\SI{3,14e-4}{\metre\squared}} = \frac{12}{3{,}14} \cdot 10^{0-(-4)}\,\si{\pascal} \approx \SI{3,8e4}{\pascal}
+\]
+dove $12/3{,}14 \approx 3{,}8$ (infatti $3{,}14 \cdot 3{,}8 = 11{,}9$).'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la stessa pressione in millimetri di mercurio?'''
+  calcolo = "F / (math.pi * (d / 2 * 1e-2)**2) / mmHg"
+  risultato = { valore = 2.9e2, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''Si divide il risultato del punto (a) per \SI{133}{\pascal\per\mmHg}:
+\[
+  p = \frac{\SI{3,8e4}{\pascal}}{\SI{133}{\pascal\per\mmHg}} = \frac{38000}{133}\,\si{\mmHg} \approx \SI{2,9e2}{\mmHg}
+\]
+(infatti $133 \cdot 290 = \num{38570}$, vicino a \num{38000}). Per il principio di Pascal questa pressione arriva in tutto il liquido, fino alla punta del catetere: è più del doppio della pressione arteriosa massima, con la forza modesta di un pollice.'''
+
+[[problema]]
+id = "ud3-statica-timpano"
+livello = 2
+testo = '''Un nuotatore scende a {{h}} di profondità in piscina senza compensare, cioè senza far entrare aria nell'orecchio medio, che resta alla pressione atmosferica. Il timpano ha un'area di {{S}}.'''
+dati.h = { valore = "3,0", unita = "m" }
+dati.S = { valore = "0,60", unita = "\\centi\\metre\\squared" }
+
+  [[problema.parte]]
+  domanda = '''Di quanto la pressione dell'acqua a quella profondità supera la pressione atmosferica?'''
+  calcolo = "rho_acqua * g * h"
+  risultato = { valore = 2.94e4, unita = "\\pascal", cifre = 3 }
+  soluzione = '''Per la legge di Stevino la pressione relativa è
+\[
+  \rho g h = \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{3,0}{\metre} = 9800 \cdot 3{,}0\,\si{\pascal} = \SI{29400}{\pascal} = \SI{2,94e4}{\pascal}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza risultante che preme sul timpano dall'esterno verso l'interno?'''
+  calcolo = "rho_acqua * g * h * S * 1e-4"
+  risultato = { valore = 1.8, unita = "\\newton", cifre = 2 }
+  soluzione = '''Dentro l'orecchio medio c'è la pressione atmosferica, fuori la pressione atmosferica più quella del punto (a): le pressioni atmosferiche si compensano, e sul timpano resta la differenza. L'area nel SI è $S = 0{,}60 \cdot \SI{e-4}{\metre\squared} = \SI{6,0e-5}{\metre\squared}$, quindi
+\[
+  F = \Delta p\,S = \SI{2,94e4}{\pascal} \cdot \SI{6,0e-5}{\metre\squared} = 2{,}94 \cdot 6{,}0 \cdot 10^{4-5}\,\si{\newton} = 17{,}6 \cdot 10^{-1}\,\si{\newton} \approx \SI{1,8}{\newton}
+\]
+È il peso di quasi \SI{200}{\gram} appoggiato su una membrana sottile meno di un decimo di millimetro: per questo, scendendo senza compensare, l'orecchio fa male.'''
+
+[[problema]]
+id = "ud3-statica-urinometro"
+livello = 2
+testo = '''L'urinometro è un piccolo galleggiante di vetro, con una scala graduata, che si usa per misurare la densità delle urine. Messo in acqua distillata, galleggia con un volume immerso di {{V1}}. Messo in un campione di urina, galleggia con un volume immerso di {{V2}}.'''
+dati.V1 = { valore = "20,0", unita = "\\centi\\metre\\cubed" }
+dati.V2 = { valore = "19,6", unita = "\\centi\\metre\\cubed" }
+
+  [[problema.parte]]
+  domanda = '''Qual è la massa dell'urinometro?'''
+  calcolo = "1.0 * V1"
+  risultato = { valore = 20.0, unita = "\\gram", cifre = 3 }
+  soluzione = '''Un corpo che galleggia è in equilibrio: la spinta è uguale al peso, $\rho_\text{f} V_\text{imm} g = m g$, quindi $m = \rho_\text{f} V_\text{imm}$, la massa del liquido spostato. In acqua, con $\rho = \SI{1,00}{\gram\per\centi\metre\cubed}$:
+\[
+  m = \SI{1,00}{\gram\per\centi\metre\cubed} \cdot \SI{20,0}{\centi\metre\cubed} = \SI{20,0}{\gram}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Qual è la densità dell'urina?'''
+  calcolo = "1.0 * V1 / V2 * 1000"
+  risultato = { valore = 1.02e3, unita = "\\kilo\\gram\\per\\metre\\cubed", cifre = 3 }
+  soluzione = '''Nell'urina la massa dell'urinometro, trovata nel punto (a), è la stessa, e anche qui è uguale alla massa del liquido spostato: $m = \rho_\text{u} V_2$. Quindi
+\[
+  \rho_\text{u} = \frac{m}{V_2} = \frac{\SI{20,0}{\gram}}{\SI{19,6}{\centi\metre\cubed}} = \frac{200}{196}\,\si{\gram\per\centi\metre\cubed} = \frac{50}{49}\,\si{\gram\per\centi\metre\cubed} \approx \SI{1,02}{\gram\per\centi\metre\cubed} = \SI{1,02e3}{\kilo\gram\per\metre\cubed}
+\]
+L'urina è più densa dell'acqua perché contiene sali e urea disciolti: l'urinometro vi affonda meno. I valori normali vanno da circa 1005 a \SI{1030}{\kilo\gram\per\metre\cubed}.'''
+
+[[problema]]
+id = "ud3-statica-hales"
+livello = 2
+testo = '''Nel 1733 Stephen Hales misurò per la prima volta la pressione arteriosa: collegò l'arteria di un cavallo a un lungo tubo di vetro verticale e osservò fin dove saliva il sangue. Immagina di ripetere la misura su una persona con una pressione arteriosa media di {{p}}.'''
+dati.p = { valore = 100, unita = "\\mmHg" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale questa pressione in pascal?'''
+  calcolo = "p * mmHg"
+  risultato = { valore = 1.33e4, unita = "\\pascal", cifre = 3 }
+  soluzione = '''Con $\SI{1}{\mmHg} \approx \SI{133}{\pascal}$:
+\[
+  p = 100 \cdot \SI{133}{\pascal} = \SI{13300}{\pascal} = \SI{1,33e4}{\pascal}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Fino a che altezza sopra l'arteria salirebbe il sangue nel tubo?'''
+  calcolo = "p * mmHg / (rho_sangue * g)"
+  risultato = { valore = 1.3, unita = "m", cifre = 2 }
+  soluzione = '''Il sangue sale finché la pressione della colonna, che ha in cima la pressione atmosferica, uguaglia la pressione relativa nell'arteria, quella del punto (a): $\rho_\text{sangue}\,g\,h = p$.
+\[
+  h = \frac{p}{\rho_\text{sangue}\,g} = \frac{\SI{1,33e4}{\pascal}}{\SI{1060}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared}} = \frac{13300}{10388}\,\si{\metre} \approx \SI{1,3}{\metre}
+\]
+dove $1060 \cdot 9{,}8 = 10600 - 212 = 10388$. Una colonna di oltre un metro, che oscillerebbe a ogni battito: per questo le pressioni arteriose si misurano con il mercurio, 13,6 volte più denso dell'acqua, e la colonna diventa di soli \SI{100}{\milli\metre}.'''
+
+[[problema]]
+id = "ud3-statica-idroterapia"
+livello = 2
+testo = '''Un paziente di massa {{m}}, operato al ginocchio, fa riabilitazione in piscina. Immerso fino al petto, il suo corpo ha un volume immerso di {{V}}.'''
+dati.m = { valore = 70, unita = "\\kilo\\gram" }
+dati.V = { valore = 63, unita = "\\litre" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la spinta di Archimede sul paziente?'''
+  calcolo = "rho_acqua * V * 1e-3 * g"
+  risultato = { valore = 617, unita = "\\newton", cifre = 3 }
+  soluzione = '''Il volume immerso nel SI è $V_\text{imm} = 63 \cdot \SI{e-3}{\metre\cubed} = \SI{0,063}{\metre\cubed}$. La spinta è il peso dell'acqua spostata:
+\[
+  F_A = \rho_\text{acqua}\,V_\text{imm}\,g = \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{0,063}{\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} = 63 \cdot 9{,}8\,\si{\newton} = \SI{617}{\newton}
+\]
+dove $63 \cdot 9{,}8 = 630 - 12{,}6 = 617{,}4$.'''
+
+  [[problema.parte]]
+  domanda = '''Con quale forza i piedi del paziente premono sul fondo della vasca?'''
+  calcolo = "m * g - rho_acqua * V * 1e-3 * g"
+  risultato = { valore = 69, unita = "\\newton", cifre = 2 }
+  soluzione = '''Il paziente è fermo: il fondo sostiene la parte del peso che la spinta non equilibra, cioè il peso apparente. Il peso è $P = mg = \SI{70}{\kilo\gram} \cdot \SI{9,8}{\metre\per\second\squared} = \SI{686}{\newton}$; con la spinta del punto (a),
+\[
+  F = P - F_A = \SI{686}{\newton} - \SI{617}{\newton} = \SI{69}{\newton}
+\]
+Il ginocchio sopporta solo un decimo del peso del corpo, quello di una massa di circa \SI{7}{\kilo\gram}: si può cominciare a camminare molto prima che fuori dall'acqua.'''
+
+[[problema]]
+id = "ud3-statica-iperbarica"
+livello = 2
+testo = '''In una camera iperbarica, usata per esempio per curare le intossicazioni da monossido di carbonio, l'aria è portata a una pressione assoluta di {{p}}, mentre fuori la pressione è {{p0}}. La camera ha un oblò circolare di diametro {{d}}. Usa $\SI{1}{atm} \approx \SI{1,0e5}{\pascal}$.'''
+dati.p = { valore = "2,5", unita = "atm" }
+dati.p0 = { valore = "1,0", unita = "atm" }
+dati.d = { valore = 20, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Di quanti pascal la pressione dentro la camera supera quella fuori?'''
+  calcolo = "(p - p0) * 1e5"
+  risultato = { valore = 1.5e5, unita = "\\pascal", cifre = 2 }
+  soluzione = '''La differenza è la pressione relativa dell'aria nella camera:
+\[
+  \Delta p = \SI{2,5}{atm} - \SI{1,0}{atm} = \SI{1,5}{atm} = 1{,}5 \cdot \SI{1,0e5}{\pascal} = \SI{1,5e5}{\pascal}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza risultante che l'aria esercita sull'oblò, spingendolo verso l'esterno?'''
+  calcolo = "(p - p0) * 1e5 * math.pi * (d / 2 * 1e-2)**2"
+  risultato = { valore = 4.7e3, unita = "\\newton", cifre = 2 }
+  soluzione = '''Sulla faccia esterna dell'oblò preme la pressione atmosferica, su quella interna la pressione della camera: la forza risultante è data dalla differenza del punto (a). L'oblò ha raggio $r = \SI{10}{\centi\metre} = \SI{0,10}{\metre}$ e area
+\[
+  S = \pi r^2 = 3{,}14 \cdot (\SI{0,10}{\metre})^2 = \SI{3,14e-2}{\metre\squared}
+\]
+quindi
+\[
+  F = \Delta p\,S = \SI{1,5e5}{\pascal} \cdot \SI{3,14e-2}{\metre\squared} = 1{,}5 \cdot 3{,}14 \cdot 10^{5-2}\,\si{\newton} = 4{,}71 \cdot 10^{3}\,\si{\newton} \approx \SI{4,7e3}{\newton}
+\]
+È il peso di una massa di quasi mezza tonnellata: l'oblò deve essere spesso e ben fissato.'''
+
+[[problema]]
+id = "ud3-statica-pvc"
+livello = 3
+testo = '''Si misura la pressione venosa centrale di un paziente supino con un manometro ad acqua collegato al catetere venoso. Lo zero della scala andrebbe messo all'altezza del cuore. La colonna d'acqua si ferma {{h}} sopra lo zero della scala; poi ci si accorge che lo zero era stato messo, per errore, {{dz}} sotto il livello del cuore.'''
+dati.h = { valore = 20, unita = "cm" }
+dati.dz = { valore = "6,0", unita = "cm" }
+dati.hs = { valore = "1,0", unita = "m" }
+dati.R = { valore = "5,0e10", unita = "\\pascal\\second\\per\\metre\\cubed" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale davvero la pressione venosa centrale, in centimetri d'acqua?'''
+  calcolo = "h - dz"
+  risultato = { valore = 14, unita = "cm\\,H_2O", cifre = 2 }
+  soluzione = '''Il manometro misura la pressione al livello da cui si conta l'altezza della colonna: la pressione relativa a una certa quota è uguale alla pressione della colonna d'acqua che sta sopra quella quota. La cima della colonna è \SI{20}{\centi\metre} sopra lo zero, e lo zero è \SI{6,0}{\centi\metre} sotto il cuore; quindi la cima è sopra il cuore di
+\[
+  h_\text{cuore} = \SI{20}{\centi\metre} - \SI{6,0}{\centi\metre} = \SI{14}{\centi\metre}
+\]
+La pressione venosa centrale è \SI{14}{cm\,H_2O}. Con lo zero troppo in basso la lettura è troppo alta di \SI{6}{cm\,H_2O}.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale in pascal?'''
+  calcolo = "(h - dz) * cmH2O"
+  risultato = { valore = 1.37e3, unita = "\\pascal", cifre = 3 }
+  soluzione = '''Con $\SI{1}{cm\,H_2O} \approx \SI{98}{\pascal}$, cioè $\rho g h$ per \SI{1}{\centi\metre} d'acqua:
+\[
+  p = 14 \cdot \SI{98}{\pascal} = \SI{1372}{\pascal} \approx \SI{1,37e3}{\pascal}
+\]
+dove $14 \cdot 98 = 14 \cdot 100 - 14 \cdot 2 = 1400 - 28 = 1372$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale in millimetri di mercurio? È nell'intervallo normale, fra circa 2 e \SI{8}{\mmHg}?'''
+  calcolo = "(h - dz) * cmH2O / mmHg"
+  risultato = { valore = 10, unita = "\\mmHg", cifre = 2 }
+  rapido = '''\SI{10}{\mmHg}; più alta del normale'''
+  soluzione = '''Si divide per \SI{133}{\pascal\per\mmHg}:
+\[
+  p = \frac{\SI{1372}{\pascal}}{\SI{133}{\pascal\per\mmHg}} \approx \SI{10}{\mmHg}
+\]
+(infatti $133 \cdot 10 = 1330$, e $133 \cdot 10{,}5 \approx 1397$: il risultato sta fra 10 e 10,5). Oppure, con il rapporto delle densità: \SI{140}{\milli\metre} d'acqua sono $140/13{,}6 \approx \SI{10}{\mmHg}$. La pressione venosa centrale è più alta del normale, anche dopo aver corretto lo zero. La lettura sbagliata, \SI{20}{cm\,H_2O}, cioè $200/13{,}6 \approx \SI{15}{\mmHg}$, avrebbe esagerato il problema.'''
+
+  [[problema.parte]]
+  domanda = '''Nello stesso catetere si infonde poi una soluzione fisiologica, con la densità dell'acqua, da una sacca appesa con la superficie del liquido {{hs}} sopra il cuore. Il deflussore e il catetere hanno insieme una resistenza idraulica di {{R}}, e il moto è laminare. Quanto vale la portata della flebo?'''
+  calcolo = "(rho_acqua * g * hs - (h - dz) * cmH2O) / R"
+  risultato = { valore = 1.7e-7, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''La sacca spinge con la pressione della colonna di soluzione fra la sua superficie e il cuore:
+\[
+  \rho g h = \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{1,0}{\metre} = \SI{9800}{\pascal}
+\]
+Nella vena c'è la pressione venosa centrale del punto (b), \SI{1372}{\pascal}, che si oppone. Ai capi del deflussore la differenza di pressione è
+\[
+  \Delta p = \SI{9800}{\pascal} - \SI{1372}{\pascal} = \SI{8428}{\pascal} \approx \SI{8,4e3}{\pascal}
+\]
+Dalla legge $\Delta p = QR$:
+\[
+  Q = \frac{\Delta p}{R} = \frac{\SI{8,4e3}{\pascal}}{\SI{5,0e10}{\pascal\second\per\metre\cubed}} = 1{,}68 \cdot 10^{3-10}\,\si{\metre\cubed\per\second} \approx \SI{1,7e-7}{\metre\cubed\per\second}
+\]
+con $8{,}4/5{,}0 = 1{,}68$. In un minuto sono $\SI{1,7e-7}{\metre\cubed\per\second} \cdot \SI{60}{\second} \approx \SI{1,0e-5}{\metre\cubed}$, cioè circa \SI{10}{\milli\litre}. Con una pressione venosa più alta la differenza di pressione cala, e la flebo scende più piano.'''
+
+[[problema]]
+id = "ud3-statica-giraffa"
+livello = 3
+testo = '''Quando una giraffa tiene la testa alta, il suo cervello si trova {{hs}} sopra il cuore, e le zampe arrivano {{hz}} sotto il cuore. Perché il sangue irrori il cervello, nelle arterie della testa serve una pressione media di almeno {{pc}}. La densità del sangue è quella del sangue umano.'''
+dati.hs = { valore = "2,0", unita = "m" }
+dati.hz = { valore = "1,8", unita = "m" }
+dati.pc = { valore = 60, unita = "\\mmHg" }
+
+  [[problema.parte]]
+  domanda = '''Di quanti millimetri di mercurio la pressione del sangue diminuisce salendo dal cuore al cervello?'''
+  calcolo = "rho_sangue * g * hs / mmHg"
+  risultato = { valore = 1.6e2, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''Per la legge di Stevino, fra due punti del sangue con dislivello $h$ la differenza di pressione è $\rho g h$:
+\[
+  \Delta p = \SI{1060}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{2,0}{\metre} = 10388 \cdot 2{,}0\,\si{\pascal} \approx \SI{20800}{\pascal}
+\]
+In millimetri di mercurio:
+\[
+  \Delta p = \frac{\SI{20800}{\pascal}}{\SI{133}{\pascal\per\mmHg}} \approx \SI{156}{\mmHg} \approx \SI{1,6e2}{\mmHg}
+\]
+(infatti $133 \cdot 156 = \num{20748}$). È lo stesso conto della dispensa, circa \SI{78}{\mmHg} per metro di sangue, moltiplicato per \SI{2,0}{\metre}.'''
+
+  [[problema.parte]]
+  domanda = '''Quale pressione media serve, come minimo, nell'aorta della giraffa, al livello del cuore?'''
+  calcolo = "pc + rho_sangue * g * hs / mmHg"
+  risultato = { valore = 2.2e2, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''Al livello del cuore la pressione deve superare quella richiesta nella testa della perdita del punto (a):
+\[
+  p_\text{cuore} = \SI{60}{\mmHg} + \SI{156}{\mmHg} = \SI{216}{\mmHg} \approx \SI{2,2e2}{\mmHg}
+\]
+Più del doppio della pressione media di una persona: il cuore della giraffa ha pareti molto spesse.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la pressione media nelle arterie delle zampe, all'altezza degli zoccoli?'''
+  calcolo = "pc + rho_sangue * g * (hs + hz) / mmHg"
+  risultato = { valore = 3.6e2, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''Scendendo di \SI{1,8}{\metre} sotto il cuore la pressione aumenta di
+\[
+  \Delta p' = \frac{10388 \cdot 1{,}8}{133}\,\si{\mmHg} \approx \frac{18700}{133}\,\si{\mmHg} \approx \SI{141}{\mmHg}
+\]
+(oppure $78 \cdot 1{,}8 \approx 140$). Con il risultato del punto (b):
+\[
+  p_\text{zampe} = \SI{216}{\mmHg} + \SI{141}{\mmHg} = \SI{357}{\mmHg} \approx \SI{3,6e2}{\mmHg}
+\]
+La pelle delle zampe della giraffa è molto spessa e tesa, come una calza elastica, e impedisce che i vasi si dilatino e che il liquido esca nei tessuti: è la stessa funzione delle calze elastiche contro le vene varicose.'''
+
+[[problema]]
+id = "ud3-statica-sollevatore"
+livello = 3
+testo = '''Un sollevatore idraulico per pazienti solleva dal letto un paziente con la sua imbragatura, che insieme pesano {{P}}. Il pistone grande ha diametro {{d2}}; la pompa che l'infermiere aziona ha un pistone di diametro {{d1}}, che a ogni colpo scende di {{x1}}. I due pistoni sono alla stessa quota.'''
+dati.P = { valore = 800, unita = "\\newton" }
+dati.d2 = { valore = "6,0", unita = "cm" }
+dati.d1 = { valore = "1,5", unita = "cm" }
+dati.x1 = { valore = "5,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quale forza serve sul pistone della pompa per tenere sollevato il paziente?'''
+  calcolo = "P * (d1 / d2)**2"
+  risultato = { valore = 50, unita = "\\newton", cifre = 2 }
+  soluzione = '''Per il principio di Pascal la pressione è la stessa sotto i due pistoni, $F_1/S_1 = F_2/S_2$. Il rapporto delle aree è il quadrato del rapporto dei diametri:
+\[
+  \frac{S_2}{S_1} = \left(\frac{\SI{6,0}{\centi\metre}}{\SI{1,5}{\centi\metre}}\right)^{2} = 4^2 = 16
+  \qquad\qquad
+  F_1 = F_2\,\frac{S_1}{S_2} = \frac{\SI{800}{\newton}}{16} = \SI{50}{\newton}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la pressione dell'olio nel circuito, in più di quella atmosferica?'''
+  calcolo = "P / (math.pi * (d2 / 2 * 1e-2)**2)"
+  risultato = { valore = 2.8e5, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Il pistone grande ha raggio $r_2 = \SI{3,0}{\centi\metre} = \SI{3,0e-2}{\metre}$ e area
+\[
+  S_2 = \pi r_2^2 = 3{,}14 \cdot 9{,}0 \cdot 10^{-4}\,\si{\metre\squared} \approx \SI{2,83e-3}{\metre\squared}
+\]
+La pressione sotto il pistone grande è
+\[
+  p = \frac{F_2}{S_2} = \frac{\SI{800}{\newton}}{\SI{2,83e-3}{\metre\squared}} = \frac{800}{2{,}83} \cdot 10^{3}\,\si{\pascal} \approx 283 \cdot 10^{3}\,\si{\pascal} \approx \SI{2,8e5}{\pascal}
+\]
+(infatti $2{,}83 \cdot 283 \approx 800$). Sono quasi tre atmosfere; la stessa pressione c'è sotto il pistone della pompa.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti colpi di pompa servono per sollevare il paziente di \SI{40}{\centi\metre}?'''
+  calcolo = "40 / (x1 * (d1 / d2)**2)"
+  risultato = { valore = 128, cifre = 3 }
+  soluzione = '''L'olio è incomprimibile: il volume che esce dalla pompa a ogni colpo, $S_1\,\Delta x_1$, entra nel cilindro grande e lo fa salire di $\Delta x_2 = \Delta x_1\,S_1/S_2$. Con il rapporto delle aree del punto (a):
+\[
+  \Delta x_2 = \frac{\SI{5,0}{\centi\metre}}{16} \approx \SI{0,31}{\centi\metre} \ \text{per colpo}
+  \qquad\qquad
+  N = \frac{\SI{40}{\centi\metre}}{\SI{5,0}{\centi\metre}/16} = \frac{40 \cdot 16}{5{,}0} = 8 \cdot 16 = 128
+\]
+Il lavoro torna: $128 \cdot \SI{50}{\newton} \cdot \SI{0,050}{\metre} = \SI{320}{\joule}$, uguale a $\SI{800}{\newton} \cdot \SI{0,40}{\metre} = \SI{320}{\joule}$. L'infermiere fa meno forza, ma per un tratto sedici volte più lungo.'''
+
+[[problema]]
+id = "ud3-statica-docimasia"
+livello = 3
+testo = '''In medicina legale la docimasia polmonare idrostatica serve a capire se un neonato ha respirato: si mette un polmone in acqua e si guarda se galleggia. Un polmone che non ha mai contenuto aria ha massa {{m}} e volume {{V1}}. Dopo i primi respiri l'aria rimasta negli alveoli porta lo stesso polmone, con la stessa massa, a un volume di {{V2}}. La massa dell'aria si trascura.'''
+dati.m = { valore = 60, unita = "\\gram" }
+dati.V1 = { valore = 57, unita = "\\centi\\metre\\cubed" }
+dati.V2 = { valore = 75, unita = "\\centi\\metre\\cubed" }
+
+  [[problema.parte]]
+  domanda = '''Qual è la densità del polmone che non ha respirato? In acqua affonda o galleggia?'''
+  calcolo = "m / V1 * 1000"
+  risultato = { valore = 1.05e3, unita = "\\kilo\\gram\\per\\metre\\cubed", cifre = 3 }
+  rapido = '''\SI{1,05e3}{\kilo\gram\per\metre\cubed}; affonda'''
+  soluzione = '''Dalla definizione di densità:
+\[
+  \rho_1 = \frac{m}{V_1} = \frac{\SI{60}{\gram}}{\SI{57}{\centi\metre\cubed}} = \frac{20}{19}\,\si{\gram\per\centi\metre\cubed} \approx \SI{1,05}{\gram\per\centi\metre\cubed} = \SI{1,05e3}{\kilo\gram\per\metre\cubed}
+\]
+dove $20/19 \approx 1{,}05$ (infatti $19 \cdot 1{,}05 = 19{,}95$). È più denso dell'acqua: il peso supera la spinta, e il polmone affonda.'''
+
+  [[problema.parte]]
+  domanda = '''Il polmone che ha respirato galleggia? Quale frazione del suo volume resta immersa?'''
+  calcolo = "m / V2"
+  risultato = { valore = 0.80, cifre = 2 }
+  rapido = '''galleggia; 0,80 del volume (80\%) immerso'''
+  soluzione = '''La densità è ora
+\[
+  \rho_2 = \frac{m}{V_2} = \frac{\SI{60}{\gram}}{\SI{75}{\centi\metre\cubed}} = \SI{0,80}{\gram\per\centi\metre\cubed} = \SI{800}{\kilo\gram\per\metre\cubed}
+\]
+minore di quella dell'acqua: il polmone galleggia. All'equilibrio la frazione immersa è il rapporto delle densità:
+\[
+  \frac{V_\text{imm}}{V_2} = \frac{\rho_2}{\rho_\text{acqua}} = \frac{800}{1000} = 0{,}80
+\]
+L'80\% del volume sta sott'acqua, il 20\% resta fuori.'''
+
+  [[problema.parte]]
+  domanda = '''Con quale forza, come minimo, bisogna spingere verso il basso il polmone che ha respirato per tenerlo tutto sott'acqua?'''
+  calcolo = "(rho_acqua * V2 * 1e-6 - m * 1e-3) * g"
+  risultato = { valore = 0.15, unita = "\\newton", cifre = 2 }
+  soluzione = '''Tutto immerso, il polmone sposta \SI{75}{\centi\metre\cubed} d'acqua, cioè \SI{75}{\gram}, e riceve la spinta $F_A = \SI{0,075}{\kilo\gram} \cdot g$. Il suo peso è $P = \SI{0,060}{\kilo\gram} \cdot g$. La spinta supera il peso, e la differenza è la forza che serve per tenerlo sotto:
+\[
+  F = F_A - P = (\SI{0,075}{\kilo\gram} - \SI{0,060}{\kilo\gram}) \cdot \SI{9,8}{\metre\per\second\squared} = \SI{0,015}{\kilo\gram} \cdot \SI{9,8}{\metre\per\second\squared} \approx \SI{0,15}{\newton}
+\]
+È il peso di una massa di \SI{15}{\gram}. La prova ha dei limiti noti: anche i gas della decomposizione possono far galleggiare un polmone che non ha respirato.'''
+
+[[problema]]
+id = "ud3-statica-bracciale"
+livello = 3
+testo = '''Durante una misura con lo sfigmomanometro il manicotto è gonfiato a {{p}}, appena sopra la pressione sistolica del paziente, e l'arteria del braccio è chiusa. La parte gonfiabile del manicotto, a contatto con il braccio, è un rettangolo di {{a}} per {{b}}.'''
+dati.p = { valore = 130, unita = "\\mmHg" }
+dati.a = { valore = 12, unita = "cm" }
+dati.b = { valore = 25, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la pressione del manicotto in pascal?'''
+  calcolo = "p * mmHg"
+  risultato = { valore = 1.73e4, unita = "\\pascal", cifre = 3 }
+  soluzione = '''È una pressione relativa, come quasi tutte le pressioni in medicina. Con $\SI{1}{\mmHg} \approx \SI{133}{\pascal}$:
+\[
+  p = 130 \cdot \SI{133}{\pascal} = \SI{17290}{\pascal} \approx \SI{1,73e4}{\pascal}
+\]
+dove $130 \cdot 133 = 13300 + 3990 = 17290$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza con cui il manicotto preme sul braccio, sommando le spinte su tutta la superficie di contatto?'''
+  calcolo = "p * mmHg * a * b * 1e-4"
+  risultato = { valore = 5.2e2, unita = "\\newton", cifre = 2 }
+  soluzione = '''L'area di contatto è $S = \SI{12}{\centi\metre} \cdot \SI{25}{\centi\metre} = \SI{300}{\centi\metre\squared} = 300 \cdot \SI{e-4}{\metre\squared} = \SI{3,0e-2}{\metre\squared}$. La pressione atmosferica preme su tutto il braccio anche senza manicotto, quindi la forza in più è data dalla pressione relativa del punto (a):
+\[
+  F = p\,S = \SI{1,73e4}{\pascal} \cdot \SI{3,0e-2}{\metre\squared} = 1{,}73 \cdot 3{,}0 \cdot 10^{4-2}\,\si{\newton} = 5{,}19 \cdot 10^{2}\,\si{\newton} \approx \SI{5,2e2}{\newton}
+\]
+È la somma delle spinte su tutta l'area di contatto. Il manicotto avvolge il braccio, quindi le spinte hanno direzioni diverse e lo comprimono da tutti i lati. In tutto valgono quanto il peso di una massa di più di \SI{50}{\kilo\gram}, perché $520/9{,}8 \approx 53$: bastano a schiacciare l'arteria.'''
+
+  [[problema.parte]]
+  domanda = '''Se il manometro dello sfigmomanometro fosse ad acqua invece che a mercurio, che dislivello mostrerebbe?'''
+  calcolo = "p * mmHg / (rho_acqua * g)"
+  risultato = { valore = 1.8, unita = "m", cifre = 2 }
+  soluzione = '''Il manometro a tubo aperto misura la pressione relativa con un dislivello, $p = \rho g \Delta h$. A parità di pressione, $\rho\,\Delta h$ è lo stesso: l'acqua, 13,6 volte meno densa del mercurio, sale 13,6 volte di più.
+\[
+  \Delta h_\text{acqua} = \SI{130}{\milli\metre} \cdot 13{,}6 = \SI{1768}{\milli\metre} \approx \SI{1,8}{\metre}
+\]
+Lo stesso dal punto (a): $\Delta h = p/(\rho_\text{acqua}\,g) = 17290/9800\,\si{\metre} \approx \SI{1,8}{\metre}$. Un tubo alto quasi due metri non si porta al letto del paziente: per questo gli sfigmomanometri a liquido erano a mercurio.'''
+
+[[problema]]
+id = "ud3-statica-trasfusione"
+livello = 3
+testo = '''Una sacca di sangue per trasfusione è appesa in modo che la superficie del sangue stia {{h}} sopra l'ago, inserito in una vena del braccio. La sacca è morbida, e sul sangue preme la pressione atmosferica. Il tubicino è chiuso dal regolatore di flusso, e il sangue è fermo.'''
+dati.h = { valore = "0,90", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Di quanto la pressione del sangue all'ago supera la pressione atmosferica, in pascal?'''
+  calcolo = "rho_sangue * g * h"
+  risultato = { valore = 9.3e3, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Il sangue nel tubicino è fermo, quindi vale la legge di Stevino, con il dislivello verticale fra la superficie nella sacca e l'ago:
+\[
+  \rho g h = \SI{1060}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{0,90}{\metre} = 10388 \cdot 0{,}90\,\si{\pascal} \approx \SI{9350}{\pascal} \approx \SI{9,3e3}{\pascal}
+\]
+dove $10388 \cdot 0{,}9 = 10388 - 1039 = 9349$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la stessa pressione in millimetri di mercurio?'''
+  calcolo = "rho_sangue * g * h / mmHg"
+  risultato = { valore = 70, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''Dal punto (a):
+\[
+  \frac{\SI{9349}{\pascal}}{\SI{133}{\pascal\per\mmHg}} \approx \SI{70}{\mmHg}
+\]
+(infatti $133 \cdot 70 = 9310$). Molto più della pressione nella vena, di circa \SI{10}{\mmHg}: aperto il regolatore, il sangue entra.'''
+
+  [[problema.parte]]
+  domanda = '''In un'emergenza la sacca viene chiusa in uno spremisacca, un manicotto che la comprime e aumenta di \SI{300}{\mmHg} la pressione sul sangue. Di quanto bisognerebbe alzare la sacca, senza spremisacca, per ottenere all'ago lo stesso aumento di pressione?'''
+  calcolo = "300 * mmHg / (rho_sangue * g)"
+  risultato = { valore = 3.8, unita = "m", cifre = 2 }
+  soluzione = '''Per il principio di Pascal l'aumento di pressione prodotto dallo spremisacca sulla superficie del sangue si trasmette invariato in tutto il liquido, fino all'ago: nella legge di Stevino $p_0$ cresce di \SI{300}{\mmHg}. Per avere lo stesso aumento alzando la sacca serve un dislivello in più $\Delta h$ con $\rho g\,\Delta h = \SI{300}{\mmHg} = 300 \cdot \SI{133}{\pascal} = \SI{39900}{\pascal}$:
+\[
+  \Delta h = \frac{\SI{39900}{\pascal}}{\SI{1060}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared}} = \frac{39900}{10388}\,\si{\metre} \approx \SI{3,8}{\metre}
+\]
+(infatti $10388 \cdot 3{,}8 \approx 39500$). Oppure, con circa \SI{78}{\mmHg} per metro di sangue: $300/78 \approx \SI{3,8}{\metre}$. Quasi quattro metri in più: lo spremisacca fa in un ambulatorio quello che altrimenti richiederebbe un soffitto altissimo.'''
+
+[[problema]]
+id = "ud3-moto-flebo"
+livello = 1
+testo = '''Una sacca di soluzione fisiologica da {{V}} viene infusa per flebo in {{t}}, con portata costante. Calcola la portata in metri cubi al secondo.'''
+dati.V = { valore = 250, unita = "\\milli\\litre" }
+dati.t = { valore = 50, unita = "\\minute" }
+
+  [[problema.parte]]
+  calcolo = "V * 1e-6 / (t * 60)"
+  risultato = { valore = 8.3e-8, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''La portata è il volume diviso per il tempo. Nelle unità della flebo è $Q = \SI{250}{\milli\litre}/\SI{50}{\minute} = \SI{5,0}{\milli\litre\per\minute}$. Nel SI: un millilitro è un centimetro cubo, cioè \SI{e-6}{\metre\cubed}, quindi $V = 250 \cdot \SI{e-6}{\metre\cubed} = \SI{2,5e-4}{\metre\cubed}$; il tempo è $t = 50 \cdot \SI{60}{\second} = \SI{3000}{\second} = \SI{3,0e3}{\second}$. Allora
+\[
+  Q = \frac{\Delta V}{\Delta t} = \frac{\SI{2,5e-4}{\metre\cubed}}{\SI{3,0e3}{\second}} = \frac{2{,}5}{3{,}0} \cdot 10^{-4-3}\,\si{\metre\cubed\per\second} \approx 0{,}83 \cdot 10^{-7}\,\si{\metre\cubed\per\second} = \SI{8,3e-8}{\metre\cubed\per\second}
+\]
+Il flusso di una flebo è un buon esempio di moto stazionario: in ogni punto del tubicino la velocità resta la stessa per tutta l'infusione.'''
+
+[[problema]]
+id = "ud3-moto-renale"
+livello = 1
+testo = '''Nell'arteria renale di un adulto, che ha raggio interno {{r}}, il sangue scorre con una velocità media di {{v}}. Calcola la portata dell'arteria.'''
+dati.r = { valore = "3,0", unita = "mm" }
+dati.v = { valore = "0,40", unita = "m/s" }
+
+  [[problema.parte]]
+  calcolo = "pi * (r * 1e-3)**2 * v"
+  risultato = { valore = 1.1e-5, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''Il raggio nel SI è $r = \SI{3,0e-3}{\metre}$. L'area della sezione è
+\[
+  S = \pi r^2 = 3{,}14 \cdot (\SI{3,0e-3}{\metre})^2 = 3{,}14 \cdot 9{,}0 \cdot 10^{-6}\,\si{\metre\squared} \approx \SI{2,83e-5}{\metre\squared}
+\]
+perché $(10^{-3})^2 = 10^{-6}$ e $3{,}14 \cdot 9 = 28{,}26$. La portata è area per velocità media:
+\[
+  Q = S\,v = \SI{2,83e-5}{\metre\squared} \cdot \SI{0,40}{\metre\per\second} \approx \SI{1,13e-5}{\metre\cubed\per\second} \approx \SI{1,1e-5}{\metre\cubed\per\second}
+\]
+In litri al minuto, con $\SI{1}{\metre\cubed} = \SI{1000}{\litre}$: $\SI{1,13e-5}{\metre\cubed\per\second} \cdot 1000 \cdot 60 \approx \SI{0,68}{\litre\per\minute}$. I due reni insieme ricevono $2 \cdot \SI{0,68}{\litre\per\minute} \approx \SI{1,4}{\litre\per\minute}$: con una portata cardiaca a riposo di circa \SI{5}{\litre\per\minute}, è poco più di un quarto.'''
+
+[[problema]]
+id = "ud3-moto-dialisi"
+livello = 1
+testo = '''Nel circuito di una macchina per la dialisi il sangue scorre in un tubo di sezione {{S1}} con velocità {{v1}}. In un raccordo la sezione si riduce a {{S2}}. Calcola la velocità del sangue nel raccordo.'''
+dati.S1 = { valore = "0,50", unita = "\\centi\\metre\\squared" }
+dati.v1 = { valore = "0,40", unita = "m/s" }
+dati.S2 = { valore = "0,20", unita = "\\centi\\metre\\squared" }
+
+  [[problema.parte]]
+  calcolo = "v1 * S1 / S2"
+  risultato = { valore = 1.0, unita = "m/s", cifre = 2 }
+  soluzione = '''Il sangue si può considerare incomprimibile, e nel tubo non ci sono ramificazioni: vale l'equazione di continuità, $S_1 v_1 = S_2 v_2$. Le aree compaiono come rapporto, quindi si possono lasciare in centimetri quadrati:
+\[
+  v_2 = v_1\,\frac{S_1}{S_2} = \SI{0,40}{\metre\per\second} \cdot \frac{0{,}50}{0{,}20} = \SI{0,40}{\metre\per\second} \cdot 2{,}5 = \SI{1,0}{\metre\per\second}
+\]
+La sezione diventa 2,5 volte più piccola, e la velocità 2,5 volte più grande.'''
+
+[[problema]]
+id = "ud3-moto-tricuspide"
+livello = 1
+testo = '''In un'ecocardiografia il Doppler misura la velocità del getto di sangue che, durante la sistole, rifluisce dal ventricolo destro nell'atrio destro attraverso una valvola tricuspide che non chiude bene: il getto ha velocità {{v}}. Con la regola dell'ecocardiografia, stima la differenza di pressione fra il ventricolo destro e l'atrio destro.'''
+dati.v = { valore = "2,5", unita = "m/s" }
+
+  [[problema.parte]]
+  calcolo = "4 * v**2"
+  risultato = { valore = 25, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''Il sangue nel ventricolo, prima della valvola, è quasi fermo rispetto al getto: per il teorema di Bernoulli la differenza di pressione è $\frac{1}{2}\rho v^2$, che in millimetri di mercurio dà la regola $\Delta p \approx 4\,v^2$, con $v$ in metri al secondo:
+\[
+  \Delta p \approx 4 \cdot (2{,}5)^2\,\si{\mmHg} = 4 \cdot 6{,}25\,\si{\mmHg} = \SI{25}{\mmHg}
+\]
+Aggiungendo la pressione dell'atrio destro, di pochi millimetri di mercurio, il cardiologo stima così la pressione sistolica nel ventricolo destro, e quindi nell'arteria polmonare, senza inserire un catetere.'''
+
+[[problema]]
+id = "ud3-moto-ago"
+livello = 2
+testo = '''Un'infermiera inietta {{V}} di farmaco in {{t}}, spingendo il pistone della siringa in modo uniforme. L'ago ha diametro interno {{d}}.'''
+dati.V = { valore = "5,0", unita = "\\milli\\litre" }
+dati.t = { valore = 10, unita = "s" }
+dati.d = { valore = "0,40", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la portata del farmaco?'''
+  calcolo = "V * 1e-6 / t"
+  risultato = { valore = 5.0e-7, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''Il volume nel SI, con $\SI{1}{\milli\litre} = \SI{e-6}{\metre\cubed}$, è $V = \SI{5,0}{\milli\litre} = \SI{5,0e-6}{\metre\cubed}$. La portata è
+\[
+  Q = \frac{\Delta V}{\Delta t} = \frac{\SI{5,0e-6}{\metre\cubed}}{\SI{10}{\second}} = 5{,}0 \cdot 10^{-6-1}\,\si{\metre\cubed\per\second} = \SI{5,0e-7}{\metre\cubed\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità media esce il farmaco dall'ago?'''
+  calcolo = "V * 1e-6 / t / (pi * (d / 2 * 1e-3)**2)"
+  risultato = { valore = 4.0, unita = "m/s", cifre = 2 }
+  soluzione = '''Il raggio interno dell'ago è metà del diametro, $r = \SI{0,20}{\milli\metre} = \SI{2,0e-4}{\metre}$, e la sezione è
+\[
+  S = \pi r^2 = 3{,}14 \cdot (\SI{2,0e-4}{\metre})^2 = 3{,}14 \cdot 4{,}0 \cdot 10^{-8}\,\si{\metre\squared} \approx \SI{1,26e-7}{\metre\squared}
+\]
+Tutto il farmaco che esce dalla siringa passa per l'ago, con la portata del punto (a). Da $Q = Sv$:
+\[
+  v = \frac{Q}{S} = \frac{\SI{5,0e-7}{\metre\cubed\per\second}}{\SI{1,26e-7}{\metre\squared}} = \frac{5{,}0}{1{,}26} \cdot 10^{-7-(-7)}\,\si{\metre\per\second} \approx \SI{4,0}{\metre\per\second}
+\]
+perché $1{,}26 \cdot 4 = 5{,}04$. Nel corpo della siringa, molto più largo, il farmaco si muove invece di pochi millimetri al secondo.'''
+
+[[problema]]
+id = "ud3-moto-iliache"
+livello = 2
+testo = '''Nell'aorta addominale, di diametro {{da}}, il sangue scorre con velocità media {{va}}. In fondo l'aorta si divide nelle due arterie iliache comuni, che si possono considerare uguali, ciascuna di diametro {{di}}.'''
+dati.da = { valore = "2,0", unita = "cm" }
+dati.va = { valore = "0,20", unita = "m/s" }
+dati.di = { valore = "1,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la portata dell'aorta addominale?'''
+  calcolo = "pi * (da / 2 * 1e-2)**2 * va"
+  risultato = { valore = 6.3e-5, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''Il raggio dell'aorta è $r = \SI{1,0}{\centi\metre} = \SI{1,0e-2}{\metre}$, e la sezione è $S_\text{a} = \pi r^2 = 3{,}14 \cdot (\SI{1,0e-2}{\metre})^2 = \SI{3,14e-4}{\metre\squared}$. La portata è
+\[
+  Q = S_\text{a}\,v_\text{a} = \SI{3,14e-4}{\metre\squared} \cdot \SI{0,20}{\metre\per\second} = \SI{6,28e-5}{\metre\cubed\per\second} \approx \SI{6,3e-5}{\metre\cubed\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità media scorre il sangue in ciascuna arteria iliaca?'''
+  calcolo = "pi * (da / 2 * 1e-2)**2 * va / 2 / (pi * (di / 2 * 1e-2)**2)"
+  risultato = { valore = 0.40, unita = "m/s", cifre = 2 }
+  soluzione = '''La portata dell'aorta si divide in parti uguali fra le due iliache: ciascuna porta $Q/2 = \SI{3,14e-5}{\metre\cubed\per\second}$. Il raggio di un'iliaca è $\SI{0,50}{\centi\metre} = \SI{5,0e-3}{\metre}$, e la sua sezione è $S_\text{i} = 3{,}14 \cdot (\SI{5,0e-3}{\metre})^2 = 3{,}14 \cdot 25 \cdot 10^{-6}\,\si{\metre\squared} = \SI{7,85e-5}{\metre\squared}$. Quindi
+\[
+  v_\text{i} = \frac{Q/2}{S_\text{i}} = \frac{\SI{3,14e-5}{\metre\cubed\per\second}}{\SI{7,85e-5}{\metre\squared}} = \SI{0,40}{\metre\per\second}
+\]
+perché $7{,}85 = 2{,}5 \cdot 3{,}14$. Lo stesso con le aree: le due iliache insieme hanno sezione $2\,S_\text{i}$, e ogni iliaca ha diametro metà dell'aorta, quindi area un quarto; la sezione totale dei rami è metà di quella dell'aorta, e la velocità raddoppia.'''
+
+[[problema]]
+id = "ud3-moto-venturimetro"
+livello = 2
+testo = '''Un tubo orizzontale in cui scorre acqua ({{rho}}) ha un restringimento in cui l'area della sezione è metà di quella del tratto largo. Due tubicini verticali, uno sul tratto largo e uno sul restringimento, mostrano un dislivello fra le due colonne d'acqua di {{dh}}. Si tratti l'acqua come un fluido ideale e si usi $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.rho = { valore = 1000, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.dh = { valore = 60, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la differenza di pressione fra il tratto largo e il restringimento?'''
+  calcolo = "rho * 10 * dh * 1e-2"
+  risultato = { valore = 6.0e3, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Nei tubicini l'acqua è ferma, e sale tanto più in alto quanto più alta è la pressione nel punto sotto di essi. Per la legge di Stevino la differenza di pressione corrisponde al dislivello fra le colonne:
+\[
+  p_1 - p_2 = \rho g\,\Delta h = \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{0,60}{\metre} = \SI{6,0e3}{\pascal}
+\]
+La colonna più alta è quella sul tratto largo: lì la pressione è maggiore.'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità scorre l'acqua nel tratto largo e nel restringimento?'''
+  calcolo = "math.sqrt(2 * rho * 10 * dh * 1e-2 / (rho * (2**2 - 1)))"
+  risultato = { valore = 2.0, unita = "m/s", cifre = 2 }
+  rapido = '''\SI{2,0}{\metre\per\second} nel tratto largo; \SI{4,0}{\metre\per\second} nel restringimento'''
+  soluzione = '''Per l'equazione di continuità, con l'area dimezzata la velocità raddoppia: $v_2 = 2\,v_1$. Il tubo è orizzontale, e il teorema di Bernoulli dà
+\[
+  p_1 - p_2 = \tfrac{1}{2}\rho\left(v_2^2 - v_1^2\right) = \tfrac{1}{2}\rho\left(4\,v_1^2 - v_1^2\right) = \tfrac{3}{2}\rho\,v_1^2
+\]
+Con la differenza di pressione del punto (a):
+\[
+  v_1^2 = \frac{2\,(p_1 - p_2)}{3\rho} = \frac{2 \cdot \SI{6,0e3}{\pascal}}{3 \cdot \SI{1000}{\kilo\gram\per\metre\cubed}} = \frac{\num{12000}}{\num{3000}}\,\si{\metre\squared\per\second\squared} = \SI{4,0}{\metre\squared\per\second\squared}
+\]
+quindi $v_1 = \SI{2,0}{\metre\per\second}$ nel tratto largo e $v_2 = \SI{4,0}{\metre\per\second}$ nel restringimento. È il principio del venturimetro: dal dislivello nei tubicini si misura la velocità del fluido.'''
+
+[[problema]]
+id = "ud3-moto-rubinetto"
+livello = 2
+testo = '''Da un rubinetto aperto sempre allo stesso modo esce un getto d'acqua che alla bocca del rubinetto ha diametro {{d1}} e velocità {{v1}}. Si segue il getto fino a {{h}} più in basso. Il getto è circondato dall'aria: in ogni suo punto la pressione dell'acqua è quella atmosferica. Si tratti l'acqua come un fluido ideale e si usi $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.d1 = { valore = "1,0", unita = "cm" }
+dati.v1 = { valore = "1,0", unita = "m/s" }
+dati.h = { valore = 15, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità scende l'acqua \SI{15}{\centi\metre} sotto la bocca del rubinetto?'''
+  calcolo = "math.sqrt(v1**2 + 2 * 10 * h * 1e-2)"
+  risultato = { valore = 2.0, unita = "m/s", cifre = 2 }
+  soluzione = '''Il getto è un tubo di flusso, e intorno al getto c'è l'aria: la pressione dell'acqua è quella atmosferica sia alla bocca del rubinetto (punto 1) sia più in basso (punto 2). Nel teorema di Bernoulli i due termini $p$ sono uguali e si semplificano:
+\[
+  \tfrac{1}{2}\rho v_1^2 + \rho g h_1 = \tfrac{1}{2}\rho v_2^2 + \rho g h_2
+  \qquad\Longrightarrow\qquad
+  v_2^2 = v_1^2 + 2g\,(h_1 - h_2)
+\]
+Con $h_1 - h_2 = \SI{0,15}{\metre}$:
+\[
+  v_2^2 = (\SI{1,0}{\metre\per\second})^2 + 2 \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{0,15}{\metre} = (1{,}0 + 3{,}0)\,\si{\metre\squared\per\second\squared} = \SI{4,0}{\metre\squared\per\second\squared}
+\]
+quindi $v_2 = \SI{2,0}{\metre\per\second}$: scendendo, l'energia potenziale dell'acqua diventa energia cinetica.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale lì il diametro del getto?'''
+  calcolo = "d1 * math.sqrt(v1 / math.sqrt(v1**2 + 2 * 10 * h * 1e-2))"
+  risultato = { valore = 0.71, unita = "cm", cifre = 2 }
+  soluzione = '''La portata del getto è la stessa a tutte le altezze (equazione di continuità), quindi $S_2 = S_1\,v_1/v_2$. Dal punto (a) la velocità raddoppia, e l'area si dimezza: $S_2 = S_1/2$. L'area va con il quadrato del diametro, quindi il diametro si divide per $\sqrt{2} \approx 1{,}41$:
+\[
+  d_2 = d_1\,\sqrt{\frac{S_2}{S_1}} = \frac{\SI{1,0}{\centi\metre}}{\sqrt{2}} \approx \frac{\SI{1,0}{\centi\metre}}{1{,}41} \approx \SI{0,71}{\centi\metre}
+\]
+È il motivo per cui il getto di un rubinetto si assottiglia scendendo. Attenzione: dimezzare l'area non vuol dire dimezzare il diametro.'''
+
+[[problema]]
+id = "ud3-moto-femorale"
+livello = 3
+testo = '''In un paziente con arteriopatia degli arti inferiori, una placca aterosclerotica riduce il diametro interno dell'arteria femorale a un terzo di quello del tratto sano. Nel tratto sano il sangue ({{rho}}) scorre con velocità {{v1}}. L'arteria si può considerare orizzontale; si trascurino la viscosità e la pulsatilità del flusso.'''
+dati.rho = { valore = 1060, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.v1 = { valore = "0,40", unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità scorre il sangue nel tratto ristretto?'''
+  calcolo = "v1 * 3**2"
+  risultato = { valore = 3.6, unita = "m/s", cifre = 2 }
+  soluzione = '''L'area della sezione è proporzionale al quadrato del diametro: con il diametro diviso per 3, l'area si divide per $3^2 = 9$. Per l'equazione di continuità la velocità si moltiplica per 9:
+\[
+  v_2 = v_1\,\frac{S_1}{S_2} = 9 \cdot \SI{0,40}{\metre\per\second} = \SI{3,6}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Di quanto cala la pressione nel tratto ristretto, in pascal?'''
+  calcolo = "0.5 * rho * (9 * v1)**2 - 0.5 * rho * v1**2"
+  risultato = { valore = 6.8e3, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Con l'arteria orizzontale il teorema di Bernoulli dà $p_1 - p_2 = \frac{1}{2}\rho\,(v_2^2 - v_1^2)$, con $\frac{1}{2}\rho = \frac{1}{2} \cdot 1060 = \SI{530}{\kilo\gram\per\metre\cubed}$. I quadrati delle velocità sono $v_2^2 = 3{,}6^2 = 12{,}96$ e $v_1^2 = 0{,}40^2 = 0{,}16$, in \si{\metre\squared\per\second\squared}. Quindi
+\[
+  p_1 - p_2 = 530 \cdot (12{,}96 - 0{,}16)\,\si{\pascal} = 530 \cdot 12{,}8\,\si{\pascal} = \SI{6784}{\pascal} \approx \SI{6,8e3}{\pascal}
+\]
+dove $530 \cdot 12{,}8 = 530 \cdot 12 + 530 \cdot 0{,}8 = 6360 + 424 = 6784$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale questo calo in millimetri di mercurio? Confrontalo con la stima della regola $\Delta p \approx 4v^2$ usata in ecografia.'''
+  calcolo = "(0.5 * rho * (9 * v1)**2 - 0.5 * rho * v1**2) / mmHg"
+  risultato = { valore = 51, unita = "\\mmHg", cifre = 2 }
+  rapido = '''circa \SI{51}{\mmHg}; con la regola $4v^2$, circa \SI{52}{\mmHg}'''
+  soluzione = '''Con $\SI{1}{\mmHg} \approx \SI{133}{\pascal}$:
+\[
+  \Delta p = \frac{\SI{6784}{\pascal}}{\SI{133}{\pascal\per\mmHg}} \approx \SI{51}{\mmHg}
+\]
+perché $133 \cdot 51 = 6650 + 133 = 6783$. La regola dell'ecografia trascura la velocità prima della stenosi e dà $4 \cdot 3{,}6^2 = 4 \cdot 12{,}96 \approx \SI{52}{\mmHg}$: quasi lo stesso valore, perché $v_1^2 = 0{,}16$ è piccolo rispetto a $v_2^2 = 12{,}96$. Un getto così veloce, a valle della placca, diventa facilmente turbolento: con il fonendoscopio sopra l'arteria si sente un soffio.'''
+
+[[problema]]
+id = "ud3-moto-sforzo"
+livello = 3
+testo = '''Durante uno sforzo intenso la frequenza cardiaca di un atleta sale a 150 battiti al minuto, e il ventricolo sinistro espelle {{Vs}} di sangue a ogni battito. L'aorta ha sezione {{Sa}}. Nei muscoli al lavoro si aprono molti capillari in più, e la sezione totale dei capillari aperti arriva a {{Sc}}. Il sangue ha densità $\rho = \SI{1060}{\kilo\gram\per\metre\cubed}$.'''
+dati.Vs = { valore = 100, unita = "\\milli\\litre" }
+dati.Sa = { valore = "5,0", unita = "\\centi\\metre\\squared" }
+dati.Sc = { valore = 5000, unita = "\\centi\\metre\\squared" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la portata cardiaca, in metri cubi al secondo?'''
+  calcolo = "Vs * 150 * 1e-6 / 60"
+  risultato = { valore = 2.5e-4, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''In un minuto il cuore espelle $\SI{100}{\milli\litre} \cdot 150 = \SI{15000}{\milli\litre} = \SI{15}{\litre}$: la portata è \SI{15}{\litre\per\minute}, tre volte quella a riposo. Nel SI, con $\SI{1}{\litre} = \SI{e-3}{\metre\cubed}$:
+\[
+  Q = \frac{\SI{15e-3}{\metre\cubed}}{\SI{60}{\second}} = \frac{15}{60} \cdot 10^{-3}\,\si{\metre\cubed\per\second} = 0{,}25 \cdot 10^{-3}\,\si{\metre\cubed\per\second} = \SI{2,5e-4}{\metre\cubed\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità media scorre il sangue nell'aorta?'''
+  calcolo = "Vs * 150 * 1e-6 / 60 / (Sa * 1e-4)"
+  risultato = { valore = 0.50, unita = "m/s", cifre = 2 }
+  soluzione = '''La sezione dell'aorta nel SI è $S_\text{a} = \SI{5,0}{\centi\metre\squared} = \SI{5,0e-4}{\metre\squared}$. Da $Q = Sv$:
+\[
+  v_\text{a} = \frac{Q}{S_\text{a}} = \frac{\SI{2,5e-4}{\metre\cubed\per\second}}{\SI{5,0e-4}{\metre\squared}} = \SI{0,50}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale, nell'aorta, il termine $\frac{1}{2}\rho v^2$ del teorema di Bernoulli? Esprimilo in millimetri di mercurio e confrontalo con la pressione media del sangue in aorta, circa \SI{100}{\mmHg}.'''
+  calcolo = "0.5 * rho_sangue * (Vs * 150 * 1e-6 / 60 / (Sa * 1e-4))**2 / mmHg"
+  risultato = { valore = 1.0, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''È l'energia cinetica di un metro cubo di sangue:
+\[
+  \tfrac{1}{2}\rho v_\text{a}^2 = 530\,\si{\kilo\gram\per\metre\cubed} \cdot (\SI{0,50}{\metre\per\second})^2 = 530 \cdot 0{,}25\,\si{\pascal} = \SI{132,5}{\pascal} \approx \SI{1,0}{\mmHg}
+\]
+È circa l'1\% della pressione media in aorta: anche sotto sforzo quasi tutta l'energia del sangue in aorta è nel termine di pressione, e quella cinetica conta poco. Diventa importante solo dove il sangue va molto più veloce, come in una stenosi.'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità media scorre il sangue nei capillari aperti? Quanto tempo impiega ad attraversare un capillare lungo \SI{1,0}{\milli\metre}?'''
+  calcolo = "1.0e-3 / (Vs * 150 * 1e-6 / 60 / (Sc * 1e-4))"
+  risultato = { valore = 2.0, unita = "s", cifre = 2 }
+  rapido = '''\SI{0,50}{\milli\metre\per\second}; circa \SI{2,0}{\second}'''
+  soluzione = '''Tutto il sangue che passa nell'aorta passa anche nei capillari, con la stessa portata. La sezione totale dei capillari è $S_\text{c} = \num{5000} \cdot \SI{e-4}{\metre\squared} = \SI{0,50}{\metre\squared}$, quindi
+\[
+  v_\text{c} = \frac{Q}{S_\text{c}} = \frac{\SI{2,5e-4}{\metre\cubed\per\second}}{\SI{0,50}{\metre\squared}} = \SI{5,0e-4}{\metre\per\second} = \SI{0,50}{\milli\metre\per\second}
+\]
+La sezione dei capillari è mille volte quella dell'aorta, e la velocità è mille volte più piccola. Il tempo per percorrere \SI{1,0}{\milli\metre} è
+\[
+  t = \frac{L}{v_\text{c}} = \frac{\SI{1,0e-3}{\metre}}{\SI{5,0e-4}{\metre\per\second}} = \SI{2,0}{\second}
+\]
+Aprire nuovi capillari serve proprio a questo: con una portata tre volte più grande, il sangue resta abbastanza lento da avere il tempo di cedere l'ossigeno ai muscoli.'''
+
+[[problema]]
+id = "ud3-moto-aortica"
+livello = 3
+testo = '''Un paziente anziano ha una stenosi della valvola aortica. All'ecocardiografia il tratto di efflusso del ventricolo sinistro, il canale che porta alla valvola, ha diametro {{d}}, e il sangue lo percorre a {{vt}}; attraverso la valvola il getto raggiunge {{vv}}. Con il bracciale si misura una pressione sistolica di {{pa}}, che è quella dell'aorta.'''
+dati.d = { valore = "2,0", unita = "cm" }
+dati.vt = { valore = "1,0", unita = "m/s" }
+dati.vv = { valore = "5,0", unita = "m/s" }
+dati.pa = { valore = 130, unita = "\\mmHg" }
+
+  [[problema.parte]]
+  domanda = '''Con la regola $\Delta p \approx 4v^2$, quanto vale la differenza di pressione fra il ventricolo e l'aorta?'''
+  calcolo = "4 * vv**2"
+  risultato = { valore = 100, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''La regola trascura la velocità prima della valvola rispetto a quella del getto:
+\[
+  \Delta p \approx 4\,v^2 = 4 \cdot (5{,}0)^2\,\si{\mmHg} = 4 \cdot 25\,\si{\mmHg} = \SI{100}{\mmHg}
+\]
+Tenendo conto della velocità nel tratto di efflusso, $v_\text{t} = \SI{1,0}{\metre\per\second}$, oltre a quella nella valvola, $v_\text{v} = \SI{5,0}{\metre\per\second}$, il teorema di Bernoulli dà $4\,(v_\text{v}^2 - v_\text{t}^2) = 4 \cdot (25 - 1{,}0) = \SI{96}{\mmHg}$: la differenza è del 4\%, e la regola semplice basta.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la pressione sistolica nel ventricolo sinistro?'''
+  calcolo = "pa + 4 * vv**2"
+  risultato = { valore = 230, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''Durante la sistole il ventricolo deve spingere il sangue attraverso la valvola: la sua pressione supera quella dell'aorta della differenza del punto (a),
+\[
+  p_\text{ventricolo} = p_\text{aorta} + \Delta p = \SI{130}{\mmHg} + \SI{100}{\mmHg} = \SI{230}{\mmHg}
+\]
+In un cuore sano le due pressioni sistoliche sono quasi uguali: qui il ventricolo lavora contro un carico molto più alto, e col tempo la sua parete si ispessisce.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'area dell'orifizio della valvola?'''
+  calcolo = "pi * (d / 2)**2 * vt / vv"
+  risultato = { valore = 0.63, unita = "\\centi\\metre\\squared", cifre = 2 }
+  soluzione = '''Tutto il sangue che percorre il tratto di efflusso passa per la valvola: per l'equazione di continuità $S_\text{t}\,v_\text{t} = S_\text{v}\,v_\text{v}$. Il raggio del tratto di efflusso è \SI{1,0}{\centi\metre}, e la sua area è $S_\text{t} = 3{,}14 \cdot (\SI{1,0}{\centi\metre})^2 = \SI{3,14}{\centi\metre\squared}$. Quindi
+\[
+  S_\text{v} = S_\text{t}\,\frac{v_\text{t}}{v_\text{v}} = \SI{3,14}{\centi\metre\squared} \cdot \frac{1{,}0}{5{,}0} = \SI{0,628}{\centi\metre\squared} \approx \SI{0,63}{\centi\metre\squared}
+\]
+È il metodo che usano i cardiologi per stimare l'area valvolare. Un'area sotto \SI{1}{\centi\metre\squared}, insieme a una velocità di \SI{4}{\metre\per\second} o più, indica una stenosi aortica grave: qui ci sono tutti e due i criteri.'''
+
+[[problema]]
+id = "ud3-moto-collo"
+livello = 3
+testo = '''In un paziente in piedi si considera un tratto di arteria carotide che sale verso il collo per un dislivello di {{h}}. In alto una placca riduce il raggio interno da {{r1}} a {{r2}}. Nel punto più basso il sangue ($\rho = \SI{1060}{\kilo\gram\per\metre\cubed}$) scorre a {{v1}}. Si trascurino la viscosità e la pulsatilità del flusso, e si usi $g = \SI{9,8}{\metre\per\second\squared}$.'''
+dati.h = { valore = 20, unita = "cm" }
+dati.r1 = { valore = "4,0", unita = "mm" }
+dati.r2 = { valore = "2,0", unita = "mm" }
+dati.v1 = { valore = "0,25", unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità scorre il sangue nel tratto ristretto?'''
+  calcolo = "v1 * (r1 / r2)**2"
+  risultato = { valore = 1.0, unita = "m/s", cifre = 2 }
+  soluzione = '''L'area della sezione va con il quadrato del raggio: con il raggio dimezzato l'area diventa un quarto, e per l'equazione di continuità la velocità diventa quattro volte più grande:
+\[
+  v_2 = v_1 \left(\frac{r_1}{r_2}\right)^{2} = \SI{0,25}{\metre\per\second} \cdot \left(\frac{4{,}0}{2{,}0}\right)^{2} = \SI{0,25}{\metre\per\second} \cdot 4 = \SI{1,0}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanta pressione si perde per il solo dislivello?'''
+  calcolo = "rho_sangue * g * h * 1e-2"
+  risultato = { valore = 2.1e3, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Nel teorema di Bernoulli il termine $\rho g h$ cresce di $\rho g\,(h_2 - h_1)$ salendo dal punto 1 al punto 2, e la pressione cala di altrettanto:
+\[
+  \rho g\,(h_2 - h_1) = \SI{1060}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{0,20}{\metre} = \SI{2077,6}{\pascal} \approx \SI{2,1e3}{\pascal}
+\]
+dove $1060 \cdot 9{,}8 = 10600 - 212 = 10388$ e $10388 \cdot 0{,}20 = 2077{,}6$. È lo stesso calo che darebbe la legge di Stevino con il sangue fermo.'''
+
+  [[problema.parte]]
+  domanda = '''Di quanti millimetri di mercurio la pressione nel tratto ristretto è più bassa di quella nel punto più basso?'''
+  calcolo = "(rho_sangue * g * h * 1e-2 + 0.5 * rho_sangue * ((v1 * (r1 / r2)**2)**2 - v1**2)) / mmHg"
+  risultato = { valore = 19, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''Il teorema di Bernoulli fra il punto basso (1) e il tratto ristretto (2) dà
+\[
+  p_1 - p_2 = \rho g\,(h_2 - h_1) + \tfrac{1}{2}\rho\left(v_2^2 - v_1^2\right)
+\]
+Il primo termine è quello del punto (b). Il secondo, con $v_2^2 = \SI{1,0}{\metre\squared\per\second\squared}$ e $v_1^2 = 0{,}25^2 = \SI{0,0625}{\metre\squared\per\second\squared}$, vale
+\[
+  \tfrac{1}{2}\rho\left(v_2^2 - v_1^2\right) = 530 \cdot (1{,}0 - 0{,}0625)\,\si{\pascal} = 530 \cdot 0{,}9375\,\si{\pascal} \approx \SI{497}{\pascal}
+\]
+In totale $p_1 - p_2 \approx 2078 + 497 = \SI{2575}{\pascal}$, e in millimetri di mercurio
+\[
+  \frac{\SI{2575}{\pascal}}{\SI{133}{\pascal\per\mmHg}} \approx \SI{19}{\mmHg}
+\]
+perché $133 \cdot 19 = 2527$ e $133 \cdot 20 = 2660$, e 2575 è più vicino a 2527. Qui conta di più il dislivello: la placca, da sola, toglie meno di \SI{4}{\mmHg}.'''
+
+[[problema]]
+id = "ud3-viscosi-lastre"
+livello = 1
+testo = '''In laboratorio uno strato di glicerina, di viscosità {{eta}}, riempie lo spazio di {{dy}} fra due lastre parallele. La lastra di sotto è ferma; quella di sopra, di area {{S}}, scorre con velocità costante {{v}}. Calcola la forza che serve per mantenere in moto la lastra di sopra.'''
+dati.eta = { valore = "1,4", unita = "\\pascal\\second" }
+dati.dy = { valore = "2,0", unita = "mm" }
+dati.S = { valore = "0,20", unita = "\\metre\\squared" }
+dati.v = { valore = "0,10", unita = "m/s" }
+
+  [[problema.parte]]
+  calcolo = "eta * S * v / (dy * 1e-3)"
+  risultato = { valore = 14, unita = "\\newton", cifre = 2 }
+  soluzione = '''Lo spessore in metri è $\Delta y = \SI{2,0}{\milli\metre} = \SI{2,0e-3}{\metre}$. Il gradiente di velocità fra le lastre è lo stesso ovunque:
+\[
+  \frac{\Delta v}{\Delta y} = \frac{\SI{0,10}{\metre\per\second}}{\SI{2,0e-3}{\metre}} = \frac{0{,}10}{2{,}0} \cdot 10^{3}\,\si{\per\second} = 0{,}050 \cdot 10^{3}\,\si{\per\second} = \SI{50}{\per\second}
+\]
+Per la legge di Newton della viscosità:
+\[
+  F = \eta\,S\,\frac{\Delta v}{\Delta y} = \SI{1,4}{\pascal\second} \cdot \SI{0,20}{\metre\squared} \cdot \SI{50}{\per\second} = 1{,}4 \cdot 10\,\si{\newton} = \SI{14}{\newton}
+\]
+perché $0{,}20 \cdot 50 = 10$. Con l'acqua, 1400 volte meno viscosa, basterebbe una forza di un centesimo di newton.'''
+
+[[problema]]
+id = "ud3-viscosi-profilo"
+livello = 1
+testo = '''In una macchina per la circolazione extracorporea la soluzione scorre in moto laminare in un tubo di raggio {{r}}. Sull'asse del tubo la velocità è {{vmax}}. Calcola la velocità media sulla sezione e la velocità a {{x}} dall'asse.'''
+dati.r = { valore = "5,0", unita = "mm" }
+dati.vmax = { valore = "0,50", unita = "m/s" }
+dati.x = { valore = "4,0", unita = "mm" }
+
+  [[problema.parte]]
+  calcolo = "vmax * (1 - x**2 / r**2)"
+  risultato = { valore = 0.18, unita = "m/s", cifre = 2 }
+  rapido = '''$v_\text{media} = \SI{0,25}{\metre\per\second}$; $v = \SI{0,18}{\metre\per\second}$'''
+  soluzione = '''In moto laminare il profilo della velocità è una parabola, e la velocità media è metà di quella sull'asse:
+\[
+  v_\text{media} = \frac{v_\text{max}}{2} = \frac{\SI{0,50}{\metre\per\second}}{2} = \SI{0,25}{\metre\per\second}
+\]
+A distanza $x$ dall'asse $v(x) = v_\text{max}\,(1 - x^2/r^2)$. Il rapporto fra le distanze è $x/r = 4{,}0/5{,}0 = 0{,}80$, e il suo quadrato $0{,}64$:
+\[
+  v = \SI{0,50}{\metre\per\second} \cdot (1 - 0{,}64) = \SI{0,50}{\metre\per\second} \cdot 0{,}36 = \SI{0,18}{\metre\per\second}
+\]
+A un millimetro dalla parete la soluzione va a poco più di un terzo della velocità che ha sull'asse.'''
+
+[[problema]]
+id = "ud3-viscosi-cannula"
+livello = 1
+testo = '''Una cannula endovenosa ha raggio interno {{r}} e lunghezza {{L}}. Fra i suoi due estremi la soluzione fisiologica, di viscosità {{eta}}, ha una differenza di pressione di {{dp}}. Calcola la portata, se il moto è laminare.'''
+dati.r = { valore = "0,50", unita = "mm" }
+dati.L = { valore = "4,0", unita = "cm" }
+dati.eta = { valore = "1,0e-3", unita = "\\pascal\\second" }
+dati.dp = { valore = "3,2e3", unita = "\\pascal" }
+
+  [[problema.parte]]
+  calcolo = "math.pi * (r * 1e-3)**4 * dp / (8 * eta * L * 1e-2)"
+  risultato = { valore = 2.0e-6, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''Si portano le lunghezze in metri: $r = \SI{5,0e-4}{\metre}$, $L = \SI{4,0e-2}{\metre}$. La quarta potenza del raggio è $r^4 = 5{,}0^4 \cdot 10^{-16}\,\si{\metre\tothe{4}} = 625 \cdot 10^{-16}\,\si{\metre\tothe{4}} = \SI{6,25e-14}{\metre\tothe{4}}$ (perché $5^2 = 25$ e $25^2 = 625$), e
+\[
+  \pi r^4 = 3{,}14 \cdot \SI{6,25e-14}{\metre\tothe{4}} \approx \SI{19,6e-14}{\metre\tothe{4}} = \SI{1,96e-13}{\metre\tothe{4}}
+\]
+Al denominatore $8\eta L = 8 \cdot \SI{1,0e-3}{\pascal\second} \cdot \SI{4,0e-2}{\metre} = 32 \cdot 10^{-5}\,\si{\pascal\second\metre} = \SI{3,2e-4}{\pascal\second\metre}$. Per la legge di Poiseuille:
+\[
+  Q = \frac{\pi r^4\,\Delta p}{8\eta L} = \frac{\SI{1,96e-13}{\metre\tothe{4}} \cdot \SI{3,2e3}{\pascal}}{\SI{3,2e-4}{\pascal\second\metre}} \]
+\[
+  Q = 1{,}96 \cdot 10^{-13+3-(-4)}\,\si{\metre\cubed\per\second} = 1{,}96 \cdot 10^{-6}\,\si{\metre\cubed\per\second} \approx \SI{2,0e-6}{\metre\cubed\per\second}
+\]
+Sono \SI{2,0}{\milli\litre} al secondo, cioè \SI{120}{\milli\litre} al minuto.'''
+
+[[problema]]
+id = "ud3-viscosi-capillare"
+livello = 1
+testo = '''Un capillare ha raggio {{r}} e lunghezza {{L}}. Calcola la sua resistenza idraulica al passaggio del sangue, di viscosità {{eta}}, trattandolo come un tubo cilindrico rigido.'''
+dati.r = { valore = "4,0", unita = "\\micro\\metre" }
+dati.L = { valore = "1,0", unita = "mm" }
+dati.eta = { valore = "4,0e-3", unita = "\\pascal\\second" }
+
+  [[problema.parte]]
+  calcolo = "8 * eta * L * 1e-3 / (math.pi * (r * 1e-6)**4)"
+  risultato = { valore = 4.0e16, unita = "\\pascal\\second\\per\\metre\\cubed", cifre = 2 }
+  soluzione = '''Si portano le lunghezze in metri: $r = \SI{4,0e-6}{\metre}$, $L = \SI{1,0e-3}{\metre}$. La quarta potenza del raggio è $r^4 = 4{,}0^4 \cdot 10^{-24}\,\si{\metre\tothe{4}} = 256 \cdot 10^{-24}\,\si{\metre\tothe{4}} = \SI{2,56e-22}{\metre\tothe{4}}$ (perché $4^2 = 16$ e $16^2 = 256$), e $\pi r^4 = 3{,}14 \cdot \SI{2,56e-22}{\metre\tothe{4}} \approx \SI{8,04e-22}{\metre\tothe{4}}$. Al numeratore $8\eta L = 8 \cdot \SI{4,0e-3}{\pascal\second} \cdot \SI{1,0e-3}{\metre} = \SI{3,2e-5}{\pascal\second\metre}$. Quindi
+\[
+  R = \frac{8\eta L}{\pi r^4} = \frac{\SI{3,2e-5}{\pascal\second\metre}}{\SI{8,04e-22}{\metre\tothe{4}}} = \frac{3{,}2}{8{,}04} \cdot 10^{-5-(-22)}\,\si{\pascal\second\per\metre\cubed} \approx 0{,}40 \cdot 10^{17}\,\si{\pascal\second\per\metre\cubed} = \SI{4,0e16}{\pascal\second\per\metre\cubed}
+\]
+Più di cento milioni di volte la resistenza periferica di tutta la circolazione, circa \SI{1,4e8}{\pascal\second\per\metre\cubed}: un capillare da solo farebbe passare pochissimo sangue. Sono i miliardi di capillari in parallelo ad abbassare la resistenza.'''
+
+[[problema]]
+id = "ud3-viscosi-polmonare"
+livello = 1
+testo = '''Nella circolazione polmonare la pressione media nell'arteria polmonare è di circa {{p1}}, quella nell'atrio sinistro di circa {{p2}}. La portata è quella del cuore destro, {{Q}}. Calcola la resistenza idraulica di tutta la circolazione polmonare (usa \SI{1}{\mmHg} = \SI{133}{\pascal}).'''
+dati.p1 = { valore = 15, unita = "\\mmHg" }
+dati.p2 = { valore = 5, unita = "\\mmHg" }
+dati.Q = { valore = "5,0", unita = "\\litre\\per\\minute" }
+
+  [[problema.parte]]
+  calcolo = "(p1 - p2) * mmHg / (Q * 1e-3 / 60)"
+  risultato = { valore = 1.6e7, unita = "\\pascal\\second\\per\\metre\\cubed", cifre = 2 }
+  soluzione = '''La differenza di pressione è $\Delta p = \SI{15}{\mmHg} - \SI{5}{\mmHg} = \SI{10}{\mmHg} = 10 \cdot \SI{133}{\pascal} = \SI{1330}{\pascal}$. La portata nel SI:
+\[
+  Q = \frac{\SI{5,0e-3}{\metre\cubed}}{\SI{60}{\second}} = \frac{5{,}0}{6} \cdot 10^{-4}\,\si{\metre\cubed\per\second} \approx \SI{8,3e-5}{\metre\cubed\per\second}
+\]
+Da $\Delta p = QR$:
+\[
+  R = \frac{\Delta p}{Q} = \frac{\SI{1,33e3}{\pascal}}{\SI{8,3e-5}{\metre\cubed\per\second}} = \frac{1{,}33}{8{,}3} \cdot 10^{3-(-5)}\,\si{\pascal\second\per\metre\cubed} \approx 0{,}16 \cdot 10^{8}\,\si{\pascal\second\per\metre\cubed} = \SI{1,6e7}{\pascal\second\per\metre\cubed}
+\]
+È quasi dieci volte meno della resistenza della circolazione sistemica, \SI{1,4e8}{\pascal\second\per\metre\cubed}: per questo, con la stessa portata, al cuore destro basta una pressione molto più bassa.'''
+
+[[problema]]
+id = "ud3-viscosi-costrizione"
+livello = 1
+testo = '''Al freddo le arteriole della pelle si restringono, e il loro raggio diminuisce del 30\%. Se la differenza di pressione ai loro capi non cambia e il moto resta laminare, quale frazione della portata di prima passa nelle arteriole?'''
+
+  [[problema.parte]]
+  calcolo = "(1 - 0.30)**4"
+  risultato = { valore = 0.24, cifre = 2 }
+  soluzione = '''Il raggio diminuisce del 30\%, quindi diventa il 70\% di prima: $r' = 0{,}70\,r$. Per la legge di Poiseuille, a parità di $\Delta p$, $\eta$ e $L$, la portata è proporzionale a $r^4$. Si eleva al quadrato due volte:
+\[
+  \frac{Q'}{Q} = 0{,}70^4 = \left(0{,}70^2\right)^2 = 0{,}49^2 \approx 0{,}24
+\]
+perché $0{,}49^2 = 0{,}2401$. Passa meno di un quarto del sangue di prima: la pelle si raffredda e il corpo disperde meno calore.'''
+
+[[problema]]
+id = "ud3-viscosi-viscosimetro"
+livello = 2
+testo = '''Per misurare la viscosità del plasma se ne mette uno strato di spessore {{dy}} fra due lastre parallele. La lastra di sopra, di area {{S}}, scorre con velocità costante {{v}}, e per tenerla in moto serve una forza di {{F}}.'''
+dati.dy = { valore = "0,50", unita = "mm" }
+dati.S = { valore = 100, unita = "\\centi\\metre\\squared" }
+dati.v = { valore = "0,20", unita = "m/s" }
+dati.F = { valore = "4,8e-3", unita = "\\newton" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il gradiente di velocità nel plasma?'''
+  calcolo = "v / (dy * 1e-3)"
+  risultato = { valore = 400, unita = "\\per\\second", cifre = 2 }
+  soluzione = '''Lo spessore in metri è $\Delta y = \SI{0,50}{\milli\metre} = \SI{5,0e-4}{\metre}$. La velocità passa da 0, sulla lastra ferma, a $v$, sulla lastra che si muove, in modo uniforme:
+\[
+  \frac{\Delta v}{\Delta y} = \frac{\SI{0,20}{\metre\per\second}}{\SI{5,0e-4}{\metre}} = \frac{0{,}20}{5{,}0} \cdot 10^{4}\,\si{\per\second} = 0{,}040 \cdot 10^{4}\,\si{\per\second} = \SI{400}{\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la viscosità del plasma?'''
+  calcolo = "F / (S * 1e-4 * v / (dy * 1e-3))"
+  risultato = { valore = 1.2e-3, unita = "\\pascal\\second", cifre = 2 }
+  soluzione = '''L'area in metri quadrati è $S = 100 \cdot (\SI{e-2}{\metre})^2 = 100 \cdot \SI{e-4}{\metre\squared} = \SI{1,0e-2}{\metre\squared}$. Dalla legge di Newton, $F = \eta S\,\Delta v/\Delta y$, con il gradiente del punto (a):
+\[
+  \eta = \frac{F}{S \cdot \Delta v/\Delta y} = \frac{\SI{4,8e-3}{\newton}}{\SI{1,0e-2}{\metre\squared} \cdot \SI{400}{\per\second}} = \frac{\SI{4,8e-3}{\newton}}{\SI{4,0}{\metre\squared\per\second}} = \SI{1,2e-3}{\newton\second\per\metre\squared} = \SI{1,2e-3}{\pascal\second}
+\]
+È il valore della tabella per il plasma a \SI{37}{\celsius}, poco più di quello dell'acqua.'''
+
+[[problema]]
+id = "ud3-viscosi-reni"
+livello = 2
+testo = '''Le due arterie renali partono dall'aorta e portano il sangue ai due reni, che si possono trattare come due vasi in parallelo. Ciascun rene, con i suoi vasi, ha una resistenza idraulica di {{R}}; fra l'aorta e le vene renali la differenza di pressione è {{dp}}.'''
+dati.R = { valore = "1,2e9", unita = "\\pascal\\second\\per\\metre\\cubed" }
+dati.dp = { valore = "1,2e4", unita = "\\pascal" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la resistenza equivalente dei due reni?'''
+  calcolo = "1 / (1 / R + 1 / R)"
+  risultato = { valore = 6.0e8, unita = "\\pascal\\second\\per\\metre\\cubed", cifre = 2 }
+  soluzione = '''Per due resistenze uguali in parallelo:
+\[
+  \frac{1}{R_\text{p}} = \frac{1}{R} + \frac{1}{R} = \frac{2}{R}
+  \qquad\qquad
+  R_\text{p} = \frac{R}{2} = \frac{\SI{1,2e9}{\pascal\second\per\metre\cubed}}{2} = \SI{0,60e9}{\pascal\second\per\metre\cubed} = \SI{6,0e8}{\pascal\second\per\metre\cubed}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto sangue arriva in tutto ai reni in un secondo? E in un minuto, in litri?'''
+  calcolo = "dp / (1 / (1 / R + 1 / R))"
+  risultato = { valore = 2.0e-5, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  rapido = '''\SI{2,0e-5}{\metre\cubed\per\second}, cioè \SI{1,2}{\litre\per\minute}'''
+  soluzione = '''Da $\Delta p = Q R_\text{p}$, con la resistenza del punto (a):
+\[
+  Q = \frac{\Delta p}{R_\text{p}} = \frac{\SI{1,2e4}{\pascal}}{\SI{6,0e8}{\pascal\second\per\metre\cubed}} = 0{,}20 \cdot 10^{4-8}\,\si{\metre\cubed\per\second} = \SI{2,0e-5}{\metre\cubed\per\second}
+\]
+In un minuto: $\SI{2,0e-5}{\metre\cubed\per\second} \cdot \SI{60}{\second} = \SI{1,2e-3}{\metre\cubed} = \SI{1,2}{\litre}$. È circa un quarto della portata cardiaca, per due organi che pesano meno di mezzo kilogrammo in tutto.'''
+
+[[problema]]
+id = "ud3-viscosi-serie"
+livello = 2
+testo = '''In uno schema semplificato della circolazione sistemica il sangue attraversa, uno dopo l'altro, tre tratti: le arterie, con resistenza {{R1}}, le arteriole, con resistenza {{R2}}, e i capillari con le vene, con resistenza {{R3}}. Fra l'aorta e l'atrio destro la differenza di pressione è {{dp}}.'''
+dati.R1 = { valore = "2,0e7", unita = "\\pascal\\second\\per\\metre\\cubed" }
+dati.R2 = { valore = "9,0e7", unita = "\\pascal\\second\\per\\metre\\cubed" }
+dati.R3 = { valore = "4,0e7", unita = "\\pascal\\second\\per\\metre\\cubed" }
+dati.dp = { valore = "1,2e4", unita = "\\pascal" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la portata?'''
+  calcolo = "dp / (R1 + R2 + R3)"
+  risultato = { valore = 8.0e-5, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''I tre tratti sono in serie, e le resistenze si sommano:
+\[
+  R = R_1 + R_2 + R_3 = (2{,}0 + 9{,}0 + 4{,}0) \cdot 10^{7}\,\si{\pascal\second\per\metre\cubed} = \SI{15e7}{\pascal\second\per\metre\cubed} = \SI{1,5e8}{\pascal\second\per\metre\cubed}
+\]
+Da $\Delta p = QR$:
+\[
+  Q = \frac{\Delta p}{R} = \frac{\SI{1,2e4}{\pascal}}{\SI{1,5e8}{\pascal\second\per\metre\cubed}} = 0{,}80 \cdot 10^{4-8}\,\si{\metre\cubed\per\second} = \SI{8,0e-5}{\metre\cubed\per\second}
+\]
+circa \SI{4,8}{\litre} al minuto.'''
+
+  [[problema.parte]]
+  domanda = '''Quanta pressione perde il sangue nelle arteriole? Esprimila anche in millimetri di mercurio.'''
+  calcolo = "dp / (R1 + R2 + R3) * R2"
+  risultato = { valore = 7.2e3, unita = "\\pascal", cifre = 2 }
+  rapido = '''\SI{7,2e3}{\pascal}, circa \SI{54}{\mmHg}'''
+  soluzione = '''In serie la portata è la stessa in tutti i tratti: è quella del punto (a). La caduta di pressione nelle arteriole è
+\[
+  \Delta p_2 = Q R_2 = \SI{8,0e-5}{\metre\cubed\per\second} \cdot \SI{9,0e7}{\pascal\second\per\metre\cubed} = 72 \cdot 10^{-5+7}\,\si{\pascal} = \SI{7,2e3}{\pascal}
+\]
+In millimetri di mercurio: $7200/133 \approx \SI{54}{\mmHg}$. Le arteriole, con $9/15 = 60\%$ della resistenza, si prendono il 60\% della caduta di pressione: $0{,}60 \cdot \SI{1,2e4}{\pascal} = \SI{7,2e3}{\pascal}$.'''
+
+[[problema]]
+id = "ud3-viscosi-ematocrito"
+livello = 2
+testo = '''Con un ematocrito normale il sangue di un paziente ha viscosità {{eta1}}, e la resistenza periferica totale vale {{R}}. Per una policitemia l'ematocrito sale e la viscosità del sangue diventa {{eta2}}. I vasi non cambiano, e la differenza di pressione fra l'aorta e l'atrio destro resta {{dp}}.'''
+dati.eta1 = { valore = "4,0e-3", unita = "\\pascal\\second" }
+dati.R = { valore = "1,6e8", unita = "\\pascal\\second\\per\\metre\\cubed" }
+dati.eta2 = { valore = "5,0e-3", unita = "\\pascal\\second" }
+dati.dp = { valore = "1,2e4", unita = "\\pascal" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la nuova resistenza periferica?'''
+  calcolo = "R * eta2 / eta1"
+  risultato = { valore = 2.0e8, unita = "\\pascal\\second\\per\\metre\\cubed", cifre = 2 }
+  soluzione = '''La resistenza di ogni vaso è $R = 8\eta L/(\pi r^4)$: se i vasi non cambiano, è proporzionale alla viscosità, e così la resistenza di tutta la circolazione. La viscosità si moltiplica per $5{,}0/4{,}0 = 1{,}25$:
+\[
+  R' = 1{,}25 \cdot \SI{1,6e8}{\pascal\second\per\metre\cubed} = \SI{2,0e8}{\pascal\second\per\metre\cubed}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la portata cardiaca? Confrontala con quella che c'era prima.'''
+  calcolo = "dp / (R * eta2 / eta1)"
+  risultato = { valore = 6.0e-5, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  rapido = '''\SI{6,0e-5}{\metre\cubed\per\second} (\SI{3,6}{\litre\per\minute}), invece di \SI{7,5e-5}{\metre\cubed\per\second}'''
+  soluzione = '''Da $\Delta p = QR'$, con la resistenza del punto (a):
+\[
+  Q' = \frac{\Delta p}{R'} = \frac{\SI{1,2e4}{\pascal}}{\SI{2,0e8}{\pascal\second\per\metre\cubed}} = 0{,}60 \cdot 10^{4-8}\,\si{\metre\cubed\per\second} = \SI{6,0e-5}{\metre\cubed\per\second}
+\]
+cioè $\SI{6,0e-5}{\metre\cubed\per\second} \cdot \SI{60}{\second} = \SI{3,6e-3}{\metre\cubed} = \SI{3,6}{\litre}$ al minuto. Prima era $Q = (\SI{1,2e4}{\pascal})/(\SI{1,6e8}{\pascal\second\per\metre\cubed}) = \SI{7,5e-5}{\metre\cubed\per\second}$, \SI{4,5}{\litre} al minuto: la portata è scesa del 20\%, perché $1/1{,}25 = 0{,}80$. Per riportarla al valore di prima il cuore dovrebbe aumentare la pressione, cioè lavorare di più.'''
+
+[[problema]]
+id = "ud3-viscosi-rami"
+livello = 2
+testo = '''Un'arteria si divide in due rami della stessa lunghezza, che sboccano nella stessa vena: il ramo 1 ha raggio {{r1}}, il ramo 2 ha raggio {{r2}}. In tutto passano nei due rami {{Q}} di sangue. Il moto è laminare.'''
+dati.r1 = { valore = "2,0", unita = "mm" }
+dati.r2 = { valore = "1,0", unita = "mm" }
+dati.Q = { valore = "1,7e-5", unita = "\\metre\\cubed\\per\\second" }
+
+  [[problema.parte]]
+  domanda = '''Quante volte la portata del ramo 1 è più grande di quella del ramo 2?'''
+  calcolo = "(r1 / r2)**4"
+  risultato = { valore = 16, cifre = 2 }
+  soluzione = '''I due rami sono in parallelo: hanno agli estremi la stessa differenza di pressione. Il sangue e la lunghezza sono gli stessi, quindi per la legge di Poiseuille la portata di ogni ramo è proporzionale a $r^4$:
+\[
+  \frac{Q_1}{Q_2} = \left(\frac{r_1}{r_2}\right)^{4} = 2^4 = 16
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la portata in ciascun ramo?'''
+  calcolo = "Q / (1 + (r1 / r2)**4)"
+  risultato = { valore = 1.0e-6, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  rapido = '''$Q_1 = \SI{1,6e-5}{\metre\cubed\per\second}$; $Q_2 = \SI{1,0e-6}{\metre\cubed\per\second}$'''
+  soluzione = '''In parallelo le portate si sommano: $Q = Q_1 + Q_2$. Dal punto (a) $Q_1 = 16\,Q_2$, quindi $Q = 17\,Q_2$:
+\[
+  Q_2 = \frac{Q}{17} = \frac{\SI{1,7e-5}{\metre\cubed\per\second}}{17} = \SI{1,0e-6}{\metre\cubed\per\second}
+  \qquad
+  Q_1 = 16\,Q_2 = \SI{1,6e-5}{\metre\cubed\per\second}
+\]
+Controllo: $1{,}6 \cdot 10^{-5} + 0{,}10 \cdot 10^{-5} = 1{,}7 \cdot 10^{-5}$. Il ramo con raggio doppio porta il 94\% del sangue.'''
+
+[[problema]]
+id = "ud3-viscosi-asse"
+livello = 2
+testo = '''Un tratto di arteria lungo {{L}} ha raggio {{r}}. Fra i suoi estremi il sangue, di viscosità {{eta}}, ha una differenza di pressione di {{dp}}. Il moto è laminare e stazionario.'''
+dati.L = { valore = "5,0", unita = "cm" }
+dati.r = { valore = "1,0", unita = "mm" }
+dati.eta = { valore = "4,0e-3", unita = "\\pascal\\second" }
+dati.dp = { valore = 320, unita = "\\pascal" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la portata?'''
+  calcolo = "math.pi * (r * 1e-3)**4 * dp / (8 * eta * L * 1e-2)"
+  risultato = { valore = 6.3e-7, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''In metri $r = \SI{1,0e-3}{\metre}$ e $L = \SI{5,0e-2}{\metre}$. Quindi $\pi r^4 = 3{,}14 \cdot (\SI{1,0e-3}{\metre})^4 = \SI{3,14e-12}{\metre\tothe{4}}$ e $8\eta L = 8 \cdot \SI{4,0e-3}{\pascal\second} \cdot \SI{5,0e-2}{\metre} = 160 \cdot 10^{-5}\,\si{\pascal\second\metre} = \SI{1,6e-3}{\pascal\second\metre}$. Per la legge di Poiseuille:
+\[
+  Q = \frac{\pi r^4\,\Delta p}{8\eta L} = \frac{\SI{3,14e-12}{\metre\tothe{4}} \cdot \SI{320}{\pascal}}{\SI{1,6e-3}{\pascal\second\metre}} = 3{,}14 \cdot 200 \cdot 10^{-12+3}\,\si{\metre\cubed\per\second} = 628 \cdot 10^{-9}\,\si{\metre\cubed\per\second} \approx \SI{6,3e-7}{\metre\cubed\per\second}
+\]
+perché $320/1{,}6 = 200$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la velocità del sangue sull'asse dell'arteria?'''
+  calcolo = "2 * math.pi * (r * 1e-3)**4 * dp / (8 * eta * L * 1e-2) / (math.pi * (r * 1e-3)**2)"
+  risultato = { valore = 0.40, unita = "m/s", cifre = 2 }
+  soluzione = '''La sezione è $S = \pi r^2 = 3{,}14 \cdot (\SI{1,0e-3}{\metre})^2 = \SI{3,14e-6}{\metre\squared}$. Da $Q = S\,v_\text{media}$, con la portata del punto (a):
+\[
+  v_\text{media} = \frac{Q}{S} = \frac{\SI{6,28e-7}{\metre\cubed\per\second}}{\SI{3,14e-6}{\metre\squared}} = 2{,}0 \cdot 10^{-7-(-6)}\,\si{\metre\per\second} = \SI{0,20}{\metre\per\second}
+\]
+Nel profilo parabolico la velocità sull'asse è il doppio di quella media: $v_\text{max} = 2 \cdot \SI{0,20}{\metre\per\second} = \SI{0,40}{\metre\per\second}$.'''
+
+[[problema]]
+id = "ud3-viscosi-olio"
+livello = 3
+testo = '''Un'infermiera fa un'iniezione intramuscolare con un ago di raggio interno {{r}} e lunghezza {{L}}, montato su una siringa con il pistone di area {{Sp}}. Vuole iniettare {{V}} di farmaco in {{t}}. Trascura la resistenza dei tessuti e considera laminare il moto nell'ago.'''
+dati.r = { valore = "0,20", unita = "mm" }
+dati.L = { valore = "4,0", unita = "cm" }
+dati.Sp = { valore = "0,50", unita = "\\centi\\metre\\squared" }
+dati.V = { valore = "2,0", unita = "\\milli\\litre" }
+dati.t = { valore = 10, unita = "s" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la resistenza idraulica dell'ago per un farmaco acquoso, con la viscosità dell'acqua, \SI{1,0e-3}{\pascal\second}.'''
+  calcolo = "8 * 1.0e-3 * L * 1e-2 / (math.pi * (r * 1e-3)**4)"
+  risultato = { valore = 6.4e10, unita = "\\pascal\\second\\per\\metre\\cubed", cifre = 2 }
+  soluzione = '''In metri $r = \SI{2,0e-4}{\metre}$ e $L = \SI{4,0e-2}{\metre}$. La quarta potenza del raggio è $r^4 = 2{,}0^4 \cdot 10^{-16}\,\si{\metre\tothe{4}} = \SI{16e-16}{\metre\tothe{4}} = \SI{1,6e-15}{\metre\tothe{4}}$, e $\pi r^4 = 3{,}14 \cdot \SI{1,6e-15}{\metre\tothe{4}} \approx \SI{5,0e-15}{\metre\tothe{4}}$. Al numeratore $8\eta L = 8 \cdot \SI{1,0e-3}{\pascal\second} \cdot \SI{4,0e-2}{\metre} = \SI{3,2e-4}{\pascal\second\metre}$. Quindi
+\[
+  R = \frac{8\eta L}{\pi r^4} = \frac{\SI{3,2e-4}{\pascal\second\metre}}{\SI{5,0e-15}{\metre\tothe{4}}} = 0{,}64 \cdot 10^{-4-(-15)}\,\si{\pascal\second\per\metre\cubed} = 0{,}64 \cdot 10^{11}\,\si{\pascal\second\per\metre\cubed} = \SI{6,4e10}{\pascal\second\per\metre\cubed}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Con quale forza bisogna spingere il pistone?'''
+  calcolo = "8 * 1.0e-3 * L * 1e-2 / (math.pi * (r * 1e-3)**4) * (V * 1e-6 / t) * Sp * 1e-4"
+  risultato = { valore = 0.64, unita = "\\newton", cifre = 2 }
+  soluzione = '''La portata è $Q = V/t$, con $V = \SI{2,0}{\milli\litre} = \SI{2,0e-6}{\metre\cubed}$:
+\[
+  Q = \frac{\SI{2,0e-6}{\metre\cubed}}{\SI{10}{\second}} = \SI{2,0e-7}{\metre\cubed\per\second}
+\]
+La differenza di pressione fra la siringa e l'uscita dell'ago, con la resistenza del punto (a), è
+\[
+  \Delta p = QR = \SI{2,0e-7}{\metre\cubed\per\second} \cdot \SI{6,4e10}{\pascal\second\per\metre\cubed} = 12{,}8 \cdot 10^{-7+10}\,\si{\pascal} \approx \SI{1,3e4}{\pascal}
+\]
+È la pressione in più che il pistone deve dare al farmaco. L'area del pistone è $\SI{0,50}{\centi\metre\squared} = 0{,}50 \cdot \SI{e-4}{\metre\squared} = \SI{5,0e-5}{\metre\squared}$, e la forza è pressione per area:
+\[
+  F = \Delta p\,S = \SI{1,28e4}{\pascal} \cdot \SI{5,0e-5}{\metre\squared} = 6{,}4 \cdot 10^{4-5}\,\si{\newton} = \SI{0,64}{\newton}
+\]
+Il peso di una massa di circa \SI{65}{\gram}: una spinta leggera.'''
+
+  [[problema.parte]]
+  domanda = '''Il farmaco è invece una soluzione oleosa, con la viscosità dell'olio d'oliva, \SI{8,0e-2}{\pascal\second}. Con lo stesso ago e gli stessi tempi, quale forza serve?'''
+  calcolo = "8 * 1.0e-3 * L * 1e-2 / (math.pi * (r * 1e-3)**4) * (V * 1e-6 / t) * Sp * 1e-4 * 8.0e-2 / 1.0e-3"
+  risultato = { valore = 51, unita = "\\newton", cifre = 2 }
+  soluzione = '''La resistenza è proporzionale alla viscosità, che si moltiplica per
+\[
+  \frac{\SI{8,0e-2}{\pascal\second}}{\SI{1,0e-3}{\pascal\second}} = 8{,}0 \cdot 10^{-2-(-3)} = 80
+\]
+A parità di portata, la differenza di pressione e la forza sul pistone si moltiplicano anch'esse per 80. Con la forza del punto (b):
+\[
+  F' = 80 \cdot \SI{0,64}{\newton} = \SI{51,2}{\newton} \approx \SI{51}{\newton}
+\]
+È il peso di più di \SI{5}{\kilo\gram}: con quell'ago non si riesce a iniettare il farmaco in dieci secondi.'''
+
+  [[problema.parte]]
+  domanda = '''Per iniettare la soluzione oleosa negli stessi tempi con la forza del punto (b), con un ago della stessa lunghezza, quale raggio interno servirebbe?'''
+  calcolo = "r * (8.0e-2 / 1.0e-3)**0.25"
+  risultato = { valore = 0.60, unita = "mm", cifre = 2 }
+  soluzione = '''Per tornare alla forza del punto (b) la resistenza dell'ago deve tornare quella di prima: $R = 8\eta L/(\pi r^4)$ resta la stessa se $r^4$ cresce quanto $\eta$, cioè di un fattore 80. Il raggio deve crescere di un fattore $k$ con $k^4 = 80$. Si provano i numeri interi: $2^4 = 16$, $3^4 = 9^2 = 81$. Quindi $k \approx 3$:
+\[
+  r' \approx 3 \cdot \SI{0,20}{\milli\metre} = \SI{0,60}{\milli\metre}
+\]
+Un ago di diametro interno \SI{1,2}{\milli\metre} invece di \SI{0,40}{\milli\metre}: per questo i farmaci oleosi si iniettano con aghi di grosso calibro, e lentamente.'''
+
+[[problema]]
+id = "ud3-viscosi-bypass"
+livello = 3
+testo = '''Una coronaria sana ha una resistenza idraulica di {{R0}}, e fra i suoi due estremi il sangue ha una differenza di pressione di {{dp}}. Una placca restringe un tratto lungo un quinto della coronaria, e in quel tratto il raggio si dimezza. Tratta la coronaria come un tubo di raggio costante, con il tratto ristretto in serie con il resto, e considera laminare il moto. Supponi che la differenza di pressione non cambi.'''
+dati.R0 = { valore = "1,0e10", unita = "\\pascal\\second\\per\\metre\\cubed" }
+dati.dp = { valore = "1,0e4", unita = "\\pascal" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la resistenza della coronaria con la placca?'''
+  calcolo = "R0 / 5 * 2**4 + R0 * 4 / 5"
+  risultato = { valore = 4.0e10, unita = "\\pascal\\second\\per\\metre\\cubed", cifre = 2 }
+  soluzione = '''La resistenza di un tubo, $R = 8\eta L/(\pi r^4)$, è proporzionale alla lunghezza. Il tratto lungo un quinto della coronaria, da sano, ha resistenza $R_0/5 = \SI{0,20e10}{\pascal\second\per\metre\cubed}$, e il resto $4R_0/5 = \SI{0,80e10}{\pascal\second\per\metre\cubed}$. Nel tratto con la placca il raggio si dimezza, e la resistenza si moltiplica per $2^4 = 16$:
+\[
+  R_\text{placca} = 16 \cdot \SI{0,20e10}{\pascal\second\per\metre\cubed} = \SI{3,2e10}{\pascal\second\per\metre\cubed}
+\]
+I due tratti sono in serie:
+\[
+  R = (3{,}2 + 0{,}80) \cdot 10^{10}\,\si{\pascal\second\per\metre\cubed} = \SI{4,0e10}{\pascal\second\per\metre\cubed}
+\]
+Un restringimento su un quinto della lunghezza quadruplica la resistenza di tutta la coronaria.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la portata prima e dopo la formazione della placca?'''
+  calcolo = "dp / (R0 / 5 * 2**4 + R0 * 4 / 5)"
+  risultato = { valore = 2.5e-7, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  rapido = '''prima \SI{1,0e-6}{\metre\cubed\per\second}; dopo \SI{2,5e-7}{\metre\cubed\per\second}'''
+  soluzione = '''Da $\Delta p = QR$. Prima:
+\[
+  Q_0 = \frac{\Delta p}{R_0} = \frac{\SI{1,0e4}{\pascal}}{\SI{1,0e10}{\pascal\second\per\metre\cubed}} = \SI{1,0e-6}{\metre\cubed\per\second}
+\]
+cioè \SI{60}{\milli\litre} al minuto. Dopo, con la resistenza del punto (a):
+\[
+  Q = \frac{\SI{1,0e4}{\pascal}}{\SI{4,0e10}{\pascal\second\per\metre\cubed}} = 0{,}25 \cdot 10^{4-10}\,\si{\metre\cubed\per\second} = \SI{2,5e-7}{\metre\cubed\per\second}
+\]
+Un quarto di prima, \SI{15}{\milli\litre} al minuto: il muscolo cardiaco servito dalla coronaria va in ischemia, soprattutto sotto sforzo.'''
+
+  [[problema.parte]]
+  domanda = '''Un chirurgo fa un bypass: collega un vaso, con resistenza \SI{2,0e10}{\pascal\second\per\metre\cubed}, dall'aorta alla coronaria dopo la placca, in parallelo con tutta la coronaria malata. Con la stessa differenza di pressione, quanto sangue arriva ora al cuore oltre la placca?'''
+  calcolo = "dp / (1 / (1 / (R0 / 5 * 2**4 + R0 * 4 / 5) + 1 / 2.0e10))"
+  risultato = { valore = 7.5e-7, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''Si lavora in unità di \SI{e10}{\pascal\second\per\metre\cubed}. La coronaria malata (4,0) e il bypass (2,0) sono in parallelo:
+\[
+  \frac{1}{R_\text{p}} = \frac{1}{4} + \frac{1}{2} = \frac{1}{4} + \frac{2}{4} = \frac{3}{4}
+  \qquad\qquad
+  R_\text{p} = \frac{4}{3} \cdot 10^{10}\,\si{\pascal\second\per\metre\cubed} \approx \SI{1,33e10}{\pascal\second\per\metre\cubed}
+\]
+La portata totale nei due rami è
+\[
+  Q = \frac{\Delta p}{R_\text{p}} = \frac{3}{4} \cdot \frac{\SI{1,0e4}{\pascal}}{\SI{e10}{\pascal\second\per\metre\cubed}} = 0{,}75 \cdot \SI{e-6}{\metre\cubed\per\second} = \SI{7,5e-7}{\metre\cubed\per\second}
+\]
+Controllo, ramo per ramo: nella coronaria $\SI{1,0e4}{\pascal}/\SI{4,0e10}{\pascal\second\per\metre\cubed} = \SI{2,5e-7}{\metre\cubed\per\second}$, come al punto (b); nel bypass $\SI{1,0e4}{\pascal}/\SI{2,0e10}{\pascal\second\per\metre\cubed} = \SI{5,0e-7}{\metre\cubed\per\second}$; la somma è \SI{7,5e-7}{\metre\cubed\per\second}. Il cuore riceve tre quarti del sangue che riceveva da sano: il triplo di quello che gli arrivava con la placca.'''
+
+[[problema]]
+id = "ud3-viscosi-esercizio"
+livello = 3
+testo = '''Uno schema semplificato divide la circolazione sistemica in due circuiti in parallelo: i muscoli scheletrici, con resistenza {{Rm}}, e il resto del corpo, con resistenza {{Rr}}. Fra l'aorta e l'atrio destro la differenza di pressione è {{dp}}.'''
+dati.Rm = { valore = "9,0e8", unita = "\\pascal\\second\\per\\metre\\cubed" }
+dati.Rr = { valore = "1,8e8", unita = "\\pascal\\second\\per\\metre\\cubed" }
+dati.dp = { valore = "1,2e4", unita = "\\pascal" }
+
+  [[problema.parte]]
+  domanda = '''A riposo, quanto vale la resistenza periferica totale? E la portata cardiaca?'''
+  calcolo = "1 / (1 / Rm + 1 / Rr)"
+  risultato = { valore = 1.5e8, unita = "\\pascal\\second\\per\\metre\\cubed", cifre = 2 }
+  rapido = '''\SI{1,5e8}{\pascal\second\per\metre\cubed}; \SI{8,0e-5}{\metre\cubed\per\second}'''
+  soluzione = '''Si lavora in unità di \SI{e8}{\pascal\second\per\metre\cubed}. Per i due circuiti in parallelo:
+\[
+  \frac{1}{R} = \frac{1}{9{,}0} + \frac{1}{1{,}8} = \frac{1}{9} + \frac{5}{9} = \frac{6}{9} = \frac{2}{3}
+  \qquad\qquad
+  R = \frac{3}{2} = 1{,}5
+\]
+perché $1/1{,}8 = 10/18 = 5/9$. Quindi $R = \SI{1,5e8}{\pascal\second\per\metre\cubed}$, e la portata è
+\[
+  Q = \frac{\Delta p}{R} = \frac{\SI{1,2e4}{\pascal}}{\SI{1,5e8}{\pascal\second\per\metre\cubed}} = 0{,}80 \cdot 10^{4-8}\,\si{\metre\cubed\per\second} = \SI{8,0e-5}{\metre\cubed\per\second}
+\]
+circa \SI{4,8}{\litre} al minuto.'''
+
+  [[problema.parte]]
+  domanda = '''A riposo, quanto sangue passa nei muscoli?'''
+  calcolo = "dp / Rm"
+  risultato = { valore = 1.3e-5, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''In parallelo i due circuiti hanno la stessa differenza di pressione, \SI{1,2e4}{\pascal}:
+\[
+  Q_\text{m} = \frac{\Delta p}{R_\text{m}} = \frac{\SI{1,2e4}{\pascal}}{\SI{9,0e8}{\pascal\second\per\metre\cubed}} = \frac{1{,}2}{9{,}0} \cdot 10^{4-8}\,\si{\metre\cubed\per\second} \approx 0{,}13 \cdot 10^{-4}\,\si{\metre\cubed\per\second} = \SI{1,3e-5}{\metre\cubed\per\second}
+\]
+È un sesto della portata cardiaca del punto (a), perché il resto del corpo, con resistenza cinque volte minore, ne prende i cinque sesti.'''
+
+  [[problema.parte]]
+  domanda = '''Durante una corsa le arteriole dei muscoli si dilatano, e il loro raggio diventa $\sqrt{2} \approx 1{,}41$ volte quello a riposo; il resto del corpo non cambia. Considera tutta la resistenza dei muscoli dovuta alle loro arteriole. Se la differenza di pressione resta la stessa, quanto vale la nuova portata cardiaca?'''
+  calcolo = "dp * (1 / (Rm / math.sqrt(2)**4) + 1 / Rr)"
+  risultato = { valore = 1.2e-4, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  rapido = '''$R = \SI{1,0e8}{\pascal\second\per\metre\cubed}$; $Q = \SI{1,2e-4}{\metre\cubed\per\second}$'''
+  soluzione = '''Come dice il testo, si attribuisce tutta la resistenza dei muscoli alle arteriole, che ne sono la parte maggiore. Con il raggio moltiplicato per $\sqrt{2}$, $r^4$ si moltiplica per $(\sqrt{2})^4 = 2^2 = 4$, e la resistenza dei muscoli si divide per 4:
+\[
+  R_\text{m}' = \frac{9{,}0}{4} = 2{,}25 \qquad (\text{in unità di } \SI{e8}{\pascal\second\per\metre\cubed})
+\]
+In parallelo con il resto del corpo:
+\[
+  \frac{1}{R'} = \frac{1}{2{,}25} + \frac{1}{1{,}8} = \frac{4}{9} + \frac{5}{9} = 1
+  \qquad\qquad
+  R' = \SI{1,0e8}{\pascal\second\per\metre\cubed}
+\]
+perché $1/2{,}25 = 100/225 = 4/9$. La portata è
+\[
+  Q' = \frac{\Delta p}{R'} = \frac{\SI{1,2e4}{\pascal}}{\SI{1,0e8}{\pascal\second\per\metre\cubed}} = \SI{1,2e-4}{\metre\cubed\per\second}
+\]
+circa \SI{7,2}{\litre} al minuto, una volta e mezza quella a riposo. Nei muscoli ora passano $\SI{1,2e4}{\pascal}/\SI{2,25e8}{\pascal\second\per\metre\cubed} \approx \SI{5,3e-5}{\metre\cubed\per\second}$, quattro volte più di prima. In una corsa vera il cuore aumenta anche la pressione, e la portata cresce ancora di più.'''
+
+[[problema]]
+id = "ud3-viscosi-flebo"
+livello = 3
+testo = '''Una sacca di soluzione fisiologica, di densità {{rho}}, è appesa con la superficie del liquido {{h}} più in alto della vena del paziente, in cui la pressione relativa è {{pv}} (circa \SI{15}{\mmHg}). Il tubo della flebo, il regolatore e la cannula, in serie, hanno una resistenza idraulica totale di {{R}}. Usa $g \approx \SI{10}{\metre\per\second\squared}$ e considera laminare il moto.'''
+dati.rho = { valore = 1000, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.h = { valore = "1,2", unita = "m" }
+dati.pv = { valore = "2,0e3", unita = "\\pascal" }
+dati.R = { valore = "5,0e10", unita = "\\pascal\\second\\per\\metre\\cubed" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la differenza di pressione che spinge la soluzione nella vena?'''
+  calcolo = "rho * 10 * h - pv"
+  risultato = { valore = 1.0e4, unita = "\\pascal", cifre = 2 }
+  soluzione = '''La superficie del liquido nella sacca è alla pressione atmosferica. Per la legge di Stevino, all'altezza della vena la pressione relativa della soluzione nel tubo, se fosse ferma, sarebbe
+\[
+  \rho g h = \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{1,2}{\metre} = \SI{1,2e4}{\pascal}
+\]
+Nella vena la pressione relativa è \SI{2,0e3}{\pascal}. La differenza che spinge la soluzione attraverso il tubo è
+\[
+  \Delta p = \SI{1,2e4}{\pascal} - \SI{0,20e4}{\pascal} = \SI{1,0e4}{\pascal}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la portata? Quanto tempo serve per infondere \SI{500}{\milli\litre}?'''
+  calcolo = "500e-6 / ((rho * 10 * h - pv) / R)"
+  risultato = { valore = 2.5e3, unita = "s", cifre = 2 }
+  rapido = '''$Q = \SI{2,0e-7}{\metre\cubed\per\second}$; \SI{2,5e3}{\second}, circa \SI{42}{\minute}'''
+  soluzione = '''Da $\Delta p = QR$, con la differenza di pressione del punto (a):
+\[
+  Q = \frac{\Delta p}{R} = \frac{\SI{1,0e4}{\pascal}}{\SI{5,0e10}{\pascal\second\per\metre\cubed}} = 0{,}20 \cdot 10^{4-10}\,\si{\metre\cubed\per\second} = \SI{2,0e-7}{\metre\cubed\per\second}
+\]
+cioè \SI{0,20}{\milli\litre} al secondo. Il volume da infondere è $\SI{500}{\milli\litre} = \SI{5,0e-4}{\metre\cubed}$, e il tempo
+\[
+  t = \frac{V}{Q} = \frac{\SI{5,0e-4}{\metre\cubed}}{\SI{2,0e-7}{\metre\cubed\per\second}} = 2{,}5 \cdot 10^{-4-(-7)}\,\si{\second} = \SI{2,5e3}{\second}
+\]
+circa $2500/60 \approx \SI{42}{\minute}$.'''
+
+  [[problema.parte]]
+  domanda = '''Se si abbassa la sacca, a quale altezza sopra la vena la flebo smette di scendere?'''
+  calcolo = "pv / (rho * 10)"
+  risultato = { valore = 0.20, unita = "m", cifre = 2 }
+  soluzione = '''La soluzione smette di scendere quando la differenza di pressione si annulla, cioè quando $\rho g h$ è uguale alla pressione nella vena:
+\[
+  h = \frac{p_\text{v}}{\rho g} = \frac{\SI{2,0e3}{\pascal}}{\SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{10}{\metre\per\second\squared}} = \frac{\SI{2,0e3}{\pascal}}{\SI{1,0e4}{\pascal\per\metre}} = \SI{0,20}{\metre}
+\]
+Sotto i \SI{20}{\centi\metre} il sangue risalirebbe nel tubo. Per questo le sacche si appendono ben sopra il paziente: più in alto la si mette, più grande è $\Delta p$ e più veloce l'infusione.'''
+
+[[problema]]
+id = "ud3-viscosi-ipertensione"
+livello = 3
+testo = '''In un paziente iperteso la pressione arteriosa media è {{p}}, quella nell'atrio destro quasi zero, e la portata cardiaca è {{Q}}. Le arteriole fanno il 60\% della resistenza periferica totale. Usa \SI{1}{\mmHg} = \SI{133}{\pascal}.'''
+dati.p = { valore = 120, unita = "\\mmHg" }
+dati.Q = { valore = "4,8", unita = "\\litre\\per\\minute" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la resistenza periferica totale?'''
+  calcolo = "p * mmHg / (Q * 1e-3 / 60)"
+  risultato = { valore = 2.0e8, unita = "\\pascal\\second\\per\\metre\\cubed", cifre = 2 }
+  soluzione = '''La differenza di pressione è $\Delta p = 120 \cdot \SI{133}{\pascal} = \SI{15960}{\pascal} \approx \SI{1,6e4}{\pascal}$. La portata nel SI:
+\[
+  Q = \frac{\SI{4,8e-3}{\metre\cubed}}{\SI{60}{\second}} = \SI{0,080e-3}{\metre\cubed\per\second} = \SI{8,0e-5}{\metre\cubed\per\second}
+\]
+Da $\Delta p = QR$:
+\[
+  R = \frac{\Delta p}{Q} = \frac{\SI{1,6e4}{\pascal}}{\SI{8,0e-5}{\metre\cubed\per\second}} = 0{,}20 \cdot 10^{4-(-5)}\,\si{\pascal\second\per\metre\cubed} = \SI{2,0e8}{\pascal\second\per\metre\cubed}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Un farmaco vasodilatatore aumenta il raggio delle arteriole del 19\%. Quanto vale la nuova resistenza periferica?'''
+  calcolo = "p * mmHg / (Q * 1e-3 / 60) * (0.40 + 0.60 / 1.19**4)"
+  risultato = { valore = 1.4e8, unita = "\\pascal\\second\\per\\metre\\cubed", cifre = 2 }
+  soluzione = '''Le arteriole valgono il 60\% della resistenza del punto (a), $0{,}60 \cdot \SI{2,0e8}{\pascal\second\per\metre\cubed} = \SI{1,2e8}{\pascal\second\per\metre\cubed}$, e il resto della circolazione, in serie con loro, $\SI{0,80e8}{\pascal\second\per\metre\cubed}$. Con il raggio moltiplicato per $1{,}19$, $r^4$ si moltiplica per $1{,}19^4 = (1{,}19^2)^2 \approx 1{,}42^2 \approx 2{,}0$, e la resistenza delle arteriole si dimezza: $\SI{0,60e8}{\pascal\second\per\metre\cubed}$. In serie:
+\[
+  R' = (0{,}80 + 0{,}60) \cdot 10^{8}\,\si{\pascal\second\per\metre\cubed} = \SI{1,4e8}{\pascal\second\per\metre\cubed}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Se la portata cardiaca resta la stessa, quanto vale la nuova pressione arteriosa media, in millimetri di mercurio?'''
+  calcolo = "(Q * 1e-3 / 60) * p * mmHg / (Q * 1e-3 / 60) * (0.40 + 0.60 / 1.19**4) / mmHg"
+  risultato = { valore = 84, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''Da $\Delta p = QR$, con la resistenza del punto (b):
+\[
+  \Delta p' = QR' = \SI{8,0e-5}{\metre\cubed\per\second} \cdot \SI{1,4e8}{\pascal\second\per\metre\cubed} = 11{,}2 \cdot 10^{-5+8}\,\si{\pascal} = \SI{1,12e4}{\pascal}
+\]
+In millimetri di mercurio: $11200/133 \approx \SI{84}{\mmHg}$. Più semplice: a parità di portata la pressione è proporzionale alla resistenza, che è diventata $1{,}4/2{,}0 = 0{,}70$ di prima, e $0{,}70 \cdot \SI{120}{\mmHg} = \SI{84}{\mmHg}$. Un aumento del raggio di meno di un quinto riporta la pressione media a un valore normale.'''
+
+[[problema]]
+id = "ud3-viscosi-doppler"
+livello = 3
+testo = '''Con un ecodoppler si misura la velocità del sangue sull'asse dell'arteria omerale, nel braccio: in media sul ciclo cardiaco vale {{vmax}}. L'arteria ha raggio {{r}}, il sangue viscosità {{eta}}. Tratta il moto come laminare e stazionario, con i valori medi.'''
+dati.vmax = { valore = "0,20", unita = "m/s" }
+dati.r = { valore = "2,0", unita = "mm" }
+dati.eta = { valore = "4,0e-3", unita = "\\pascal\\second" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la velocità media del sangue sulla sezione dell'arteria?'''
+  calcolo = "vmax / 2"
+  risultato = { valore = 0.10, unita = "m/s", cifre = 2 }
+  soluzione = '''Nel profilo parabolico la velocità media è metà di quella sull'asse: $v_\text{media} = \SI{0,20}{\metre\per\second}/2 = \SI{0,10}{\metre\per\second}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la portata nell'arteria?'''
+  calcolo = "math.pi * (r * 1e-3)**2 * vmax / 2"
+  risultato = { valore = 1.3e-6, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''La sezione è $S = \pi r^2 = 3{,}14 \cdot (\SI{2,0e-3}{\metre})^2 = 3{,}14 \cdot \SI{4,0e-6}{\metre\squared} \approx \SI{1,26e-5}{\metre\squared}$. Con la velocità media del punto (a):
+\[
+  Q = S\,v_\text{media} = \SI{1,26e-5}{\metre\squared} \cdot \SI{0,10}{\metre\per\second} = \SI{1,26e-6}{\metre\cubed\per\second} \approx \SI{1,3e-6}{\metre\cubed\per\second}
+\]
+circa \SI{75}{\milli\litre} al minuto.'''
+
+  [[problema.parte]]
+  domanda = '''Quanta pressione perde il sangue lungo \SI{25}{\centi\metre} di arteria?'''
+  calcolo = "8 * eta * 0.25 * (math.pi * (r * 1e-3)**2 * vmax / 2) / (math.pi * (r * 1e-3)**4)"
+  risultato = { valore = 200, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Dalla legge di Poiseuille, $\Delta p = Q\,8\eta L/(\pi r^4)$. Con $Q = \pi r^2 v_\text{media}$ il fattore $\pi r^2$ si semplifica con $\pi r^4$, e resta
+\[
+  \Delta p = \frac{8\eta L\,v_\text{media}}{r^2} = \frac{8 \cdot \SI{4,0e-3}{\pascal\second} \cdot \SI{0,25}{\metre} \cdot \SI{0,10}{\metre\per\second}}{\SI{4,0e-6}{\metre\squared}}
+\]
+Al numeratore $8 \cdot 4{,}0 \cdot 10^{-3} \cdot 0{,}25 \cdot 0{,}10 = 8{,}0 \cdot 10^{-4}$, quindi
+\[
+  \Delta p = \frac{8{,}0 \cdot 10^{-4}}{4{,}0 \cdot 10^{-6}}\,\si{\pascal} = 2{,}0 \cdot 10^{-4-(-6)}\,\si{\pascal} = \SI{200}{\pascal}
+\]
+circa $200/133 \approx \SI{1,5}{\mmHg}$. Lungo tutto il braccio il sangue perde pochissima pressione: le arterie grandi hanno poca resistenza, e la pressione cala soprattutto nelle arteriole.'''
+
+[[problema]]
+id = "ud3-superficie-collirio"
+livello = 1
+testo = '''Per misurare la tensione superficiale di un collirio, che contiene un tensioattivo, si usa un telaio a U con un filo mobile lungo {{l}}. La lamina di collirio tesa fra telaio e filo tira il filo con una forza totale di {{F}}. Calcola la tensione superficiale del collirio.'''
+dati.l = { valore = "4,0", unita = "cm" }
+dati.F = { valore = "3,6e-3", unita = "\\newton" }
+
+  [[problema.parte]]
+  calcolo = "F / (2 * l * 1e-2)"
+  risultato = { valore = 0.045, unita = "\\newton\\per\\metre", cifre = 2 }
+  soluzione = '''La lamina ha due superfici, una davanti e una dietro, e ciascuna tira il filo con la forza $\gamma\ell$: la forza totale è $F = 2\gamma\ell$. La lunghezza del filo in metri è $\ell = \SI{4,0}{\centi\metre} = \SI{4,0e-2}{\metre}$, quindi $2\ell = \SI{8,0e-2}{\metre}$:
+\[
+  \gamma = \frac{F}{2\ell} = \frac{\SI{3,6e-3}{\newton}}{\SI{8,0e-2}{\metre}} = \frac{3{,}6}{8{,}0} \cdot 10^{-3-(-2)}\,\si{\newton\per\metre} = 0{,}45 \cdot 10^{-1}\,\si{\newton\per\metre} = \SI{0,045}{\newton\per\metre}
+\]
+È meno dei \SI{0,073}{\newton\per\metre} dell'acqua a \SI{20}{\celsius}: il tensioattivo abbassa la tensione superficiale. Dividendo solo per $\ell$, dimenticando la seconda superficie, si troverebbe il doppio, \SI{0,090}{\newton\per\metre}, più dell'acqua pura.'''
+
+[[problema]]
+id = "ud3-superficie-aerosol"
+livello = 1
+testo = '''Un nebulizzatore per aerosolterapia produce goccioline d'acqua di raggio {{r}}, che arrivano fino ai bronchioli. Con la tensione superficiale dell'acqua a \SI{37}{\celsius}, {{gamma}}, calcola di quanto la pressione dentro una gocciolina supera quella dell'aria intorno.'''
+dati.r = { valore = "2,0", unita = "\\micro\\metre" }
+dati.gamma = { valore = "0,070", unita = "\\newton\\per\\metre" }
+
+  [[problema.parte]]
+  calcolo = "2 * gamma / (r * 1e-6)"
+  risultato = { valore = 7.0e4, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Una goccia ha una sola superficie curva, quella fra il liquido e l'aria, e per la legge di Laplace $\Delta p = 2\gamma/r$. Il raggio in metri è $r = \SI{2,0}{\micro\metre} = \SI{2,0e-6}{\metre}$:
+\[
+  \Delta p = \frac{2\gamma}{r} = \frac{2 \cdot \SI{0,070}{\newton\per\metre}}{\SI{2,0e-6}{\metre}} = \frac{0{,}14}{2{,}0} \cdot 10^{6}\,\si{\pascal} = 0{,}070 \cdot 10^{6}\,\si{\pascal} = \SI{7,0e4}{\pascal}
+\]
+Sono circa $0{,}7$ atmosfere: in una goccia così piccola la pressione di curvatura è grande, perché è inversamente proporzionale al raggio.'''
+
+[[problema]]
+id = "ud3-superficie-mercurio"
+livello = 1
+testo = '''Il mercurio non bagna il vetro: l'angolo di contatto è di circa \ang{140}, e $\cos\ang{140} \approx -0{,}77$. La sua tensione superficiale è {{gamma}} e la sua densità {{rho}}. In uno sfigmomanometro a mercurio si immerge nel mercurio un tubo di vetro di raggio interno {{r}}. Di quanto si abbassa il mercurio nel tubo rispetto al livello esterno?'''
+dati.gamma = { valore = "0,49", unita = "\\newton\\per\\metre" }
+dati.rho = { valore = 13600, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.r = { valore = "1,0", unita = "mm" }
+
+  [[problema.parte]]
+  calcolo = "-(2 * gamma * (-0.77) / (rho * g * r * 1e-3)) * 1e3"
+  risultato = { valore = 5.7, unita = "mm", cifre = 2 }
+  soluzione = '''Si usa la legge di Jurin, con $r = \SI{1,0}{\milli\metre} = \SI{1,0e-3}{\metre}$. Il numeratore è $2\gamma\cos\theta = 2 \cdot 0{,}49 \cdot (-0{,}77) \approx -0{,}755$, in \si{\newton\per\metre}; il denominatore è $\rho g r = 13600 \cdot 9{,}8 \cdot 10^{-3} \approx 133$, in \si{\newton\per\metre\squared} ($13600 \cdot 9{,}8 = 133280 \approx 1{,}33 \cdot 10^{5}$, e $1{,}33 \cdot 10^{5-3} = 133$). Quindi
+\[
+  h = \frac{2\gamma\cos\theta}{\rho g r} = \frac{-\SI{0,755}{\newton\per\metre}}{\SI{133}{\newton\per\metre\squared}} \approx \SI{-5,7e-3}{\metre} = \SI{-5,7}{\milli\metre}
+\]
+L'altezza è negativa perché $\cos\theta < 0$: il mercurio si abbassa di circa \SI{5,7}{\milli\metre}. Per questo il tubo di uno sfigmomanometro a mercurio non è troppo sottile: l'abbassamento è inversamente proporzionale al raggio, e in un tubo più largo è più piccolo.'''
+
+[[problema]]
+id = "ud3-superficie-carotide"
+livello = 1
+testo = '''La carotide comune di un adulto ha un raggio interno di circa {{r}}. La pressione media del sangue dentro l'arteria supera di {{dp}} quella dei tessuti intorno. Considerando l'arteria un cilindro, calcola la tensione che la sua parete deve sopportare.'''
+dati.r = { valore = "3,0", unita = "mm" }
+dati.dp = { valore = 90, unita = "\\mmHg" }
+
+  [[problema.parte]]
+  calcolo = "dp * mmHg * r * 1e-3"
+  risultato = { valore = 36, unita = "\\newton\\per\\metre", cifre = 2 }
+  soluzione = '''Per la parete di un vaso cilindrico la legge di Laplace dà $T = \Delta p\,r$. Si portano i dati nel SI: $\Delta p = 90 \cdot \SI{133}{\pascal} = \SI{11970}{\pascal} \approx \SI{1,20e4}{\pascal}$ e $r = \SI{3,0}{\milli\metre} = \SI{3,0e-3}{\metre}$. Quindi
+\[
+  T = \Delta p\,r = \SI{1,20e4}{\pascal} \cdot \SI{3,0e-3}{\metre} = 3{,}6 \cdot 10^{4-3}\,\si{\newton\per\metre} = \SI{36}{\newton\per\metre}
+\]
+Il pascal per il metro dà \si{\newton\per\metre\squared} $\cdot$ \si{\metre} = \si{\newton\per\metre}: è una forza per unità di lunghezza, come la tensione superficiale.'''
+
+[[problema]]
+id = "ud3-superficie-bolla-profondita"
+livello = 2
+testo = '''In un flacone di soluzione fisiologica, che ha la tensione superficiale e la densità dell'acqua ($\gamma = \SI{0,073}{\newton\per\metre}$, $\rho = \SI{1000}{\kilo\gram\per\metre\cubed}$), c'è una piccola bolla d'aria di raggio {{r}}.'''
+dati.r = { valore = "0,050", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Di quanto la pressione dentro la bolla supera quella del liquido intorno?'''
+  calcolo = "2 * 0.073 / (r * 1e-3)"
+  risultato = { valore = 2.9e3, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Una bolla d'aria in un liquido ha una sola superficie, quella fra il liquido e l'aria, e vale $\Delta p = 2\gamma/r$. Il raggio in metri è $r = \SI{0,050}{\milli\metre} = \SI{5,0e-5}{\metre}$:
+\[
+  \Delta p = \frac{2\gamma}{r} = \frac{2 \cdot \SI{0,073}{\newton\per\metre}}{\SI{5,0e-5}{\metre}} = \frac{0{,}146}{5{,}0} \cdot 10^{5}\,\si{\pascal} = 0{,}0292 \cdot 10^{5}\,\si{\pascal} \approx \SI{2,9e3}{\pascal}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''A quale profondità nel liquido la pressione dovuta alla colonna sovrastante, $\rho g h$, è uguale a questa pressione di curvatura?'''
+  calcolo = "2 * 0.073 / (r * 1e-3) / (1000 * g)"
+  risultato = { valore = 0.30, unita = "m", cifre = 2 }
+  soluzione = '''Per la legge di Stevino la pressione cresce di $\rho g h$ scendendo di $h$. Si pone $\rho g h = \Delta p$, con $\Delta p = \SI{2920}{\pascal}$ dal punto precedente, e $\rho g = 1000 \cdot 9{,}8 = \SI{9800}{\newton\per\metre\cubed}$:
+\[
+  h = \frac{\Delta p}{\rho g} = \frac{\SI{2920}{\pascal}}{\SI{9800}{\newton\per\metre\cubed}} \approx \SI{0,30}{\metre}
+\]
+La sovrappressione dentro una bolla di un decimo di millimetro di diametro vale quanto quella di \SI{30}{\centi\metre} d'acqua: per le bolle piccole la pressione di curvatura conta più della profondità.'''
+
+[[problema]]
+id = "ud3-superficie-jurin-goccia"
+livello = 2
+testo = '''Si immerge un capillare di vetro di raggio {{r}} in una soluzione acquosa che contiene un tensioattivo. La soluzione bagna il vetro ($\theta \approx \ang{0}$), ha densità {{rho}} e risale nel capillare di {{h}}.'''
+dati.r = { valore = "0,40", unita = "mm" }
+dati.rho = { valore = 1000, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.h = { valore = "3,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la tensione superficiale della soluzione?'''
+  calcolo = "rho * g * (r * 1e-3) * (h * 1e-2) / 2"
+  risultato = { valore = 0.059, unita = "\\newton\\per\\metre", cifre = 2 }
+  soluzione = '''Si ricava $\gamma$ dalla legge di Jurin con $\cos\theta = 1$: da $h = 2\gamma/(\rho g r)$ viene $\gamma = \rho g r h/2$. Nel SI $r = \SI{4,0e-4}{\metre}$ e $h = \SI{3,0e-2}{\metre}$:
+\[
+  \gamma = \frac{\rho g r h}{2} = \frac{1000 \cdot 9{,}8 \cdot 4{,}0 \cdot 10^{-4} \cdot 3{,}0 \cdot 10^{-2}}{2}\,\si{\newton\per\metre}
+\]
+\[
+  \gamma = \frac{9{,}8 \cdot 12 \cdot 10^{3-4-2}}{2}\,\si{\newton\per\metre} = \frac{117{,}6 \cdot 10^{-3}}{2}\,\si{\newton\per\metre} \approx \SI{0,059}{\newton\per\metre}
+\]
+Le unità: \si{\kilo\gram\per\metre\cubed} $\cdot$ \si{\metre\per\second\squared} $\cdot$ \si{\metre\squared} = \si{\kilo\gram\per\second\squared} = \si{\newton\per\metre}.'''
+
+  [[problema.parte]]
+  domanda = '''Una goccia di questa soluzione ha raggio \SI{1,0}{\milli\metre}. Di quanto la pressione al suo interno supera quella dell'aria?'''
+  calcolo = "2 * (rho * g * (r * 1e-3) * (h * 1e-2) / 2) / 1.0e-3"
+  risultato = { valore = 1.2e2, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Si usa la tensione superficiale trovata, $\gamma \approx \SI{0,059}{\newton\per\metre}$, nella legge di Laplace per una goccia, con $r = \SI{1,0e-3}{\metre}$:
+\[
+  \Delta p = \frac{2\gamma}{r} = \frac{2 \cdot \SI{0,059}{\newton\per\metre}}{\SI{1,0e-3}{\metre}} = 0{,}118 \cdot 10^{3}\,\si{\pascal} \approx \SI{1,2e2}{\pascal}
+\]'''
+
+[[problema]]
+id = "ud3-superficie-bolla-lavoro"
+livello = 2
+testo = '''Si soffia una bolla di sapone fino a portarla a un raggio di {{r}}. La tensione superficiale dell'acqua saponata è {{gamma}}. Usa $\pi \approx 3{,}14$; la superficie di una sfera di raggio $r$ è $4\pi r^2$.'''
+dati.r = { valore = "2,0", unita = "cm" }
+dati.gamma = { valore = "0,025", unita = "\\newton\\per\\metre" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'area totale delle superfici della lamina?'''
+  calcolo = "2 * 4 * 3.14 * (r * 1e-2)**2"
+  risultato = { valore = 1.0e-2, unita = "\\metre\\squared", cifre = 2 }
+  soluzione = '''La lamina di una bolla di sapone ha due superfici, quella interna e quella esterna; lo spessore è minuscolo, e tutte e due hanno in pratica il raggio $r = \SI{2,0e-2}{\metre}$. Una sfera ha superficie $4\pi r^2$, quindi
+\[
+  S = 2 \cdot 4\pi r^2 = 8 \cdot 3{,}14 \cdot (\SI{2,0e-2}{\metre})^2 = 25{,}1 \cdot \SI{4,0e-4}{\metre\squared} \approx \SI{1,0e-2}{\metre\squared}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto lavoro serve, come minimo, per formare la bolla?'''
+  calcolo = "0.025 * 2 * 4 * 3.14 * (r * 1e-2)**2"
+  risultato = { valore = 2.5e-4, unita = "J", cifre = 2 }
+  soluzione = '''La tensione superficiale è anche il lavoro per aumentare la superficie di \SI{1}{\metre\squared}: per creare una superficie $S$ serve il lavoro $W = \gamma S$. Con l'area del punto precedente:
+\[
+  W = \gamma S = \SI{0,025}{\joule\per\metre\squared} \cdot \SI{1,0e-2}{\metre\squared} = 2{,}5 \cdot 10^{-2-2}\,\si{\joule} = \SI{2,5e-4}{\joule}
+\]
+Un quarto di millijoule: poco, perché il tensioattivo tiene bassa $\gamma$. Con acqua pura ($\gamma = \SI{0,073}{\newton\per\metre}$) il lavoro sarebbe circa tre volte più grande.'''
+
+[[problema]]
+id = "ud3-superficie-ematocrito"
+livello = 2
+testo = '''Per misurare l'ematocrito si raccoglie una goccia di sangue capillare in un tubicino di vetro di raggio interno {{r}}. Il sangue bagna il vetro ($\theta \approx \ang{0}$), ha tensione superficiale {{gamma}} e densità {{rho}}. Si immagina di tenere il tubicino in verticale, con l'estremità inferiore nella goccia.'''
+dati.r = { valore = "0,40", unita = "mm" }
+dati.gamma = { valore = "0,058", unita = "\\newton\\per\\metre" }
+dati.rho = { valore = 1060, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+
+  [[problema.parte]]
+  domanda = '''Fino a che altezza sale il sangue nel tubicino?'''
+  calcolo = "2 * gamma / (rho * g * r * 1e-3)"
+  risultato = { valore = 0.028, unita = "m", cifre = 2 }
+  soluzione = '''Si usa la legge di Jurin con $\cos\theta = 1$ e $r = \SI{4,0e-4}{\metre}$. Al denominatore $\rho g r = 1060 \cdot 9{,}8 \cdot 4{,}0 \cdot 10^{-4} \approx 1{,}04 \cdot 10^{4} \cdot 4{,}0 \cdot 10^{-4} = 4{,}16$, in \si{\newton\per\metre\cubed} $\cdot$ \si{\metre}; al numeratore $2\gamma = \SI{0,116}{\newton\per\metre}$:
+\[
+  h = \frac{2\gamma}{\rho g r} = \frac{0{,}116}{4{,}16}\,\si{\metre} \approx \SI{0,028}{\metre} = \SI{2,8}{\centi\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Che volume di sangue contiene la colonna sollevata?'''
+  calcolo = "3.14 * (r * 1e-3)**2 * (2 * gamma / (rho * g * r * 1e-3)) * 1e9"
+  risultato = { valore = 14, unita = "\\micro\\litre", cifre = 2 }
+  soluzione = '''La colonna è un cilindro di raggio $r$ e altezza $h = \SI{2,8e-2}{\metre}$:
+\[
+  V = \pi r^2 h = 3{,}14 \cdot (\SI{4,0e-4}{\metre})^2 \cdot \SI{2,8e-2}{\metre} = 3{,}14 \cdot 16 \cdot 2{,}8 \cdot 10^{-8-2}\,\si{\metre\cubed} \approx 141 \cdot 10^{-10}\,\si{\metre\cubed} = \SI{1,4e-8}{\metre\cubed}
+\]
+dove $(4{,}0 \cdot 10^{-4})^2 = 16 \cdot 10^{-8}$. Un microlitro è un millimetro cubo, $(10^{-3}\,\si{\metre})^3 = \SI{e-9}{\metre\cubed}$, quindi $V = 14 \cdot \SI{e-9}{\metre\cubed} = \SI{14}{\micro\litre}$. In verticale il peso ferma la colonna a pochi centimetri; per questo il tubicino si tiene quasi orizzontale, e si riempie di più.'''
+
+[[problema]]
+id = "ud3-superficie-aneurisma"
+livello = 3
+testo = '''L'aorta addominale di un paziente iperteso ha, nel tratto sano, un diametro interno di {{d1}}. Più a valle, alla stessa altezza, c'è un aneurisma, in cui il diametro arriva a {{d2}}. La pressione sistolica del sangue, rispetto ai tessuti intorno, è {{p}} in tutti e due i tratti. Tratta l'aorta come un cilindro.'''
+dati.d1 = { valore = "2,0", unita = "cm" }
+dati.d2 = { valore = "5,0", unita = "cm" }
+dati.p = { valore = 120, unita = "\\mmHg" }
+dati.v1 = { valore = "0,50", unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la tensione della parete nel tratto sano?'''
+  calcolo = "p * mmHg * (d1 / 2 * 1e-2)"
+  risultato = { valore = 1.6e2, unita = "\\newton\\per\\metre", cifre = 2 }
+  soluzione = '''Nella legge di Laplace per un cilindro, $T = \Delta p\,r$, entra il raggio: $r_1 = d_1/2 = \SI{1,0}{\centi\metre} = \SI{1,0e-2}{\metre}$. La pressione è $\Delta p = 120 \cdot \SI{133}{\pascal} = \SI{15960}{\pascal} \approx \SI{1,60e4}{\pascal}$. Quindi
+\[
+  T_1 = \Delta p\,r_1 = \SI{1,60e4}{\pascal} \cdot \SI{1,0e-2}{\metre} = 1{,}6 \cdot 10^{4-2}\,\si{\newton\per\metre} = \SI{1,6e2}{\newton\per\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la tensione della parete nell'aneurisma?'''
+  calcolo = "p * mmHg * (d2 / 2 * 1e-2)"
+  risultato = { valore = 4.0e2, unita = "\\newton\\per\\metre", cifre = 2 }
+  soluzione = '''La pressione è la stessa e il raggio è $r_2 = \SI{2,5}{\centi\metre} = \SI{2,5e-2}{\metre}$:
+\[
+  T_2 = \Delta p\,r_2 = \SI{1,60e4}{\pascal} \cdot \SI{2,5e-2}{\metre} = 4{,}0 \cdot 10^{4-2}\,\si{\newton\per\metre} = \SI{4,0e2}{\newton\per\metre}
+\]
+Con $1{,}6 \cdot 2{,}5 = 4{,}0$. Il raggio è $2{,}5$ volte più grande, e la tensione cresce dello stesso fattore. La parete dell'aneurisma, già indebolita, deve reggere una tensione due volte e mezzo più grande: si sfianca ancora, il raggio cresce, e la tensione con lui.'''
+
+  [[problema.parte]]
+  domanda = '''A quale pressione sistolica, in \si{\mmHg}, bisognerebbe portare il paziente con i farmaci perché la parete dell'aneurisma abbia la stessa tensione che aveva il tratto sano a \SI{120}{\mmHg}?'''
+  calcolo = "p * (d1 / d2)"
+  risultato = { valore = 48, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''Si chiede $\Delta p\,r_2 = T_1$, cioè $\Delta p = T_1/r_2$. Senza passare per i pascal: a parità di tensione la pressione è inversamente proporzionale al raggio, e il raggio è $2{,}5$ volte più grande, quindi
+\[
+  \Delta p = \SI{120}{\mmHg} \cdot \frac{r_1}{r_2} = \SI{120}{\mmHg} \cdot \frac{1{,}0}{2{,}5} = \SI{48}{\mmHg}
+\]
+Una pressione sistolica così bassa non è sostenibile: il controllo della pressione rallenta la crescita dell'aneurisma, ma non annulla l'aumento di tensione dovuto al raggio. Per questo oltre un certo diametro l'aneurisma si ripara chirurgicamente.'''
+
+  [[problema.parte]]
+  domanda = '''Nel tratto sano il sangue scorre a {{v1}}. Con quale velocità scorre nell'aneurisma? Di quanto vi aumenta la pressione, trattando il sangue come un fluido ideale di densità \SI{1060}{\kilo\gram\per\metre\cubed}? È giusto dare la stessa pressione ai due tratti?'''
+  calcolo = "0.5 * rho_sangue * (v1**2 - (v1 * (d1 / d2)**2)**2)"
+  risultato = { valore = 1.3e2, unita = "\\pascal", cifre = 2 }
+  rapido = '''\SI{0,080}{\metre\per\second}; \SI{1,3e2}{\pascal}, circa \SI{1}{\mmHg}: sì'''
+  soluzione = '''Per l'equazione di continuità $S_1 v_1 = S_2 v_2$, e le aree stanno come i quadrati dei diametri:
+\[
+  v_2 = v_1 \left(\frac{d_1}{d_2}\right)^2 = \SI{0,50}{\metre\per\second} \cdot \left(\frac{2{,}0}{5{,}0}\right)^2 = \SI{0,50}{\metre\per\second} \cdot 0{,}16 = \SI{0,080}{\metre\per\second}
+\]
+Il sangue rallenta. Per il teorema di Bernoulli, con i due tratti alla stessa altezza e $\frac{1}{2}\rho = 530$, la pressione cresce di
+\[
+  p_2 - p_1 = \tfrac{1}{2}\rho\,(v_1^2 - v_2^2) = 530 \cdot (0{,}25 - 0{,}0064)\,\si{\pascal} \approx 530 \cdot 0{,}24\,\si{\pascal} \approx \SI{127}{\pascal} \approx \SI{1,3e2}{\pascal}
+\]
+dove $530 \cdot 0{,}24 = 500 \cdot 0{,}24 + 30 \cdot 0{,}24 = 120 + 7{,}2 \approx 127$. In millimetri di mercurio è $127/133 \approx \SI{1,0}{\mmHg}$, meno dell'1\% di \SI{120}{\mmHg}. Si può quindi dare la stessa pressione ai due tratti: la tensione nell'aneurisma cresce per il raggio, non per la pressione.'''
+
+[[problema]]
+id = "ud3-superficie-alveoli"
+livello = 3
+testo = '''Due alveoli vicini, collegati dallo stesso bronchiolo, hanno raggi {{r1}} e {{r2}}. Ciascuno è rivestito da un velo di liquido e si comporta come una bolla in un liquido, con una sola superficie curva.'''
+dati.r1 = { valore = "0,050", unita = "mm" }
+dati.r2 = { valore = "0,15", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Se il liquido fosse acqua a \SI{37}{\celsius} ($\gamma = \SI{0,070}{\newton\per\metre}$), quale differenza di pressione servirebbe per tenere aperto l'alveolo piccolo? Esprimila in pascal e in centimetri d'acqua.'''
+  calcolo = "2 * 0.070 / (r1 * 1e-3)"
+  risultato = { valore = 2.8e3, unita = "\\pascal", cifre = 2 }
+  rapido = '''\SI{2,8e3}{\pascal}, circa \SI{29}{cm\,H_2O}'''
+  soluzione = '''Per la legge di Laplace con una sola superficie, $\Delta p = 2\gamma/r$, con $r_1 = \SI{5,0e-5}{\metre}$:
+\[
+  \Delta p_1 = \frac{2\gamma}{r_1} = \frac{2 \cdot \SI{0,070}{\newton\per\metre}}{\SI{5,0e-5}{\metre}} = \frac{0{,}14}{5{,}0} \cdot 10^{5}\,\si{\pascal} = 0{,}028 \cdot 10^{5}\,\si{\pascal} = \SI{2,8e3}{\pascal}
+\]
+In centimetri d'acqua, con $\SI{1}{cm\,H_2O} \approx \SI{98}{\pascal}$: $2800/98 \approx 29$, cioè circa \SI{29}{cm\,H_2O}. È il doppio dei \SI{14}{cm\,H_2O} di un alveolo di raggio \SI{0,1}{\milli\metre}, perché il raggio è la metà.'''
+
+  [[problema.parte]]
+  domanda = '''Con lo stesso liquido, quanto vale la pressione di curvatura nell'alveolo grande? Se i due alveoli sono in comunicazione, quale dei due si svuota nell'altro?'''
+  calcolo = "2 * 0.070 / (r2 * 1e-3)"
+  risultato = { valore = 9.3e2, unita = "\\pascal", cifre = 2 }
+  rapido = '''\SI{9,3e2}{\pascal}; il piccolo si svuota nel grande'''
+  soluzione = '''Il raggio è tre volte più grande, $r_2 = \SI{1,5e-4}{\metre}$, e la pressione di curvatura è tre volte più piccola:
+\[
+  \Delta p_2 = \frac{2\gamma}{r_2} = \frac{0{,}14}{1{,}5} \cdot 10^{4}\,\si{\pascal} \approx 0{,}093 \cdot 10^{4}\,\si{\pascal} = \SI{9,3e2}{\pascal}
+\]
+Nell'alveolo piccolo l'aria ha una pressione più alta, $\SI{2800}{\pascal}$ contro \SI{930}{\pascal} sopra quella del liquido intorno: l'aria passa dal piccolo al grande, il piccolo diventa ancora più piccolo e la sua pressione cresce ancora. L'alveolo piccolo collassa, come la bolla piccola del quesito lampo.'''
+
+  [[problema.parte]]
+  domanda = '''Nel polmone vero il surfattante è più concentrato nell'alveolo piccolo: lì la tensione superficiale scende a \SI{0,010}{\newton\per\metre}, nel grande a \SI{0,030}{\newton\per\metre}. Quanto valgono ora le due pressioni di curvatura? Gli alveoli sono stabili?'''
+  calcolo = "2 * 0.010 / (r1 * 1e-3)"
+  risultato = { valore = 4.0e2, unita = "\\pascal", cifre = 2 }
+  rapido = '''\SI{4,0e2}{\pascal} in tutti e due; stabili'''
+  soluzione = '''Si rifà il conto con le nuove tensioni superficiali:
+\[
+  \Delta p_1 = \frac{2 \cdot \SI{0,010}{\newton\per\metre}}{\SI{5,0e-5}{\metre}} = \frac{0{,}020}{5{,}0} \cdot 10^{5}\,\si{\pascal} = \SI{4,0e2}{\pascal}
+\]
+\[
+  \Delta p_2 = \frac{2 \cdot \SI{0,030}{\newton\per\metre}}{\SI{1,5e-4}{\metre}} = \frac{0{,}060}{1{,}5} \cdot 10^{4}\,\si{\pascal} = \SI{4,0e2}{\pascal}
+\]
+Le due pressioni sono uguali: nell'alveolo piccolo il raggio è un terzo, ma anche $\gamma$ è un terzo, e il rapporto $\gamma/r$ è lo stesso. L'aria non ha motivo di passare da uno all'altro, e gli alveoli sono stabili. In più la pressione necessaria è sette volte più bassa che con l'acqua ($2800/400 = 7$), e respirare costa molto meno lavoro.'''
+
+[[problema]]
+id = "ud3-superficie-embolia"
+livello = 3
+testo = '''Una bolla d'aria, entrata in circolo da un catetere, si incastra in un'arteriola di raggio interno {{R}}. La tensione superficiale fra il plasma e l'aria è {{gamma}}. Per spingere la bolla in avanti, il menisco davanti deve diventare una semisfera di raggio uguale a quello del vaso, \SI{20}{\micro\metre}, mentre quello dietro si appiattisce fino a un raggio di curvatura di \SI{40}{\micro\metre}. Ciascun menisco separa il plasma dall'aria, con una sola superficie.'''
+dati.R = { valore = 20, unita = "\\micro\\metre" }
+dati.gamma = { valore = "0,050", unita = "\\newton\\per\\metre" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la pressione di curvatura del menisco davanti? E di quello dietro?'''
+  calcolo = "2 * gamma / (R * 1e-6)"
+  risultato = { valore = 5.0e3, unita = "\\pascal", cifre = 2 }
+  rapido = '''davanti \SI{5,0e3}{\pascal}, dietro \SI{2,5e3}{\pascal}'''
+  soluzione = '''Ogni menisco è una superficie curva con una sola faccia, e per la legge di Laplace la pressione dalla parte concava, l'aria della bolla, supera quella del plasma di $2\gamma/r$. Davanti $r = \SI{2,0e-5}{\metre}$:
+\[
+  \Delta p_\text{davanti} = \frac{2\gamma}{r} = \frac{2 \cdot \SI{0,050}{\newton\per\metre}}{\SI{2,0e-5}{\metre}} = \frac{0{,}10}{2{,}0} \cdot 10^{5}\,\si{\pascal} = \SI{5,0e3}{\pascal}
+\]
+Dietro il raggio è doppio, $r = \SI{4,0e-5}{\metre}$, e la pressione di curvatura è la metà: $\Delta p_\text{dietro} = \SI{2,5e3}{\pascal}$.'''
+
+  [[problema.parte]]
+  domanda = '''Di quanto la pressione del plasma dietro la bolla deve superare quella del plasma davanti per spingerla? Esprimila in \si{\mmHg}.'''
+  calcolo = "(2 * gamma / (R * 1e-6) - 2 * gamma / (2 * R * 1e-6)) / mmHg"
+  risultato = { valore = 19, unita = "\\mmHg", cifre = 2 }
+  soluzione = '''Nella bolla l'aria ha la stessa pressione dappertutto, $p_\text{aria}$. Dietro, il plasma ha $p_\text{dietro} = p_\text{aria} - \SI{2,5e3}{\pascal}$; davanti, $p_\text{davanti} = p_\text{aria} - \SI{5,0e3}{\pascal}$. La differenza è
+\[
+  p_\text{dietro} - p_\text{davanti} = \SI{5,0e3}{\pascal} - \SI{2,5e3}{\pascal} = \SI{2,5e3}{\pascal} = \frac{2500}{133}\,\si{\mmHg} \approx \SI{18,8}{\mmHg} \approx \SI{19}{\mmHg}
+\]
+Il plasma dietro deve avere una pressione più alta di circa \SI{19}{\mmHg} solo per far avanzare la bolla.'''
+
+  [[problema.parte]]
+  domanda = '''Ai capi del tratto di arteriola la differenza di pressione disponibile è di circa \SI{40}{\mmHg}. Quante bolle uguali, in fila, bastano a fermare del tutto il flusso?'''
+  calcolo = "math.ceil(40 / ((2 * gamma / (R * 1e-6) - 2 * gamma / (2 * R * 1e-6)) / mmHg))"
+  risultato = { valore = 3, cifre = 1 }
+  soluzione = '''Le bolle in fila si comportano come resistenze in serie: le differenze di pressione che ciascuna richiede si sommano. Due bolle richiedono $2 \cdot \SI{18,8}{\mmHg} \approx \SI{38}{\mmHg}$, ancora meno dei \SI{40}{\mmHg} disponibili; tre bolle richiedono $3 \cdot \SI{18,8}{\mmHg} \approx \SI{56}{\mmHg}$, più di quanto c'è. Bastano quindi 3 bolle per fermare il flusso: il tessuto a valle resta senza sangue. È l'embolia gassosa, ed è il motivo per cui si eliminano con cura le bolle dalla siringa e dal deflussore.'''
+
+[[problema]]
+id = "ud3-superficie-deflussore"
+livello = 3
+testo = '''Nel gocciolatore di un deflussore per flebo la soluzione esce da un beccuccio di raggio {{r}} e forma una goccia. Nel modello più semplice la goccia resta attaccata finché il suo peso è sostenuto dalla tensione superficiale, che tira verso l'alto lungo tutto il bordo del beccuccio, una circonferenza lunga $2\pi r$; si stacca quando il peso arriva a $2\pi r\gamma$. La soluzione ha la tensione superficiale e la densità dell'acqua, {{gamma}} e \SI{1000}{\kilo\gram\per\metre\cubed}. Usa $\pi \approx 3{,}14$.'''
+dati.r = { valore = "1,0", unita = "mm" }
+dati.gamma = { valore = "0,073", unita = "\\newton\\per\\metre" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza massima che la tensione superficiale può esercitare sulla goccia?'''
+  calcolo = "2 * 3.14 * (r * 1e-3) * gamma"
+  risultato = { valore = 4.6e-4, unita = "\\newton", cifre = 2 }
+  soluzione = '''La tensione superficiale è la forza per unità di lunghezza del bordo. Con $r = \SI{1,0e-3}{\metre}$ il bordo è lungo $2\pi r = 2 \cdot 3{,}14 \cdot \SI{1,0e-3}{\metre} = \SI{6,28e-3}{\metre}$, e
+\[
+  F = 2\pi r\,\gamma = \SI{6,28e-3}{\metre} \cdot \SI{0,073}{\newton\per\metre} = 0{,}458 \cdot 10^{-3}\,\si{\newton} \approx \SI{4,6e-4}{\newton}
+\]
+con $6{,}28 \cdot 0{,}073 \approx 0{,}458$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il volume di una goccia? Quante gocce servono per \SI{1}{\milli\litre} di soluzione?'''
+  calcolo = "1e-3 / (2 * 3.14 * (r * 1e-3) * gamma / g)"
+  risultato = { valore = 21, cifre = 2 }
+  rapido = '''\SI{0,047}{\milli\litre}; 21 gocce'''
+  soluzione = '''La goccia si stacca quando il suo peso $mg$ è uguale alla forza del punto precedente:
+\[
+  m = \frac{F}{g} = \frac{\SI{4,58e-4}{\newton}}{\SI{9,8}{\metre\per\second\squared}} \approx \SI{4,7e-5}{\kilo\gram} = \SI{0,047}{\gram}
+\]
+Con la densità dell'acqua un grammo occupa un millilitro, quindi la goccia ha volume \SI{0,047}{\milli\litre}. Il numero di gocce in \SI{1}{\milli\litre}, cioè in \SI{1}{\gram}, è
+\[
+  N = \frac{\SI{1}{\gram}}{\SI{0,0467}{\gram}} \approx 21
+\]
+È vicino alle 20 gocce per millilitro su cui sono tarati i deflussori standard.'''
+
+  [[problema.parte]]
+  domanda = '''Con lo stesso deflussore si infonde un farmaco diluito in una soluzione con un tensioattivo, con la stessa densità e tensione superficiale \SI{0,050}{\newton\per\metre}. Quante gocce ci sono ora in \SI{1}{\milli\litre}?'''
+  calcolo = "1e-3 / (2 * 3.14 * (r * 1e-3) * 0.050 / g)"
+  risultato = { valore = 31, cifre = 2 }
+  soluzione = '''La massa di una goccia è $m = 2\pi r\gamma/g$, proporzionale a $\gamma$; il numero di gocce per millilitro è quindi inversamente proporzionale a $\gamma$. Partendo dal risultato precedente, $N \approx 21{,}4$:
+\[
+  N' = N \cdot \frac{\gamma}{\gamma'} = 21{,}4 \cdot \frac{0{,}073}{0{,}050} = 21{,}4 \cdot 1{,}46 \approx 31
+\]
+Le gocce sono più piccole e più numerose. Chi regola la flebo contando 20 gocce al millilitro infonderebbe, a parità di gocce al minuto, circa un terzo di volume in meno ($20/31 \approx 0{,}65$): il conto delle gocce vale per il liquido per cui il deflussore è tarato.'''
+
+# ==================================================================== quesiti d'esame
+
+[[quesito]]
+id = "ud3-statica-fluido-solido"
+tipo = "multipla"
+testo = '''A differenza di un solido, un fluido in quiete'''
+corretta = "A"
+soluzione = '''Un solido resiste a una forza di taglio, parallela alla superficie, e si deforma solo un poco. Un fluido fermo non resiste: sotto una forza di taglio, anche piccola, si mette in movimento. Per questo un fluido in quiete può esercitare su una parete solo forze perpendicolari alla parete, cioè una pressione.'''
+
+  [[quesito.opzione]]
+  testo = '''può esercitare su una parete solo forze perpendicolari alla parete'''
+  [[quesito.opzione]]
+  testo = '''ha sempre un volume proprio'''
+  commento = '''Vale per i liquidi, non per i gas, che occupano tutto il recipiente. Anche i gas sono fluidi.'''
+  [[quesito.opzione]]
+  testo = '''resiste a una forza di taglio deformandosi solo un poco'''
+  commento = '''È il comportamento di un solido. Sotto una forza di taglio un fluido scorre.'''
+  [[quesito.opzione]]
+  testo = '''non esercita pressione sulle pareti del recipiente'''
+  commento = '''Un fluido fermo preme sulle pareti: è proprio la pressione, perpendicolare alla parete.'''
+  [[quesito.opzione]]
+  testo = '''ha sempre una densità minore di quella di un solido'''
+  commento = '''La densità non distingue i fluidi dai solidi. Il mercurio, che è liquido, è molto più denso del ghiaccio o dell'osso.'''
+
+[[quesito]]
+id = "ud3-statica-mercurio"
+tipo = "multipla"
+testo = '''Il mercurio dei vecchi termometri e sfigmomanometri va raccolto e smaltito a parte. Un contenitore di raccolta contiene {{V}} di mercurio, che ha densità {{rho}}. La massa del mercurio è'''
+dati.V = { valore = "2,0", unita = "\\litre" }
+dati.rho = { valore = 13600, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+corretta = "B"
+calcolo = "rho * V * 1e-3"
+soluzione = '''Un litro è un decimetro cubo, $\SI{1}{\litre} = \SI{e-3}{\metre\cubed}$, quindi $V = \SI{2,0e-3}{\metre\cubed}$. Dalla definizione di densità:
+\[
+  m = \rho V = \SI{13600}{\kilo\gram\per\metre\cubed} \cdot \SI{2,0e-3}{\metre\cubed} = 27200 \cdot 10^{-3}\,\si{\kilo\gram} = \SI{27,2}{\kilo\gram}
+\]
+Il conto a mente: \SI{1}{\litre} di mercurio ha massa \SI{13,6}{\kilo\gram}, due litri il doppio. Un oggetto piccolo e molto pesante.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{6,8}{\kilo\gram}'''
+  commento = '''Divide la densità per il volume invece di moltiplicare: $13{,}6/2 = 6{,}8$. Da $\rho = m/V$ si ricava $m = \rho V$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{27,2}{\kilo\gram}'''
+  valore = 27.2
+  [[quesito.opzione]]
+  testo = '''\SI{2,72}{\kilo\gram}'''
+  commento = '''Sbaglia la conversione del litro, prendendo $\SI{1}{\litre} = \SI{e-4}{\metre\cubed}$. Un litro è $(\SI{0,1}{\metre})^3 = \SI{e-3}{\metre\cubed}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,72e4}{\kilo\gram}'''
+  commento = '''Usa il volume in litri dentro una formula in unità del SI, come se fossero \SI{2,0}{\metre\cubed}: $13600 \cdot 2{,}0 = \num{27200}$. Il volume va prima portato in metri cubi.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,0}{\kilo\gram}'''
+  commento = '''Usa la regola «un litro, un kilogrammo», che vale per l'acqua. Il mercurio è 13,6 volte più denso dell'acqua.'''
+
+[[quesito]]
+id = "ud3-statica-recipienti"
+tipo = "multipla"
+testo = '''Tre recipienti aperti, un cilindro stretto, un cilindro largo e un vaso che si allarga verso l'alto, sono riempiti d'acqua fino alla stessa altezza di \SI{30}{\centi\metre}. La pressione dell'acqua sul fondo è'''
+corretta = "D"
+soluzione = '''Per la legge di Stevino la pressione sul fondo è $p = p_0 + \rho g h$: dipende solo dalla densità del liquido e dalla profondità, che sono le stesse nei tre recipienti, e non dalla forma né dalla quantità d'acqua. La pressione sul fondo è la stessa nei tre recipienti (paradosso idrostatico). Nel vaso che si allarga c'è più acqua, ma il peso in più è sostenuto dalle pareti inclinate, non dal fondo.'''
+
+  [[quesito.opzione]]
+  testo = '''maggiore nel cilindro largo, che contiene più acqua'''
+  commento = '''Confonde la pressione con il peso totale dell'acqua. Il cilindro largo contiene più acqua, ma il suo peso si distribuisce su un fondo più grande: il peso per unità di area è lo stesso.'''
+  [[quesito.opzione]]
+  testo = '''maggiore nel cilindro stretto, perché il fondo ha l'area più piccola'''
+  commento = '''Applica $p = F/S$ come se la forza fosse la stessa nei tre recipienti. Nel cilindro stretto c'è meno acqua, quindi anche meno peso: forza e area diminuiscono nella stessa proporzione.'''
+  [[quesito.opzione]]
+  testo = '''maggiore nel vaso che si allarga, che contiene più acqua di tutti'''
+  commento = '''Pensa che tutto il peso dell'acqua gravi sul fondo. Nel vaso che si allarga una parte del peso è sostenuta dalle pareti inclinate.'''
+  [[quesito.opzione]]
+  testo = '''la stessa nei tre recipienti'''
+  [[quesito.opzione]]
+  testo = '''la stessa solo se i tre fondi hanno la stessa area'''
+  commento = '''L'area del fondo decide la forza sul fondo, $F = pS$, non la pressione: la pressione dipende solo dalla profondità.'''
+
+[[quesito]]
+id = "ud3-statica-diastolica"
+tipo = "multipla"
+testo = '''La pressione arteriosa minima di un paziente è {{p}}, e la pressione atmosferica è {{p0}}. Al momento della diastole la pressione assoluta del sangue nell'arteria è'''
+dati.p = { valore = 80, unita = "\\mmHg" }
+dati.p0 = { valore = 760, unita = "\\mmHg" }
+corretta = "A"
+calcolo = "p0 + p"
+soluzione = '''Le pressioni arteriose sono relative: \SI{80}{\mmHg} vuol dire \SI{80}{\mmHg} sopra la pressione atmosferica. La pressione assoluta è la relativa più quella atmosferica:
+\[
+  p_\text{ass} = p_\text{atm} + p_\text{rel} = \SI{760}{\mmHg} + \SI{80}{\mmHg} = \SI{840}{\mmHg}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{840}{\mmHg}'''
+  valore = 840
+  [[quesito.opzione]]
+  testo = '''\SI{680}{\mmHg}'''
+  commento = '''Sottrae la pressione relativa da quella atmosferica: $760 - 80 = 680$. Una pressione arteriosa positiva sta sopra quella atmosferica, quindi si somma.'''
+  [[quesito.opzione]]
+  testo = '''\SI{80}{\mmHg}'''
+  commento = '''È la pressione relativa, quella che si legge con lo sfigmomanometro. La pressione assoluta si misura a partire dal vuoto e comprende quella atmosferica.'''
+  [[quesito.opzione]]
+  testo = '''\SI{760}{\mmHg}'''
+  commento = '''È solo la pressione atmosferica: tratta il sangue come se fosse alla pressione dell'aria. I \SI{80}{\mmHg} dicono proprio di quanto il sangue la supera.'''
+  [[quesito.opzione]]
+  testo = '''\SI{10,6}{\kilo\pascal}'''
+  commento = '''Converte bene \SI{80}{\mmHg} in pascal, $80 \cdot 133 = \SI{10640}{\pascal}$, ma resta la pressione relativa: la pressione atmosferica non è stata aggiunta.'''
+
+[[quesito]]
+id = "ud3-statica-pesino"
+tipo = "multipla"
+testo = '''Un pesino per la ginnastica in acqua ha massa {{m}} e volume {{V}}. Completamente immerso in acqua ({{rho}}), con $g = \SI{10}{\metre\per\second\squared}$, il suo peso apparente è'''
+dati.m = { valore = 500, unita = "\\gram" }
+dati.V = { valore = 200, unita = "\\centi\\metre\\cubed" }
+dati.rho = { valore = 1000, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+corretta = "E"
+calcolo = "(m * 1e-3 - rho * V * 1e-6) * 10"
+soluzione = '''Il peso è $P = mg = \SI{0,500}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} = \SI{5,0}{\newton}$. Il pesino sposta \SI{200}{\centi\metre\cubed} d'acqua, cioè $V = \SI{2,0e-4}{\metre\cubed}$, e riceve la spinta
+\[
+  F_A = \rho V g = \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{2,0e-4}{\metre\cubed} \cdot \SI{10}{\metre\per\second\squared} = \SI{2,0}{\newton}
+\]
+Il peso apparente è il peso meno la spinta: $P_\text{app} = \SI{5,0}{\newton} - \SI{2,0}{\newton} = \SI{3,0}{\newton}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{2,0}{\newton}'''
+  commento = '''È la spinta di Archimede, non il peso apparente. Il peso apparente è il peso meno la spinta.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5,0}{\newton}'''
+  commento = '''È il peso in aria: dimentica la spinta dell'acqua.'''
+  [[quesito.opzione]]
+  testo = '''\SI{7,0}{\newton}'''
+  commento = '''Somma la spinta al peso, come se la spinta fosse verso il basso. La spinta di Archimede è verso l'alto e alleggerisce il corpo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3,0e3}{\newton}'''
+  commento = '''Usa la massa in grammi: $(500 - 200) \cdot 10 = 3000$. Nel SI la massa del pesino è \SI{0,500}{\kilo\gram}, quella dell'acqua spostata \SI{0,200}{\kilo\gram}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3,0}{\newton}'''
+  valore = 3.0
+
+[[quesito]]
+id = "ud3-statica-manometro"
+tipo = "multipla"
+testo = '''Un manometro a tubo aperto, a mercurio, è collegato a un recipiente di gas. Il mercurio nel ramo aperto all'aria sta {{dh}} più in alto che nel ramo collegato al recipiente. Se la pressione atmosferica è {{p0}}, la pressione assoluta del gas è'''
+dati.dh = { valore = 19, unita = "cm" }
+dati.p0 = { valore = 760, unita = "\\mmHg" }
+corretta = "C"
+calcolo = "p0 + 10 * dh"
+soluzione = '''Il gas spinge in basso il mercurio nel suo ramo e lo fa salire nell'altro: la sua pressione è maggiore di quella atmosferica, e la differenza è la pressione del dislivello, $p - p_\text{atm} = \rho g \Delta h$. Con il mercurio, un dislivello di \SI{19}{\centi\metre} = \SI{190}{\milli\metre} vale direttamente \SI{190}{\mmHg}. Quindi
+\[
+  p = \SI{760}{\mmHg} + \SI{190}{\mmHg} = \SI{950}{\mmHg}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{190}{\mmHg}'''
+  commento = '''È la pressione relativa, quella che il manometro misura direttamente. Quella assoluta comprende anche la pressione atmosferica.'''
+  [[quesito.opzione]]
+  testo = '''\SI{570}{\mmHg}'''
+  commento = '''Sbaglia il verso: $760 - 190 = 570$. Il livello è più alto nel ramo aperto, quindi è il gas a spingere più forte dell'aria, e la sua pressione è maggiore di quella atmosferica.'''
+  [[quesito.opzione]]
+  testo = '''\SI{950}{\mmHg}'''
+  valore = 950
+  [[quesito.opzione]]
+  testo = '''\SI{779}{\mmHg}'''
+  commento = '''Legge il dislivello come \SI{19}{\milli\metre} invece di \SI{19}{\centi\metre}: $760 + 19 = 779$. Un centimetro di mercurio sono \SI{10}{\mmHg}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{760}{\mmHg}'''
+  commento = '''Pensa che, essendo un ramo aperto all'aria, il gas resti alla pressione atmosferica. Se così fosse, i due livelli sarebbero alla stessa altezza.'''
+
+[[quesito]]
+id = "ud3-statica-ghiaccio-olio"
+tipo = "multipla"
+testo = '''Il ghiaccio e l'olio d'oliva hanno la stessa densità, {{rho}}. Un cubetto di ghiaccio messo in un recipiente pieno d'olio, e spinto tutto sotto la superficie,'''
+dati.rho = { valore = 920, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+corretta = "E"
+soluzione = '''Su un corpo completamente immerso agiscono il peso, $\rho_\text{c} V g$, e la spinta, $\rho_\text{f} V g$. Con $\rho_\text{c} = \rho_\text{f}$ le due forze sono uguali qualunque sia la profondità: il cubetto resta in equilibrio dove lo si lascia, come un pesce o un subacqueo con la zavorra giusta. (Nella realtà le due densità differiscono di poco, e il ghiaccio, sciogliendosi, cambia: il cubetto si muove lentamente.)'''
+
+  [[quesito.opzione]]
+  testo = '''torna a galla e galleggia con il 92\% del volume immerso'''
+  commento = '''Usa il rapporto fra la densità del ghiaccio e quella dell'acqua, $920/1000$. Qui il liquido è l'olio, e il rapporto è $920/920 = 1$.'''
+  [[quesito.opzione]]
+  testo = '''torna a galla e galleggia con l'8\% del volume immerso'''
+  commento = '''Usa la frazione che resta fuori dall'acqua quando il ghiaccio galleggia in acqua, $1 - 0{,}92 = 0{,}08$: sbaglia il liquido e confonde la parte fuori con quella immersa.'''
+  [[quesito.opzione]]
+  testo = '''affonda, perché l'olio è meno denso dell'acqua'''
+  commento = '''Il confronto va fatto fra il corpo e il liquido in cui è immerso, non con l'acqua: ghiaccio e olio hanno la stessa densità, e il peso non supera la spinta.'''
+  [[quesito.opzione]]
+  testo = '''torna a galla e galleggia con metà del volume immerso'''
+  commento = '''Pensa che densità uguali diano metà dentro e metà fuori. La frazione immersa è $\rho_\text{c}/\rho_\text{f} = 1$: tutto il volume immerso, e nessuna spinta in più che lo faccia risalire.'''
+  [[quesito.opzione]]
+  testo = '''resta in equilibrio, tutto immerso, alla profondità a cui lo si lascia'''
+
+[[quesito]]
+id = "ud3-statica-iperbarica-mmhg"
+tipo = "completamento"
+testo = '''Durante una seduta in camera iperbarica la pressione assoluta dell'aria è {{p}}. Con $\SI{1}{atm} = \SI{760}{\mmHg}$, la pressione nella camera supera quella atmosferica esterna di \completa{} mmHg.'''
+dati.p = { valore = "2,5", unita = "atm" }
+calcolo = "(p - 1) * 760"
+risposta = "1140"
+soluzione = '''Fuori la pressione è \SI{1}{atm}, quindi la pressione relativa della camera è $\SI{2,5}{atm} - \SI{1}{atm} = \SI{1,5}{atm}$. In millimetri di mercurio:
+\[
+  1{,}5 \cdot \SI{760}{\mmHg} = 760 + 380 = \SI{1140}{\mmHg}
+\]
+Chi scrive 1900 ha convertito la pressione assoluta, $2{,}5 \cdot 760$, invece della differenza con quella esterna.'''
+
+[[quesito]]
+id = "ud3-statica-liquor"
+tipo = "completamento"
+testo = '''Durante una rachicentesi la pressione del liquor si misura con un manometro ad acqua collegato all'ago, con il paziente sdraiato su un fianco. Il liquor sale nel tubo fino a {{dh}} sopra il livello dell'ago; il liquor ha praticamente la densità dell'acqua, e il mercurio è 13,6 volte più denso. La pressione del liquor è di \completa{} mmHg.'''
+dati.dh = { valore = "27,2", unita = "cm" }
+calcolo = "dh * 10 / 13.6"
+risposta = "20"
+soluzione = '''A parità di pressione, $\rho g \Delta h$ è lo stesso: una colonna di mercurio, 13,6 volte più densa, è 13,6 volte più bassa di una d'acqua. La colonna è di $\SI{27,2}{\centi\metre} = \SI{272}{\milli\metre}$ d'acqua, quindi
+\[
+  \frac{\SI{272}{\milli\metre}}{13{,}6} = \SI{20}{\milli\metre} \ \text{di mercurio} = \SI{20}{\mmHg}
+\]
+(infatti $13{,}6 \cdot 20 = 272$). È una pressione alta: i valori normali sono fra circa 7 e \SI{15}{\mmHg}. Chi scrive 2 ha diviso per 13,6 i centimetri invece dei millimetri.'''
+
+[[quesito]]
+id = "ud3-statica-tavoletta"
+tipo = "completamento"
+testo = '''Una tavoletta di schiuma per la riabilitazione in acqua galleggia con un quinto del suo volume immerso. La densità della schiuma è \completa{} kg/m³.'''
+calcolo = "1000 / 5"
+risposta = "200"
+soluzione = '''Per un corpo che galleggia la frazione immersa è il rapporto delle densità, $V_\text{imm}/V = \rho_\text{c}/\rho_\text{f}$. Quindi
+\[
+  \rho_\text{c} = \rho_\text{acqua}\,\frac{V_\text{imm}}{V} = \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \frac{1}{5} = \SI{200}{\kilo\gram\per\metre\cubed}
+\]
+Chi scrive 800 ha usato la frazione che resta fuori, $4/5$, invece di quella immersa.'''
+
+[[quesito]]
+id = "ud3-moto-placca"
+tipo = "multipla"
+testo = '''In un tratto orizzontale di arteria una placca fa salire la velocità media del sangue da {{v1}} a {{v2}}. Trattando il sangue come un fluido ideale di densità {{rho}}, nel tratto ristretto la pressione'''
+dati.v1 = { valore = "1,0", unita = "m/s" }
+dati.v2 = { valore = "2,0", unita = "m/s" }
+dati.rho = { valore = 1060, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+corretta = "C"
+calcolo = "0.5 * rho * (v2**2 - v1**2)"
+soluzione = '''Con l'arteria orizzontale il teorema di Bernoulli dà $p_1 - p_2 = \frac{1}{2}\rho\,(v_2^2 - v_1^2)$. Con $\frac{1}{2}\rho = 530$:
+\[
+  p_1 - p_2 = 530 \cdot (2{,}0^2 - 1{,}0^2)\,\si{\pascal} = 530 \cdot (4 - 1)\,\si{\pascal} = \SI{1590}{\pascal}
+\]
+La differenza è positiva: la pressione nel tratto ristretto, dove il sangue è più veloce, è più bassa di \SI{1590}{\pascal}, circa \SI{12}{\mmHg}.'''
+
+  [[quesito.opzione]]
+  testo = '''cala di \SI{530}{\pascal}'''
+  commento = '''Usa il quadrato della differenza delle velocità, $(2 - 1)^2 = 1$, invece della differenza dei quadrati, $4 - 1 = 3$.'''
+  [[quesito.opzione]]
+  testo = '''cala di \SI{2120}{\pascal}'''
+  commento = '''Trascura la velocità prima della placca: $530 \cdot 2^2 = 2120$. Si può fare solo se la velocità prima è molto più piccola di quella dopo, come nella regola dell'ecocardiografia; qui è la metà, e $v_1^2$ non è trascurabile.'''
+  [[quesito.opzione]]
+  testo = '''cala di \SI{1590}{\pascal}'''
+  valore = 1590
+  [[quesito.opzione]]
+  testo = '''cala di \SI{3180}{\pascal}'''
+  commento = '''Dimentica il fattore $\frac{1}{2}$ dell'energia cinetica: $1060 \cdot 3 = 3180$.'''
+  [[quesito.opzione]]
+  testo = '''aumenta di \SI{1590}{\pascal}'''
+  commento = '''Il valore è giusto, il verso no: dove il fluido è più veloce la pressione è più bassa, perché per accelerare il sangue deve essere spinto da una pressione più alta dietro che davanti.'''
+
+[[quesito]]
+id = "ud3-moto-aneurisma"
+tipo = "multipla"
+testo = '''Un paziente ha un aneurisma dell'aorta addominale, cioè una dilatazione della sua parete. Trattando il sangue come un fluido ideale, nel tratto dilatato rispetto al tratto sano il sangue'''
+corretta = "D"
+soluzione = '''Nel tratto dilatato la sezione è più grande, e per l'equazione di continuità, con la stessa portata, il sangue rallenta. Per il teorema di Bernoulli, dove la velocità è più bassa la pressione è più alta: la pressione nell'aneurisma è un po' più alta che nel tratto sano, e spinge ancora di più verso l'esterno una parete già indebolita.'''
+
+  [[quesito.opzione]]
+  testo = '''accelera, e la sua pressione è più bassa'''
+  commento = '''È quello che succede in una stenosi, dove la sezione si riduce. Nell'aneurisma la sezione aumenta.'''
+  [[quesito.opzione]]
+  testo = '''rallenta, e la sua pressione è più bassa'''
+  commento = '''La velocità è giusta, la pressione no: per il teorema di Bernoulli, se l'energia cinetica per unità di volume diminuisce, la pressione aumenta.'''
+  [[quesito.opzione]]
+  testo = '''accelera, e la sua pressione è più alta'''
+  commento = '''Rovescia l'equazione di continuità: con la stessa portata, in una sezione più grande il sangue va più piano. Anche il legame fra velocità e pressione è al contrario.'''
+  [[quesito.opzione]]
+  testo = '''rallenta, e la sua pressione è più alta'''
+  [[quesito.opzione]]
+  testo = '''scorre con la stessa velocità, perché la portata è la stessa'''
+  commento = '''La portata è la stessa, ma è area per velocità: se l'area cresce, la velocità deve diminuire.'''
+
+[[quesito]]
+id = "ud3-moto-rami"
+tipo = "multipla"
+testo = '''Un'arteria di sezione {{S}} si divide in quattro rami uguali, ciascuno di sezione {{Sr}}. Nel tronco il sangue scorre con velocità media {{v}}. Nei rami la velocità media del sangue è'''
+dati.S = { valore = "1,0", unita = "\\centi\\metre\\squared" }
+dati.Sr = { valore = "0,50", unita = "\\centi\\metre\\squared" }
+dati.v = { valore = "0,30", unita = "m/s" }
+corretta = "B"
+calcolo = "v * S / (4 * Sr)"
+soluzione = '''Quando un condotto si ramifica, nell'equazione di continuità si usa l'area totale dei rami: $S_\text{rami} = 4 \cdot \SI{0,50}{\centi\metre\squared} = \SI{2,0}{\centi\metre\squared}$. Quindi
+\[
+  v_\text{rami} = v\,\frac{S}{S_\text{rami}} = \SI{0,30}{\metre\per\second} \cdot \frac{1{,}0}{2{,}0} = \SI{0,15}{\metre\per\second}
+\]
+Ogni ramo è più stretto del tronco, ma i rami insieme hanno una sezione più grande: il sangue rallenta. È quello che succede, in grande, passando dall'aorta ai capillari.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0,60}{\metre\per\second}'''
+  commento = '''Usa la sezione di un solo ramo come se ci passasse tutta la portata: $0{,}30 \cdot 1{,}0/0{,}50 = 0{,}60$. Ogni ramo porta solo un quarto della portata.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,15}{\metre\per\second}'''
+  valore = 0.15
+  [[quesito.opzione]]
+  testo = '''\SI{0,075}{\metre\per\second}'''
+  commento = '''Divide la velocità per il numero dei rami, $0{,}30/4 = 0{,}075$, come se si spartisse come la portata. È la portata a dividersi fra i rami; la velocità si ricava dalla portata e dall'area di ogni ramo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,30}{\metre\per\second}'''
+  commento = '''Pensa che la velocità si conservi come la portata. Si conserva il prodotto $Sv$, e l'area totale dei rami è doppia di quella del tronco.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,038}{\metre\per\second}'''
+  commento = '''Conta due volte i quattro rami: usa l'area totale dei rami e poi divide ancora per 4, $0{,}15/4 \approx 0{,}038$. L'area totale tiene già conto di tutti i rami.'''
+
+[[quesito]]
+id = "ud3-moto-portata"
+tipo = "completamento"
+testo = '''In un'arteria di sezione {{S}} il sangue scorre con velocità media {{v}}. La portata dell'arteria vale \completa{} mL/s.'''
+dati.S = { valore = "0,50", unita = "\\centi\\metre\\squared" }
+dati.v = { valore = "0,20", unita = "m/s" }
+calcolo = "S * v * 100"
+risposta = "10"
+soluzione = '''Conviene lavorare in centimetri, perché un millilitro è un centimetro cubo. La velocità è $\SI{0,20}{\metre\per\second} = \SI{20}{\centi\metre\per\second}$, quindi
+\[
+  Q = S\,v = \SI{0,50}{\centi\metre\squared} \cdot \SI{20}{\centi\metre\per\second} = \SI{10}{\centi\metre\cubed\per\second} = \SI{10}{\milli\litre\per\second}
+\]
+Chi scrive 0,1 ha moltiplicato i centimetri quadrati per i metri al secondo senza convertire.'''
+
+[[quesito]]
+id = "ud3-moto-gradiente"
+tipo = "completamento"
+testo = '''In un'ecocardiografia la differenza di pressione fra il ventricolo sinistro e l'aorta, ricavata con la regola $\Delta p \approx 4v^2$, è di {{dp}}. Il getto di sangue attraverso la valvola aortica ha una velocità di \completa{} m/s.'''
+dati.dp = { valore = 36, unita = "\\mmHg" }
+calcolo = "math.sqrt(dp / 4)"
+risposta = "3"
+soluzione = '''Dalla regola dell'ecocardiografia, con $\Delta p$ in millimetri di mercurio e $v$ in metri al secondo:
+\[
+  v^2 = \frac{\Delta p}{4} = \frac{36}{4} = 9
+  \qquad\qquad
+  v = \sqrt{9} = \SI{3}{\metre\per\second}
+\]
+Chi scrive 9 si è fermato a $v^2$, senza la radice; chi scrive 6 ha fatto la radice di 36 senza dividere per 4. È una stenosi aortica moderata: quella grave comincia da \SI{4}{\metre\per\second}.'''
+
+[[quesito]]
+id = "ud3-viscosi-catetere"
+tipo = "multipla"
+testo = '''Un catetere viene sostituito con uno lungo il doppio e di raggio interno doppio. A parità di differenza di pressione, e con moto laminare, la portata'''
+corretta = "E"
+calcolo = "2**4 / 2"
+soluzione = '''Per la legge di Poiseuille, $Q = \pi r^4 \Delta p/(8\eta L)$: la portata è proporzionale a $r^4$ e inversamente proporzionale a $L$. Con raggio doppio $r^4$ si moltiplica per $2^4 = 16$; con lunghezza doppia la portata si dimezza. In tutto: $16/2 = 8$.'''
+
+  [[quesito.opzione]]
+  testo = '''diventa 2 volte più grande'''
+  commento = '''Usa il quadrato del raggio, $2^2/2 = 2$: pensa solo all'area della sezione. Nella legge di Poiseuille il raggio compare alla quarta potenza.'''
+  [[quesito.opzione]]
+  testo = '''diventa 16 volte più grande'''
+  commento = '''Tiene conto del raggio ma dimentica la lunghezza: un catetere lungo il doppio ha resistenza doppia, e la portata si dimezza.'''
+  [[quesito.opzione]]
+  testo = '''diventa 32 volte più grande'''
+  commento = '''Moltiplica per la lunghezza invece di dividere, $16 \cdot 2 = 32$: la lunghezza sta al denominatore, perché un tubo più lungo frena di più.'''
+  [[quesito.opzione]]
+  testo = '''diventa 8 volte più piccola'''
+  commento = '''Il fattore 8 è giusto, ma il verso no: un catetere più largo ha una resistenza minore, e a parità di pressione lascia passare più liquido.'''
+  [[quesito.opzione]]
+  testo = '''diventa 8 volte più grande'''
+  valore = 8
+
+[[quesito]]
+id = "ud3-viscosi-gradiente"
+tipo = "multipla"
+testo = '''In un vaso sanguigno il sangue scorre in moto laminare, con il profilo di velocità a parabola. Il gradiente di velocità è massimo'''
+corretta = "B"
+soluzione = '''Il gradiente di velocità dice quanto rapidamente cambia la velocità passando da uno strato all'altro: è la pendenza del profilo. La parabola è piatta sull'asse, dove la velocità è massima ma quasi uguale negli strati vicini, ed è più ripida vicino alla parete, dove la velocità scende rapidamente fino a zero. Il gradiente è massimo vicino alla parete e nullo sull'asse.'''
+
+  [[quesito.opzione]]
+  testo = '''sull'asse del vaso, dove la velocità è massima'''
+  commento = '''Confonde il gradiente con la velocità. Sull'asse la velocità è massima, ma il profilo è piatto: gli strati vicini vanno quasi alla stessa velocità, e il gradiente è nullo.'''
+  [[quesito.opzione]]
+  testo = '''vicino alla parete del vaso'''
+  [[quesito.opzione]]
+  testo = '''uguale in tutti i punti della sezione'''
+  commento = '''Il gradiente è lo stesso ovunque nello strato fra due lastre piane, dove la velocità cresce in modo uniforme. In un tubo il profilo è una parabola, e la sua pendenza cambia da punto a punto.'''
+  [[quesito.opzione]]
+  testo = '''a metà strada fra l'asse e la parete'''
+  commento = '''A metà raggio la pendenza della parabola è metà di quella vicino alla parete: il gradiente cresce di continuo dall'asse alla parete, senza un massimo intermedio.'''
+  [[quesito.opzione]]
+  testo = '''in nessun punto: è nullo ovunque, perché il moto è stazionario'''
+  commento = '''Confonde il cambiamento nel tempo con quello nello spazio. Stazionario vuol dire che in ogni punto la velocità non cambia nel tempo; il gradiente misura come cambia da uno strato all'altro.'''
+
+[[quesito]]
+id = "ud3-viscosi-tre-vasi"
+tipo = "multipla"
+testo = '''Tre vasi uguali hanno ciascuno resistenza idraulica $R$. Due sono collegati in parallelo fra loro, e la coppia è in serie con il terzo. La resistenza equivalente dei tre vasi è'''
+corretta = "C"
+soluzione = '''I due vasi in parallelo: $1/R_\text{p} = 1/R + 1/R = 2/R$, quindi $R_\text{p} = R/2$. In serie con il terzo le resistenze si sommano: $R_\text{eq} = R/2 + R = 3R/2$.'''
+
+  [[quesito.opzione]]
+  testo = '''$3R$'''
+  commento = '''Mette tutti e tre i vasi in serie. Due sono in parallelo, e insieme hanno resistenza minore di ciascuno.'''
+  [[quesito.opzione]]
+  testo = '''$R/3$'''
+  commento = '''Mette tutti e tre i vasi in parallelo: $1/R + 1/R + 1/R = 3/R$. Il terzo vaso è in serie con la coppia.'''
+  [[quesito.opzione]]
+  testo = '''$3R/2$'''
+  [[quesito.opzione]]
+  testo = '''$2R/3$'''
+  commento = '''Scambia serie e parallelo: due vasi in serie, $2R$, in parallelo con il terzo, danno $2R \cdot R/(2R + R) = 2R/3$.'''
+  [[quesito.opzione]]
+  testo = '''$R/2$'''
+  commento = '''Calcola bene la coppia in parallelo, $R/2$, ma dimentica di sommare il terzo vaso, che è in serie.'''
+
+[[quesito]]
+id = "ud3-viscosi-regime"
+tipo = "multipla"
+testo = '''In un'arteria sana il sangue accelera a ogni sistole e rallenta nella diastole, e scorre in strati che non si mescolano. Il suo moto è'''
+corretta = "A"
+soluzione = '''Le due classificazioni sono indipendenti. Gli strati che scorrono senza mescolarsi dicono che il moto è laminare. La velocità che cambia nel tempo, in ogni punto, dice che il moto non è stazionario: è pulsatile. Il moto del sangue in un'arteria sana è quindi laminare e non stazionario.'''
+
+  [[quesito.opzione]]
+  testo = '''laminare e non stazionario'''
+  [[quesito.opzione]]
+  testo = '''turbolento, perché la velocità cambia nel tempo'''
+  commento = '''Confonde «non stazionario» con «turbolento». Turbolento vuol dire che il fluido forma vortici e si rimescola; qui gli strati non si mescolano. Un moto può cambiare nel tempo e restare ordinato.'''
+  [[quesito.opzione]]
+  testo = '''laminare e stazionario, perché gli strati non si mescolano'''
+  commento = '''Laminare è giusto, ma il fatto che gli strati non si mescolino non dice niente sul tempo: la velocità che cresce nella sistole e cala nella diastole rende il moto non stazionario.'''
+  [[quesito.opzione]]
+  testo = '''turbolento e stazionario'''
+  commento = '''Sbaglia tutte e due le classificazioni: gli strati non si mescolano (moto laminare) e la velocità cambia nel tempo (moto non stazionario). Un moto turbolento, poi, non è mai stazionario nel dettaglio.'''
+  [[quesito.opzione]]
+  testo = '''quello di un fluido ideale, perché in un'arteria sana non c'è attrito'''
+  commento = '''Il sangue è un fluido viscoso anche in un'arteria sana: il moto laminare in strati che scivolano gli uni sugli altri è proprio quello di un fluido reale, frenato dall'attrito interno e dalla parete.'''
+
+[[quesito]]
+id = "ud3-viscosi-raddoppio"
+tipo = "multipla"
+testo = '''Un organo ha bisogno del doppio del sangue. A parità di differenza di pressione, e con moto laminare, il raggio delle sue arteriole deve'''
+corretta = "D"
+calcolo = "round(100 * (2**0.25 - 1))"
+soluzione = '''Per la legge di Poiseuille la portata è proporzionale a $r^4$. Per raddoppiarla serve un fattore $k$ con $k^4 = 2$. Si prova $k = 1{,}19$: $1{,}19^2 \approx 1{,}42$ e $1{,}42^2 \approx 2{,}0$. Il raggio deve aumentare di circa il 19\%.'''
+
+  [[quesito.opzione]]
+  testo = '''aumentare del 100\%'''
+  commento = '''Tratta la portata come proporzionale al raggio. Con il raggio doppio la portata diventerebbe $2^4 = 16$ volte più grande.'''
+  [[quesito.opzione]]
+  testo = '''aumentare del 41\%'''
+  commento = '''Tratta la portata come proporzionale a $r^2$, cioè all'area: $\sqrt{2} \approx 1{,}41$. Ma con il raggio cresce anche la velocità media, e la portata va con $r^4$.'''
+  [[quesito.opzione]]
+  testo = '''aumentare del 26\%'''
+  commento = '''Usa la terza potenza del raggio: $1{,}26^3 \approx 2$. La potenza giusta è la quarta: $1{,}26^4 \approx 2{,}5$.'''
+  [[quesito.opzione]]
+  testo = '''aumentare del 19\%'''
+  valore = 19
+  [[quesito.opzione]]
+  testo = '''diminuire del 19\%'''
+  commento = '''Il numero è giusto, il verso no: un'arteriola più stretta ha una resistenza maggiore e lascia passare meno sangue. Per avere più sangue le arteriole si dilatano.'''
+
+[[quesito]]
+id = "ud3-viscosi-letto"
+tipo = "multipla"
+testo = '''Un letto capillare è formato da \num{10000} capillari uguali in parallelo, ciascuno con resistenza idraulica {{R}}. La resistenza equivalente del letto capillare è'''
+dati.R = { valore = "2,0e16", unita = "\\pascal\\second\\per\\metre\\cubed" }
+corretta = "A"
+calcolo = "R / 10000"
+soluzione = '''Per $n$ rami uguali in parallelo, ciascuno di resistenza $R_1$, si ha $1/R = n/R_1$, cioè $R = R_1/n$. Con $n = \num{10000} = 10^4$:
+\[
+  R = \frac{\SI{2,0e16}{\pascal\second\per\metre\cubed}}{10^4} = 2{,}0 \cdot 10^{16-4}\,\si{\pascal\second\per\metre\cubed} = \SI{2,0e12}{\pascal\second\per\metre\cubed}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{2,0e12}{\pascal\second\per\metre\cubed}'''
+  valore = 2.0e12
+  [[quesito.opzione]]
+  testo = '''\SI{2,0e20}{\pascal\second\per\metre\cubed}'''
+  commento = '''Somma le resistenze come se i capillari fossero in serie: $10^4 \cdot \num{2,0e16} = \num{2,0e20}$. In parallelo il sangue ha più strade, e la resistenza diminuisce.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5,0e-13}{\pascal\second\per\metre\cubed}'''
+  commento = '''Calcola $1/R = 10^4/\num{2,0e16} = \num{5,0e-13}$ e si ferma lì: è l'inverso della resistenza, e va capovolto.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,0e16}{\pascal\second\per\metre\cubed}'''
+  commento = '''Pensa che, avendo tutti i capillari la stessa differenza di pressione, la resistenza resti quella di uno solo. Ma le portate dei rami si sommano: a parità di pressione passa $10^4$ volte più sangue, e la resistenza è $10^4$ volte più piccola.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,0e4}{\pascal\second\per\metre\cubed}'''
+  commento = '''Divide gli esponenti invece di sottrarli: $10^{16}/10^{4} = 10^{16-4} = 10^{12}$, non $10^{16/4} = 10^{4}$.'''
+
+[[quesito]]
+id = "ud3-viscosi-terzo"
+tipo = "completamento"
+testo = '''Per un'aterosclerosi il raggio di un'arteria si riduce a un terzo. A parità di differenza di pressione, e con moto laminare, la portata diventa \completa{} volte più piccola.'''
+calcolo = "3**4"
+risposta = "81"
+soluzione = '''Per la legge di Poiseuille la portata è proporzionale a $r^4$. Con il raggio ridotto a un terzo: $(1/3)^4 = 1/3^4 = 1/81$, perché $3^2 = 9$ e $9^2 = 81$. La portata diventa 81 volte più piccola. Chi scrive 9 ha usato il quadrato del raggio, cioè solo l'area; chi scrive 27 la terza potenza.'''
+
+[[quesito]]
+id = "ud3-viscosi-plasma"
+tipo = "completamento"
+testo = '''Con la stessa cannula e la stessa differenza di pressione si fanno passare, in moto laminare, del plasma, di viscosità {{eta1}}, e del sangue, di viscosità {{eta2}}. La portata del plasma è \completa{} volte quella del sangue.'''
+dati.eta1 = { valore = "1,2e-3", unita = "\\pascal\\second" }
+dati.eta2 = { valore = "3,6e-3", unita = "\\pascal\\second" }
+calcolo = "eta2 / eta1"
+risposta = "3"
+soluzione = '''Per la legge di Poiseuille, $Q = \pi r^4 \Delta p/(8\eta L)$: con lo stesso tubo e la stessa $\Delta p$ la portata è inversamente proporzionale alla viscosità. Quindi
+\[
+  \frac{Q_\text{plasma}}{Q_\text{sangue}} = \frac{\eta_\text{sangue}}{\eta_\text{plasma}} = \frac{3{,}6 \cdot 10^{-3}}{1{,}2 \cdot 10^{-3}} = 3
+\]
+Il plasma è meno viscoso perché non ha i globuli rossi. Chi scrive $1/3$ ha messo la viscosità al numeratore, come se un fluido più viscoso scorresse meglio.'''
+
+[[quesito]]
+id = "ud3-viscosi-strati"
+tipo = "completamento"
+testo = '''Uno strato di fluido di spessore {{dy}} è compreso fra una lastra ferma e una lastra che scorre con velocità {{v}}. Il gradiente di velocità nel fluido vale \completa{} \si{\per\second}.'''
+dati.dy = { valore = "0,50", unita = "mm" }
+dati.v = { valore = "0,30", unita = "m/s" }
+calcolo = "v / (dy * 1e-3)"
+risposta = "600"
+soluzione = '''La velocità passa da 0 a $v$ in modo uniforme, e il gradiente è lo stesso in tutto lo strato. Con $\Delta y = \SI{0,50}{\milli\metre} = \SI{5,0e-4}{\metre}$:
+\[
+  \frac{\Delta v}{\Delta y} = \frac{\SI{0,30}{\metre\per\second}}{\SI{5,0e-4}{\metre}} = \frac{0{,}30}{5{,}0} \cdot 10^{4}\,\si{\per\second} = 0{,}060 \cdot 10^{4}\,\si{\per\second} = \SI{600}{\per\second}
+\]
+Chi scrive 0,6 ha lasciato lo spessore in millimetri: $0{,}30/0{,}50 = 0{,}6$.'''
+
+[[quesito]]
+id = "ud3-superficie-capillare-raggio"
+tipo = "multipla"
+testo = '''In un capillare di vetro l'acqua risale di {{h}}. In un altro capillare dello stesso vetro, con raggio tre volte più piccolo, l'acqua risale di'''
+dati.h = { valore = 2, unita = "cm" }
+corretta = "D"
+calcolo = "h * 3"
+soluzione = '''Per la legge di Jurin, $h = 2\gamma\cos\theta/(\rho g r)$, l'altezza è inversamente proporzionale al raggio. Se il raggio diventa un terzo, l'altezza triplica: $h = 3 \cdot \SI{2}{\centi\metre} = \SI{6}{\centi\metre}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0,67}{\centi\metre}'''
+  commento = '''Tratta l'altezza come proporzionale al raggio: $2/3 \approx 0{,}67$. Nel tubo più sottile il liquido sale di più.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\centi\metre}'''
+  commento = '''Pensa che l'altezza dipenda solo dal liquido e dal vetro; dipende anche dal raggio del tubo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{18}{\centi\metre}'''
+  commento = '''Usa l'inverso del quadrato del raggio, come se contasse l'area della sezione: $2 \cdot 3^2 = 18$. Nella legge di Jurin il raggio è alla prima potenza.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6}{\centi\metre}'''
+  valore = 6
+  [[quesito.opzione]]
+  testo = '''\SI{0,22}{\centi\metre}'''
+  commento = '''Sbaglia due volte: proporzionalità diretta e al quadrato, $2/3^2 \approx 0{,}22$.'''
+
+[[quesito]]
+id = "ud3-superficie-bolla-sapone"
+tipo = "multipla"
+testo = '''Una bolla di sapone ha raggio {{r}} e l'acqua saponata ha tensione superficiale {{gamma}}. La pressione dentro la bolla supera quella esterna di'''
+dati.r = { valore = 1, unita = "cm" }
+dati.gamma = { valore = "0,025", unita = "\\newton\\per\\metre" }
+corretta = "C"
+calcolo = "4 * gamma / (r * 1e-2)"
+soluzione = '''La lamina di una bolla di sapone ha due superfici, e la legge di Laplace dà $\Delta p = 4\gamma/r$. Con $r = \SI{0,01}{\metre}$: $\Delta p = 4 \cdot 0{,}025/0{,}01 = 0{,}1/0{,}01 = \SI{10}{\pascal}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{5}{\pascal}'''
+  commento = '''Usa $2\gamma/r$, la formula della goccia, dimenticando che la lamina ha due superfici: $2 \cdot 0{,}025/0{,}01 = 5$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,5}{\pascal}'''
+  commento = '''Divide la tensione superficiale per il raggio senza il fattore 4: $0{,}025/0{,}01 = 2{,}5$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\pascal}'''
+  valore = 10
+  [[quesito.opzione]]
+  testo = '''\SI{0,1}{\pascal}'''
+  commento = '''Lascia il raggio in centimetri: $4 \cdot 0{,}025/1 = 0{,}1$. Il raggio va in metri.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1e-3}{\pascal}'''
+  commento = '''Moltiplica per il raggio invece di dividere: $4 \cdot 0{,}025 \cdot 0{,}01 = 0{,}001$. La pressione di curvatura è più grande nelle bolle piccole, quindi il raggio sta al denominatore.'''
+
+[[quesito]]
+id = "ud3-superficie-surfattante"
+tipo = "multipla"
+testo = '''Quale affermazione sul surfattante polmonare è corretta?'''
+corretta = "B"
+soluzione = '''Per la legge di Laplace la pressione di curvatura di un alveolo è $2\gamma/r$, più alta negli alveoli piccoli. Il surfattante abbassa $\gamma$, e la abbassa di più dove è più concentrato, negli alveoli piccoli: così la pressione necessaria per tenerli aperti è più bassa, e quelli piccoli non si svuotano in quelli grandi.'''
+
+  [[quesito.opzione]]
+  testo = '''Aumenta la tensione superficiale del liquido alveolare, così gli alveoli restano più tesi e non collassano.'''
+  commento = '''Una tensione superficiale più alta farebbe crescere la pressione di curvatura, $2\gamma/r$, e renderebbe più facile il collasso: il surfattante la abbassa.'''
+  [[quesito.opzione]]
+  testo = '''Abbassa la tensione superficiale, e la abbassa di più negli alveoli piccoli, che così non si svuotano in quelli grandi.'''
+  [[quesito.opzione]]
+  testo = '''Abbassa la tensione superficiale soprattutto negli alveoli grandi, perché sono loro ad avere la pressione di curvatura più alta.'''
+  commento = '''Inverte la legge di Laplace: la pressione di curvatura è inversamente proporzionale al raggio, quindi è più alta negli alveoli piccoli.'''
+  [[quesito.opzione]]
+  testo = '''Serve soprattutto a far passare l'ossigeno attraverso la parete dell'alveolo.'''
+  commento = '''Il ruolo del surfattante è meccanico: riduce la tensione superficiale. Gli scambi di gas avvengono per diffusione attraverso la parete.'''
+  [[quesito.opzione]]
+  testo = '''Annulla la pressione di curvatura, perché rende piana la superficie del liquido alveolare.'''
+  commento = '''La superficie dell'alveolo resta curva; il surfattante riduce $\gamma$ e quindi la pressione di curvatura, ma non la annulla.'''
+
+[[quesito]]
+id = "ud3-superficie-aneurisma-tensione"
+tipo = "multipla"
+testo = '''In un aneurisma dell'aorta il raggio del vaso passa da \SI{1}{\centi\metre} a \SI{3}{\centi\metre}, mentre la pressione del sangue rispetto ai tessuti intorno resta la stessa. La tensione che la parete deve sopportare'''
+corretta = "E"
+soluzione = '''Per la parete di un vaso cilindrico la legge di Laplace dà $T = \Delta p\,r$. A parità di pressione la tensione è proporzionale al raggio: se il raggio triplica, triplica anche la tensione.'''
+
+  [[quesito.opzione]]
+  testo = '''diventa un terzo'''
+  commento = '''Usa la proporzionalità inversa della pressione di curvatura, $\Delta p = 2\gamma/r$, al posto di $T = \Delta p\,r$: qui è data la pressione, e la tensione cresce con il raggio.'''
+  [[quesito.opzione]]
+  testo = '''resta la stessa, perché la pressione non cambia'''
+  commento = '''La tensione non dipende solo dalla pressione ma anche dal raggio, $T = \Delta p\,r$.'''
+  [[quesito.opzione]]
+  testo = '''diventa 9 volte più grande'''
+  commento = '''Tratta la tensione come proporzionale al quadrato del raggio, come l'area della sezione; nella legge di Laplace il raggio è alla prima potenza.'''
+  [[quesito.opzione]]
+  testo = '''diventa 81 volte più grande'''
+  commento = '''Confonde la legge di Laplace con quella di Poiseuille, dove la portata è proporzionale a $r^4$: $3^4 = 81$.'''
+  [[quesito.opzione]]
+  testo = '''diventa 3 volte più grande'''
+
+[[quesito]]
+id = "ud3-superficie-bolla-sangue"
+tipo = "completamento"
+testo = '''Una microbolla d'aria nel sangue ha raggio {{r}}. La tensione superficiale fra plasma e aria è {{gamma}}. La pressione dentro la bolla supera quella del sangue intorno di \completa{} kPa.'''
+dati.r = { valore = 1, unita = "\\micro\\metre" }
+dati.gamma = { valore = "0,05", unita = "\\newton\\per\\metre" }
+calcolo = "2 * 0.05 / (r * 1e-6) / 1e3"
+risposta = "100"
+soluzione = '''Una bolla in un liquido ha una sola superficie: $\Delta p = 2\gamma/r = 2 \cdot 0{,}05/10^{-6} = 0{,}1 \cdot 10^{6} = \SI{e5}{\pascal} = \SI{100}{\kilo\pascal}$. È circa una atmosfera in più: il gas di una bolla così piccola è spinto a sciogliersi nel sangue, e le microbolle spariscono in fretta.'''
+
+[[quesito]]
+id = "ud3-superficie-angolo"
+tipo = "completamento"
+testo = '''Una soluzione forma con la parete di un capillare un angolo di contatto di \ang{60} ($\cos\ang{60} = 0{,}5$) e risale di {{h}}. Un liquido con la stessa tensione superficiale e la stessa densità, ma con angolo di contatto \ang{0}, nello stesso capillare risalirebbe di \completa{} cm.'''
+dati.h = { valore = "1,2", unita = "cm" }
+calcolo = "h / 0.5"
+risposta = "2,4"
+soluzione = '''Per la legge di Jurin, $h = 2\gamma\cos\theta/(\rho g r)$, a parità di tutto il resto l'altezza è proporzionale a $\cos\theta$. Passando da $\cos\ang{60} = 0{,}5$ a $\cos\ang{0} = 1$ l'altezza raddoppia: $2 \cdot \SI{1,2}{\centi\metre} = \SI{2,4}{\centi\metre}$.'''
 
 # ==================================================================== quesiti lampo, in ordine di dispensa
 
@@ -253,5 +2737,5 @@ soluzione = '''Per la legge di Laplace la pressione dentro una bolla supera quel
   testo = '''non succede nulla, perché le due bolle sono alla stessa pressione'''
   commento = '''La pressione dentro una bolla dipende dal raggio, $\Delta p = 4\gamma/r$: le due bolle hanno pressioni diverse.'''
   [[quesito.opzione]]
-  testo = '''le due bolle si gonfiano tutte e due'''
-  commento = '''Il sistema è chiuso: l'aria che entra in una bolla deve uscire dall'altra.'''
+  testo = '''la bolla piccola si gonfia finché ha il raggio della grande, perché la sua pressione è maggiore'''
+  commento = '''Parte giustamente dalla pressione più alta nella bolla piccola, ma ne sbaglia l'effetto. Una pressione più alta spinge l'aria fuori, verso la bolla dove la pressione è più bassa: la bolla piccola si svuota, non si gonfia.'''
