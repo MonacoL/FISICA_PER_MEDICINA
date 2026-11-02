@@ -115,6 +115,37 @@
     {\normalsize #1\par}
   \end{center}}
 
+% \simulazione{numero}: una prova completa (CONTEXT.md). Il frontespizio della parte
+% è in simulazioni/simulazioni.tex; qui l'apertura di ogni prova e delle sue soluzioni.
+\newcommand{\simulazioni}{%
+  \clearpage
+  \renewcommand{\udtitolo}{}%
+  \renewcommand{\parte}{Simulazioni d'esame}%
+  \phantomsection\addcontentsline{toc}{chapter}{Simulazioni d'esame}%
+  \thispagestyle{plain}%
+  \begin{center}
+    \vspace*{1.5em}
+    {\LARGE\bfseries Simulazioni d'esame\par}\vspace{0.6em}
+    {\normalsize Tre prove complete nel formato ufficiale, con le soluzioni\par}
+    \vspace{1.5em}
+  \end{center}}
+
+\newcommand{\simulazione}[1]{%
+  \clearpage
+  \renewcommand{\parte}{Simulazione #1}%
+  \setcounter{quesito}{0}%
+  \phantomsection\addcontentsline{toc}{section}{Simulazione #1}%
+  \begin{center}
+    {\LARGE\bfseries Simulazione #1\par}\vspace{0.4em}
+    {\normalsize 31 quesiti: 21 a risposta multipla e 10 a completamento \textperiodcentered\ 50 minuti\par}
+  \end{center}}
+
+\newcommand{\soluzionisimulazione}[1]{%
+  \clearpage
+  \renewcommand{\parte}{Soluzioni della simulazione #1}%
+  \phantomsection\addcontentsline{toc}{section}{Soluzioni della simulazione #1}%
+  \section*{Soluzioni della simulazione #1}}
+
 % --- Box -----------------------------------------------------------------
 \RequirePackage[most]{tcolorbox}
 \tcbset{

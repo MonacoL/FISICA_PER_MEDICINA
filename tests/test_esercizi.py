@@ -129,3 +129,54 @@ def test_figura_nel_testo_diventa_un_rimando_nella_pagina_web() -> None:
     html = latex_a_html("Prima.\n\\begin{center}\n\\input{ud2/figure/trazione}\n\\end{center}\nDopo.")
     assert "\\input" not in html and "\\begin{center}" not in html
     assert "La figura è nel libro in PDF." in html
+
+
+def simulazioni(tolti: int = 0) -> dict:
+    """Tre prove nel formato ufficiale, divise fra le UD come QUOTE_UD; `tolti` quesiti in meno nella prima."""
+    from controllo.esercizi import QUOTE_UD
+
+    quesiti = []
+    for s in (1, 2, 3):
+        uds = [u for u, n in QUOTE_UD.items() for _ in range(n)]
+        for i, u in enumerate(uds):
+            tipo = "completamento" if i % 3 == 2 and i < 30 else "multipla"
+            q = {"id": f"s{s}-{i}", "simulazione": s, "ud": u, "sezione": "I vettori", "tipo": tipo, "testo": "", "soluzione": ""}
+            if tipo == "completamento":
+                q["risposta"] = "1"
+            else:
+                q["corretta"] = "ABCDE"[i % 5]
+                q["opzione"] = [{"testo": "", "commento": ""} for _ in range(5)]
+            quesiti.append(q)
+    return {"quesito": quesiti[tolti:]}
+
+
+def test_simulazioni_nel_formato_ufficiale_tornano() -> None:
+    from controllo.esercizi import controlla_simulazioni
+
+    errori, avvisi = controlla_simulazioni(simulazioni(), "simulazioni")
+    assert errori == [] and avvisi == []
+
+
+def test_simulazione_con_un_quesito_in_meno_fallisce() -> None:
+    from controllo.esercizi import controlla_simulazioni
+
+    errori, _ = controlla_simulazioni(simulazioni(tolti=1), "simulazioni")
+    assert any("simulazione 1" in e for e in errori)
+
+
+def test_simulazione_con_una_sezione_che_la_dispensa_non_ha_fallisce() -> None:
+    from controllo.esercizi import QUOTE_UD, controlla_simulazioni
+
+    titoli = {u: {"I vettori"} for u in QUOTE_UD}
+    fonte = simulazioni()
+    assert controlla_simulazioni(fonte, "simulazioni", titoli) == ([], [])
+    fonte["quesito"][0]["sezione"] = "I vettori nello spazio"
+    errori, _ = controlla_simulazioni(fonte, "simulazioni", titoli)
+    assert any("I vettori nello spazio" in e for e in errori)
+
+
+def test_i_titoli_delle_dispense_comprendono_le_sottosezioni() -> None:
+    from controllo.esercizi import TITOLO
+
+    tex = "\\section{I vettori}\n\\subsection{Angoli maggiori di \\texorpdfstring{\\ang{90}}{90 gradi}}"
+    assert TITOLO.findall(tex) == ["I vettori", "Angoli maggiori di \\texorpdfstring{\\ang{90}}{90 gradi}"]

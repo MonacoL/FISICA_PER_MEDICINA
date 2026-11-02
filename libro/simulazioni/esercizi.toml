@@ -1,0 +1,2299 @@
+# Simulazioni d'esame: fonte unica (ADR 0006). `uv run controllo simulazioni` ne ricava
+# generati/simulazioni.tex e la pagina web build/web/simulazioni.html, e ricalcola ogni risultato.
+#
+# Il formato dei quesiti è quello di libro/ud7/esercizi.toml, con tre campi in più:
+# - simulazione: 1, 2 o 3, la prova a cui il quesito appartiene;
+# - ud: l'unità didattica (1-7) da cui viene il quesito;
+# - sezione: il titolo della sezione o della sottosezione della dispensa di quella UD
+#   da ripassare, scritto come nel \section o nel \subsection; la soluzione svolta lo
+#   mostra accanto all'UD, e il controllo verifica che il titolo esista nella dispensa.
+# Ogni prova ha 21 quesiti a risposta multipla e 10 a completamento, divisi fra le UD
+# come in QUOTE_UD (controllo/esercizi.py). Nella prova i quesiti vanno prima tutti a
+# risposta multipla, poi a completamento, ciascun gruppo in ordine di UD.
+
+titolo = "Simulazioni d'esame"
+
+[costanti]
+g = 10
+mmHg = 133
+R = 8.3
+h = 6.6e-34
+eV = 1.6e-19
+k = 9000000000.0
+e = 1.6e-19
+
+# ==================================================================== problemi
+
+
+# ==================================================================== quesiti d'esame
+
+[[quesito]]
+id = "sim1-ud2-grafico-vt"
+simulazione = 1
+ud = 2
+sezione = "Il moto uniformemente accelerato"
+tipo = "multipla"
+testo = '''Un corpo parte da fermo e si muove lungo una retta di moto uniformemente accelerato. Nel suo grafico velocità-tempo la velocità è rappresentata da'''
+corretta = "B"
+soluzione = '''Nel moto uniformemente accelerato la velocità è $v = v_0 + a\,t$, una funzione di primo grado del tempo: il grafico $v(t)$ è una retta. Con $v_0 = 0$ passa per l'origine. La sua pendenza è $\Delta v/\Delta t$, cioè proprio l'accelerazione $a$. Lo spazio percorso è invece l'area sotto la retta.'''
+
+  [[quesito.opzione]]
+  testo = '''una retta orizzontale'''
+  commento = '''È il grafico velocità-tempo del moto uniforme, in cui la velocità non cambia.'''
+  [[quesito.opzione]]
+  testo = '''una retta inclinata, con pendenza uguale all'accelerazione'''
+  [[quesito.opzione]]
+  testo = '''un ramo di parabola'''
+  commento = '''Confonde con il grafico orario $x(t)$, che nel moto uniformemente accelerato è una parabola. La velocità cresce in modo lineare con il tempo.'''
+  [[quesito.opzione]]
+  testo = '''una retta inclinata, con pendenza uguale alla velocità'''
+  commento = '''Confonde i due grafici: la velocità è la pendenza del grafico orario $x(t)$; la pendenza del grafico $v(t)$ è l'accelerazione.'''
+  [[quesito.opzione]]
+  testo = '''una retta inclinata, con pendenza uguale allo spazio percorso'''
+  commento = '''Lo spazio percorso è l'area sotto il grafico velocità-tempo, non la sua pendenza.'''
+
+[[quesito]]
+id = "sim1-ud2-sonda"
+simulazione = 1
+ud = 2
+sezione = "Il primo principio: l'inerzia"
+tipo = "multipla"
+testo = '''Una sonda spaziale, lontanissima da stelle e pianeti, viaggia a \SI{10}{\kilo\metre\per\second} quando il suo motore si spegne. Trascurando ogni forza esterna, dopo lo spegnimento la sonda'''
+corretta = "E"
+soluzione = '''Spento il motore, sulla sonda non agisce nessuna forza. Per il primo principio della dinamica un corpo su cui la risultante delle forze è nulla mantiene la sua velocità, in modulo, direzione e verso: la sonda prosegue in linea retta a \SI{10}{\kilo\metre\per\second}. Il motore serviva a cambiare la velocità, non a mantenerla.'''
+
+  [[quesito.opzione]]
+  testo = '''rallenta a poco a poco fino a fermarsi'''
+  commento = '''Pensa che per mantenere il moto serva una forza. Sulla Terra i corpi lasciati a sé rallentano per l'attrito e la resistenza dell'aria, che qui non ci sono.'''
+  [[quesito.opzione]]
+  testo = '''si ferma subito'''
+  commento = '''Pensa che il moto cessi insieme alla forza che lo ha prodotto. Per fermarsi la sonda avrebbe bisogno di una forza opposta alla velocità.'''
+  [[quesito.opzione]]
+  testo = '''continua ad accelerare, ma sempre meno'''
+  commento = '''Per il secondo principio un'accelerazione richiede una forza risultante. Senza forze l'accelerazione è nulla, subito dopo lo spegnimento.'''
+  [[quesito.opzione]]
+  testo = '''prosegue a \SI{10}{\kilo\metre\per\second}, ma su una traiettoria che si incurva'''
+  commento = '''Il modulo è giusto, ma cambiare direzione vuol dire cambiare velocità, e serve una forza. Senza forze la traiettoria è rettilinea.'''
+  [[quesito.opzione]]
+  testo = '''prosegue in linea retta a \SI{10}{\kilo\metre\per\second}'''
+
+[[quesito]]
+id = "sim1-ud2-energia-cinetica"
+simulazione = 1
+ud = 2
+sezione = "L'energia cinetica e il suo teorema"
+tipo = "multipla"
+testo = '''Un corpo ha energia cinetica $E_c$. Se la sua massa si dimezza e la sua velocità raddoppia, la sua energia cinetica diventa'''
+corretta = "A"
+calcolo = "(1 / 2) * 2**2"
+soluzione = '''L'energia cinetica è $E_c = \frac12 mv^2$: proporzionale alla massa e al quadrato della velocità. Con massa $m/2$ e velocità $2v$:
+\[
+  E_c' = \frac12 \cdot \frac{m}{2} \cdot (2v)^2 = \frac12 m v^2 \cdot \frac{4}{2} = 2E_c
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''$2E_c$'''
+  valore = 2
+  [[quesito.opzione]]
+  testo = '''$E_c$'''
+  commento = '''Pensa che il dimezzamento della massa e il raddoppio della velocità si compensino: vale se l'energia cinetica fosse proporzionale alla velocità, non al suo quadrato.'''
+  [[quesito.opzione]]
+  testo = '''$4E_c$'''
+  commento = '''Tiene conto del raddoppio della velocità, $2^2 = 4$, ma dimentica che la massa si dimezza.'''
+  [[quesito.opzione]]
+  testo = '''$8E_c$'''
+  commento = '''Moltiplica per 2 per la massa invece di dividere: $2 \cdot 4$.'''
+  [[quesito.opzione]]
+  testo = '''$E_c/2$'''
+  commento = '''Tiene conto solo della massa dimezzata e dimentica la velocità.'''
+
+[[quesito]]
+id = "sim1-ud2-urto-agganciati"
+simulazione = 1
+ud = 2
+sezione = "La conservazione della quantità di moto"
+tipo = "multipla"
+testo = '''Due carrelli si scontrano su una rotaia senza attrito e dopo l'urto restano agganciati. Nell'urto'''
+corretta = "C"
+soluzione = '''Durante l'urto i carrelli si scambiano forze interne, uguali e opposte per il terzo principio, e le forze esterne orizzontali sono nulle: il sistema è isolato, e la quantità di moto totale si conserva. L'urto con i corpi che restano attaccati è completamente anelastico: una parte dell'energia cinetica diventa calore e deformazione, e l'energia cinetica totale diminuisce.'''
+
+  [[quesito.opzione]]
+  testo = '''si conservano sia la quantità di moto totale sia l'energia cinetica totale'''
+  commento = '''Vale per l'urto elastico. Due carrelli che restano agganciati fanno un urto completamente anelastico, quello in cui si perde più energia cinetica.'''
+  [[quesito.opzione]]
+  testo = '''si conserva l'energia cinetica totale, ma non la quantità di moto totale'''
+  commento = '''Rovescia le due leggi: negli urti la quantità di moto totale si conserva sempre, l'energia cinetica no.'''
+  [[quesito.opzione]]
+  testo = '''si conserva la quantità di moto totale, ma non l'energia cinetica totale'''
+  [[quesito.opzione]]
+  testo = '''non si conservano né la quantità di moto totale né l'energia cinetica totale'''
+  commento = '''Le forze dell'urto sono interne al sistema dei due carrelli, e senza attrito non ci sono forze esterne orizzontali: la quantità di moto totale si conserva.'''
+  [[quesito.opzione]]
+  testo = '''si conserva la quantità di moto di ciascun carrello'''
+  commento = '''Ogni carrello subisce la forza dell'altro, e la sua quantità di moto cambia. Si conserva la loro somma, perché le due variazioni sono uguali e opposte.'''
+
+[[quesito]]
+id = "sim1-ud2-cm-piano"
+simulazione = 1
+ud = 2
+sezione = "Il centro di massa"
+tipo = "multipla"
+testo = '''Tre piccoli corpi stanno in un piano: uno di \SI{1}{\kilo\gram} nell'origine, uno di \SI{1}{\kilo\gram} nel punto $(4, 0)$ e uno di \SI{2}{\kilo\gram} nel punto $(0, 4)$, con le coordinate in metri. Il centro di massa del sistema si trova nel punto'''
+corretta = "D"
+soluzione = '''La massa totale è $1 + 1 + 2 = \SI{4}{\kilo\gram}$. Coordinata per coordinata, il centro di massa è la media delle posizioni pesata con le masse:
+\[
+  x_{cm} = \frac{1 \cdot 0 + 1 \cdot 4 + 2 \cdot 0}{4}\,\si{\metre} = \SI{1}{\metre}
+  \qquad\qquad
+  y_{cm} = \frac{1 \cdot 0 + 1 \cdot 0 + 2 \cdot 4}{4}\,\si{\metre} = \SI{2}{\metre}
+\]
+Il centro di massa è in $(1, 2)$. Il corpo di \SI{2}{\kilo\gram} ha metà della massa totale, e porta $y_{cm}$ a metà strada fra 0 e 4. Il corpo in $(4, 0)$ ha un quarto della massa totale, e porta $x_{cm}$ a un quarto di 4.'''
+
+  [[quesito.opzione]]
+  testo = '''$(4/3, 4/3)$'''
+  commento = '''Fa la media semplice delle coordinate, $(0 + 4 + 0)/3$ e $(0 + 0 + 4)/3$, come se le tre masse fossero uguali.'''
+  [[quesito.opzione]]
+  testo = '''$(2, 1)$'''
+  commento = '''Scambia le masse dei due corpi fuori dall'origine: mette \SI{2}{\kilo\gram} in $(4, 0)$ e \SI{1}{\kilo\gram} in $(0, 4)$.'''
+  [[quesito.opzione]]
+  testo = '''$(2, 4)$'''
+  commento = '''Divide le somme pesate, 4 e 8, per la massa del corpo più pesante, \SI{2}{\kilo\gram}, invece che per la massa totale, \SI{4}{\kilo\gram}.'''
+  [[quesito.opzione]]
+  testo = '''$(1, 2)$'''
+  [[quesito.opzione]]
+  testo = '''$(4, 8)$'''
+  commento = '''Calcola le somme pesate $\sum m x$ e $\sum m y$ e dimentica di dividerle per la massa totale.'''
+
+[[quesito]]
+id = "sim1-ud2-pianeta"
+simulazione = 1
+ud = 2
+sezione = "La forza gravitazionale e la forza peso"
+tipo = "multipla"
+testo = '''Sulla Terra un astronauta pesa \SI{700}{\newton}. Su un pianeta che ha massa doppia di quella della Terra e raggio doppio, il suo peso sarebbe'''
+corretta = "A"
+calcolo = "700 * 2 / 2**2"
+soluzione = '''Il peso è la forza gravitazionale del pianeta sull'astronauta, sulla superficie: $F = GMm/R^2$, proporzionale alla massa del pianeta e inversamente proporzionale al quadrato del raggio. La massa doppia moltiplica il peso per 2, il raggio doppio lo divide per $2^2 = 4$:
+\[
+  F' = \SI{700}{\newton} \cdot \frac{2}{2^2} = \SI{700}{\newton} \cdot \frac{1}{2} = \SI{350}{\newton}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{350}{\newton}'''
+  valore = 350
+  [[quesito.opzione]]
+  testo = '''\SI{700}{\newton}'''
+  commento = '''Divide per il raggio invece che per il suo quadrato: $2/2 = 1$, e il peso sembra non cambiare.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1400}{\newton}'''
+  commento = '''Tiene conto solo della massa doppia del pianeta e dimentica il raggio.'''
+  [[quesito.opzione]]
+  testo = '''\SI{175}{\newton}'''
+  commento = '''Tiene conto solo del raggio doppio, $700/4$, e dimentica la massa doppia.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5600}{\newton}'''
+  commento = '''Moltiplica per il quadrato del raggio invece di dividere: $700 \cdot 2 \cdot 4$. La forza gravitazionale diminuisce con la distanza dal centro del pianeta.'''
+
+[[quesito]]
+id = "sim1-ud1-infusione"
+simulazione = 1
+ud = 1
+sezione = "Le conversioni fra unità di misura"
+tipo = "completamento"
+testo = '''Una pompa a siringa infonde \SI{3,6}{\milli\litre} di farmaco ogni ora. Il volume infuso in un secondo, in metri cubi, è $1 \cdot 10^{n}\,\si{\metre\cubed}$ con $n =$ \completa.'''
+calcolo = "round(math.log10(3.6e-6 / 3.6e3))"
+risposta = "-9"
+soluzione = '''Un millilitro è un centimetro cubo, cioè $(\SI{e-2}{\metre})^3 = \SI{e-6}{\metre\cubed}$; quindi $\SI{3,6}{\milli\litre} = \SI{3,6e-6}{\metre\cubed}$. Un'ora è $\SI{3600}{\second} = \SI{3,6e3}{\second}$. Il volume in un secondo è
+\[
+  \frac{\SI{3,6e-6}{\metre\cubed}}{\SI{3,6e3}{\second}} = \frac{3{,}6}{3{,}6} \cdot 10^{-6-3}\,\si{\metre\cubed\per\second} = \SI{1e-9}{\metre\cubed\per\second}
+\]
+Chi scrive $-6$ ha preso il millilitro per \SI{e-3}{\metre\cubed}, che è invece il litro: $\SI{3,6e-3}{\metre\cubed} / \SI{3,6e3}{\second} = \SI{e-6}{\metre\cubed\per\second}$.'''
+
+[[quesito]]
+id = "sim1-ud2-lancio-basso"
+simulazione = 1
+ud = 2
+sezione = "La caduta libera"
+tipo = "completamento"
+testo = '''Da un ponte un sasso viene lanciato verticalmente verso il basso a \SI{5}{\metre\per\second}. Trascurando la resistenza dell'aria e usando $g = \SI{10}{\metre\per\second\squared}$, dopo \SI{2}{\second} la sua velocità ha modulo \completa\ \si{\metre\per\second}.'''
+calcolo = "5 + g * 2"
+risposta = "25"
+soluzione = '''Si prende l'asse verticale verso il basso: la velocità iniziale e l'accelerazione hanno lo stesso verso, e sono tutte e due positive. Nel moto uniformemente accelerato
+\[
+  v = v_0 + g\,t = \SI{5}{\metre\per\second} + \SI{10}{\metre\per\second\squared} \cdot \SI{2}{\second} = (5 + 20)\,\si{\metre\per\second} = \SI{25}{\metre\per\second}
+\]
+Chi scrive 20 ha dimenticato la velocità iniziale; chi scrive 15 ha dato alla velocità iniziale e all'accelerazione versi opposti, come in un lancio verso l'alto.'''
+
+[[quesito]]
+id = "sim1-ud2-potenza-ambulanza"
+simulazione = 1
+ud = 2
+sezione = "La potenza"
+tipo = "completamento"
+testo = '''Un'ambulanza di \SI{2000}{\kilo\gram} parte da ferma su una strada orizzontale e raggiunge \SI{15}{\metre\per\second} in \SI{9}{\second}. Trascurando gli attriti, la potenza media che il motore trasmette alle ruote vale \completa\ \si{\kilo\watt}.'''
+calcolo = "0.5 * 2000 * 15**2 / 9 / 1000"
+risposta = "25"
+soluzione = '''Senza attriti il lavoro del motore è tutto energia cinetica, per il teorema dell'energia cinetica:
+\[
+  W = \frac12 m v^2 = \frac12 \cdot \SI{2000}{\kilo\gram} \cdot (\SI{15}{\metre\per\second})^2 = 1000 \cdot 225\,\si{\joule} = \SI{225000}{\joule}
+\]
+La potenza media è il lavoro diviso per il tempo:
+\[
+  P = \frac{W}{\Delta t} = \frac{\SI{225000}{\joule}}{\SI{9}{\second}} = \SI{25000}{\watt} = \SI{25}{\kilo\watt}
+\]
+Chi scrive 50 ha dimenticato il fattore $\frac12$ dell'energia cinetica.'''
+
+[[quesito]]
+id = "sim2-ud1-dimensioni"
+simulazione = 2
+ud = 1
+sezione = "Le dimensioni di una grandezza"
+tipo = "multipla"
+testo = '''Con $h$ un'altezza, $t$ un tempo, $m$ una massa e $g$ l'accelerazione di gravità, quale di queste espressioni ha le dimensioni di una velocità?'''
+corretta = "C"
+soluzione = '''Le dimensioni sono $[h] = [L]$, $[t] = [T]$, $[m] = [M]$ e $[g] = [L\,T^{-2}]$; una velocità ha dimensione $[L\,T^{-1}]$. Per $\sqrt{gh}$:
+\[
+  [g\,h] = [L\,T^{-2}] \cdot [L] = [L^2\,T^{-2}]
+  \qquad\Longrightarrow\qquad
+  [\sqrt{g h}\,] = [L\,T^{-1}]
+  \qquad\text{perché}\qquad
+  [L\,T^{-1}]^2 = [L^2\,T^{-2}]
+\]
+La radice quadrata dimezza gli esponenti, come in $\sqrt{10^{2a}} = 10^{a}$. È la velocità di un corpo che cade da fermo da un'altezza $h$, a meno del fattore numerico $\sqrt 2$, che non ha dimensioni.'''
+
+  [[quesito.opzione]]
+  testo = '''$g\,t^2$'''
+  commento = '''$[L\,T^{-2}] \cdot [T^2] = [L]$: è una lunghezza. Per una velocità il tempo andrebbe alla prima potenza, $g\,t$.'''
+  [[quesito.opzione]]
+  testo = '''$h/t^2$'''
+  commento = '''$[L] / [T^2] = [L\,T^{-2}]$: è un'accelerazione. Per una velocità si divide per il tempo, non per il suo quadrato.'''
+  [[quesito.opzione]]
+  testo = '''$\sqrt{g\,h}$'''
+  [[quesito.opzione]]
+  testo = '''$m\,g\,h$'''
+  commento = '''$[M] \cdot [L\,T^{-2}] \cdot [L] = [M\,L^2\,T^{-2}]$: è un'energia, l'energia potenziale gravitazionale.'''
+  [[quesito.opzione]]
+  testo = '''$h\,t$'''
+  commento = '''$[L] \cdot [T] = [L\,T]$: moltiplica per il tempo invece di dividere.'''
+
+[[quesito]]
+id = "sim2-ud2-angoli-complementari"
+simulazione = 2
+ud = 2
+sezione = "Il moto parabolico"
+tipo = "multipla"
+testo = '''Due palline vengono lanciate dallo stesso punto di un terreno orizzontale, con velocità dello stesso modulo: una a \ang{30} e l'altra a \ang{60} sopra l'orizzontale. Trascurando la resistenza dell'aria, rispetto alla prima, la seconda pallina'''
+corretta = "A"
+soluzione = '''Con velocità $v_0$ e angolo $\theta$, le componenti iniziali sono $v_{0x} = v_0\cos\theta$ e $v_{0y} = v_0\sin\theta$. Il tempo di volo è $t_v = 2v_{0y}/g$, l'altezza massima $v_{0y}^2/(2g)$, la gittata
+\[
+  R = v_{0x}\,t_v = \frac{2v_0^2\sin\theta\cos\theta}{g}
+\]
+Per \ang{30} il prodotto è $\sin\ang{30}\cos\ang{30}$, per \ang{60} è $\sin\ang{60}\cos\ang{60}$: sono gli stessi due numeri, scambiati, e le gittate sono uguali. A \ang{60} però $v_{0y}$ è maggiore: la pallina sale più in alto e resta in volo più a lungo, mentre va più piano in orizzontale.'''
+
+  [[quesito.opzione]]
+  testo = '''tocca terra alla stessa distanza, ma sale più in alto e resta in volo più a lungo'''
+  [[quesito.opzione]]
+  testo = '''tocca terra a una distanza doppia, perché l'angolo è doppio'''
+  commento = '''La gittata non è proporzionale all'angolo: dipende dal prodotto $\sin\theta\cos\theta$, che a \ang{30} e a \ang{60} è lo stesso.'''
+  [[quesito.opzione]]
+  testo = '''tocca terra alla stessa distanza, e resta in volo per lo stesso tempo'''
+  commento = '''La gittata è giusta, ma il tempo di volo dipende dalla componente verticale della velocità, $t_v = 2v_{0y}/g$, che a \ang{60} è maggiore.'''
+  [[quesito.opzione]]
+  testo = '''tocca terra più vicino, perché ha una velocità orizzontale minore'''
+  commento = '''Guarda solo la velocità orizzontale. A \ang{60} è minore, ma la pallina resta in volo più a lungo, e i due fattori si compensano esattamente.'''
+  [[quesito.opzione]]
+  testo = '''tocca terra più lontano, perché sale più in alto'''
+  commento = '''Salire più in alto vuol dire restare in volo di più, ma con una velocità orizzontale minore. La gittata è massima a \ang{45}, e a \ang{30} e \ang{60} è la stessa.'''
+
+[[quesito]]
+id = "sim2-ud2-reazione-peso"
+simulazione = 2
+ud = 2
+sezione = "Il terzo principio: azione e reazione"
+tipo = "multipla"
+testo = '''Un libro è fermo su un tavolo. Per il terzo principio della dinamica, la reazione alla forza peso del libro è'''
+corretta = "D"
+soluzione = '''Il peso del libro è la forza con cui la Terra attira il libro. Per il terzo principio la sua reazione è la forza con cui il libro attira la Terra: stesso modulo, verso opposto (verso l'alto), applicata a un corpo diverso, la Terra. La spinta del tavolo sul libro è anch'essa uguale e opposta al peso, ma agisce sullo stesso corpo, il libro, e lo bilancia perché il libro è in equilibrio: non è la reazione al peso.'''
+
+  [[quesito.opzione]]
+  testo = '''la forza con cui il tavolo spinge il libro verso l'alto'''
+  commento = '''È uguale e opposta al peso, ma agisce sullo stesso corpo, il libro: le due forze si bilanciano per l'equilibrio, non per il terzo principio. Azione e reazione agiscono su corpi diversi.'''
+  [[quesito.opzione]]
+  testo = '''la forza con cui il libro preme sul tavolo'''
+  commento = '''È la reazione alla spinta del tavolo sul libro. Il peso è un'interazione fra il libro e la Terra, e la sua reazione agisce sulla Terra.'''
+  [[quesito.opzione]]
+  testo = '''nessuna forza: il peso non ha reazione, perché la Terra non si muove'''
+  commento = '''Ogni forza ha la sua reazione. La Terra si muove pochissimo perché la sua massa è enorme, non perché la forza manchi.'''
+  [[quesito.opzione]]
+  testo = '''la forza con cui il libro attira la Terra verso l'alto'''
+  [[quesito.opzione]]
+  testo = '''la forza con cui il tavolo preme sul pavimento'''
+  commento = '''È una forza fra altri due corpi, il tavolo e il pavimento. La coppia di azione e reazione riguarda sempre gli stessi due corpi, qui il libro e la Terra.'''
+
+[[quesito]]
+id = "sim2-ud2-ciclista"
+simulazione = 2
+ud = 2
+sezione = "L'energia cinetica e il suo teorema"
+tipo = "multipla"
+testo = '''Un ciclista, che con la bicicletta ha una massa di \SI{80}{\kilo\gram}, accelera da \SI{5}{\metre\per\second} a \SI{10}{\metre\per\second}. Il lavoro totale delle forze che agiscono su di lui è'''
+corretta = "E"
+calcolo = "0.5 * 80 * (10**2 - 5**2)"
+soluzione = '''Per il teorema dell'energia cinetica il lavoro totale è la variazione dell'energia cinetica:
+\[
+  W_{\text{tot}} = \frac12 m v_f^2 - \frac12 m v_i^2 = \frac12 \cdot \SI{80}{\kilo\gram} \cdot (100 - 25)\,\si{\metre\squared\per\second\squared} = 40 \cdot 75\,\si{\joule} = \SI{3000}{\joule}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{1000}{\joule}'''
+  commento = '''Eleva al quadrato la differenza delle velocità invece di fare la differenza dei quadrati: $\frac12 \cdot 80 \cdot (10 - 5)^2 = 40 \cdot 25$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{4000}{\joule}'''
+  commento = '''Usa solo l'energia cinetica finale, $\frac12 \cdot 80 \cdot 100$, come se il ciclista partisse da fermo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{400}{\joule}'''
+  commento = '''Calcola la variazione della quantità di moto, $m\,\Delta v = 80 \cdot 5 = \SI{400}{\kilo\gram\metre\per\second}$, che non è un lavoro.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6000}{\joule}'''
+  commento = '''Dimentica il fattore $\frac12$ dell'energia cinetica: $80 \cdot 75$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3000}{\joule}'''
+  valore = 3000
+
+[[quesito]]
+id = "sim2-ud2-rimbalzo"
+simulazione = 2
+ud = 2
+sezione = "Quantità di moto e impulso"
+tipo = "multipla"
+testo = '''Una pallina da riabilitazione di \SI{0,1}{\kilo\gram} arriva sul pavimento in verticale a \SI{5}{\metre\per\second} e rimbalza verso l'alto a \SI{3}{\metre\per\second}. L'impulso che il pavimento le dà ha modulo'''
+corretta = "B"
+calcolo = "0.1 * (3 + 5)"
+soluzione = '''L'impulso è uguale alla variazione della quantità di moto. Con l'asse verso l'alto, la velocità prima dell'urto è \SI{-5}{\metre\per\second} e dopo è \SI{+3}{\metre\per\second}:
+\[
+  J = m v_f - m v_i = \SI{0,1}{\kilo\gram} \cdot \bigl(3 - (-5)\bigr)\,\si{\metre\per\second} = 0{,}1 \cdot 8\,\si{\newton\second} = \SI{0,8}{\newton\second}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0,2}{\newton\second}'''
+  commento = '''Sottrae i moduli delle velocità, $0{,}1 \cdot (5 - 3)$, e dimentica che la velocità ha cambiato verso.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,8}{\newton\second}'''
+  valore = 0.8
+  [[quesito.opzione]]
+  testo = '''\SI{0,5}{\newton\second}'''
+  commento = '''Conta solo l'arresto della pallina, $0{,}1 \cdot 5$, e dimentica il rimbalzo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,3}{\newton\second}'''
+  commento = '''Conta solo la quantità di moto dopo il rimbalzo, $0{,}1 \cdot 3$, come se la pallina partisse da ferma.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,0}{\newton\second}'''
+  commento = '''Tratta il rimbalzo come se la pallina ripartisse alla stessa velocità di arrivo: $0{,}1 \cdot (5 + 5)$.'''
+
+[[quesito]]
+id = "sim2-ud2-base-appoggio"
+simulazione = 2
+ud = 2
+sezione = "L'equilibrio del corpo rigido"
+tipo = "multipla"
+testo = '''Una persona anziana sta ferma in piedi. Resta in equilibrio, senza cadere, se'''
+corretta = "D"
+soluzione = '''Il peso agisce come se fosse applicato tutto nel baricentro; le forze del pavimento agiscono nella base d'appoggio, l'area occupata dai piedi e compresa fra essi. Per l'equilibrio servono la risultante nulla e la somma dei momenti nulla. Se la verticale per il baricentro cade dentro la base d'appoggio, le forze del pavimento possono bilanciare anche il momento del peso. Se cade fuori, il peso fa ruotare il corpo attorno al bordo della base, e la persona cade. Per questo un bastone o un deambulatore, che allargano la base, aiutano a non cadere.'''
+
+  [[quesito.opzione]]
+  testo = '''il suo baricentro si trova all'altezza del bacino'''
+  commento = '''In piedi il baricentro sta proprio lì, ma non basta: conta dove cade la verticale che passa per esso, rispetto ai piedi.'''
+  [[quesito.opzione]]
+  testo = '''la risultante delle forze su di lei è nulla, anche se la verticale per il baricentro cade fuori dai piedi'''
+  commento = '''Dimentica l'equilibrio rotazionale. Con la verticale fuori dalla base, il peso ha un momento che le forze del pavimento non possono bilanciare, e il corpo ruota.'''
+  [[quesito.opzione]]
+  testo = '''il suo peso è minore della forza con cui il pavimento la spinge verso l'alto'''
+  commento = '''Allora la risultante sarebbe verso l'alto e la persona accelererebbe verso l'alto. In equilibrio le due forze verticali sono uguali.'''
+  [[quesito.opzione]]
+  testo = '''la verticale che passa per il suo baricentro cade dentro la base d'appoggio'''
+  [[quesito.opzione]]
+  testo = '''tiene i piedi uniti, così il baricentro sta proprio sopra di essi'''
+  commento = '''Con i piedi uniti la base d'appoggio si restringe, e basta una piccola inclinazione per portare la verticale del baricentro fuori: è più facile cadere, non meno.'''
+
+[[quesito]]
+id = "sim2-ud2-lancette"
+simulazione = 2
+ud = 2
+sezione = "Il moto circolare uniforme"
+tipo = "completamento"
+testo = '''In un orologio la lancetta dei minuti e quella delle ore ruotano di moto circolare uniforme. La velocità angolare della lancetta dei minuti è \completa\ volte quella della lancetta delle ore.'''
+calcolo = "12 / 1"
+risposta = "12"
+soluzione = '''La lancetta dei minuti fa un giro in un'ora, $T_m = \SI{1}{\hour}$; quella delle ore in dodici ore, $T_o = \SI{12}{\hour}$. La velocità angolare è $\omega = 2\pi/T$, inversamente proporzionale al periodo:
+\[
+  \frac{\omega_m}{\omega_o} = \frac{2\pi/T_m}{2\pi/T_o} = \frac{T_o}{T_m} = \frac{\SI{12}{\hour}}{\SI{1}{\hour}} = 12
+\]
+Chi scrive 60 ha usato i minuti di un'ora al posto del rapporto fra i periodi. La velocità angolare non dipende dalla lunghezza della lancetta.'''
+
+[[quesito]]
+id = "sim2-ud2-carrelli-contatto"
+simulazione = 2
+ud = 2
+sezione = "Il secondo principio: forza e accelerazione"
+tipo = "completamento"
+testo = '''Un infermiere spinge in orizzontale due carrelli a contatto, uno davanti all'altro, su un pavimento con attrito trascurabile. Spinge il carrello posteriore, di \SI{20}{\kilo\gram}, con una forza di \SI{60}{\newton}; quello anteriore ha massa \SI{10}{\kilo\gram}. La forza che il carrello posteriore esercita su quello anteriore vale \completa\ \si{\newton}.'''
+calcolo = "10 * 60 / (20 + 10)"
+risposta = "20"
+soluzione = '''I due carrelli si muovono insieme, con la stessa accelerazione. Per il sistema dei due carrelli l'unica forza orizzontale esterna è la spinta:
+\[
+  a = \frac{F}{m_1 + m_2} = \frac{\SI{60}{\newton}}{\SI{30}{\kilo\gram}} = \SI{2}{\metre\per\second\squared}
+\]
+Sul carrello anteriore agisce in orizzontale solo la forza del carrello posteriore, che gli dà questa accelerazione:
+\[
+  F_{\text{contatto}} = m_2\,a = \SI{10}{\kilo\gram} \cdot \SI{2}{\metre\per\second\squared} = \SI{20}{\newton}
+\]
+Chi scrive 60 pensa che la spinta arrivi intera al carrello anteriore; chi scrive 40 ha calcolato la forza risultante sul carrello posteriore, $20 \cdot 2$.'''
+
+[[quesito]]
+id = "sim2-ud2-elastico-lavoro"
+simulazione = 2
+ud = 2
+sezione = "Il lavoro di una forza variabile"
+tipo = "completamento"
+testo = '''Un elastico da riabilitazione si comporta come una molla ideale di costante elastica \SI{1000}{\newton\per\metre}. Il paziente lo tiene già allungato di \SI{2}{\centi\metre} e lo allunga ancora, fino a \SI{4}{\centi\metre}. Il lavoro che compie in questo tratto vale \completa\ \si{\milli\joule}.'''
+calcolo = "0.5 * 1000 * (0.04**2 - 0.02**2) * 1000"
+risposta = "600"
+soluzione = '''Il lavoro per allungare la molla è l'aumento della sua energia potenziale elastica, $E_p = \frac12 kx^2$, fra $x_1 = \SI{0,02}{\metre}$ e $x_2 = \SI{0,04}{\metre}$:
+\[
+  W = \frac12 k x_2^2 - \frac12 k x_1^2 = \frac12 \cdot \SI{1000}{\newton\per\metre} \cdot (16 - 4) \cdot 10^{-4}\,\si{\metre\squared} = 500 \cdot \SI{12e-4}{\joule} = \SI{0,6}{\joule} = \SI{600}{\milli\joule}
+\]
+Chi scrive 200 ha usato l'allungamento in più, $\frac12 k (\Delta x)^2 = 500 \cdot \SI{4e-4}{\joule}$: la forza della molla cresce con l'allungamento totale, e il secondo tratto costa più del primo.'''
+
+[[quesito]]
+id = "sim3-ud2-rotonda"
+simulazione = 3
+ud = 2
+sezione = "Il moto circolare uniforme"
+tipo = "multipla"
+testo = '''Un'ambulanza percorre una rotonda circolare con il tachimetro fermo su \SI{30}{\kilo\metre\per\hour}. Durante il giro la sua accelerazione'''
+corretta = "E"
+soluzione = '''Il modulo della velocità è costante, ma la sua direzione cambia di continuo: il moto è circolare uniforme, ed è accelerato. L'accelerazione è quella centripeta, diretta in ogni istante verso il centro della rotonda, con modulo $a_c = v^2/r$, costante perché $v$ ed $r$ non cambiano.'''
+
+  [[quesito.opzione]]
+  testo = '''è nulla, perché il modulo della velocità non cambia'''
+  commento = '''Confonde il moto circolare uniforme con il rettilineo uniforme. Anche una velocità che cambia solo direzione è una velocità che cambia.'''
+  [[quesito.opzione]]
+  testo = '''è diretta come la velocità, tangente alla rotonda'''
+  commento = '''Un'accelerazione tangente farebbe cambiare il modulo della velocità, che qui è costante. Per cambiare solo la direzione l'accelerazione deve essere perpendicolare alla velocità.'''
+  [[quesito.opzione]]
+  testo = '''è diretta verso l'esterno della rotonda'''
+  commento = '''Scambia l'accelerazione con la sensazione dei passeggeri, che si sentono spinti verso l'esterno perché tendono a proseguire in linea retta. L'accelerazione punta verso il centro.'''
+  [[quesito.opzione]]
+  testo = '''è diretta verso il centro, e a parità di velocità è più grande se la rotonda è più larga'''
+  commento = '''La direzione è giusta, ma $a_c = v^2/r$: a parità di velocità, una rotonda più larga dà un'accelerazione più piccola.'''
+  [[quesito.opzione]]
+  testo = '''è diretta verso il centro della rotonda e ha modulo costante'''
+
+[[quesito]]
+id = "sim3-ud2-inseguimento"
+simulazione = 3
+ud = 2
+sezione = "Il moto rettilineo uniforme"
+tipo = "multipla"
+testo = '''Su una strada rettilinea un'ambulanza a \SI{90}{\kilo\metre\per\hour} segue un'auto che va a \SI{60}{\kilo\metre\per\hour}, nello stesso verso, \SI{1}{\kilo\metre} più avanti. Entrambe vanno a velocità costante. L'ambulanza raggiunge l'auto dopo'''
+corretta = "D"
+calcolo = "1 / (90 - 60) * 60"
+soluzione = '''Le due vanno nello stesso verso: ogni ora l'ambulanza guadagna sull'auto $90 - 60 = \SI{30}{\kilo\metre}$. La raggiunge quando ha recuperato il chilometro di distacco:
+\[
+  90\,t = 1 + 60\,t \quad\Longrightarrow\quad t = \frac{\SI{1}{\kilo\metre}}{\SI{30}{\kilo\metre\per\hour}} = \frac{1}{30}\,\si{\hour} = \frac{60}{30}\,\si{\minute} = \SI{2}{\minute}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{40}{\second}'''
+  commento = '''Usa solo la velocità dell'ambulanza, come se l'auto fosse ferma: $1/90$ di ora, cioè \SI{40}{\second}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1}{\minute}'''
+  commento = '''Divide la distanza per la velocità dell'auto: $1/60$ di ora. Non c'è un motivo fisico per usare quella velocità da sola.'''
+  [[quesito.opzione]]
+  testo = '''\SI{24}{\second}'''
+  commento = '''Somma le velocità, $90 + 60 = \SI{150}{\kilo\metre\per\hour}$, come se i veicoli si venissero incontro: $1/150$ di ora. Nello stesso verso conta la differenza.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\minute}'''
+  valore = 2
+  [[quesito.opzione]]
+  testo = '''\SI{48}{\second}'''
+  commento = '''Usa la media delle due velocità, \SI{75}{\kilo\metre\per\hour}: $1/75$ di ora, cioè \SI{48}{\second}.'''
+
+[[quesito]]
+id = "sim3-ud2-armadio"
+simulazione = 3
+ud = 2
+sezione = "La forza normale e l'attrito"
+tipo = "multipla"
+testo = '''Per smuovere un armadio fermo sul pavimento serve una spinta orizzontale di poco più di \SI{200}{\newton}; una volta in moto, per farlo scorrere a velocità costante basta una spinta di \SI{150}{\newton}. Il motivo è che'''
+corretta = "B"
+soluzione = '''Per smuoverlo la spinta deve superare l'attrito statico massimo, $\mu_s F_N \approx \SI{200}{\newton}$. Una volta in moto, a velocità costante la risultante è nulla per il primo principio: la spinta bilancia l'attrito dinamico, che vale quindi $\mu_d F_N = \SI{150}{\newton}$. La forza normale è la stessa nei due casi, quindi $\mu_d < \mu_s$: per i due materiali a contatto il coefficiente di attrito dinamico è minore di quello statico.'''
+
+  [[quesito.opzione]]
+  testo = '''mentre l'armadio scorre il suo peso diminuisce'''
+  commento = '''Il peso non dipende dal moto. Su un pavimento orizzontale anche la forza normale resta uguale al peso; cambia il coefficiente di attrito.'''
+  [[quesito.opzione]]
+  testo = '''il coefficiente di attrito dinamico è minore di quello statico'''
+  [[quesito.opzione]]
+  testo = '''mentre l'armadio scorre l'attrito non agisce più, e la spinta serve solo a mantenere il moto'''
+  commento = '''Senza attrito non servirebbe nessuna spinta per mantenere il moto, per il primo principio. A velocità costante la spinta di \SI{150}{\newton} bilancia proprio l'attrito dinamico.'''
+  [[quesito.opzione]]
+  testo = '''una volta in moto l'inerzia aiuta l'armadio, mentre l'attrito resta lo stesso'''
+  commento = '''L'inerzia non è una forza. A velocità costante la risultante è nulla: se la spinta è diversa, è diverso l'attrito che bilancia.'''
+  [[quesito.opzione]]
+  testo = '''l'attrito statico vale sempre \SI{200}{\newton}, anche quando nessuno spinge l'armadio'''
+  commento = '''L'attrito statico vale quanto basta a bilanciare la spinta, fino a un massimo. Se nessuno spinge, è nullo: \SI{200}{\newton} è il suo valore massimo.'''
+
+[[quesito]]
+id = "sim3-ud2-rampa"
+simulazione = 3
+ud = 2
+sezione = "Il lavoro di una forza"
+tipo = "multipla"
+testo = '''Una barella con il paziente, di \SI{100}{\kilo\gram} in tutto, scende dal primo piano al piano terra, con un dislivello di \SI{4}{\metre}: una volta in ascensore, un'altra volta lungo una rampa lunga \SI{40}{\metre}. Con $g = \SI{10}{\metre\per\second\squared}$, il lavoro compiuto dalla forza peso è'''
+corretta = "A"
+calcolo = "100 * g * 4"
+soluzione = '''Il peso è una forza conservativa: il suo lavoro dipende solo dalla posizione iniziale e da quella finale, non dal percorso. Scendendo di $h$ il peso, verso il basso, compie un lavoro positivo
+\[
+  W = m g h = \SI{100}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{4}{\metre} = \SI{4000}{\joule}
+\]
+sia in ascensore sia lungo la rampa. Lungo la rampa il percorso è più lungo, ma la componente del peso lungo la rampa è più piccola: il prodotto è lo stesso.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{4000}{\joule} in tutti e due i casi'''
+  valore = 4000
+  [[quesito.opzione]]
+  testo = '''\SI{4000}{\joule} in ascensore e \SI{40000}{\joule} lungo la rampa'''
+  commento = '''Moltiplica il peso intero per la lunghezza della rampa. Lungo la rampa agisce nella direzione del moto solo la componente del peso parallela alla rampa, dieci volte più piccola.'''
+  [[quesito.opzione]]
+  testo = '''zero in tutti e due i casi'''
+  commento = '''Confonde il lavoro del peso con il lavoro totale. Se la barella scende a velocità costante il lavoro totale è zero, ma il peso compie un lavoro positivo, bilanciato da quello negativo di chi la frena.'''
+  [[quesito.opzione]]
+  testo = '''\SI{4000}{\joule} in ascensore e \SI{400}{\joule} lungo la rampa'''
+  commento = '''Calcola bene la componente del peso lungo la rampa, $mg \cdot 4/40 = \SI{100}{\newton}$, ma la moltiplica per il dislivello invece che per la lunghezza della rampa: $100 \cdot 4 = 400$. Va moltiplicata per \SI{40}{\metre}, e si ritrova \SI{4000}{\joule}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{-4000}{\joule} in tutti e due i casi'''
+  commento = '''Il modulo è giusto, ma il segno no: in discesa il peso ha la componente nel verso dello spostamento, e il suo lavoro è positivo. È negativo in salita.'''
+
+[[quesito]]
+id = "sim3-ud2-carrelli-energia"
+simulazione = 3
+ud = 2
+sezione = "Quantità di moto e impulso"
+tipo = "multipla"
+testo = '''Un carrello di \SI{4}{\kilo\gram} e uno di \SI{1}{\kilo\gram} hanno la stessa energia cinetica. Il rapporto fra il modulo della quantità di moto del carrello pesante e quello del carrello leggero è'''
+corretta = "C"
+calcolo = "math.sqrt(4 / 1)"
+soluzione = '''Dall'energia cinetica si ricava la velocità, e da questa la quantità di moto: $E_c = \frac12 mv^2 = \dfrac{(mv)^2}{2m} = \dfrac{p^2}{2m}$, quindi $p = \sqrt{2mE_c}$. A parità di energia cinetica
+\[
+  \frac{p_1}{p_2} = \sqrt{\frac{m_1}{m_2}} = \sqrt{\frac{4}{1}} = 2
+\]
+In numeri: con $E_c = \SI{2}{\joule}$, il carrello leggero va a \SI{2}{\metre\per\second} e ha $p = \SI{2}{\kilo\gram\metre\per\second}$; quello pesante va a \SI{1}{\metre\per\second} e ha $p = \SI{4}{\kilo\gram\metre\per\second}$.'''
+
+  [[quesito.opzione]]
+  testo = '''4'''
+  commento = '''Prende la quantità di moto proporzionale alla massa, come se i carrelli avessero la stessa velocità. A parità di energia il carrello pesante va più piano.'''
+  [[quesito.opzione]]
+  testo = '''$1/2$'''
+  commento = '''Rovescia il rapporto: è quello fra le velocità del carrello pesante e del leggero, non fra le quantità di moto.'''
+  [[quesito.opzione]]
+  testo = '''2'''
+  valore = 2
+  [[quesito.opzione]]
+  testo = '''1'''
+  commento = '''Pensa che stessa energia cinetica voglia dire stessa quantità di moto. Sono grandezze diverse: $E_c = p^2/(2m)$ dipende anche dalla massa.'''
+  [[quesito.opzione]]
+  testo = '''16'''
+  commento = '''Eleva al quadrato il rapporto delle masse invece di prenderne la radice: $4^2$.'''
+
+[[quesito]]
+id = "sim3-ud2-tricipite"
+simulazione = 3
+ud = 2
+sezione = "Le leve nel corpo"
+tipo = "multipla"
+testo = '''Un paziente tiene il braccio verticale lungo il fianco e l'avambraccio orizzontale in avanti, e con la mano spinge verso il basso su un tavolo con una forza di {{F}}. La mano è {{br}} davanti al gomito. Il tricipite tira verso l'alto l'olecrano, la sporgenza dell'ulna che sta {{bt}} dietro il gomito. Trascurando il peso dell'avambraccio, la forza del tricipite vale'''
+dati.F = { valore = 50, unita = "\\newton" }
+dati.br = { valore = 30, unita = "cm" }
+dati.bt = { valore = "2,5", unita = "cm" }
+corretta = "B"
+calcolo = "F * br / bt"
+soluzione = '''Per il terzo principio il tavolo spinge la mano verso l'alto con \SI{50}{\newton}: è la resistenza, davanti al gomito. Il tricipite tira dietro il gomito, che fa da fulcro. Il fulcro sta fra la forza motrice e la resistenza: è una leva di primo genere. Le forze sono verticali, perpendicolari all'avambraccio, e i bracci sono le distanze dal gomito. All'equilibrio i momenti rispetto al gomito si bilanciano:
+\[
+  F_t\,b_t = F\,b_r
+  \qquad\Longrightarrow\qquad
+  F_t = F\,\frac{b_r}{b_t} = \SI{50}{\newton} \cdot \frac{30}{2{,}5} = 50 \cdot 12\,\si{\newton} = \SI{600}{\newton}
+\]
+Le distanze compaiono in un rapporto, quindi si possono lasciare in centimetri. Il braccio del tricipite è 12 volte più corto di quello della resistenza: la leva è svantaggiosa, e il muscolo tira con una forza 12 volte più grande. In cambio un piccolo accorciamento del muscolo sposta la mano di molto.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{50}{\newton}'''
+  commento = '''Uguaglia le forze invece dei momenti. Il tricipite sta molto più vicino al fulcro della mano, e deve tirare di più.'''
+  [[quesito.opzione]]
+  testo = '''\SI{600}{\newton}'''
+  valore = 600.0
+  [[quesito.opzione]]
+  testo = '''\SI{4,2}{\newton}'''
+  commento = '''Rovescia i bracci: $50 \cdot 2{,}5/30 \approx 4{,}2$. Con il braccio più corto il muscolo deve tirare più della resistenza, non meno.'''
+  [[quesito.opzione]]
+  testo = '''\SI{7200}{\newton}'''
+  commento = '''Usa il quadrato del rapporto dei bracci, $50 \cdot 12^2$. Il momento è proporzionale al braccio, non al suo quadrato.'''
+  [[quesito.opzione]]
+  testo = '''\SI{650}{\newton}'''
+  commento = '''È la forza con cui l'omero preme verso il basso sull'avambraccio nel gomito: per l'equilibrio delle forze bilancia le due spinte verso l'alto, $600 + 50$. Il tricipite tira con \SI{600}{\newton}.'''
+[[quesito]]
+id = "sim3-ud1-vettore-mancante"
+simulazione = 3
+ud = 1
+sezione = "Somma e differenza di vettori"
+tipo = "completamento"
+testo = '''La somma di due vettori è $\vec a + \vec b = (4, -5)$, e il primo è $\vec a = (-2, 3)$. Il modulo di $\vec b$ vale \completa.'''
+calcolo = "math.hypot(4 - (-2), -5 - 3)"
+risposta = "10"
+soluzione = '''Le componenti si sommano una per una, quindi $\vec b = (\vec a + \vec b) - \vec a$ si trova sottraendo componente per componente:
+\[
+  b_x = 4 - (-2) = 6
+  \qquad\qquad
+  b_y = -5 - 3 = -8
+\]
+Il modulo è $b = \sqrt{6^2 + (-8)^2} = \sqrt{36 + 64} = \sqrt{100} = 10$. Chi scrive circa 2,8 ha sommato i due vettori, $(4, -5) + (-2, 3) = (2, -2)$, di modulo $\sqrt 8 \approx 2{,}8$, invece di sottrarli; oppure ha sottratto i moduli, $\sqrt{41} - \sqrt{13} \approx 6{,}4 - 3{,}6 = 2{,}8$. I moduli dei vettori non si sommano né si sottraggono come i numeri.'''
+[[quesito]]
+id = "sim3-ud2-molla-carrello"
+simulazione = 3
+ud = 2
+sezione = "La forza elastica e la legge di Hooke"
+tipo = "completamento"
+testo = '''Su una rotaia orizzontale senza attrito un carrello di \SI{2}{\kilo\gram} è tirato da una molla ideale orizzontale di costante elastica \SI{200}{\newton\per\metre}, allungata di \SI{5}{\centi\metre}. In quell'istante l'accelerazione del carrello vale \completa\ \si{\metre\per\second\squared}.'''
+calcolo = "200 * 0.05 / 2"
+risposta = "5"
+soluzione = '''Per la legge di Hooke, con $x = \SI{5}{\centi\metre} = \SI{0,05}{\metre}$, la molla tira il carrello con una forza di modulo
+\[
+  F = kx = \SI{200}{\newton\per\metre} \cdot \SI{0,05}{\metre} = \SI{10}{\newton}
+\]
+È l'unica forza orizzontale, quindi è la risultante. Per il secondo principio
+\[
+  a = \frac{F}{m} = \frac{\SI{10}{\newton}}{\SI{2}{\kilo\gram}} = \SI{5}{\metre\per\second\squared}
+\]
+Chi scrive 500 ha lasciato l'allungamento in centimetri.'''
+
+[[quesito]]
+id = "sim3-ud2-pendio"
+simulazione = 3
+ud = 2
+sezione = "La conservazione dell'energia meccanica"
+tipo = "completamento"
+testo = '''Una slitta passa sulla cima di un pendio innevato a \SI{4}{\metre\per\second} e scende fino in fondo, \SI{45}{\centi\metre} più in basso. Trascurando gli attriti e usando $g = \SI{10}{\metre\per\second\squared}$, in fondo al pendio la slitta ha una velocità di \completa\ \si{\metre\per\second}.'''
+calcolo = "math.sqrt(4**2 + 2 * g * 0.45)"
+risposta = "5"
+soluzione = '''Senza attriti l'energia meccanica si conserva; la forza normale della neve è perpendicolare al moto e non compie lavoro. Con lo zero dell'energia potenziale in fondo e $h = \SI{0,45}{\metre}$:
+\[
+  \frac12 m v_i^2 + mgh = \frac12 m v_f^2
+  \quad\Longrightarrow\quad
+  v_f^2 = v_i^2 + 2gh = 16 + 2 \cdot 10 \cdot 0{,}45 = (16 + 9)\,\si{\metre\squared\per\second\squared} = \SI{25}{\metre\squared\per\second\squared}
+\]
+quindi $v_f = \SI{5}{\metre\per\second}$. Chi scrive 7 ha sommato le velocità, $4 + 3$, invece delle energie; chi scrive 3 ha dimenticato la velocità iniziale.'''
+
+[[quesito]]
+id = "sim1-ud3-tonometria"
+simulazione = 1
+ud = 3
+sezione = "La pressione"
+tipo = "multipla"
+testo = '''La pressione all'interno dell'occhio di un paziente supera quella atmosferica di {{p}}. Con $\SI{1}{\mmHg} \approx \SI{133}{\pascal}$, la forza in più che il liquido dell'occhio esercita dall'interno sulla cornea, che si può trattare come una superficie piana di area {{S}}, è circa'''
+dati.p = { valore = 15, unita = "\\mmHg" }
+dati.S = { valore = "1,0", unita = "\\centi\\metre\\squared" }
+corretta = "D"
+calcolo = "p * mmHg * S * 1e-4"
+soluzione = '''La pressione in pascal è $p = 15 \cdot \SI{133}{\pascal} = \SI{1995}{\pascal} \approx \SI{2,0e3}{\pascal}$. L'area nel SI è $\SI{1,0}{\centi\metre\squared} = (\SI{e-2}{\metre})^2 = \SI{1,0e-4}{\metre\squared}$. Dalla definizione di pressione:
+\[
+  F = p\,S = \SI{1995}{\pascal} \cdot \SI{1,0e-4}{\metre\squared} = 1995 \cdot 10^{-4}\,\si{\newton} \approx \SI{0,20}{\newton}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\newton}'''
+  commento = '''Converte i centimetri quadrati con $10^{-2}$ invece di $10^{-4}$: $1995 \cdot 10^{-2} \approx 20$. Un centimetro quadrato è $(10^{-2}\,\si{\metre})^2 = \SI{e-4}{\metre\squared}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,0e3}{\newton}'''
+  commento = '''Lascia l'area in centimetri quadrati, $S = 1$, in una formula in unità del SI: $1995 \cdot 1 \approx \num{2,0e3}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,5e-3}{\newton}'''
+  commento = '''Dimentica di convertire i millimetri di mercurio in pascal: $15 \cdot 10^{-4} = \num{1,5e-3}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,20}{\newton}'''
+  valore = 0.1995
+  [[quesito.opzione]]
+  testo = '''\SI{2,0e7}{\newton}'''
+  commento = '''Divide la pressione per l'area invece di moltiplicarla: $1995/10^{-4} \approx \num{2,0e7}$. Da $p = F/S$ si ricava $F = pS$.'''
+
+[[quesito]]
+id = "sim1-ud3-torricelli"
+simulazione = 1
+ud = 3
+sezione = "L'esperimento di Torricelli"
+tipo = "multipla"
+testo = '''Si ripete l'esperimento di Torricelli al livello del mare con un tubo di diametro doppio, tenuto inclinato di \ang{30} rispetto alla verticale. Rispetto a quella che si ha in un tubo verticale più stretto, l'altezza verticale della colonna di mercurio sopra il livello della bacinella'''
+corretta = "C"
+soluzione = '''Alla quota della superficie della bacinella la pressione dentro il tubo è uguale a quella atmosferica. Dentro il tubo, sopra la colonna, c'è il vuoto, quindi per la legge di Stevino $p_\text{atm} = \rho_\text{Hg}\,g\,h$, dove $h$ è il dislivello verticale fra la superficie della bacinella e la cima della colonna. Questa relazione non contiene né la sezione del tubo né la sua inclinazione: $h$ resta di circa \SI{760}{\milli\metre}. Nel tubo inclinato il mercurio occupa un tratto più lungo, ma la sua cima è sempre \SI{760}{\milli\metre} più in alto della bacinella.'''
+
+  [[quesito.opzione]]
+  testo = '''diventa un quarto, perché la sezione del tubo è quattro volte più grande'''
+  commento = '''Pensa che conti il peso della colonna. Con una sezione quattro volte più grande il peso del mercurio è quattro volte più grande, ma lo è anche la superficie su cui preme: la pressione dipende solo dall'altezza.'''
+  [[quesito.opzione]]
+  testo = '''aumenta, perché nel tubo inclinato il mercurio occupa un tratto più lungo'''
+  commento = '''Confonde la lunghezza della colonna lungo il tubo con il dislivello verticale. Nella legge di Stevino conta solo il dislivello verticale.'''
+  [[quesito.opzione]]
+  testo = '''resta di circa \SI{760}{\milli\metre}'''
+  [[quesito.opzione]]
+  testo = '''si dimezza, perché il diametro del tubo è doppio'''
+  commento = '''Confonde con la capillarità, in cui l'altezza è inversamente proporzionale al raggio. Nel tubo di Torricelli la capillarità è trascurabile, e la colonna è sostenuta dalla pressione atmosferica.'''
+  [[quesito.opzione]]
+  testo = '''diminuisce, perché nel tubo inclinato una parte del peso del mercurio è sostenuta dalla parete'''
+  commento = '''La pressione alla base della colonna dipende solo dal dislivello verticale, non da come è inclinato il tubo: l'equilibrio si ha di nuovo quando la cima è \SI{760}{\milli\metre} sopra la bacinella.'''
+
+[[quesito]]
+id = "sim1-ud3-siringa-ago"
+simulazione = 1
+ud = 3
+sezione = "L'equazione di continuità"
+tipo = "multipla"
+testo = '''Lo stantuffo di una siringa ha diametro {{D}}, l'ago ha diametro interno {{d}}. Si spinge lo stantuffo in modo uniforme, a {{v1}}. Il farmaco, incomprimibile, esce dall'ago con una velocità media di'''
+dati.D = { valore = "1,0", unita = "cm" }
+dati.d = { valore = "0,50", unita = "mm" }
+dati.v1 = { valore = "1,0", unita = "\\milli\\metre\\per\\second" }
+corretta = "E"
+calcolo = "v1 * 1e-3 * (D * 10 / d)**2"
+soluzione = '''Per l'equazione di continuità $S_1 v_1 = S_2 v_2$: la velocità è inversamente proporzionale all'area, e l'area è proporzionale al quadrato del diametro. Con i diametri nella stessa unità, $D = \SI{1,0}{\centi\metre} = \SI{10}{\milli\metre}$:
+\[
+  \frac{D}{d} = \frac{\SI{10}{\milli\metre}}{\SI{0,50}{\milli\metre}} = 20
+  \qquad\qquad
+  \frac{S_1}{S_2} = 20^2 = 400
+\]
+\[
+  v_2 = v_1\,\frac{S_1}{S_2} = \SI{1,0}{\milli\metre\per\second} \cdot 400 = \SI{400}{\milli\metre\per\second} = \SI{0,40}{\metre\per\second}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0,020}{\metre\per\second}'''
+  commento = '''Usa il rapporto dei diametri, 20, invece di quello delle aree, $20^2 = 400$: $20 \cdot \SI{1,0}{\milli\metre\per\second} = \SI{20}{\milli\metre\per\second}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,5e-6}{\metre\per\second}'''
+  commento = '''Rovescia il rapporto delle aree, $\SI{1,0}{\milli\metre\per\second}/400 = \SI{2,5e-3}{\milli\metre\per\second}$: nel tratto stretto il fluido accelera, non rallenta.'''
+  [[quesito.opzione]]
+  testo = '''\SI{4,0e-3}{\metre\per\second}'''
+  commento = '''Confronta i diametri in unità diverse, $1{,}0/0{,}50 = 2$ e $2^2 = 4$, senza portare il centimetro in millimetri.'''
+  [[quesito.opzione]]
+  testo = '''\SI{40}{\metre\per\second}'''
+  commento = '''Sbaglia la conversione, $\SI{1}{\centi\metre} = \SI{100}{\milli\metre}$: il rapporto dei diametri viene 200 e quello delle aree \num{40000}. Un centimetro è \SI{10}{\milli\metre}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,40}{\metre\per\second}'''
+  valore = 0.4
+
+[[quesito]]
+id = "sim1-ud3-menisco"
+simulazione = 1
+ud = 3
+sezione = "La capillarità"
+tipo = "multipla"
+testo = '''Si immerge un tubicino di vetro sottile in una bacinella di mercurio, che non bagna il vetro. Nel tubicino il mercurio'''
+corretta = "B"
+soluzione = '''Il mercurio non bagna il vetro: la coesione fra le sue molecole prevale sull'adesione al vetro, e l'angolo di contatto è maggiore di \ang{90} (circa \ang{140}). Il menisco è convesso. Nella legge di Jurin, $h = 2\gamma\cos\theta/(\rho g r)$, il coseno di un angolo fra \ang{90} e \ang{180} è negativo, e così anche $h$: nel tubicino il mercurio si ferma più in basso del livello esterno.'''
+
+  [[quesito.opzione]]
+  testo = '''sale sopra il livello esterno, con il menisco concavo'''
+  commento = '''È il comportamento dell'acqua, che bagna il vetro. Il mercurio non lo bagna, e fa il contrario.'''
+  [[quesito.opzione]]
+  testo = '''si ferma più in basso del livello esterno, con il menisco convesso'''
+  [[quesito.opzione]]
+  testo = '''sale sopra il livello esterno, con il menisco convesso'''
+  commento = '''La forma del menisco è giusta, ma un liquido che non bagna il vetro si abbassa: con $\theta > \ang{90}$ l'altezza $h$ della legge di Jurin è negativa.'''
+  [[quesito.opzione]]
+  testo = '''si ferma allo stesso livello esterno, perché tubicino e bacinella sono vasi comunicanti'''
+  commento = '''Trascura la tensione superficiale. I vasi comunicanti si portano allo stesso livello solo se i tubi sono larghi; in un tubo sottile conta la capillarità.'''
+  [[quesito.opzione]]
+  testo = '''si ferma più in basso del livello esterno, con il menisco concavo'''
+  commento = '''Il livello è giusto, ma il menisco concavo è quello di un liquido che bagna la parete. Il menisco del mercurio nel vetro è convesso.'''
+
+[[quesito]]
+id = "sim1-ud4-ambulanza"
+simulazione = 1
+ud = 4
+sezione = "L'effetto Doppler"
+tipo = "multipla"
+testo = '''Un'ambulanza con la sirena accesa viene dritta verso un pedone fermo, a velocità costante. Mentre l'ambulanza si avvicina, il suono che il pedone sente'''
+corretta = "A"
+soluzione = '''La sorgente si avvicina all'osservatore: davanti a lei i fronti d'onda si addensano, la lunghezza d'onda è più corta e la frequenza che arriva al pedone è più alta di quella emessa. Lo spostamento di frequenza dipende dalla velocità con cui la distanza diminuisce, che qui è costante: il suono resta ugualmente acuto per tutto l'avvicinamento. Cambia invece l'intensità, che cresce man mano che la distanza diminuisce.'''
+
+  [[quesito.opzione]]
+  testo = '''è più acuto di quello emesso, con un'altezza che resta costante, e diventa sempre più forte'''
+  [[quesito.opzione]]
+  testo = '''è sempre più acuto man mano che l'ambulanza si avvicina'''
+  commento = '''Confonde la distanza con la velocità. L'effetto Doppler dipende dalla velocità con cui la distanza cambia, che qui è costante; con la distanza cambia solo l'intensità.'''
+  [[quesito.opzione]]
+  testo = '''ha la stessa frequenza di quello emesso, perché la velocità dell'ambulanza è costante'''
+  commento = '''Pensa che serva un'accelerazione. Basta che sorgente e osservatore si avvicinino, anche a velocità costante.'''
+  [[quesito.opzione]]
+  testo = '''è più grave di quello emesso, con un'altezza che resta costante'''
+  commento = '''Rovescia l'effetto: quando sorgente e osservatore si avvicinano la frequenza percepita è più alta, non più bassa.'''
+  [[quesito.opzione]]
+  testo = '''è più acuto perché il suono emesso da una sorgente in moto viaggia più veloce'''
+  commento = '''La velocità del suono dipende solo dal mezzo, non dal moto della sorgente. Cambia la lunghezza d'onda: i fronti d'onda davanti all'ambulanza sono più vicini.'''
+
+[[quesito]]
+id = "sim1-ud3-embolo"
+simulazione = 1
+ud = 3
+sezione = "Resistenze in serie e in parallelo"
+tipo = "completamento"
+testo = '''Un'arteria di resistenza idraulica {{R0}} porta il sangue a due rami uguali in parallelo, ciascuno di resistenza {{R1}}, che sboccano nella stessa vena. Un embolo chiude uno dei due rami. Se la differenza di pressione fra l'inizio dell'arteria e la vena non cambia e il moto resta laminare, la portata totale diventa il \completa\ \% di quella di prima.'''
+dati.R0 = { valore = "2,0e8", unita = "\\pascal\\second\\per\\metre\\cubed" }
+dati.R1 = { valore = "2,0e8", unita = "\\pascal\\second\\per\\metre\\cubed" }
+calcolo = "100 * (R0 + R1 / 2) / (R0 + R1)"
+risposta = "75"
+soluzione = '''Si lavora in unità di \SI{e8}{\pascal\second\per\metre\cubed}. Prima dell'embolo i due rami uguali in parallelo hanno resistenza $R_1/2 = 1{,}0$, in serie con l'arteria: $R = 2{,}0 + 1{,}0 = 3{,}0$. Dopo, resta un ramo solo, in serie con l'arteria: $R' = 2{,}0 + 2{,}0 = 4{,}0$. Da $Q = \Delta p/R$, a parità di $\Delta p$:
+\[
+  \frac{Q'}{Q} = \frac{R}{R'} = \frac{3{,}0}{4{,}0} = 0{,}75 = 75\%
+\]
+Chi scrive 50 dimentica l'arteria in serie con i rami.'''
+
+[[quesito]]
+id = "sim1-ud3-tubo-u"
+simulazione = 1
+ud = 3
+sezione = "Le conseguenze della legge di Stevino"
+tipo = "completamento"
+testo = '''Un tubo a U aperto contiene acqua ({{rhoa}}). In un ramo si versa uno strato di olio d'oliva ({{rhoo}}) alto {{ho}}, che non si mescola con l'acqua. All'equilibrio, nell'altro ramo la superficie dell'acqua sta più in alto della superficie di separazione fra olio e acqua di \completa\ \si{\centi\metre}.'''
+dati.rhoa = { valore = 1000, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.rhoo = { valore = 920, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.ho = { valore = 25, unita = "cm" }
+calcolo = "ho * rhoo / rhoa"
+risposta = "23"
+soluzione = '''Alla quota della superficie di separazione la pressione è la stessa nei due rami. Sopra quella quota c'è, da una parte, la colonna di olio alta $h_\text{o}$, dall'altra una colonna d'acqua alta $h_\text{a}$, tutte e due con la pressione atmosferica in cima. Quindi $\rho_\text{o} g h_\text{o} = \rho_\text{a} g h_\text{a}$ e
+\[
+  h_\text{a} = h_\text{o}\,\frac{\rho_\text{o}}{\rho_\text{a}} = \SI{25}{\centi\metre} \cdot \frac{920}{1000} = 25 \cdot 0{,}92\,\si{\centi\metre} = \SI{23}{\centi\metre}
+\]
+Il liquido meno denso forma la colonna più alta. Chi scrive 27 ha rovesciato il rapporto delle densità.'''
+
+[[quesito]]
+id = "sim1-ud4-conversazioni"
+simulazione = 1
+ud = 4
+sezione = "L'intensità del suono e la sua percezione"
+tipo = "completamento"
+testo = '''Nella mensa di un ospedale ogni conversazione produce al centro della sala un livello sonoro di {{b1}}. Le conversazioni sono sorgenti indipendenti con la stessa intensità. Il livello al centro della sala arriva a {{b2}} quando le conversazioni sono \completa.'''
+dati.b1 = { valore = 50, unita = "\\deci\\bel" }
+dati.b2 = { valore = 70, unita = "\\deci\\bel" }
+calcolo = "10**((b2 - b1) / 10)"
+risposta = "100"
+soluzione = '''Le sorgenti sono indipendenti, quindi si sommano le intensità: con $N$ conversazioni l'intensità è $N$ volte quella di una sola. Il livello aumenta di
+\[
+  \beta_N - \beta_1 = 10\log_{10} N = \SI{70}{\deci\bel} - \SI{50}{\deci\bel} = \SI{20}{\deci\bel}
+\]
+quindi $\log_{10} N = 2$ e $N = 10^{2} = 100$. Due conversazioni non bastano: danno solo $50 + 3 = \SI{53}{\deci\bel}$, perché si sommano le intensità, non i livelli.'''
+
+[[quesito]]
+id = "sim2-ud3-protesi"
+simulazione = 2
+ud = 3
+sezione = "La spinta di Archimede"
+tipo = "multipla"
+testo = '''Una protesi d'anca appesa a un dinamometro segna {{P}} in aria e {{Papp}} quando è completamente immersa in acqua ({{rho}}). La densità del materiale della protesi è'''
+dati.P = { valore = "9,0", unita = "\\newton" }
+dati.Papp = { valore = "7,0", unita = "\\newton" }
+dati.rho = { valore = 1000, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+corretta = "A"
+calcolo = "rho * P / (P - Papp)"
+soluzione = '''Il dinamometro in acqua segna il peso apparente, il peso meno la spinta. La spinta è quindi
+\[
+  F_A = P - P_\text{app} = \SI{9,0}{\newton} - \SI{7,0}{\newton} = \SI{2,0}{\newton}
+\]
+Il peso è $P = \rho V g$, la spinta $F_A = \rho_\text{acqua} V g$, con lo stesso volume $V$ perché la protesi è tutta immersa. Dividendo, $V$ e $g$ si semplificano:
+\[
+  \frac{\rho}{\rho_\text{acqua}} = \frac{P}{F_A} = \frac{9{,}0}{2{,}0} = 4{,}5
+  \qquad\qquad
+  \rho = 4{,}5 \cdot \SI{1000}{\kilo\gram\per\metre\cubed} = \SI{4500}{\kilo\gram\per\metre\cubed}
+\]
+È la densità del titanio, con cui si fanno molte protesi.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{4500}{\kilo\gram\per\metre\cubed}'''
+  valore = 4500.0
+  [[quesito.opzione]]
+  testo = '''\SI{1300}{\kilo\gram\per\metre\cubed}'''
+  commento = '''Divide il peso per il peso apparente invece che per la spinta: $9{,}0/7{,}0 \approx 1{,}3$. La spinta è la differenza fra le due letture, \SI{2,0}{\newton}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{220}{\kilo\gram\per\metre\cubed}'''
+  commento = '''Rovescia il rapporto, $F_A/P = 2{,}0/9{,}0 \approx 0{,}22$: una densità minore di quella dell'acqua farebbe galleggiare la protesi.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3500}{\kilo\gram\per\metre\cubed}'''
+  commento = '''Mette al numeratore il peso apparente invece del peso: $7{,}0/2{,}0 = 3{,}5$. Il peso del corpo è quello misurato in aria.'''
+  [[quesito.opzione]]
+  testo = '''\SI{4,5}{\kilo\gram\per\metre\cubed}'''
+  commento = '''Usa per l'acqua la densità in \si{\gram\per\centi\metre\cubed}, $\rho_\text{acqua} = 1$, e scrive il risultato in \si{\kilo\gram\per\metre\cubed}: $\SI{4,5}{\gram\per\centi\metre\cubed} = \SI{4500}{\kilo\gram\per\metre\cubed}$.'''
+
+[[quesito]]
+id = "sim2-ud3-stenosi"
+simulazione = 2
+ud = 3
+sezione = "Stenosi e aneurisma"
+tipo = "multipla"
+testo = '''In un tratto orizzontale di arteria il sangue ({{rho}}) scorre a {{v1}}, e la sua pressione supera di {{dp}} quella dei tessuti intorno. Più avanti una placca restringe il vaso. Con $\SI{1}{\mmHg} \approx \SI{133}{\pascal}$ e trattando il sangue come un fluido ideale, nel tratto ristretto la pressione scende fino a quella dei tessuti, che possono schiacciare la parete, quando l'area della sezione si riduce a'''
+dati.rho = { valore = 1060, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.v1 = { valore = "0,50", unita = "m/s" }
+dati.dp = { valore = 24, unita = "\\mmHg" }
+corretta = "E"
+calcolo = "round(v1 / math.sqrt(v1**2 + 2 * dp * mmHg / rho), 2)"
+soluzione = '''Il vaso è orizzontale, e per il teorema di Bernoulli nel tratto ristretto la pressione cala di $\frac{1}{2}\rho\,(v_2^2 - v_1^2)$. La parete rischia di essere schiacciata quando il calo arriva a $\SI{24}{\mmHg} = 24 \cdot \SI{133}{\pascal} \approx \SI{3,2e3}{\pascal}$. Con $\frac{1}{2}\rho = \frac{1}{2} \cdot 1060 = \SI{530}{\kilo\gram\per\metre\cubed}$:
+\[
+  v_2^2 - v_1^2 = \frac{\SI{3,2e3}{\pascal}}{\SI{530}{\kilo\gram\per\metre\cubed}} \approx \SI{6,0}{\metre\squared\per\second\squared}
+\]
+\[
+  v_2^2 \approx 6{,}0 + v_1^2 = (6{,}0 + 0{,}50^2)\,\si{\metre\squared\per\second\squared} = (6{,}0 + 0{,}25)\,\si{\metre\squared\per\second\squared} = \SI{6,25}{\metre\squared\per\second\squared}
+\]
+perché $530 \cdot 6 = 3180$. Quindi $v_2 \approx \SI{2,5}{\metre\per\second}$, perché $2{,}5^2 = 6{,}25$: 5 volte $v_1$. Per l'equazione di continuità, $S_1 v_1 = S_2 v_2$, l'area è 5 volte più piccola: un quinto di quella del tratto sano. In un aneurisma succede il contrario: la sezione cresce, il sangue rallenta e la pressione sale un poco.'''
+
+  [[quesito.opzione]]
+  testo = '''circa nove decimi di quella del tratto sano'''
+  commento = '''Lascia la pressione in millimetri di mercurio: con \SI{24}{\pascal} al posto di \SI{3,2e3}{\pascal} trova $v_2^2 = 0{,}25 + 24/530 \approx 0{,}30$, cioè $v_2 \approx \SI{0,54}{\metre\per\second}$, appena più di $v_1$.'''
+  [[quesito.opzione]]
+  testo = '''un venticinquesimo di quella del tratto sano'''
+  commento = '''Eleva al quadrato il rapporto delle velocità, $5^2$, come se fosse un rapporto fra raggi. La portata $Sv$ è la stessa: le aree stanno nel rapporto inverso delle velocità, alla prima potenza.'''
+  [[quesito.opzione]]
+  testo = '''circa un sesto di quella del tratto sano'''
+  commento = '''Usa il quadrato della differenza delle velocità, $(v_2 - v_1)^2 \approx 6{,}0$, invece della differenza dei quadrati: trova $v_2 \approx 0{,}50 + 2{,}45 \approx \SI{2,95}{\metre\per\second}$, quasi 6 volte $v_1$.'''
+  [[quesito.opzione]]
+  testo = '''nessun valore: nel tratto ristretto il sangue è compresso, e la sua pressione sale'''
+  commento = '''Pensa che il restringimento «schiacci» il sangue. Per la continuità nel tratto ristretto il sangue accelera, e per il teorema di Bernoulli dove la velocità è più alta la pressione è più bassa.'''
+  [[quesito.opzione]]
+  testo = '''un quinto di quella del tratto sano'''
+  valore = 0.2
+[[quesito]]
+id = "sim2-ud3-insetto"
+simulazione = 2
+ud = 3
+sezione = "La tensione superficiale"
+tipo = "multipla"
+testo = '''Un insetto sta fermo sulla superficie dell'acqua, sostenuto dalla tensione superficiale lungo il bordo delle sue zampe. Si immagina un insetto della stessa forma e dello stesso materiale, con tutte le dimensioni 10 volte più grandi. Rispetto al primo insetto, il rapporto fra la forza di tensione superficiale che può sostenerlo e il suo peso'''
+corretta = "B"
+calcolo = "10 / 10**3"
+soluzione = '''La forza di tensione superficiale è $F = \gamma \ell$, proporzionale alla lunghezza del bordo: con le dimensioni per 10, diventa 10 volte più grande. Il peso è proporzionale al volume: diventa $10^3 = 1000$ volte più grande. Il rapporto fra forza e peso si moltiplica quindi per
+\[
+  \frac{10}{10^{3}} = 10^{-2} = \frac{1}{100}
+\]
+Per questo la tensione superficiale conta per gli oggetti piccoli, e non regge un animale grande.'''
+
+  [[quesito.opzione]]
+  testo = '''resta lo stesso, perché la forma è la stessa'''
+  commento = '''A parità di forma le grandezze crescono con potenze diverse delle dimensioni: la lunghezza del bordo come $10$, il volume come $10^3$.'''
+  [[quesito.opzione]]
+  testo = '''diventa 100 volte più piccolo'''
+  valore = 0.01
+  [[quesito.opzione]]
+  testo = '''diventa 10 volte più piccolo'''
+  commento = '''Fa crescere il peso come una superficie, $10^2$, invece che come un volume, $10^3$: $10/10^2 = 1/10$.'''
+  [[quesito.opzione]]
+  testo = '''diventa 1000 volte più piccolo'''
+  commento = '''Fa crescere il peso di $10^3$ ma lascia invariata la forza di tensione superficiale, che invece cresce di 10 con la lunghezza del bordo delle zampe.'''
+  [[quesito.opzione]]
+  testo = '''diventa 10 volte più grande'''
+  commento = '''Considera solo la forza di tensione superficiale, che cresce di 10, e dimentica che il peso cresce molto di più.'''
+
+[[quesito]]
+id = "sim2-ud4-velocita-punto"
+simulazione = 2
+ud = 4
+sezione = "Il moto armonico"
+tipo = "multipla"
+testo = '''Su una corda tesa viaggia un'onda armonica trasversale. Un punto della corda si muove con la velocità più grande quando'''
+corretta = "C"
+soluzione = '''Al passaggio di un'onda armonica ogni punto della corda è un oscillatore armonico, che oscilla fra $-A$ e $+A$. Agli estremi, cioè su una cresta o su un avvallamento, il punto si ferma e torna indietro: la sua velocità è nulla. La velocità è massima quando passa per la posizione di equilibrio. Questa velocità non va confusa con la velocità di propagazione dell'onda, che è la stessa in tutti i punti e non cambia nel tempo.'''
+
+  [[quesito.opzione]]
+  testo = '''si trova su una cresta'''
+  commento = '''Confonde lo spostamento massimo con la velocità massima: sulla cresta il punto inverte il moto, e la sua velocità è nulla.'''
+  [[quesito.opzione]]
+  testo = '''si trova su un avvallamento'''
+  commento = '''Anche nell'avvallamento lo spostamento è massimo (verso il basso) e il punto inverte il moto: la sua velocità è nulla.'''
+  [[quesito.opzione]]
+  testo = '''passa per la posizione di equilibrio'''
+  [[quesito.opzione]]
+  testo = '''si muove alla velocità di propagazione dell'onda, sempre uguale'''
+  commento = '''Confonde la velocità con cui avanza la forma dell'onda con quella con cui oscillano i punti della corda, che cambia di continuo.'''
+  [[quesito.opzione]]
+  testo = '''si muove con velocità costante fra $-A$ e $+A$: la velocità è la stessa in ogni posizione'''
+  commento = '''Tratta l'oscillazione come un moto uniforme. Nel moto armonico il punto rallenta avvicinandosi agli estremi, dove si ferma, e accelera tornando verso l'equilibrio.'''
+
+[[quesito]]
+id = "sim2-ud4-fonendoscopio"
+simulazione = 2
+ud = 4
+sezione = "La legge dell'inverso del quadrato"
+tipo = "multipla"
+testo = '''I toni cardiaci raccolti dalla membrana del fonendoscopio arrivano alle orecchie del medico lungo i tubi dello strumento senza indebolirsi molto. Il motivo è che nei tubi'''
+corretta = "D"
+soluzione = '''All'aperto l'energia di un'onda sonora si distribuisce su superfici sempre più grandi, e l'intensità cala con l'inverso del quadrato della distanza. Dentro un tubo l'onda non può allargarsi: la sua energia resta concentrata sulla piccola sezione del tubo, e l'intensità resta quasi la stessa lungo il tubo.'''
+
+  [[quesito.opzione]]
+  testo = '''il suono passa nella gomma dei tubi, un solido, dove è più veloce che nell'aria'''
+  commento = '''Nei solidi il suono è in genere più veloce che nell'aria, ma qui viaggia nell'aria dentro i tubi. E una velocità maggiore non impedirebbe all'onda di allargarsi.'''
+  [[quesito.opzione]]
+  testo = '''la frequenza del suono aumenta, e con lei l'intensità'''
+  commento = '''La frequenza è fissata dalla sorgente e non cambia lungo il percorso dell'onda.'''
+  [[quesito.opzione]]
+  testo = '''il suono diventa un'onda trasversale, che non si attenua'''
+  commento = '''Nell'aria, come in ogni fluido, si propagano solo onde longitudinali.'''
+  [[quesito.opzione]]
+  testo = '''l'onda non può allargarsi, e la sua energia resta concentrata nel tubo'''
+  [[quesito.opzione]]
+  testo = '''l'aria dei tubi si sposta dalla membrana alle orecchie, e porta con sé l'energia del suono'''
+  commento = '''Un'onda trasporta energia, non materia: gli strati d'aria oscillano avanti e indietro intorno alla loro posizione.'''
+
+[[quesito]]
+id = "sim2-ud3-densita-sangue"
+simulazione = 2
+ud = 3
+sezione = "La densità"
+tipo = "completamento"
+testo = '''In un campione di sangue con un ematocrito del 40\%, i globuli rossi occupano il 40\% del volume e hanno densità {{rhog}}; il resto del volume è plasma, di densità {{rhop}}. La densità del sangue del campione è \completa\ \si{\kilo\gram\per\metre\cubed}.'''
+dati.rhog = { valore = 1100, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.rhop = { valore = 1025, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+calcolo = "0.40 * rhog + 0.60 * rhop"
+risposta = "1055"
+soluzione = '''Si considera $\SI{1}{\metre\cubed}$ di sangue. I globuli rossi ne occupano \SI{0,40}{\metre\cubed}, con massa $\SI{1100}{\kilo\gram\per\metre\cubed} \cdot \SI{0,40}{\metre\cubed} = \SI{440}{\kilo\gram}$; il plasma \SI{0,60}{\metre\cubed}, con massa $\SI{1025}{\kilo\gram\per\metre\cubed} \cdot \SI{0,60}{\metre\cubed} = \SI{615}{\kilo\gram}$. La densità è la massa totale divisa per il volume:
+\[
+  \rho = \frac{m}{V} = \frac{\SI{440}{\kilo\gram} + \SI{615}{\kilo\gram}}{\SI{1}{\metre\cubed}} = \SI{1055}{\kilo\gram\per\metre\cubed}
+\]
+Chi scrive 1062,5 fa la media semplice delle due densità, senza pesarle con i volumi. La densità è una grandezza intensiva: unendo due campioni le masse e i volumi si sommano, la densità no.'''
+
+[[quesito]]
+id = "sim2-ud3-flusso"
+simulazione = 2
+ud = 3
+sezione = "Portata e flusso"
+tipo = "completamento"
+testo = '''In un vaso il sangue scorre con velocità {{v}}, uguale in tutti i punti e nella stessa direzione. Si considera una superficie piana immaginaria di area {{S}}, tutta dentro il vaso, la cui perpendicolare forma un angolo di \ang{60} con la velocità ($\cos\ang{60} = 0{,}5$). Il flusso della velocità attraverso la superficie vale \completa\ \si{\centi\metre\cubed\per\second}.'''
+dati.v = { valore = 20, unita = "\\centi\\metre\\per\\second" }
+dati.S = { valore = "3,0", unita = "\\centi\\metre\\squared" }
+calcolo = "S * v * 0.5"
+risposta = "30"
+soluzione = '''Il flusso è l'area per la componente della velocità perpendicolare alla superficie, $\Phi = S\,v\cos\alpha$. Con le grandezze in centimetri:
+\[
+  \Phi = \SI{3,0}{\centi\metre\squared} \cdot \SI{20}{\centi\metre\per\second} \cdot 0{,}5 = \SI{30}{\centi\metre\cubed\per\second}
+\]
+Chi scrive 60 dimentica il coseno: il conto $Sv$ vale solo per una superficie perpendicolare alla velocità.'''
+
+[[quesito]]
+id = "sim2-ud3-velocita-arteriola"
+simulazione = 2
+ud = 3
+sezione = "La legge di Poiseuille"
+tipo = "completamento"
+testo = '''Per una vasocostrizione il raggio di un'arteriola si dimezza, mentre la differenza di pressione ai suoi capi e la sua lunghezza restano le stesse e il moto resta laminare. La velocità media del sangue nell'arteriola diventa \completa\ volte più piccola.'''
+calcolo = "2**4 / 2**2"
+risposta = "4"
+soluzione = '''Per la legge di Poiseuille la portata è proporzionale a $r^4$: con il raggio dimezzato diventa $2^4 = 16$ volte più piccola. L'area della sezione è proporzionale a $r^2$, e diventa $2^2 = 4$ volte più piccola. La velocità media è la portata divisa per l'area, $v = Q/S$:
+\[
+  \frac{v'}{v} = \frac{Q'/Q}{S'/S} = \frac{1/16}{1/4} = \frac{1}{4}
+\]
+Lo stesso risultato viene da $v_\text{media} = r^2\,\Delta p/(8\eta L)$. Chi scrive 16 confonde la velocità con la portata.'''
+
+[[quesito]]
+id = "sim3-ud3-pascal-ago"
+simulazione = 3
+ud = 3
+sezione = "Il principio di Pascal"
+tipo = "multipla"
+testo = '''Una siringa piena di soluzione, con la punta dell'ago tappata, è tenuta ferma in orizzontale. Spingendo lo stantuffo, di area {{S1}}, la pressione nella soluzione sotto lo stantuffo aumenta di {{dp}}. La sezione della punta dell'ago è 100 volte più piccola di quella dello stantuffo. Sul tappo, alla punta dell'ago, la pressione aumenta di'''
+dati.S1 = { valore = "2,0", unita = "\\centi\\metre\\squared" }
+dati.dp = { valore = "1,0e5", unita = "\\pascal" }
+corretta = "C"
+calcolo = "dp"
+soluzione = '''Il liquido è fermo e incomprimibile. Per il principio di Pascal una variazione di pressione prodotta in un punto si trasmette invariata a tutti i punti del liquido e alle pareti: sul tappo la pressione aumenta di \SI{1,0e5}{\pascal}, come sotto lo stantuffo. A essere 100 volte più piccola è la forza sul tappo: sullo stantuffo $F = \Delta p\,S_1 = \SI{1,0e5}{\pascal} \cdot \SI{2,0e-4}{\metre\squared} = \SI{20}{\newton}$, sul tappo $\SI{20}{\newton}/100 = \SI{0,20}{\newton}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{1,0e7}{\pascal}'''
+  commento = '''Moltiplica per il rapporto delle aree, come se la sezione stretta concentrasse la pressione. Per il principio di Pascal la variazione di pressione è la stessa in tutto il liquido; cambia la forza, proporzionale all'area.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,0e3}{\pascal}'''
+  commento = '''Divide per il rapporto delle aree: tratta la pressione come una forza, che sulla sezione più piccola è 100 volte minore.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,0e5}{\pascal}'''
+  valore = 1.0e5
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\pascal}'''
+  commento = '''Calcola la forza sullo stantuffo, $\SI{1,0e5}{\pascal} \cdot \SI{2,0e-4}{\metre\squared} = \SI{20}{\newton}$, e la scambia per una pressione.'''
+  [[quesito.opzione]]
+  testo = '''zero, perché il liquido è fermo'''
+  commento = '''Il principio di Pascal vale proprio per i fluidi fermi: la pressione aumenta in tutto il liquido anche se non si muove.'''
+
+[[quesito]]
+id = "sim3-ud3-korotkoff"
+simulazione = 3
+ud = 3
+sezione = "I fluidi reali: la viscosità"
+tipo = "multipla"
+testo = '''Durante la misura della pressione con lo sfigmomanometro, quando la pressione del manicotto è fra la sistolica e la diastolica, con il fonendoscopio sull'arteria si sentono dei colpi, i toni di Korotkoff. Si sentono perché il sangue che passa a scatti nell'arteria schiacciata'''
+corretta = "A"
+soluzione = '''A ogni battito l'arteria schiacciata dal manicotto si apre per un istante, e il sangue passa per un'apertura stretta con grande velocità. A velocità alte il moto diventa turbolento: il sangue forma vortici e si rimescola, e le vibrazioni che ne nascono si sentono con il fonendoscopio. Quando la pressione del manicotto scende sotto la diastolica l'arteria resta aperta, il flusso torna laminare e i colpi spariscono.'''
+
+  [[quesito.opzione]]
+  testo = '''scorre in moto turbolento, formando vortici che fanno vibrare la parete'''
+  [[quesito.opzione]]
+  testo = '''scorre in moto laminare, in strati che sfregano l'uno sull'altro'''
+  commento = '''Il moto laminare è ordinato e silenzioso: è il flusso che c'è quando i colpi spariscono, sotto la pressione diastolica.'''
+  [[quesito.opzione]]
+  testo = '''scorre in moto stazionario, perché la velocità è la stessa a ogni battito'''
+  commento = '''Un flusso a scatti non è stazionario, perché la velocità in ogni punto cambia nel tempo. E «stazionario» non dice nulla sul rumore: conta se il moto è laminare o turbolento.'''
+  [[quesito.opzione]]
+  testo = '''rallenta nel tratto schiacciato, e l'accumulo di sangue fa vibrare la parete'''
+  commento = '''Per l'equazione di continuità nel tratto ristretto il sangue accelera, non rallenta.'''
+  [[quesito.opzione]]
+  testo = '''ha nel tratto schiacciato una pressione più alta, che fa vibrare la parete'''
+  commento = '''Per il teorema di Bernoulli, dove il sangue è più veloce la pressione è più bassa, non più alta.'''
+
+[[quesito]]
+id = "sim3-ud3-cannula-sangue"
+simulazione = 3
+ud = 3
+sezione = "La legge di Poiseuille"
+tipo = "multipla"
+testo = '''Con una cannula si infonde soluzione fisiologica, di viscosità {{eta1}}. Si vuole infondere sangue, di viscosità {{eta2}}, con la stessa portata e la stessa differenza di pressione, usando una cannula della stessa lunghezza, in moto laminare. Rispetto a quello della prima cannula, il raggio interno della nuova cannula deve essere'''
+dati.eta1 = { valore = "1,0e-3", unita = "\\pascal\\second" }
+dati.eta2 = { valore = "4,0e-3", unita = "\\pascal\\second" }
+corretta = "D"
+calcolo = "(eta2 / eta1)**0.25"
+soluzione = '''Per la legge di Poiseuille $Q = \pi r^4 \Delta p/(8\eta L)$. Con $Q$, $\Delta p$ e $L$ fissati, deve restare uguale il rapporto $r^4/\eta$. La viscosità è $4{,}0/1{,}0 = 4$ volte più grande, quindi $r^4$ deve diventare 4 volte più grande:
+\[
+  r_2 = \sqrt[4]{4}\; r_1 = \sqrt{\sqrt{4}}\; r_1 = \sqrt{2}\; r_1 \approx 1{,}4\, r_1
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''4 volte più grande'''
+  commento = '''Fa crescere il raggio quanto la viscosità, come se la portata fosse proporzionale a $r$. È proporzionale a $r^4$.'''
+  [[quesito.opzione]]
+  testo = '''2 volte più grande'''
+  commento = '''Usa la radice quadrata, $\sqrt{4} = 2$, come se la portata andasse con l'area della sezione, $r^2$. Con $r^4$ serve la radice quarta.'''
+  [[quesito.opzione]]
+  testo = '''uguale, perché la differenza di pressione è la stessa'''
+  commento = '''Dimentica la viscosità: a parità di cannula e di differenza di pressione il sangue, quattro volte più viscoso, passerebbe con una portata quattro volte più piccola.'''
+  [[quesito.opzione]]
+  testo = '''circa 1,4 volte più grande'''
+  valore = 1.4142135623730951
+  [[quesito.opzione]]
+  testo = '''circa 1,4 volte più piccolo'''
+  commento = '''Il fattore è giusto ma il verso è rovesciato: un fluido più viscoso, per passare con la stessa portata, ha bisogno di una cannula più larga.'''
+
+[[quesito]]
+id = "sim3-ud3-goccia-bolla"
+simulazione = 3
+ud = 3
+sezione = "La pressione di curvatura e la legge di Laplace"
+tipo = "multipla"
+testo = '''Una goccia d'acqua saponata e una bolla di sapone hanno lo stesso raggio, {{r}}; la tensione superficiale dell'acqua saponata è {{gamma}}. La pressione interna supera quella esterna'''
+dati.r = { valore = "0,50", unita = "cm" }
+dati.gamma = { valore = "0,025", unita = "\\newton\\per\\metre" }
+corretta = "E"
+calcolo = "4 * gamma / (r * 1e-2)"
+soluzione = '''Per la legge di Laplace, con $r = \SI{5,0e-3}{\metre}$. La goccia ha una sola superficie curva:
+\[
+  \Delta p_\text{goccia} = \frac{2\gamma}{r} = \frac{2 \cdot \SI{0,025}{\newton\per\metre}}{\SI{5,0e-3}{\metre}} = \frac{0{,}050}{0{,}0050}\,\si{\pascal} = \SI{10}{\pascal}
+\]
+La bolla di sapone ha due superfici, l'interna e l'esterna della lamina, e la pressione di curvatura raddoppia:
+\[
+  \Delta p_\text{bolla} = \frac{4\gamma}{r} = \SI{20}{\pascal}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''di \SI{10}{\pascal} nella goccia e di \SI{10}{\pascal} nella bolla'''
+  commento = '''Usa $2\gamma/r$ anche per la bolla, dimenticando che la lamina di una bolla di sapone ha due superfici.'''
+  [[quesito.opzione]]
+  testo = '''di \SI{20}{\pascal} nella goccia e di \SI{10}{\pascal} nella bolla'''
+  commento = '''Scambia le due formule: il fattore 4 spetta alla bolla, che ha due superfici, non alla goccia.'''
+  [[quesito.opzione]]
+  testo = '''di \SI{5,0}{\pascal} nella goccia e di \SI{10}{\pascal} nella bolla'''
+  commento = '''Usa $\gamma/r$ per una superficie, dimenticando il fattore 2 della legge di Laplace per una superficie sferica.'''
+  [[quesito.opzione]]
+  testo = '''di \SI{10}{\pascal} nella goccia, mentre nella bolla non la supera, perché la lamina è sottilissima'''
+  commento = '''La pressione di curvatura non dipende dallo spessore della lamina, ma dal raggio e dalla tensione superficiale delle sue due superfici.'''
+  [[quesito.opzione]]
+  testo = '''di \SI{10}{\pascal} nella goccia e di \SI{20}{\pascal} nella bolla'''
+  valore = 20.0
+
+[[quesito]]
+id = "sim3-ud4-due-voci"
+simulazione = 3
+ud = 4
+sezione = "Interferenza costruttiva e distruttiva"
+tipo = "multipla"
+testo = '''Due persone parlano insieme nella stessa stanza, con voci di intensità simile. Nella stanza non si trovano punti di silenzio dovuti all'interferenza, come capita invece con due altoparlanti collegati allo stesso amplificatore che emettono lo stesso suono. Il motivo è che le due voci'''
+corretta = "B"
+soluzione = '''Per avere una figura di interferenza stabile, con punti fissi di interferenza distruttiva, le due sorgenti devono avere la stessa frequenza e mantenere la stessa differenza di fase, cioè oscillare sempre con lo stesso ritardo l'una rispetto all'altra. Due altoparlanti collegati allo stesso amplificatore lo fanno; due voci no: frequenze e fasi cambiano di continuo, e i punti di interferenza costruttiva e distruttiva si spostano troppo in fretta per essere notati.'''
+
+  [[quesito.opzione]]
+  testo = '''non rispettano il principio di sovrapposizione, perché sono troppo intense'''
+  commento = '''Il principio di sovrapposizione vale per le onde di piccola ampiezza, e le voci lo sono: in ogni punto gli spostamenti delle due onde si sommano.'''
+  [[quesito.opzione]]
+  testo = '''non hanno la stessa frequenza, né una differenza di fase che resta costante'''
+  [[quesito.opzione]]
+  testo = '''si propagano nell'aria con velocità diverse'''
+  commento = '''La velocità del suono dipende dal mezzo, non dalla sorgente: le due voci viaggiano nell'aria con la stessa velocità.'''
+  [[quesito.opzione]]
+  testo = '''hanno ampiezze un po' diverse, e l'interferenza distruttiva richiede ampiezze esattamente uguali'''
+  commento = '''Con ampiezze diverse l'interferenza distruttiva c'è lo stesso: l'onda non si annulla, ma resta un'ampiezza $|A_1 - A_2|$ piccola. Due altoparlanti un po' diversi danno comunque punti di suono molto attenuato.'''
+  [[quesito.opzione]]
+  testo = '''trasportano energia, e l'energia non si può annullare'''
+  commento = '''L'interferenza non annulla l'energia: la sposta dai punti di interferenza distruttiva a quelli di interferenza costruttiva. Non impedisce quindi i punti di silenzio.'''
+
+[[quesito]]
+id = "sim3-ud3-zavorra"
+simulazione = 3
+ud = 3
+sezione = "Le condizioni di galleggiamento"
+tipo = "completamento"
+testo = '''Un subacqueo con la sua attrezzatura ha massa {{m}} e volume {{V}}. In acqua dolce ({{rho}}) vuole restare in equilibrio a qualsiasi profondità. Trascurando il volume della zavorra, la massa di zavorra che deve aggiungere è \completa\ \si{\kilo\gram}.'''
+dati.m = { valore = 90, unita = "\\kilo\\gram" }
+dati.V = { valore = 94, unita = "\\litre" }
+dati.rho = { valore = 1000, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+calcolo = "rho * V * 1e-3 - m"
+risposta = "4"
+soluzione = '''Un corpo immerso resta in equilibrio a qualsiasi profondità quando il suo peso è uguale alla spinta di Archimede, cioè quando la sua densità media è quella dell'acqua. Il volume nel SI è $V = 94 \cdot \SI{e-3}{\metre\cubed} = \SI{0,094}{\metre\cubed}$. Il peso dell'acqua spostata è quello di una massa
+\[
+  \rho V = \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{0,094}{\metre\cubed} = \SI{94}{\kilo\gram}
+\]
+Il subacqueo con la zavorra deve avere questa massa: $m_\text{z} = \SI{94}{\kilo\gram} - \SI{90}{\kilo\gram} = \SI{4}{\kilo\gram}$. Senza zavorra la sua densità media è $90/0{,}094 \approx \SI{960}{\kilo\gram\per\metre\cubed}$, minore di quella dell'acqua, e tornerebbe a galla.'''
+
+[[quesito]]
+id = "sim3-ud3-aria-polmoni"
+simulazione = 3
+ud = 3
+sezione = "La densità"
+tipo = "completamento"
+testo = '''Dopo un'inspirazione profonda i polmoni di un adulto contengono circa {{V}} d'aria, di densità {{rho}}. La massa di quest'aria è \completa\ \si{\gram}.'''
+dati.V = { valore = "5,0", unita = "\\litre" }
+dati.rho = { valore = "1,2", unita = "\\kilo\\gram\\per\\metre\\cubed" }
+calcolo = "rho * V * 1e-3 * 1e3"
+risposta = "6"
+soluzione = '''Il volume nel SI è $V = 5{,}0 \cdot \SI{e-3}{\metre\cubed} = \SI{5,0e-3}{\metre\cubed}$. Dalla definizione di densità:
+\[
+  m = \rho V = \SI{1,2}{\kilo\gram\per\metre\cubed} \cdot \SI{5,0e-3}{\metre\cubed} = 6{,}0 \cdot 10^{-3}\,\si{\kilo\gram} = \SI{6}{\gram}
+\]
+Chi scrive \num{6000} ha lasciato il volume in litri: $1{,}2 \cdot 5{,}0 = 6{,}0$, letto come chilogrammi. Un litro è \SI{e-3}{\metre\cubed}.'''
+
+[[quesito]]
+id = "sim3-ud4-equazione"
+simulazione = 3
+ud = 4
+sezione = "L'equazione dell'onda armonica"
+tipo = "completamento"
+testo = '''Su una corda viaggia un'onda descritta, in unità del SI, da $y(x,t) = 0{,}040\,\sin(0{,}50\,x - 15\,t)$. La velocità di propagazione dell'onda vale \completa\ \si{\metre\per\second}.'''
+calcolo = "15 / 0.50"
+risposta = "30"
+soluzione = '''Si confronta con $y = A\sin(kx - \omega t)$: il numero d'onda è $k = \SI{0,50}{\radian\per\metre}$, la pulsazione $\omega = \SI{15}{\radian\per\second}$. La velocità è il loro rapporto:
+\[
+  v = \frac{\omega}{k} = \frac{\SI{15}{\radian\per\second}}{\SI{0,50}{\radian\per\metre}} = \SI{30}{\metre\per\second}
+\]
+Chi scrive 7,5 ha moltiplicato $\omega$ per $k$ invece di dividere.'''
+
+[[quesito]]
+id = "sim1-ud5-funzione-stato"
+simulazione = 1
+ud = 5
+sezione = "L'energia interna"
+tipo = "multipla"
+testo = '''Un gas perfetto passa dallo stato $A$ allo stato $B$ in due modi: una volta con un'isobara seguita da un'isocora, un'altra volta con un'isocora seguita da un'isobara. Quale grandezza ha certamente lo stesso valore nei due casi?'''
+corretta = "E"
+soluzione = '''L'energia interna è una funzione di stato: la sua variazione dipende solo dagli stati iniziale e finale, che sono gli stessi, quindi $\Delta U = U_B - U_A$ è uguale nei due casi. Il lavoro è l'area sotto la curva nel piano $pV$: nel primo percorso l'isobara è alla pressione $p_A$, nel secondo alla pressione $p_B$, e le aree sono diverse. Allora anche il calore, $Q = \Delta U + W$, è diverso.'''
+
+  [[quesito.opzione]]
+  testo = '''il lavoro compiuto dal gas'''
+  commento = '''Tratta il lavoro come una funzione di stato. È l'area sotto la curva nel piano $pV$, e i due percorsi hanno l'isobara a pressioni diverse, $p_A$ e $p_B$: le aree sono diverse.'''
+  [[quesito.opzione]]
+  testo = '''il calore assorbito dal gas'''
+  commento = '''Tratta il calore come una funzione di stato. Dal primo principio $Q = \Delta U + W$: $\Delta U$ è uguale, ma $W$ no, quindi neppure $Q$.'''
+  [[quesito.opzione]]
+  testo = '''la temperatura più alta raggiunta durante la trasformazione'''
+  commento = '''Non è certo. Se pressione e volume crescono tutti e due, la temperatura più alta è quella di $B$ in entrambi i percorsi. Ma se, per esempio, la pressione cresce e il volume cala, il secondo percorso passa per lo stato $(p_B, V_A)$, più caldo sia di $A$ sia di $B$, e il primo no.'''
+  [[quesito.opzione]]
+  testo = '''la pressione del gas durante l'isobara'''
+  commento = '''Nel primo percorso l'isobara viene per prima ed è alla pressione dello stato $A$; nel secondo viene dopo l'isocora ed è alla pressione dello stato $B$.'''
+  [[quesito.opzione]]
+  testo = '''la variazione di energia interna del gas'''
+
+[[quesito]]
+id = "sim1-ud5-ghiaccio-impacco"
+simulazione = 1
+ud = 5
+sezione = "La calorimetria"
+tipo = "multipla"
+testo = '''Per un impacco freddo serve acqua a \SI{0}{\celsius}. In un contenitore isolato con \SI{300}{\gram} d'acqua a \SI{20}{\celsius} si aggiunge ghiaccio a \SI{0}{\celsius}, quanto basta perché alla fine il ghiaccio sia appena tutto fuso e l'acqua sia a \SI{0}{\celsius}. Il calore specifico dell'acqua è \SI{1}{\calorie\per\gram\per\celsius}, il calore latente di fusione del ghiaccio \SI{80}{\calorie\per\gram}. Quanto ghiaccio serve?'''
+corretta = "A"
+calcolo = "300 * 1 * 20 / 80"
+soluzione = '''L'acqua, raffreddandosi da \SI{20}{\celsius} a \SI{0}{\celsius}, cede $Q = m c\,\Delta T = 300 \cdot 1 \cdot 20 = \SI{6000}{\calorie}$. Tutto questo calore serve a fondere il ghiaccio, che resta a \SI{0}{\celsius}: $Q = m_g L_f$, quindi
+\[
+  m_g = \frac{Q}{L_f} = \frac{\SI{6000}{\calorie}}{\SI{80}{\calorie\per\gram}} = \SI{75}{\gram}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{75}{\gram}'''
+  valore = 75
+  [[quesito.opzione]]
+  testo = '''\SI{1200}{\gram}'''
+  commento = '''Rovescia il rapporto fra il calore specifico e il calore latente: $300 \cdot 80/20 = 1200$ invece di $300 \cdot 20/80 = 75$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{60}{\gram}'''
+  commento = '''Fa scaldare anche l'acqua di fusione fino a \SI{20}{\celsius}, $m_g \cdot 80 + m_g \cdot 1 \cdot 20 = 6000$, da cui $m_g = 60$: ma la temperatura finale è \SI{0}{\celsius}, e l'acqua di fusione non si scalda.'''
+  [[quesito.opzione]]
+  testo = '''circa \SI{1100}{\gram}'''
+  commento = '''Usa la temperatura in kelvin, \SI{293}{\kelvin}, invece della differenza di temperatura, \SI{20}{\kelvin}: $300 \cdot 293/80 \approx 1100$.'''
+  [[quesito.opzione]]
+  testo = '''nessuna quantità: se l'acqua finisce a \SI{0}{\celsius}, il ghiaccio non può fondere'''
+  commento = '''A \SI{0}{\celsius} ghiaccio e acqua possono stare insieme: il ghiaccio fonde a temperatura costante, prendendo calore dall'acqua più calda finché questa arriva a \SI{0}{\celsius}.'''
+
+[[quesito]]
+id = "sim1-ud5-dewar"
+simulazione = 1
+ud = 5
+sezione = "La trasmissione del calore"
+tipo = "multipla"
+testo = '''In un ambulatorio di dermatologia l'azoto liquido si conserva in un recipiente a doppia parete: fra le due pareti c'è il vuoto, e le pareti sono argentate, cioè riflettenti. In che modo il recipiente riduce il calore che arriva all'azoto?'''
+corretta = "D"
+soluzione = '''La conduzione e la convezione hanno bisogno di un materiale: la conduzione di molecole che si urtano, la convezione di un fluido che si muove. Nel vuoto fra le pareti non ci sono né l'una né l'altra. L'irraggiamento invece attraversa anche il vuoto; lo riducono le pareti argentate, che riflettono la radiazione infrarossa invece di assorbirla.'''
+
+  [[quesito.opzione]]
+  testo = '''il vuoto blocca l'irraggiamento, le pareti argentate la conduzione'''
+  commento = '''Rovescia i ruoli: l'irraggiamento attraversa il vuoto (così arriva sulla Terra il calore del Sole), e una superficie riflettente agisce sulla radiazione, non sulla conduzione.'''
+  [[quesito.opzione]]
+  testo = '''il vuoto blocca la convezione, ma la conduzione attraverso il vuoto resta'''
+  commento = '''La conduzione ha bisogno di un materiale, le cui molecole si passano energia urtandosi: nel vuoto non c'è.'''
+  [[quesito.opzione]]
+  testo = '''le pareti argentate assorbono la radiazione infrarossa e la trattengono'''
+  commento = '''Una superficie lucida e riflettente ha emissività bassa: assorbe poco e riflette la radiazione. Se l'assorbisse si scalderebbe, e il calore arriverebbe all'interno.'''
+  [[quesito.opzione]]
+  testo = '''il vuoto blocca conduzione e convezione, le pareti argentate riducono l'irraggiamento'''
+  [[quesito.opzione]]
+  testo = '''il vuoto blocca tutti e tre i modi di trasmissione; le pareti argentate servono solo a proteggere il vetro'''
+  commento = '''L'irraggiamento è l'unico dei tre modi che non ha bisogno di un mezzo: passa anche attraverso il vuoto.'''
+
+[[quesito]]
+id = "sim1-ud5-carnot-inventore"
+simulazione = 1
+ud = 5
+sezione = "Il ciclo di Carnot"
+tipo = "multipla"
+testo = '''Un inventore dichiara di aver costruito una macchina termica che lavora fra una sorgente calda a \SI{327}{\celsius} e una fredda a \SI{27}{\celsius}, con un rendimento del 60\%. Quale affermazione è corretta?'''
+corretta = "B"
+soluzione = '''Il rendimento massimo fra due sorgenti è quello di Carnot, con le temperature in kelvin: $T_c = 327 + 273 = \SI{600}{\kelvin}$ e $T_f = 27 + 273 = \SI{300}{\kelvin}$.
+\[
+  \eta_{\text{Carnot}} = 1 - \frac{T_f}{T_c} = 1 - \frac{300}{600} = 1 - \frac12 = 50\%
+\]
+Il 60\% supera questo limite: per il teorema di Carnot nessuna macchina fra queste temperature ci arriva.'''
+
+  [[quesito.opzione]]
+  testo = '''è possibile, perché il rendimento dichiarato è minore del 100\%'''
+  commento = '''Guarda solo il primo principio, che vieta di produrre più lavoro del calore assorbito. Il limite più stretto viene dal secondo principio: il rendimento di Carnot, qui il 50\%.'''
+  [[quesito.opzione]]
+  testo = '''non è possibile: fra quelle temperature il rendimento massimo è il 50\%'''
+  [[quesito.opzione]]
+  testo = '''è possibile: fra quelle temperature il rendimento massimo è circa il 92\%'''
+  commento = '''Usa i gradi Celsius invece dei kelvin: $1 - 27/327 \approx 1 - 0{,}08 = 0{,}92$.'''
+  [[quesito.opzione]]
+  testo = '''è possibile, purché tutte le trasformazioni della macchina siano reversibili'''
+  commento = '''Una macchina reversibile arriva esattamente al rendimento di Carnot, il 50\%, e non lo supera: è il caso migliore possibile.'''
+  [[quesito.opzione]]
+  testo = '''non è possibile, perché la macchina violerebbe il primo principio'''
+  commento = '''Il primo principio è rispettato, basta che il lavoro sia il calore assorbito meno quello ceduto. A vietare il 60\% è il secondo principio.'''
+
+[[quesito]]
+id = "sim1-ud7-onde-uguale"
+simulazione = 1
+ud = 7
+sezione = "Che cos'è un'onda elettromagnetica"
+tipo = "multipla"
+testo = '''Le onde radio di un tomografo a risonanza magnetica e i raggi X di una TC si propagano nel vuoto. Quale grandezza hanno uguale?'''
+corretta = "C"
+soluzione = '''Onde radio e raggi X sono entrambi onde elettromagnetiche, e nel vuoto tutte le onde elettromagnetiche viaggiano alla velocità della luce, $c \approx \SI{3e8}{\metre\per\second}$. Hanno invece frequenze molto diverse, quindi lunghezze d'onda diverse ($\lambda = c/f$) e fotoni di energia diversa ($E = hf$).'''
+
+  [[quesito.opzione]]
+  testo = '''la frequenza'''
+  commento = '''Le onde radio stanno all'inizio dello spettro, i raggi X verso la fine: la frequenza dei raggi X è molto più alta.'''
+  [[quesito.opzione]]
+  testo = '''la lunghezza d'onda'''
+  commento = '''Le onde radio hanno lunghezze d'onda dell'ordine del metro, i raggi X sotto \SI{10}{\nano\metre}: con la stessa velocità e frequenze diverse, $\lambda = c/f$ è diversa.'''
+  [[quesito.opzione]]
+  testo = '''la velocità'''
+  [[quesito.opzione]]
+  testo = '''l'energia di ciascun fotone'''
+  commento = '''L'energia del fotone è $E = hf$: con frequenze diverse è diversa, molto più grande per i raggi X.'''
+  [[quesito.opzione]]
+  testo = '''nessuna: le onde radio sono oscillazioni del solo campo magnetico, i raggi X del solo campo elettrico'''
+  commento = '''Ogni onda elettromagnetica è fatta di un campo elettrico e di un campo magnetico che oscillano insieme, perpendicolari fra loro e alla direzione di propagazione.'''
+
+[[quesito]]
+id = "sim1-ud7-lb-cobalto"
+simulazione = 1
+ud = 7
+sezione = "Lo spessore emivalente"
+tipo = "multipla"
+testo = '''Per i raggi X di una radiografia lo spessore emivalente del piombo è di qualche decimo di millimetro; per i raggi $\gamma$ del cobalto-60, usati in radioterapia, è di circa \SI{1}{\centi\metre}. Perché la differenza è così grande?'''
+corretta = "E"
+soluzione = '''Lo spessore emivalente è $x_{1/2} = \ln 2/\mu$: è grande quando il coefficiente di attenuazione $\mu$ è piccolo. Il coefficiente dipende dal materiale e dall'energia dei fotoni. I fotoni $\gamma$ del cobalto hanno un'energia molto più alta di quelli di una radiografia, il piombo li attenua meno, e $\mu$ è più piccolo: serve più spessore per dimezzarli.'''
+
+  [[quesito.opzione]]
+  testo = '''i raggi $\gamma$ hanno una lunghezza d'onda più lunga dei raggi X'''
+  commento = '''Rovescia l'ordine dello spettro: i raggi $\gamma$ hanno lunghezza d'onda più corta, e quindi fotoni più energetici.'''
+  [[quesito.opzione]]
+  testo = '''il fascio del cobalto è più intenso di quello della radiografia'''
+  commento = '''Lo spessore emivalente non dipende dall'intensità del fascio: ogni strato toglie la stessa frazione di quello che gli arriva, qualunque sia l'intensità.'''
+  [[quesito.opzione]]
+  testo = '''i fotoni $\gamma$ del cobalto hanno più energia, e per loro il coefficiente di attenuazione del piombo è più grande'''
+  commento = '''L'energia è giusta, ma il verso no: con $\mu$ più grande lo spessore emivalente, $\ln 2/\mu$, sarebbe più piccolo, non più grande.'''
+  [[quesito.opzione]]
+  testo = '''i raggi $\gamma$ hanno carica elettrica, i raggi X no'''
+  commento = '''Raggi X e raggi $\gamma$ sono entrambi fotoni, senza carica: si distinguono per l'origine e per l'energia.'''
+  [[quesito.opzione]]
+  testo = '''i fotoni $\gamma$ del cobalto hanno più energia, e per loro il coefficiente di attenuazione del piombo è più piccolo'''
+
+[[quesito]]
+id = "sim1-ud5-isobara-frazione"
+simulazione = 1
+ud = 5
+sezione = "Le trasformazioni del gas perfetto"
+tipo = "completamento"
+testo = '''Una certa quantità di gas perfetto monoatomico viene scaldata a pressione costante. La percentuale del calore assorbito che il gas trasforma in lavoro è \completa\,\%.'''
+calcolo = "100 * R / (5 / 2 * R)"
+risposta = "40"
+soluzione = '''A pressione costante il gas assorbe $Q = n c_p\,\Delta T$, con $c_p = \frac52 R$ per un gas monoatomico, e compie il lavoro $W = p\,\Delta V = nR\,\Delta T$. Il rapporto non dipende né da $n$ né da $\Delta T$:
+\[
+  \frac{W}{Q} = \frac{nR\,\Delta T}{\frac52 nR\,\Delta T} = \frac{2}{5} = 0{,}4 = 40\%
+\]
+Il restante 60\%, $n c_V\,\Delta T$ con $c_V = \frac32 R$, resta nel gas come energia interna.'''
+
+[[quesito]]
+id = "sim1-ud7-iodio-decaduti"
+simulazione = 1
+ud = 7
+sezione = "La legge del decadimento e l'emivita"
+tipo = "completamento"
+testo = '''Un flacone di iodio-131, che ha un'emivita di 8 giorni, resta in deposito nel reparto di medicina nucleare per 32 giorni. In questo tempo la percentuale dei nuclei di iodio-131 iniziali che sono decaduti vale \completa\,\%.'''
+calcolo = "(1 - 0.5**(32 / 8)) * 100"
+risposta = "93,75"
+soluzione = '''In 32 giorni ci sono $n = 32/8 = 4$ emivite. I nuclei rimasti sono la frazione $1/2^4 = 1/16$ di quelli iniziali, quindi quelli decaduti sono
+\[
+  1 - \frac{1}{16} = \frac{15}{16} = 0{,}9375 = 93{,}75\%
+\]
+Chi scrive 6,25 ha calcolato i nuclei rimasti, $1/16$, invece di quelli decaduti.'''
+
+[[quesito]]
+id = "sim2-ud5-gas-raddoppio"
+simulazione = 2
+ud = 5
+sezione = "Il gas perfetto e la sua equazione di stato"
+tipo = "multipla"
+testo = '''Un gas perfetto è chiuso in un cilindro da un pistone libero di muoversi, così che la sua pressione resta costante. Il gas è a \SI{27}{\celsius}. A quale temperatura bisogna portarlo perché il suo volume raddoppi?'''
+corretta = "B"
+calcolo = "2 * (27 + 273) - 273"
+soluzione = '''A pressione costante il volume è proporzionale alla temperatura assoluta, $V_1/T_1 = V_2/T_2$. All'inizio $T_1 = 27 + 273 = \SI{300}{\kelvin}$. Perché il volume raddoppi deve raddoppiare la temperatura in kelvin: $T_2 = 2 \cdot \SI{300}{\kelvin} = \SI{600}{\kelvin}$, cioè $600 - 273 = \SI{327}{\celsius}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{54}{\celsius}'''
+  commento = '''Raddoppia la temperatura in gradi Celsius, $2 \cdot 27 = 54$: il volume è proporzionale alla temperatura in kelvin.'''
+  [[quesito.opzione]]
+  testo = '''\SI{327}{\celsius}'''
+  valore = 327
+  [[quesito.opzione]]
+  testo = '''\SI{600}{\celsius}'''
+  commento = '''Trova bene $T_2 = \SI{600}{\kelvin}$, ma dimentica di togliere 273 per tornare ai gradi Celsius.'''
+  [[quesito.opzione]]
+  testo = '''\SI{327}{\kelvin}'''
+  commento = '''Raddoppia in gradi Celsius, \SI{54}{\celsius}, e poi passa ai kelvin: $54 + 273 = \SI{327}{\kelvin}$, che sono ancora \SI{54}{\celsius}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{-123}{\celsius}'''
+  commento = '''Tratta volume e temperatura come inversamente proporzionali, e dimezza la temperatura: $300/2 = \SI{150}{\kelvin} = \SI{-123}{\celsius}$. Inversamente proporzionali sono pressione e volume, a temperatura costante.'''
+
+[[quesito]]
+id = "sim2-ud5-scaldabiberon"
+simulazione = 2
+ud = 5
+sezione = "Capacità termica e calore specifico"
+tipo = "multipla"
+testo = '''Uno scaldabiberon fornisce al latte una potenza di \SI{100}{\watt}. Il calore specifico del latte è circa \SI{4,0}{\kilo\joule\per\kilo\gram\per\kelvin}. Trascurando le perdite, quanto tempo serve per scaldare \SI{200}{\gram} di latte da \SI{7}{\celsius} a \SI{37}{\celsius}?'''
+corretta = "D"
+calcolo = "0.200 * 4.0e3 * 30 / 100 / 60"
+soluzione = '''Il calore che serve è $Q = m c\,\Delta T$, con $m = \SI{0,200}{\kilo\gram}$, $c = \SI{4,0e3}{\joule\per\kilo\gram\per\kelvin}$ e $\Delta T = 37 - 7 = \SI{30}{\kelvin}$:
+\[
+  Q = 0{,}200 \cdot \num{4,0e3} \cdot 30\,\si{\joule} = 800 \cdot 30\,\si{\joule} = \SI{24000}{\joule}
+\]
+Con una potenza di \SI{100}{\joule\per\second}, il tempo è $\Delta t = Q/P = 24000/100 = \SI{240}{\second} = \SI{4}{\minute}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{8}{\second}'''
+  commento = '''Dimentica la differenza di temperatura: $0{,}200 \cdot 4000/100 = \SI{8}{\second}$ è il tempo per scaldare il latte di un solo kelvin.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,24}{\second}'''
+  commento = '''Usa il calore specifico in kilojoule e la potenza in watt: $0{,}200 \cdot 4{,}0 \cdot 30/100 = 0{,}24$. Il calore viene in kilojoule, e va portato in joule prima di dividere per i watt.'''
+  [[quesito.opzione]]
+  testo = '''circa \SI{41}{\minute}'''
+  commento = '''Usa la temperatura finale in kelvin, \SI{310}{\kelvin}, invece della differenza di temperatura: $0{,}200 \cdot 4000 \cdot 310/100 = \SI{2480}{\second} \approx \SI{41}{\minute}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{4}{\minute}'''
+  valore = 4
+  [[quesito.opzione]]
+  testo = '''circa \SI{67}{\hour}'''
+  commento = '''Mette la massa in grammi con il calore specifico in \si{\joule\per\kilo\gram\per\kelvin}: $200 \cdot 4000 \cdot 30/100 = \SI{2,4e5}{\second} \approx \SI{67}{\hour}$, mille volte troppo.'''
+
+[[quesito]]
+id = "sim2-ud5-sangue-convezione"
+simulazione = 2
+ud = 5
+sezione = "La convezione"
+tipo = "multipla"
+testo = '''Il sangue, spinto dal cuore, porta il calore prodotto negli organi profondi fino alla pelle, dove il calore si disperde. Questo trasporto di calore è un esempio di'''
+corretta = "E"
+soluzione = '''Il calore viaggia con un fluido che si sposta, il sangue: è convezione. Il sangue non si muove da solo per differenze di densità, lo spinge una pompa, il cuore: la convezione è forzata.'''
+
+  [[quesito.opzione]]
+  testo = '''conduzione'''
+  commento = '''Nella conduzione il calore passa attraverso un materiale che resta fermo. Qui il calore viaggia insieme al sangue, che si sposta.'''
+  [[quesito.opzione]]
+  testo = '''irraggiamento'''
+  commento = '''L'irraggiamento è lo scambio di calore con la radiazione infrarossa, senza un mezzo. Il sangue è un fluido che trasporta il calore muovendosi.'''
+  [[quesito.opzione]]
+  testo = '''convezione naturale'''
+  commento = '''Il tipo di trasmissione è giusto, ma nella convezione naturale il fluido si muove da solo, per le differenze di densità. Il sangue lo spinge il cuore.'''
+  [[quesito.opzione]]
+  testo = '''evaporazione'''
+  commento = '''L'evaporazione toglie calore alla pelle con il sudore che diventa vapore. Il sangue porta il calore alla pelle senza cambiare stato.'''
+  [[quesito.opzione]]
+  testo = '''convezione forzata'''
+
+[[quesito]]
+id = "sim2-ud5-adiabatica-valvola"
+simulazione = 2
+ud = 5
+sezione = "Le trasformazioni del gas perfetto"
+tipo = "multipla"
+testo = '''Un gas perfetto chiuso in un cilindro si espande spingendo un pistone, così in fretta da non scambiare calore con l'ambiente. Durante l'espansione la sua temperatura'''
+corretta = "A"
+soluzione = '''L'espansione è adiabatica, $Q = 0$. Il primo principio dà $\Delta U = Q - W = -W$. Espandendosi il gas compie un lavoro positivo, quindi la sua energia interna diminuisce. Per un gas perfetto l'energia interna dipende solo dalla temperatura: la temperatura diminuisce.'''
+
+  [[quesito.opzione]]
+  testo = '''diminuisce, perché il gas compie lavoro a spese della sua energia interna'''
+  [[quesito.opzione]]
+  testo = '''resta costante, perché il gas non scambia calore'''
+  commento = '''Confonde l'adiabatica con l'isoterma: senza calore la temperatura cambia, perché il lavoro compiuto toglie energia interna.'''
+  [[quesito.opzione]]
+  testo = '''aumenta, perché il lavoro compiuto dal gas si aggiunge alla sua energia interna'''
+  commento = '''Sbaglia il segno del lavoro: con $W$ compiuto dal gas il primo principio è $\Delta U = Q - W$, e un lavoro positivo fa diminuire $U$.'''
+  [[quesito.opzione]]
+  testo = '''aumenta, perché il volume del gas aumenta'''
+  commento = '''Usa la proporzionalità fra volume e temperatura, che vale solo a pressione costante. Qui anche la pressione diminuisce, e il primo principio dice che $U$, quindi $T$, scende.'''
+  [[quesito.opzione]]
+  testo = '''diminuisce, perché il gas cede calore all'ambiente'''
+  commento = '''La conclusione è giusta, ma il motivo no: in un'adiabatica il gas non scambia calore. Si raffredda perché compie lavoro.'''
+
+[[quesito]]
+id = "sim2-ud7-spettro-usi"
+simulazione = 2
+ud = 7
+sezione = "Lo spettro elettromagnetico"
+tipo = "multipla"
+testo = '''Quale coppia fra una regione dello spettro elettromagnetico e un suo uso in medicina è corretta?'''
+corretta = "C"
+soluzione = '''La termografia misura la radiazione infrarossa emessa dalla pelle. Le altre coppie sono sbagliate: la risonanza magnetica usa onde radio, la mammografia raggi X, il saturimetro luce rossa e infrarosso, le lampade germicide ultravioletto.'''
+
+  [[quesito.opzione]]
+  testo = '''ultravioletto e risonanza magnetica'''
+  commento = '''La risonanza magnetica usa onde radio, all'altro capo dello spettro rispetto all'ultravioletto.'''
+  [[quesito.opzione]]
+  testo = '''microonde e mammografia'''
+  commento = '''La mammografia è una radiografia: usa raggi X, che attraversano i tessuti. Le microonde si usano per scaldarli, nella diatermia.'''
+  [[quesito.opzione]]
+  testo = '''infrarosso e termografia'''
+  [[quesito.opzione]]
+  testo = '''raggi $\gamma$ e saturimetro'''
+  commento = '''Il saturimetro usa un LED rosso e uno infrarosso, radiazioni non ionizzanti. I raggi $\gamma$ si usano in medicina nucleare e in radioterapia.'''
+  [[quesito.opzione]]
+  testo = '''onde radio e lampade germicide'''
+  commento = '''Le lampade germicide emettono ultravioletto, i cui fotoni bastano a danneggiare il DNA dei microrganismi. I fotoni delle onde radio hanno un'energia piccolissima.'''
+
+[[quesito]]
+id = "sim2-ud7-lente-sole"
+simulazione = 2
+ud = 7
+sezione = "Le lenti convergenti sottili"
+tipo = "multipla"
+testo = '''Una lente convergente da occhiali, di potere diottrico \SI{5}{D}, tenuta al sole concentra la luce in un punto luminoso. A che distanza dalla lente si trova quel punto?'''
+corretta = "B"
+calcolo = "1 / 5 * 100"
+soluzione = '''Il Sole è un oggetto molto lontano: i suoi raggi arrivano paralleli all'asse e la lente ne forma l'immagine nel fuoco, $q = f$. La distanza focale è l'inverso del potere diottrico, in metri:
+\[
+  f = \frac{1}{D} = \frac{1}{\SI{5}{D}} = \SI{0,2}{\metre} = \SI{20}{\centi\metre}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{40}{\centi\metre}'''
+  commento = '''Mette l'immagine in $2f$, come per un oggetto che si trova in $2f$. Per un oggetto molto lontano l'immagine è nel fuoco.'''
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\centi\metre}'''
+  valore = 20
+  [[quesito.opzione]]
+  testo = '''\SI{5}{\metre}'''
+  commento = '''Prende il potere diottrico come distanza focale: la focale è il suo inverso, $f = 1/D$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\centi\metre}'''
+  commento = '''Trova $f = \SI{0,2}{\metre}$ ma sbaglia la conversione: un metro è \SI{100}{\centi\metre}, quindi \SI{0,2}{\metre} sono \SI{20}{\centi\metre}.'''
+  [[quesito.opzione]]
+  testo = '''la lente non forma l'immagine di un oggetto così lontano'''
+  commento = '''Confonde l'oggetto all'infinito con l'oggetto nel fuoco: è un oggetto nel fuoco che dà l'immagine all'infinito. Un oggetto all'infinito ha l'immagine nel fuoco.'''
+
+[[quesito]]
+id = "sim2-ud5-carnot-ceduto"
+simulazione = 2
+ud = 5
+sezione = "Il ciclo di Carnot"
+tipo = "completamento"
+testo = '''Una macchina di Carnot lavora fra una sorgente calda a \SI{227}{\celsius} e una sorgente fredda a \SI{27}{\celsius}. In ogni ciclo assorbe \SI{900}{\joule} dalla sorgente calda. Il calore che cede in ogni ciclo alla sorgente fredda vale \completa\ \si{\joule}.'''
+calcolo = "900 * (27 + 273) / (227 + 273)"
+risposta = "540"
+soluzione = '''Per il ciclo di Carnot il rapporto fra i calori è il rapporto fra le temperature assolute, $|Q_f|/Q_c = T_f/T_c$, con $T_c = 227 + 273 = \SI{500}{\kelvin}$ e $T_f = 27 + 273 = \SI{300}{\kelvin}$:
+\[
+  |Q_f| = Q_c\,\frac{T_f}{T_c} = \SI{900}{\joule} \cdot \frac{300}{500} = \SI{900}{\joule} \cdot \frac35 = \SI{540}{\joule}
+\]
+Il lavoro di un ciclo è $900 - 540 = \SI{360}{\joule}$, e il rendimento $360/900 = 40\%$. Chi scrive 360 ha calcolato il lavoro invece del calore ceduto.'''
+
+[[quesito]]
+id = "sim2-ud7-fotoni-stessa-potenza"
+simulazione = 2
+ud = 7
+sezione = "Il fotone"
+tipo = "completamento"
+testo = '''Due lampade emettono la stessa potenza: una lampada a ultravioletti per la fototerapia della pelle, con lunghezza d'onda di \SI{300}{\nano\metre}, e una lampada arancione, con lunghezza d'onda di \SI{600}{\nano\metre}. Il numero di fotoni emessi in un secondo dalla lampada arancione è \completa\ volte quello della lampada a ultravioletti.'''
+calcolo = "600 / 300"
+risposta = "2"
+soluzione = '''Il numero di fotoni al secondo è la potenza divisa per l'energia di un fotone, $N = P/E$, e l'energia è $E = hc/\lambda$: quindi $N = P\lambda/(hc)$, proporzionale a $\lambda$ a parità di potenza. Il rapporto è
+\[
+  \frac{N_{\text{arancione}}}{N_{\text{UV}}} = \frac{\lambda_{\text{arancione}}}{\lambda_{\text{UV}}} = \frac{\SI{600}{\nano\metre}}{\SI{300}{\nano\metre}} = 2
+\]
+Ogni fotone arancione porta metà dell'energia di un fotone ultravioletto, e per avere la stessa potenza ne servono il doppio.'''
+
+[[quesito]]
+id = "sim3-ud5-bombole-avogadro"
+simulazione = 3
+ud = 5
+sezione = "Il gas perfetto e la sua equazione di stato"
+tipo = "multipla"
+testo = '''Due bombole uguali sono alla stessa pressione e alla stessa temperatura. Una contiene ossigeno, $\mathrm{O_2}$, con massa molare \SI{32}{\gram\per\mole}; l'altra azoto, $\mathrm{N_2}$, con massa molare \SI{28}{\gram\per\mole}. Trattando i due gas come gas perfetti, le bombole contengono'''
+corretta = "D"
+soluzione = '''Dall'equazione di stato, $n = pV/(RT)$: con $p$, $V$ e $T$ uguali il numero di moli è lo stesso, qualunque sia il gas. Lo stesso numero di moli vuol dire lo stesso numero di molecole, $N = n N_A$. La massa invece è $n$ per la massa molare: la bombola di ossigeno pesa di più, nel rapporto $32/28$.'''
+
+  [[quesito.opzione]]
+  testo = '''più molecole di ossigeno, che ha la massa molare più grande'''
+  commento = '''Fa entrare la massa molare nell'equazione di stato: $pV = nRT$ dà il numero di moli, che non dipende da quale gas c'è.'''
+  [[quesito.opzione]]
+  testo = '''più molecole di azoto, perché le sue molecole sono più leggere'''
+  commento = '''Pensa che molecole più leggere ci stiano in numero maggiore. Per un gas perfetto la massa delle molecole non conta: a parità di $p$, $V$ e $T$ il numero di molecole è lo stesso.'''
+  [[quesito.opzione]]
+  testo = '''la stessa massa di gas'''
+  commento = '''Confonde il numero di moli con la massa: le moli sono le stesse, ma una mole di ossigeno ha massa \SI{32}{\gram} e una di azoto \SI{28}{\gram}.'''
+  [[quesito.opzione]]
+  testo = '''lo stesso numero di molecole, ma masse di gas diverse'''
+  [[quesito.opzione]]
+  testo = '''quantità di gas che non si possono confrontare senza conoscere il volume delle bombole'''
+  commento = '''Le bombole sono uguali, quindi il volume è lo stesso: nel confronto $V$ si semplifica, come $p$ e $T$.'''
+
+[[quesito]]
+id = "sim3-ud5-panno-ghiaccio"
+simulazione = 3
+ud = 5
+sezione = "La conduzione"
+tipo = "multipla"
+testo = '''Una borsa del ghiaccio a \SI{0}{\celsius} è appoggiata sulla coscia di un atleta, separata dalla pelle da un panno di cotone spesso \SI{5}{\milli\metre}, con conducibilità termica \SI{0,05}{\watt\per\metre\per\kelvin}. La superficie di contatto è di \SI{200}{\centi\metre\squared} e la pelle sotto il panno è a \SI{30}{\celsius}. La potenza che attraversa il panno per conduzione è circa'''
+corretta = "E"
+calcolo = "0.05 * 0.02 * 30 / 0.005"
+soluzione = '''Si portano le grandezze nel SI: $A = \SI{200}{\centi\metre\squared} = 200 \cdot \SI{e-4}{\metre\squared} = \SI{0,02}{\metre\squared}$, $d = \SI{5}{\milli\metre} = \SI{0,005}{\metre}$, $T_1 - T_2 = 30 - 0 = \SI{30}{\kelvin}$. Con la legge di Fourier:
+\[
+  P = k A\,\frac{T_1 - T_2}{d} = 0{,}05 \cdot 0{,}02 \cdot \frac{30}{0{,}005}\,\si{\watt} = \num{e-3} \cdot \num{6e3}\,\si{\watt} = \SI{6}{\watt}
+\]
+dove $0{,}05 \cdot 0{,}02 = \num{e-3}$ e $30/0{,}005 = 30 \cdot 200 = \num{6000}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{1,5e-4}{\watt}'''
+  commento = '''Moltiplica per lo spessore invece di dividere: $0{,}05 \cdot 0{,}02 \cdot 30 \cdot 0{,}005 = \num{1,5e-4}$. Uno strato più spesso fa passare meno calore.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6e-3}{\watt}'''
+  commento = '''Lascia lo spessore in millimetri: $0{,}05 \cdot 0{,}02 \cdot 30/5 = \num{6e-3}$, mille volte troppo poco.'''
+  [[quesito.opzione]]
+  testo = '''circa \SI{61}{\watt}'''
+  commento = '''Usa la temperatura della pelle in kelvin, \SI{303}{\kelvin}, invece della differenza di temperatura, \SI{30}{\kelvin}: $0{,}05 \cdot 0{,}02 \cdot 303/0{,}005 \approx 61$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6e4}{\watt}'''
+  commento = '''Lascia l'area in centimetri quadrati: $0{,}05 \cdot 200 \cdot 30/0{,}005 = \num{6e4}$. Un centimetro quadrato è \SI{e-4}{\metre\squared}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6}{\watt}'''
+  valore = 6
+
+[[quesito]]
+id = "sim3-ud5-tre-espansioni"
+simulazione = 3
+ud = 5
+sezione = "Le trasformazioni del gas perfetto"
+tipo = "multipla"
+testo = '''Tre campioni uguali di gas perfetto partono dallo stesso stato e si espandono in modo reversibile fino allo stesso volume finale: il primo con un'isobara, il secondo con un'isoterma, il terzo con un'adiabatica. Come stanno fra loro i lavori $W$ compiuti dal gas?'''
+corretta = "C"
+soluzione = '''Il lavoro è l'area sotto la curva nel piano $pV$, fra lo stesso volume iniziale e lo stesso volume finale. L'isobara resta alla pressione iniziale, e la sua curva sta sopra le altre. L'isoterma scende, perché il volume aumenta. L'adiabatica scende ancora più ripida, perché il gas intanto si raffredda. Quindi $W_{\text{isobara}} > W_{\text{isoterma}} > W_{\text{adiabatica}}$.'''
+
+  [[quesito.opzione]]
+  testo = '''sono uguali, perché la variazione di volume è la stessa'''
+  commento = '''Usa $W = p\,\Delta V$ come se la pressione fosse la stessa in tutti e tre i casi. Il lavoro è l'area sotto la curva, e dipende da come la pressione cambia lungo la trasformazione.'''
+  [[quesito.opzione]]
+  testo = '''$W_{\text{adiabatica}} > W_{\text{isoterma}} > W_{\text{isobara}}$'''
+  commento = '''Rovescia l'ordine delle curve: la curva che sta più in alto nel piano $pV$, l'isobara, ha sotto di sé l'area più grande.'''
+  [[quesito.opzione]]
+  testo = '''$W_{\text{isobara}} > W_{\text{isoterma}} > W_{\text{adiabatica}}$'''
+  [[quesito.opzione]]
+  testo = '''$W_{\text{isoterma}} > W_{\text{isobara}} > W_{\text{adiabatica}}$'''
+  commento = '''Pensa che l'isoterma dia più lavoro perché tutto il calore assorbito diventa lavoro. Ma nell'isoterma la pressione scende, mentre nell'isobara resta al valore iniziale: l'area sotto l'isobara è più grande.'''
+  [[quesito.opzione]]
+  testo = '''$W_{\text{isobara}} > W_{\text{adiabatica}} > W_{\text{isoterma}}$'''
+  commento = '''Scambia l'isoterma e l'adiabatica: l'adiabatica scende più ripida dell'isoterma, quindi sta sotto e ha sotto di sé meno area.'''
+
+[[quesito]]
+id = "sim3-ud5-entropia-stanza"
+simulazione = 3
+ud = 5
+sezione = "L'entropia"
+tipo = "multipla"
+testo = '''Un adulto a riposo cede all'aria della stanza circa \SI{100}{\watt} di calore. L'aria è a \SI{27}{\celsius} e la sua temperatura non cambia. In un minuto la variazione di entropia dell'aria è circa'''
+corretta = "B"
+calcolo = "100 * 60 / (27 + 273)"
+soluzione = '''In un minuto l'aria riceve $Q = P\,\Delta t = \SI{100}{\joule\per\second} \cdot \SI{60}{\second} = \SI{6000}{\joule}$, alla temperatura costante $T = 27 + 273 = \SI{300}{\kelvin}$. La sua entropia aumenta di
+\[
+  \Delta S = \frac{Q}{T} = \frac{\SI{6000}{\joule}}{\SI{300}{\kelvin}} = \SI{20}{\joule\per\kelvin}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{222}{\joule\per\kelvin}'''
+  commento = '''Usa la temperatura in gradi Celsius: $6000/27 \approx 222$. In $\Delta S = Q/T$ la temperatura va in kelvin.'''
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\joule\per\kelvin}'''
+  valore = 20
+  [[quesito.opzione]]
+  testo = '''\SI{-20}{\joule\per\kelvin}'''
+  commento = '''Sbaglia il segno: il calore esce dal corpo ma entra nell'aria, quindi per l'aria $Q > 0$ e la sua entropia aumenta.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,33}{\joule\per\kelvin}'''
+  commento = '''Calcola l'aumento in un secondo, $100/300 \approx 0{,}33$, e dimentica di moltiplicare per i 60 secondi di un minuto.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,05}{\joule\per\kelvin}'''
+  commento = '''Rovescia il rapporto: $T/Q = 300/6000 = 0{,}05$ invece di $Q/T$.'''
+
+[[quesito]]
+id = "sim3-ud7-ionizzante-frequenza"
+simulazione = 3
+ud = 7
+sezione = "Radiazioni ionizzanti e non ionizzanti"
+tipo = "multipla"
+testo = '''Una radiazione elettromagnetica ha frequenza \SI{3,0e16}{\hertz}. Per ionizzare una molecola biologica serve un'energia di circa \SI{10}{\electronvolt}. La radiazione è ionizzante? ($h \approx \SI{6,6e-34}{\joule\second}$, $\SI{1}{\electronvolt} \approx \SI{1,6e-19}{\joule}$)'''
+corretta = "A"
+calcolo = "h * 3.0e16 / eV"
+soluzione = '''L'energia di un fotone è
+\[
+  E = hf = \SI{6,6e-34}{\joule\second} \cdot \SI{3,0e16}{\hertz} = 19{,}8 \cdot 10^{-34+16}\,\si{\joule} = \SI{1,98e-17}{\joule}
+\]
+In elettronvolt: $E = \num{1,98e-17}/\num{1,6e-19}\,\si{\electronvolt} \approx 1{,}24 \cdot 10^{-17+19}\,\si{\electronvolt} \approx \SI{120}{\electronvolt}$. È più dei circa \SI{10}{\electronvolt} che servono: la radiazione è ionizzante. Infatti $\lambda = c/f = \num{3e8}/\num{3,0e16}\,\si{\metre} = \SI{e-8}{\metre} = \SI{10}{\nano\metre}$, al confine fra ultravioletto e raggi X.'''
+
+  [[quesito.opzione]]
+  testo = '''sì: ogni fotone ha circa \SI{120}{\electronvolt}'''
+  valore = 123.75
+  [[quesito.opzione]]
+  testo = '''no: è un'onda radio, con lunghezza d'onda di circa \SI{e8}{\metre}'''
+  commento = '''Rovescia la formula della lunghezza d'onda: $f/c = \num{3,0e16}/\num{3e8} = \num{e8}$. La lunghezza d'onda è $\lambda = c/f = \SI{e-8}{\metre}$.'''
+  [[quesito.opzione]]
+  testo = '''no: è infrarosso, con lunghezza d'onda di circa \SI{10}{\micro\metre}'''
+  commento = '''Sbaglia l'esponente in $\lambda = c/f$: $10^{8-16} = 10^{-8}$, cioè $\lambda = \SI{10}{\nano\metre}$, non $10^{-5}$.'''
+  [[quesito.opzione]]
+  testo = '''sì, ma solo se il fascio è abbastanza intenso'''
+  commento = '''Conta l'energia del singolo fotone, non l'intensità del fascio: se un fotone basta a ionizzare, la radiazione è ionizzante anche con un fascio debole.'''
+  [[quesito.opzione]]
+  testo = '''no: ogni fotone ha circa \SI{2e-17}{\electronvolt}'''
+  commento = '''Dimentica di convertire: $hf = \num{1,98e-17}$ è in joule, e va diviso per \SI{1,6e-19}{\joule\per\electronvolt}.'''
+
+[[quesito]]
+id = "sim3-ud7-catena-torio"
+simulazione = 3
+ud = 7
+sezione = "I tipi di decadimento"
+tipo = "multipla"
+testo = '''Nella catena radioattiva del torio, il nucleo $\nuclide{232}{90}{Th}$ emette una particella $\alpha$ e poi, uno dopo l'altro, due elettroni $\beta^-$. Quale nucleo si forma alla fine?'''
+corretta = "C"
+soluzione = '''Il decadimento $\alpha$ toglie 4 al numero di massa e 2 al numero atomico; ogni decadimento $\beta^-$ lascia invariato il numero di massa e aggiunge 1 al numero atomico, perché un neutrone diventa protone. Alla fine:
+\[
+  A = 232 - 4 = 228 \qquad\qquad Z = 90 - 2 + 1 + 1 = 90
+\]
+Con $Z = 90$ è ancora torio: $\nuclide{228}{90}{Th}$, un altro isotopo dello stesso elemento.'''
+
+  [[quesito.opzione]]
+  testo = '''$\nuclide{228}{88}{Ra}$'''
+  commento = '''Conta solo il decadimento $\alpha$ e dimentica i due $\beta^-$, che riportano il numero atomico da 88 a 90.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{228}{86}{Rn}$'''
+  commento = '''Fa togliere un protone a ogni $\beta^-$: nel $\beta^-$ un neutrone diventa protone, e il numero atomico aumenta di 1.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{228}{90}{Th}$'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{230}{90}{Th}$'''
+  commento = '''Toglie 2 al numero di massa nel decadimento $\alpha$: la particella $\alpha$ contiene 4 nucleoni, 2 protoni e 2 neutroni.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{228}{92}{U}$'''
+  commento = '''Conta i due $\beta^-$, che aggiungono 2 al numero atomico, ma dimentica che la particella $\alpha$ ne porta via 2.'''
+
+[[quesito]]
+id = "sim3-ud5-sudore-grammi"
+simulazione = 3
+ud = 5
+sezione = "I cambiamenti di stato e il calore latente"
+tipo = "completamento"
+testo = '''Un atleta ha una massa di \SI{72}{\kilo\gram}; il calore specifico medio del corpo è \SI{3,5}{\kilo\joule\per\kilo\gram\per\kelvin} e il calore latente di evaporazione del sudore \SI{2400}{\kilo\joule\per\kilo\gram}. Perché la temperatura del suo corpo scenda di \SI{1}{\celsius} solo grazie al sudore, deve evaporarne \completa\ \si{\gram}.'''
+calcolo = "72 * 3.5 * 1 / 2400 * 1000"
+risposta = "105"
+soluzione = '''Per raffreddare il corpo di \SI{1}{\kelvin} bisogna togliergli $Q = m c\,\Delta T = 72 \cdot 3{,}5 \cdot 1\,\si{\kilo\joule} = \SI{252}{\kilo\joule}$. Il sudore che evapora toglie $L$ per ogni chilogrammo, quindi ne serve
+\[
+  m_s = \frac{Q}{L} = \frac{\SI{252}{\kilo\joule}}{\SI{2400}{\kilo\joule\per\kilo\gram}} = \SI{0,105}{\kilo\gram} = \SI{105}{\gram}
+\]
+dove $252/2400 = 2{,}52/24 = 0{,}105$.'''
+
+[[quesito]]
+id = "sim3-ud7-specchietto"
+simulazione = 3
+ud = 7
+sezione = "Le leggi della riflessione e della rifrazione"
+tipo = "completamento"
+testo = '''Un raggio di luce arriva sullo specchietto del dentista formando un angolo di \ang{20} con la superficie dello specchio. L'angolo fra il raggio incidente e il raggio riflesso vale \completa\ gradi.'''
+calcolo = "2 * (90 - 20)"
+risposta = "140"
+soluzione = '''Gli angoli si misurano dalla normale, perpendicolare allo specchio. Se il raggio forma \ang{20} con la superficie, l'angolo di incidenza è $\theta_1 = \ang{90} - \ang{20} = \ang{70}$. Per la legge della riflessione anche l'angolo di riflessione è \ang{70}, dall'altra parte della normale. L'angolo fra i due raggi è la somma, $\ang{70} + \ang{70} = \ang{140}$. Chi scrive 40 ha misurato gli angoli dalla superficie invece che dalla normale.'''
+
+[[quesito]]
+id = "sim1-ud6-elettrone-protone"
+simulazione = 1
+ud = 6
+sezione = "Il campo uniforme e il moto di una carica"
+tipo = "multipla"
+testo = '''Un elettrone e un protone sono lasciati fermi, nel vuoto, nello stesso campo elettrico uniforme. La massa del protone è circa 1800 volte quella dell'elettrone, e il peso è trascurabile. Appena lasciate libere, le due particelle'''
+corretta = "C"
+soluzione = '''Le due cariche hanno lo stesso modulo $e$ e segni opposti: le forze $\vec F = q\vec E$ hanno lo stesso modulo $eE$ e versi opposti, quella sul protone nel verso del campo, quella sull'elettrone nel verso opposto. Le accelerazioni sono $a = eE/m$: a parità di forza, l'elettrone, circa 1800 volte meno massiccio, accelera circa 1800 volte di più.'''
+
+  [[quesito.opzione]]
+  testo = '''risentono della stessa forza, nello stesso verso, e hanno la stessa accelerazione'''
+  commento = '''Dimentica sia il segno delle cariche, che rende le forze opposte, sia la differenza di massa, che rende diverse le accelerazioni.'''
+  [[quesito.opzione]]
+  testo = '''risentono di forze con lo stesso modulo e versi opposti, e hanno accelerazioni con lo stesso modulo'''
+  commento = '''Le forze sono giuste, ma stessa forza non vuol dire stessa accelerazione: $a = F/m$, e le masse sono molto diverse.'''
+  [[quesito.opzione]]
+  testo = '''risentono di forze con lo stesso modulo e versi opposti, e l'accelerazione dell'elettrone è circa 1800 volte più grande'''
+  [[quesito.opzione]]
+  testo = '''risentono di forze con versi opposti, e la forza sull'elettrone è circa 1800 volte più grande'''
+  commento = '''Confonde la forza con l'accelerazione: la forza $eE$ dipende dalla carica, che è la stessa in modulo, non dalla massa.'''
+  [[quesito.opzione]]
+  testo = '''risentono di forze con lo stesso modulo e versi opposti, e l'accelerazione del protone è circa 1800 volte più grande'''
+  commento = '''Rovescia il ruolo della massa: con $a = F/m$ accelera di più la particella più leggera, cioè l'elettrone.'''
+
+[[quesito]]
+id = "sim1-ud6-filo-stirato"
+simulazione = 1
+ud = 6
+sezione = "Le leggi di Ohm"
+tipo = "multipla"
+testo = '''Un filo metallico per elettrodi ha resistenza $R$. Lo si stira in modo uniforme fino a raddoppiarne la lunghezza, senza cambiare il volume del metallo. La nuova resistenza è'''
+corretta = "B"
+calcolo = "2 / (1 / 2)"
+soluzione = '''Il volume del filo è $A L$, e resta lo stesso: se la lunghezza raddoppia, la sezione si dimezza. Per la seconda legge di Ohm
+\[
+  R' = \rho\,\frac{2L}{A/2} = 4\,\rho\,\frac{L}{A} = 4R
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''$2R$'''
+  commento = '''Tiene conto della lunghezza doppia ma dimentica che, a volume costante, la sezione si dimezza.'''
+  [[quesito.opzione]]
+  testo = '''$4R$'''
+  valore = 4
+  [[quesito.opzione]]
+  testo = '''$R$'''
+  commento = '''Pensa che la sezione dimezzata compensi la lunghezza doppia: ma una sezione più piccola fa crescere la resistenza, non calare.'''
+  [[quesito.opzione]]
+  testo = '''$8R$'''
+  commento = '''Dimezza il diametro invece dell'area, $A' = A/4$, e trova $2 \cdot 4 = 8$. A volume costante è l'area a dimezzarsi.'''
+  [[quesito.opzione]]
+  testo = '''$R/4$'''
+  commento = '''Rovescia la seconda legge di Ohm, come se fosse $R \propto A/L$: $(1/2)/2 = 1/4$.'''
+
+[[quesito]]
+id = "sim1-ud6-mezzo-giro"
+simulazione = 1
+ud = 6
+sezione = "Il moto di una carica in un campo magnetico uniforme"
+tipo = "multipla"
+testo = '''Un protone entra in un campo magnetico uniforme con velocità perpendicolare al campo, e vi percorre mezzo giro di circonferenza. Durante il mezzo giro'''
+corretta = "D"
+soluzione = '''La forza di Lorentz è sempre perpendicolare alla velocità, quindi non compie lavoro: l'energia cinetica e il modulo della velocità restano costanti. La forza però curva la traiettoria, e dopo mezzo giro il protone si muove in verso opposto a quello iniziale.'''
+
+  [[quesito.opzione]]
+  testo = '''il modulo della velocità cresce, perché la forza di Lorentz accelera il protone'''
+  commento = '''L'accelerazione c'è, ma è centripeta: cambia la direzione della velocità, non il suo modulo.'''
+  [[quesito.opzione]]
+  testo = '''il modulo della velocità cala, perché il campo magnetico frena il protone'''
+  commento = '''Per frenare il protone la forza dovrebbe avere una componente opposta alla velocità; la forza di Lorentz è perpendicolare alla velocità e non compie lavoro.'''
+  [[quesito.opzione]]
+  testo = '''la velocità resta la stessa in modulo, direzione e verso'''
+  commento = '''Vale per il modulo, ma una forza perpendicolare alla velocità curva la traiettoria: la direzione cambia di continuo.'''
+  [[quesito.opzione]]
+  testo = '''il modulo della velocità resta lo stesso, e alla fine la velocità ha verso opposto a quello iniziale'''
+  [[quesito.opzione]]
+  testo = '''il protone prosegue in linea retta, perché il campo magnetico non agisce sulle cariche'''
+  commento = '''Il campo magnetico non agisce sulle cariche ferme o che si muovono lungo il campo; su una carica che si muove perpendicolarmente al campo la forza è massima.'''
+
+[[quesito]]
+id = "sim1-ud6-carica-defibrillatore"
+simulazione = 1
+ud = 6
+sezione = "L'energia di un condensatore"
+tipo = "multipla"
+testo = '''Il condensatore di un defibrillatore ha una capacità di {{C}} e deve immagazzinare un'energia di {{U}}. A quale differenza di potenziale va caricato?'''
+dati.C = { valore = 200, unita = "\\micro\\farad" }
+dati.U = { valore = 100, unita = "\\joule" }
+corretta = "A"
+calcolo = "math.sqrt(2 * U / (C * 1e-6))"
+soluzione = '''Da $U = \frac12 C V^2$ si ricava $V^2 = 2U/C$. Con $C = \SI{200}{\micro\farad} = \SI{2e-4}{\farad}$:
+\[
+  V^2 = \frac{2 \cdot \SI{100}{\joule}}{\SI{2e-4}{\farad}} = \frac{200}{2} \cdot 10^{4}\,\si{\volt\squared} = \SI{e6}{\volt\squared}
+  \qquad
+  V = \sqrt{10^{6}}\,\si{\volt} = \SI{1000}{\volt}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{1000}{\volt}'''
+  valore = 1000
+  [[quesito.opzione]]
+  testo = '''circa \SI{710}{\volt}'''
+  commento = '''Dimentica il fattore $\frac12$: $V = \sqrt{U/C} = \sqrt{\num{5e5}}\,\si{\volt} \approx \SI{710}{\volt}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1e6}{\volt}'''
+  commento = '''Trova $V^2 = \SI{e6}{\volt\squared}$ e si ferma lì, senza estrarre la radice.'''
+  [[quesito.opzione]]
+  testo = '''circa \SI{32}{\volt}'''
+  commento = '''Traduce micro con $10^{-3}$: con $C = \SI{0,2}{\farad}$, $V^2 = 200/0{,}2 = 1000$ e $V \approx \SI{32}{\volt}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5e5}{\volt}'''
+  commento = '''Usa $U = CV$, senza il $\frac12$ e senza il quadrato: $V = U/C = 100/\num{2e-4}\,\si{\volt} = \SI{5e5}{\volt}$.'''
+
+[[quesito]]
+id = "sim1-ud6-protone-sale"
+simulazione = 1
+ud = 6
+sezione = "La conservazione dell'energia"
+tipo = "completamento"
+testo = '''Un protone ha un'energia cinetica di {{K}} e, sotto la sola forza elettrica, va da un punto $A$ a un punto $B$ il cui potenziale è più alto di {{dV}}. In $B$ la sua energia cinetica vale \completa\ \si{\electronvolt}.'''
+dati.K = { valore = 300, unita = "\\electronvolt" }
+dati.dV = { valore = 100, unita = "\\volt" }
+calcolo = "K - dV"
+risposta = "200"
+soluzione = '''L'energia potenziale del protone cambia di $\Delta U = e\,\Delta V = e \cdot \SI{100}{\volt} = \SI{+100}{\electronvolt}$: un protone che sale di potenziale guadagna energia potenziale. Per la conservazione dell'energia la stessa quantità si toglie all'energia cinetica: $K_B = \SI{300}{\electronvolt} - \SI{100}{\electronvolt} = \SI{200}{\electronvolt}$.'''
+
+[[quesito]]
+id = "sim1-ud6-spira-schiacciata"
+simulazione = 1
+ud = 6
+sezione = "La legge di Faraday-Neumann-Lenz"
+tipo = "completamento"
+testo = '''Una spira quadrata di filo flessibile, di lato {{l}}, è perpendicolare a un campo magnetico uniforme di {{B}}. In {{t}} la spira viene schiacciata fino ad avere area nulla. Il modulo della forza elettromotrice media indotta vale \completa\ \si{\milli\volt}.'''
+dati.l = { valore = 10, unita = "\\centi\\metre" }
+dati.B = { valore = "0,40", unita = "\\tesla" }
+dati.t = { valore = "0,050", unita = "\\second" }
+calcolo = "B * (l * 1e-2)**2 / t * 1e3"
+risposta = "80"
+soluzione = '''L'area iniziale è $A = (\SI{0,10}{\metre})^2 = \SI{e-2}{\metre\squared}$, e il flusso passa da $BA = 0{,}40 \cdot 10^{-2}\,\si{\weber} = \SI{4,0e-3}{\weber}$ a zero. Per la legge di Faraday-Neumann-Lenz
+\[
+  |\mathcal E| = \frac{|\Delta\Phi|}{\Delta t} = \frac{\SI{4,0e-3}{\weber}}{\SI{5,0e-2}{\second}} = 0{,}80 \cdot 10^{-3+2}\,\si{\volt} = \SI{0,080}{\volt} = \SI{80}{\milli\volt}
+\]
+Qui il flusso cambia perché cambia l'area, non il campo.'''
+
+[[quesito]]
+id = "sim2-ud6-acqua-sale"
+simulazione = 2
+ud = 6
+sezione = "La polarizzazione dei dielettrici"
+tipo = "multipla"
+testo = '''Nel cristallo di sale da cucina gli ioni $\mathrm{Na^{+}}$ e $\mathrm{Cl^{-}}$ sono tenuti insieme dall'attrazione elettrica, eppure l'acqua scioglie bene il sale. Il motivo principale è che'''
+corretta = "E"
+soluzione = '''L'acqua è un dielettrico con costante dielettrica relativa $\varepsilon_r \approx 80$. Le sue molecole, che sono dipoli, si orientano nel campo degli ioni e ne riducono il campo: la forza di Coulomb fra gli ioni diventa circa 80 volte più debole, e l'agitazione termica basta a separarli.'''
+
+  [[quesito.opzione]]
+  testo = '''l'acqua è un conduttore, e annulla le cariche degli ioni'''
+  commento = '''L'acqua pura conduce pochissimo, e la carica si conserva: in soluzione lo ione sodio resta $\mathrm{Na^{+}}$.'''
+  [[quesito.opzione]]
+  testo = '''le molecole d'acqua hanno una carica netta, che neutralizza quella degli ioni'''
+  commento = '''Le molecole d'acqua sono neutre: hanno la carica negativa spostata da un lato, cioè sono dipoli, ma la loro carica totale è zero.'''
+  [[quesito.opzione]]
+  testo = '''in acqua la carica elementare diventa circa 80 volte più piccola'''
+  commento = '''La carica degli ioni non cambia, è sempre un multiplo di $e$: è la forza fra gli ioni a diventare più piccola.'''
+  [[quesito.opzione]]
+  testo = '''in acqua la forza di Coulomb diventa circa 80 volte più grande, e strappa gli ioni dal cristallo'''
+  commento = '''Rovescia l'effetto del dielettrico: la forza va divisa per $\varepsilon_r$, non moltiplicata. Una forza più grande, del resto, terrebbe gli ioni più uniti.'''
+  [[quesito.opzione]]
+  testo = '''le molecole d'acqua si polarizzano e rendono l'attrazione fra gli ioni circa 80 volte più debole'''
+
+[[quesito]]
+id = "sim2-ud6-partitore"
+simulazione = 2
+ud = 6
+sezione = "Resistenze in serie e in parallelo"
+tipo = "multipla"
+testo = '''Due resistori, $R_1 = {{R1}}$ e $R_2 = {{R2}}$, sono collegati in parallelo, e nel gruppo entra una corrente di {{I}}. La corrente che attraversa $R_2$ è'''
+dati.R1 = { valore = 10, unita = "\\ohm" }
+dati.R2 = { valore = 40, unita = "\\ohm" }
+dati.I = { valore = "1,0", unita = "\\ampere" }
+corretta = "C"
+calcolo = "I * (R1 * R2 / (R1 + R2)) / R2"
+soluzione = '''La resistenza equivalente è $R_{\text{eq}} = (10 \cdot 40)/(10 + 40)\,\si{\ohm} = 400/50\,\si{\ohm} = \SI{8}{\ohm}$. Ai capi del parallelo c'è $V = R_{\text{eq}} I = 8 \cdot 1{,}0\,\si{\volt} = \SI{8}{\volt}$, la stessa per i due resistori. Quindi $I_2 = V/R_2 = 8/40\,\si{\ampere} = \SI{0,20}{\ampere}$, e $I_1 = 8/10\,\si{\ampere} = \SI{0,80}{\ampere}$: la somma è \SI{1,0}{\ampere}.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0,80}{\ampere}'''
+  commento = '''È la corrente in $R_1$: la corrente maggiore passa nel resistore più piccolo, non in quello più grande.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,50}{\ampere}'''
+  commento = '''Divide la corrente a metà fra i due rami, come se le resistenze fossero uguali.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,20}{\ampere}'''
+  valore = 0.2
+  [[quesito.opzione]]
+  testo = '''\SI{1,0}{\ampere}'''
+  commento = '''Tratta il collegamento come una serie, in cui tutti e due i resistori portano la stessa corrente: in parallelo la corrente si divide.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,25}{\ampere}'''
+  commento = '''Moltiplica la corrente per $R_1/R_2 = 10/40$; il rapporto giusto è $R_1/(R_1 + R_2) = 10/50$.'''
+
+[[quesito]]
+id = "sim2-ud6-alfa-raggio"
+simulazione = 2
+ud = 6
+sezione = "Il moto di una carica in un campo magnetico uniforme"
+tipo = "multipla"
+testo = '''Un protone e una particella alfa (carica $+2e$, massa circa 4 volte quella del protone) entrano con la stessa velocità in un campo magnetico uniforme, perpendicolare alla loro velocità. Il rapporto $r_\alpha/r_p$ fra i raggi delle loro orbite è'''
+corretta = "A"
+calcolo = "4 / 2"
+soluzione = '''Il raggio è $r = mv/(|q|B)$. Con la stessa $v$ e lo stesso $B$, conta solo il rapporto $m/|q|$:
+\[
+  \frac{r_\alpha}{r_p} = \frac{m_\alpha/q_\alpha}{m_p/e} = \frac{4m_p/2e}{m_p/e} = \frac{4}{2} = 2
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''2'''
+  valore = 2
+  [[quesito.opzione]]
+  testo = '''4'''
+  commento = '''Tiene conto della massa quadrupla ma dimentica che anche la carica è doppia, e la carica sta al denominatore.'''
+  [[quesito.opzione]]
+  testo = '''$1/2$'''
+  commento = '''Rovescia la formula, come se fosse $r \propto |q|/m$: $2/4 = 1/2$.'''
+  [[quesito.opzione]]
+  testo = '''1'''
+  commento = '''Pensa che il raggio dipenda solo dalla velocità e dal campo, che sono gli stessi; ma dipende anche dalla massa e dalla carica.'''
+  [[quesito.opzione]]
+  testo = '''8'''
+  commento = '''Moltiplica il rapporto delle masse per quello delle cariche, $4 \cdot 2 = 8$, invece di dividere.'''
+
+[[quesito]]
+id = "sim2-ud6-lenz-allontana"
+simulazione = 2
+ud = 6
+sezione = "La legge di Faraday-Neumann-Lenz"
+tipo = "multipla"
+testo = '''Si allontana da una spira conduttrice chiusa il polo nord di un magnete, muovendolo lungo l'asse della spira. La corrente indotta nella spira'''
+corretta = "D"
+soluzione = '''Allontanando il magnete il flusso attraverso la spira diminuisce. Per la legge di Lenz la corrente indotta produce un campo concorde con quello del magnete, che si oppone alla diminuzione: la faccia della spira rivolta verso il magnete diventa un polo sud e attira il polo nord, frenandone l'allontanamento.'''
+
+  [[quesito.opzione]]
+  testo = '''è nulla, perché il flusso attraverso la spira diminuisce invece di aumentare'''
+  commento = '''Anche una diminuzione è una variazione del flusso, e induce una forza elettromotrice.'''
+  [[quesito.opzione]]
+  testo = '''fa della faccia rivolta verso il magnete un polo nord, che respinge il magnete'''
+  commento = '''È quello che succede avvicinando il magnete, quando il flusso aumenta. Allontanandolo il verso della corrente si inverte.'''
+  [[quesito.opzione]]
+  testo = '''produce dentro la spira un campo opposto a quello del magnete, che aiuta il magnete ad allontanarsi'''
+  commento = '''Una corrente indotta che favorisse la variazione creerebbe energia dal nulla: il campo indotto si oppone alla variazione, e qui il flusso cala, quindi il campo indotto è concorde con quello del magnete.'''
+  [[quesito.opzione]]
+  testo = '''fa della faccia rivolta verso il magnete un polo sud, che attira il magnete'''
+  [[quesito.opzione]]
+  testo = '''circola nello stesso verso in cui circolerebbe avvicinando il magnete'''
+  commento = '''Avvicinando il magnete il flusso aumenta, allontanandolo diminuisce: le due variazioni sono opposte, e così il verso delle correnti indotte.'''
+
+[[quesito]]
+id = "sim2-ud6-serie-poi-parallelo"
+simulazione = 2
+ud = 6
+sezione = "Condensatori in serie e in parallelo"
+tipo = "completamento"
+testo = '''Due condensatori, da {{C1}} e da {{C2}}, sono collegati in serie. Al gruppo si collega in parallelo un terzo condensatore da {{C3}}. La capacità equivalente dei tre condensatori vale \completa\ \si{\micro\farad}.'''
+dati.C1 = { valore = "3,0", unita = "\\micro\\farad" }
+dati.C2 = { valore = "6,0", unita = "\\micro\\farad" }
+dati.C3 = { valore = "4,0", unita = "\\micro\\farad" }
+calcolo = "C1 * C2 / (C1 + C2) + C3"
+risposta = "6"
+soluzione = '''Prima la serie: $1/C_{12} = 1/3{,}0 + 1/6{,}0 = 2/6 + 1/6 = 3/6$, quindi $C_{12} = \SI{2,0}{\micro\farad}$. Poi il parallelo con il terzo, in cui le capacità si sommano: $C_{\text{eq}} = 2{,}0 + 4{,}0 = \SI{6,0}{\micro\farad}$.'''
+
+[[quesito]]
+id = "sim2-ud6-quadrato"
+simulazione = 2
+ud = 6
+sezione = "Il potenziale elettrico"
+tipo = "completamento"
+testo = '''Ai vertici di un quadrato ci sono quattro cariche puntiformi, nel vuoto: tre valgono {{q}}, la quarta vale \SI{-2,0}{\nano\coulomb}. Ogni vertice dista {{r}} dal centro. Con $k = \SI{9e9}{\newton\metre\squared\per\coulomb\squared}$ e il potenziale nullo all'infinito, il potenziale al centro del quadrato vale \completa\ \si{\volt}.'''
+dati.q = { valore = "+2,0", unita = "\\nano\\coulomb" }
+dati.r = { valore = "9,0", unita = "\\centi\\metre" }
+calcolo = "k * (q * 1e-9) / (r * 1e-2) * (3 - 1)"
+risposta = "400"
+soluzione = '''Ogni carica, a $r = \SI{0,090}{\metre}$ dal centro, dà un potenziale di modulo
+\[
+  k\,\frac{|q|}{r} = \num{9e9} \cdot \frac{\num{2,0e-9}}{\num{9,0e-2}}\,\si{\volt} = \frac{18}{\num{9,0e-2}}\,\si{\volt} = \SI{200}{\volt}
+\]
+Il potenziale è uno scalare e si somma con i segni: $V = 3 \cdot \SI{200}{\volt} - \SI{200}{\volt} = \SI{400}{\volt}$.'''
+
+[[quesito]]
+id = "sim3-ud6-capacita-doppia"
+simulazione = 3
+ud = 6
+sezione = "Il condensatore piano"
+tipo = "multipla"
+testo = '''Quale di queste modifiche raddoppia la capacità di un condensatore piano?'''
+corretta = "A"
+soluzione = '''La capacità di un condensatore piano è $C = \varepsilon_r \varepsilon_0 A/d$: è proporzionale alla costante dielettrica relativa e all'area delle armature, inversamente proporzionale alla loro distanza. Con la distanza doppia la capacità si dimezza; il dielettrico la moltiplica per 4:
+\[
+  C' = \frac{4}{2}\,C = 2C
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''raddoppiare la distanza fra le armature e riempire lo spazio fra loro con un dielettrico di costante dielettrica relativa $\varepsilon_r = 4$'''
+  [[quesito.opzione]]
+  testo = '''raddoppiare la carica sulle armature'''
+  commento = '''La capacità $C = Q/V$ non dipende dalla carica: con la carica doppia raddoppia anche la differenza di potenziale, e il rapporto resta lo stesso. Dipende solo dalla forma del condensatore e dal dielettrico.'''
+  [[quesito.opzione]]
+  testo = '''raddoppiare la distanza fra le armature'''
+  commento = '''Rovescia la dipendenza dalla distanza: in $C = \varepsilon_r \varepsilon_0 A/d$ la distanza sta al denominatore, e raddoppiarla dimezza la capacità.'''
+  [[quesito.opzione]]
+  testo = '''raddoppiare il lato delle armature, che sono quadrate'''
+  commento = '''Confonde il lato con l'area: con il lato doppio l'area diventa $2^2 = 4$ volte più grande, e con lei la capacità.'''
+  [[quesito.opzione]]
+  testo = '''raddoppiare la distanza fra le armature e riempire lo spazio fra loro con un dielettrico di costante dielettrica relativa $\varepsilon_r = 2$'''
+  commento = '''Il dielettrico raddoppia la capacità, ma la distanza doppia la dimezza: i due effetti si compensano, e la capacità resta la stessa.'''
+[[quesito]]
+id = "sim3-ud6-sfera-attratta"
+simulazione = 3
+ud = 6
+sezione = "L'induzione elettrostatica"
+tipo = "multipla"
+testo = '''Si avvicina una bacchetta carica negativamente a una sfera metallica scarica, appesa a un filo isolante, senza toccarla. La sfera'''
+corretta = "B"
+soluzione = '''È l'induzione elettrostatica: la bacchetta respinge gli elettroni liberi della sfera sul lato lontano, e il lato vicino resta positivo. La carica totale resta zero, ma le cariche positive, più vicine, sono attratte più di quanto le negative, più lontane, siano respinte, perché la forza di Coulomb diminuisce con la distanza: la sfera è attratta.'''
+
+  [[quesito.opzione]]
+  testo = '''non risente di nessuna forza, perché è scarica'''
+  commento = '''Dimentica l'induzione: le cariche libere del metallo si spostano, e la sfera, pur neutra, ha un lato positivo e uno negativo.'''
+  [[quesito.opzione]]
+  testo = '''è attratta dalla bacchetta, e la sua carica totale resta nulla'''
+  [[quesito.opzione]]
+  testo = '''è respinta, perché la bacchetta respinge gli elettroni della sfera'''
+  commento = '''Gli elettroni sono respinti, ma sul lato lontano; il lato vicino è positivo e, essendo più vicino, è attratto con una forza più grande.'''
+  [[quesito.opzione]]
+  testo = '''è attratta, perché la bacchetta le cede elettroni e la carica negativamente'''
+  commento = '''Senza contatto la carica non passa dalla bacchetta alla sfera; e una sfera carica negativamente sarebbe respinta, non attratta.'''
+  [[quesito.opzione]]
+  testo = '''è attratta, perché diventa carica positivamente'''
+  commento = '''Confonde la separazione delle cariche con una carica netta: la sfera ha un lato positivo e uno negativo, ma in tutto resta neutra.'''
+
+[[quesito]]
+id = "sim3-ud6-scaldabiberon"
+simulazione = 3
+ud = 6
+sezione = "La potenza e l'effetto Joule"
+tipo = "multipla"
+testo = '''Uno scaldabiberon porta l'indicazione «\SI{230}{\volt}, \SI{460}{\watt}». In viaggio viene collegato a una rete a {{V}}. Considerando costante la sua resistenza, la potenza che dissipa è'''
+dati.V = { valore = 115, unita = "\\volt" }
+corretta = "E"
+calcolo = "460 * (V / 230)**2"
+soluzione = '''La resistenza è $R = V_0^2/P_0 = 230^2/460\,\si{\ohm} = \num{52900}/460\,\si{\ohm} = \SI{115}{\ohm}$. A \SI{115}{\volt}: $P = V^2/R = 115^2/115\,\si{\watt} = \SI{115}{\watt}$. Più in breve: a resistenza costante $P \propto V^2$, e con la differenza di potenziale dimezzata la potenza si divide per $2^2 = 4$, $\SI{460}{\watt}/4 = \SI{115}{\watt}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{230}{\watt}'''
+  commento = '''Tratta la potenza come proporzionale alla differenza di potenziale. Ma dimezzando $V$ si dimezza anche la corrente, e $P = VI$ si divide per 4.'''
+  [[quesito.opzione]]
+  testo = '''\SI{460}{\watt}'''
+  commento = '''Pensa che la potenza sia una proprietà fissa dell'apparecchio: vale solo alla differenza di potenziale scritta sull'etichetta.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1840}{\watt}'''
+  commento = '''Usa il fattore 4 giusto ma nel verso sbagliato: con una differenza di potenziale più bassa la potenza cala.'''
+  [[quesito.opzione]]
+  testo = '''\SI{920}{\watt}'''
+  commento = '''Pensa che a una differenza di potenziale più bassa l'apparecchio assorba più corrente, come se fosse $P \propto 1/V$: $460 \cdot 2 = 920$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{115}{\watt}'''
+  valore = 115
+
+[[quesito]]
+id = "sim3-ud6-bussola"
+simulazione = 3
+ud = 6
+sezione = "Le correnti producono campi magnetici: l'esperimento di Oersted"
+tipo = "multipla"
+testo = '''Un lungo filo verticale è percorso da una corrente diretta verso l'alto. Una bussola è appoggiata su un tavolo orizzontale, vicina al filo e a nord di esso. Il campo magnetico prodotto dal filo nel punto in cui si trova la bussola è diretto verso'''
+corretta = "D"
+soluzione = '''Le linee del campo di un filo sono circonferenze centrate sul filo. Con il pollice della mano destra verso l'alto, lungo la corrente, le dita si chiudono in senso antiorario per chi guarda dall'alto. Nel punto a nord del filo la circonferenza antioraria è tangente verso ovest: il campo del filo punta verso ovest. L'ago della bussola risente anche del campo terrestre, diretto verso nord, e si dispone lungo il campo totale. Punta quindi fra nord e ovest, e quasi verso ovest solo se il campo del filo è molto più intenso di quello terrestre.'''
+
+  [[quesito.opzione]]
+  testo = '''nord, in direzione opposta al filo'''
+  commento = '''Tratta il campo del filo come quello di una carica positiva, uscente in modo radiale; le linee del campo magnetico di un filo sono circonferenze intorno al filo.'''
+  [[quesito.opzione]]
+  testo = '''sud, verso il filo'''
+  commento = '''Tratta il campo del filo come radiale ed entrante, come quello di una carica negativa; il campo è tangente alle circonferenze intorno al filo.'''
+  [[quesito.opzione]]
+  testo = '''est'''
+  commento = '''La direzione, tangente alla circonferenza, è giusta, ma il verso è quello della mano sinistra: con la mano destra le linee girano in senso antiorario visto dall'alto.'''
+  [[quesito.opzione]]
+  testo = '''ovest'''
+  [[quesito.opzione]]
+  testo = '''l'alto, nel verso della corrente'''
+  commento = '''Il campo di un filo è perpendicolare al filo, non parallelo alla corrente: le sue linee stanno in piani orizzontali.'''
+
+[[quesito]]
+id = "sim3-ud6-spira-capovolta"
+simulazione = 3
+ud = 6
+sezione = "La legge di Faraday-Neumann-Lenz"
+tipo = "completamento"
+testo = '''Una spira di area {{A}} è perpendicolare a un campo magnetico uniforme di {{B}}. In {{t}} viene capovolta, cioè ruotata di \ang{180} intorno a un suo diametro. Il modulo della forza elettromotrice media indotta vale \completa\ \si{\milli\volt}.'''
+dati.A = { valore = 50, unita = "\\centi\\metre\\squared" }
+dati.B = { valore = "0,20", unita = "\\tesla" }
+dati.t = { valore = "0,10", unita = "\\second" }
+calcolo = "2 * B * (A * 1e-4) / t * 1e3"
+risposta = "20"
+soluzione = '''L'area è $A = 50 \cdot \SI{e-4}{\metre\squared} = \SI{5,0e-3}{\metre\squared}$. All'inizio il flusso è $BA = 0{,}20 \cdot \num{5,0e-3}\,\si{\weber} = \SI{1,0e-3}{\weber}$. Dopo il capovolgimento le linee attraversano la spira dall'altra faccia ($\cos\ang{180} = -1$): il flusso è $\SI{-1,0e-3}{\weber}$, e la variazione vale in modulo $\SI{2,0e-3}{\weber}$, non \SI{1,0e-3}{\weber}.
+\[
+  |\mathcal E| = \frac{|\Delta\Phi|}{\Delta t} = \frac{\SI{2,0e-3}{\weber}}{\SI{0,10}{\second}} = \SI{2,0e-2}{\volt} = \SI{20}{\milli\volt}
+\]'''
+
+[[quesito]]
+id = "sim3-ud6-protone-fermato"
+simulazione = 3
+ud = 6
+sezione = "Campo e potenziale in un campo uniforme"
+tipo = "completamento"
+testo = '''Un protone con un'energia cinetica di {{K}} entra in un campo elettrico uniforme di {{E}}, muovendosi nel verso opposto al campo. Sul protone agisce solo la forza elettrica. Il protone si ferma dopo aver percorso \completa\ \si{\milli\metre}.'''
+dati.K = { valore = "4,0", unita = "\\kilo\\electronvolt" }
+dati.E = { valore = "4,0e5", unita = "\\volt\\per\\metre" }
+calcolo = "(K * 1e3) / E * 1e3"
+risposta = "10"
+soluzione = '''Il protone è positivo e risente di una forza nel verso del campo, opposta alla sua velocità: rallenta, risalendo verso potenziali più alti. Si ferma quando ha perso tutta l'energia cinetica, $K = \SI{4,0e3}{\electronvolt}$, cioè dopo aver risalito una differenza di potenziale $\Delta V = K/e = \SI{4,0e3}{\volt}$. In un campo uniforme $\Delta V = Ed$:
+\[
+  d = \frac{\Delta V}{E} = \frac{\SI{4,0e3}{\volt}}{\SI{4,0e5}{\volt\per\metre}} = 1{,}0 \cdot 10^{3-5}\,\si{\metre} = \SI{1,0e-2}{\metre} = \SI{10}{\milli\metre}
+\]'''
+
+# ==================================================================== quesiti lampo, in ordine di dispensa
+
