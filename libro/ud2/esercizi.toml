@@ -229,6 +229,7 @@ dati.T = { valore = "4,0", unita = "s" }
 \[
   a_c = \frac{v^2}{r} = \frac{(\SI{12,6}{\metre\per\second})^2}{\SI{8,0}{\metre}} \approx \frac{\SI{159}{\metre\squared\per\second\squared}}{\SI{8,0}{\metre}} \approx \SI{20}{\metre\per\second\squared}
 \]
+dove $12{,}6^2 = (12 + 0{,}6)^2 = 144 + 2 \cdot 12 \cdot 0{,}6 + 0{,}36 = 144 + 14{,}4 + 0{,}36 \approx 159$, e $159/8 \approx 19{,}9$. In lettere, $a_c = 4\pi^2 r/T^2 = 4\pi^2 \cdot 8{,}0/16 = 2\pi^2 \approx 2 \cdot 9{,}87 \approx 20$: lo stesso risultato.
 In multipli di $g$: $20/10 = 2$, cioè circa $2\,g$. Le centrifughe per piloti arrivano a 9 o 10 $g$ girando più in fretta: a parità di raggio, l'accelerazione cresce con il quadrato della velocità.'''
 
 [[problema]]
@@ -600,11 +601,11 @@ dati.d = { valore = "0,50", unita = "m" }
   [[problema.parte]]
   calcolo = "G * M * m / d**2"
   risultato = { valore = 4.8e-8, unita = "\\newton", cifre = 2 }
-  soluzione = '''Per la legge di gravitazione universale la forza è proporzionale al prodotto delle masse e inversamente proporzionale al quadrato della distanza. Il prodotto delle masse è $60 \cdot 3{,}0 = \SI{180}{\kilo\gram\squared}$, il quadrato della distanza è $(\SI{0,50}{\metre})^2 = \SI{0,25}{\metre\squared}$, e $180/0{,}25 = 180 \cdot 4 = 720$:
+  soluzione = '''Siano $m_1 = \SI{60}{\kilo\gram}$ la massa della madre, $m_2 = \SI{3,0}{\kilo\gram}$ quella del neonato e $r = \SI{0,50}{\metre}$ la distanza. Per la legge di gravitazione universale la forza è proporzionale al prodotto delle masse e inversamente proporzionale al quadrato della distanza. Il prodotto delle masse è $60 \cdot 3{,}0 = \SI{180}{\kilo\gram\squared}$, il quadrato della distanza è $(\SI{0,50}{\metre})^2 = \SI{0,25}{\metre\squared}$, e $180/0{,}25 = 180 \cdot 4 = 720$:
 \[
-  F = G\,\frac{Mm}{d^2} = \SI{6,67e-11}{\newton\metre\squared\per\kilo\gram\squared} \cdot \frac{\SI{180}{\kilo\gram\squared}}{\SI{0,25}{\metre\squared}} = 6{,}67 \cdot 720 \cdot 10^{-11}\,\si{\newton} \approx 4{,}8 \cdot 10^{3} \cdot 10^{-11}\,\si{\newton} = \SI{4,8e-8}{\newton}
+  F = G\,\frac{m_1 m_2}{r^2} = \SI{6,67e-11}{\newton\metre\squared\per\kilo\gram\squared} \cdot \frac{\SI{180}{\kilo\gram\squared}}{\SI{0,25}{\metre\squared}} = 6{,}67 \cdot 720 \cdot 10^{-11}\,\si{\newton} \approx 4{,}8 \cdot 10^{3} \cdot 10^{-11}\,\si{\newton} = \SI{4,8e-8}{\newton}
 \]
-dove $6{,}67 \cdot 720 \approx 4800$ e $10^{3} \cdot 10^{-11} = 10^{3-11} = 10^{-8}$. Il peso del neonato è $3{,}0 \cdot 9{,}8 \approx \SI{29}{\newton}$, quasi un miliardo di volte di più: fra due persone la forza gravitazionale è impercettibile.'''
+dove $6{,}67 \cdot 720 \approx 4800$ e $10^{3} \cdot 10^{-11} = 10^{3-11} = 10^{-8}$. Il peso del neonato è circa $3{,}0 \cdot 10 = \SI{30}{\newton}$. Il rapporto è $30/(4{,}8 \cdot 10^{-8}) \approx 6 \cdot 10^{8}$, perché $30/4{,}8 \approx 6$: il peso è circa seicento milioni di volte più grande. Fra due persone la forza gravitazionale è impercettibile.'''
 
 [[problema]]
 id = "ud2-dinamica-carrello"
@@ -828,7 +829,11 @@ dati.m = { valore = "3,0", unita = "\\kilo\\gram" }
   calcolo = "2 * m * g * sin60"
   risultato = { valore = 52, unita = "\\newton", cifre = 2 }
   rapido = '''\SI{52}{\newton}, orizzontale'''
-  soluzione = '''Sulla carrucola del piede tirano due tratti di fune, ciascuno con tensione \SI{30}{\newton}. Si prende l'asse $x$ orizzontale, nel verso in cui tirano le funi, e l'asse $y$ verticale. Ogni tratto forma \ang{30} con l'orizzontale, quindi ha componente orizzontale $F_T\cos\ang{30}$ e componente verticale $F_T\sin\ang{30}$, verso l'alto per un tratto e verso il basso per l'altro. Le componenti verticali si annullano; quelle orizzontali si sommano:
+  soluzione = '''Sulla carrucola del piede tirano due tratti di fune, ciascuno con tensione \SI{30}{\newton}, come nello schema.
+\begin{center}
+\input{ud2/figure/trazione}
+\end{center}
+Si prende l'asse $x$ orizzontale, nel verso in cui tirano le funi, e l'asse $y$ verticale. Ogni tratto forma \ang{30} con l'orizzontale, quindi ha componente orizzontale $F_T\cos\ang{30}$ e componente verticale $F_T\sin\ang{30}$, verso l'alto per un tratto e verso il basso per l'altro. Le componenti verticali si annullano; quelle orizzontali si sommano:
 \[
   F_x = 2\,F_T\cos\ang{30} = 2 \cdot \SI{30}{\newton} \cdot 0{,}87 = \SI{52,2}{\newton} \approx \SI{52}{\newton}
   \qquad\qquad
@@ -945,9 +950,9 @@ dati.h = { valore = 400, unita = "\\kilo\\metre" }
   g' = g\,\left(\frac{R_T}{R_T + h}\right)^2 = \SI{9,8}{\metre\per\second\squared} \cdot \left(\frac{6{,}4}{6{,}8}\right)^2
 \]
 \[
-  g' = \SI{9,8}{\metre\per\second\squared} \cdot \left(\frac{16}{17}\right)^2 = \SI{9,8}{\metre\per\second\squared} \cdot \frac{256}{289} \approx 9{,}8 \cdot 0{,}886\,\si{\metre\per\second\squared} \approx \SI{8,7}{\metre\per\second\squared}
+  g' = \SI{9,8}{\metre\per\second\squared} \cdot \left(\frac{16}{17}\right)^2 = \SI{9,8}{\metre\per\second\squared} \cdot \frac{256}{289} \approx 9{,}8 \cdot 0{,}89\,\si{\metre\per\second\squared} \approx \SI{8,7}{\metre\per\second\squared}
 \]
-dove $6{,}4/6{,}8 = 64/68 = 16/17$, e $9{,}8 \cdot 0{,}886 \approx 8{,}68$. A \SI{400}{\kilo\metre} di quota la gravità è ancora quasi il 90\% di quella al suolo.'''
+dove $6{,}4/6{,}8 = 64/68 = 16/17$. Per il rapporto $256/289$: $289 \cdot 0{,}9 = 260$, poco più di 256, quindi il rapporto è poco meno di 0,9, circa 0,89. Infine $9{,}8 \cdot 0{,}89 = 9{,}8 \cdot 0{,}9 - 9{,}8 \cdot 0{,}01 = 8{,}82 - 0{,}10 \approx 8{,}7$. A \SI{400}{\kilo\metre} di quota la gravità è ancora quasi il 90\% di quella al suolo.'''
 
   [[problema.parte]]
   domanda = '''Quanto vale la forza peso dell'astronauta sulla stazione?'''
@@ -955,8 +960,9 @@ dove $6{,}4/6{,}8 = 64/68 = 16/17$, e $9{,}8 \cdot 0{,}886 \approx 8{,}68$. A \S
   risultato = { valore = 610, unita = "\\newton", cifre = 2 }
   soluzione = '''Con l'accelerazione del punto (a):
 \[
-  F_p = m\,g' = \SI{70}{\kilo\gram} \cdot \SI{8,68}{\metre\per\second\squared} \approx \SI{608}{\newton} \approx \SI{6,1e2}{\newton}
+  F_p = m\,g' = \SI{70}{\kilo\gram} \cdot \SI{8,7}{\metre\per\second\squared} = \SI{609}{\newton} \approx \SI{6,1e2}{\newton}
 \]
+dove $70 \cdot 8{,}7 = 560 + 49 = 609$.
 Al suolo pesa $70 \cdot 9{,}8 = \SI{686}{\newton}$. Il peso non è affatto sparito: se gli astronauti fluttuano non è perché la gravità manca.'''
 
   [[problema.parte]]
@@ -966,16 +972,16 @@ Al suolo pesa $70 \cdot 9{,}8 = \SI{686}{\newton}$. Il peso non è affatto spari
   rapido = '''$\approx\SI{7,7e3}{\metre\per\second}$; cade insieme alla stazione'''
   soluzione = '''Sulla stazione, e su ogni cosa che contiene, agisce solo il peso, diretto verso il centro della Terra. In orbita circolare il peso fa da forza centripeta: $m g' = m v^2/r$, quindi $v^2 = g' r$ (la massa si semplifica):
 \[
-  v^2 = \SI{8,68}{\metre\per\second\squared} \cdot \SI{6,8e6}{\metre} \approx \SI{59e6}{\metre\squared\per\second\squared}
+  v^2 = \SI{8,7}{\metre\per\second\squared} \cdot \SI{6,8e6}{\metre} \approx \SI{59e6}{\metre\squared\per\second\squared}
   \qquad\Longrightarrow\qquad
   v \approx \sqrt{59} \cdot 10^{3}\,\si{\metre\per\second} \approx \SI{7,7e3}{\metre\per\second}
 \]
-dove $8{,}68 \cdot 6{,}8 \approx 59$, $\sqrt{10^{6}} = 10^{3}$ e $7{,}7^2 \approx 59$. Sono quasi \SI{28000}{\kilo\metre\per\hour}. L'astronauta e la stazione hanno la stessa accelerazione $g'$, verso la Terra: cadono insieme, continuamente, e il pavimento non deve spingere l'astronauta. Una bilancia sotto i suoi piedi segnerebbe zero, come in un ascensore in caduta libera.'''
+dove $8{,}7 \cdot 6{,}8 = 8{,}7 \cdot 7 - 8{,}7 \cdot 0{,}2 = 60{,}9 - 1{,}74 \approx 59$, $\sqrt{10^{6}} = 10^{3}$ e $7{,}7^2 \approx 59$. Sono quasi \SI{28000}{\kilo\metre\per\hour}. L'astronauta e la stazione hanno la stessa accelerazione $g'$, verso la Terra: cadono insieme, continuamente, e il pavimento non deve spingere l'astronauta. Una bilancia sotto i suoi piedi segnerebbe zero, come in un ascensore in caduta libera.'''
 
 [[problema]]
 id = "ud2-dinamica-tavolo"
 livello = 3
-testo = '''In un'esercitazione di laboratorio un blocco di {{m1}} sta su un tavolo orizzontale. È legato a una fune ideale che passa su una carrucola ideale, sul bordo del tavolo, e regge all'altro capo un pesetto di {{m2}}, appeso in verticale. Il blocco viene spinto appena e poi si muove verso la carrucola, mentre il pesetto scende. Il coefficiente di attrito dinamico fra blocco e tavolo è $\mu_d = 0{,}20$. Usa $g = \SI{10}{\metre\per\second\squared}$.'''
+testo = '''In un'esercitazione di laboratorio un blocco di {{m1}} sta su un tavolo orizzontale. È legato a una fune ideale che passa su una carrucola ideale, sul bordo del tavolo, e regge all'altro capo un pesetto di {{m2}}, appeso in verticale. Il blocco viene spinto appena e poi si muove verso la carrucola, mentre il pesetto scende. Il coefficiente di attrito dinamico fra blocco e tavolo è $\mu_d = 0{,}20$. Usa $g = \SI{10}{\metre\per\second\squared}$. La fune è inestensibile: blocco e pesetto hanno accelerazioni dello stesso modulo. Scrivi il secondo principio separatamente per ciascuno dei due corpi.'''
 dati.m1 = { valore = "4,0", unita = "\\kilo\\gram" }
 dati.m2 = { valore = "1,0", unita = "\\kilo\\gram" }
 
@@ -1457,7 +1463,7 @@ dati.t = { valore = "3,0", unita = "\\minute" }
 Il peso è una forza conservativa: in salita compie \SI{-206}{\joule}, in discesa \SI{+206}{\joule}, e sul ciclo completo, che riporta il paziente al punto di partenza, il suo lavoro è zero. In discesa sono i muscoli a frenare il corpo, con un lavoro negativo; qui ne trascuriamo il costo.'''
 
   [[problema.parte]]
-  domanda = '''Qual è la potenza meccanica media che i muscoli sviluppano nelle salite?'''
+  domanda = '''Qual è la potenza meccanica media che i muscoli sviluppano per le salite, calcolata su tutta la durata della prova?'''
   calcolo = "m * 9.8 * h * n / 60"
   risultato = { valore = 82, unita = "W", cifre = 2 }
   soluzione = '''In un minuto le salite sono 24, quindi in un secondo $24/60 = 0{,}40$. La potenza media è il lavoro compiuto in un secondo:
@@ -1509,7 +1515,7 @@ dati.theta = { valore = 60, unita = "\\degree" }
   domanda = '''Quanto vale, nel punto più basso, la tensione complessiva delle corde?'''
   calcolo = "m * g + m * 2 * g * L * (1 - 0.5) / L"
   risultato = { valore = 500, unita = "\\newton", cifre = 2 }
-  soluzione = '''Nel punto più basso il bambino percorre un arco di circonferenza di raggio $L$, e la risultante delle forze deve essere la forza centripeta $mv^2/L$, diretta verso l'alto, verso il punto di aggancio. La tensione è verso l'alto, il peso verso il basso:
+  soluzione = '''Il moto non è uniforme, perché la velocità cambia modulo. Ma in ogni moto circolare la componente dell'accelerazione diretta verso il centro vale $v^2/r$, con la velocità di quell'istante. Nel punto più basso le due forze sono verticali, la risultante non ha componente lungo la tangente, e tutta l'accelerazione è centripeta. Il bambino percorre un arco di circonferenza di raggio $L$, quindi la risultante delle forze è la forza centripeta $mv^2/L$, diretta verso l'alto, verso il punto di aggancio. La tensione è verso l'alto, il peso verso il basso:
 \[
   F_T - mg = \frac{mv^2}{L}
   \quad\Longrightarrow\quad
@@ -1579,7 +1585,7 @@ dati.h = { valore = 20, unita = "cm" }
   domanda = '''Quanto lavoro compiono le gambe durante la spinta?'''
   calcolo = "0.5 * m * 2 * g * h / 100 + m * g * s / 100"
   risultato = { valore = 385, unita = "J", cifre = 3 }
-  soluzione = '''Durante la spinta agiscono la forza delle gambe (attraverso la spinta della pedana sui piedi) e il peso. Per il teorema dell'energia cinetica la somma dei loro lavori è l'energia cinetica allo stacco, perché all'inizio l'atleta è fermo:
+  soluzione = '''Si tratta l'atleta come un punto materiale nel suo centro di massa. Durante la spinta su di esso agiscono la forza delle gambe, verso l'alto, e il peso. Per il teorema dell'energia cinetica la somma dei loro lavori è l'energia cinetica allo stacco, perché all'inizio l'atleta è fermo:
 \[
   E_c = \frac12 \cdot \SI{70}{\kilo\gram} \cdot (\SI{2,0}{\metre\per\second})^2 = \SI{140}{\joule}
   \qquad
@@ -1685,7 +1691,7 @@ dati.vb = { valore = "6,0", unita = "m/s" }
   [[problema.parte]]
   calcolo = "mb * vb / M"
   risultato = { valore = 0.15, unita = "m/s", cifre = 2 }
-  soluzione = '''Il sistema formato da paziente, carrozzina e palla è isolato in orizzontale: senza attrito, nessuna forza esterna orizzontale agisce su di esso. Prima del lancio è tutto fermo, quindi la quantità di moto totale è zero, e resta zero. Con l'asse nel verso del lancio, e $v$ la velocità della carrozzina:
+  soluzione = '''Il sistema formato da paziente, carrozzina e palla è isolato in orizzontale: senza attrito, nessuna forza esterna orizzontale agisce su di esso. Prima del lancio è tutto fermo, quindi la quantità di moto totale è zero, e resta zero. Siano $M = \SI{80}{\kilo\gram}$ la massa di paziente e carrozzina, $v$ la loro velocità, $m_b = \SI{2,0}{\kilo\gram}$ e $v_b = \SI{6,0}{\metre\per\second}$ la massa e la velocità della palla. Con l'asse nel verso del lancio:
 \[
   M v + m_b v_b = 0
   \quad\Longrightarrow\quad
@@ -2085,7 +2091,7 @@ Quindici volte il peso del manubrio: l'inserzione è vicina alla spalla e la for
 \]
 in verticale, verso l'alto: $F_d \sin\ang{30} = \SI{300}{\newton} \cdot 0{,}5 = \SI{150}{\newton}$.
 
-Per l'equilibrio traslazionale ogni componente della risultante è zero. In orizzontale l'unica altra forza è quella della spalla, che deve spingere l'omero verso l'esterno con circa \SI{2,6e2}{\newton}: il deltoide preme la testa dell'omero contro la spalla. In verticale verso l'alto c'è \SI{150}{\newton}, verso il basso $35 + 20 = \SI{55}{\newton}$; la spalla deve dare i $150 - 55 = \SI{95}{\newton}$ che mancano, verso il basso. Le forze nell'articolazione sono molto più grandi dei pesi in gioco.'''
+Per l'equilibrio traslazionale ogni componente della risultante è zero. In orizzontale l'unica altra forza è quella della spalla, che deve spingere l'omero verso l'esterno con circa \SI{2,6e2}{\newton}: il deltoide preme la testa dell'omero contro la spalla. In verticale verso l'alto agiscono \SI{150}{\newton}, verso il basso solo $35 + 20 = \SI{55}{\newton}$. Per l'equilibrio la spalla deve spingere l'omero verso il basso con i $150 - 55 = \SI{95}{\newton}$ in più. Le forze nell'articolazione sono molto più grandi dei pesi in gioco.'''
 
 [[problema]]
 id = "ud2-rigido-incrocio"
@@ -2248,8 +2254,8 @@ soluzione = '''Nel punto più alto la palla smette di salire e comincia a scende
   [[quesito.opzione]]
   testo = '''la velocità è nulla e l'accelerazione vale $g$, verso il basso'''
   [[quesito.opzione]]
-  testo = '''la velocità è nulla e l'accelerazione è minore di $g$, perché la palla è più lontana dalla Terra'''
-  commento = '''Vicino alla superficie della Terra, per altezze di qualche metro o di qualche centinaio di metri, $g$ non cambia in modo apprezzabile. L'accelerazione è $g$ in tutti i punti della traiettoria.'''
+  testo = '''l'accelerazione è nulla e la velocità vale $g$, verso il basso'''
+  commento = '''Scambia velocità e accelerazione. $g$ è un'accelerazione, in \si{\metre\per\second\squared}, non una velocità. Nel punto più alto è la velocità a essere nulla, mentre l'accelerazione resta $g$, verso il basso.'''
 
 [[quesito]]
 id = "ud2-cinematica-altezza"
@@ -2664,7 +2670,7 @@ testo = '''Una pallina parte da ferma da un'altezza {{H}} e scende lungo una gui
 dati.H = { valore = "0,80", unita = "m" }
 corretta = "E"
 calcolo = "H * (1 - 0.5**2)"
-soluzione = '''L'energia meccanica si conserva: la forza normale della guida è perpendicolare al moto e non compie lavoro. Nel punto più basso l'energia cinetica è $mgH$. Con metà della velocità l'energia cinetica è $(1/2)^2 = 1/4$ di questo valore, quindi la pallina ha perso solo un quarto della sua energia potenziale iniziale: è scesa di $H/4 = \SI{0,20}{\metre}$. La sua altezza è
+soluzione = '''Sia $H = \SI{0,80}{\metre}$ l'altezza di partenza. L'energia meccanica si conserva: la forza normale della guida è perpendicolare al moto e non compie lavoro. Nel punto più basso l'energia cinetica è $mgH$. Con metà della velocità l'energia cinetica è $(1/2)^2 = 1/4$ di questo valore, quindi la pallina ha perso solo un quarto della sua energia potenziale iniziale: è scesa di $H/4 = \SI{0,20}{\metre}$. La sua altezza è
 \[
   h = H - \frac{H}{4} = \frac34 \cdot \SI{0,80}{\metre} = \SI{0,60}{\metre}
 \]'''
@@ -2753,7 +2759,7 @@ testo = '''Un razzo di segnalazione viene lanciato in obliquo da un terreno oriz
 dati.R = { valore = 100, unita = "m" }
 corretta = "E"
 calcolo = "2 * R - R / 2"
-soluzione = '''Le forze dell'esplosione sono interne: il centro di massa dei due frammenti, su cui agisce solo il peso, continua la parabola del razzo e arriva a terra a \SI{100}{\metre}. Il punto più alto della parabola è a metà, sopra i \SI{50}{\metre}, e lì cade il frammento fermo. Nel punto più alto la velocità verticale è zero per tutti e due i frammenti, quindi toccano terra insieme, mentre il centro di massa arriva a \SI{100}{\metre}. Con masse uguali il centro di massa è a metà fra i frammenti:
+soluzione = '''Le forze dell'esplosione sono interne: il centro di massa dei due frammenti, su cui agisce solo il peso, continua la parabola del razzo e arriva a terra a \SI{100}{\metre}. Il punto più alto della parabola è a metà, sopra i \SI{50}{\metre}, e lì cade il frammento fermo. Prima dell'esplosione la quantità di moto verticale è zero, perché il razzo è nel punto più alto. Il frammento fermo ne porta zero, quindi anche l'altro ha velocità verticale nulla: i due frammenti cadono dalla stessa quota partendo con velocità verticale zero, e toccano terra insieme, mentre il centro di massa arriva a \SI{100}{\metre}. Con masse uguali il centro di massa è a metà fra i frammenti:
 \[
   \frac{x_1 + x_2}{2} = \SI{100}{\metre}
   \quad\Longrightarrow\quad
@@ -2850,7 +2856,7 @@ soluzione = '''Il piede ruota attorno al punto in cui poggia a terra, le teste d
   commento = '''Nella caviglia agisce il peso del corpo, cioè la resistenza. Il piede ruota attorno alla punta, che resta ferma a terra: il fulcro è nelle teste dei metatarsi.'''
   [[quesito.opzione]]
   testo = '''di terzo genere, svantaggiosa come la maggior parte delle leve del corpo'''
-  commento = '''Nel terzo genere la forza motrice sta fra il fulcro e la resistenza. Qui il tendine d'Achille tira il calcagno, più lontano dal fulcro della caviglia: è la resistenza a stare in mezzo.'''
+  commento = '''Nel terzo genere la forza motrice sta fra il fulcro e la resistenza. Qui il fulcro è nelle teste dei metatarsi, dove il piede poggia a terra. Il tendine d'Achille tira il calcagno, che dal fulcro è più lontano della caviglia, dove agisce il peso: è la resistenza a stare in mezzo.'''
   [[quesito.opzione]]
   testo = '''di primo genere, indifferente, perché la caviglia sta a metà del piede'''
   commento = '''La caviglia non fa da fulcro, e i bracci non sono uguali: il calcagno, dove tira il tendine, è più lontano dalla punta del piede di quanto lo sia la caviglia.'''
@@ -3059,8 +3065,8 @@ Quale corpo eserciti questa forza lo vedremo con il terzo principio e con l'attr
   testo = '''\SI{12}{\newton}'''
   commento = '''Divide la massa per l'accelerazione, $60/5$. La forza è il \emph{prodotto} di massa e accelerazione; il quoziente $m/a$ non ha nemmeno le unità di una forza.'''
   [[quesito.opzione]]
-  testo = '''\SI{65}{\newton}'''
-  commento = '''Somma massa e accelerazione, $60 + 5$: sono grandezze diverse, che non si possono sommare.'''
+  testo = '''\SI{3000}{\newton}'''
+  commento = '''Moltiplica per l'accelerazione il peso, $mg = \SI{600}{\newton}$, invece della massa: $600 \cdot 5 = 3000$. Nel secondo principio c'è la massa, in chilogrammi, non il peso.'''
   [[quesito.opzione]]
   testo = '''\SI{300}{\newton}'''
   valore = 300
@@ -3108,8 +3114,8 @@ Per il terzo principio la persona preme sulla bilancia con la stessa forza, \SI{
   testo = '''\SI{56}{\kilo\gram}'''
   commento = '''È $m(g - a)/g$, il valore per un ascensore che accelera verso il \emph{basso}. Se l'accelerazione è verso l'alto, la forza della bilancia supera il peso.'''
   [[quesito.opzione]]
-  testo = '''\SI{72}{\kilo\gram}'''
-  commento = '''Somma la massa, in chilogrammi, e l'accelerazione, in \si{\metre\per\second\squared}: sono grandezze diverse, che non si sommano.'''
+  testo = '''\SI{840}{\newton}'''
+  commento = '''È la forza con cui la persona preme sulla bilancia, $m(g + a) = 70 \cdot 12 = \SI{840}{\newton}$. Ma la bilancia la divide per $g$ e mostra chilogrammi: indica $840/10 = \SI{84}{\kilo\gram}$.'''
   [[quesito.opzione]]
   testo = '''\SI{14}{\kilo\gram}'''
   commento = '''Conta solo la forza che serve ad accelerare la persona, $ma = \SI{140}{\newton}$, e dimentica quella che serve a sostenerne il peso.'''
