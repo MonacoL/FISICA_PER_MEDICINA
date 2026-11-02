@@ -28,6 +28,8 @@ Lavora in sola lettura su questi file. Per estrarre il testo dal PDF puoi usare 
    - quando la soluzione salta un passaggio che lo Studente non sa fare da solo;
    - quando serve uno strumento matematico (potenze di 10, logaritmi, proporzioni, grafici…) senza un Richiamo di matematica, prima o lì.
 
+   Poi rileggi la soluzione del testo riga per riga: ogni numero che compare (un esponente, un fattore, un numero di emivite, una conversione di unità) deve venire da un conto scritto prima. Un numero che compare senza il suo conto è un passaggio saltato, anche quando tu sai ricostruirlo.
+
    Fatto quando ogni esercizio ha il suo esito.
 4. **Pagina e figure.** Segnala figure che non si capiscono senza il testo o che non corrispondono al testo, box che interrompono il filo del discorso, rimandi che portano nel posto sbagliato.
 5. **Rapporto.** Scrivilo nel formato di `rilievi.md`, con prefisso `STU`. Nel **Problema** di ogni Rilievo scrivi che cosa ha capito o fatto lo Studente e dove si è fermato. Dopo i Rilievi aggiungi la sezione `### Esercizi provati`: una riga per esercizio, `<nome> (file:riga): risolto | risolto con difficoltà | non risolto`, con il Rilievo collegato.
