@@ -1,21 +1,21 @@
 # Rilievi: gravità e formato del rapporto
 
-Vale per tutti i Revisori. Il rapporto è il messaggio finale del Revisore: la skill `revisione-ud` lo pubblica così com'è come commento nella PR.
+Vale per tutti i revisori. Il rapporto è il messaggio finale del revisore: la skill `revisione-ud` lo pubblica così com'è come commento nella PR.
 
 ## Gravità
 
-- **Bloccante**: errore di fisica o di concetto; risultato numerico sbagliato; formula o unità di misura sbagliata; Quesito con zero o due risposte corrette; voce del Syllabus della UD non coperta. La PR non si unisce finché resta un Bloccante.
-- **Da correggere**: passaggio poco chiaro o saltato; esercizio che non si risolve con quello che il testo ha già spiegato; termine o simbolo usato prima di essere definito; Richiamo di matematica mancante; Distrattore debole; numeri di un Quesito non calcolabili a mente; voce del Syllabus coperta solo in parte; violazione delle regole di formato del Completamento; maiuscola in mezzo alla frase su un nome comune, compresi i termini del glossario ("gli Esempi svolti" invece di "gli esempi svolti"). Chi scrive può respingerlo solo con il motivo.
+- **Bloccante**: errore di fisica o di concetto; risultato numerico sbagliato; formula o unità di misura sbagliata; quesito con zero o due risposte corrette; voce del syllabus della UD non coperta. La PR non si unisce finché resta un bloccante.
+- **Da correggere**: passaggio poco chiaro o saltato; esercizio che non si risolve con quello che il testo ha già spiegato; termine o simbolo usato prima di essere definito; richiamo di matematica mancante; distrattore debole; numeri di un quesito non calcolabili a mente; voce del syllabus coperta solo in parte; violazione delle regole di formato del completamento; maiuscola in mezzo alla frase su un nome comune, compresi i termini del glossario ("gli esempi svolti" invece di "gli esempi svolti"). Chi scrive può respingerlo solo con il motivo.
 - **Suggerimento**: stile, ordine dell'esposizione, figure migliorabili.
 
-Nel dubbio fra due gravità, scegli la più alta e spiega il dubbio nel Rilievo.
+Nel dubbio fra due gravità, scegli la più alta e spiega il dubbio nel rilievo.
 
 ## Formato
 
 ```markdown
-## <Nome del Revisore> · <UD> <Parte>
+## <Nome del revisore> · <UD> <Parte>
 
-<Una riga: che cosa hai letto e quanti Rilievi per gravità, es. "3 Rilievi: 1 Bloccante, 1 Da correggere, 1 Suggerimento".>
+<Una riga: che cosa hai letto e quanti rilievi per gravità, es. "3 rilievi: 1 bloccante, 1 da correggere, 1 suggerimento".>
 
 ### <PREFISSO>-1 · <Gravità>
 **Dove:** `libro/ud7/dispensa.tex:42` (PDF p. 3)
@@ -25,9 +25,9 @@ Nel dubbio fra due gravità, scegli la più alta e spiega il dubbio nel Rilievo.
 ### <PREFISSO>-2 · <Gravità>
 ...
 
-<Sezioni aggiuntive richieste dal singolo Revisore, es. la copertura del Syllabus.>
+<Sezioni aggiuntive richieste dal singolo revisore, es. la copertura del syllabus.>
 ```
 
-- I Rilievi sono numerati dal più grave al meno grave. Il prefisso identifica il Revisore: `FIS` (fisica), `STU` (Studente), `FOR` (formato). Chi scrive risponde citando l'identificativo, es. `FIS-2`.
-- Ogni Rilievo ha un solo problema e la sua posizione `file:riga` nel sorgente. Se si vede solo nel PDF (figura, impaginazione), indica la pagina del PDF e la riga del sorgente più vicina.
-- Se non ci sono Rilievi, il rapporto lo dice nella riga iniziale: "Nessun Rilievo."
+- I Rilievi sono numerati dal più grave al meno grave. Il prefisso identifica il revisore: `FIS` (fisica), `STU` (Studente), `FOR` (formato). Chi scrive risponde citando l'identificativo, es. `FIS-2`.
+- Ogni rilievo ha un solo problema e la sua posizione `file:riga` nel sorgente. Se si vede solo nel PDF (figura, impaginazione), indica la pagina del PDF e la riga del sorgente più vicina.
+- Se non ci sono rilievi, il rapporto lo dice nella riga iniziale: "Nessun rilievo."

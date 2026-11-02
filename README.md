@@ -22,7 +22,7 @@ TinyTeX mette i suoi comandi in `~/.local/bin`, che deve essere nel `PATH`. Se m
 
 ## Controllo automatico
 
-Compila con `latexmk` ogni Unità didattica indicata e, una volta, il Libro, e controlla i sorgenti. Stampa un rapporto con file e riga di ogni problema ed esce con un codice diverso da zero se:
+Compila con `latexmk` ogni unità didattica indicata e, una volta, il libro, e controlla i sorgenti. Stampa un rapporto con file e riga di ogni problema ed esce con un codice diverso da zero se:
 
 - qualcosa non compila;
 - c'è un `\ref` a un'etichetta che non esiste, o un'etichetta definita due volte;
@@ -40,7 +40,7 @@ La stessa cosa gira in CI su ogni PR (`.github/workflows/controllo.yml`), che pu
 
 ## Licenza
 
-- **Contenuti** (testo delle Dispense, esercizi, soluzioni, figure, cioè i file in `libro/udN/` e i PDF che ne derivano): [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it), testo completo in [`LICENSE`](LICENSE). Si possono copiare e adattare citando l'autore, senza scopi commerciali e con la stessa licenza.
+- **Contenuti** (testo delle dispense, esercizi, soluzioni, figure, cioè i file in `libro/udN/` e i PDF che ne derivano): [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it), testo completo in [`LICENSE`](LICENSE). Si possono copiare e adattare citando l'autore, senza scopi commerciali e con la stessa licenza.
 - **Codice** (la classe `libro/fisica.cls`, la configurazione di compilazione, gli script Python): [MIT](LICENSE-CODE).
 
 © 2026 Luca Monaco
