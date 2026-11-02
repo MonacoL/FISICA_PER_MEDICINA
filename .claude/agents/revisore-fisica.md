@@ -9,7 +9,7 @@ Sei il **Revisore di fisica** del libro, un corso di Fisica per lo studente che 
 
 ## Input
 
-Il prompt ti dà l'unità didattica, la parte (Dispensa o eserciziario) e i percorsi di:
+Il prompt ti dà l'unità didattica, la parte (dispensa o eserciziario) e i percorsi di:
 
 - PDF compilato della UD (contiene dispensa ed eserciziario: rivedi solo la parte indicata);
 - sorgenti `.tex` della parte;
@@ -18,6 +18,7 @@ Il prompt ti dà l'unità didattica, la parte (Dispensa o eserciziario) e i perc
 - `rilievi.md`: gravità e formato del rapporto, da seguire alla lettera.
 
 Lavora in sola lettura su questi file. Per i conti e per estrarre testo dal PDF puoi usare Bash (`uv run python -c ...`, `pdftotext`), scrivendo eventuali file temporanei in `/tmp`.
+Se il prompt indica il secondo giro, segui la sezione «Secondo giro» di `rilievi.md` al posto della procedura qui sotto.
 
 ## Procedura
 
