@@ -1,0 +1,21 @@
+% Moto circolare uniforme: in ogni punto la velocità è tangente alla circonferenza
+% e l'accelerazione centripeta punta verso il centro.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \draw[richiamo, thick] (0,0) circle (1.8);
+  \fill (0,0) circle (1.5pt) node[below left] {$O$};
+  \foreach \ang/\lab in {60/1, 190/2} {
+    \coordinate (P) at (\ang:1.8);
+    \fill (P) circle (1.6pt);
+    \draw[->, formula, very thick] (P) -- ++(\ang+90:1.3);
+    \draw[->, attenzione, very thick] (P) -- ($(P)!0.45!(0,0)$);
+  }
+  \draw[thin] (0,0) -- (60:1.8);
+  \node at ($(60:0.85)+(0.28,-0.1)$) {$r$};
+  \node[formula] at ($(60:1.8)+(150:1.5)$) {$\vec v$};
+  \node[attenzione] at ($(60:1.8)+(240:0.55)+(0.3,0)$) {$\vec a_c$};
+  \node[formula] at ($(190:1.8)+(280:1.5)$) {$\vec v$};
+  \node[attenzione] at ($(190:1.8)+(10:0.6)+(0,0.25)$) {$\vec a_c$};
+  % verso di rotazione
+  \draw[->, richiamo] (100:2.25) arc (100:150:2.25);
+  \node[richiamo] at (125:2.65) {$\omega$};
+\end{tikzpicture}

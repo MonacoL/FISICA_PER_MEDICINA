@@ -1,0 +1,44 @@
+% Grafici orari e velocità-tempo: (a) moto rettilineo uniforme, (b) moto
+% uniformemente accelerato. L'area sotto il grafico v(t) è lo spostamento.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % (a) moto uniforme: x(t)
+  \begin{scope}
+    \draw[->] (0,0) -- (3.2,0) node[below] {$t$};
+    \draw[->] (0,0) -- (0,2.5) node[left] {$x$};
+    \draw[formula, very thick] (0,0.5) -- (2.9,2.2);
+    \node[left] at (0,0.5) {$x_0$};
+    \node[formula] at (2.0,0.8) {pendenza $v$};
+  \end{scope}
+  % (a) moto uniforme: v(t)
+  \begin{scope}[xshift=4.3cm]
+    \draw[->] (0,0) -- (3.2,0) node[below] {$t$};
+    \draw[->] (0,0) -- (0,2.5) node[left] {$v$};
+    \fill[formula!20] (0,0) rectangle (2.4,1.4);
+    \draw[formula, very thick] (0,1.4) -- (2.9,1.4);
+    \node[left] at (0,1.4) {$v$};
+    \draw[dashed] (2.4,0) -- (2.4,1.4); \node[below] at (2.4,0) {$t$};
+    \node at (1.2,0.7) {$\Delta x = v\,t$};
+  \end{scope}
+  \node at (3.75,-1.0) {(a) moto rettilineo uniforme};
+  % (b) moto uniformemente accelerato: x(t)
+  \begin{scope}[yshift=-4.0cm]
+    \draw[->] (0,0) -- (3.2,0) node[below] {$t$};
+    \draw[->] (0,0) -- (0,2.5) node[left] {$x$};
+    \draw[esempio, very thick, domain=0:2.9, samples=60] plot (\x, {0.3+0.25*\x+0.17*\x*\x});
+    \node[left] at (0,0.3) {$x_0$};
+    \node[esempio] at (2.1,0.6) {parabola};
+  \end{scope}
+  % (b) moto uniformemente accelerato: v(t)
+  \begin{scope}[xshift=4.3cm, yshift=-4.0cm]
+    \draw[->] (0,0) -- (3.2,0) node[below] {$t$};
+    \draw[->] (0,0) -- (0,2.5) node[left] {$v$};
+    \fill[esempio!20] (0,0) -- (0,0.6) -- (2.4,2.04) -- (2.4,0) -- cycle;
+    \draw[esempio, very thick] (0,0.6) -- (2.9,2.34);
+    \node[left] at (0,0.6) {$v_0$};
+    \draw[dashed] (2.4,0) -- (2.4,2.04); \node[below] at (2.4,0) {$t$};
+    \draw[dashed] (0,2.04) -- (2.4,2.04); \node[left] at (0,2.04) {$v$};
+    \node[align=center] at (1.2,0.55) {$\Delta x = $ area};
+    \node[esempio] at (1.6,2.5) {pendenza $a$};
+  \end{scope}
+  \node at (3.75,-5.0) {(b) moto uniformemente accelerato};
+\end{tikzpicture}

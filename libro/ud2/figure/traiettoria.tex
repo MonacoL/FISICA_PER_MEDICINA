@@ -1,0 +1,18 @@
+% Traiettoria di un punto materiale nel piano: posizioni r1 e r2 in due istanti
+% e spostamento Delta r, che non coincide con la strada percorsa lungo la curva.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \draw[->] (0,0) -- (6.4,0) node[below] {$x$};
+  \draw[->] (0,0) -- (0,3.6) node[left] {$y$};
+  \node[below left] at (0,0) {$O$};
+  % traiettoria
+  \draw[richiamo, thick, dashed] (0.6,0.5) .. controls (1.2,3.2) and (3.6,3.6) .. (5.6,1.6)
+    coordinate[pos=0.18] (P1) coordinate[pos=0.78] (P2);
+  \fill (P1) circle (1.6pt) node[left, xshift=-2pt] {$P_1$};
+  \fill (P2) circle (1.6pt) node[above right] {$P_2$};
+  % vettori posizione
+  \draw[->, formula, thick] (0,0) -- (P1) node[midway, left] {$\vec r_1$};
+  \draw[->, formula, thick] (0,0) -- (P2) node[midway, below right] {$\vec r_2$};
+  % spostamento
+  \draw[->, attenzione, very thick] (P1) -- (P2) node[midway, below] {$\Delta\vec r$};
+  \node[richiamo, align=left] at (4.3,3.75) {traiettoria};
+\end{tikzpicture}

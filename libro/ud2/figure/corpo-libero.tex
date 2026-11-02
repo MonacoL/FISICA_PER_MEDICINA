@@ -1,0 +1,37 @@
+% Diagrammi di corpo libero: (a) libro appoggiato su un tavolo, (b) lampada appesa
+% a un filo, (c) cassa tirata sul pavimento con attrito.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % (a) corpo appoggiato
+  \begin{scope}
+    \fill[richiamo!25] (-1.2,-0.15) rectangle (1.2,0);
+    \draw[thick] (-1.2,0) -- (1.2,0);
+    \filldraw[fill=esempio!35, draw=esempio, thick] (-0.5,0) rectangle (0.5,0.6);
+    \fill (0,0.3) circle (1.3pt);
+    \draw[->, formula, very thick] (0,0.3) -- (0,1.6) node[right] {$\vec F_N$};
+    \draw[->, attenzione, very thick] (0,0.3) -- (0,-1.0) node[right] {$\vec F_p$};
+    \node at (0,-1.7) {(a)};
+  \end{scope}
+  % (b) corpo appeso
+  \begin{scope}[xshift=3.6cm]
+    \fill[richiamo!25] (-1.0,1.9) rectangle (1.0,2.05);
+    \draw[thick] (-1.0,1.9) -- (1.0,1.9);
+    \draw[thick] (0,1.9) -- (0,0.6);
+    \filldraw[fill=esempio!35, draw=esempio, thick] (-0.35,0.6) -- (0.35,0.6) -- (0.5,0.1) -- (-0.5,0.1) -- cycle;
+    \fill (0,0.35) circle (1.3pt);
+    \draw[->, formula, very thick] (0,0.35) -- (0,1.55) node[right, yshift=-6pt] {$\vec F_T$};
+    \draw[->, attenzione, very thick] (0,0.35) -- (0,-0.85) node[right] {$\vec F_p$};
+    \node at (0,-1.7) {(b)};
+  \end{scope}
+  % (c) corpo tirato con attrito
+  \begin{scope}[xshift=7.6cm]
+    \fill[richiamo!25] (-1.7,-0.15) rectangle (1.7,0);
+    \draw[thick] (-1.7,0) -- (1.7,0);
+    \filldraw[fill=esempio!35, draw=esempio, thick] (-0.5,0) rectangle (0.5,0.7);
+    \fill (0,0.35) circle (1.3pt);
+    \draw[->, formula, very thick] (0,0.35) -- (0,1.6) node[right] {$\vec F_N$};
+    \draw[->, attenzione, very thick] (0,0.35) -- (0,-0.95) node[right] {$\vec F_p$};
+    \draw[->, esempio, very thick] (0,0.35) -- (1.6,0.35) node[above] {$\vec F$};
+    \draw[->, medica, very thick] (0,0.35) -- (-1.2,0.35) node[above] {$\vec F_a$};
+    \node at (0,-1.7) {(c)};
+  \end{scope}
+\end{tikzpicture}

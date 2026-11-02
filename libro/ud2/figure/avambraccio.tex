@@ -1,0 +1,25 @@
+% Avambraccio orizzontale che regge un peso: leva di terzo genere con il fulcro
+% nel gomito. Il bicipite tira a b1 dal gomito, il peso agisce a b2.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % omero (verticale) e avambraccio (orizzontale)
+  \filldraw[fill=esempio!15, draw=esempio, thick, rounded corners=3pt] (-0.25,0) rectangle (0.25,3.2);
+  \filldraw[fill=esempio!25, draw=esempio, thick, rounded corners=3pt] (-0.2,-0.22) rectangle (6.2,0.22);
+  \fill[richiamo!70] (0,0) circle (0.2);
+  \fill (0,0) circle (1.5pt);
+  \node[below left] at (-0.2,-0.2) {gomito $O$};
+  % bicipite
+  \draw[medica!35, line width=5pt, line cap=round] (0.3,2.9) .. controls (1.0,2.2) and (1.1,1.2) .. (1.0,0.22);
+  \node[medica, right] at (1.1,2.3) {bicipite};
+  \draw[->, medica!80!black, very thick] (1.0,0.22) -- (1.0,1.5) node[right] {$\vec F_b$};
+  % peso nella mano
+  \draw[thick] (6.0,-0.22) -- (6.0,-0.6);
+  \filldraw[fill=richiamo!60, draw=black] (5.7,-0.6) rectangle (6.3,-1.05);
+  \draw[->, attenzione, very thick] (6.0,-1.05) -- (6.0,-2.0) node[right] {$\vec F_p$};
+  % distanze
+  % peso dell'avambraccio nel suo baricentro
+  \draw[->, attenzione!70, thick] (2.6,-0.22) -- (2.6,-1.0) node[below] {$\vec F_{av}$};
+  % distanze
+  \draw[dashed, richiamo] (0,-0.25) -- (0,-2.55);
+  \draw[|<->|, formula] (0,-0.6) -- (1.0,-0.6) node[midway, below] {$b_1$};
+  \draw[|<->|, formula] (0,-2.4) -- (6.0,-2.4) node[midway, below] {$b_2$};
+\end{tikzpicture}

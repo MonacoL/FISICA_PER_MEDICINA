@@ -1,0 +1,362 @@
+# Esercizi della UD2: fonte unica (ADR 0006). `uv run controllo ud2` ne ricava
+# generati/eserciziario.tex, un generati/lampo-<id>.tex per ogni quesito lampo,
+# la pagina web build/web/ud2.html, e ricalcola ogni risultato.
+#
+# Il formato è descritto in testa a libro/ud7/esercizi.toml.
+# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
+# arrivano con il ticket dell'eserciziario UD2.
+
+titolo = "Eserciziario UD2 · Meccanica"
+
+[costanti]
+g = 10
+
+# ==================================================================== quesiti lampo, in ordine di dispensa
+
+[[quesito]]
+id = "ud2-velocita-media"
+tipo = "multipla"
+lampo = true
+testo = '''Un'ambulanza percorre la prima metà del tragitto verso l'ospedale alla velocità costante di {{v1}} e la seconda metà, rallentata dal traffico, alla velocità costante di {{v2}}. La sua velocità scalare media sull'intero tragitto è'''
+dati.v1 = { valore = 60, unita = "\\kilo\\metre\\per\\hour" }
+dati.v2 = { valore = 30, unita = "\\kilo\\metre\\per\\hour" }
+corretta = "B"
+calcolo = "2 / (1 / v1 + 1 / v2)"
+soluzione = '''La velocità scalare media è la distanza percorsa divisa per il tempo impiegato. Chiamiamo $d$ la lunghezza di ciascuna metà del tragitto. I tempi delle due metà sono
+\[
+  t_1 = \frac{d}{\SI{60}{\kilo\metre\per\hour}} \qquad\qquad t_2 = \frac{d}{\SI{30}{\kilo\metre\per\hour}} = \frac{2d}{\SI{60}{\kilo\metre\per\hour}}
+\]
+e il tempo totale è $t_1 + t_2 = 3d/(\SI{60}{\kilo\metre\per\hour}) = d/(\SI{20}{\kilo\metre\per\hour})$. La distanza totale è $2d$, quindi
+\[
+  v_m = \frac{2d}{d/(\SI{20}{\kilo\metre\per\hour})} = 2 \cdot \SI{20}{\kilo\metre\per\hour} = \SI{40}{\kilo\metre\per\hour}
+\]
+Con un tragitto di \SI{60}{\kilo\metre}: la prima metà, \SI{30}{\kilo\metre}, richiede \SI{0,5}{\hour}, la seconda \SI{1}{\hour}; in tutto \SI{60}{\kilo\metre} in \SI{1,5}{\hour}, cioè \SI{40}{\kilo\metre\per\hour}. L'ambulanza passa più \emph{tempo} nel tratto lento, che quindi pesa di più nella media.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{45}{\kilo\metre\per\hour}'''
+  commento = '''È la media aritmetica delle due velocità, $(60 + 30)/2$. Andrebbe bene se l'ambulanza viaggiasse alle due velocità per tempi uguali; per distanze uguali passa il doppio del tempo nel tratto lento.'''
+  [[quesito.opzione]]
+  testo = '''\SI{40}{\kilo\metre\per\hour}'''
+  valore = 40
+  [[quesito.opzione]]
+  testo = '''\SI{90}{\kilo\metre\per\hour}'''
+  commento = '''Somma le due velocità. La velocità media deve stare fra la più bassa e la più alta, quindi fra 30 e \SI{60}{\kilo\metre\per\hour}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\kilo\metre\per\hour}'''
+  commento = '''Divide una sola metà del tragitto, $d$, per il tempo totale, $d/(\SI{20}{\kilo\metre\per\hour})$: la distanza percorsa in quel tempo è $2d$.'''
+  [[quesito.opzione]]
+  testo = '''non si può calcolare senza la lunghezza del tragitto'''
+  commento = '''La lunghezza $d$ compare sia nella distanza sia nel tempo, e si semplifica: per qualunque tragitto diviso in due metà uguali il risultato è lo stesso.'''
+
+[[quesito]]
+id = "ud2-frenata"
+tipo = "completamento"
+lampo = true
+testo = '''Un'auto viaggia a {{v}} e frena con un'accelerazione costante di modulo {{a}}. Lo spazio che percorre dall'inizio della frenata all'arresto, in metri, è \completa.'''
+dati.v = { valore = 20, unita = "m/s" }
+dati.a = { valore = 5, unita = "\\metre\\per\\second\\squared" }
+calcolo = "v**2 / (2 * a)"
+risposta = "40"
+soluzione = '''Non serve il tempo: si usa la relazione fra velocità e spostamento del moto uniformemente accelerato, $v^2 = v_0^2 + 2a\,\Delta x$. L'auto si ferma, quindi $v = 0$; si muove nel verso positivo e rallenta, quindi l'accelerazione è negativa, $a = \SI{-5}{\metre\per\second\squared}$:
+\[
+  0 = (\SI{20}{\metre\per\second})^2 + 2 \cdot (\SI{-5}{\metre\per\second\squared}) \cdot \Delta x
+  \quad\Longrightarrow\quad
+  \Delta x = \frac{\SI{400}{\metre\squared\per\second\squared}}{\SI{10}{\metre\per\second\squared}} = \SI{40}{\metre}
+\]
+Chi scrive 80 ha dimenticato il 2 nel denominatore; chi scrive 4 ha calcolato il tempo di frenata, $t = v_0/|a| = 20/5 = \SI{4}{\second}$, invece dello spazio.'''
+
+[[quesito]]
+id = "ud2-caduta"
+tipo = "multipla"
+lampo = true
+testo = '''Un vaso cade da un davanzale a {{h}} di altezza, partendo da fermo. Trascurando la resistenza dell'aria e usando $g = \SI{10}{\metre\per\second\squared}$, arriva a terra con una velocità di modulo'''
+dati.h = { valore = 5, unita = "m" }
+corretta = "D"
+calcolo = "math.sqrt(2 * g * h)"
+soluzione = '''Il vaso cade in caduta libera, con accelerazione $g$ verso il basso. Dalla relazione $v^2 = v_0^2 + 2gh$ con $v_0 = 0$:
+\[
+  v = \sqrt{2gh} = \sqrt{2 \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{5}{\metre}} = \sqrt{\SI{100}{\metre\squared\per\second\squared}} = \SI{10}{\metre\per\second}
+\]
+Sono \SI{36}{\kilo\metre\per\hour}. La massa del vaso non entra nel conto.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{100}{\metre\per\second}'''
+  commento = '''È $v^2$, non $v$: dimentica la radice quadrata. Lo dicono anche le unità: $2gh$ si misura in \si{\metre\squared\per\second\squared}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{50}{\metre\per\second}'''
+  commento = '''Moltiplica $g$ per $h$, come se la velocità fosse $gh$: le unità di $gh$ sono \si{\metre\squared\per\second\squared}, non quelle di una velocità.'''
+  [[quesito.opzione]]
+  testo = '''\SI{7,1}{\metre\per\second}'''
+  commento = '''Calcola $\sqrt{gh} = \sqrt{50} \approx 7{,}1$: dimentica il fattore 2 di $v = \sqrt{2gh}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\metre\per\second}'''
+  valore = 10
+  [[quesito.opzione]]
+  testo = '''\SI{5}{\metre\per\second}'''
+  commento = '''Divide l'altezza per il tempo di caduta, che è \SI{1}{\second}: così trova la velocità \emph{media}, che nel moto uniformemente accelerato da fermo è metà di quella finale.'''
+
+[[quesito]]
+id = "ud2-parabolico"
+tipo = "multipla"
+lampo = true
+testo = '''Dal bordo di un tavolo, nello stesso istante, una pallina viene lasciata cadere da ferma e una seconda pallina, uguale, viene lanciata in orizzontale a {{v}}. Trascurando la resistenza dell'aria,'''
+dati.v = { valore = 3, unita = "m/s" }
+corretta = "A"
+soluzione = '''Il moto orizzontale e quello verticale sono indipendenti. In verticale le due palline partono entrambe con velocità nulla, dalla stessa altezza, con la stessa accelerazione $g$ verso il basso: le loro coordinate verticali sono uguali in ogni istante, e toccano terra insieme. La velocità orizzontale della seconda pallina la porta più lontano, ma non cambia il tempo di caduta.'''
+
+  [[quesito.opzione]]
+  testo = '''arrivano a terra nello stesso istante'''
+  [[quesito.opzione]]
+  testo = '''arriva prima la pallina lasciata cadere, perché la sua traiettoria è più corta'''
+  commento = '''La traiettoria della pallina lanciata è più lunga, ma è percorsa più in fretta. Il tempo di caduta dipende solo dal moto verticale, che è uguale per le due palline.'''
+  [[quesito.opzione]]
+  testo = '''arriva prima la pallina lanciata, perché parte con una velocità diversa da zero'''
+  commento = '''La velocità iniziale della pallina lanciata è orizzontale: la sua componente verticale è zero, come per l'altra pallina.'''
+  [[quesito.opzione]]
+  testo = '''arriva prima la pallina lanciata, perché la velocità orizzontale si somma a quella verticale e la fa cadere più in fretta'''
+  commento = '''Le componenti della velocità si sommano come vettori, non come numeri: la componente orizzontale non cambia quella verticale, che cresce allo stesso modo per le due palline.'''
+  [[quesito.opzione]]
+  testo = '''arriva prima la pallina lasciata cadere, perché l'accelerazione della pallina lanciata è inclinata e ha una componente verticale minore di $g$'''
+  commento = '''L'accelerazione di tutte e due le palline è $g$, verticale e verso il basso: è inclinata la velocità della pallina lanciata, non la sua accelerazione.'''
+
+[[quesito]]
+id = "ud2-centrifuga"
+tipo = "completamento"
+lampo = true
+testo = '''In una centrifuga da laboratorio una provetta ruota su una circonferenza di raggio {{r}} con una velocità di modulo costante {{v}}. La sua accelerazione centripeta, espressa in multipli di $g = \SI{10}{\metre\per\second\squared}$, è \completa.'''
+dati.r = { valore = 10, unita = "cm" }
+dati.v = { valore = 20, unita = "m/s" }
+calcolo = "v**2 / (r / 100) / g"
+risposta = "400"
+soluzione = '''Il raggio in metri è $r = \SI{10}{\centi\metre} = \SI{0,1}{\metre}$. L'accelerazione centripeta è
+\[
+  a_c = \frac{v^2}{r} = \frac{(\SI{20}{\metre\per\second})^2}{\SI{0,1}{\metre}} = \frac{\SI{400}{\metre\squared\per\second\squared}}{\SI{0,1}{\metre}} = \SI{4000}{\metre\per\second\squared}
+\]
+In multipli di $g$: $4000/10 = 400$. Chi scrive 4 ha lasciato il raggio in centimetri, $400/10 = 40$ e poi $40/10 = 4$; chi scrive 200 ha usato $v/r$ invece di $v^2/r$, $20/0{,}1 = 200$ (ma quella non è un'accelerazione: si misura in \si{\per\second}).'''
+
+[[quesito]]
+id = "ud2-secondo"
+tipo = "multipla"
+lampo = true
+testo = '''Alla partenza di una gara un velocista di {{m}} accelera in orizzontale a {{a}}. La forza risultante orizzontale che agisce su di lui ha modulo'''
+dati.m = { valore = 60, unita = "\\kilo\\gram" }
+dati.a = { valore = 5, unita = "\\metre\\per\\second\\squared" }
+corretta = "C"
+calcolo = "m * a"
+soluzione = '''Per il secondo principio la forza risultante è la massa per l'accelerazione, e ha la stessa direzione dell'accelerazione, cioè orizzontale:
+\[
+  F = ma = \SI{60}{\kilo\gram} \cdot \SI{5}{\metre\per\second\squared} = \SI{300}{\newton}
+\]
+È la forza di attrito con cui la pista spinge in avanti i piedi del velocista, in risposta alla spinta all'indietro dei piedi sulla pista (terzo principio).'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{12}{\newton}'''
+  commento = '''Divide la massa per l'accelerazione, $60/5$. La forza è il \emph{prodotto} di massa e accelerazione; il quoziente $m/a$ non ha nemmeno le unità di una forza.'''
+  [[quesito.opzione]]
+  testo = '''\SI{65}{\newton}'''
+  commento = '''Somma massa e accelerazione, $60 + 5$: sono grandezze diverse, che non si possono sommare.'''
+  [[quesito.opzione]]
+  testo = '''\SI{300}{\newton}'''
+  valore = 300
+  [[quesito.opzione]]
+  testo = '''\SI{900}{\newton}'''
+  commento = '''Somma alla forza orizzontale, \SI{300}{\newton}, il peso del velocista, \SI{600}{\newton}. Il peso è verticale, ed è bilanciato dalla forza normale della pista: non entra nella risultante orizzontale.'''
+  [[quesito.opzione]]
+  testo = '''\SI{600}{\newton}'''
+  commento = '''È il peso del velocista, $mg$ con $g = \SI{10}{\metre\per\second\squared}$: una forza verticale, che non è la causa dell'accelerazione orizzontale.'''
+
+[[quesito]]
+id = "ud2-hooke"
+tipo = "completamento"
+lampo = true
+testo = '''A una molla ideale di costante elastica {{k}}, appesa al soffitto, si aggancia una massa di {{m}}. All'equilibrio, con $g = \SI{10}{\metre\per\second\squared}$, la molla si è allungata, in centimetri, di \completa.'''
+dati.k = { valore = 200, unita = "\\newton\\per\\metre" }
+dati.m = { valore = 2, unita = "\\kilo\\gram" }
+calcolo = "m * g / k * 100"
+risposta = "10"
+soluzione = '''All'equilibrio la forza elastica della molla, verso l'alto, bilancia il peso della massa, verso il basso: $kx = mg$. Il peso è $mg = \SI{2}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} = \SI{20}{\newton}$, quindi
+\[
+  x = \frac{mg}{k} = \frac{\SI{20}{\newton}}{\SI{200}{\newton\per\metre}} = \SI{0,1}{\metre} = \SI{10}{\centi\metre}
+\]
+Chi scrive 0,1 ha dato il risultato in metri; chi scrive 1 ha usato la massa al posto del peso, $2/200 = \SI{0,01}{\metre}$.'''
+
+[[quesito]]
+id = "ud2-ascensore"
+tipo = "multipla"
+lampo = true
+testo = '''Una persona di {{m}} sta su una bilancia pesapersone dentro un ascensore che parte verso l'alto con un'accelerazione di {{a}}. La bilancia misura la forza con cui la persona la preme, la divide per $g = \SI{10}{\metre\per\second\squared}$ e mostra il risultato in chilogrammi. Durante la partenza la bilancia indica'''
+dati.m = { valore = 70, unita = "\\kilo\\gram" }
+dati.a = { valore = 2, unita = "\\metre\\per\\second\\squared" }
+corretta = "E"
+calcolo = "m * (g + a) / g"
+soluzione = '''Sulla persona agiscono il peso $mg$, verso il basso, e la forza normale $F_N$ della bilancia, verso l'alto. Con l'asse verso l'alto, il secondo principio dà $F_N - mg = ma$, quindi
+\[
+  F_N = m(g + a) = \SI{70}{\kilo\gram} \cdot (10 + 2)\,\si{\metre\per\second\squared} = \SI{840}{\newton}
+\]
+Per il terzo principio la persona preme sulla bilancia con la stessa forza, \SI{840}{\newton}. La bilancia indica $840/10 = \SI{84}{\kilo\gram}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{70}{\kilo\gram}'''
+  commento = '''Vale quando l'ascensore è fermo o si muove a velocità costante. Durante la partenza la bilancia deve spingere la persona con una forza maggiore del peso, per accelerarla verso l'alto.'''
+  [[quesito.opzione]]
+  testo = '''\SI{56}{\kilo\gram}'''
+  commento = '''È $m(g - a)/g$, il valore per un ascensore che accelera verso il \emph{basso}. Se l'accelerazione è verso l'alto, la forza della bilancia supera il peso.'''
+  [[quesito.opzione]]
+  testo = '''\SI{72}{\kilo\gram}'''
+  commento = '''Somma la massa, in chilogrammi, e l'accelerazione, in \si{\metre\per\second\squared}: sono grandezze diverse, che non si sommano.'''
+  [[quesito.opzione]]
+  testo = '''\SI{14}{\kilo\gram}'''
+  commento = '''Conta solo la forza che serve ad accelerare la persona, $ma = \SI{140}{\newton}$, e dimentica quella che serve a sostenerne il peso.'''
+  [[quesito.opzione]]
+  testo = '''\SI{84}{\kilo\gram}'''
+  valore = 84
+
+[[quesito]]
+id = "ud2-potenza"
+tipo = "multipla"
+lampo = true
+testo = '''Un paziente di {{m}}, durante una prova da sforzo, sale una rampa di scale con un dislivello di {{h}} in {{t}}. Con $g = \SI{10}{\metre\per\second\squared}$, la potenza media che sviluppa contro la forza peso è'''
+dati.m = { valore = 60, unita = "\\kilo\\gram" }
+dati.h = { valore = 3, unita = "m" }
+dati.t = { valore = 6, unita = "s" }
+corretta = "C"
+calcolo = "m * g * h / t"
+soluzione = '''Il lavoro contro la forza peso, per salire di $h$, è $W = mgh$:
+\[
+  W = \SI{60}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{3}{\metre} = \SI{1800}{\joule}
+\]
+La potenza media è il lavoro diviso per il tempo:
+\[
+  P = \frac{W}{t} = \frac{\SI{1800}{\joule}}{\SI{6}{\second}} = \SI{300}{\watt}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{1800}{\watt}'''
+  commento = '''È il lavoro, \SI{1800}{\joule}, non la potenza: manca la divisione per il tempo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{100}{\watt}'''
+  commento = '''Dimentica il dislivello: $mg/t = 600/6$. Il lavoro contro il peso è il peso per l'altezza di cui si sale.'''
+  [[quesito.opzione]]
+  testo = '''\SI{300}{\watt}'''
+  valore = 300
+  [[quesito.opzione]]
+  testo = '''\SI{30}{\watt}'''
+  commento = '''Usa la massa al posto del peso, $60 \cdot 3/6$: dimentica il fattore $g$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{10800}{\watt}'''
+  commento = '''Moltiplica il lavoro per il tempo invece di dividerlo: $1800 \cdot 6$. A parità di lavoro, più tempo vuol dire meno potenza.'''
+
+[[quesito]]
+id = "ud2-cinetica"
+tipo = "completamento"
+lampo = true
+testo = '''Un'auto frena con la stessa forza frenante costante, una volta partendo da \SI{30}{\kilo\metre\per\hour} e una volta da \SI{60}{\kilo\metre\per\hour}. Lo spazio di frenata nel secondo caso è quello del primo moltiplicato per \completa.'''
+calcolo = "(60 / 30)**2"
+risposta = "4"
+soluzione = '''Per il teorema dell'energia cinetica, il lavoro della forza frenante, $-F\,d$, è uguale alla variazione dell'energia cinetica, $0 - \frac12 mv^2$. Quindi $F d = \frac12 m v^2$, e a parità di forza lo spazio di frenata $d$ è proporzionale al quadrato della velocità iniziale:
+\[
+  \frac{d_2}{d_1} = \left(\frac{v_2}{v_1}\right)^2 = \left(\frac{60}{30}\right)^2 = 2^2 = 4
+\]
+Chi scrive 2 tratta lo spazio di frenata come proporzionale alla velocità.'''
+
+[[quesito]]
+id = "ud2-scivolo"
+tipo = "multipla"
+lampo = true
+testo = '''Un bambino di {{m}} parte da fermo dalla cima di uno scivolo, {{h}} più in alto della fine, e arriva in fondo a {{v}}. Con $g = \SI{10}{\metre\per\second\squared}$, l'energia dissipata dall'attrito durante la discesa è'''
+dati.m = { valore = 20, unita = "\\kilo\\gram" }
+dati.h = { valore = "1,8", unita = "m" }
+dati.v = { valore = 4, unita = "m/s" }
+corretta = "D"
+calcolo = "m * g * h - 0.5 * m * v**2"
+soluzione = '''All'inizio il bambino è fermo e ha solo energia potenziale (con lo zero alla fine dello scivolo); alla fine ha solo energia cinetica:
+\[
+  E_{p} = mgh = \SI{20}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{1,8}{\metre} = \SI{360}{\joule}
+  \qquad
+  E_{c} = \frac12 mv^2 = \frac12 \cdot \SI{20}{\kilo\gram} \cdot (\SI{4}{\metre\per\second})^2 = \SI{160}{\joule}
+\]
+L'energia meccanica è diminuita di $360 - 160 = \SI{200}{\joule}$: è il lavoro (negativo) dell'attrito, che ha trasformato questa energia in calore.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{160}{\joule}'''
+  commento = '''È l'energia cinetica alla fine, cioè la parte dell'energia potenziale che \emph{non} è stata dissipata.'''
+  [[quesito.opzione]]
+  testo = '''\SI{360}{\joule}'''
+  commento = '''È tutta l'energia potenziale iniziale: sarebbe l'energia dissipata solo se il bambino arrivasse in fondo fermo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{520}{\joule}'''
+  commento = '''Somma energia potenziale iniziale ed energia cinetica finale. L'energia dissipata è la \emph{differenza} fra l'energia meccanica iniziale e quella finale.'''
+  [[quesito.opzione]]
+  testo = '''\SI{200}{\joule}'''
+  valore = 200
+  [[quesito.opzione]]
+  testo = '''\SI{0}{\joule}, perché l'energia si conserva'''
+  commento = '''Si conserva l'energia totale, ma non l'energia meccanica quando agisce l'attrito: con l'energia meccanica conservata il bambino arriverebbe in fondo a \SI{6}{\metre\per\second}, non a \SI{4}{\metre\per\second}.'''
+
+[[quesito]]
+id = "ud2-airbag"
+tipo = "multipla"
+lampo = true
+testo = '''In un urto frontale un passeggero di {{m}}, che viaggia a {{v}}, viene fermato dalla cintura e dall'airbag in {{dt}}. La forza media che agisce su di lui durante l'arresto ha modulo'''
+dati.m = { valore = 70, unita = "\\kilo\\gram" }
+dati.v = { valore = 10, unita = "m/s" }
+dati.dt = { valore = "0,10", unita = "s" }
+corretta = "B"
+calcolo = "m * v / dt"
+soluzione = '''Per il teorema dell'impulso, $F\,\Delta t = \Delta p$. La quantità di moto del passeggero passa da $mv$ a zero, quindi in modulo $\Delta p = mv = \SI{70}{\kilo\gram} \cdot \SI{10}{\metre\per\second} = \SI{700}{\kilo\gram\metre\per\second}$, e
+\[
+  F = \frac{\Delta p}{\Delta t} = \frac{\SI{700}{\kilo\gram\metre\per\second}}{\SI{0,10}{\second}} = \SI{7000}{\newton}
+\]
+È circa dieci volte il peso del passeggero.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{700}{\newton}'''
+  commento = '''È il modulo della variazione della quantità di moto, \SI{700}{\kilo\gram\metre\per\second}, scambiato per una forza: manca la divisione per il tempo dell'arresto.'''
+  [[quesito.opzione]]
+  testo = '''\SI{7000}{\newton}'''
+  valore = 7000
+  [[quesito.opzione]]
+  testo = '''\SI{35000}{\newton}'''
+  commento = '''Divide per il tempo l'energia cinetica, $\frac12 mv^2 = \SI{3500}{\joule}$: il risultato è una potenza, in watt, non una forza.'''
+  [[quesito.opzione]]
+  testo = '''\SI{70}{\newton}'''
+  commento = '''Moltiplica la variazione della quantità di moto per il tempo invece di dividerla: $700 \cdot 0{,}10$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3500}{\newton}'''
+  commento = '''Usa l'energia cinetica, $\frac12 mv^2 = \SI{3500}{\joule}$, come se fosse una forza. La forza media si ricava dalla quantità di moto e dal tempo.'''
+
+[[quesito]]
+id = "ud2-urto"
+tipo = "completamento"
+lampo = true
+testo = '''Su una rotaia senza attrito, un carrello di {{m1}} che si muove a {{v1}} urta un carrello fermo di {{m2}}; dopo l'urto i due carrelli restano agganciati. La loro velocità comune, in metri al secondo, è \completa.'''
+dati.m1 = { valore = 2, unita = "\\kilo\\gram" }
+dati.v1 = { valore = 3, unita = "m/s" }
+dati.m2 = { valore = 1, unita = "\\kilo\\gram" }
+calcolo = "m1 * v1 / (m1 + m2)"
+risposta = "2"
+soluzione = '''Durante l'urto le forze esterne orizzontali sono nulle, quindi la quantità di moto totale si conserva. Prima dell'urto è quella del solo primo carrello; dopo, i due carrelli si muovono insieme con la stessa velocità $v$:
+\[
+  m_1 v_1 = (m_1 + m_2)\,v
+  \quad\Longrightarrow\quad
+  v = \frac{m_1 v_1}{m_1 + m_2} = \frac{\SI{2}{\kilo\gram} \cdot \SI{3}{\metre\per\second}}{\SI{3}{\kilo\gram}} = \SI{2}{\metre\per\second}
+\]
+Chi scrive 1,5 ha fatto la media delle velocità, $(3 + 0)/2$, senza tener conto delle masse; chi scrive 3 ha dimenticato che dopo l'urto si muove anche il secondo carrello.'''
+
+[[quesito]]
+id = "ud2-bicipite"
+tipo = "completamento"
+lampo = true
+testo = '''L'avambraccio è orizzontale e la mano regge un peso di {{Fp}}, a {{b2}} dal gomito. Il bicipite tira verticalmente verso l'alto, a {{b1}} dal gomito. Trascurando il peso dell'avambraccio, all'equilibrio la forza del bicipite, in newton, è \completa.'''
+dati.Fp = { valore = 20, unita = "\\newton" }
+dati.b1 = { valore = 4, unita = "cm" }
+dati.b2 = { valore = 32, unita = "cm" }
+calcolo = "Fp * b2 / b1"
+risposta = "160"
+soluzione = '''L'avambraccio è una leva di terzo genere con il fulcro nel gomito. All'equilibrio i momenti rispetto al gomito si bilanciano: il momento del bicipite, antiorario, è uguale a quello del peso, orario. Le forze sono perpendicolari all'avambraccio, quindi i bracci sono le distanze dal gomito:
+\[
+  F_b \cdot b_1 = F_p \cdot b_2
+  \quad\Longrightarrow\quad
+  F_b = F_p\,\frac{b_2}{b_1} = \SI{20}{\newton} \cdot \frac{\SI{32}{\centi\metre}}{\SI{4}{\centi\metre}} = \SI{20}{\newton} \cdot 8 = \SI{160}{\newton}
+\]
+Le distanze compaiono in un rapporto, quindi si possono lasciare in centimetri. Chi scrive 2,5 ha usato il rapporto rovesciato, $4/32$: il bicipite, vicino al fulcro, deve tirare \emph{più} del peso, non meno.'''

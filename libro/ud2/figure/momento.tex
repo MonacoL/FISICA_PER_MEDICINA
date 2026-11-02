@@ -1,0 +1,24 @@
+% Momento di una forza rispetto a un punto O: r va da O al punto di applicazione,
+% theta è l'angolo fra r e F, il braccio b = r sin(theta) è la distanza fra O e
+% la retta d'azione della forza.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % asta incernierata in O
+  \filldraw[fill=richiamo!30, draw=richiamo, thick] (-0.15,-0.15) rectangle (4.6,0.15);
+  \fill[richiamo!60] (0,0) circle (0.22);
+  \fill (0,0) circle (1.6pt);
+  \node[below left] at (-0.1,-0.15) {$O$};
+  \coordinate (A) at (4.0,0);
+  \fill (A) circle (1.6pt);
+  \draw[<->, formula] (0,0.45) -- (4.0,0.45) node[midway, above] {$r$};
+  % forza in A a 60 gradi dall'asta
+  \draw[->, attenzione, very thick] (A) -- ++(60:2.2) node[right] {$\vec F$};
+  \draw (A) ++(0.55,0) arc (0:60:0.55); \node at ($(A)+(30:0.8)$) {$\theta$};
+  % retta d'azione
+  \draw[dashed, attenzione!70] ($(A)+(240:2.6)$) -- ($(A)+(60:2.9)$);
+  % braccio: perpendicolare da O alla retta d'azione
+  \coordinate (H) at ($(A)!(0,0)!($(A)+(60:1)$)$);
+  \draw[medica, thick] (0,0) -- (H) node[midway, below left] {$b = r\sin\theta$};
+  \draw[medica] ($(H)!0.18cm!(0,0)$) -- ++(60:0.18) -- ($(H)+(60:0.18)$);
+  % verso di rotazione
+  \draw[->, richiamo, thick] (40:1.5) arc (40:120:1.5);
+\end{tikzpicture}
