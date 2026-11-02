@@ -4,3 +4,6 @@
 # Ambiente Python
 .venv/
 __pycache__/
+
+# Worktree degli agenti
+.claude/
