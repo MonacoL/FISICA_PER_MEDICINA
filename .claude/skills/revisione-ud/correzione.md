@@ -40,7 +40,7 @@ Dopo il secondo giro, se resta un bloccante (non risolto, o respinto con motivo 
 
 ## 5. Checklist della PR
 
-Compila la descrizione della PR dal modello `.github/pull_request_template.md`, con `gh pr edit <numero> --body-file <file>`:
+Compila la descrizione della PR dal modello `.github/pull_request_template.md`, con `gh api -X PATCH repos/{owner}/{repo}/pulls/<numero> -F body=@<file>` (`gh pr edit` può fallire per un errore dei Projects classic):
 
 - controllo automatico: spuntato se `uv run controllo <ud>` passa e la CI della PR è verde;
 - una riga per revisore, con il numero di rilievi accolti e respinti e il link al commento del rapporto;
