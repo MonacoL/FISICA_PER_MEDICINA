@@ -128,11 +128,11 @@ etto & h & $10^{2}$ & micro & $\mu$ & $10^{-6}$ \\
 
 Per esempio $\SI{3}{\milli\gram} = 3 \cdot 10^{-3}\,\si{\gram}$ e $\SI{5}{\micro\metre} = 5 \cdot 10^{-6}\,\si{\metre}$. Fa eccezione il chilogrammo: è l'unità del SI ma contiene già il prefisso kilo, quindi i prefissi della massa si applicano al grammo ($\SI{1}{\milli\gram} = \SI{e-3}{\gram} = \SI{e-6}{\kilo\gram}$).
 
-In medicina si usano anche unità che non sono del SI: il litro per i volumi ($\SI{1}{\litre} = \SI{1}{\deci\metre\cubed}$), l'ora e il minuto per i tempi, il grado Celsius per la temperatura, il millimetro di mercurio (mmHg) per la pressione del sangue. Nei conti conviene portarle nel SI.
+In medicina si usano anche unità che non sono del SI, come il litro per i volumi ($\SI{1}{\litre} = \SI{1}{\deci\metre\cubed}$), l'ora e il minuto per i tempi e il millimetro di mercurio (mmHg) per la pressione del sangue. La temperatura si misura spesso in gradi Celsius, un'unità ammessa dal SI, ma nelle formule della fisica si usa il kelvin. Nei conti conviene portare tutto nelle unità fondamentali del SI.
 
 \subsection{Le dimensioni di una grandezza}
 
-La \textbf{dimensione} di una grandezza dice da quali grandezze fondamentali è fatta, indipendentemente dall'unità scelta. Si scrive fra parentesi quadre, con $[L]$ per la lunghezza, $[M]$ per la massa e $[T]$ per il tempo. Una distanza ha dimensione $[L]$, sia che la misuri in metri sia in pollici. Le dimensioni delle grandezze derivate si ottengono dalla loro definizione:
+La \textbf{dimensione} di una grandezza dice da quali grandezze fondamentali è fatta, indipendentemente dall'unità scelta. Si scrive fra parentesi quadre, con $[L]$ per la lunghezza, $[M]$ per la massa e $[T]$ per il tempo (attenzione: $[T]$ fra parentesi quadre è la dimensione del tempo, non la temperatura). Una distanza ha dimensione $[L]$, sia che la misuri in metri sia in pollici. Le dimensioni delle grandezze derivate si ottengono dalla loro definizione:
 \begin{gather*}
   [\text{area}] = [L^{2}] \qquad\qquad
   [\text{volume}] = [L^{3}]
@@ -176,7 +176,7 @@ Per le aree e i volumi il fattore di conversione va elevato al quadrato o al cub
 \]
 Il litro è il volume di un cubo di lato $\SI{1}{\deci\metre} = \SI{10}{\centi\metre}$, quindi $\SI{1}{\litre} = (\SI{10}{\centi\metre})^{3} = \SI{1000}{\centi\metre\cubed}$, e un millilitro è un centimetro cubo. Un metro cubo contiene $10^{6}/10^{3} = 10^{3}$ litri.
 
-La temperatura in kelvin si ottiene da quella in gradi Celsius aggiungendo 273: la temperatura corporea, \SI{37}{\celsius}, vale $37 + 273 = \SI{310}{\kelvin}$. Una \emph{differenza} di temperatura ha lo stesso valore nelle due scale: salire di \SI{1}{\celsius} vuol dire salire di \SI{1}{\kelvin}.
+La temperatura in kelvin, che si indica con $T$, si ottiene da quella in gradi Celsius, che si indica con la minuscola $t$, aggiungendo \num{273,15}, che nei conti si arrotonda a 273: $T = t + 273$. Questa $t$ non è il tempo: il contesto e l'unità dicono di quale grandezza si parla. La temperatura corporea, \SI{37}{\celsius}, vale $37 + 273 = \SI{310}{\kelvin}$. Una \emph{differenza} di temperatura ha lo stesso valore nelle due scale: salire di \SI{1}{\celsius} vuol dire salire di \SI{1}{\kelvin}.
 
 \begin{formula}[Conversioni da ricordare]
 \SI{1}{\kilo\metre\per\hour} = \frac{1}{3{,}6}\,\si{\metre\per\second}
@@ -219,7 +219,7 @@ Le unità aiutano a non sbagliare: dividendo milligrammi per milligrammi al mill
 
 \subsection{La stima dell'ordine di grandezza}
 
-L'\textbf{ordine di grandezza} di un numero è la potenza di 10 più vicina a quel numero. Per trovarlo si scrive il numero in notazione scientifica, $a \cdot 10^{n}$, e si guarda la mantissa: se $a$ è minore di circa 3 (per la precisione di $\sqrt{10} \approx 3{,}16$), l'ordine di grandezza è $10^{n}$; se è maggiore, è $10^{n+1}$. Così l'ordine di grandezza di $2 \cdot 10^{4}$ è $10^{4}$, quello di $7 \cdot 10^{4}$ è $10^{5}$. La soglia è $\sqrt{10}$ e non 5 perché su una scala di potenze di 10 il punto a metà strada fra $10^{n}$ e $10^{n+1}$ è $\sqrt{10} \cdot 10^{n}$: in entrambi i casi si moltiplica per $\sqrt{10}$. Alcuni libri usano la soglia 5; nei quesiti d'esame i numeri non cadono quasi mai vicino alla soglia.
+L'\textbf{ordine di grandezza} di un numero è la potenza di 10 più vicina a quel numero su una scala di potenze di 10, cioè quella da cui differisce per il fattore più piccolo. Per trovarlo si scrive il numero in notazione scientifica, $a \cdot 10^{n}$, e si guarda la mantissa: se $a$ è minore di circa 3 (per la precisione, di $\sqrt{10} \approx 3{,}16$), l'ordine di grandezza è $10^{n}$; se è maggiore, è $10^{n+1}$. Così l'ordine di grandezza di $2 \cdot 10^{4}$ è $10^{4}$, quello di $7 \cdot 10^{4}$ è $10^{5}$. La soglia è $\sqrt{10}$ e non 5 perché sulle potenze di 10 conta il fattore, non la differenza. Per andare da $10^{n}$ a $\sqrt{10} \cdot 10^{n}$ si moltiplica per $\sqrt{10}$, e per andare da $\sqrt{10} \cdot 10^{n}$ a $10^{n+1}$ si moltiplica di nuovo per $\sqrt{10}$ (infatti $\sqrt{10} \cdot \sqrt{10} = 10$). I due passi sono uguali, quindi $\sqrt{10} \cdot 10^{n}$ sta a metà strada. Alcuni libri usano la soglia 5; nei quesiti d'esame i numeri non cadono quasi mai vicino alla soglia.
 
 \textbf{Stimare} l'ordine di grandezza di un risultato vuol dire calcolarlo con numeri arrotondati, in modo da fare il conto a mente. La stima serve per rispondere in fretta e per controllare un conto più preciso: se il risultato esatto ha un ordine di grandezza diverso dalla stima, c'è un errore.
 
@@ -310,7 +310,7 @@ a = c \sin\alpha \qquad b = c \cos\alpha \qquad \sin^{2}\alpha + \cos^{2}\alpha 
 In un triangolo rettangolo il quadrato dell'ipotenusa è uguale alla somma dei quadrati dei cateti: $c^{2} = a^{2} + b^{2}$, quindi $c = \sqrt{a^{2} + b^{2}}$. Per esempio, con cateti 3 e 4 l'ipotenusa è $\sqrt{9 + 16} = \sqrt{25} = 5$. Due radici da ricordare: $\sqrt 2 \approx 1{,}41$ e $\sqrt 3 \approx 1{,}73$.
 \end{richiamo}
 
-L'ultima formula del box viene da Pitagora. Dividendo $a^{2} + b^{2} = c^{2}$ per $c^{2}$ si ottiene $(a/c)^{2} + (b/c)^{2} = 1$, cioè $\sin^{2}\alpha + \cos^{2}\alpha = 1$ (dove $\sin^{2}\alpha$ vuol dire $(\sin\alpha)^{2}$). Inoltre gli angoli acuti di un triangolo rettangolo sommano a \ang{90}, e il cateto opposto a uno è adiacente all'altro: per questo $\sin\alpha = \cos(\ang{90} - \alpha)$.
+L'ultima formula del box viene da Pitagora. Dividendo $a^{2} + b^{2} = c^{2}$ per $c^{2}$ si ottiene $(a/c)^{2} + (b/c)^{2} = 1$, cioè $\sin^{2}\alpha + \cos^{2}\alpha = 1$ (dove $\sin^{2}\alpha$ vuol dire $(\sin\alpha)^{2}$). Dividendo numeratore e denominatore di $a/b$ per $c$ si ha invece $\tan\alpha = (a/c)/(b/c) = \sin\alpha/\cos\alpha$. Inoltre gli angoli acuti di un triangolo rettangolo sommano a \ang{90}, e il cateto opposto a uno è adiacente all'altro: per questo $\sin\alpha = \cos(\ang{90} - \alpha)$.
 
 \subsection{I valori notevoli}
 
@@ -321,18 +321,28 @@ All'esame non c'è la calcolatrice: seno e coseno si usano solo per pochi angoli
   \item \textbf{\ang{0} e \ang{90}}: quando l'angolo tende a \ang{0} il cateto opposto si schiaccia a zero e quello adiacente diventa uguale all'ipotenusa, quindi $\sin\ang{0} = 0$ e $\cos\ang{0} = 1$. A \ang{90} è il contrario: $\sin\ang{90} = 1$ e $\cos\ang{90} = 0$.
 \end{itemize}
 
-\begin{center}
+\begin{formula}[Valori notevoli]
 \renewcommand{\arraystretch}{1.5}
-\begin{tabular}{@{}lccccc@{}}
+\begin{array}{@{}lccccc@{}}
 \toprule
-$\theta$ & \ang{0} & \ang{30} & \ang{45} & \ang{60} & \ang{90} \\
+\theta & \ang{0} & \ang{30} & \ang{45} & \ang{60} & \ang{90} \\
 \midrule
-$\sin\theta$ & $0$ & $\dfrac{1}{2} = 0{,}5$ & $\dfrac{\sqrt 2}{2} \approx 0{,}71$ & $\dfrac{\sqrt 3}{2} \approx 0{,}87$ & $1$ \\
-$\cos\theta$ & $1$ & $\dfrac{\sqrt 3}{2} \approx 0{,}87$ & $\dfrac{\sqrt 2}{2} \approx 0{,}71$ & $\dfrac{1}{2} = 0{,}5$ & $0$ \\
-$\tan\theta$ & $0$ & $\dfrac{\sqrt 3}{3} \approx 0{,}58$ & $1$ & $\sqrt 3 \approx 1{,}73$ & non definita \\
+\sin\theta & 0 & \dfrac{1}{2} = 0{,}5 & \dfrac{\sqrt 2}{2} \approx 0{,}71 & \dfrac{\sqrt 3}{2} \approx 0{,}87 & 1 \\ \addlinespace[6pt]
+\cos\theta & 1 & \dfrac{\sqrt 3}{2} \approx 0{,}87 & \dfrac{\sqrt 2}{2} \approx 0{,}71 & \dfrac{1}{2} = 0{,}5 & 0 \\ \addlinespace[6pt]
+\tan\theta & 0 & \dfrac{\sqrt 3}{3} \approx 0{,}58 & 1 & \sqrt 3 \approx 1{,}73 & \text{non definita} \\
 \bottomrule
-\end{tabular}
-\end{center}
+\end{array}
+\end{formula}
+
+La tangente è il rapporto fra seno e coseno:
+\[
+  \tan\ang{30} = \frac{1/2}{\sqrt 3/2} = \frac{1}{\sqrt 3} = \frac{\sqrt 3}{3} \approx 0{,}58
+  \qquad
+  \tan\ang{45} = 1
+  \qquad
+  \tan\ang{60} = \frac{\sqrt 3/2}{1/2} = \sqrt 3 \approx 1{,}73
+\]
+Per $\tan\ang{30}$ si moltiplicano numeratore e denominatore di $1/\sqrt 3$ per $\sqrt 3$; $\tan\ang{45} = 1$ perché seno e coseno sono uguali.
 
 Il seno cresce da 0 a 1 quando l'angolo va da \ang{0} a \ang{90}; il coseno fa il contrario, con gli stessi valori in ordine inverso. La tangente a \ang{90} non è definita, perché il coseno vale zero e non si può dividere per zero.
 
@@ -361,15 +371,17 @@ Nel triangolo rettangolo gli angoli sono acuti. Per i vettori servono anche ango
 \begin{figure}[h]
 \centering
 \input{ud1/figure/circonferenza}
-\caption{La circonferenza goniometrica. Il punto $P$ all'angolo $\theta$ ha coordinate $(\cos\theta, \sin\theta)$. Per $\theta = \ang{120}$, come in figura, il coseno è negativo e il seno positivo.}
+\caption{La circonferenza goniometrica. Il punto $P$ all'angolo $\theta$ ha coordinate $(\cos\theta, \sin\theta)$. Per $\theta = \ang{120}$, come in figura, il coseno è negativo e il seno positivo. Il punto $P'$, unito a $P$ dalla linea tratteggiata, è all'angolo $\ang{180} - \theta = \ang{60}$: è simmetrico di $P$ rispetto all'asse $y$.}
 \label{fig:ud1-circonferenza}
 \end{figure}
 
-Per un angolo fra \ang{90} e \ang{180} il punto $P$ sta a sinistra dell'asse $y$: il coseno è negativo, il seno resta positivo. Per simmetria, rispetto all'angolo $\ang{180} - \theta$ il seno è uguale e il coseno cambia segno:
-\[
-  \sin(\ang{180} - \theta) = \sin\theta \qquad \cos(\ang{180} - \theta) = -\cos\theta
-\]
-Per esempio $\cos\ang{120} = -\cos\ang{60} = -1/2$ e $\sin\ang{150} = \sin\ang{30} = 1/2$. Per $\theta = \ang{180}$ il punto $P$ è in $(-1, 0)$: $\cos\ang{180} = -1$ e $\sin\ang{180} = 0$.
+Per un angolo fra \ang{90} e \ang{180} il punto $P$ sta a sinistra dell'asse $y$: il coseno è negativo, il seno resta positivo. I punti agli angoli $\theta$ e $\ang{180} - \theta$ sono simmetrici rispetto all'asse $y$ (in figura, \ang{120} e \ang{60}): hanno la stessa ordinata e ascisse opposte, quindi il seno è uguale e il coseno cambia segno:
+
+\begin{formula}[Angoli supplementari]
+\sin(\ang{180} - \theta) = \sin\theta \qquad \cos(\ang{180} - \theta) = -\cos\theta
+\end{formula}
+
+Per esempio $\cos\ang{120} = -\cos\ang{60} = -1/2$ e $\sin\ang{150} = \sin\ang{30} = 1/2$. Per $\theta = \ang{180}$ il punto $P$ è in $(-1, 0)$: $\cos\ang{180} = -1$ e $\sin\ang{180} = 0$. Ruotando oltre \ang{180} il punto $P$ scende sotto l'asse $x$, e il seno diventa negativo: per esempio a \ang{270} $P$ è in $(0, -1)$, quindi $\cos\ang{270} = 0$ e $\sin\ang{270} = -1$.
 
 % -------------------------------------------------------------------------
 \section{I vettori}
@@ -398,9 +410,9 @@ a_x = a \cos\theta \qquad a_y = a \sin\theta
 a = \sqrt{a_x^{2} + a_y^{2}} \qquad \tan\theta = \frac{a_y}{a_x}
 \end{formula}
 
-Le prime due formule danno le componenti dal modulo e dall'angolo; le altre due fanno il contrario, con Pitagora e con la tangente. Le componenti possono essere negative: un vettore che punta verso sinistra ha $a_x < 0$, uno che punta verso il basso ha $a_y < 0$. Con la circonferenza goniometrica le formule valgono per qualunque angolo: per $\theta = \ang{120}$, per esempio, $a_x = a\cos\ang{120} = -a/2$.
+Le prime due formule danno le componenti dal modulo e dall'angolo; le altre due fanno il contrario, con Pitagora e con la tangente. La tangente da sola non basta a trovare l'angolo: $(3, 4)$ e $(-3, -4)$ hanno la stessa tangente, ma puntano in versi opposti. Per scegliere l'angolo giusto si guardano i segni di $a_x$ e $a_y$. Se $a_x = 0$ il vettore è verticale e $\theta$ vale \ang{90} o \ang{270}. Le componenti possono essere negative: un vettore che punta verso sinistra ha $a_x < 0$, uno che punta verso il basso ha $a_y < 0$. Con la circonferenza goniometrica le formule valgono per qualunque angolo: per $\theta = \ang{120}$, per esempio, $a_x = a\cos\ang{120} = -a/2$.
 
-Un vettore si scrive spesso con le sue componenti fra parentesi, $\vec a = (a_x, a_y)$, oppure con i \textbf{versori} $\hat\imath$ e $\hat\jmath$, i vettori di modulo 1 diretti come gli assi $x$ e $y$: $\vec a = a_x\,\hat\imath + a_y\,\hat\jmath$. Nello spazio c'è una terza componente $a_z$, lungo l'asse $z$ con il versore $\hat k$, e il modulo è $\sqrt{a_x^{2} + a_y^{2} + a_z^{2}}$.
+Un vettore si scrive spesso con le sue componenti fra parentesi, $\vec a = (a_x, a_y)$, oppure con i \textbf{versori} $\hat\imath$ e $\hat\jmath$, i vettori di modulo 1 diretti come gli assi $x$ e $y$: $\vec a = a_x\,\hat\imath + a_y\,\hat\jmath$. Nello spazio c'è una terza componente $a_z$, lungo l'asse $z$ con il versore $\hat k$, e il modulo è $\sqrt{a_x^{2} + a_y^{2} + a_z^{2}}$. Gli assi si orientano in modo che, con $x$ verso destra e $y$ verso l'alto sul foglio, l'asse $z$ esca dal foglio verso chi legge.
 
 \begin{esempio}
 (a) Trova le componenti di un vettore di modulo 10 che forma un angolo di \ang{30} con l'asse $x$. (b) Trova modulo e direzione del vettore $\vec b = (3, 4)$.
@@ -497,6 +509,8 @@ Il prodotto scalare non dipende dall'ordine: $\vec a \cdot \vec b = \vec b \cdot
 \vec a \cdot \vec b = a\,b\cos\theta = a_x b_x + a_y b_y + a_z b_z
 \end{formula}
 
+Per esempio, con $\vec a = (1, 0)$ lungo l'asse $x$ e $\vec b = (\cos\theta, \sin\theta)$ di modulo 1, la formula con le componenti dà $1 \cdot \cos\theta + 0 \cdot \sin\theta = \cos\theta$, come la definizione.
+
 Nella UD2 il prodotto scalare servirà per il \textbf{lavoro} di una forza: una forza $\vec F$ che sposta il suo punto di applicazione di $\vec s$ compie il lavoro $W = \vec F \cdot \vec s = F s \cos\theta$.
 
 \begin{esempio}
@@ -524,7 +538,7 @@ I moduli sono $a = \sqrt{10}$ e $b = \sqrt 5$, quindi $ab = \sqrt{50} = \sqrt{25
 
 Il \textbf{prodotto vettoriale} di $\vec a$ e $\vec b$ si scrive $\vec a \times \vec b$ ed è un \emph{vettore} $\vec c$ (figura~\ref{fig:ud1-vettoriale}):
 \begin{itemize}
-  \item il \textbf{modulo} è $c = ab\sin\theta$, dove $\theta$ è l'angolo fra $\vec a$ e $\vec b$, preso fra \ang{0} e \ang{180}: è l'area del parallelogramma che ha $\vec a$ e $\vec b$ come lati;
+  \item il \textbf{modulo} è $c = ab\sin\theta$, dove $\theta$ è l'angolo fra $\vec a$ e $\vec b$, preso fra \ang{0} e \ang{180}: è l'area del parallelogramma che ha $\vec a$ e $\vec b$ come lati: la base è $a$ e l'altezza è il cateto opposto a $\theta$, cioè $b\sin\theta$;
   \item la \textbf{direzione} è perpendicolare al piano che contiene $\vec a$ e $\vec b$, quindi perpendicolare a entrambi;
   \item il \textbf{verso} è dato dalla \textbf{regola della mano destra}: si dispongono pollice, indice e medio della mano destra in modo che siano perpendicolari fra loro, come gli spigoli di un cubo che partono da uno stesso vertice; se il pollice indica il verso di $\vec a$ e l'indice quello di $\vec b$, il medio indica il verso di $\vec a \times \vec b$.
 \end{itemize}

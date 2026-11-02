@@ -1,5 +1,6 @@
 % Circonferenza goniometrica di raggio 1: il punto P all'angolo theta ha
-% coordinate (cos theta, sin theta). Disegnato theta = 120 gradi, con cos < 0.
+% coordinate (cos theta, sin theta). Disegnato theta = 120 gradi, con cos < 0,
+% e tratteggiato il punto P' a 60 gradi (180 - theta), simmetrico rispetto a y.
 \begin{tikzpicture}[>=Stealth, font=\small, scale=1.35]
   \draw[->] (-1.35,0) -- (1.45,0) node[right] {$x$};
   \draw[->] (0,-1.25) -- (0,1.35) node[above] {$y$};
@@ -7,6 +8,9 @@
   \node[below right] at (1,0) {$1$};
   \node[above left] at (0,1) {$1$};
   \coordinate (P) at (120:1);
+  \coordinate (Q) at (60:1);
+  \draw[dashed, formula] (0,0 |- P) -- (Q);
+  \draw[formula, fill=white] (Q) circle (1.4pt) node[above right] {$P'$};
   \draw[very thick, formula] (0,0) -- (P);
   \fill[formula] (P) circle (1.2pt) node[above left] {$P$};
   \draw[dashed] (P) -- (P |- 0,0);
@@ -16,5 +20,5 @@
   \draw[very thick, medica] (0,0) -- (P |- 0,0);
   \node[medica, below] at (-0.62,0) {$\cos\theta$};
   \draw[very thick, attenzione] (0,0) -- (0,0 |- P);
-  \node[attenzione, right] at (0,0.72) {$\sin\theta$};
+  \node[attenzione, right] at (0,0.55) {$\sin\theta$};
 \end{tikzpicture}
