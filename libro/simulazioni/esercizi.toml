@@ -944,10 +944,11 @@ calcolo = "round(v1 / math.sqrt(v1**2 + 2 * dp * mmHg / rho), 2)"
 soluzione = '''Il vaso è orizzontale, e per il teorema di Bernoulli nel tratto ristretto la pressione cala di $\frac{1}{2}\rho\,(v_2^2 - v_1^2)$. La parete rischia di essere schiacciata quando il calo arriva a $\SI{24}{\mmHg} = 24 \cdot \SI{133}{\pascal} \approx \SI{3,2e3}{\pascal}$. Con $\frac{1}{2}\rho = \frac{1}{2} \cdot 1060 = \SI{530}{\kilo\gram\per\metre\cubed}$:
 \[
   v_2^2 - v_1^2 = \frac{\SI{3,2e3}{\pascal}}{\SI{530}{\kilo\gram\per\metre\cubed}} \approx \SI{6,0}{\metre\squared\per\second\squared}
-  \qquad\Longrightarrow\qquad
-  v_2^2 \approx (6{,}0 + 0{,}25)\,\si{\metre\squared\per\second\squared} = \SI{6,25}{\metre\squared\per\second\squared}
 \]
-perché $530 \cdot 6 = 3180$. Quindi $v_2 \approx \SI{2,5}{\metre\per\second}$, 5 volte $v_1$. Per l'equazione di continuità, $S_1 v_1 = S_2 v_2$, l'area è 5 volte più piccola: un quinto di quella del tratto sano. In un aneurisma succede il contrario: la sezione cresce, il sangue rallenta e la pressione sale un poco.'''
+\[
+  v_2^2 \approx 6{,}0 + v_1^2 = (6{,}0 + 0{,}50^2)\,\si{\metre\squared\per\second\squared} = (6{,}0 + 0{,}25)\,\si{\metre\squared\per\second\squared} = \SI{6,25}{\metre\squared\per\second\squared}
+\]
+perché $530 \cdot 6 = 3180$. Quindi $v_2 \approx \SI{2,5}{\metre\per\second}$, perché $2{,}5^2 = 6{,}25$: 5 volte $v_1$. Per l'equazione di continuità, $S_1 v_1 = S_2 v_2$, l'area è 5 volte più piccola: un quinto di quella del tratto sano. In un aneurisma succede il contrario: la sezione cresce, il sangue rallenta e la pressione sale un poco.'''
 
   [[quesito.opzione]]
   testo = '''circa nove decimi di quella del tratto sano'''
