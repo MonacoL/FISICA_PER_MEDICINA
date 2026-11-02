@@ -162,6 +162,34 @@ def controlla(fonte: dict, nome: str) -> tuple[list[str], list[str]]:
     return errori, avvisi
 
 
+# Simulazioni: i 31 quesiti di una prova, divisi fra le UD in proporzione ai CFU del
+# syllabus (6 CFU in tutto, quote arrotondate; il resto più grande va alla UD2).
+QUOTE_UD = {1: 1, 2: 8, 3: 6, 4: 2, 5: 5, 6: 6, 7: 3}
+FORMATO_PROVA = {"multipla": 21, "completamento": 10}
+
+
+def controlla_simulazioni(fonte: dict, nome: str) -> tuple[list[str], list[str]]:
+    """Come `controlla`, più il formato di ogni prova: 21 + 10 quesiti e la ripartizione per UD."""
+    errori, avvisi = controlla(fonte, nome)
+    quesiti = fonte.get("quesito", [])
+    for q in quesiti:
+        if q.get("simulazione") not in (1, 2, 3) or q.get("ud") not in QUOTE_UD:
+            errori.append(f"{nome}: qs:{q['id']}: servono simulazione (1-3) e ud (1-7)")
+    for s in (1, 2, 3):
+        prova = [q for q in quesiti if q.get("simulazione") == s]
+        tipi = {t: sum(q["tipo"] == t for q in prova) for t in FORMATO_PROVA}
+        if tipi != FORMATO_PROVA:
+            errori.append(f"{nome}: simulazione {s}: {tipi} invece di {FORMATO_PROVA}")
+        per_ud = {u: sum(q.get("ud") == u for q in prova) for u in QUOTE_UD}
+        if per_ud != QUOTE_UD:
+            avvisi.append(f"{nome}: simulazione {s}: quesiti per UD {per_ud} invece di {QUOTE_UD}")
+        lettere = [q["corretta"] for q in prova if q["tipo"] == "multipla"]
+        conti = {lettera: lettere.count(lettera) for lettera in LETTERE}
+        if lettere and max(conti.values()) > 2 * max(1, min(conti.values())):
+            avvisi.append(f"{nome}: simulazione {s}: lettere corrette sbilanciate, {conti}")
+    return errori, avvisi
+
+
 # --------------------------------------------------------------------------
 # LaTeX
 
@@ -257,6 +285,29 @@ def eserciziario_latex(fonte: dict) -> str:
     return "\n".join(out) + "\n"
 
 
+
+def prova(fonte: dict, s: int) -> list[dict]:
+    """I quesiti della simulazione `s` nell'ordine della prova: prima le risposte multiple,
+    poi i completamenti; dentro un tipo in ordine di UD, come il syllabus."""
+    quesiti = [q for q in fonte.get("quesito", []) if q.get("simulazione") == s]
+    return sorted(quesiti, key=lambda q: (q["tipo"] != "multipla", q["ud"]))
+
+
+def simulazioni_latex(fonte: dict) -> str:
+    out = ["% Generato da simulazioni/esercizi.toml: non modificare qui."]
+    for s in (1, 2, 3):
+        quesiti = prova(fonte, s)
+        out += ["", rf"\simulazione{{{s}}}"]
+        for q in quesiti:
+            out += ["", r"\needspace{8\baselineskip}", rf"\quesito\label{{qs:{q['id']}}}", testo_quesito(q)]
+        righe = [rf"\ref{{qs:{q['id']}}} & {risposta_breve(q)} & {q['ud']} \\" for q in quesiti]
+        out += ["", rf"\soluzionisimulazione{{{s}}}", "", r"\begin{longtable}{@{}lll@{}}",
+                r"\toprule", r"Quesito & Risposta & UD \\", r"\midrule", r"\endhead", *righe,
+                r"\bottomrule", r"\end{longtable}", "", r"\subsection*{Soluzioni svolte}"]
+        for q in quesiti:
+            out += ["", rf"\solquesito{{qs:{q['id']}}}(UD~{q['ud']}) ", soluzione_quesito(q)]
+    return "\n".join(out) + "\n"
+
 # --------------------------------------------------------------------------
 # Web: lo stesso contenuto in una pagina con MathJax. Le macro siunitx dei testi
 # sono ridefinite in MathJax; il resto del LaTeX in modo testo diventa HTML minimo.
@@ -326,19 +377,24 @@ def pagina_web(fonte: dict, titolo: str) -> str:
 def genera(cartella: Path, ud: str) -> tuple[list[str], list[str]]:
     """Legge `cartella/ud/esercizi.toml`, scrive i file generati e restituisce (errori, avvisi).
 
-    LaTeX in `ud/generati/` (eserciziario.tex e un lampo-<id>.tex per quesito lampo),
+    LaTeX in `ud/generati/` (eserciziario.tex e un lampo-<id>.tex per quesito lampo;
+    simulazioni.tex per la cartella `simulazioni`),
     pagina web in `build/web/<ud>.html`.
     """
     sorgente = cartella / ud / "esercizi.toml"
     nome = f"{ud}/esercizi.toml"
     try:
         fonte = tomllib.loads(sorgente.read_text(encoding="utf-8"))
-        errori, avvisi = controlla(fonte, nome)
+        simulazioni = ud == "simulazioni"
+        errori, avvisi = (controlla_simulazioni if simulazioni else controlla)(fonte, nome)
     except (tomllib.TOMLDecodeError, KeyError, SyntaxError, NameError, ValueError) as e:
         return [f"{nome}: {type(e).__name__}: {e}"], []
     generati = cartella / ud / "generati"
     generati.mkdir(exist_ok=True)
-    (generati / "eserciziario.tex").write_text(eserciziario_latex(fonte), encoding="utf-8")
+    if simulazioni:
+        (generati / "simulazioni.tex").write_text(simulazioni_latex(fonte), encoding="utf-8")
+    else:
+        (generati / "eserciziario.tex").write_text(eserciziario_latex(fonte), encoding="utf-8")
     for q in fonte.get("quesito", []):
         if q.get("lampo"):
             (generati / f"lampo-{q['id']}.tex").write_text(lampo_latex(q), encoding="utf-8")
