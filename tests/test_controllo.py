@@ -99,24 +99,26 @@ def test_etichetta_definita_due_volte_fallisce_e_indica_i_file(tmp_path: Path) -
 
 
 @pytest.mark.parametrize(
-    "segnaposto",
+    ("riga", "marcatore"),
     [
-        "\\todo{rivedere il conto}",
-        "% TODO: figura",
-        "% FIXME numero sbagliato",
-        "% XXX",
-        "La dose vale [[valore]] Gy.",
-        "La dose vale [DA VERIFICARE] Gy.",
+        ("\\todo{rivedere il conto}", "\\todo{"),
+        ("% TODO: figura", "TODO"),
+        ("% FIXME numero sbagliato", "FIXME"),
+        ("% XXX", "XXX"),
+        ("La dose vale [[valore]] Gy.", "[[valore]]"),
+        ("La dose vale [DA VERIFICARE] Gy.", "[DA VERIFICARE]"),
     ],
 )
-def test_segnaposto_rimasto_fallisce_e_indica_il_file(tmp_path: Path, segnaposto: str) -> None:
-    testo = "\\providecommand{\\todo}[1]{}\nTesto.\n" + segnaposto + "\n"
+def test_segnaposto_rimasto_fallisce_e_indica_file_e_marcatore(
+    tmp_path: Path, riga: str, marcatore: str
+) -> None:
+    testo = "\\providecommand{\\todo}[1]{}\nTesto.\n" + riga + "\n"
     rotto = progetto(tmp_path, ud1=testo)
 
     esito = controllo("ud1", "--cartella", str(rotto))
 
     assert esito.returncode != 0
-    assert "ud1/ud1.tex:3: segnaposto rimasto" in esito.stdout
+    assert f"ud1/ud1.tex:3: segnaposto rimasto: {marcatore}" in esito.stdout
 
 
 def test_pacchetto_assente_dalla_lista_fallisce_e_indica_file_e_pacchetto(tmp_path: Path) -> None:
@@ -178,3 +180,16 @@ def test_overfull_di_una_scatola_esplicita_e_un_avviso(tmp_path: Path) -> None:
 
     assert esito.returncode == 0, esito.stdout + esito.stderr
     assert "avviso: ud1/ud1.tex:3: overfull hbox di" in esito.stdout
+
+
+def test_pacchetti_sulla_stessa_riga_o_su_piu_righe_sono_controllati_tutti(tmp_path: Path) -> None:
+    preambolo = "\\usepackage{amsmath}\\usepackage{booktabs}\n\\usepackage{amsmath,\n  multirow}\n"
+    rotto = progetto(tmp_path / "libro", preambolo=preambolo, ud1="Testo.\n")
+    lista = tmp_path / "tex-packages.txt"
+    lista.write_text("latexmk\namsmath\n", encoding="utf-8")
+
+    esito = controllo("ud1", "--cartella", str(rotto), "--pacchetti", str(lista))
+
+    assert esito.returncode != 0
+    assert "ud1.tex:2: pacchetto assente da tex-packages.txt: booktabs" in esito.stdout
+    assert "ud1.tex:4: pacchetto assente da tex-packages.txt: multirow" in esito.stdout

@@ -52,23 +52,31 @@ SEGNAPOSTO = re.compile(
 )
 
 
-# I pacchetti caricati direttamente: \usepackage[opzioni]{a,b} o \RequirePackage{c}.
-CARICA = re.compile(r"^[^%]*?\\(?:usepackage|RequirePackage)\s*(?:\[[^\]]*\])?\s*\{([^}]*)\}")
+# I pacchetti caricati direttamente: \usepackage[opzioni]{a,b} o \RequirePackage{c},
+# anche più d'uno per riga e con l'elenco spezzato su più righe.
+CARICA = re.compile(r"\\(?:usepackage|RequirePackage)\s*(?:\[[^\]]*\])?\s*\{([^}]*)\}")
+
+# Un commento LaTeX: da un % non preceduto da \ fino a fine riga.
+COMMENTO = re.compile(r"(?<!\\)%.*")
 
 # Pacchetti TeX Live che TinyTeX installa sempre: non serve elencarli in tex-packages.txt.
 NUCLEO = {"base", "graphics", "l3kernel", "latexconfig", "babel", "amsfonts"}
 
 
-def righe(cartella: Path, *estensioni: str):
-    """Ogni riga dei sorgenti di `cartella`, come («file:riga», testo); salta build/."""
+def sorgenti(cartella: Path, *estensioni: str):
+    """Ogni sorgente di `cartella` con queste estensioni, come (percorso relativo, testo); salta build/."""
     file = [f for estensione in estensioni for f in cartella.rglob(f"*{estensione}")]
     for sorgente in sorted(file):
         relativo = sorgente.relative_to(cartella)
-        if "build" in relativo.parts:
-            continue
-        testo = sorgente.read_text(encoding="utf-8", errors="replace").splitlines()
-        for numero, riga in enumerate(testo, start=1):
-            yield f"{relativo.as_posix()}:{numero}", riga
+        if "build" not in relativo.parts:
+            yield relativo.as_posix(), sorgente.read_text(encoding="utf-8", errors="replace")
+
+
+def righe(cartella: Path, *estensioni: str):
+    """Ogni riga dei sorgenti di `cartella`, come («file:riga», testo)."""
+    for relativo, testo in sorgenti(cartella, *estensioni):
+        for numero, riga in enumerate(testo.splitlines(), start=1):
+            yield f"{relativo}:{numero}", riga
 
 
 def dove(cartella: Path, schema: re.Pattern[str]) -> list[str]:
@@ -76,25 +84,32 @@ def dove(cartella: Path, schema: re.Pattern[str]) -> list[str]:
     return [posizione for posizione, riga in righe(cartella, ".tex") if schema.search(riga)]
 
 
-def pacchetto_tex_live(nome: str) -> str:
+def pacchetto_tex_live(cartella: Path, nome: str) -> str:
     """Il pacchetto TeX Live che contiene `nome`.sty, dalla cartella in cui sta (tabularx → tools)."""
     percorso = subprocess.run(
-        ["kpsewhich", f"{nome}.sty"], capture_output=True, text=True
+        ["kpsewhich", f"{nome}.sty"], cwd=cartella, capture_output=True, text=True
     ).stdout.strip()
     trovato = re.search(r"/tex/[^/]+/([^/]+)/", percorso)
     return trovato.group(1) if trovato else nome
 
 
 def pacchetti_assenti(cartella: Path, lista: Path) -> list[str]:
+    """I pacchetti caricati nei sorgenti il cui pacchetto TeX Live non è in `lista`."""
     elencati = set(lista.read_text(encoding="utf-8").split()) | NUCLEO
     problemi = []
-    for posizione, riga in righe(cartella, ".tex", ".cls", ".sty"):
-        carica = CARICA.search(riga)
-        if not carica:
-            continue
-        for nome in filter(None, (n.strip() for n in carica.group(1).split(","))):
-            if pacchetto_tex_live(nome) not in elencati:
-                problemi.append(f"{posizione}: pacchetto assente da {lista.name}: {nome}")
+    for relativo, testo in sorgenti(cartella, ".tex", ".cls", ".sty"):
+        # Toglie i commenti lasciando le righe dove sono, così i numeri di riga restano giusti.
+        testo = COMMENTO.sub("", testo)
+        for carica in CARICA.finditer(testo):
+            inizio = carica.start(1)
+            for nome in carica.group(1).split(","):
+                if nome.strip() and pacchetto_tex_live(cartella, nome.strip()) not in elencati:
+                    posizione = inizio + len(nome) - len(nome.lstrip())
+                    riga = testo.count("\n", 0, posizione) + 1
+                    problemi.append(
+                        f"{relativo}:{riga}: pacchetto assente da {lista.name}: {nome.strip()}"
+                    )
+                inizio += len(nome) + 1
     return problemi
 
 
@@ -110,7 +125,12 @@ def etichette(cartella: Path, log: Path) -> list[str]:
 
 
 def segnaposti(cartella: Path) -> list[str]:
-    return [f"{posizione}: segnaposto rimasto" for posizione in dove(cartella, SEGNAPOSTO)]
+    """Le note per chi scrive rimaste nei sorgenti, con il marcatore trovato."""
+    return [
+        f"{posizione}: segnaposto rimasto: {trovato.group()}"
+        for posizione, riga in righe(cartella, ".tex")
+        for trovato in SEGNAPOSTO.finditer(riga)
+    ]
 
 
 # Un overfull hbox più largo di così si vede nel margine: va nel rapporto come avviso.
@@ -126,7 +146,7 @@ EVENTO = re.compile(
 )
 
 
-def overfull(log: Path) -> list[str]:
+def overfull(cartella: Path, log: Path) -> list[str]:
     """Gli overfull hbox oltre soglia, con il file in cui stanno.
 
     Il file è quello aperto in cima alla pila. Ma se il paragrafo finisce dopo la fine
@@ -137,8 +157,6 @@ def overfull(log: Path) -> list[str]:
     pila: list[str] = []
     appena_chiuso = None
     avvisi = []
-    cartella = log.parent.parent
-
     def contiene(file: str | None, riga: int) -> bool:
         sorgente = cartella / file if file else None
         if not sorgente or not sorgente.is_file():
@@ -195,14 +213,14 @@ def compila(cartella: Path, sorgente: str) -> Esito:
     log = cartella / "build" / Path(sorgente).with_suffix(".log")
     if esito.returncode != 0:
         return Esito(False, errori(log) or [f"latexmk è uscito con codice {esito.returncode}"])
-    return Esito(True, etichette(cartella, log), overfull(log))
+    return Esito(True, etichette(cartella, log), overfull(cartella, log))
 
 
-def rapporto(nome: str, esito: Esito) -> None:
-    print(f"{nome}: {'compila' if esito.compila else 'non compila'}")
-    for errore in esito.errori:
+def rapporto(intestazione: str, errori: list[str], avvisi: list[str]) -> None:
+    print(intestazione)
+    for errore in errori:
         print(f"  errore: {errore}")
-    for avviso in esito.avvisi:
+    for avviso in avvisi:
         print(f"  avviso: {avviso}")
 
 
@@ -229,17 +247,14 @@ def main() -> None:
     documenti = [(ud.upper(), f"{ud.lower()}.tex") for ud in argomenti.ud]
     documenti.append(("Libro", "libro.tex"))
 
-    sorgenti = Esito(
-        True,
-        segnaposti(argomenti.cartella)
-        + pacchetti_assenti(argomenti.cartella, argomenti.pacchetti),
+    problemi = segnaposti(argomenti.cartella) + pacchetti_assenti(
+        argomenti.cartella, argomenti.pacchetti
     )
-    print(f"Sorgenti: {'puliti' if not sorgenti.errori else 'da sistemare'}")
-    for errore in sorgenti.errori:
-        print(f"  errore: {errore}")
-    riuscito = not sorgenti.errori
+    rapporto(f"Sorgenti: {'da sistemare' if problemi else 'puliti'}", problemi, [])
+    riuscito = not problemi
     for nome, sorgente in documenti:
         esito = compila(argomenti.cartella, sorgente)
-        rapporto(nome, esito)
+        stato = "compila" if esito.compila else "non compila"
+        rapporto(f"{nome}: {stato}", esito.errori, esito.avvisi)
         riuscito = riuscito and not esito.errori
     sys.exit(0 if riuscito else 1)
