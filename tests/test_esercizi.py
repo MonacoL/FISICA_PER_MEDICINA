@@ -140,7 +140,7 @@ def simulazioni(tolti: int = 0) -> dict:
         uds = [u for u, n in QUOTE_UD.items() for _ in range(n)]
         for i, u in enumerate(uds):
             tipo = "completamento" if i % 3 == 2 and i < 30 else "multipla"
-            q = {"id": f"s{s}-{i}", "simulazione": s, "ud": u, "tipo": tipo, "testo": "", "soluzione": ""}
+            q = {"id": f"s{s}-{i}", "simulazione": s, "ud": u, "sezione": "I vettori", "tipo": tipo, "testo": "", "soluzione": ""}
             if tipo == "completamento":
                 q["risposta"] = "1"
             else:
@@ -162,3 +162,21 @@ def test_simulazione_con_un_quesito_in_meno_fallisce() -> None:
 
     errori, _ = controlla_simulazioni(simulazioni(tolti=1), "simulazioni")
     assert any("simulazione 1" in e for e in errori)
+
+
+def test_simulazione_con_una_sezione_che_la_dispensa_non_ha_fallisce() -> None:
+    from controllo.esercizi import QUOTE_UD, controlla_simulazioni
+
+    titoli = {u: {"I vettori"} for u in QUOTE_UD}
+    fonte = simulazioni()
+    assert controlla_simulazioni(fonte, "simulazioni", titoli) == ([], [])
+    fonte["quesito"][0]["sezione"] = "I vettori nello spazio"
+    errori, _ = controlla_simulazioni(fonte, "simulazioni", titoli)
+    assert any("I vettori nello spazio" in e for e in errori)
+
+
+def test_i_titoli_delle_dispense_comprendono_le_sottosezioni() -> None:
+    from controllo.esercizi import TITOLO
+
+    tex = "\\section{I vettori}\n\\subsection{Angoli maggiori di \\texorpdfstring{\\ang{90}}{90 gradi}}"
+    assert TITOLO.findall(tex) == ["I vettori", "Angoli maggiori di \\texorpdfstring{\\ang{90}}{90 gradi}"]

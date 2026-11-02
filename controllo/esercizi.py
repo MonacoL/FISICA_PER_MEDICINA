@@ -168,13 +168,36 @@ QUOTE_UD = {1: 1, 2: 8, 3: 6, 4: 2, 5: 5, 6: 6, 7: 3}
 FORMATO_PROVA = {"multipla": 21, "completamento": 10}
 
 
-def controlla_simulazioni(fonte: dict, nome: str) -> tuple[list[str], list[str]]:
-    """Come `controlla`, più il formato di ogni prova: 21 + 10 quesiti e la ripartizione per UD."""
+# Titolo di una \section o di una \subsection, anche con graffe annidate (\ang{90}).
+TITOLO = re.compile(r"\\(?:sub)?section\*?\{((?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*)\}")
+
+
+def titoli_dispense(cartella: Path) -> dict[int, set[str]]:
+    """I titoli delle sezioni e delle sottosezioni di ogni dispensa: quelli che `sezione` può nominare."""
+    titoli = {}
+    for u in QUOTE_UD:
+        dispensa = cartella / f"ud{u}" / "dispensa.tex"
+        titoli[u] = set(TITOLO.findall(dispensa.read_text(encoding="utf-8"))) if dispensa.exists() else set()
+    return titoli
+
+
+def controlla_simulazioni(
+    fonte: dict, nome: str, titoli: dict[int, set[str]] | None = None
+) -> tuple[list[str], list[str]]:
+    """Come `controlla`, più il formato di ogni prova: 21 + 10 quesiti e la ripartizione per UD.
+
+    Con `titoli` (da `titoli_dispense`) controlla anche che la `sezione` di ogni quesito
+    sia il titolo di una sezione o di una sottosezione della dispensa della sua UD.
+    """
     errori, avvisi = controlla(fonte, nome)
     quesiti = fonte.get("quesito", [])
     for q in quesiti:
         if q.get("simulazione") not in (1, 2, 3) or q.get("ud") not in QUOTE_UD:
             errori.append(f"{nome}: qs:{q['id']}: servono simulazione (1-3) e ud (1-7)")
+        elif "sezione" not in q:
+            errori.append(f"{nome}: qs:{q['id']}: manca la sezione da ripassare")
+        elif titoli is not None and q["sezione"] not in titoli.get(q["ud"], set()):
+            errori.append(f"{nome}: qs:{q['id']}: «{q['sezione']}» non è un titolo della dispensa della UD{q['ud']}")
     for s in (1, 2, 3):
         prova = [q for q in quesiti if q.get("simulazione") == s]
         tipi = {t: sum(q["tipo"] == t for q in prova) for t in FORMATO_PROVA}
@@ -293,19 +316,37 @@ def prova(fonte: dict, s: int) -> list[dict]:
     return sorted(quesiti, key=lambda q: (q["tipo"] != "multipla", q["ud"]))
 
 
+def righe_stimate(q: dict) -> int:
+    """Una stima per eccesso delle righe che il quesito occupa in pagina, opzioni comprese:
+    è lo spazio che \\needspace chiede, perché nessun quesito si spezzi fra due pagine."""
+
+    def caratteri(s: str) -> int:
+        # Nomi delle macro, graffe e dollari non si vedono in pagina.
+        return len(re.sub(r"\\[a-zA-Z]+|[{}$]", "", s))
+
+    righe = math.ceil((caratteri(riempi(q["testo"], q.get("dati", {}))) + 14) / 88)
+    if q["tipo"] == "multipla":
+        opzioni = [riempi(o["testo"], q.get("dati", {})) for o in q["opzione"]]
+        if max(len(o) for o in opzioni) < 25:
+            righe += 3
+        else:
+            righe += sum(math.ceil((caratteri(o) + 4) / 84) for o in opzioni) + 1
+    return righe + 2
+
+
 def simulazioni_latex(fonte: dict) -> str:
     out = ["% Generato da simulazioni/esercizi.toml: non modificare qui."]
     for s in (1, 2, 3):
         quesiti = prova(fonte, s)
         out += ["", rf"\simulazione{{{s}}}"]
         for q in quesiti:
-            out += ["", r"\needspace{8\baselineskip}", rf"\quesito\label{{qs:{q['id']}}}", testo_quesito(q)]
+            out += ["", rf"\needspace{{{righe_stimate(q)}\baselineskip}}", rf"\quesito\label{{qs:{q['id']}}}", testo_quesito(q)]
         righe = [rf"\ref{{qs:{q['id']}}} & {risposta_breve(q)} & {q['ud']} \\" for q in quesiti]
         out += ["", rf"\soluzionisimulazione{{{s}}}", "", r"\begin{longtable}{@{}lll@{}}",
                 r"\toprule", r"Quesito & Risposta & UD \\", r"\midrule", r"\endhead", *righe,
                 r"\bottomrule", r"\end{longtable}", "", r"\subsection*{Soluzioni svolte}"]
         for q in quesiti:
-            out += ["", rf"\solquesito{{qs:{q['id']}}}(UD~{q['ud']}) ", soluzione_quesito(q)]
+            out += ["", rf"\solquesito{{qs:{q['id']}}}(UD~{q['ud']}, «{q['sezione']}») ", soluzione_quesito(q)]
     return "\n".join(out) + "\n"
 
 # --------------------------------------------------------------------------
@@ -392,7 +433,10 @@ def genera(cartella: Path, ud: str) -> tuple[list[str], list[str]]:
     try:
         fonte = tomllib.loads(sorgente.read_text(encoding="utf-8"))
         simulazioni = ud == "simulazioni"
-        errori, avvisi = (controlla_simulazioni if simulazioni else controlla)(fonte, nome)
+        if simulazioni:
+            errori, avvisi = controlla_simulazioni(fonte, nome, titoli_dispense(cartella))
+        else:
+            errori, avvisi = controlla(fonte, nome)
     except (tomllib.TOMLDecodeError, KeyError, SyntaxError, NameError, ValueError) as e:
         return [f"{nome}: {type(e).__name__}: {e}"], []
     generati = cartella / ud / "generati"
