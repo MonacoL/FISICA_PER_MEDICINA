@@ -3,8 +3,6 @@
 # la pagina web build/web/ud1.html, e ricalcola ogni risultato.
 #
 # Il formato è descritto in testa a libro/ud7/esercizi.toml.
-# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
-# arrivano con il ticket #20.
 
 titolo = "Eserciziario UD1 · Introduzione ai metodi della fisica"
 
@@ -14,6 +12,1561 @@ cos30 = 0.87
 sin45 = 0.71
 sin60 = 0.87
 cos60 = 0.5
+cos45 = 0.71
+tan30 = 0.58
+rad2 = 1.41
+
+# ==================================================================== problemi
+
+[[problema]]
+id = "ud1-notazione-piastrine"
+livello = 1
+testo = '''Un esame del sangue trova {{n}} piastrine in ogni microlitro (\si{\micro\litre}) di sangue. Quante piastrine ci sono in un litro? Scrivi il risultato in notazione scientifica.'''
+dati.n = { valore = "2,5e5" }
+
+  [[problema.parte]]
+  calcolo = "n / 1e-6"
+  risultato = { valore = 2.5e11, cifre = 2 }
+  soluzione = '''Il prefisso micro vale $10^{-6}$: $\SI{1}{\micro\litre} = \SI{e-6}{\litre}$, quindi in un litro ci sono $1/10^{-6} = 10^{6}$ microlitri. Il numero di piastrine in un litro è
+\[
+  N = 2{,}5 \cdot 10^{5} \cdot 10^{6} = 2{,}5 \cdot 10^{5+6} = \num{2,5e11}
+\]
+La mantissa 2,5 è già fra 1 e 10: il risultato è in notazione scientifica.'''
+
+[[problema]]
+id = "ud1-notazione-capello"
+livello = 1
+testo = '''Lo spessore di un capello è circa {{d}}, il diametro di un atomo circa {{a}}. Quanti atomi, messi in fila, coprono lo spessore del capello?'''
+dati.d = { valore = 80, unita = "\\micro\\metre" }
+dati.a = { valore = "1e-10", unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "d * 1e-6 / a"
+  risultato = { valore = 8.0e5, cifre = 2 }
+  soluzione = '''Si porta lo spessore del capello in metri e in notazione scientifica:
+\[
+  \SI{80}{\micro\metre} = 80 \cdot 10^{-6}\,\si{\metre} = 8{,}0 \cdot 10^{1} \cdot 10^{-6}\,\si{\metre} = \SI{8,0e-5}{\metre}
+\]
+Il numero di atomi è il rapporto fra le due lunghezze, un numero puro:
+\[
+  N = \frac{\SI{8,0e-5}{\metre}}{\SI{e-10}{\metre}} = 8{,}0 \cdot 10^{-5-(-10)} = 8{,}0 \cdot 10^{-5+10} = \num{8,0e5}
+\]
+Quasi un milione di atomi.'''
+
+[[problema]]
+id = "ud1-unita-siringa"
+livello = 1
+testo = '''Una siringa contiene {{V}} di farmaco. Esprimi il volume in metri cubi.'''
+dati.V = { valore = "2,5", unita = "\\milli\\litre" }
+
+  [[problema.parte]]
+  calcolo = "V * 1e-6"
+  risultato = { valore = 2.5e-6, unita = "\\metre\\cubed", cifre = 2 }
+  soluzione = '''Un millilitro è un centimetro cubo, e $\SI{1}{\centi\metre} = \SI{e-2}{\metre}$. Il fattore di conversione va elevato al cubo:
+\[
+  \SI{1}{\milli\litre} = \SI{1}{\centi\metre\cubed} = (\SI{e-2}{\metre})^{3} = 10^{-2 \cdot 3}\,\si{\metre\cubed} = \SI{e-6}{\metre\cubed}
+\]
+Quindi $V = \SI{2,5}{\milli\litre} = \SI{2,5e-6}{\metre\cubed}$.'''
+
+[[problema]]
+id = "ud1-unita-neonato"
+livello = 1
+testo = '''Un neonato ha {{g}} di vita. Quanti secondi sono? Scrivi il risultato in notazione scientifica, arrotondando la mantissa a una cifra decimale.'''
+dati.g = { valore = 30, unita = "giorni" }
+
+  [[problema.parte]]
+  calcolo = "g * 24 * 3600"
+  risultato = { valore = 2.6e6, unita = "s", cifre = 2 }
+  soluzione = '''Un giorno ha 24 ore e un'ora ha \SI{3600}{\second}. Le ore in 30 giorni sono $30 \cdot 24 = 720$, quindi
+\[
+  t = 720 \cdot \SI{3600}{\second} = \SI{2592000}{\second} = \SI{2,592e6}{\second} \approx \SI{2,6e6}{\second}
+\]
+Il conto si fa a mano anche così: $720 \cdot 3600 = 72 \cdot 36 \cdot 10^{3} = 2592 \cdot 10^{3}$.'''
+
+[[problema]]
+id = "ud1-unita-superficie"
+livello = 1
+testo = '''La superficie corporea di un adulto è circa {{S}}. Quanto vale in centimetri quadrati?'''
+dati.S = { valore = "1,8", unita = "\\metre\\squared" }
+
+  [[problema.parte]]
+  calcolo = "S * 1e4"
+  risultato = { valore = 1.8e4, unita = "\\centi\\metre\\squared", cifre = 2 }
+  soluzione = '''Un metro è $\SI{e2}{\centi\metre}$, e per le aree il fattore va al quadrato:
+\[
+  \SI{1}{\metre\squared} = (\SI{e2}{\centi\metre})^{2} = \SI{e4}{\centi\metre\squared}
+\]
+Quindi $S = 1{,}8 \cdot \SI{e4}{\centi\metre\squared} = \SI{18000}{\centi\metre\squared}$. Chi moltiplica solo per 100 trova \SI{180}{\centi\metre\squared}, la superficie di una mano.'''
+
+[[problema]]
+id = "ud1-unita-flebo"
+livello = 2
+testo = '''Una flebo da {{V}} di soluzione fisiologica deve scendere in {{t}}.'''
+dati.V = { valore = 480, unita = "\\milli\\litre" }
+dati.t = { valore = "4,0", unita = "h" }
+
+  [[problema.parte]]
+  domanda = '''Quanti millilitri al minuto devono scendere?'''
+  calcolo = "V / (t * 60)"
+  risultato = { valore = 2.0, unita = "\\milli\\litre\\per\\minute", cifre = 2 }
+  soluzione = '''Il tempo in minuti è $\SI{4,0}{\hour} = 4{,}0 \cdot \SI{60}{\minute} = \SI{240}{\minute}$. La portata è il volume diviso il tempo:
+\[
+  Q = \frac{\SI{480}{\milli\litre}}{\SI{240}{\minute}} = \SI{2,0}{\milli\litre\per\minute}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la stessa portata in unità del SI, cioè in metri cubi al secondo?'''
+  calcolo = "V * 1e-6 / (t * 3600)"
+  risultato = { valore = 3.3e-8, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
+  soluzione = '''Si parte dal risultato del punto (a) e si sostituiscono le unità: $\SI{1}{\milli\litre} = \SI{1}{\centi\metre\cubed} = \SI{e-6}{\metre\cubed}$ e $\SI{1}{\minute} = \SI{60}{\second}$. Quindi
+\[
+  Q = \frac{2{,}0 \cdot \SI{e-6}{\metre\cubed}}{\SI{60}{\second}} = \frac{2{,}0}{60} \cdot 10^{-6}\,\si{\metre\cubed\per\second} = 3{,}3 \cdot 10^{-2} \cdot 10^{-6}\,\si{\metre\cubed\per\second} = \SI{3,3e-8}{\metre\cubed\per\second}
+\]
+dove $2{,}0/60 = 1/30 \approx 0{,}033 = 3{,}3 \cdot 10^{-2}$.'''
+
+[[problema]]
+id = "ud1-unita-osso"
+livello = 2
+testo = '''Un campione di osso compatto ha la forma di un cubo di lato {{l}} e ha massa {{m}}.'''
+dati.l = { valore = "2,0", unita = "cm" }
+dati.m = { valore = "15,2", unita = "\\gram" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il volume del campione, in centimetri cubi?'''
+  calcolo = "l**3"
+  risultato = { valore = 8.0, unita = "\\centi\\metre\\cubed", cifre = 2 }
+  soluzione = '''Il volume di un cubo è il lato al cubo:
+\[
+  V = (\SI{2,0}{\centi\metre})^{3} = 2{,}0 \cdot 2{,}0 \cdot 2{,}0\,\si{\centi\metre\cubed} = \SI{8,0}{\centi\metre\cubed}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la densità dell'osso in unità del SI?'''
+  calcolo = "m / l**3 * 1e3"
+  risultato = { valore = 1900, unita = "\\kilo\\gram\\per\\metre\\cubed", cifre = 2 }
+  soluzione = '''La densità è la massa divisa per il volume del punto (a):
+\[
+  \rho = \frac{m}{V} = \frac{\SI{15,2}{\gram}}{\SI{8,0}{\centi\metre\cubed}} = \SI{1,9}{\gram\per\centi\metre\cubed}
+\]
+Per passare al SI si sostituiscono $\SI{1}{\gram} = \SI{e-3}{\kilo\gram}$ e $\SI{1}{\centi\metre\cubed} = (\SI{e-2}{\metre})^{3} = \SI{e-6}{\metre\cubed}$:
+\[
+  \rho = 1{,}9 \cdot \frac{\SI{e-3}{\kilo\gram}}{\SI{e-6}{\metre\cubed}} = 1{,}9 \cdot 10^{-3-(-6)}\,\si{\kilo\gram\per\metre\cubed} = \SI{1,9e3}{\kilo\gram\per\metre\cubed} = \SI{1900}{\kilo\gram\per\metre\cubed}
+\]
+L'osso compatto è quasi due volte più denso dell'acqua, che ha \SI{1000}{\kilo\gram\per\metre\cubed}.'''
+
+[[problema]]
+id = "ud1-ordine-cellule"
+livello = 2
+testo = '''Il corpo di un adulto ha un volume di circa {{V}}. Una cellula tipica si può pensare come un cubo di lato {{l}}.'''
+dati.V = { valore = 70, unita = "\\litre" }
+dati.l = { valore = 20, unita = "\\micro\\metre" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il volume di una cellula, in metri cubi?'''
+  calcolo = "(l * 1e-6)**3"
+  risultato = { valore = 8e-15, unita = "\\metre\\cubed", cifre = 1 }
+  soluzione = '''Il lato in metri è $\SI{20}{\micro\metre} = 20 \cdot \SI{e-6}{\metre} = \SI{2e-5}{\metre}$. Il volume del cubo è
+\[
+  V_c = (2 \cdot 10^{-5}\,\si{\metre})^{3} = 2^{3} \cdot 10^{-5 \cdot 3}\,\si{\metre\cubed} = \SI{8e-15}{\metre\cubed}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Stima il numero di cellule del corpo. Qual è il suo ordine di grandezza?'''
+  calcolo = "V * 1e-3 / (l * 1e-6)**3"
+  risultato = { valore = 9e12, cifre = 1 }
+  rapido = '''\num{9e12}, ordine di grandezza $10^{13}$'''
+  soluzione = '''Il volume del corpo in metri cubi è $\SI{70}{\litre} = 70 \cdot \SI{e-3}{\metre\cubed} = \SI{7e-2}{\metre\cubed}$, perché un litro è un millesimo di metro cubo. Il numero di cellule è il volume del corpo diviso per il volume di una cellula del punto (a):
+\[
+  N = \frac{\SI{7e-2}{\metre\cubed}}{\SI{8e-15}{\metre\cubed}} = \frac{7}{8} \cdot 10^{-2-(-15)} = 0{,}875 \cdot 10^{13} \approx \num{9e12}
+\]
+In notazione scientifica $N \approx 9 \cdot 10^{12}$: la mantissa 9 è maggiore di 3, quindi l'ordine di grandezza è $10^{13}$, una decina di migliaia di miliardi di cellule.'''
+
+[[problema]]
+id = "ud1-notazione-glucosio"
+livello = 2
+testo = '''In una provetta ci sono {{m1}} di glucosio sciolti in acqua. Se ne aggiungono altri {{m2}}, e alla fine la soluzione ha un volume di {{V}}. La concentrazione è la massa di sostanza disciolta divisa per il volume della soluzione.'''
+dati.m1 = { valore = "2,0e-3", unita = "\\gram" }
+dati.m2 = { valore = "5,0e-4", unita = "\\gram" }
+dati.V = { valore = "5,0", unita = "\\milli\\litre" }
+
+  [[problema.parte]]
+  domanda = '''Quanto glucosio c'è in tutto nella provetta? Scrivi il risultato in notazione scientifica.'''
+  calcolo = "m1 + m2"
+  risultato = { valore = 2.5e-3, unita = "\\gram", cifre = 2 }
+  soluzione = '''Per sommare due numeri in notazione scientifica bisogna prima scriverli con lo stesso esponente: $5{,}0 \cdot 10^{-4} = 0{,}50 \cdot 10^{-3}$. Poi si sommano le mantisse:
+\[
+  m = 2{,}0 \cdot 10^{-3}\,\si{\gram} + 0{,}50 \cdot 10^{-3}\,\si{\gram} = (2{,}0 + 0{,}50) \cdot 10^{-3}\,\si{\gram} = \SI{2,5e-3}{\gram}
+\]
+Gli esponenti non si sommano: $\num{2,0e-3} + \num{5,0e-4}$ non è $\num{7,0e-7}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la concentrazione del glucosio, in grammi al litro?'''
+  calcolo = "(m1 + m2) / (V * 1e-3)"
+  risultato = { valore = 0.50, unita = "\\gram\\per\\litre", cifre = 2 }
+  soluzione = '''Il volume in litri è $\SI{5,0}{\milli\litre} = \SI{5,0e-3}{\litre}$. La concentrazione è la massa del punto (a) divisa per il volume:
+\[
+  c = \frac{\SI{2,5e-3}{\gram}}{\SI{5,0e-3}{\litre}} = \frac{2{,}5}{5{,}0} \cdot 10^{-3-(-3)}\,\si{\gram\per\litre} = 0{,}50 \cdot 10^{0}\,\si{\gram\per\litre} = \SI{0,50}{\gram\per\litre}
+\]'''
+
+[[problema]]
+id = "ud1-grandezze-sacche"
+livello = 2
+testo = '''Due sacche contengono la stessa sostanza sciolta in acqua. La sacca A ha un volume di {{VA}} e una concentrazione di {{cA}}; la sacca B ha un volume di {{VB}} e una concentrazione di {{cB}}. La concentrazione è la massa di sostanza disciolta divisa per il volume della soluzione. Si versa il contenuto delle due sacche in un unico recipiente.'''
+dati.VA = { valore = 300, unita = "\\milli\\litre" }
+dati.cA = { valore = "2,0", unita = "\\gram\\per\\litre" }
+dati.VB = { valore = 200, unita = "\\milli\\litre" }
+dati.cB = { valore = "4,5", unita = "\\gram\\per\\litre" }
+
+  [[problema.parte]]
+  domanda = '''Quanta sostanza c'è nel recipiente?'''
+  calcolo = "VA * 1e-3 * cA + VB * 1e-3 * cB"
+  risultato = { valore = 1.5, unita = "\\gram", cifre = 2 }
+  soluzione = '''Dalla definizione di concentrazione, $c = m/V$, la massa in ogni sacca è $m = cV$, con il volume in litri:
+\[
+  m_A = \SI{2,0}{\gram\per\litre} \cdot \SI{0,300}{\litre} = \SI{0,60}{\gram}
+  \qquad
+  m_B = \SI{4,5}{\gram\per\litre} \cdot \SI{0,200}{\litre} = \SI{0,90}{\gram}
+\]
+La massa è una grandezza estensiva: mettendo insieme le due sacche si somma, $m = \SI{0,60}{\gram} + \SI{0,90}{\gram} = \SI{1,5}{\gram}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la concentrazione nel recipiente?'''
+  calcolo = "(VA * cA + VB * cB) / (VA + VB)"
+  risultato = { valore = 3.0, unita = "\\gram\\per\\litre", cifre = 2 }
+  soluzione = '''Anche il volume è estensivo e si somma: $V = \SI{300}{\milli\litre} + \SI{200}{\milli\litre} = \SI{500}{\milli\litre} = \SI{0,500}{\litre}$. Con la massa del punto (a):
+\[
+  c = \frac{m}{V} = \frac{\SI{1,5}{\gram}}{\SI{0,500}{\litre}} = \SI{3,0}{\gram\per\litre}
+\]
+La concentrazione è intensiva e non si somma: non vale $2{,}0 + 4{,}5 = \SI{6,5}{\gram\per\litre}$. Non è nemmeno la media semplice, $(2{,}0 + 4{,}5)/2 = \SI{3,25}{\gram\per\litre}$, perché la sacca A, più grande, pesa di più. Il risultato deve stare fra le due concentrazioni di partenza, e infatti \SI{3,0}{\gram\per\litre} è fra \SI{2,0}{\gram\per\litre} e \SI{4,5}{\gram\per\litre}.'''
+
+[[problema]]
+id = "ud1-unita-pediatrico"
+livello = 3
+testo = '''A un bambino di {{m}} il pediatra prescrive amoxicillina alla dose di {{d}} al giorno, divisa in due somministrazioni uguali. La sospensione orale contiene {{C}} di principio attivo ogni \SI{5}{\milli\litre}, e il flacone ne contiene {{V}}.'''
+dati.m = { valore = 16, unita = "\\kilo\\gram" }
+dati.d = { valore = 50, unita = "\\milli\\gram\\per\\kilo\\gram" }
+dati.C = { valore = 250, unita = "\\milli\\gram" }
+dati.V = { valore = 100, unita = "\\milli\\litre" }
+
+  [[problema.parte]]
+  domanda = '''Quanti milligrammi di amoxicillina deve prendere il bambino in un giorno?'''
+  calcolo = "d * m"
+  risultato = { valore = 800, unita = "\\milli\\gram", cifre = 2 }
+  soluzione = '''La dose giornaliera è la dose per chilogrammo moltiplicata per la massa del bambino; i chilogrammi si semplificano:
+\[
+  D = \SI{50}{\milli\gram\per\kilo\gram} \cdot \SI{16}{\kilo\gram} = \SI{800}{\milli\gram}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanti millilitri di sospensione deve prendere a ogni somministrazione?'''
+  calcolo = "d * m / 2 / (C / 5)"
+  risultato = { valore = 8.0, unita = "\\milli\\litre", cifre = 2 }
+  soluzione = '''Ogni somministrazione è metà della dose del punto (a): $\SI{800}{\milli\gram}/2 = \SI{400}{\milli\gram}$. La concentrazione della sospensione è $\SI{250}{\milli\gram}/\SI{5}{\milli\litre} = \SI{50}{\milli\gram\per\milli\litre}$. Il volume è
+\[
+  V_1 = \frac{\SI{400}{\milli\gram}}{\SI{50}{\milli\gram\per\milli\litre}} = \SI{8,0}{\milli\litre}
+\]
+Dividendo milligrammi per milligrammi al millilitro restano millilitri, come deve essere.'''
+
+  [[problema.parte]]
+  domanda = '''Per quanti giorni basta il flacone?'''
+  calcolo = "V / (2 * d * m / 2 / (C / 5))"
+  risultato = { valore = 6.25, unita = "giorni", cifre = 3 }
+  soluzione = '''In un giorno il bambino prende due volte il volume del punto (b), $2 \cdot \SI{8,0}{\milli\litre} = \SI{16}{\milli\litre}$. Il flacone basta per
+\[
+  \frac{\SI{100}{\milli\litre}}{\SI{16}{\milli\litre}/\text{giorno}} = 6{,}25\ \text{giorni}
+\]
+In pratica copre 6 giorni pieni: dopo 12 somministrazioni ne sono usciti $12 \cdot 8{,}0 = \SI{96}{\milli\litre}$, e i \SI{4}{\milli\litre} che restano non bastano per la tredicesima. Se la terapia dura più di 6 giorni serve un secondo flacone.'''
+
+[[problema]]
+id = "ud1-ordine-respiro"
+livello = 3
+testo = '''A riposo un adulto fa circa {{f}} atti respiratori al minuto, e a ogni atto inspira {{V}} d'aria.'''
+dati.f = { valore = 12 }
+dati.V = { valore = "0,50", unita = "\\litre" }
+dati.rho = { valore = "1,2", unita = "\\kilo\\gram\\per\\metre\\cubed" }
+
+  [[problema.parte]]
+  domanda = '''Quanti litri d'aria inspira in un minuto?'''
+  calcolo = "f * V"
+  risultato = { valore = 6.0, unita = "\\litre", cifre = 2 }
+  soluzione = '''Si moltiplica il volume di un atto per il numero di atti in un minuto:
+\[
+  V_{\text{min}} = 12 \cdot \SI{0,50}{\litre} = \SI{6,0}{\litre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanti metri cubi d'aria inspira in un giorno?'''
+  calcolo = "f * V * 60 * 24 * 1e-3"
+  risultato = { valore = 8.6, unita = "\\metre\\cubed", cifre = 2 }
+  soluzione = '''Un giorno ha $24 \cdot 60 = \num{1440}$ minuti. Con il risultato del punto (a):
+\[
+  V_{\text{giorno}} = \SI{6,0}{\litre} \cdot 1440 = \SI{8640}{\litre}
+\]
+Un metro cubo contiene \num{1000} litri, quindi $\SI{8640}{\litre} = 8640 \cdot \SI{e-3}{\metre\cubed} = \SI{8,64}{\metre\cubed} \approx \SI{8,6}{\metre\cubed}$.'''
+
+  [[problema.parte]]
+  domanda = '''Qual è l'ordine di grandezza di questo volume, in metri cubi? Controlla il risultato con una stima fatta a mente.'''
+  calcolo = "10**round(math.log10(f * V * 60 * 24 * 1e-3))"
+  risultato = { valore = 10, unita = "\\metre\\cubed", cifre = 1 }
+  soluzione = '''In notazione scientifica il volume del punto (b) è $\SI{8,6e0}{\metre\cubed}$: la mantissa 8,6 è maggiore di 3, quindi l'ordine di grandezza è $10^{0+1} = 10^{1}$, cioè \SI{10}{\metre\cubed}.
+
+La stima a mente: si arrotonda $1440 \approx 1{,}5 \cdot 10^{3}$ e si ottiene $\SI{6}{\litre} \cdot 1{,}5 \cdot 10^{3} = 9 \cdot 10^{3}\,\si{\litre} = \SI{9}{\metre\cubed}$, con lo stesso ordine di grandezza. È più o meno il volume d'aria di uno sgabuzzino di $\SI{2}{\metre} \times \SI{2}{\metre} \times \SI{2,5}{\metre}$.'''
+
+  [[problema.parte]]
+  domanda = '''La densità dell'aria è circa {{rho}}. Quanti chilogrammi d'aria inspira in un giorno?'''
+  calcolo = "f * V * 60 * 24 * 1e-3 * rho"
+  risultato = { valore = 10, unita = "\\kilo\\gram", cifre = 2 }
+  soluzione = '''La densità è la massa divisa per il volume, $\rho = m/V$, quindi la massa è $m = \rho V$. Con il volume del punto (b):
+\[
+  m = \SI{1,2}{\kilo\gram\per\metre\cubed} \cdot \SI{8,6}{\metre\cubed} \approx \SI{10,3}{\kilo\gram} \approx \SI{10}{\kilo\gram}
+\]
+La densità è intensiva e non dipende da quanta aria si considera; la massa, estensiva, cresce con il volume. Ogni giorno si inspirano circa \SI{10}{\kilo\gram} d'aria: più della massa del cibo e dell'acqua di una giornata, che è di qualche chilogrammo.'''
+
+[[problema]]
+id = "ud1-unita-gocce"
+livello = 3
+testo = '''Bisogna infondere {{V}} di soluzione in {{t}}, con un deflussore in cui {{g}} gocce fanno \SI{1}{\milli\litre}.'''
+dati.V = { valore = "1,0", unita = "\\litre" }
+dati.t = { valore = "8,0", unita = "h" }
+dati.g = { valore = 20 }
+
+  [[problema.parte]]
+  domanda = '''Quanti millilitri all'ora devono scendere?'''
+  calcolo = "V * 1e3 / t"
+  risultato = { valore = 125, unita = "\\milli\\litre\\per\\hour", cifre = 3 }
+  soluzione = '''Il volume in millilitri è $\SI{1,0}{\litre} = \SI{1000}{\milli\litre}$. La portata è
+\[
+  Q = \frac{\SI{1000}{\milli\litre}}{\SI{8,0}{\hour}} = \SI{125}{\milli\litre\per\hour}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quante gocce al minuto deve regolare l'infermiere?'''
+  calcolo = "V * 1e3 / t / 60 * g"
+  risultato = { valore = 42, cifre = 2 }
+  soluzione = '''Ogni millilitro sono 20 gocce, quindi in un'ora scendono $125 \cdot 20 = 2500$ gocce. Un'ora ha 60 minuti:
+\[
+  \frac{2500\ \text{gocce}}{\SI{60}{\minute}} \approx 41{,}7\ \text{gocce al minuto} \approx 42\ \text{gocce al minuto}
+\]
+Poco meno di una goccia al secondo: un ritmo che si controlla a occhio.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il volume di una goccia, in metri cubi?'''
+  calcolo = "1 / g * 1e-6"
+  risultato = { valore = 5e-8, unita = "\\metre\\cubed", cifre = 1 }
+  soluzione = '''Una goccia è un ventesimo di millilitro: $\SI{1}{\milli\litre}/20 = \SI{0,05}{\milli\litre} = \SI{5e-2}{\milli\litre}$. Un millilitro è un centimetro cubo, cioè $(\SI{e-2}{\metre})^{3} = \SI{e-6}{\metre\cubed}$, quindi
+\[
+  V_g = 5 \cdot 10^{-2} \cdot \SI{e-6}{\metre\cubed} = 5 \cdot 10^{-2+(-6)}\,\si{\metre\cubed} = \SI{5e-8}{\metre\cubed}
+\]'''
+
+[[problema]]
+id = "ud1-grandezze-spostamento"
+livello = 3
+testo = '''In un reparto un paziente cammina per {{a}} lungo un corridoio diretto verso est, poi gira a sinistra e cammina per {{b}} verso nord, in un corridoio perpendicolare al primo.'''
+dati.a = { valore = 30, unita = "m" }
+dati.b = { valore = 40, unita = "m" }
+dati.t = { valore = 100, unita = "s" }
+
+  [[problema.parte]]
+  domanda = '''Quanta strada ha percorso?'''
+  calcolo = "a + b"
+  risultato = { valore = 70, unita = "m", cifre = 2 }
+  soluzione = '''La strada percorsa, o distanza percorsa, è una grandezza scalare: conta solo quanti metri il paziente ha fatto, non in che direzione. Si sommano i due tratti:
+\[
+  d = \SI{30}{\metre} + \SI{40}{\metre} = \SI{70}{\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il modulo del suo spostamento, cioè la distanza in linea d'aria fra il punto di partenza e quello di arrivo?'''
+  calcolo = "math.sqrt(a**2 + b**2)"
+  risultato = { valore = 50, unita = "m", cifre = 2 }
+  soluzione = '''Lo spostamento è una grandezza vettoriale: va dal punto di partenza a quello di arrivo, con una direzione e un verso. I due tratti sono perpendicolari, quindi sono i cateti di un triangolo rettangolo, e lo spostamento ne è l'ipotenusa. Per il teorema di Pitagora:
+\[
+  s = \sqrt{(\SI{30}{\metre})^{2} + (\SI{40}{\metre})^{2}} = \sqrt{900 + 1600}\ \si{\metre} = \sqrt{2500}\ \si{\metre} = \SI{50}{\metre}
+\]
+Lo spostamento è minore della strada percorsa del punto (a): i vettori non si sommano come i numeri.'''
+
+  [[problema.parte]]
+  domanda = '''Il paziente torna alla stanza di partenza per la stessa strada. Quanto vale la distanza percorsa in tutto? E il suo spostamento complessivo?'''
+  calcolo = "2 * (a + b)"
+  risultato = { valore = 140, unita = "m", cifre = 2 }
+  rapido = '''\SI{140}{\metre}, spostamento nullo'''
+  soluzione = '''All'andata ha percorso \SI{70}{\metre}, al ritorno altri \SI{70}{\metre}. La distanza percorsa, scalare, si somma:
+\[
+  d_{\text{tot}} = \SI{70}{\metre} + \SI{70}{\metre} = \SI{140}{\metre}
+\]
+Lo spostamento complessivo invece è nullo: il paziente è tornato nel punto di partenza. Lo spostamento del ritorno ha lo stesso modulo di quello dell'andata, \SI{50}{\metre}, ma verso opposto, e i due si annullano.'''
+
+  [[problema.parte]]
+  domanda = '''Il percorso di andata dura {{t}}. Quanto vale, in chilometri all'ora, la strada percorsa all'andata divisa per il tempo? E il modulo dello spostamento diviso per il tempo?'''
+  calcolo = "(a + b) / t * 3.6"
+  risultato = { valore = 2.5, unita = "\\kilo\\metre\\per\\hour", cifre = 2 }
+  rapido = '''\SI{2,5}{\kilo\metre\per\hour}, \SI{1,8}{\kilo\metre\per\hour}'''
+  soluzione = '''Con la strada del punto (a) e lo spostamento del punto (b), divisi per il tempo:
+\[
+  \frac{\SI{70}{\metre}}{\SI{100}{\second}} = \SI{0,70}{\metre\per\second}
+  \qquad\qquad
+  \frac{\SI{50}{\metre}}{\SI{100}{\second}} = \SI{0,50}{\metre\per\second}
+\]
+Da \si{\metre\per\second} a \si{\kilo\metre\per\hour} si moltiplica per 3,6:
+\[
+  0{,}70 \cdot 3{,}6 = \SI{2,52}{\kilo\metre\per\hour} \approx \SI{2,5}{\kilo\metre\per\hour}
+  \qquad\qquad
+  0{,}50 \cdot 3{,}6 = \SI{1,8}{\kilo\metre\per\hour}
+\]
+I due rapporti sono diversi per lo stesso motivo per cui sono diversi strada e spostamento: il primo conta tutti i metri percorsi, il secondo solo la distanza in linea d'aria fra partenza e arrivo. Sul percorso di andata e ritorno il secondo sarebbe zero.'''
+
+[[problema]]
+id = "ud1-ordine-emoglobina"
+livello = 3
+testo = '''Un adulto ha circa {{V}} di sangue. Ogni microlitro di sangue contiene circa {{n}} globuli rossi, e ogni globulo rosso contiene circa {{h}} molecole di emoglobina.'''
+dati.V = { valore = "5,0", unita = "\\litre" }
+dati.n = { valore = "5,0e6" }
+dati.h = { valore = "2,8e8" }
+dati.mH = { valore = "1,1e-22", unita = "kg" }
+
+  [[problema.parte]]
+  domanda = '''Quanti globuli rossi ci sono in tutto il sangue?'''
+  calcolo = "V * 1e6 * n"
+  risultato = { valore = 2.5e13, cifre = 2 }
+  soluzione = '''Un microlitro è \SI{e-6}{\litre}, quindi un litro contiene $10^{6}$ microlitri e il volume del sangue è $V = 5{,}0 \cdot 10^{6}\,\si{\micro\litre}$. Il numero di globuli rossi è
+\[
+  N = 5{,}0 \cdot 10^{6} \cdot 5{,}0 \cdot 10^{6} = 25 \cdot 10^{6+6} = 25 \cdot 10^{12} = 2{,}5 \cdot 10^{1} \cdot 10^{12} = \num{2,5e13}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quante molecole di emoglobina ci sono in tutto il sangue?'''
+  calcolo = "V * 1e6 * n * h"
+  risultato = { valore = 7.0e21, cifre = 2 }
+  soluzione = '''Si moltiplica il numero di globuli rossi del punto (a) per le molecole in ognuno:
+\[
+  N_{\text{Hb}} = 2{,}5 \cdot 10^{13} \cdot 2{,}8 \cdot 10^{8} = (2{,}5 \cdot 2{,}8) \cdot 10^{13+8} = \num{7,0e21}
+\]
+dove $2{,}5 \cdot 2{,}8 = 7{,}0$.'''
+
+  [[problema.parte]]
+  domanda = '''Qual è l'ordine di grandezza di questo numero?'''
+  calcolo = "10**round(math.log10(V * 1e6 * n * h))"
+  risultato = { valore = 1e22, cifre = 1 }
+  soluzione = '''Il numero del punto (b) è $7{,}0 \cdot 10^{21}$. La mantissa 7,0 è maggiore di 3, quindi l'ordine di grandezza è $10^{21+1} = 10^{22}$. Chi guarda solo l'esponente e risponde $10^{21}$ sbaglia di un fattore 10: $7 \cdot 10^{21}$ è più vicino a $10^{22}$ che a $10^{21}$.'''
+
+  [[problema.parte]]
+  domanda = '''Una molecola di emoglobina ha una massa di circa {{mH}}. Quanto vale la concentrazione di emoglobina nel sangue, in grammi al litro?'''
+  calcolo = "V * 1e6 * n * h * mH * 1e3 / V"
+  risultato = { valore = 150, unita = "\\gram\\per\\litre", cifre = 2 }
+  soluzione = '''La massa di tutta l'emoglobina è il numero di molecole del punto (b) per la massa di una molecola:
+\[
+  m = 7{,}0 \cdot 10^{21} \cdot \SI{1,1e-22}{\kilo\gram} = (7{,}0 \cdot 1{,}1) \cdot 10^{21-22}\,\si{\kilo\gram} = 7{,}7 \cdot 10^{-1}\,\si{\kilo\gram} = \SI{770}{\gram}
+\]
+La concentrazione è la massa divisa per il volume del sangue:
+\[
+  c = \frac{\SI{770}{\gram}}{\SI{5,0}{\litre}} = \SI{154}{\gram\per\litre} \approx \SI{150}{\gram\per\litre}
+\]
+È il valore che si legge sulle analisi del sangue, dove si scrive \SI{15}{\gram\per\deci\litre}. Il volume del sangue alla fine si semplifica: la concentrazione è intensiva, e si poteva trovare anche partendo da un solo microlitro.'''
+
+[[problema]]
+id = "ud1-trig-schienale"
+livello = 1
+testo = '''Lo schienale di un letto d'ospedale è lungo {{L}}. Per mettere il paziente in posizione semiseduta lo si alza fino a formare un angolo di \ang{45} con il materasso. A che altezza sopra il piano del materasso arriva il bordo superiore dello schienale?'''
+dati.L = { valore = "0,80", unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "L * sin45"
+  risultato = { valore = 0.57, unita = "m", cifre = 2 }
+  soluzione = '''Lo schienale è l'ipotenusa di un triangolo rettangolo. L'altezza è il cateto opposto all'angolo di \ang{45}, quindi si usa il seno:
+\[
+  h = L \sin\ang{45} \approx \SI{0,80}{\metre} \cdot 0{,}71 = \SI{0,568}{\metre} \approx \SI{0,57}{\metre}
+\]
+A \ang{45} seno e coseno sono uguali: anche la distanza orizzontale fra la cerniera e il bordo dello schienale è circa \SI{0,57}{\metre}.'''
+
+[[problema]]
+id = "ud1-trig-trendelenburg"
+livello = 1
+testo = '''Il piano di un lettino è lungo {{L}}. Per mettere il paziente in posizione di Trendelenburg (testa più in basso dei piedi) si solleva il lato dei piedi finché si trova {{h}} più in alto del lato della testa. Che angolo forma il piano del lettino con l'orizzontale?'''
+dati.L = { valore = "1,80", unita = "m" }
+dati.h = { valore = "0,90", unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "math.degrees(math.asin(h / L))"
+  risultato = { valore = 30, unita = "\\degree", cifre = 2 }
+  soluzione = '''Il piano del lettino è l'ipotenusa, il dislivello è il cateto opposto all'angolo cercato. Il loro rapporto è il seno dell'angolo:
+\[
+  \sin\alpha = \frac{h}{L} = \frac{\SI{0,90}{\metre}}{\SI{1,80}{\metre}} = \frac{1}{2} = 0{,}5
+\]
+Dalla tabella dei valori notevoli, il seno vale $1/2$ per $\alpha = \ang{30}$.'''
+
+[[problema]]
+id = "ud1-vett-carrozzina"
+livello = 1
+testo = '''Un infermiere spinge una carrozzina sulle maniglie con una forza di modulo {{F}}, diretta in avanti e verso il basso, a \ang{30} sotto l'orizzontale. Prendi l'asse $x$ orizzontale, nel verso in cui avanza la carrozzina, e l'asse $y$ verticale verso l'alto.'''
+dati.F = { valore = 40, unita = "\\newton" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la componente orizzontale della forza?'''
+  calcolo = "F * cos30"
+  risultato = { valore = 35, unita = "\\newton", cifre = 2 }
+  soluzione = '''La forza è l'ipotenusa del triangolo rettangolo che ha le componenti come cateti. La componente orizzontale è il cateto adiacente all'angolo di \ang{30}, che è misurato rispetto all'orizzontale:
+\[
+  F_x = F \cos\ang{30} \approx \SI{40}{\newton} \cdot 0{,}87 = \SI{34,8}{\newton} \approx \SI{35}{\newton}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la componente verticale?'''
+  calcolo = "-F * sin30"
+  risultato = { valore = -20, unita = "\\newton", cifre = 2 }
+  soluzione = '''La componente verticale è il cateto opposto all'angolo di \ang{30}. La forza punta verso il basso e l'asse $y$ verso l'alto, quindi la componente è negativa:
+\[
+  F_y = -F \sin\ang{30} = -\SI{40}{\newton} \cdot 0{,}5 = -\SI{20}{\newton}
+\]
+Solo la componente orizzontale spinge avanti la carrozzina; quella verticale la preme contro il pavimento.'''
+
+[[problema]]
+id = "ud1-vett-corridoio"
+livello = 1
+testo = '''In un ospedale un barelliere percorre {{dx}} verso est lungo un corridoio, poi {{dy}} verso nord lungo un altro corridoio, perpendicolare al primo. Quanto vale il modulo del suo spostamento?'''
+dati.dx = { valore = 24, unita = "m" }
+dati.dy = { valore = 7, unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "math.sqrt(dx**2 + dy**2)"
+  risultato = { valore = 25, unita = "m", cifre = 2 }
+  soluzione = '''I due spostamenti sono perpendicolari: sono i cateti di un triangolo rettangolo, e lo spostamento totale è l'ipotenusa. Per il teorema di Pitagora:
+\[
+  s = \sqrt{(\SI{24}{\metre})^2 + (\SI{7}{\metre})^2} = \sqrt{576 + 49}\,\si{\metre} = \sqrt{625}\,\si{\metre} = \SI{25}{\metre}
+\]
+Il barelliere ha camminato per $24 + 7 = \SI{31}{\metre}$, ma si trova a \SI{25}{\metre} dal punto di partenza: la strada percorsa non è il modulo dello spostamento.'''
+
+[[problema]]
+id = "ud1-vett-scalare-ottuso"
+livello = 1
+testo = '''Due vettori hanno modulo $a = 6{,}0$ e $b = 5{,}0$ e formano fra loro un angolo di \ang{135}. Calcola il loro prodotto scalare.'''
+
+  [[problema.parte]]
+  calcolo = "6.0 * 5.0 * (-cos45)"
+  risultato = { valore = -21, cifre = 2 }
+  soluzione = '''L'angolo è ottuso. Per gli angoli supplementari $\cos(\ang{180} - \theta) = -\cos\theta$, quindi
+\[
+  \cos\ang{135} = \cos(\ang{180} - \ang{45}) = -\cos\ang{45} \approx -0{,}71
+\]
+Dalla definizione del prodotto scalare:
+\[
+  \vec a \cdot \vec b = ab\cos\theta \approx 6{,}0 \cdot 5{,}0 \cdot (-0{,}71) = 30 \cdot (-0{,}71) = -21{,}3 \approx -21
+\]
+Il prodotto è negativo, come per ogni angolo fra \ang{90} e \ang{180}.'''
+
+[[problema]]
+id = "ud1-trig-pedana"
+livello = 2
+testo = '''Una pedana per caricare la barella sull'ambulanza supera un dislivello di {{h}} e occupa sul pavimento del garage una lunghezza orizzontale di {{d}}.'''
+dati.h = { valore = "0,70", unita = "m" }
+dati.d = { valore = "2,40", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Quanto è lunga la pedana?'''
+  calcolo = "math.sqrt(h**2 + d**2)"
+  risultato = { valore = 2.5, unita = "m", cifre = 2 }
+  soluzione = '''La pedana è l'ipotenusa del triangolo rettangolo che ha per cateti il dislivello e la lunghezza orizzontale. Per il teorema di Pitagora:
+\[
+  L = \sqrt{h^2 + d^2} = \sqrt{0{,}70^2 + 2{,}40^2}\,\si{\metre} = \sqrt{0{,}49 + 5{,}76}\,\si{\metre} = \sqrt{6{,}25}\,\si{\metre} = \SI{2,5}{\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il seno dell'angolo $\alpha$ che la pedana forma con il pavimento? L'angolo è maggiore o minore di \ang{30}?'''
+  calcolo = "h / math.sqrt(h**2 + d**2)"
+  rapido = '''0,28, minore di \ang{30}'''
+  risultato = { valore = 0.28, cifre = 2 }
+  soluzione = '''Il dislivello è il cateto opposto ad $\alpha$; l'ipotenusa è la lunghezza trovata al punto (a):
+\[
+  \sin\alpha = \frac{h}{L} = \frac{\SI{0,70}{\metre}}{\SI{2,5}{\metre}} = 0{,}28
+\]
+Il seno cresce con l'angolo, e $\sin\ang{30} = 0{,}5$: poiché $0{,}28 < 0{,}5$, l'angolo è minore di \ang{30}.'''
+
+[[problema]]
+id = "ud1-vett-marcatore"
+livello = 2
+testo = '''Prima di una seduta di radioterapia si controlla la posizione di un marcatore sulla pelle del paziente, in un piano con gli assi $x$ e $y$. Il marcatore dovrebbe trovarsi in $P = (12, 30)$, ma viene misurato in $Q = (15, 26)$, con le coordinate in millimetri.'''
+dati.xP = { valore = 12, unita = "mm" }
+dati.yP = { valore = 30, unita = "mm" }
+dati.xQ = { valore = 15, unita = "mm" }
+dati.yQ = { valore = 26, unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Lo spostamento del marcatore è il vettore $\vec s$ che va da $P$ a $Q$. Quanto vale la sua componente $y$? Che cosa indica il suo segno?'''
+  calcolo = "yQ - yP"
+  risultato = { valore = -4, unita = "mm", cifre = 1 }
+  soluzione = '''Le componenti del vettore che va da $P$ a $Q$ dicono di quanto si sposta in $x$ e di quanto in $y$ chi va da $P$ a $Q$: arrivo meno partenza, $s_x = x_Q - x_P$ e $s_y = y_Q - y_P$. Se si pensano $P$ e $Q$ come vettori con la coda nell'origine, è la differenza fra i due vettori, $\vec Q - \vec P$. Quindi
+\[
+  s_x = \SI{15}{\milli\metre} - \SI{12}{\milli\metre} = \SI{3}{\milli\metre}
+  \qquad\qquad
+  s_y = \SI{26}{\milli\metre} - \SI{30}{\milli\metre} = -\SI{4}{\milli\metre}
+\]
+La componente $y$ è negativa: il marcatore si è spostato nel verso negativo dell'asse $y$.'''
+
+  [[problema.parte]]
+  domanda = '''Di quanto si è spostato il marcatore? La tolleranza ammessa è di \SI{4}{\milli\metre}: va corretta la posizione del paziente?'''
+  calcolo = "math.sqrt((xQ - xP)**2 + (yQ - yP)**2)"
+  rapido = '''\SI{5}{\milli\metre}: sì, va riposizionato'''
+  risultato = { valore = 5, unita = "mm", cifre = 1 }
+  soluzione = '''La distanza fra $P$ e $Q$ è il modulo di $\vec s$. Con le componenti del punto (a):
+\[
+  s = \sqrt{s_x^2 + s_y^2} = \sqrt{3^2 + (-4)^2}\,\si{\milli\metre} = \sqrt{9 + 16}\,\si{\milli\metre} = \sqrt{25}\,\si{\milli\metre} = \SI{5}{\milli\metre}
+\]
+Il quadrato di un numero negativo è positivo: $(-4)^2 = 16$. Lo spostamento, \SI{5}{\milli\metre}, supera la tolleranza di \SI{4}{\milli\metre}: il paziente va riposizionato, anche se nessuna delle due componenti (3 e \SI{4}{\milli\metre}) da sola la supera. È il modulo che conta.'''
+
+[[problema]]
+id = "ud1-vett-ortodonzia"
+livello = 2
+testo = '''Un apparecchio ortodontico tira un dente con due elastici agganciati allo stesso punto. Il primo esercita una forza di {{F1}} lungo l'asse $x$; il secondo una forza di {{F2}} che forma un angolo di \ang{60} con la prima, sopra l'asse $x$.'''
+dati.F1 = { valore = "1,5", unita = "\\newton" }
+dati.F2 = { valore = "1,0", unita = "\\newton" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la componente $y$ della seconda forza? E la componente $x$?'''
+  calcolo = "F2 * sin60"
+  risultato = { valore = 0.87, unita = "\\newton", cifre = 2 }
+  rapido = '''$F_{2y} \approx \SI{0,87}{\newton}$, $F_{2x} = \SI{0,50}{\newton}$'''
+  soluzione = '''La seconda forza forma \ang{60} con l'asse $x$:
+\[
+  F_{2y} = F_2 \sin\ang{60} \approx \SI{1,0}{\newton} \cdot 0{,}87 = \SI{0,87}{\newton}
+  \qquad\qquad
+  F_{2x} = F_2 \cos\ang{60} = \SI{1,0}{\newton} \cdot 0{,}5 = \SI{0,50}{\newton}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il modulo della forza totale sul dente?'''
+  calcolo = "math.sqrt((F1 + F2 * cos60)**2 + (F2 * sin60)**2)"
+  risultato = { valore = 2.2, unita = "\\newton", cifre = 2 }
+  soluzione = '''La prima forza ha componenti $(\SI{1,5}{\newton}, 0)$. Con le componenti del punto (a), si sommano le $x$ e le $y$:
+\[
+  R_x = \SI{1,5}{\newton} + \SI{0,50}{\newton} = \SI{2,0}{\newton}
+  \qquad\qquad
+  R_y = 0 + \SI{0,87}{\newton} = \SI{0,87}{\newton}
+\]
+Il modulo viene da Pitagora:
+\[
+  R = \sqrt{R_x^2 + R_y^2} = \sqrt{2{,}0^2 + 0{,}87^2}\,\si{\newton} \approx \sqrt{4{,}0 + 0{,}75}\,\si{\newton} = \sqrt{4{,}75}\,\si{\newton} \approx \SI{2,2}{\newton}
+\]
+Per il quadrato di 0,87 conviene il valore esatto, $R_y = (\sqrt 3/2)\,\si{\newton}$: $(\sqrt 3/2)^2 = 3/4 = 0{,}75$. La radice è circa 2,2 perché $2{,}2^2 = 4{,}84$, vicino a 4,75. Il risultato è minore della somma dei moduli, $1{,}5 + 1{,}0 = \SI{2,5}{\newton}$, perché i due elastici non tirano nella stessa direzione.'''
+
+[[problema]]
+id = "ud1-vett-angolo-componenti"
+livello = 2
+testo = '''Sono dati i vettori $\vec a = (1, 2)$ e $\vec b = (1, -3)$.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola il prodotto scalare $\vec a \cdot \vec b$.'''
+  calcolo = "1 * 1 + 2 * (-3)"
+  risultato = { valore = -5, cifre = 1 }
+  soluzione = '''Con le componenti si moltiplicano le $x$ fra loro e le $y$ fra loro, poi si somma:
+\[
+  \vec a \cdot \vec b = a_x b_x + a_y b_y = 1 \cdot 1 + 2 \cdot (-3) = 1 - 6 = -5
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'angolo fra i due vettori?'''
+  calcolo = "math.degrees(math.acos(-5 / math.sqrt(50)))"
+  risultato = { valore = 135, unita = "\\degree", cifre = 3 }
+  soluzione = '''I moduli sono $a = \sqrt{1 + 4} = \sqrt 5$ e $b = \sqrt{1 + 9} = \sqrt{10}$, quindi $ab = \sqrt{50} = \sqrt{25 \cdot 2} = 5\sqrt 2$. Dalla definizione $\vec a \cdot \vec b = ab\cos\theta$, con il risultato del punto (a):
+\[
+  \cos\theta = \frac{\vec a \cdot \vec b}{ab} = \frac{-5}{5\sqrt 2} = -\frac{1}{\sqrt 2} = -\frac{\sqrt 2}{2} \approx -0{,}71
+\]
+Il coseno è negativo, quindi l'angolo è ottuso. Poiché $\cos(\ang{180} - \theta) = -\cos\theta$ e $\cos\ang{45} = \sqrt 2/2$, l'angolo è $\theta = \ang{180} - \ang{45} = \ang{135}$.'''
+
+[[problema]]
+id = "ud1-vett-robot"
+livello = 2
+testo = '''Un robot chirurgico muove la punta di uno strumento per passi. Ogni passo è lo spostamento $\vec p = (0{,}6;\ -0{,}8)$, con le componenti in millimetri. Il robot fa tre passi, poi uno spostamento $\vec q = (2{,}2;\ 5{,}4)$, sempre in millimetri.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola le componenti e il modulo dello spostamento $3\vec p$ dovuto ai tre passi.'''
+  calcolo = "3 * math.sqrt(0.6**2 + 0.8**2)"
+  risultato = { valore = 3.0, unita = "mm", cifre = 2 }
+  rapido = '''$(1{,}8;\ -2{,}4)$ mm, \SI{3,0}{\milli\metre}'''
+  soluzione = '''Moltiplicare un vettore per un numero vuol dire moltiplicare per quel numero ogni componente, $k\vec a = (k a_x, k a_y)$. Si vede bene con $3\vec p = \vec p + \vec p + \vec p$: sommando le componenti si ottiene $(3p_x, 3p_y)$. Quindi
+\[
+  3\vec p = (3 \cdot 0{,}6;\ 3 \cdot (-0{,}8)) = (1{,}8;\ -2{,}4)
+\]
+Il modulo:
+\[
+  |3\vec p| = \sqrt{1{,}8^2 + 2{,}4^2}\,\si{\milli\metre} = \sqrt{3{,}24 + 5{,}76}\,\si{\milli\metre} = \sqrt{9}\,\si{\milli\metre} = \SI{3,0}{\milli\metre}
+\]
+Controllo: un passo ha modulo $p = \sqrt{0{,}36 + 0{,}64} = 1$, e il modulo di $3\vec p$ è $3p = 3$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il modulo dello spostamento totale della punta?'''
+  calcolo = "math.sqrt((3 * 0.6 + 2.2)**2 + (3 * (-0.8) + 5.4)**2)"
+  risultato = { valore = 5.0, unita = "mm", cifre = 2 }
+  soluzione = '''Si somma $\vec q$ allo spostamento del punto (a), componente per componente:
+\[
+  3\vec p + \vec q = (1{,}8 + 2{,}2;\ -2{,}4 + 5{,}4) = (4{,}0;\ 3{,}0)
+\]
+Il modulo:
+\[
+  |3\vec p + \vec q| = \sqrt{4{,}0^2 + 3{,}0^2}\,\si{\milli\metre} = \sqrt{16 + 9}\,\si{\milli\metre} = \sqrt{25}\,\si{\milli\metre} = \SI{5,0}{\milli\metre}
+\]'''
+
+[[problema]]
+id = "ud1-vett-elisoccorso"
+livello = 3
+testo = '''Un elicottero dell'elisoccorso parte dalla base e vola per {{d1}} verso est. Poi cambia rotta e vola per altri {{d2}} verso nord-est, cioè a \ang{45} fra est e nord, fino al luogo dell'incidente. Prendi l'asse $x$ verso est e l'asse $y$ verso nord.'''
+dati.d1 = { valore = 20, unita = "\\kilo\\metre" }
+dati.d2 = { valore = 20, unita = "\\kilo\\metre" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la componente $x$ dello spostamento totale? E la componente $y$?'''
+  calcolo = "d1 + d2 * cos45"
+  risultato = { valore = 34, unita = "\\kilo\\metre", cifre = 2 }
+  rapido = '''\SI{34}{\kilo\metre} e \SI{14}{\kilo\metre}'''
+  soluzione = '''Il primo tratto ha componenti $(\SI{20}{\kilo\metre}, 0)$. Il secondo forma \ang{45} con l'asse $x$:
+\[
+  d_{2x} = d_2 \cos\ang{45} \approx \SI{20}{\kilo\metre} \cdot 0{,}71 = \SI{14,2}{\kilo\metre}
+  \qquad\qquad
+  d_{2y} = d_2 \sin\ang{45} \approx \SI{14,2}{\kilo\metre}
+\]
+Le componenti dello spostamento totale sono le somme delle componenti:
+\[
+  R_x = \SI{20}{\kilo\metre} + \SI{14,2}{\kilo\metre} = \SI{34,2}{\kilo\metre} \approx \SI{34}{\kilo\metre}
+  \qquad\qquad
+  R_y = 0 + \SI{14,2}{\kilo\metre} \approx \SI{14}{\kilo\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''A che distanza dalla base si trova il luogo dell'incidente? Confrontala con la strada percorsa.'''
+  calcolo = "math.sqrt((d1 + d2 * cos45)**2 + (d2 * sin45)**2)"
+  risultato = { valore = 37, unita = "\\kilo\\metre", cifre = 2 }
+  soluzione = '''La distanza è il modulo dello spostamento. Con le componenti del punto (a):
+\[
+  R = \sqrt{R_x^2 + R_y^2} \approx \sqrt{34^2 + 14^2}\,\si{\kilo\metre} = \sqrt{1156 + 196}\,\si{\kilo\metre} = \sqrt{1352}\,\si{\kilo\metre} \approx \SI{37}{\kilo\metre}
+\]
+Le componenti si arrotondano a \SI{34}{\kilo\metre} e \SI{14}{\kilo\metre} prima di elevarle al quadrato: i decimali non cambiano il risultato, e il conto si fa a mano senza fatica. La radice è circa 37 perché $37^2 = 1369$. L'elicottero ha volato per $20 + 20 = \SI{40}{\kilo\metre}$, ma si trova a \SI{37}{\kilo\metre} dalla base: i due tratti non hanno la stessa direzione, e il modulo della somma è minore della somma dei moduli.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la tangente dell'angolo $\theta$ che lo spostamento totale forma con l'asse $x$? L'angolo è maggiore o minore di \ang{30}? In che direzione deve volare l'elicottero per tornare alla base in linea retta?'''
+  calcolo = "(d2 * sin45) / (d1 + d2 * cos45)"
+  risultato = { valore = 0.42, cifre = 2 }
+  rapido = '''0,42, minore di \ang{30}; ritorno verso ovest e un po' a sud'''
+  soluzione = '''La tangente è il rapporto fra le componenti del punto (a):
+\[
+  \tan\theta = \frac{R_y}{R_x} = \frac{\SI{14,2}{\kilo\metre}}{\SI{34,2}{\kilo\metre}} \approx 0{,}42
+\]
+Le due componenti sono positive, quindi il vettore punta fra est e nord. La tangente cresce con l'angolo, e $\tan\ang{30} \approx 0{,}58$: poiché $0{,}42 < 0{,}58$, l'angolo è minore di \ang{30}. Per tornare l'elicottero deve percorrere lo spostamento opposto, $-\vec R = (-\SI{34}{\kilo\metre}, -\SI{14}{\kilo\metre})$: \SI{37}{\kilo\metre} con lo stesso angolo $\theta$ sotto il verso ovest, cioè verso ovest e un po' verso sud.'''
+
+[[problema]]
+id = "ud1-vett-rotula"
+livello = 3
+testo = '''La rotula è tirata da due tendini: il tendine del quadricipite, verso la coscia, e il tendine rotuleo, verso la tibia. Supponi che i due tendini tirino con la stessa forza, di modulo {{F}}. La somma delle due forze preme la rotula contro il femore. Quando il ginocchio è disteso le due forze hanno quasi la stessa direzione e versi opposti; quando si piega, l'angolo fra le due forze diminuisce.'''
+dati.F = { valore = 1200, unita = "\\newton" }
+
+  [[problema.parte]]
+  domanda = '''Con il ginocchio poco piegato le due forze formano un angolo di \ang{120}. Quanto vale il modulo della loro somma?'''
+  calcolo = "2 * F * cos60"
+  risultato = { valore = 1.2e3, unita = "\\newton", cifre = 2 }
+  soluzione = '''Si prende l'asse $x$ lungo la bisettrice dell'angolo fra le due forze. Ognuna forma con l'asse un angolo di $\ang{120}/2 = \ang{60}$, una sopra e una sotto. Le componenti perpendicolari all'asse hanno lo stesso modulo, $F\sin\ang{60}$, e versi opposti: si annullano. Le componenti lungo l'asse hanno lo stesso verso e si sommano:
+\[
+  R = 2F\cos\ang{60} = 2 \cdot \SI{1200}{\newton} \cdot 0{,}5 = \SI{1200}{\newton}
+\]
+A \ang{120} la somma di due forze uguali ha lo stesso modulo di ciascuna.'''
+
+  [[problema.parte]]
+  domanda = '''Piegando di più il ginocchio, l'angolo fra le forze scende a \ang{90}. Quanto vale ora il modulo della somma?'''
+  calcolo = "2 * F * cos45"
+  risultato = { valore = 1.7e3, unita = "\\newton", cifre = 2 }
+  soluzione = '''Ognuna delle due forze forma ora \ang{45} con la bisettrice. Come nel punto (a):
+\[
+  R = 2F\cos\ang{45} \approx 2 \cdot \SI{1200}{\newton} \cdot 0{,}71 = \SI{1704}{\newton} \approx \SI{1,7e3}{\newton}
+\]
+Le forze sono perpendicolari, quindi lo stesso risultato viene da Pitagora: $R = \sqrt{F^2 + F^2} = F\sqrt 2 \approx \SI{1200}{\newton} \cdot 1{,}41 \approx \SI{1,7e3}{\newton}$.'''
+
+  [[problema.parte]]
+  domanda = '''Di quale fattore è aumentata la forza che preme la rotula contro il femore, passando da \ang{120} a \ang{90}? Che cosa succede con il ginocchio disteso?'''
+  calcolo = "(2 * F * cos45) / (2 * F * cos60)"
+  rapido = '''1,4; con il ginocchio disteso la somma è quasi nulla'''
+  risultato = { valore = 1.4, cifre = 2 }
+  soluzione = '''Con i risultati dei punti (a) e (b):
+\[
+  \frac{R_{90}}{R_{120}} = \frac{2F\cos\ang{45}}{2F\cos\ang{60}} = \frac{0{,}71}{0{,}5} \approx 1{,}4
+\]
+Il modulo dei tendini non conta: il fattore dipende solo dall'angolo. Con il ginocchio disteso le due forze sono quasi opposte, l'angolo fra loro è vicino a \ang{180} e la somma è quasi nulla: la rotula è premuta poco contro il femore. Per questo accovacciarsi o salire le scale, con il ginocchio molto piegato, carica l'articolazione fra rotula e femore molto più che stare in piedi.'''
+
+[[problema]]
+id = "ud1-vett-lesione"
+livello = 3
+testo = '''Per seguire la guarigione di una lesione della pelle se ne misura l'area su una foto. La lesione si approssima con un parallelogramma. Un lato è il vettore $\vec a$, di modulo {{a}}, lungo l'asse $x$ della foto (verso destra); l'altro lato è il vettore $\vec b$, di modulo {{b}}, che forma un angolo di \ang{30} con $\vec a$, verso l'alto della foto.'''
+dati.a = { valore = "4,0", unita = "cm" }
+dati.b = { valore = "3,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la componente $x$ di $\vec b$? E la componente $y$?'''
+  calcolo = "b * cos30"
+  risultato = { valore = 2.6, unita = "cm", cifre = 2 }
+  rapido = '''$b_x \approx \SI{2,6}{\centi\metre}$, $b_y = \SI{1,5}{\centi\metre}$'''
+  soluzione = '''$\vec b$ forma \ang{30} con l'asse $x$:
+\[
+  b_x = b\cos\ang{30} \approx \SI{3,0}{\centi\metre} \cdot 0{,}87 = \SI{2,61}{\centi\metre} \approx \SI{2,6}{\centi\metre}
+  \qquad\qquad
+  b_y = b\sin\ang{30} = \SI{3,0}{\centi\metre} \cdot 0{,}5 = \SI{1,5}{\centi\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'area della lesione con il prodotto vettoriale. Che direzione e che verso ha $\vec a \times \vec b$?'''
+  calcolo = "a * b * sin30"
+  risultato = { valore = 6.0, unita = "\\centi\\metre\\squared", cifre = 2 }
+  soluzione = '''L'area del parallelogramma con lati $\vec a$ e $\vec b$ è il modulo del prodotto vettoriale:
+\[
+  |\vec a \times \vec b| = ab\sin\ang{30} = \SI{4,0}{\centi\metre} \cdot \SI{3,0}{\centi\metre} \cdot 0{,}5 = \SI{6,0}{\centi\metre\squared}
+\]
+Controllo con base per altezza: la base è $a = \SI{4,0}{\centi\metre}$ e l'altezza è la componente $b_y$ del punto (a), quindi l'area è $4{,}0 \cdot 1{,}5 = \SI{6,0}{\centi\metre\squared}$. Il prodotto vettoriale è perpendicolare al piano della foto. Per il verso, con la regola della mano destra: pollice lungo $\vec a$, verso destra. L'indice va dalla parte di $\vec b$, perpendicolare al pollice: conta solo la componente di $\vec b$ perpendicolare ad $\vec a$, che qui punta verso l'alto della foto. Il medio esce dalla foto verso chi guarda, nel verso positivo dell'asse $z$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto è lunga la diagonale del parallelogramma che parte dal vertice comune ai due lati?'''
+  calcolo = "math.sqrt((a + b * cos30)**2 + (b * sin30)**2)"
+  risultato = { valore = 6.8, unita = "cm", cifre = 2 }
+  soluzione = '''Per la regola del parallelogramma questa diagonale è la somma $\vec a + \vec b$. Con le componenti del punto (a):
+\[
+  \vec a + \vec b = (4{,}0 + 2{,}6;\ 0 + 1{,}5)\,\si{\centi\metre} = (6{,}6;\ 1{,}5)\,\si{\centi\metre}
+\]
+\[
+  |\vec a + \vec b| = \sqrt{6{,}6^2 + 1{,}5^2}\,\si{\centi\metre} = \sqrt{43{,}56 + 2{,}25}\,\si{\centi\metre} = \sqrt{45{,}81}\,\si{\centi\metre} \approx \SI{6,8}{\centi\metre}
+\]
+perché $6{,}8^2 = 46{,}24$, vicino a 45,81. È meno della somma dei lati, $4{,}0 + 3{,}0 = \SI{7,0}{\centi\metre}$, ma di poco: i due lati formano un angolo piccolo.'''
+
+[[problema]]
+id = "ud1-trig-radiografia"
+livello = 3
+testo = '''In una radiografia con proiezione obliqua il raggio centrale del fascio è inclinato di \ang{30} rispetto alla verticale. Il fuoco del tubo radiogeno, da cui partono i raggi X, si trova a {{D}} dal rivelatore, misurati lungo il raggio centrale. Il rivelatore è orizzontale, sotto il paziente. La figura non è in scala.
+\begin{center}
+\input{ud1/figure/radiografia}
+\end{center}'''
+dati.D = { valore = 100, unita = "cm" }
+dati.h = { valore = "6,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''A che altezza sopra il rivelatore si trova il fuoco?'''
+  calcolo = "D * cos30"
+  risultato = { valore = 87, unita = "cm", cifre = 2 }
+  soluzione = '''Il raggio centrale è l'ipotenusa di un triangolo rettangolo; i cateti sono la verticale dal fuoco al rivelatore e la distanza orizzontale. L'angolo di \ang{30} è misurato rispetto alla verticale, quindi l'altezza è il cateto adiacente:
+\[
+  H = D\cos\ang{30} \approx \SI{100}{\centi\metre} \cdot 0{,}87 = \SI{87}{\centi\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''A che distanza orizzontale dal punto in cui il raggio centrale colpisce il rivelatore si trova il piede della verticale che scende dal fuoco?'''
+  calcolo = "D * sin30"
+  risultato = { valore = 50, unita = "cm", cifre = 2 }
+  soluzione = '''La distanza orizzontale è il cateto opposto all'angolo di \ang{30}:
+\[
+  d = D\sin\ang{30} = \SI{100}{\centi\metre} \cdot 0{,}5 = \SI{50}{\centi\metre}
+\]
+Controllo con Pitagora: $87^2 + 50^2 = 7569 + 2500 = 10069$, vicino a $100^2 = 10000$; la differenza viene dall'arrotondamento di $\cos\ang{30}$ a 0,87.'''
+
+  [[problema.parte]]
+  domanda = '''Un piccolo calcolo si trova nel paziente a {{h}} sopra il rivelatore. I raggi X che lo attraversano si possono considerare paralleli al raggio centrale. Di quanto è spostata la sua ombra sul rivelatore, rispetto al punto che sta proprio sotto il calcolo?'''
+  calcolo = "h * tan30"
+  risultato = { valore = 3.5, unita = "cm", cifre = 2 }
+  soluzione = '''Il raggio che passa per il calcolo forma un altro triangolo rettangolo, più piccolo: il cateto verticale è l'altezza $h$ del calcolo sopra il rivelatore, il cateto orizzontale è lo spostamento $x$ dell'ombra. L'angolo di \ang{30} con la verticale è adiacente ad $h$ e opposto a $x$, quindi
+\[
+  \tan\ang{30} = \frac{x}{h}
+  \qquad\Longrightarrow\qquad
+  x = h\tan\ang{30} \approx \SI{6,0}{\centi\metre} \cdot 0{,}58 = \SI{3,48}{\centi\metre} \approx \SI{3,5}{\centi\metre}
+\]
+Lo spostamento è proporzionale all'altezza: due strutture a profondità diverse, una sopra l'altra, nell'immagine obliqua appaiono separate. È per questo che si fanno le proiezioni oblique.'''
+
+[[problema]]
+id = "ud1-vett-cammino"
+livello = 3
+testo = '''In un laboratorio di analisi del cammino una telecamera riprende di lato un paziente, con tre marcatori sull'anca $H$, sul ginocchio $K$ e sulla caviglia $A$. In un istante le loro coordinate, in centimetri, sono $H = (20, 90)$, $K = (20, 50)$ e $A = (50, 20)$. La coscia è il vettore $\vec u$ che va dal ginocchio all'anca, la gamba il vettore $\vec v$ che va dal ginocchio alla caviglia.'''
+
+  [[problema.parte]]
+  domanda = '''Trova le componenti di $\vec u$ e di $\vec v$. Quanto è lunga la gamba, dal ginocchio alla caviglia?'''
+  calcolo = "30 * rad2"
+  risultato = { valore = 42, unita = "cm", cifre = 2 }
+  rapido = '''$\vec u = (0, 40)$, $\vec v = (30, -30)$, \SI{42}{\centi\metre}'''
+  soluzione = '''Le componenti del vettore che va da un punto a un altro sono arrivo meno partenza, coordinata per coordinata. $\vec u$ parte da $K$ e arriva in $H$, $\vec v$ parte da $K$ e arriva in $A$:
+\[
+  \vec u = (x_H - x_K,\ y_H - y_K) = (20 - 20,\ 90 - 50) = (0, 40)
+\]
+\[
+  \vec v = (x_A - x_K,\ y_A - y_K) = (50 - 20,\ 20 - 50) = (30, -30)
+\]
+La lunghezza della gamba è il modulo di $\vec v$:
+\[
+  v = \sqrt{30^2 + (-30)^2}\,\si{\centi\metre} = \sqrt{2 \cdot 900}\,\si{\centi\metre} = 30\sqrt 2\,\si{\centi\metre} \approx 30 \cdot 1{,}41\,\si{\centi\metre} = \SI{42,3}{\centi\metre} \approx \SI{42}{\centi\metre}
+\]
+La coscia, verticale, è lunga $u = \SI{40}{\centi\metre}$.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola il prodotto scalare $\vec u \cdot \vec v$.'''
+  calcolo = "0 * 30 + 40 * (-30)"
+  risultato = { valore = -1.2e3, unita = "\\centi\\metre\\squared", cifre = 2 }
+  soluzione = '''Con le componenti del punto (a):
+\[
+  \vec u \cdot \vec v = u_x v_x + u_y v_y = 0 \cdot 30 + 40 \cdot (-30) = -1200\,\si{\centi\metre\squared}
+\]
+Il prodotto di due lunghezze si misura in \si{\centi\metre\squared}. È negativo: l'angolo fra coscia e gamba è ottuso.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'angolo $\theta$ fra coscia e gamba? Di quanti gradi è flesso il ginocchio, se a gamba tesa coscia e gamba formano \ang{180}?'''
+  calcolo = "math.degrees(math.acos(-1200 / (40 * 30 * rad2)))"
+  risultato = { valore = 135, unita = "\\degree", cifre = 3 }
+  rapido = '''\ang{135}, flessione \ang{45}'''
+  soluzione = '''Dalla definizione del prodotto scalare, con i risultati dei punti (a) e (b):
+\[
+  \cos\theta = \frac{\vec u \cdot \vec v}{uv} = \frac{-1200}{40 \cdot 30\sqrt 2} = \frac{-1200}{1200\sqrt 2} = -\frac{1}{\sqrt 2} = -\frac{\sqrt 2}{2} \approx -0{,}71
+\]
+Poiché $\cos(\ang{180} - \theta) = -\cos\theta$ e $\cos\ang{45} = \sqrt 2/2$, l'angolo è $\theta = \ang{180} - \ang{45} = \ang{135}$. A gamba tesa l'angolo sarebbe \ang{180}, quindi il ginocchio è flesso di $\ang{180} - \ang{135} = \ang{45}$.'''
+
+# ==================================================================== quesiti d'esame
+
+[[quesito]]
+id = "ud1-notazione-prodotto"
+tipo = "multipla"
+testo = '''Il prodotto $(2 \cdot 10^{-3}) \cdot (5 \cdot 10^{8})$, scritto in notazione scientifica, vale'''
+corretta = "C"
+calcolo = "2e-3 * 5e8"
+soluzione = '''Si moltiplicano le mantisse e si sommano gli esponenti:
+\[
+  (2 \cdot 10^{-3}) \cdot (5 \cdot 10^{8}) = (2 \cdot 5) \cdot 10^{-3+8} = 10 \cdot 10^{5}
+\]
+La mantissa 10 non è minore di 10: si scrive $10 = 1 \cdot 10^{1}$, e il risultato è $1 \cdot 10^{1} \cdot 10^{5} = 1 \cdot 10^{6}$.'''
+
+  [[quesito.opzione]]
+  testo = '''$1 \cdot 10^{5}$'''
+  commento = '''Trova $10 \cdot 10^{5}$, poi riduce la mantissa da 10 a 1 senza aumentare l'esponente: così il numero diventa 10 volte più piccolo.'''
+  [[quesito.opzione]]
+  testo = '''$7 \cdot 10^{5}$'''
+  commento = '''Somma le mantisse, $2 + 5 = 7$, invece di moltiplicarle. Nel prodotto si moltiplicano le mantisse e si sommano solo gli esponenti.'''
+  [[quesito.opzione]]
+  testo = '''$1 \cdot 10^{6}$'''
+  valore = 1e6
+  [[quesito.opzione]]
+  testo = '''$1 \cdot 10^{-23}$'''
+  commento = '''Moltiplica gli esponenti, $(-3) \cdot 8 = -24$, invece di sommarli: $10 \cdot 10^{-24} = 1 \cdot 10^{-23}$. Gli esponenti si moltiplicano solo quando si eleva a potenza una potenza.'''
+  [[quesito.opzione]]
+  testo = '''$4 \cdot 10^{-12}$'''
+  commento = '''Fa il quoziente invece del prodotto: $2/5 = 0{,}4$ e $10^{-3-8} = 10^{-11}$, quindi $0{,}4 \cdot 10^{-11} = 4 \cdot 10^{-12}$.'''
+
+[[quesito]]
+id = "ud1-unita-microgrammi"
+tipo = "multipla"
+testo = '''Una compressa di levotiroxina, un ormone tiroideo, contiene {{m}} di principio attivo. Quanti microgrammi sono?'''
+dati.m = { valore = "0,075", unita = "\\milli\\gram" }
+corretta = "A"
+calcolo = "m * 1e3"
+soluzione = '''Il milli vale $10^{-3}$ e il micro $10^{-6}$: un milligrammo è \num{1000} microgrammi. Quindi
+\[
+  \SI{0,075}{\milli\gram} = 0{,}075 \cdot \SI{1000}{\micro\gram} = \SI{75}{\micro\gram}
+\]
+Passando a un'unità più piccola il numero diventa più grande.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{75}{\micro\gram}'''
+  valore = 75
+  [[quesito.opzione]]
+  testo = '''\SI{7,5e-5}{\micro\gram}'''
+  commento = '''Divide per \num{1000} invece di moltiplicare: $0{,}075/1000 = \num{7,5e-5}$. Passando a un'unità mille volte più piccola il numero deve diventare mille volte più grande.'''
+  [[quesito.opzione]]
+  testo = '''\SI{7,5}{\micro\gram}'''
+  commento = '''Moltiplica per 100, come se fra milli e micro ci fossero due potenze di 10. Sono tre: $10^{-3}/10^{-6} = 10^{3}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{7,5e4}{\micro\gram}'''
+  commento = '''Moltiplica per $10^{6}$, come se la massa fosse in grammi: è la conversione da grammi a microgrammi, non da milligrammi.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,075}{\micro\gram}'''
+  commento = '''Cambia solo il nome dell'unità e lascia il numero: da milligrammi a microgrammi l'unità diventa mille volte più piccola, quindi il numero deve diventare mille volte più grande.'''
+
+[[quesito]]
+id = "ud1-unita-ferita"
+tipo = "multipla"
+testo = '''Una ferita ha una superficie di {{S}}. In metri quadrati la sua superficie è'''
+dati.S = { valore = 6, unita = "\\centi\\metre\\squared" }
+corretta = "E"
+calcolo = "S * 1e-4"
+soluzione = '''Un centimetro è \SI{e-2}{\metre}, e per le aree il fattore va al quadrato: $\SI{1}{\centi\metre\squared} = (\SI{e-2}{\metre})^{2} = \SI{e-4}{\metre\squared}$. Quindi $\SI{6}{\centi\metre\squared} = \SI{6e-4}{\metre\squared}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{6e-2}{\metre\squared}'''
+  commento = '''Usa il fattore delle lunghezze, $10^{-2}$, senza elevarlo al quadrato.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6e-6}{\metre\squared}'''
+  commento = '''Eleva il fattore al cubo, $(10^{-2})^{3} = 10^{-6}$, come per un volume: una superficie ha dimensione $[L^{2}]$, non $[L^{3}]$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6e4}{\metre\squared}'''
+  commento = '''Usa il fattore giusto, $10^{4}$, ma moltiplica invece di dividere. Il metro quadrato è più grande del centimetro quadrato, quindi il numero deve diventare più piccolo: \SI{6e4}{\metre\squared} sono sei ettari.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6e2}{\metre\squared}'''
+  commento = '''Sbaglia due volte: non eleva al quadrato il fattore 100 e moltiplica invece di dividere.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6e-4}{\metre\squared}'''
+  valore = 6e-4
+
+[[quesito]]
+id = "ud1-grandezze-pressione"
+tipo = "multipla"
+testo = '''La pressione è una forza divisa per una superficie, e la forza si misura in newton: $\SI{1}{\newton} = \SI{1}{\kilo\gram\metre\per\second\squared}$. La dimensione della pressione è'''
+corretta = "B"
+soluzione = '''La forza ha la dimensione di una massa per una lunghezza diviso un tempo al quadrato, $[M\,L\,T^{-2}]$; una superficie ha dimensione $[L^{2}]$. Quindi
+\[
+  [\text{pressione}] = \frac{[M\,L\,T^{-2}]}{[L^{2}]} = [M\,L^{1-2}\,T^{-2}] = [M\,L^{-1}\,T^{-2}]
+\]
+È la dimensione del pascal, $\SI{1}{\pascal} = \SI{1}{\newton\per\metre\squared} = \SI{1}{\kilo\gram\per\metre\per\second\squared}$.'''
+
+  [[quesito.opzione]]
+  testo = '''$[M\,L\,T^{-2}]$'''
+  commento = '''È la dimensione della forza: dimentica di dividere per la superficie.'''
+  [[quesito.opzione]]
+  testo = '''$[M\,L^{-1}\,T^{-2}]$'''
+  [[quesito.opzione]]
+  testo = '''$[M\,L^{-3}]$'''
+  commento = '''È la dimensione della densità, massa diviso volume. Nella pressione c'è anche il tempo, che viene dalla forza.'''
+  [[quesito.opzione]]
+  testo = '''$[M\,L^{3}\,T^{-2}]$'''
+  commento = '''Moltiplica la forza per la superficie invece di dividere: $[M\,L\,T^{-2}] \cdot [L^{2}] = [M\,L^{3}\,T^{-2}]$.'''
+  [[quesito.opzione]]
+  testo = '''$[M\,L^{-2}\,T^{-2}]$'''
+  commento = '''Divide la forza per un volume, $[L^{3}]$, invece che per una superficie: $[M\,L\,T^{-2}]/[L^{3}] = [M\,L^{-2}\,T^{-2}]$.'''
+
+[[quesito]]
+id = "ud1-grandezze-intensiva"
+tipo = "multipla"
+testo = '''Quale di queste grandezze è intensiva?'''
+corretta = "D"
+soluzione = '''Una grandezza intensiva non cambia se si divide il sistema in due parti: dividendo un prelievo di sangue in due provette, la concentrazione di glucosio è la stessa in entrambe. Le altre quattro si dimezzano: sono estensive. La concentrazione è il rapporto fra due grandezze estensive, la massa di glucosio e il volume, e il rapporto fra due grandezze estensive è intensivo.'''
+
+  [[quesito.opzione]]
+  testo = '''la massa di sangue contenuta in una sacca'''
+  commento = '''Dividendo la sacca in due sacche uguali la massa si dimezza: è estensiva.'''
+  [[quesito.opzione]]
+  testo = '''il volume di urina raccolto in un giorno'''
+  commento = '''Il volume dipende da quanta urina c'è: raccogliendone metà si dimezza. È estensivo.'''
+  [[quesito.opzione]]
+  testo = '''il numero di globuli rossi contenuti in un prelievo'''
+  commento = '''Pensa alla conta come a una proprietà del sangue, ma il numero di cellule dipende da quanto sangue si preleva: è estensivo. Intensivo è il numero di globuli rossi per microlitro.'''
+  [[quesito.opzione]]
+  testo = '''la concentrazione di glucosio nel sangue'''
+  [[quesito.opzione]]
+  testo = '''l'energia fornita da un pasto'''
+  commento = '''Mangiando metà del pasto si ricava metà dell'energia: l'energia è estensiva.'''
+
+[[quesito]]
+id = "ud1-ordine-globuli"
+tipo = "multipla"
+testo = '''Un globulo rosso ha un diametro di circa {{d}}. L'ordine di grandezza del numero di globuli rossi che, messi in fila, coprono \SI{1}{\centi\metre} è'''
+dati.d = { valore = 8, unita = "\\micro\\metre" }
+corretta = "D"
+calcolo = "10**round(math.log10(1e-2 / (d * 1e-6)))"
+soluzione = '''Si portano le due lunghezze in metri: $\SI{1}{\centi\metre} = \SI{e-2}{\metre}$ e $\SI{8}{\micro\metre} = \SI{8e-6}{\metre}$. Il numero di globuli rossi è
+\[
+  N = \frac{10^{-2}}{8 \cdot 10^{-6}} = \frac{1}{8} \cdot 10^{-2-(-6)} = 0{,}125 \cdot 10^{4} = 1{,}25 \cdot 10^{3}
+\]
+La mantissa 1,25 è minore di 3, quindi l'ordine di grandezza è $10^{3}$.'''
+
+  [[quesito.opzione]]
+  testo = '''$10^{2}$'''
+  commento = '''Confonde centi con milli e usa $\SI{1}{\centi\metre} = \SI{e-3}{\metre}$: $10^{-3}/(8 \cdot 10^{-6}) = 125 = 1{,}25 \cdot 10^{2}$.'''
+  [[quesito.opzione]]
+  testo = '''$10^{6}$'''
+  commento = '''Legge micro come nano, $\SI{8e-9}{\metre}$: $10^{-2}/(8 \cdot 10^{-9}) = 1{,}25 \cdot 10^{6}$.'''
+  [[quesito.opzione]]
+  testo = '''$10^{-3}$'''
+  commento = '''Rovescia il rapporto, $8 \cdot 10^{-6}/10^{-2} = 8 \cdot 10^{-4}$, che si arrotonda a $10^{-3}$. Un numero di globuli rossi minore di 1 è già un segnale d'errore.'''
+  [[quesito.opzione]]
+  testo = '''$10^{3}$'''
+  valore = 1000
+  [[quesito.opzione]]
+  testo = '''$10^{4}$'''
+  commento = '''Arrotonda il diametro, \SI{8}{\micro\metre}, a \SI{1}{\micro\metre}: $10^{-2}/10^{-6} = 10^{4}$. Prima di arrotondare il risultato bisogna tenere la mantissa 8, che sposta il risultato di quasi un ordine di grandezza.'''
+
+[[quesito]]
+id = "ud1-unita-febbre"
+tipo = "multipla"
+testo = '''Un paziente ha la febbre a \SI{39}{\celsius}. Durante la notte la temperatura scende di \SI{2}{\celsius}. In kelvin, la temperatura del mattino e la diminuzione valgono'''
+corretta = "A"
+soluzione = '''Al mattino la temperatura è $39 - 2 = \SI{37}{\celsius}$, cioè $T = 37 + 273 = \SI{310}{\kelvin}$. Una differenza di temperatura ha lo stesso valore nelle due scale: una diminuzione di \SI{2}{\celsius} è una diminuzione di \SI{2}{\kelvin}. Il 273 si aggiunge alle temperature, non alle differenze.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{310}{\kelvin} e \SI{2}{\kelvin}'''
+  [[quesito.opzione]]
+  testo = '''\SI{312}{\kelvin} e \SI{2}{\kelvin}'''
+  commento = '''Converte la temperatura della sera, $39 + 273 = \SI{312}{\kelvin}$, invece di quella del mattino.'''
+  [[quesito.opzione]]
+  testo = '''\SI{310}{\kelvin} e \SI{275}{\kelvin}'''
+  commento = '''Aggiunge 273 anche alla differenza: $2 + 273 = 275$. Una differenza di temperatura è la stessa in gradi Celsius e in kelvin.'''
+  [[quesito.opzione]]
+  testo = '''\SI{-236}{\kelvin} e \SI{2}{\kelvin}'''
+  commento = '''Sottrae 273 invece di aggiungerlo: $37 - 273 = -236$. La temperatura in kelvin non è mai negativa.'''
+  [[quesito.opzione]]
+  testo = '''\SI{37}{\kelvin} e \SI{2}{\kelvin}'''
+  commento = '''Cambia solo il nome dell'unità e lascia i numeri dei gradi Celsius: le due scale hanno lo zero in punti diversi.'''
+
+[[quesito]]
+id = "ud1-unita-glicemia"
+tipo = "multipla"
+testo = '''La glicemia a digiuno di un paziente è {{c}}. In grammi al litro vale'''
+dati.c = { valore = 90, unita = "\\milli\\gram\\per\\deci\\litre" }
+corretta = "E"
+calcolo = "c * 1e-3 / 0.1"
+soluzione = '''Si sostituiscono le unità: $\SI{1}{\milli\gram} = \SI{e-3}{\gram}$ e $\SI{1}{\deci\litre} = \SI{e-1}{\litre}$. Quindi
+\[
+  \SI{90}{\milli\gram\per\deci\litre} = 90 \cdot \frac{\SI{e-3}{\gram}}{\SI{e-1}{\litre}} = 90 \cdot 10^{-3-(-1)}\,\si{\gram\per\litre} = 90 \cdot 10^{-2}\,\si{\gram\per\litre} = \SI{0,90}{\gram\per\litre}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{9,0}{\gram\per\litre}'''
+  commento = '''Confonde deci con centi e usa $\SI{1}{\deci\litre} = \SI{e-2}{\litre}$: $90 \cdot 10^{-3}/10^{-2} = 9{,}0$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,090}{\gram\per\litre}'''
+  commento = '''Converte i milligrammi in grammi, \SI{0,090}{\gram}, ma tratta il decilitro come un litro.'''
+  [[quesito.opzione]]
+  testo = '''\SI{9,0e-3}{\gram\per\litre}'''
+  commento = '''Moltiplica per 0,1 invece di dividere: $\SI{0,090}{\gram} \cdot 0{,}1 = \SI{9,0e-3}{\gram}$. In un litro, dieci volte più grande di un decilitro, c'è dieci volte più glucosio.'''
+  [[quesito.opzione]]
+  testo = '''\SI{900}{\gram\per\litre}'''
+  commento = '''Passa bene dal decilitro al litro, $\SI{90}{\milli\gram\per\deci\litre} = \SI{900}{\milli\gram\per\litre}$, ma dimentica di convertire i milligrammi in grammi.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,90}{\gram\per\litre}'''
+  valore = 0.9
+
+[[quesito]]
+id = "ud1-grandezze-vettoriali"
+tipo = "multipla"
+testo = '''Quale di queste coppie contiene solo grandezze vettoriali?'''
+corretta = "C"
+soluzione = '''Una grandezza è vettoriale quando per descriverla servono, oltre al numero con l'unità, una direzione e un verso. Lo spostamento e la forza sono vettoriali: spostarsi di \SI{100}{\metre} o spingere con una certa forza non dice niente finché non si sa in che direzione. Massa, temperatura, volume e durata sono scalari: basta un numero con la sua unità.'''
+
+  [[quesito.opzione]]
+  testo = '''la massa e la forza'''
+  commento = '''La forza è vettoriale, ma la massa no: \SI{70}{\kilo\gram} non hanno direzione.'''
+  [[quesito.opzione]]
+  testo = '''la temperatura e la velocità'''
+  commento = '''La velocità è vettoriale, ma la temperatura è scalare: \SI{37}{\celsius} non puntano da nessuna parte.'''
+  [[quesito.opzione]]
+  testo = '''lo spostamento e la forza'''
+  [[quesito.opzione]]
+  testo = '''il volume e lo spostamento'''
+  commento = '''Lo spostamento è vettoriale, ma il volume è scalare. Il volume ha tre dimensioni nello spazio, $[L^{3}]$, ma non una direzione.'''
+  [[quesito.opzione]]
+  testo = '''la durata di un esame e l'accelerazione'''
+  commento = '''L'accelerazione è vettoriale, ma la durata è scalare. Il tempo scorre in un solo verso, ma questo non ne fa un vettore: basta un numero, \SI{20}{\minute}.'''
+
+[[quesito]]
+id = "ud1-unita-rene"
+tipo = "multipla"
+testo = '''I reni filtrano circa {{V}} di plasma al giorno. In metri cubi sono'''
+dati.V = { valore = 180, unita = "\\litre" }
+corretta = "B"
+calcolo = "V / 1000"
+soluzione = '''Un litro è un decimetro cubo, e $\SI{1}{\deci\metre} = \SI{e-1}{\metre}$, quindi $\SI{1}{\litre} = (\SI{e-1}{\metre})^{3} = \SI{e-3}{\metre\cubed}$: un metro cubo contiene \num{1000} litri. Quindi $\SI{180}{\litre} = 180 \cdot \SI{e-3}{\metre\cubed} = \SI{0,18}{\metre\cubed}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{1,8e5}{\metre\cubed}'''
+  commento = '''Moltiplica per \num{1000} invece di dividere. Il metro cubo è più grande del litro, quindi il numero deve diventare più piccolo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,18}{\metre\cubed}'''
+  valore = 0.18
+  [[quesito.opzione]]
+  testo = '''\SI{1,8}{\metre\cubed}'''
+  commento = '''Eleva al quadrato il fattore 10 invece di elevarlo al cubo, e divide per 100: tratta il volume come una superficie.'''
+  [[quesito.opzione]]
+  testo = '''\SI{18}{\metre\cubed}'''
+  commento = '''Sa che $\SI{1}{\litre} = \SI{1}{\deci\metre\cubed}$, ma divide per 10 come per una lunghezza: per un volume il fattore va al cubo, $10^{3}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,8e-4}{\metre\cubed}'''
+  commento = '''Usa $\SI{1}{\litre} = \SI{e-6}{\metre\cubed}$, che è il valore del millilitro, cioè del centimetro cubo.'''
+
+[[quesito]]
+id = "ud1-notazione-quadrato"
+tipo = "completamento"
+testo = '''Il quadrato $(4 \cdot 10^{-6})^{2}$, scritto in notazione scientifica, è $1{,}6 \cdot 10^{n}$ con $n =$ \completa.'''
+calcolo = "round(math.log10((4e-6)**2 / 1.6))"
+risposta = "-11"
+soluzione = '''Si eleva al quadrato la mantissa e la potenza di 10; per la potenza di una potenza gli esponenti si moltiplicano:
+\[
+  (4 \cdot 10^{-6})^{2} = 4^{2} \cdot 10^{-6 \cdot 2} = 16 \cdot 10^{-12} = 1{,}6 \cdot 10^{1} \cdot 10^{-12} = 1{,}6 \cdot 10^{-11}
+\]
+Quindi $n = -11$. Chi scrive $-12$ ha ridotto la mantissa da 16 a 1,6 senza correggere l'esponente; chi scrive 36 ha elevato al quadrato l'esponente, $(-6)^{2} = 36$, invece di moltiplicarlo per 2.'''
+
+[[quesito]]
+id = "ud1-unita-aorta"
+tipo = "completamento"
+testo = '''A riposo il sangue scorre nell'aorta a una velocità media di circa {{v}}. In chilometri all'ora questa velocità vale \completa\ \si{\kilo\metre\per\hour}.'''
+dati.v = { valore = 20, unita = "\\centi\\metre\\per\\second" }
+calcolo = "v / 100 * 3.6"
+risposta = "0,72"
+soluzione = '''Prima si passa ai metri al secondo: $\SI{20}{\centi\metre\per\second} = \SI{0,20}{\metre\per\second}$. Da \si{\metre\per\second} a \si{\kilo\metre\per\hour} si moltiplica per 3,6:
+\[
+  \SI{0,20}{\metre\per\second} \cdot 3{,}6 = \SI{0,72}{\kilo\metre\per\hour}
+\]
+Il fattore 3,6 viene da $\SI{1}{\metre\per\second} = \SI{e-3}{\kilo\metre}/(\SI{1}{\hour}/3600) = 3600 \cdot 10^{-3}\,\si{\kilo\metre\per\hour} = \SI{3,6}{\kilo\metre\per\hour}$. Chi divide per 3,6 trova circa 0,056, un valore che non ha senso: una velocità in \si{\kilo\metre\per\hour} è sempre un numero più grande della stessa velocità in \si{\metre\per\second}.'''
+
+[[quesito]]
+id = "ud1-unita-insulina"
+tipo = "completamento"
+testo = '''Una siringa da insulina contiene {{V}} di soluzione. In millimetri cubi il suo volume vale \completa.'''
+dati.V = { valore = "0,50", unita = "\\milli\\litre" }
+calcolo = "V * 1000"
+risposta = "500"
+soluzione = '''Un millilitro è un centimetro cubo, e $\SI{1}{\centi\metre} = \SI{10}{\milli\metre}$. Il fattore va al cubo: $\SI{1}{\centi\metre\cubed} = (\SI{10}{\milli\metre})^{3} = \SI{1000}{\milli\metre\cubed}$. Quindi
+\[
+  \SI{0,50}{\milli\litre} = 0{,}50 \cdot \SI{1000}{\milli\metre\cubed} = \SI{500}{\milli\metre\cubed}
+\]
+Chi usa il fattore 10 delle lunghezze trova 5.'''
+
+[[quesito]]
+id = "ud1-ordine-leucociti"
+tipo = "completamento"
+testo = '''Un millimetro cubo di sangue contiene circa {{n}} globuli bianchi. L'ordine di grandezza del numero di globuli bianchi in un litro di sangue è $10^{n}$ con $n =$ \completa.'''
+dati.n = { valore = 7000 }
+calcolo = "round(math.log10(n * 1e6))"
+risposta = "10"
+soluzione = '''Un litro è un decimetro cubo, e $\SI{1}{\deci\metre} = \SI{100}{\milli\metre}$, quindi $\SI{1}{\litre} = (\SI{e2}{\milli\metre})^{3} = \SI{e6}{\milli\metre\cubed}$. I globuli bianchi in un litro sono
+\[
+  N = 7 \cdot 10^{3} \cdot 10^{6} = 7 \cdot 10^{9}
+\]
+La mantissa 7 è maggiore di 3, quindi l'ordine di grandezza è $10^{9+1} = 10^{10}$: $n = 10$. Chi risponde 9 guarda solo l'esponente e dimentica la mantissa.'''
+
+[[quesito]]
+id = "ud1-grandezze-fisiologica"
+tipo = "completamento"
+testo = '''La soluzione fisiologica contiene {{c}} di cloruro di sodio: la concentrazione è la massa di sostanza disciolta divisa per il volume della soluzione. Si versano in un unico recipiente due sacche di soluzione fisiologica, da \SI{250}{\milli\litre} ciascuna. La concentrazione di cloruro di sodio nel recipiente vale \completa\ \si{\gram\per\litre}.'''
+dati.c = { valore = 9, unita = "\\gram\\per\\litre" }
+calcolo = "c"
+risposta = "9"
+soluzione = '''La concentrazione è una grandezza intensiva: non dipende da quanta soluzione c'è, e unendo due soluzioni con la stessa concentrazione resta la stessa. Infatti nel recipiente ci sono $2 \cdot \SI{9}{\gram\per\litre} \cdot \SI{0,250}{\litre} = \SI{4,5}{\gram}$ di sale in $\SI{0,500}{\litre}$, e $\SI{4,5}{\gram}/\SI{0,500}{\litre} = \SI{9}{\gram\per\litre}$. Massa e volume, estensivi, raddoppiano; il loro rapporto no. Chi risponde 18 somma le concentrazioni come se fossero estensive.'''
+
+[[quesito]]
+id = "ud1-trig-radianti"
+tipo = "multipla"
+testo = '''Un fisioterapista misura un'estensione del polso di \ang{60}. Espresso in radianti, questo angolo vale'''
+corretta = "B"
+calcolo = "60 * math.pi / 180"
+soluzione = '''Un angolo piatto, \ang{180}, vale $\pi$ radianti. Per passare da gradi a radianti si moltiplica per $\pi/\ang{180}$:
+\[
+  \ang{60} = 60 \cdot \frac{\pi}{180}\ \si{\radian} = \frac{\pi}{3}\ \si{\radian}
+\]
+Controllo: \ang{60} è un terzo di \ang{180}, quindi vale un terzo di $\pi$.'''
+
+  [[quesito.opzione]]
+  testo = '''$\pi/6$'''
+  commento = '''Usa $\ang{360} = \pi$ invece di $2\pi$: $60\pi/360 = \pi/6$, che corrisponde a \ang{30}.'''
+  [[quesito.opzione]]
+  testo = '''$\pi/3$'''
+  valore = 1.0471975511965976
+  [[quesito.opzione]]
+  testo = '''$2\pi/3$'''
+  commento = '''Usa $\ang{180} = 2\pi$ invece di $\pi$: $60 \cdot 2\pi/180 = 2\pi/3$, che corrisponde a \ang{120}.'''
+  [[quesito.opzione]]
+  testo = '''$3\pi$'''
+  commento = '''Rovescia il rapporto: $180/60 = 3$ invece di $60/180 = 1/3$. Un angolo minore di \ang{180} non può valere più di $\pi$.'''
+  [[quesito.opzione]]
+  testo = '''$60\pi$'''
+  commento = '''Moltiplica per $\pi$ ma dimentica di dividere per 180.'''
+
+[[quesito]]
+id = "ud1-trig-supplementare"
+tipo = "multipla"
+testo = '''Il valore di $\cos\ang{150}$ è'''
+corretta = "E"
+calcolo = "-cos30"
+soluzione = '''\ang{150} e \ang{30} sono supplementari: $\ang{180} - \ang{150} = \ang{30}$. Per gli angoli supplementari il coseno cambia segno:
+\[
+  \cos\ang{150} = \cos(\ang{180} - \ang{30}) = -\cos\ang{30} = -\frac{\sqrt 3}{2} \approx -0{,}87
+\]
+Sulla circonferenza goniometrica il punto a \ang{150} sta a sinistra dell'asse $y$: l'ascissa, cioè il coseno, è negativa.'''
+
+  [[quesito.opzione]]
+  testo = '''$\dfrac{1}{2}$'''
+  commento = '''È $\sin\ang{150} = \sin\ang{30}$: scambia il coseno con il seno.'''
+  [[quesito.opzione]]
+  testo = '''$\dfrac{\sqrt 3}{2}$'''
+  commento = '''Trova l'angolo supplementare giusto ma dimentica il segno: per un angolo fra \ang{90} e \ang{180} il coseno è negativo.'''
+  [[quesito.opzione]]
+  testo = '''$-\dfrac{1}{2}$'''
+  commento = '''Il segno è giusto, ma usa $\cos\ang{60}$: sottrae \ang{90} invece di partire da \ang{180}, $\ang{150} - \ang{90} = \ang{60}$. L'angolo da usare è $\ang{180} - \ang{150} = \ang{30}$.'''
+  [[quesito.opzione]]
+  testo = '''$-1$'''
+  commento = '''È $\cos\ang{180}$: il coseno vale $-1$ solo a \ang{180}, e \ang{150} non è \ang{180}.'''
+  [[quesito.opzione]]
+  testo = '''$-\dfrac{\sqrt 3}{2}$'''
+  valore = -0.87
+
+[[quesito]]
+id = "ud1-trig-biopsia"
+tipo = "multipla"
+testo = '''Un ago da biopsia lungo {{L}} viene inserito in linea retta per tutta la sua lunghezza, inclinato di \ang{60} rispetto alla superficie della pelle. La distanza fra il punto d'ingresso e il punto della pelle che sta proprio sopra la punta dell'ago vale'''
+dati.L = { valore = 10, unita = "cm" }
+corretta = "A"
+calcolo = "L * cos60"
+soluzione = '''L'ago è l'ipotenusa di un triangolo rettangolo. La distanza lungo la pelle è il cateto che forma l'angolo di \ang{60} insieme all'ago, cioè il cateto adiacente:
+\[
+  d = L\cos\ang{60} = \SI{10}{\centi\metre} \cdot \frac{1}{2} = \SI{5}{\centi\metre}
+\]
+La profondità della punta è invece il cateto opposto, $L\sin\ang{60} \approx \SI{8,7}{\centi\metre}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{5}{\centi\metre}'''
+  valore = 5
+  [[quesito.opzione]]
+  testo = '''circa \SI{8,7}{\centi\metre}'''
+  commento = '''Usa il seno, $10 \cdot 0{,}87$: questa è la profondità della punta sotto la pelle, il cateto opposto all'angolo.'''
+  [[quesito.opzione]]
+  testo = '''circa \SI{17}{\centi\metre}'''
+  commento = '''Moltiplica per $\tan\ang{60} \approx 1{,}73$. La tangente è il rapporto fra due cateti, non fra un cateto e l'ipotenusa; e un cateto non può essere più lungo dell'ago.'''
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\centi\metre}'''
+  commento = '''Divide per il coseno invece di moltiplicare, $10/0{,}5$: così si troverebbe l'ipotenusa a partire dal cateto. Un cateto non può essere più lungo dell'ipotenusa.'''
+  [[quesito.opzione]]
+  testo = '''circa \SI{11,5}{\centi\metre}'''
+  commento = '''Divide per il seno, $10/0{,}87 \approx 11{,}5$: sbaglia sia la funzione sia l'operazione, e trova un cateto più lungo dell'ago.'''
+
+[[quesito]]
+id = "ud1-vett-modulo-spazio"
+tipo = "multipla"
+testo = '''Il vettore $\vec a = (2, 3, 6)$ ha modulo'''
+corretta = "D"
+calcolo = "math.sqrt(2**2 + 3**2 + 6**2)"
+soluzione = '''Nello spazio il modulo è la radice della somma dei quadrati delle tre componenti:
+\[
+  a = \sqrt{a_x^2 + a_y^2 + a_z^2} = \sqrt{4 + 9 + 36} = \sqrt{49} = 7
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''$11$'''
+  commento = '''Somma le componenti, $2 + 3 + 6$: il modulo non è la somma delle componenti, come l'ipotenusa non è la somma dei cateti.'''
+  [[quesito.opzione]]
+  testo = '''$49$'''
+  commento = '''Dimentica la radice quadrata: $4 + 9 + 36 = 49$ è il quadrato del modulo.'''
+  [[quesito.opzione]]
+  testo = '''circa $3{,}6$'''
+  commento = '''Usa solo le componenti $x$ e $y$, $\sqrt{4 + 9} = \sqrt{13} \approx 3{,}6$: nello spazio conta anche la componente $z$.'''
+  [[quesito.opzione]]
+  testo = '''$7$'''
+  valore = 7
+  [[quesito.opzione]]
+  testo = '''circa $3{,}3$'''
+  commento = '''Fa la radice della somma delle componenti senza elevarle al quadrato: $\sqrt{2 + 3 + 6} = \sqrt{11} \approx 3{,}3$.'''
+
+[[quesito]]
+id = "ud1-vett-versori"
+tipo = "multipla"
+testo = '''Con la regola della mano destra, il prodotto vettoriale $\hat\jmath \times \hat\imath$ vale'''
+corretta = "C"
+soluzione = '''I due versori sono perpendicolari e hanno modulo 1, quindi il prodotto ha modulo $1 \cdot 1 \cdot \sin\ang{90} = 1$ ed è diretto come l'asse $z$. Per il verso: pollice lungo il primo fattore, $\hat\jmath$ (asse $y$), indice lungo il secondo, $\hat\imath$ (asse $x$); il medio punta nel verso negativo dell'asse $z$, dentro il foglio. Lo stesso risultato viene da $\hat\imath \times \hat\jmath = \hat k$ e dalla regola dello scambio: $\hat\jmath \times \hat\imath = -\,\hat\imath \times \hat\jmath = -\hat k$.'''
+
+  [[quesito.opzione]]
+  testo = '''$\hat k$'''
+  commento = '''È $\hat\imath \times \hat\jmath$. Il prodotto vettoriale dipende dall'ordine: scambiando i fattori il verso si inverte.'''
+  [[quesito.opzione]]
+  testo = '''$0$'''
+  commento = '''Confonde con il prodotto scalare, che è nullo per vettori perpendicolari. Il prodotto vettoriale è nullo per vettori paralleli, ed è massimo per vettori perpendicolari.'''
+  [[quesito.opzione]]
+  testo = '''$-\hat k$'''
+  [[quesito.opzione]]
+  testo = '''$1$'''
+  commento = '''Trova il modulo giusto, $1 \cdot 1 \cdot \sin\ang{90} = 1$, ma lo scrive come un numero: il prodotto vettoriale è un vettore, con una direzione e un verso.'''
+  [[quesito.opzione]]
+  testo = '''$\hat\imath + \hat\jmath$'''
+  commento = '''Confonde il prodotto con la somma. Il prodotto vettoriale è perpendicolare a entrambi i fattori, mentre $\hat\imath + \hat\jmath$ sta nel loro piano.'''
+
+[[quesito]]
+id = "ud1-vett-differenza"
+tipo = "multipla"
+testo = '''Dati i vettori $\vec a = (5, 2)$ e $\vec b = (1, -1)$, il modulo di $\vec a - \vec b$ vale'''
+corretta = "E"
+calcolo = "math.sqrt((5 - 1)**2 + (2 - (-1))**2)"
+soluzione = '''Si sottraggono le componenti una per una, attenti al segno meno davanti a una componente negativa:
+\[
+  \vec a - \vec b = (5 - 1,\ 2 - (-1)) = (4,\ 3)
+  \qquad\qquad
+  |\vec a - \vec b| = \sqrt{4^2 + 3^2} = \sqrt{16 + 9} = \sqrt{25} = 5
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''circa $6{,}1$'''
+  commento = '''È il modulo della somma: $\vec a + \vec b = (6, 1)$ e $\sqrt{36 + 1} = \sqrt{37} \approx 6{,}1$.'''
+  [[quesito.opzione]]
+  testo = '''circa $4{,}1$'''
+  commento = '''Sbaglia il segno nella componente $y$: scrive $2 - 1 = 1$ invece di $2 - (-1) = 3$, e trova $\sqrt{16 + 1} = \sqrt{17} \approx 4{,}1$.'''
+  [[quesito.opzione]]
+  testo = '''$7$'''
+  commento = '''Trova le componenti giuste, $(4, 3)$, ma le somma: il modulo si calcola con Pitagora.'''
+  [[quesito.opzione]]
+  testo = '''$25$'''
+  commento = '''Dimentica la radice quadrata: $16 + 9 = 25$ è il quadrato del modulo.'''
+  [[quesito.opzione]]
+  testo = '''$5$'''
+  valore = 5
+
+[[quesito]]
+id = "ud1-vett-perpendicolari"
+tipo = "multipla"
+testo = '''Il prodotto scalare dei vettori $\vec a = (2, -1, 3)$ e $\vec b = (4, 5, -1)$ vale'''
+corretta = "B"
+calcolo = "2 * 4 + (-1) * 5 + 3 * (-1)"
+soluzione = '''Si moltiplicano le componenti omologhe e si sommano i tre prodotti, con il loro segno:
+\[
+  \vec a \cdot \vec b = a_x b_x + a_y b_y + a_z b_z = 2 \cdot 4 + (-1) \cdot 5 + 3 \cdot (-1) = 8 - 5 - 3 = 0
+\]
+Il prodotto scalare di due vettori non nulli è zero solo se sono perpendicolari: $\vec a$ e $\vec b$ lo sono.'''
+
+  [[quesito.opzione]]
+  testo = '''$16$'''
+  commento = '''Ignora i segni delle componenti negative: $8 + 5 + 3 = 16$.'''
+  [[quesito.opzione]]
+  testo = '''$0$'''
+  valore = 0
+  [[quesito.opzione]]
+  testo = '''$(8, -5, -3)$'''
+  commento = '''Moltiplica le componenti ma non somma i prodotti: il prodotto scalare è un numero, non un vettore.'''
+  [[quesito.opzione]]
+  testo = '''$3$'''
+  commento = '''Dimentica la componente $z$: $8 - 5 = 3$.'''
+  [[quesito.opzione]]
+  testo = '''circa $24$'''
+  commento = '''Moltiplica i moduli, $\sqrt{14} \cdot \sqrt{42} = \sqrt{588} \approx 24$: è il prodotto scalare solo per vettori paralleli e concordi.'''
+
+[[quesito]]
+id = "ud1-vett-paralleli"
+tipo = "multipla"
+testo = '''Due vettori non nulli $\vec a$ e $\vec b$ hanno prodotto vettoriale nullo. Allora'''
+corretta = "A"
+soluzione = '''Il modulo del prodotto vettoriale è $ab\sin\theta$. Con $a$ e $b$ diversi da zero, il prodotto è nullo solo se $\sin\theta = 0$, cioè $\theta = \ang{0}$ oppure $\theta = \ang{180}$: i due vettori hanno la stessa direzione, con lo stesso verso o con versi opposti.'''
+
+  [[quesito.opzione]]
+  testo = '''$\vec a$ e $\vec b$ hanno la stessa direzione'''
+  [[quesito.opzione]]
+  testo = '''$\vec a$ e $\vec b$ sono perpendicolari'''
+  commento = '''È il contrario: per vettori perpendicolari $\sin\ang{90} = 1$ e il prodotto vettoriale è massimo. A essere nullo per vettori perpendicolari è il prodotto scalare.'''
+  [[quesito.opzione]]
+  testo = '''$\vec a$ e $\vec b$ hanno lo stesso modulo'''
+  commento = '''Pensa a $\vec a \times \vec a = 0$, ma è nullo perché un vettore è parallelo a sé stesso, non per l'uguaglianza dei moduli: due vettori perpendicolari di modulo uguale hanno prodotto vettoriale diverso da zero.'''
+  [[quesito.opzione]]
+  testo = '''anche il prodotto scalare $\vec a \cdot \vec b$ è nullo'''
+  commento = '''Per vettori paralleli il prodotto scalare vale $ab$ o $-ab$, mai zero. I due prodotti non possono essere nulli insieme, se i vettori non sono nulli.'''
+  [[quesito.opzione]]
+  testo = '''$\vec a$ e $\vec b$ hanno versi opposti'''
+  commento = '''È uno dei due casi possibili, $\theta = \ang{180}$. Anche due vettori con lo stesso verso, $\theta = \ang{0}$, hanno prodotto vettoriale nullo.'''
+
+[[quesito]]
+id = "ud1-vett-forze-120"
+tipo = "multipla"
+testo = '''Due elastici di un tutore tirano lo stesso punto con forze di modulo {{F}} ciascuna. Le due forze formano fra loro un angolo di \ang{120}. Il modulo della forza totale vale'''
+dati.F = { valore = 10, unita = "\\newton" }
+corretta = "C"
+calcolo = "2 * F * cos60"
+soluzione = '''Si mette la prima forza lungo l'asse $x$: $\vec F_1 = (10, 0)$, in newton. La seconda forma \ang{120} con l'asse:
+\[
+  \vec F_2 = (10\cos\ang{120},\ 10\sin\ang{120}) = \left(-10 \cdot \tfrac{1}{2},\ 10 \cdot \tfrac{\sqrt 3}{2}\right) = (-5,\ 5\sqrt 3)
+\]
+La somma è $(10 - 5,\ 5\sqrt 3) = (5,\ 5\sqrt 3)$, e il suo modulo
+\[
+  F = \sqrt{25 + 25 \cdot 3}\,\si{\newton} = \sqrt{100}\,\si{\newton} = \SI{10}{\newton}
+\]
+Due forze uguali a \ang{120} danno una somma dello stesso modulo di ciascuna.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\newton}'''
+  commento = '''Somma i moduli: vale solo per forze con la stessa direzione e lo stesso verso.'''
+  [[quesito.opzione]]
+  testo = '''circa \SI{17}{\newton}'''
+  commento = '''Prende come angolo fra le forze \ang{60} invece di \ang{120}: per due forze a \ang{60} la somma sarebbe $2 \cdot 10 \cdot \cos\ang{30} \approx \SI{17}{\newton}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\newton}'''
+  valore = 10
+  [[quesito.opzione]]
+  testo = '''\SI{0}{\newton}'''
+  commento = '''Tratta le forze come opposte: la somma è nulla solo se l'angolo fra le due forze uguali è \ang{180}.'''
+  [[quesito.opzione]]
+  testo = '''circa \SI{14}{\newton}'''
+  commento = '''Usa Pitagora come se le forze fossero perpendicolari: $\sqrt{100 + 100} = 10\sqrt 2 \approx \SI{14}{\newton}$.'''
+
+[[quesito]]
+id = "ud1-vett-componenti-ottuso"
+tipo = "multipla"
+testo = '''Una forza di modulo \SI{6,0}{\newton} forma un angolo di \ang{120} con l'asse $x$, misurato in verso antiorario. Le sue componenti $(F_x;\ F_y)$, in newton, sono'''
+corretta = "D"
+soluzione = '''Con la circonferenza goniometrica le formule delle componenti valgono per qualunque angolo. Per gli angoli supplementari $\cos\ang{120} = -\cos\ang{60} = -0{,}5$ e $\sin\ang{120} = \sin\ang{60} \approx 0{,}87$:
+\[
+  F_x = F\cos\ang{120} = 6{,}0 \cdot (-0{,}5) = -3{,}0
+  \qquad\qquad
+  F_y = F\sin\ang{120} \approx 6{,}0 \cdot 0{,}87 \approx 5{,}2
+\]
+La forza punta verso sinistra e verso l'alto.'''
+
+  [[quesito.opzione]]
+  testo = '''$(3{,}0;\ 5{,}2)$'''
+  commento = '''Dimentica il segno del coseno: per un angolo fra \ang{90} e \ang{180} il coseno è negativo e la componente $x$ punta verso sinistra.'''
+  [[quesito.opzione]]
+  testo = '''$(5{,}2;\ -3{,}0)$'''
+  commento = '''Scambia seno e coseno: usa $F\sin\theta$ per la componente $x$ e $F\cos\theta$ per la componente $y$.'''
+  [[quesito.opzione]]
+  testo = '''$(-3{,}0;\ -5{,}2)$'''
+  commento = '''Dà il segno meno anche alla componente $y$: a \ang{120} il punto sulla circonferenza goniometrica è sopra l'asse $x$, e il seno è positivo.'''
+  [[quesito.opzione]]
+  testo = '''$(-3{,}0;\ 5{,}2)$'''
+  [[quesito.opzione]]
+  testo = '''$(-0{,}50;\ 0{,}87)$'''
+  commento = '''Sono il coseno e il seno di \ang{120}, cioè le componenti del versore: dimentica di moltiplicare per il modulo, \SI{6,0}{\newton}.'''
+
+[[quesito]]
+id = "ud1-trig-tutore"
+tipo = "completamento"
+testo = '''Un tutore esercita una forza di componenti $F_x = \SI{2}{\newton}$ e $F_y = 2\sqrt 3\ \si{\newton}$. L'angolo che la forza forma con l'asse $x$ vale \completa\ gradi.'''
+calcolo = "math.degrees(math.atan2(2 * math.sqrt(3), 2))"
+risposta = "60"
+soluzione = '''La tangente dell'angolo è il rapporto fra le componenti:
+\[
+  \tan\theta = \frac{F_y}{F_x} = \frac{2\sqrt 3}{2} = \sqrt 3
+\]
+Dalla tabella dei valori notevoli $\tan\ang{60} = \sqrt 3$. Le due componenti sono positive, quindi il vettore sta fra il verso positivo dell'asse $x$ e quello dell'asse $y$, e l'angolo è \ang{60}. Chi scrive 30 ha rovesciato il rapporto, $F_x/F_y = 1/\sqrt 3 = \tan\ang{30}$.'''
+
+[[quesito]]
+id = "ud1-vett-scalare-120"
+tipo = "completamento"
+testo = '''Due vettori di modulo $a = 4$ e $b = 5$ formano un angolo di \ang{120}. Il prodotto scalare $\vec a \cdot \vec b$ vale \completa.'''
+calcolo = "4 * 5 * (-cos60)"
+risposta = "-10"
+soluzione = '''Per gli angoli supplementari $\cos\ang{120} = -\cos\ang{60} = -1/2$. Quindi
+\[
+  \vec a \cdot \vec b = ab\cos\ang{120} = 4 \cdot 5 \cdot \left(-\frac{1}{2}\right) = -10
+\]
+Chi scrive 10 ha dimenticato che il coseno di un angolo ottuso è negativo; chi scrive circa 17 ha usato il seno, $20 \cdot 0{,}87$, che dà il modulo del prodotto vettoriale.'''
+
+[[quesito]]
+id = "ud1-vett-per-scalare"
+tipo = "completamento"
+testo = '''Dato il vettore $\vec a = (2, -1)$, il vettore $-3\vec a$ ha componente $y$ uguale a \completa.'''
+calcolo = "-3 * (-1)"
+risposta = "3"
+soluzione = '''Moltiplicare un vettore per un numero vuol dire moltiplicare per quel numero ogni componente, $k\vec a = (k a_x, k a_y)$, anche quando $k$ è negativo:
+\[
+  -3\vec a = (-3 \cdot 2,\ -3 \cdot (-1)) = (-6,\ 3)
+\]
+La componente $y$ è 3: meno per meno dà più. Il vettore $-3\vec a$ ha la stessa direzione di $\vec a$, modulo triplo e verso opposto.'''
+
+[[quesito]]
+id = "ud1-vett-vettoriale-150"
+tipo = "completamento"
+testo = '''Due vettori di modulo $a = 6$ e $b = 4$ formano un angolo di \ang{150}. Il modulo del prodotto vettoriale $\vec a \times \vec b$ vale \completa.'''
+calcolo = "6 * 4 * sin30"
+risposta = "12"
+soluzione = '''Per gli angoli supplementari il seno non cambia: $\sin\ang{150} = \sin\ang{30} = 1/2$. Quindi
+\[
+  |\vec a \times \vec b| = ab\sin\ang{150} = 6 \cdot 4 \cdot \frac{1}{2} = 12
+\]
+Il modulo del prodotto vettoriale non è mai negativo: chi scrive $-12$ ha cambiato segno al seno come si fa con il coseno. Chi scrive circa 21 ha usato $\cos\ang{30} \approx 0{,}87$.'''
+
+[[quesito]]
+id = "ud1-trig-pitagora"
+tipo = "completamento"
+testo = '''Per un angolo acuto $\alpha$ si sa che $\sin\alpha = 0{,}6$. Allora $\cos\alpha$ vale \completa.'''
+calcolo = "math.sqrt(1 - 0.6**2)"
+risposta = "0,8"
+soluzione = '''Da $\sin^{2}\alpha + \cos^{2}\alpha = 1$:
+\[
+  \cos^{2}\alpha = 1 - \sin^{2}\alpha = 1 - 0{,}36 = 0{,}64
+  \qquad\Longrightarrow\qquad
+  \cos\alpha = \sqrt{0{,}64} = 0{,}8
+\]
+Per un angolo acuto il coseno è positivo, quindi si prende la radice positiva. È il triangolo rettangolo con cateti 3 e 4 e ipotenusa 5: $\sin\alpha = 3/5$ e $\cos\alpha = 4/5$. Chi scrive 0,4 ha fatto $1 - 0{,}6$, dimenticando i quadrati.'''
 
 # ==================================================================== quesiti lampo, in ordine di dispensa
 
@@ -94,11 +1647,11 @@ Il conto esatto dà \num{100800} $\approx 1{,}0 \cdot 10^{5}$: la mantissa è mi
 id = "ud1-trigonometria"
 tipo = "completamento"
 lampo = true
-testo = '''Una rampa per carrozzine è lunga {{c}} e forma con il pavimento un angolo di \ang{30}. Il dislivello che supera, in metri, è \completa.'''
+testo = '''La scala mobile all'ingresso dell'ospedale è lunga {{c}} e forma con il pavimento un angolo di \ang{30}. Il dislivello che supera, in metri, è \completa.'''
 dati.c = { valore = 4, unita = "m" }
 calcolo = "c * sin30"
 risposta = "2"
-soluzione = '''La rampa è l'ipotenusa di un triangolo rettangolo; il dislivello è il cateto opposto all'angolo di \ang{30}, quindi si usa il seno:
+soluzione = '''La scala mobile è l'ipotenusa di un triangolo rettangolo; il dislivello è il cateto opposto all'angolo di \ang{30}, quindi si usa il seno:
 \[
   h = c \sin\ang{30} = \SI{4}{\metre} \cdot \frac{1}{2} = \SI{2}{\metre}
 \]
