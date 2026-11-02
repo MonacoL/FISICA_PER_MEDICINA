@@ -34,7 +34,7 @@ Un sistema è \textbf{aperto} se scambia con l'ambiente energia e materia (il co
 Un gas contiene un numero enorme di molecole, e non si può seguire ciascuna. Lo si descrive invece con poche grandezze misurabili su tutto il sistema, le \textbf{variabili termodinamiche}. Per un gas bastano tre:
 \begin{itemize}
   \item il \textbf{volume} $V$, in \si{\metre\cubed} (in medicina spesso in litri, $\SI{1}{\litre} = \SI{e-3}{\metre\cubed}$);
-  \item la \textbf{pressione} $p$: la forza che il gas esercita su ogni metro quadrato della parete, $p = F/A$, in pascal, $\SI{1}{\pascal} = \SI{1}{\newton\per\metre\squared}$ (la vedrai per esteso nella UD3, sui fluidi). La pressione dell'aria al livello del mare è circa $\SI{1}{atm} = \SI{1,013e5}{\pascal} \approx \SI{1,0e5}{\pascal} = \SI{760}{mmHg}$; si usa anche il bar, $\SI{1}{bar} = \SI{e5}{\pascal}$;
+  \item la \textbf{pressione} $p$: la forza che il gas esercita su ogni metro quadrato della parete, $p = F/A$, in pascal, $\SI{1}{\pascal} = \SI{1}{\newton\per\metre\squared}$ (l'hai vista per esteso nella UD3, sui fluidi). La pressione dell'aria al livello del mare è circa $\SI{1}{atm} = \SI{1,013e5}{\pascal} \approx \SI{1,0e5}{\pascal} = \SI{760}{mmHg}$; si usa anche il bar, $\SI{1}{bar} = \SI{e5}{\pascal}$;
   \item la \textbf{temperatura} $T$, di cui parla il prossimo paragrafo.
 \end{itemize}
 Quando queste grandezze hanno lo stesso valore in tutto il sistema e non cambiano nel tempo, il sistema è in \textbf{equilibrio termodinamico}, e i loro valori definiscono il suo \textbf{stato}. Lo stato di un gas in equilibrio si rappresenta come un punto nel \textbf{piano $pV$}, con il volume in ascissa e la pressione in ordinata. Una \textbf{trasformazione} è il passaggio da uno stato iniziale a uno stato finale.
@@ -165,7 +165,7 @@ La «caloria» delle etichette degli alimenti (a volte scritta Cal, con la maius
 
 \subsection{Capacità termica e calore specifico}
 
-Dare la stessa quantità di calore a corpi diversi non li scalda allo stesso modo. La \textbf{capacità termica} $C$ di un corpo è il calore che serve per alzare la sua temperatura di un kelvin: $C = Q/\Delta T$, in \si{\joule\per\kelvin}. È una grandezza estensiva: una vasca d'acqua ha una capacità termica molto più grande di un bicchiere. Dividendo per la massa si ottiene una proprietà del materiale, il \textbf{calore specifico} $c = C/m$: il calore che serve per scaldare di un kelvin un chilogrammo di quella sostanza.
+Dare la stessa quantità di calore a corpi diversi non li scalda allo stesso modo. La \textbf{capacità termica} $C$ di un corpo è il calore che serve per alzare la sua temperatura di un kelvin: $C = Q/\Delta T$, in \si{\joule\per\kelvin}. È una grandezza \textbf{estensiva}, cioè proporzionale alla quantità di materia: una vasca d'acqua ha una capacità termica molto più grande di un bicchiere. Dividendo per la massa si ottiene una proprietà del materiale, che non dipende da quanto materiale c'è, il \textbf{calore specifico} $c = C/m$: il calore che serve per scaldare di un kelvin un chilogrammo di quella sostanza.
 
 \begin{formula}[Capacità termica e calore specifico]
 C = \frac{Q}{\Delta T}
@@ -208,7 +208,7 @@ In kilojoule: $\SI{20}{\kilo\calorie} \cdot \SI{4,2}{\kilo\joule\per\kilo\calori
 \[
   Q = m\,c\,\Delta T = \SI{70}{\kilo\gram} \cdot \SI{3,5}{\kilo\joule\per\kilo\gram\per\kelvin} \cdot \SI{2}{\kelvin} = 70 \cdot 7\,\si{\kilo\joule} = \SI{490}{\kilo\joule}
 \]
-che sono $490/4{,}2 \approx \SI{117}{\kilo\calorie}$.
+che sono $490/4{,}2 = 4900/42 = 700/6 \approx \SI{117}{\kilo\calorie}$.
 \end{esempio}
 
 \begin{attenzione}[le unità del calore specifico]
@@ -218,11 +218,11 @@ In $Q = mc\,\Delta T$ le unità devono andare d'accordo. Con $c$ in \si{\kilo\jo
 \input{ud5/generati/lampo-ud5-calore}
 
 \begin{applicazione}{la febbre e l'ipotermia}
-La temperatura del corpo è regolata dall'ipotalamo intorno a \SI{37}{\celsius}. Nella febbre il valore di riferimento sale, e il corpo si scalda finché lo raggiunge: riduce le perdite di calore restringendo i vasi della pelle (che diventa pallida e fredda) e aumenta la produzione con i brividi, contrazioni muscolari che producono calore senza compiere lavoro utile. L'esempio precedente dice quanta energia serve: circa \SI{490}{\kilo\joule} per due gradi. A riposo il corpo produce circa \SI{100}{\watt}, cioè \SI{100}{\joule} al secondo (il watt è l'unità della potenza, energia diviso tempo, UD2). Se non perdesse calore, gli servirebbero
+La temperatura del corpo è regolata dall'ipotalamo intorno a \SI{37}{\celsius}. Nella febbre il valore di riferimento sale, e il corpo si scalda finché lo raggiunge: riduce le perdite di calore restringendo i vasi della pelle (che diventa pallida e fredda) e aumenta la produzione con i brividi, contrazioni muscolari che producono calore senza compiere lavoro utile. L'esempio precedente dice quanta energia serve: circa \SI{490}{\kilo\joule} per due gradi. A riposo il corpo produce circa \SI{100}{\watt}, cioè \SI{100}{\joule} al secondo (il watt è l'unità della potenza, energia diviso tempo, UD2). Se non perdesse calore, gli servirebbe il tempo
 \[
   \Delta t = \frac{Q}{P} = \frac{\SI{490000}{\joule}}{\SI{100}{\joule\per\second}} = \SI{4900}{\second} \approx \SI{1,4}{\hour}
 \]
-Con i brividi, che possono moltiplicare la produzione di calore per tre o più, la salita è più rapida.
+Qui $\Delta t$ è un intervallo di tempo, non una differenza di temperatura. Con i brividi, che possono moltiplicare la produzione di calore per tre o più, la salita è più rapida.
 
 Nell'\textbf{ipotermia} succede il contrario: il corpo perde più calore di quanto ne produce e la temperatura centrale scende sotto \SI{35}{\celsius}. L'alto calore specifico del corpo aiuta nei due versi: la temperatura cambia lentamente, e un'ipotermia si corregge altrettanto lentamente.
 \end{applicazione}
@@ -288,7 +288,7 @@ cioè circa \SI{150}{\milli\litre} all'ora. Durante uno sforzo intenso la produz
 
 \subsection{La calorimetria}
 
-La \textbf{calorimetria} misura gli scambi di calore. Il principio è semplice: se due o più corpi a temperature diverse sono messi a contatto in un recipiente isolato, il \textbf{calorimetro}, il calore ceduto dai corpi caldi è uguale al calore assorbito da quelli freddi, perché l'energia non esce dal recipiente. Con i segni del paragrafo precedente, la somma di tutti i calori scambiati è zero.
+La \textbf{calorimetria} misura gli scambi di calore. Il principio è semplice: se due o più corpi a temperature diverse sono messi a contatto in un recipiente isolato, il \textbf{calorimetro}, il calore ceduto dai corpi caldi è uguale al calore assorbito da quelli freddi, perché l'energia non esce dal recipiente. Con la convenzione sui segni vista per $Q = mc\,\Delta T$ (calore assorbito positivo, ceduto negativo), la somma di tutti i calori scambiati è zero.
 
 \begin{formula}[Bilancio calorimetrico]
 Q_1 + Q_2 + \dots = 0
@@ -411,19 +411,17 @@ $A$ è l'area della superficie che emette, $T$ la sua temperatura \emph{assoluta
 \begin{esempio}
 Stima la potenza netta che un adulto svestito perde per irraggiamento in una stanza le cui pareti sono a \SI{17}{\celsius}. La pelle è a \SI{27}{\celsius}, l'area $A = \SI{2}{\metre\squared}$, l'emissività $e \approx 1$.
 
-Le temperature vanno in kelvin: $T = 27 + 273 = \SI{300}{\kelvin}$ e $T_{\text{amb}} = 17 + 273 = \SI{290}{\kelvin}$. Le quarte potenze, con la notazione scientifica:
+Le temperature vanno in kelvin: $T = 27 + 273 = \SI{300}{\kelvin}$ e $T_{\text{amb}} = 17 + 273 = \SI{290}{\kelvin}$. Invece di calcolare le due quarte potenze e sottrarle, conviene scomporre la differenza, usando due volte $a^{2} - b^{2} = (a - b)(a + b)$:
 \begin{gather*}
-  300^{4} = (3 \cdot 10^{2})^{4} = 81 \cdot 10^{8} = \num{8,1e9}
+  T^{4} - T_{\text{amb}}^{4} = (T^{2} - T_{\text{amb}}^{2})(T^{2} + T_{\text{amb}}^{2}) = (T - T_{\text{amb}})(T + T_{\text{amb}})(T^{2} + T_{\text{amb}}^{2})
   \\
-  290^{4} = (2{,}9 \cdot 10^{2})^{4} = (2{,}9^{2})^{2} \cdot 10^{8} = 8{,}41^{2} \cdot 10^{8} \approx \num{7,07e9}
+  = 10 \cdot 590 \cdot (\num{90000} + \num{84100})\,\si{\kelvin\tothe{4}} = \num{5,9e3} \cdot \num{1,741e5}\,\si{\kelvin\tothe{4}} \approx \num{1,03e9}\,\si{\kelvin\tothe{4}}
 \end{gather*}
-dove $8{,}41^{2} \approx 70{,}7$. La potenza emessa e quella assorbita sono
+dove $5{,}9 \cdot 1{,}741 \approx 6 \cdot 1{,}74 - 0{,}1 \cdot 1{,}74 = 10{,}44 - 0{,}17 \approx 10{,}3$. La potenza netta è
 \[
-  P = \sigma A T^{4} \approx \num{5,7e-8} \cdot 2 \cdot \num{8,1e9}\,\si{\watt} = 5{,}7 \cdot 2 \cdot 81\,\si{\watt} \approx \SI{923}{\watt}
-  \qquad
-  P_{\text{ass}} \approx 5{,}7 \cdot 2 \cdot 70{,}7\,\si{\watt} \approx \SI{806}{\watt}
+  P_{\text{netta}} = e\,\sigma A\,(T^{4} - T_{\text{amb}}^{4}) \approx \num{5,7e-8} \cdot 2 \cdot \num{1,03e9}\,\si{\watt} = 11{,}4 \cdot 10{,}3\,\si{\watt} \approx \SI{117}{\watt} \approx \SI{120}{\watt}
 \]
-Si è usato $10^{-8} \cdot 10^{9} = 10$, quindi $\num{8,1e9} \cdot 10^{-8} = 81$, e poi $5{,}7 \cdot 2 = 11{,}4$, $11{,}4 \cdot 81 \approx 923$ e $11{,}4 \cdot 70{,}7 \approx 806$. La potenza netta è $923 - 806 \approx \SI{120}{\watt}$. Il corpo emette e assorbe potenze grandi, quasi uguali; conta la loro differenza, che è dello stesso ordine della potenza prodotta a riposo.
+Si è usato $10^{-8} \cdot 10^{9} = 10$, quindi $\num{1,03e9} \cdot 10^{-8} = 10{,}3$, e poi $5{,}7 \cdot 2 = 11{,}4$ e $11{,}4 \cdot 10{,}3 = 114 + 3{,}4 \approx 117$. Da sola, la potenza emessa è molto più grande: $\sigma A T^{4} \approx 11{,}4 \cdot 81\,\si{\watt} \approx \SI{920}{\watt}$, perché $300^{4} = 81 \cdot 10^{8}$. Il corpo emette e assorbe potenze grandi, quasi uguali; conta la loro differenza, che è dello stesso ordine della potenza prodotta a riposo. I \SI{27}{\celsius} della pelle sono un valore arrotondato per semplificare il conto: la pelle è in realtà intorno a \SI{33}{\celsius}, e la potenza netta è un po' più grande, quindi questa è una stima per difetto.
 \end{esempio}
 
 \begin{attenzione}[nell'irraggiamento conta la quarta potenza della temperatura assoluta]
@@ -539,11 +537,12 @@ A parità di $\Delta T$ serve più calore che nell'isocora, \SI{1660}{\joule} in
 \[
   W = nRT\,\ln\frac{V_f}{V_i}
 \]
-Per $n = \SI{1}{\mole}$ a \SI{300}{\kelvin} che raddoppia il suo volume: $W = 8{,}3 \cdot 300 \cdot \ln 2\,\si{\joule} \approx 2490 \cdot 0{,}69\,\si{\joule}$. Per il conto a mano, $2490 \cdot 0{,}69 = 2490 \cdot 0{,}7 - 2490 \cdot 0{,}01 = 1743 - 25 = 1718$, quindi $W \approx \SI{1720}{\joule}$, e il gas assorbe lo stesso calore.
 
 \begin{richiamo}{il logaritmo naturale}
-Il logaritmo naturale $\ln x$ è l'esponente a cui elevare il numero $e \approx 2{,}72$ per ottenere $x$: $\ln x = y$ vuol dire $e^{y} = x$. I valori da ricordare: $\ln 1 = 0$, $\ln 2 \approx 0{,}69$, $\ln 10 \approx 2{,}3$. La proprietà più utile è $\ln(1/x) = -\ln x$: per una compressione isoterma che dimezza il volume, $\ln(1/2) = -0{,}69$, e il lavoro è negativo. Il logaritmo cresce lentamente: $\ln 4 = \ln(2 \cdot 2) = 2 \ln 2 \approx 1{,}38$.
+Il logaritmo naturale $\ln x$ è l'esponente a cui elevare il numero $e \approx 2{,}72$ per ottenere $x$: $\ln x = y$ vuol dire $e^{y} = x$ (questa $e$ è il numero di Nepero, da non confondere con l'emissività della legge di Stefan-Boltzmann). I valori da ricordare: $\ln 1 = 0$, $\ln 2 \approx 0{,}69$, $\ln 10 \approx 2{,}3$. Le proprietà da sapere: $\ln(ab) = \ln a + \ln b$, $\ln(a/b) = \ln a - \ln b$, $\ln(a^{n}) = n \ln a$. Il logaritmo cresce lentamente: $\ln 4 = \ln(2 \cdot 2) = 2 \ln 2 \approx 1{,}38$. E $\ln(1/x) = -\ln x$: per una compressione isoterma che dimezza il volume, $\ln(1/2) = -0{,}69$, e il lavoro è negativo.
 \end{richiamo}
+
+Per $n = \SI{1}{\mole}$ a \SI{300}{\kelvin} che raddoppia il suo volume: $W = 8{,}3 \cdot 300 \cdot \ln 2\,\si{\joule} \approx 2490 \cdot 0{,}69\,\si{\joule}$. Per il conto a mano, $2490 \cdot 0{,}69 = 2490 \cdot 0{,}7 - 2490 \cdot 0{,}01 = 1743 - 25 = 1718$, quindi $W \approx \SI{1720}{\joule}$, e il gas assorbe lo stesso calore.
 
 \textbf{Adiabatica} (nessuno scambio di calore, $Q = 0$). Succede se il gas è isolato termicamente, o se la trasformazione è così rapida che il calore non fa in tempo a passare. Il primo principio dà $\Delta U = -W$: se il gas si espande compie lavoro a spese della sua energia interna, e si raffredda; se è compresso si scalda. In una trasformazione adiabatica reversibile pressione e volume sono legati da
 \[
@@ -582,7 +581,7 @@ Nel piano $pV$ l'adiabatica scende più ripida dell'isoterma che passa per lo st
 Il confronto qualitativo, a partire dallo stesso stato (figura~\ref{fig:ud5-trasformazioni}): espandendo il gas fino allo stesso volume finale, l'isobara compie più lavoro di tutte (l'area sotto il segmento orizzontale è la più grande) e scalda il gas; l'isoterma ne compie meno e tiene la temperatura fissa; l'adiabatica ne compie ancora meno e raffredda il gas; l'isocora non compie lavoro e, se il gas è raffreddato, ne fa solo scendere la pressione.
 
 \begin{attenzione}[adiabatica non vuol dire isoterma]
-In un'adiabatica non c'è scambio di calore, ma la temperatura cambia: comprimendo in fretta l'aria in una pompa da bicicletta la pompa si scalda, e il gas che esce da una bomboletta spray la raffredda. Viceversa in un'isoterma la temperatura resta costante, ma il gas scambia calore, tanto quanto il lavoro. «Senza calore» e «a temperatura costante» sono due cose diverse.
+In un'adiabatica non c'è scambio di calore, ma la temperatura cambia: comprimendo in fretta l'aria in una pompa da bicicletta la pompa si scalda, e l'aria che esce in fretta dalla valvola di una gomma gonfia, espandendosi, si raffredda. Viceversa in un'isoterma la temperatura resta costante, ma il gas scambia calore, tanto quanto il lavoro. «Senza calore» e «a temperatura costante» sono due cose diverse.
 \end{attenzione}
 
 \input{ud5/generati/lampo-ud5-trasformazioni}
@@ -590,11 +589,11 @@ In un'adiabatica non c'è scambio di calore, ma la temperatura cambia: comprimen
 \begin{applicazione}{il metabolismo e il primo principio}
 Il corpo umano è un sistema aperto, ma il primo principio vale anche per lui. L'energia entra con il cibo, come energia chimica; esce come lavoro, quando i muscoli spostano il corpo o un oggetto, e come calore, verso l'ambiente. Un'alimentazione di \SI{2000}{\kilo\calorie} al giorno corrisponde a una potenza media di
 \[
-  P = \frac{\SI{2000}{\kilo\calorie} \cdot \SI{4,2}{\kilo\joule\per\kilo\calorie}}{\SI{86400}{\second}} = \frac{\SI{8,4e6}{\joule}}{\SI{8,64e4}{\second}} \approx \SI{97}{\watt} \approx \SI{100}{\watt}
+  P = \frac{\SI{2000}{\kilo\calorie} \cdot \SI{4,2}{\kilo\joule\per\kilo\calorie}}{\SI{86400}{\second}} = \frac{\SI{8,4e6}{\joule}}{\SI{8,64e4}{\second}} = \frac{8{,}4}{8{,}64} \cdot 10^{2}\,\si{\watt}
 \]
-(un giorno ha $24 \cdot 3600 = \num{86400}$ secondi). È il valore di riferimento di un adulto a riposo usato in questa unità. Se il corpo riceve più energia di quanta ne spende, il resto si accumula come energia interna, nelle riserve di grasso.
+(un giorno ha $24 \cdot 3600 = \num{86400}$ secondi). Poiché 8,4 è un po' meno di 8,64, il rapporto vale circa 0,97, e $P \approx 0{,}97 \cdot \SI{100}{\watt} \approx \SI{97}{\watt} \approx \SI{100}{\watt}$. È il valore di riferimento di un adulto a riposo usato in questa unità. Se il corpo riceve più energia di quanta ne spende, il resto si accumula come energia interna, nelle riserve di grasso.
 
-I muscoli trasformano in lavoro solo una parte dell'energia chimica che consumano, circa il 20--25\%; il resto diventa calore. Per salire tre metri di scale, una persona di \SI{70}{\kilo\gram} compie contro la gravità il lavoro $W = mgh \approx \SI{70}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{3}{\metre} = \SI{2100}{\joule}$ (UD2). Con un rendimento del 25\% consuma $\SI{2100}{\joule} / 0{,}25 = \SI{8400}{\joule}$ di energia chimica, e $8400 - 2100 = \SI{6300}{\joule}$ diventano calore. È per questo che lo sforzo fisico scalda e fa sudare.
+I muscoli trasformano in lavoro solo una parte dell'energia chimica che consumano, circa il 20--25\%; il resto diventa calore. Per salire tre metri di scale, una persona di \SI{70}{\kilo\gram} compie contro la gravità il lavoro $W = mgh \approx \SI{70}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{3}{\metre} = \SI{2100}{\joule}$ (UD2). Se il 25\% dell'energia chimica diventa lavoro, consuma $\SI{2100}{\joule} / 0{,}25 = \SI{8400}{\joule}$ di energia chimica, e $8400 - 2100 = \SI{6300}{\joule}$ diventano calore. È per questo che lo sforzo fisico scalda e fa sudare.
 \end{applicazione}
 
 % -------------------------------------------------------------------------
@@ -606,7 +605,7 @@ I muscoli trasformano in lavoro solo una parte dell'energia chimica che consuman
 Il primo principio dice che l'energia si conserva, ma non dice in che verso vanno i processi. Una tazza di caffè caldo su un tavolo si raffredda e scalda un po' l'aria intorno; il processo inverso, in cui il caffè si scalda prendendo calore dall'aria più fredda, conserverebbe l'energia altrettanto bene, ma non succede mai. Il \textbf{secondo principio della termodinamica} fissa il verso dei processi naturali. Ha due enunciati classici, che si dimostrano equivalenti (se uno fosse falso, lo sarebbe anche l'altro):
 \begin{itemize}
   \item \textbf{enunciato di Clausius}: è impossibile realizzare una trasformazione il cui \emph{unico} risultato sia il passaggio di calore da un corpo più freddo a uno più caldo;
-  \item \textbf{enunciato di Kelvin-Planck}: è impossibile realizzare una trasformazione il cui \emph{unico} risultato sia trasformare in lavoro tutto il calore preso da una sola sorgente a temperatura uniforme.
+  \item \textbf{enunciato di Kelvin-Planck}: è impossibile realizzare una trasformazione il cui \emph{unico} risultato sia trasformare in lavoro tutto il calore preso da una sola sorgente a temperatura uniforme (una \textbf{sorgente}, o termostato, è un corpo così grande che il calore che cede o riceve non cambia la sua temperatura: l'aria di una stanza, il mare, una caldaia mantenuta accesa).
 \end{itemize}
 La parola chiave è «unico». Un frigorifero porta calore dall'interno freddo alla cucina più calda, ma solo spendendo lavoro elettrico: non è l'unico risultato. Nell'espansione isoterma di un gas tutto il calore assorbito diventa lavoro, ma intanto il gas si è espanso: anche qui non è l'unico risultato, e per ripetere l'operazione il gas va ricompresso.
 
@@ -699,9 +698,11 @@ L'entropia si misura in \si{\joule\per\kelvin}. Se il sistema cede calore, $Q < 
 L'entropia è una \textbf{funzione di stato}: la sua variazione dipende solo dallo stato iniziale e da quello finale. Per questo si può calcolare anche per una trasformazione irreversibile: si immagina una trasformazione reversibile fra gli stessi due stati e si calcola $\Delta S$ su quella. Il secondo principio diventa:
 
 \emph{in un sistema isolato l'entropia non diminuisce mai: aumenta nelle trasformazioni irreversibili e resta costante in quelle reversibili.}
-\[
-  \Delta S_{\text{isolato}} \geq 0
-\]
+\begin{formula}[Secondo principio con l'entropia]
+\Delta S_{\text{isolato}} \geq 0
+\qquad
+(= 0 \text{ nelle trasformazioni reversibili, } > 0 \text{ in quelle irreversibili})
+\end{formula}
 Un sistema non isolato può diminuire la sua entropia, ma solo se quella dell'ambiente aumenta almeno altrettanto: considerando insieme il sistema e l'ambiente, che formano un sistema isolato, l'entropia totale non diminuisce.
 
 \begin{esempio}
@@ -750,10 +751,12 @@ Un macrostato con più microstati ha più entropia. E le molecole, muovendosi a 
 Un esempio. Un recipiente è diviso in due metà da una parete, e tutto il gas sta nella metà di sinistra. Si toglie la parete: il gas si espande nel vuoto e riempie tutto il recipiente. Ogni molecola ora può stare in due metà invece che in una, quindi per $N$ molecole il numero dei microstati si moltiplica per $2 \cdot 2 \cdots 2 = 2^{N}$. Il processo inverso, in cui tutte le molecole tornano da sole nella metà di sinistra, non è vietato dalle leggi del moto, ma ha probabilità $(1/2)^{N}$. Con 4 molecole è $1/16$, e capita spesso; con una mole, $N \approx \num{6e23}$, è un numero così piccolo che non capiterà mai nella vita dell'universo. L'irreversibilità è una questione di probabilità: i processi spontanei vanno verso i macrostati più probabili.
 
 L'aumento di entropia nell'espansione libera si trova anche con la formula di Boltzmann. Per una mole di gas che raddoppia il volume,
-\[
-  \Delta S = k_B \ln 2^{N_A} = N_A\,k_B \ln 2 = R \ln 2 \approx 8{,}3 \cdot 0{,}69\,\si{\joule\per\kelvin} \approx \SI{5,7}{\joule\per\kelvin}
-\]
-dove si è usato $\ln 2^{N} = N \ln 2$ e $N_A k_B = R$. È lo stesso risultato che dà la definizione $\Delta S = Q/T$ applicata all'espansione isoterma reversibile fra gli stessi due stati, in cui $Q = W = RT\ln 2$: l'entropia è una funzione di stato, e le due strade devono dare lo stesso numero.
+\begin{gather*}
+  \Delta S = k_B \ln \Omega_f - k_B \ln \Omega_i = k_B \ln \frac{\Omega_f}{\Omega_i} = k_B \ln 2^{N_A}
+  \\
+  = N_A\,k_B \ln 2 = R \ln 2 \approx 8{,}3 \cdot 0{,}69\,\si{\joule\per\kelvin} \approx \SI{5,7}{\joule\per\kelvin}
+\end{gather*}
+dove si sono usate due proprietà del logaritmo, $\ln a - \ln b = \ln(a/b)$ e $\ln 2^{N} = N \ln 2$, con $\Omega_f/\Omega_i = 2^{N_A}$, e poi $N_A k_B = R$. È lo stesso risultato che dà la definizione $\Delta S = Q/T$ applicata all'espansione isoterma reversibile fra gli stessi due stati, in cui $Q = W = RT\ln 2$: l'entropia è una funzione di stato, e le due strade devono dare lo stesso numero.
 
 Per questo l'entropia si descrive spesso come una misura del disordine: un gas sparso in tutto il recipiente, un liquido rispetto al suo cristallo, due sostanze mescolate hanno più microstati, e più entropia, delle situazioni «ordinate» corrispondenti.
 

@@ -199,8 +199,8 @@ soluzione = '''Il primo principio dice $Q = \Delta U + W$. Tutto il calore diven
   testo = '''nell'adiabatica'''
   commento = '''Nell'adiabatica il gas non scambia calore, $Q = 0$: il lavoro che compie viene dalla sua energia interna, non da un calore assorbito.'''
   [[quesito.opzione]]
-  testo = '''in nessuna: lo vieta il secondo principio'''
-  commento = '''Il secondo principio vieta che trasformare tutto il calore in lavoro sia l'\emph{unico} risultato. Nell'isoterma il gas si espande e cambia stato: non è l'unico risultato, quindi non c'è violazione.'''
+  testo = '''in nessuna: nell'isoterma il gas non scambia calore'''
+  commento = '''Confonde isoterma e adiabatica: nell'isoterma la temperatura resta costante, ma il gas scambia calore, tanto quanto il lavoro ($Q = W$).'''
 
 [[quesito]]
 id = "ud5-carnot"
