@@ -1,0 +1,29 @@
+% Effetto Venturi in un restringimento: velocità maggiore e pressione minore nel
+% tratto stretto, mostrate da tubicini verticali.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % fluido nel tubo
+  \fill[formula!15] (0,-0.8) -- (2.2,-0.8) .. controls (2.7,-0.8) and (2.8,-0.35) .. (3.2,-0.35)
+    -- (4.0,-0.35) .. controls (4.4,-0.35) and (4.5,-0.8) .. (5.0,-0.8) -- (7.2,-0.8)
+    -- (7.2,0.8) -- (5.0,0.8) .. controls (4.5,0.8) and (4.4,0.35) .. (4.0,0.35)
+    -- (3.2,0.35) .. controls (2.8,0.35) and (2.7,0.8) .. (2.2,0.8) -- (0,0.8) -- cycle;
+  % tubicini e liquido
+  \foreach \x/\b/\l in {1.0/0.8/2.6, 3.6/0.35/1.3, 6.2/0.8/2.6} {
+    \fill[formula!15] (\x-0.12,\b) rectangle (\x+0.12,\l);
+    \draw[thick] (\x-0.12,\b) -- (\x-0.12,3.1) (\x+0.12,\b) -- (\x+0.12,3.1);
+    \draw[formula, thick] (\x-0.12,\l) -- (\x+0.12,\l);
+  }
+  % pareti
+  \draw[very thick] (0,-0.8) -- (2.2,-0.8) .. controls (2.7,-0.8) and (2.8,-0.35) .. (3.2,-0.35)
+    -- (4.0,-0.35) .. controls (4.4,-0.35) and (4.5,-0.8) .. (5.0,-0.8) -- (7.2,-0.8);
+  \draw[very thick] (0,0.8) -- (0.88,0.8) (1.12,0.8) -- (2.2,0.8) .. controls (2.7,0.8) and (2.8,0.35) .. (3.2,0.35)
+    -- (3.48,0.35) (3.72,0.35) -- (4.0,0.35) .. controls (4.4,0.35) and (4.5,0.8) .. (5.0,0.8) -- (6.08,0.8) (6.32,0.8) -- (7.2,0.8);
+  % velocità
+  \draw[->, very thick, formula] (0.6,-0.2) -- (1.4,-0.2) node[right] {$v_1$};
+  \draw[->, very thick, formula] (2.9,-0.05) -- (4.4,-0.05) node[right] {$v_2$};
+  \draw[->, very thick, formula] (5.8,-0.2) -- (6.6,-0.2) node[right] {$v_1$};
+  % pressioni
+  \node[left] at (0.85,2.4) {$p_1$};
+  \node[left] at (3.45,1.15) {$p_2$};
+  \node[left] at (6.05,2.4) {$p_1$};
+  \node[below, align=center, font=\footnotesize] at (3.6,-0.9) {$v_2 > v_1$, \ $p_2 < p_1$};
+\end{tikzpicture}

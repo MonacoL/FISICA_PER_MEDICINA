@@ -1,0 +1,34 @@
+% (a) Moto laminare: linee di corrente parallele. (b) Moto turbolento a valle di un
+% restringimento: vortici e linee irregolari.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % (a) laminare
+  \fill[formula!10] (0,0) rectangle (5.5,1.6);
+  \draw[very thick] (0,0) -- (5.5,0) (0,1.6) -- (5.5,1.6);
+  \foreach \y in {0.25,0.55,0.8,1.05,1.35} {
+    \draw[formula, thick, ->] (0.2,\y) -- (5.3,\y);
+  }
+  \node at (2.75,-0.4) {(a)};
+
+  % (b) turbolento
+  \begin{scope}[xshift=6.5cm]
+    \fill[formula!10] (0,0) -- (1.2,0) .. controls (1.6,0) and (1.7,0.5) .. (2.0,0.5)
+      .. controls (2.3,0.5) and (2.4,0) .. (2.8,0) -- (6,0) -- (6,1.6) -- (2.8,1.6)
+      .. controls (2.4,1.6) and (2.3,1.1) .. (2.0,1.1) .. controls (1.7,1.1) and (1.6,1.6) .. (1.2,1.6)
+      -- (0,1.6) -- cycle;
+    \draw[very thick] (0,0) -- (1.2,0) .. controls (1.6,0) and (1.7,0.5) .. (2.0,0.5)
+      .. controls (2.3,0.5) and (2.4,0) .. (2.8,0) -- (6,0);
+    \draw[very thick] (0,1.6) -- (1.2,1.6) .. controls (1.6,1.6) and (1.7,1.1) .. (2.0,1.1)
+      .. controls (2.3,1.1) and (2.4,1.6) .. (2.8,1.6) -- (6,1.6);
+    % linee regolari prima del restringimento
+    \foreach \y in {0.4,0.8,1.2} {
+      \draw[formula, thick] (0.1,\y) -- (1.1,\y);
+    }
+    \draw[formula, thick, ->] (1.1,0.8) -- (2.6,0.8);
+    % vortici a valle
+    \foreach \x/\y/\r in {3.2/0.35/0.22, 3.9/1.2/0.25, 4.6/0.45/0.2, 5.3/1.15/0.2, 4.2/0.8/0.15} {
+      \draw[formula, thick, ->] (\x+\r,\y) arc[start angle=0, end angle=300, radius=\r];
+    }
+    \draw[formula, thick, ->, domain=2.6:5.9, samples=60] plot (\x, {0.8+0.18*sin(380*\x)+0.08*sin(900*\x)});
+    \node at (3,-0.4) {(b)};
+  \end{scope}
+\end{tikzpicture}
