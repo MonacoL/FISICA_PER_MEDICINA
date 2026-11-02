@@ -22,7 +22,14 @@ TinyTeX mette i suoi comandi in `~/.local/bin`, che deve essere nel `PATH`. Se m
 
 ## Controllo automatico
 
-Compila con `latexmk` ogni Unità didattica indicata e, una volta, il Libro. Stampa un rapporto ed esce con un codice diverso da zero se qualcosa non compila:
+Compila con `latexmk` ogni Unità didattica indicata e, una volta, il Libro, e controlla i sorgenti. Stampa un rapporto con file e riga di ogni problema ed esce con un codice diverso da zero se:
+
+- qualcosa non compila;
+- c'è un `\ref` a un'etichetta che non esiste, o un'etichetta definita due volte;
+- un `\usepackage` o `\RequirePackage` carica un pacchetto il cui pacchetto TeX Live non è in `tex-packages.txt` (per esempio `tabularx` sta in `tools`); i pacchetti del nucleo di TinyTeX non serve elencarli;
+- restano `\todo{…}`, `TODO`, `FIXME`, `XXX`, `[[…]]` o `[DA …]` nei `.tex`, commenti compresi.
+
+Gli overfull hbox oltre 5pt compaiono nel rapporto come avviso, senza far fallire il comando.
 
 ```sh
 uv run controllo ud7          # oppure più UD: uv run controllo ud1 ud7
