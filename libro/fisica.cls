@@ -278,5 +278,7 @@
   all'esame non si usano calcolatrice né formulario.\par\medskip
   Quest'opera è distribuita con licenza Creative Commons
   Attribuzione -- Non commerciale -- Condividi allo stesso modo 4.0 Internazionale
-  (CC BY-NC-SA 4.0), \url{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it}.\par}
+  (CC BY-NC-SA 4.0), \url{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it}.
+  Il codice che lo genera (template \LaTeX{} e script) è distribuito con licenza MIT.
+  \copyright~2026 \autore.\par}
   \clearpage}
