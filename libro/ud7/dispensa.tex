@@ -27,7 +27,7 @@ Immagina il materiale diviso in tanti strati sottili uguali. Ogni strato non tog
 I(x) = I_0 \, e^{-\mu x}
 \end{formula}
 
-$I_0$ è l'intensità che entra, $I(x)$ quella che esce dopo uno spessore $x$, e $\mu$ è il \textbf{coefficiente di attenuazione lineare}, che si misura in \si[per-mode=power]{\metre\tothe{-1}} (o, più spesso, in \si[per-mode=power]{\centi\metre\tothe{-1}}). Il prodotto $\mu x$ è un numero puro. Il coefficiente $\mu$ dipende dal materiale e dall'energia dei fotoni: per i raggi X il piombo e l'osso hanno $\mu$ molto più grande dei tessuti molli.
+$I_0$ è l'intensità che entra, $I(x)$ quella che esce dopo uno spessore $x$, e $\mu$ è il \textbf{coefficiente di attenuazione lineare}, che si misura in \si[per-mode=power]{\metre\tothe{-1}} (o, più spesso, in \si[per-mode=power]{\centi\metre\tothe{-1}}). Il prodotto $\mu x$ è un numero puro. Il coefficiente $\mu$ dipende dal materiale e dall'energia dei fotoni: per i raggi X il piombo e l'osso hanno $\mu$ molto più grande dei tessuti molli. La legge, con un solo valore di $\mu$, vale per un fascio \textbf{monocromatico}, con fotoni tutti della stessa energia: per un fascio con energie diverse, come quello di una radiografia, è un'approssimazione.
 
 \begin{richiamo}{esponenziali e logaritmi}
 Il numero di Nepero vale $e \approx 2{,}72$. Il logaritmo naturale è l'operazione inversa dell'esponenziale: $\ln(e^{a}) = a$ e $e^{\ln b} = b$. I valori da ricordare:
@@ -61,7 +61,7 @@ Per i raggi X di una radiografia, il tessuto molle ha uno spessore emivalente di
 
 Lo spessore contiene $n = \SI{24}{\centi\metre} / \SI{3}{\centi\metre} = 8$ spessori emivalenti, quindi
 \[
-  \frac{I}{I_0} = \frac{1}{2^8} = \frac{1}{128} \approx 0{,}008 = 0{,}8\,\%
+  \frac{I}{I_0} = \frac{1}{2^8} = \frac{1}{256} \approx 0{,}004 = 0{,}4\,\%
 \]
 Il coefficiente di attenuazione è
 \[
@@ -70,7 +70,7 @@ Il coefficiente di attenuazione è
 \end{esempio}
 
 \begin{attenzione}[l'attenuazione non è lineare]
-Raddoppiare lo spessore \emph{non} dimezza l'intensità trasmessa: la eleva al quadrato. Se uno strato lascia passare $1/4$, due strati uguali lasciano passare $1/16$, non $1/8$. E non confondere l'attenuazione con la legge dell'inverso del quadrato: quella dipende dalla distanza dalla sorgente anche nel vuoto, l'attenuazione dipende dal materiale attraversato.
+Raddoppiare lo spessore \emph{non} dimezza la frazione trasmessa $I/I_0$: la eleva al quadrato. Se uno strato lascia passare $1/4$, due strati uguali lasciano passare $1/16$, non $1/8$. E non confondere l'attenuazione con la legge dell'inverso del quadrato, per cui l'intensità di una sorgente puntiforme diminuisce come $1/d^2$ con la distanza $d$ (la stessa potenza si distribuisce su una sfera sempre più grande): quella dipende dalla distanza dalla sorgente anche nel vuoto, l'attenuazione dipende dal materiale attraversato.
 \end{attenzione}
 
 \begin{quesitolampo}{ql:ud7-hvl}
@@ -110,7 +110,7 @@ La stessa equazione, con il tempo al posto dello spessore, descrive il decadimen
 
 \subsection{Nuclei e isotopi}
 
-Il nucleo di un atomo contiene $Z$ protoni e $N$ neutroni. $Z$ è il \textbf{numero atomico} e decide di quale elemento si tratta; $A = Z + N$ è il \textbf{numero di massa}. Un nucleo si indica con il simbolo dell'elemento, $A$ in alto e $Z$ in basso: per esempio $\nuclide{12}{6}{C}$ è il carbonio con 6 protoni e 6 neutroni.
+Il nucleo di un atomo contiene $Z$ protoni e $N$ neutroni. $Z$ è il \textbf{numero atomico} e decide di quale elemento si tratta; $A = Z + N$ è il \textbf{numero di massa}. Un nucleo si indica con il simbolo dell'elemento, $A$ in alto e $Z$ in basso: per esempio $\nuclide{12}{6}{C}$ è il carbonio con 6 protoni e 6 neutroni. Attenzione ai simboli: qui $A$ è il numero di massa, non l'assorbanza della sezione precedente.
 
 Nuclei con lo stesso $Z$ e diverso $N$ sono \textbf{isotopi} dello stesso elemento: hanno le stesse proprietà chimiche ma massa diversa. Il carbonio ha, tra gli altri, gli isotopi $\nuclide{12}{6}{C}$ e $\nuclide{14}{6}{C}$.
 
@@ -132,6 +132,8 @@ $\beta^+$ & un positrone (e un neutrino): un protone diventa neutrone & $0$ & $-
 $\gamma$ & un fotone di alta energia da un nucleo eccitato & $0$ & $0$ & cm di piombo, m di cemento \\
 \bottomrule
 \end{tabularx}
+
+Il \textbf{positrone} $e^+$ è uguale all'elettrone ma con carica $+1$. Il \textbf{neutrino} $\nu$ e l'\textbf{antineutrino} $\bar\nu$ sono particelle senza carica e quasi senza massa: nel bilancio hanno $A = 0$ e $Z = 0$. Un nucleo è \textbf{eccitato} quando ha energia in eccesso, che cede emettendo un fotone $\gamma$.
 \end{center}
 
 Alcuni esempi:
@@ -156,7 +158,7 @@ Il nucleo $\nuclide{238}{92}{U}$ decade emettendo una particella $\alpha$. Il nu
 
 Non si può prevedere quando decadrà un singolo nucleo: si sa solo che ogni nucleo ha la stessa probabilità di decadere in ogni secondo, e che questa probabilità non dipende da quanto tempo è già passato. Ne segue che in ogni intervallo di tempo decade la stessa \emph{frazione} dei nuclei presenti. È la stessa situazione dell'assorbimento: il numero $N$ di nuclei non ancora decaduti diminuisce in modo esponenziale.
 
-La costante $\lambda$, che si misura in \si[per-mode=power]{\second\tothe{-1}}, è la \textbf{costante di decadimento}. L'\textbf{attività} $\mathcal{A}$ è il numero di decadimenti al secondo e si misura in becquerel: $\SI{1}{\becquerel} = 1$ decadimento al secondo. L'\textbf{emivita} $T_{1/2}$ è il tempo in cui metà dei nuclei decade.
+Quella probabilità di decadere in un secondo è la \textbf{costante di decadimento} $\lambda$, che si misura in \si[per-mode=power]{\second\tothe{-1}}. Se ci sono $N$ nuclei (qui $N$ non è più il numero di neutroni), in un secondo ne decadono in media $\lambda N$: è l'\textbf{attività} $\mathcal{A}$, il numero di decadimenti al secondo e si misura in becquerel: $\SI{1}{\becquerel} = 1$ decadimento al secondo. L'\textbf{emivita} $T_{1/2}$ è il tempo in cui metà dei nuclei decade: come per lo spessore emivalente, ponendo $N = N_0/2$ si ottiene $\lambda T_{1/2} = \ln 2$.
 
 \begin{formula}[Decadimento radioattivo]
 N(t) = N_0\, e^{-\lambda t}
@@ -184,9 +186,9 @@ Per curare l'ipertiroidismo si somministra iodio-131, con emivita di \SI{8}{gior
 \[
   \mathcal{A} = \frac{\SI{3,2}{\giga\becquerel}}{2^3} = \SI{0,4}{\giga\becquerel} = \SI{400}{\mega\becquerel}
 \]
-Per il numero di nuclei serve $\lambda$, con l'emivita in secondi ($\SI{1}{giorno} = \SI{86400}{\second}$):
+Per il numero di nuclei serve $\lambda$, con l'emivita in secondi ($\SI{1}{giorno} = \SI{86400}{\second}$, e $8 \cdot 86\,400 = 691\,200 \approx \num{6,9e5}$); l'attività va in \si[per-mode=power]{\second\tothe{-1}}, con $\SI{1}{\giga\becquerel} = \SI{e9}{\becquerel}$:
 \[
-  \lambda = \frac{\ln 2}{T_{1/2}} = \frac{0{,}69}{8 \cdot \SI{86400}{\second}} \approx \SI[per-mode=power]{1,0e-6}{\second\tothe{-1}}
+  \lambda = \frac{\ln 2}{T_{1/2}} = \frac{0{,}69}{8 \cdot \SI{86400}{\second}} \approx \frac{0{,}69}{\SI{6,9e5}{\second}} = \SI[per-mode=power]{1,0e-6}{\second\tothe{-1}}
   \qquad
   N_0 = \frac{\mathcal{A}_0}{\lambda} = \frac{\SI[per-mode=power]{3,2e9}{\second\tothe{-1}}}{\SI[per-mode=power]{1,0e-6}{\second\tothe{-1}}} = \num{3,2e15}
 \]
