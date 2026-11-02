@@ -234,9 +234,9 @@
     % contenuto
     \node[anchor=north west, align=left, inner sep=0pt, text width=16cm]
       at ([xshift=2.4cm,yshift=-12.6cm]current page.north west)
-      {\Large Dispense ed Eserciziari\\[0.2cm]
-       \large\color{richiamo} Teoria, Esempi svolti, Problemi su tre Livelli e Quesiti d'esame\\
-       nel formato della prova, con Soluzioni svolte e Simulazioni d'esame};
+      {\Large Dispense ed eserciziari\\[0.2cm]
+       \large\color{richiamo} Teoria, esempi svolti, problemi su tre livelli e quesiti d'esame\\
+       nel formato della prova, con soluzioni svolte e simulazioni d'esame};
     \node[anchor=north west, align=left, inner sep=0pt]
       at ([xshift=2.4cm,yshift=-15.6cm]current page.north west)
       {\begin{tabular}{@{}l@{\hspace{1em}}l@{}}
@@ -269,12 +269,12 @@
   \textbf{Fisica per il semestre filtro di Medicina e Chirurgia}\\
   \autore\par\medskip
   Versione aggiornata al \today. Il testo è in sviluppo: la versione più recente,
-  i sorgenti \LaTeX{} e i PDF delle singole Unità didattiche sono su\\
+  i sorgenti \LaTeX{} e i PDF delle singole unità didattiche sono su\\
   \url{\repourl}\par\medskip
   Hai trovato un errore o un passaggio poco chiaro? Apri una segnalazione (issue)
   sul repository GitHub.\par\medskip
-  Il programma segue il Syllabus ufficiale dell'insegnamento di Fisica del semestre
-  filtro. I Quesiti d'esame sono originali, costruiti sul modello delle prove reali:
+  Il programma segue il syllabus ufficiale dell'insegnamento di Fisica del semestre
+  filtro. I quesiti d'esame sono originali, costruiti sul modello delle prove reali:
   all'esame non si usano calcolatrice né formulario.\par\medskip
   Quest'opera è distribuita con licenza Creative Commons
   Attribuzione -- Non commerciale -- Condividi allo stesso modo 4.0 Internazionale
