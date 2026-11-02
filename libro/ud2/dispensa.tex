@@ -1,0 +1,1201 @@
+% UD2 — Dispensa
+% Scritta da zero (non esisteva un materiale UD2). I quesiti lampo vengono da
+% esercizi.toml (ADR 0006): si modificano lì.
+\dispensa
+
+\begin{tcolorbox}[fisbox={formula}{formulaBg},title={Obiettivi dell'unità}]
+Al termine di questa unità sai:
+\begin{itemize}
+  \item descrivere il moto di un punto con posizione, spostamento, traiettoria e legge oraria, e distinguere velocità e accelerazione medie da quelle istantanee, anche leggendo pendenze e aree di un grafico;
+  \item risolvere problemi di moto rettilineo uniforme, moto uniformemente accelerato e caduta libera, e scomporre un moto parabolico in due moti rettilinei;
+  \item calcolare periodo, velocità e accelerazione centripeta di un moto circolare uniforme;
+  \item enunciare i tre principi della dinamica, disegnare il diagramma di corpo libero di un corpo e scrivere le condizioni di equilibrio traslazionale;
+  \item usare la forza peso, la forza gravitazionale, la forza normale, l'attrito statico e dinamico, la tensione di una fune e la forza elastica della legge di Hooke;
+  \item calcolare il lavoro di una forza e la potenza, e usare il teorema dell'energia cinetica;
+  \item distinguere le forze conservative da quelle non conservative, usare l'energia potenziale gravitazionale ed elastica e la conservazione dell'energia meccanica;
+  \item usare quantità di moto e impulso, e la conservazione della quantità di moto negli urti e nelle esplosioni;
+  \item trovare il centro di massa di un sistema di corpi, calcolare il momento di una forza, scrivere le condizioni di equilibrio di un corpo rigido e riconoscere le leve del corpo umano.
+\end{itemize}
+\end{tcolorbox}
+
+La meccanica studia il moto dei corpi e le sue cause. È la base di quasi tutta la fisica che segue: le forze e l'energia tornano nei fluidi (UD3), nelle onde (UD4), nella termodinamica (UD5) e nell'elettricità (UD6). In medicina la meccanica spiega come i muscoli muovono le ossa, quali forze agiscono sulle articolazioni, perché una caduta fa male e come una cintura di sicurezza la rende meno pericolosa. L'unità ha due parti. La \textbf{cinematica} descrive \emph{come} si muove un corpo, senza chiedersi perché. La \textbf{dinamica} lega il moto alle sue cause, le forze, e introduce lavoro, energia e quantità di moto.
+
+Servono gli strumenti della UD1: le conversioni di unità (in particolare da \si{\kilo\metre\per\hour} a \si{\metre\per\second}, dividendo per 3,6), la trigonometria del triangolo rettangolo con i valori notevoli di seno e coseno, i vettori con le loro componenti, la somma di vettori, il prodotto scalare e il prodotto vettoriale. Qui non si ripetono: quando servono, si dice in quale sezione della UD1 si trovano.
+
+All'esame non c'è la calcolatrice. L'accelerazione di gravità vale circa \SI{9,8}{\metre\per\second\squared}; quando i conti a mente lo rendono comodo si arrotonda a \SI{10}{\metre\per\second\squared}, e si dice ogni volta. L'errore che si fa è del 2\%, molto più piccolo della differenza fra le opzioni di un quesito.
+
+% -------------------------------------------------------------------------
+\section{La cinematica del punto materiale}
+\label{sec:ud2-cinematica}
+
+\subsection{Punto materiale e sistema di riferimento}
+
+Un corpo che si muove ha una forma e delle dimensioni, e le sue parti possono muoversi in modi diversi: mentre una persona cammina, le braccia oscillano e le gambe si piegano. Spesso però interessa solo dove si trova il corpo nel suo insieme. Se le dimensioni del corpo sono piccole rispetto alle distanze che percorre, lo si può trattare come un punto: un \textbf{punto materiale}, cioè un punto che ha la massa del corpo. Un'ambulanza che percorre \SI{10}{\kilo\metre} verso l'ospedale è un punto materiale; la stessa ambulanza che fa manovra in un parcheggio non lo è.
+
+Per dire dove si trova un punto serve un \textbf{sistema di riferimento}: un punto fisso scelto come origine $O$, degli assi cartesiani che partono dall'origine e un orologio per misurare il tempo. La \textbf{posizione} del punto all'istante $t$ è il vettore $\vec r$ che va dall'origine al punto; le sue componenti sono le coordinate $x$ e $y$ del punto (UD1, sezione «I vettori»). Se il moto avviene lungo una retta, basta un asse, e la posizione è una sola coordinata $x$, positiva o negativa secondo il lato dell'origine in cui si trova il punto.
+
+\subsection{Spostamento, traiettoria e legge oraria}
+
+Il simbolo $\Delta$ (delta maiuscola) indica la \emph{variazione} di una grandezza: il valore finale meno il valore iniziale. Lo \textbf{spostamento} fra l'istante $t_1$ e l'istante $t_2$ è la variazione della posizione:
+\[
+  \Delta\vec r = \vec r_2 - \vec r_1 \qquad\qquad \text{lungo una retta:}\quad \Delta x = x_2 - x_1
+\]
+È un vettore che va dalla posizione iniziale a quella finale (figura~\ref{fig:ud2-traiettoria}), e si calcola come differenza di due vettori, componente per componente. Lungo una retta lo spostamento è positivo se il punto si è mosso nel verso dell'asse, negativo se si è mosso nel verso opposto.
+
+\begin{figure}[h]
+\centering
+\input{ud2/figure/traiettoria}
+\caption{La traiettoria (tratteggiata) è la linea percorsa dal punto. Le posizioni $\vec r_1$ e $\vec r_2$ negli istanti $t_1$ e $t_2$ vanno dall'origine al punto. Lo spostamento $\Delta\vec r = \vec r_2 - \vec r_1$ va da $P_1$ a $P_2$ in linea retta, ed è più corto della strada percorsa lungo la curva.}
+\label{fig:ud2-traiettoria}
+\end{figure}
+
+La \textbf{traiettoria} è la linea formata da tutti i punti per cui passa il corpo: la strada percorsa, senza indicazione dei tempi. La \textbf{legge oraria} dice invece dove si trova il corpo in ogni istante: è la posizione in funzione del tempo, $x(t)$ lungo una retta, oppure $\vec r(t)$ nel piano. Il suo grafico, con il tempo in ascissa e la posizione in ordinata, si chiama \textbf{grafico orario}.
+
+\begin{attenzione}[spostamento e distanza percorsa]
+Lo spostamento dipende solo dal punto di partenza e da quello di arrivo; la \textbf{distanza percorsa} è la lunghezza della strada fatta. Nel test del cammino di sei minuti il paziente cammina avanti e indietro lungo un corridoio di \SI{30}{\metre}: dopo 16 vasche ha percorso \SI{480}{\metre}, ma è tornato al punto di partenza, e il suo spostamento è zero. La distanza percorsa è sempre positiva e non è mai più piccola del modulo dello spostamento.
+\end{attenzione}
+
+\subsection{La velocità media e la velocità istantanea}
+
+La \textbf{velocità media} in un intervallo di tempo è lo spostamento diviso per la durata dell'intervallo:
+\[
+  \vec v_m = \frac{\Delta\vec r}{\Delta t} \qquad\qquad \text{lungo una retta:}\quad v_m = \frac{\Delta x}{\Delta t} = \frac{x_2 - x_1}{t_2 - t_1}
+\]
+Si misura in \si{\metre\per\second}. È un vettore, con la direzione e il verso dello spostamento; lungo una retta il suo segno dice in quale verso si è mosso il corpo. Nella vita quotidiana si usa spesso un'altra grandezza, la \textbf{velocità scalare media}: la distanza percorsa divisa per il tempo. È sempre positiva, e coincide con il modulo della velocità media solo se il corpo va dritto senza tornare indietro. Nel test del cammino di sei minuti la velocità scalare media è $\SI{480}{\metre} / \SI{360}{\second} \approx \SI{1,3}{\metre\per\second}$, circa \SI{4,8}{\kilo\metre\per\hour}, mentre la velocità media è zero.
+
+La velocità media non dice che cosa succede dentro l'intervallo: un'auto che percorre \SI{60}{\kilo\metre} in un'ora può aver viaggiato sempre a \SI{60}{\kilo\metre\per\hour}, oppure essersi fermata a metà strada e poi aver accelerato. La \textbf{velocità istantanea} è la velocità media calcolata su un intervallo di tempo così piccolo che, rendendolo ancora più piccolo, il risultato non cambia più: è quello che indica il tachimetro. La velocità istantanea si indica con $\vec v$, senza pedice, e il suo modulo con $v$. È sempre tangente alla traiettoria, e ha il verso del moto.
+
+Per vedere velocità media e istantanea su un grafico orario serve la pendenza.
+
+\begin{richiamo}{la pendenza di un grafico}
+Una retta nel piano $(x, y)$ ha equazione $y = mx + q$. Il numero $q$ è l'ordinata del punto in cui la retta taglia l'asse $y$; il numero $m$ è la \textbf{pendenza}: di quanto sale $y$ quando $x$ aumenta di 1. Presi due punti qualsiasi della retta,
+\[
+  m = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1}
+\]
+Se $m > 0$ la retta sale, se $m < 0$ scende, se $m = 0$ è orizzontale. Per esempio la retta che passa per $(1, 2)$ e $(3, 8)$ ha pendenza $(8 - 2)/(3 - 1) = 3$. In un grafico di fisica la pendenza ha un'unità: quella della grandezza in ordinata divisa per quella in ascissa.
+
+Per una curva la pendenza cambia da punto a punto. La \textbf{tangente} alla curva in un punto è la retta che tocca la curva in quel punto e ne segue la direzione: ingrandendo molto il grafico intorno al punto, curva e tangente non si distinguono più. La pendenza della curva in un punto è la pendenza della sua tangente. La \textbf{secante} è invece la retta che passa per due punti della curva.
+\end{richiamo}
+
+Nel grafico orario $x(t)$ la grandezza in ordinata è la posizione e quella in ascissa il tempo: la pendenza della secante fra due istanti è $\Delta x / \Delta t$, cioè la velocità media; la pendenza della tangente in un istante è la velocità istantanea (figura~\ref{fig:ud2-pendenza}). Dove il grafico è ripido il corpo va veloce; dove è orizzontale è fermo; dove scende si muove nel verso negativo dell'asse.
+
+\par\medskip
+\noindent\begin{minipage}{\linewidth}
+\centering
+\input{ud2/figure/pendenza}
+\captionof{figure}{Un grafico orario. La pendenza della secante fra $t_1$ e $t_2$ è la velocità media nell'intervallo; la pendenza della tangente in $t_1$ è la velocità istantanea in quell'istante. Qui la curva diventa più ripida: il corpo accelera.}
+\label{fig:ud2-pendenza}
+\end{minipage}
+\medskip
+
+\begin{esempio}
+Un paziente in riabilitazione cammina lungo un corridoio rettilineo. Si mette l'asse $x$ lungo il corridoio, con l'origine alla porta della palestra. All'istante $t = \SI{0}{\second}$ il paziente è in $x = \SI{2}{\metre}$; a $t = \SI{20}{\second}$ è arrivato in fondo al corridoio, in $x = \SI{26}{\metre}$; a $t = \SI{40}{\second}$, dopo essere tornato indietro, è in $x = \SI{14}{\metre}$. Calcola la velocità media nei primi \SI{20}{\second}, nei secondi \SI{20}{\second} e su tutto il percorso, e la velocità scalare media su tutto il percorso.
+
+Nei primi \SI{20}{\second}:
+\[
+  v_m = \frac{x_2 - x_1}{t_2 - t_1} = \frac{\SI{26}{\metre} - \SI{2}{\metre}}{\SI{20}{\second} - \SI{0}{\second}} = \frac{\SI{24}{\metre}}{\SI{20}{\second}} = \SI{1,2}{\metre\per\second}
+\]
+Nei secondi \SI{20}{\second} il paziente torna indietro, e la velocità media è negativa:
+\[
+  v_m = \frac{\SI{14}{\metre} - \SI{26}{\metre}}{\SI{40}{\second} - \SI{20}{\second}} = \frac{\SI{-12}{\metre}}{\SI{20}{\second}} = \SI{-0,6}{\metre\per\second}
+\]
+Su tutto il percorso lo spostamento è $\SI{14}{\metre} - \SI{2}{\metre} = \SI{12}{\metre}$, quindi $v_m = \SI{12}{\metre} / \SI{40}{\second} = \SI{0,3}{\metre\per\second}$. La distanza percorsa è invece $24 + 12 = \SI{36}{\metre}$, e la velocità scalare media è $\SI{36}{\metre} / \SI{40}{\second} = \SI{0,9}{\metre\per\second}$.
+\end{esempio}
+
+\begin{attenzione}[la velocità media non è la media delle velocità]
+Nell'esempio la velocità scalare media su tutto il percorso, \SI{0,9}{\metre\per\second}, è proprio la media di 1,2 e 0,6, ma solo perché i due tratti durano lo stesso tempo. Se i tratti hanno la stessa \emph{lunghezza} e velocità diverse, il corpo passa più tempo in quello lento, e la velocità media è più vicina alla velocità più bassa. Va sempre calcolata come distanza totale divisa per tempo totale.
+\end{attenzione}
+
+\input{ud2/generati/lampo-ud2-velocita-media}
+
+\subsection{L'accelerazione media e l'accelerazione istantanea}
+
+Quando la velocità cambia, il corpo accelera. L'\textbf{accelerazione media} in un intervallo di tempo è la variazione della velocità divisa per la durata dell'intervallo:
+\[
+  \vec a_m = \frac{\Delta\vec v}{\Delta t} \qquad\qquad \text{lungo una retta:}\quad a_m = \frac{\Delta v}{\Delta t} = \frac{v_2 - v_1}{t_2 - t_1}
+\]
+Si misura in metri al secondo \emph{al secondo}: $(\si{\metre\per\second})/\si{\second} = \si{\metre\per\second\squared}$. Un'accelerazione di \SI{3}{\metre\per\second\squared} vuol dire che la velocità aumenta di \SI{3}{\metre\per\second} ogni secondo. Come per la velocità, l'\textbf{accelerazione istantanea} $\vec a$ è l'accelerazione media su un intervallo piccolissimo; nel grafico velocità-tempo $v(t)$ è la pendenza della tangente.
+
+\begin{formula}[Velocità e accelerazione medie]
+\vec v_m = \frac{\Delta\vec r}{\Delta t} \qquad v_m = \frac{\Delta x}{\Delta t}
+\qquad\qquad
+\vec a_m = \frac{\Delta\vec v}{\Delta t} \qquad a_m = \frac{\Delta v}{\Delta t}
+\end{formula}
+
+Lungo una retta, il segno dell'accelerazione da solo non dice se il corpo va più veloce o più piano. Il corpo accelera (il modulo della velocità aumenta) se velocità e accelerazione hanno lo stesso segno; rallenta se hanno segni opposti. Un'auto che va nel verso negativo dell'asse e frena ha velocità negativa e accelerazione positiva. Nel piano, poi, c'è accelerazione anche se cambia solo la direzione della velocità e non il suo modulo: è il caso del moto circolare, che vedremo nella sezione~\ref{sec:ud2-piano}.
+
+\begin{esempio}
+Un'auto passa da ferma a \SI{108}{\kilo\metre\per\hour} in \SI{10}{\second}. Qual è la sua accelerazione media?
+
+La velocità finale in unità del SI è $108 / 3{,}6 = \SI{30}{\metre\per\second}$. Quindi
+\[
+  a_m = \frac{v_2 - v_1}{\Delta t} = \frac{\SI{30}{\metre\per\second} - \SI{0}{\metre\per\second}}{\SI{10}{\second}} = \SI{3}{\metre\per\second\squared}
+\]
+In ogni secondo la velocità dell'auto cresce in media di \SI{3}{\metre\per\second}, cioè di circa \SI{11}{\kilo\metre\per\hour}.
+\end{esempio}
+
+\begin{applicazione}{l'accelerazione del sangue nell'aorta}
+Quando il ventricolo sinistro si contrae, il sangue nell'aorta, che all'inizio della sistole è quasi fermo, raggiunge in circa un decimo di secondo una velocità di circa \SI{1}{\metre\per\second}. L'accelerazione media è
+\[
+  a_m = \frac{\SI{1}{\metre\per\second} - \SI{0}{\metre\per\second}}{\SI{0,1}{\second}} = \SI{10}{\metre\per\second\squared}
+\]
+più o meno come quella di un corpo che cade. L'ecocardiografia Doppler (UD4) misura la velocità del sangue istante per istante: il tempo che serve a raggiungere il picco, e quindi l'accelerazione, è uno dei parametri con cui si valuta la valvola aortica.
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{I moti rettilinei}
+\label{sec:ud2-rettilinei}
+
+\subsection{Il moto rettilineo uniforme}
+
+Un corpo si muove di \textbf{moto rettilineo uniforme} se percorre una retta con velocità costante: in tempi uguali fa spostamenti uguali. L'accelerazione è zero, e la velocità media in ogni intervallo è uguale alla velocità istantanea $v$. Da $v = \Delta x / \Delta t$, con la posizione $x_0$ all'istante $t = 0$:
+
+\begin{formula}[Moto rettilineo uniforme]
+x(t) = x_0 + v\,t \qquad\qquad v = \text{costante}, \quad a = 0
+\end{formula}
+
+Il grafico orario è una retta di pendenza $v$ che taglia l'asse delle posizioni in $x_0$; il grafico velocità-tempo è una retta orizzontale (figura~\ref{fig:ud2-moti}a). Nel grafico $v(t)$ lo spostamento fra 0 e $t$, $v\,t$, è l'area del rettangolo di base $t$ e altezza $v$. Vale per qualunque moto, come spiega il richiamo che segue.
+
+\begin{figure}[h]
+\centering
+\input{ud2/figure/moti-rettilinei}
+\caption{(a) Nel moto rettilineo uniforme il grafico orario è una retta di pendenza $v$ e il grafico velocità-tempo è orizzontale. (b) Nel moto uniformemente accelerato il grafico velocità-tempo è una retta di pendenza $a$ e il grafico orario è un arco di parabola. In tutti e due i casi lo spostamento è l'area sotto il grafico velocità-tempo.}
+\label{fig:ud2-moti}
+\end{figure}
+
+\begin{richiamo}{l'area sotto un grafico}
+Nel grafico velocità-tempo, un rettangolo di base $\Delta t$ e altezza $v$ ha area $v\,\Delta t$, che è proprio lo spostamento a velocità costante. L'area ha le unità del prodotto delle due grandezze: $(\si{\metre\per\second}) \cdot \si{\second} = \si{\metre}$. Se la velocità cambia, si divide l'intervallo in tanti intervalli piccoli, in ognuno dei quali la velocità è quasi costante: lo spostamento è la somma delle aree dei rettangolini, cioè l'area fra il grafico e l'asse dei tempi. Dove la velocità è negativa l'area si conta con il segno meno.
+
+Due formule di geometria che servono: l'area di un triangolo è base per altezza diviso 2; l'area di un trapezio è la somma delle due basi parallele per l'altezza, diviso 2. Se il trapezio ha i lati paralleli verticali, come in figura~\ref{fig:ud2-moti}b, le «basi» sono i due lati verticali e l'«altezza» è la distanza orizzontale fra loro.
+\end{richiamo}
+
+\begin{esempio}
+Un'ambulanza viaggia in autostrada a velocità costante di \SI{108}{\kilo\metre\per\hour}. Quanto tempo impiega a percorrere i \SI{6}{\kilo\metre} che la separano dall'uscita per l'ospedale?
+
+La velocità in unità del SI è $108/3{,}6 = \SI{30}{\metre\per\second}$, e la distanza è \SI{6000}{\metre}. Dalla legge oraria, $\Delta x = v\,t$:
+\[
+  t = \frac{\Delta x}{v} = \frac{\SI{6000}{\metre}}{\SI{30}{\metre\per\second}} = \SI{200}{\second}
+\]
+cioè 3 minuti e 20 secondi. Si può fare il conto anche in ore: $t = \SI{6}{\kilo\metre} / \SI{108}{\kilo\metre\per\hour} = \frac{1}{18}\,\si{\hour}$, e $3600/18 = \SI{200}{\second}$.
+\end{esempio}
+
+\subsection{Il moto uniformemente accelerato}
+
+Un corpo si muove di \textbf{moto uniformemente accelerato} se percorre una retta con accelerazione costante $a$: la velocità cambia della stessa quantità in tempi uguali. Con velocità $v_0$ all'istante $t = 0$, dopo un tempo $t$ la velocità è cambiata di $a\,t$:
+\[
+  v(t) = v_0 + a\,t
+\]
+Il grafico velocità-tempo è una retta di pendenza $a$ (figura~\ref{fig:ud2-moti}b). Lo spostamento fra 0 e $t$ è l'area sotto questa retta: un trapezio con i lati verticali lunghi $v_0$ e $v = v_0 + at$ e larghezza $t$. Con la formula del trapezio:
+\[
+  \Delta x = \frac{(v_0 + v)\,t}{2} = \frac{(v_0 + v_0 + at)\,t}{2} = v_0 t + \frac{1}{2}a t^2
+\]
+La prima uguaglianza ha un significato semplice: nel moto uniformemente accelerato la velocità media è la media fra la velocità iniziale e quella finale, $(v_0 + v)/2$, perché la velocità cresce in modo uniforme. Per questo motivo negli altri moti, in generale, non vale.
+
+Spesso il tempo non è dato e non è chiesto. Lo si elimina ricavandolo dalla prima formula, $t = (v - v_0)/a$, e mettendolo in $\Delta x = (v_0 + v)\,t/2$:
+\[
+  \Delta x = \frac{(v_0 + v)(v - v_0)}{2a} = \frac{v^2 - v_0^2}{2a}
+  \quad\Longrightarrow\quad
+  v^2 = v_0^2 + 2a\,\Delta x
+\]
+dove si è usato il prodotto notevole $(v + v_0)(v - v_0) = v^2 - v_0^2$.
+
+\begin{formula}[Moto uniformemente accelerato]
+v = v_0 + a\,t \qquad\qquad x = x_0 + v_0 t + \frac{1}{2} a t^2 \qquad\qquad v^2 = v_0^2 + 2a\,(x - x_0)
+\end{formula}
+
+\begin{attenzione}[i segni dipendono dall'asse]
+Prima di usare le formule si sceglie il verso positivo dell'asse, e tutte le grandezze (posizioni, velocità, accelerazioni) prendono il segno rispetto a quel verso. Un corpo che frena non ha per forza accelerazione negativa: ha accelerazione di segno opposto alla velocità. E le formule del moto uniformemente accelerato valgono solo se l'accelerazione è costante per tutto l'intervallo: se un'auto prima viaggia a velocità costante e poi frena, i due tratti si studiano separatamente.
+\end{attenzione}
+
+\begin{esempio}[lo spazio di arresto]
+Un'automobilista viaggia a \SI{54}{\kilo\metre\per\hour} quando vede un pedone attraversare. Passa \SI{1,0}{\second} prima che inizi a frenare (il \emph{tempo di reazione}); poi l'auto rallenta con accelerazione costante di modulo \SI{7,5}{\metre\per\second\squared}. Quanta strada percorre in tutto prima di fermarsi?
+
+La velocità è $54/3{,}6 = \SI{15}{\metre\per\second}$. Si mette l'asse nel verso del moto. Durante il tempo di reazione l'auto va ancora a velocità costante:
+\[
+  \Delta x_1 = v_0\,t_r = \SI{15}{\metre\per\second} \cdot \SI{1,0}{\second} = \SI{15}{\metre}
+\]
+Durante la frenata l'accelerazione è opposta alla velocità, $a = \SI{-7,5}{\metre\per\second\squared}$, e la velocità finale è zero. Da $v^2 = v_0^2 + 2a\,\Delta x$:
+\[
+  0 = (\SI{15}{\metre\per\second})^2 + 2 \cdot (\SI{-7,5}{\metre\per\second\squared}) \cdot \Delta x_2
+  \quad\Longrightarrow\quad
+  \Delta x_2 = \frac{\SI{225}{\metre\squared\per\second\squared}}{\SI{15}{\metre\per\second\squared}} = \SI{15}{\metre}
+\]
+Lo spazio di arresto è $15 + 15 = \SI{30}{\metre}$. La frenata dura $t = (0 - v_0)/a = (\SI{-15}{\metre\per\second}) / (\SI{-7,5}{\metre\per\second\squared}) = \SI{2}{\second}$.
+\end{esempio}
+
+\begin{applicazione}{alcol, farmaci e tempo di reazione}
+Nell'esempio metà dello spazio di arresto se ne va prima ancora di toccare il freno. L'alcol, i sedativi, gli antistaminici di vecchia generazione e la mancanza di sonno allungano il tempo di reazione. Se passa da \SI{1}{\second} a \SI{2}{\second}, a \SI{15}{\metre\per\second} l'auto percorre \SI{15}{\metre} in più prima di cominciare a frenare: lo spazio di arresto passa da 30 a \SI{45}{\metre}. Per questo i foglietti illustrativi di molti farmaci avvertono di non mettersi alla guida.
+\end{applicazione}
+
+\input{ud2/generati/lampo-ud2-frenata}
+
+\subsection{La caduta libera}
+
+Un sasso e un foglio di carta lasciati cadere insieme non arrivano a terra insieme, ma è colpa dell'aria. Se la resistenza dell'aria è trascurabile, tutti i corpi vicino alla superficie della Terra cadono con la stessa accelerazione, diretta verso il basso, qualunque sia la loro massa: è l'\textbf{accelerazione di gravità} $g$, che vale circa \SI{9,8}{\metre\per\second\squared}. Il moto di un corpo soggetto solo alla gravità si chiama \textbf{caduta libera}; lungo la verticale è un moto uniformemente accelerato.
+
+Si mette l'asse $y$ verticale, con il verso positivo verso l'alto. Allora l'accelerazione è $a = -g$, e le formule del moto uniformemente accelerato diventano
+\[
+  v = v_0 - g\,t \qquad\qquad y = y_0 + v_0 t - \frac{1}{2} g t^2 \qquad\qquad v^2 = v_0^2 - 2g\,(y - y_0)
+\]
+Il caso più frequente è un corpo che parte da fermo ($v_0 = 0$) e cade di un'altezza $h$, cioè arriva in $y - y_0 = -h$. Dalla seconda formula $h = \frac12 g t^2$, dalla terza $v^2 = 2gh$:
+
+\begin{formula}[Caduta libera da fermo da un'altezza $h$]
+t = \sqrt{\frac{2h}{g}} \qquad\qquad v = \sqrt{2gh} \qquad\qquad g \approx \SI{9,8}{\metre\per\second\squared}
+\end{formula}
+
+La formula della velocità ha un significato da ricordare: la velocità di arrivo cresce come la \emph{radice} dell'altezza. Per arrivare a terra con velocità doppia bisogna cadere da un'altezza quattro volte più grande.
+
+\begin{attenzione}[la massa non conta, l'aria sì]
+Nel vuoto un martello e una piuma cadono insieme: l'hanno mostrato gli astronauti dell'Apollo 15 sulla Luna. Sulla Terra l'aria frena di più i corpi leggeri e larghi, e per cadute lunghe frena anche quelli pesanti: un paracadutista a braccia aperte non supera circa \SI{200}{\kilo\metre\per\hour}. Le formule della caduta libera valgono quando la resistenza dell'aria è trascurabile, come per una persona che cade da pochi metri.
+\end{attenzione}
+
+\begin{richiamo}{le equazioni di secondo grado}
+Un'equazione della forma $A t^2 + B t + C = 0$, con $A \neq 0$, si risolve con la formula
+\[
+  t = \frac{-B \pm \sqrt{\Delta}}{2A} \qquad\text{dove}\qquad \Delta = B^2 - 4AC
+\]
+(qui i coefficienti si chiamano $A$, $B$, $C$ per non confonderli con l'accelerazione $a$). Il numero $\Delta$, il \emph{discriminante}, dice quante soluzioni ci sono: due se $\Delta > 0$, una sola se $\Delta = 0$, nessuna se $\Delta < 0$. In fisica una soluzione va sempre controllata: un tempo negativo, per esempio, indica un istante prima del lancio, e di solito si scarta. Nell'esempio che segue si arriva a $t^2 - 4\,t + 3 = 0$: $A = 1$, $B = -4$, $C = 3$, quindi $-B = 4$ e $\Delta = (-4)^2 - 4 \cdot 1 \cdot 3 = 16 - 12 = 4$. Quando $B = 0$, come in $h = \frac12 g t^2$, non serve la formula: $t^2 = 2h/g$ e $t = \sqrt{2h/g}$.
+\end{richiamo}
+
+\begin{esempio}[un lancio verso l'alto]
+Una palla viene lanciata verticalmente verso l'alto a \SI{20}{\metre\per\second}. Usando $g = \SI{10}{\metre\per\second\squared}$ e trascurando l'aria: (a) dopo quanto tempo raggiunge il punto più alto, e a che altezza? (b) In quali istanti si trova a \SI{15}{\metre} sopra il punto di lancio?
+
+(a) Nel punto più alto la palla si ferma per un istante: $v = 0$. Da $v = v_0 - gt$:
+\[
+  t = \frac{v_0}{g} = \frac{\SI{20}{\metre\per\second}}{\SI{10}{\metre\per\second\squared}} = \SI{2}{\second}
+  \qquad\qquad
+  h_{\max} = \frac{v_0^2}{2g} = \frac{\SI{400}{\metre\squared\per\second\squared}}{\SI{20}{\metre\per\second\squared}} = \SI{20}{\metre}
+\]
+dove l'altezza viene da $0 = v_0^2 - 2g\,h_{\max}$.
+
+(b) Con $y_0 = 0$, la posizione è $y = 20\,t - 5\,t^2$ (in metri, con $t$ in secondi). Si cerca quando $y = 15$:
+\[
+  20\,t - 5\,t^2 = 15 \quad\Longrightarrow\quad 5\,t^2 - 20\,t + 15 = 0 \quad\Longrightarrow\quad t^2 - 4\,t + 3 = 0
+\]
+dividendo tutto per 5. È un'equazione di secondo grado (vedi il richiamo qui sopra): $\Delta = 16 - 12 = 4$, e
+\[
+  t = \frac{4 \pm \sqrt 4}{2} = \frac{4 \pm 2}{2} \quad\Longrightarrow\quad t = \SI{1}{\second} \quad\text{oppure}\quad t = \SI{3}{\second}
+\]
+Le due soluzioni hanno senso tutte e due: a \SI{1}{\second} la palla passa a \SI{15}{\metre} salendo, a \SI{3}{\second} ci ripassa scendendo. I due istanti sono simmetrici rispetto a \SI{2}{\second}, l'istante del punto più alto.
+\end{esempio}
+
+\begin{applicazione}{cadute e traumi}
+La velocità con cui si arriva a terra cadendo da fermo, con $g \approx \SI{10}{\metre\per\second\squared}$:
+\begin{center}
+\small
+\begin{tabular}{@{}llc@{}}
+\toprule
+altezza $h$ & per avere un'idea & $v = \sqrt{2gh}$ \\
+\midrule
+\SI{1,25}{\metre} & il quarto piolo di una scala & $\sqrt{25}\,\si{\metre\per\second} = \SI{5}{\metre\per\second} = \SI{18}{\kilo\metre\per\hour}$ \\
+\SI{5}{\metre} & una finestra del primo piano & $\sqrt{100}\,\si{\metre\per\second} = \SI{10}{\metre\per\second} = \SI{36}{\kilo\metre\per\hour}$ \\
+\SI{20}{\metre} & una finestra del sesto piano & $\sqrt{400}\,\si{\metre\per\second} = \SI{20}{\metre\per\second} = \SI{72}{\kilo\metre\per\hour}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Ogni volta che l'altezza si moltiplica per 4, la velocità raddoppia. Nella valutazione di un politrauma l'altezza di caduta è uno dei dati che fanno sospettare lesioni gravi anche senza segni evidenti. La gravità del trauma, però, non dipende solo dalla velocità di arrivo, ma anche da quanto bruscamente il corpo viene fermato: lo vedremo con l'impulso, nella sezione~\ref{sec:ud2-quantita}.
+\end{applicazione}
+
+\input{ud2/generati/lampo-ud2-caduta}
+
+% -------------------------------------------------------------------------
+\section{I moti nel piano}
+\label{sec:ud2-piano}
+
+\subsection{Il moto parabolico}
+
+Un pallone calciato, un sasso lanciato, un tuffatore che si stacca dal trampolino si muovono su una curva in un piano verticale. Per descrivere questi moti si usano le componenti dei vettori posizione, velocità e accelerazione lungo due assi: $x$ orizzontale e $y$ verticale verso l'alto. Se la resistenza dell'aria è trascurabile, l'unica accelerazione è quella di gravità, verticale e verso il basso: le sue componenti sono $a_x = 0$ e $a_y = -g$. Ne viene il \textbf{principio di indipendenza dei moti}: il moto orizzontale e quello verticale procedono ognuno per conto suo, come se l'altro non ci fosse.
+\begin{itemize}
+  \item In orizzontale l'accelerazione è zero: il moto è rettilineo uniforme, con velocità costante $v_x = v_{0x}$.
+  \item In verticale l'accelerazione è $-g$: il moto è uniformemente accelerato, come nella caduta libera.
+\end{itemize}
+Un corpo lanciato dall'origine con velocità $v_0$ che forma l'angolo $\theta$ con l'orizzontale ha componenti iniziali $v_{0x} = v_0\cos\theta$ e $v_{0y} = v_0\sin\theta$ (UD1, sezione «Le componenti di un vettore»). Le sue coordinate sono
+\[
+  x = v_{0x}\,t \qquad\qquad y = v_{0y}\,t - \frac{1}{2} g t^2
+\]
+Ricavando $t = x/v_{0x}$ dalla prima e mettendolo nella seconda si ottiene $y$ in funzione di $x$: un'espressione con un termine in $x$ e uno in $x^2$, cioè una parabola. Da qui il nome di \textbf{moto parabolico} (figura~\ref{fig:ud2-parabolico}).
+
+\begin{figure}[h]
+\centering
+\input{ud2/figure/parabolico}
+\caption{Moto parabolico di un corpo lanciato a \ang{45}. In ogni punto la velocità (in rosso) è la somma della componente orizzontale $v_x$ (arancione), che non cambia, e della componente verticale $v_y$ (verde), che diminuisce, si annulla nel punto più alto e poi diventa negativa.}
+\label{fig:ud2-parabolico}
+\end{figure}
+
+Se il corpo atterra alla stessa quota da cui è partito, tre grandezze si ricavano subito.
+\begin{itemize}
+  \item Il \textbf{tempo di volo}: in verticale il corpo sale finché $v_y = v_{0y} - gt$ si annulla, cioè per un tempo $v_{0y}/g$, e impiega lo stesso tempo a ridiscendere. In tutto $t_v = 2v_{0y}/g$.
+  \item L'\textbf{altezza massima}: nel punto più alto $v_y = 0$, e da $0 = v_{0y}^2 - 2g\,h_{\max}$ si ha $h_{\max} = v_{0y}^2/(2g)$.
+  \item La \textbf{gittata}, cioè la distanza orizzontale percorsa: è la velocità orizzontale per il tempo di volo, $R = v_{0x}\,t_v$.
+\end{itemize}
+
+\begin{formula}[Moto parabolico (lancio e arrivo alla stessa quota)]
+v_{0x} = v_0\cos\theta \qquad v_{0y} = v_0\sin\theta \qquad x = v_{0x}\,t \qquad y = v_{0y}\,t - \frac12 g t^2
+\\
+t_v = \frac{2v_{0y}}{g} \qquad h_{\max} = \frac{v_{0y}^2}{2g} \qquad R = v_{0x}\,t_v = \frac{2v_0^2\sin\theta\cos\theta}{g}
+\end{formula}
+
+Con la velocità iniziale fissata, la gittata è massima per un lancio a \ang{45}: il prodotto $\sin\theta\cos\theta$ vale $\frac{\sqrt2}{2}\cdot\frac{\sqrt2}{2} = \frac12$ a \ang{45}, mentre a \ang{30} e a \ang{60} vale $\frac12\cdot\frac{\sqrt3}{2} \approx 0{,}43$. Due angoli che sommati danno \ang{90}, come \ang{30} e \ang{60}, danno la stessa gittata, perché si scambiano seno e coseno.
+
+\begin{esempio}
+(a) Una pallina rotola giù dal bordo di un tavolo alto \SI{0,80}{\metre} con velocità orizzontale di \SI{2,0}{\metre\per\second}. A che distanza dal tavolo tocca terra? (b) Un pallone viene calciato a \SI{20}{\metre\per\second} con un angolo di \ang{30} sopra l'orizzontale. Calcola tempo di volo, altezza massima e gittata. Usa $g = \SI{10}{\metre\per\second\squared}$.
+
+(a) In verticale la pallina parte con $v_{0y} = 0$, perché la velocità iniziale è orizzontale: il tempo di caduta è quello di un corpo lasciato cadere da \SI{0,80}{\metre},
+\[
+  t = \sqrt{\frac{2h}{g}} = \sqrt{\frac{2 \cdot \SI{0,80}{\metre}}{\SI{10}{\metre\per\second\squared}}} = \sqrt{\SI{0,16}{\second\squared}} = \SI{0,40}{\second}
+\]
+In questo tempo, in orizzontale, percorre $x = v_{0x}\,t = \SI{2,0}{\metre\per\second} \cdot \SI{0,40}{\second} = \SI{0,80}{\metre}$.
+
+(b) Le componenti della velocità iniziale sono
+\[
+  v_{0x} = 20\cos\ang{30} \approx 20 \cdot 0{,}87 = \SI{17,4}{\metre\per\second} \qquad\qquad v_{0y} = 20\sin\ang{30} = 20 \cdot 0{,}5 = \SI{10}{\metre\per\second}
+\]
+Quindi
+\[
+  t_v = \frac{2 \cdot \SI{10}{\metre\per\second}}{\SI{10}{\metre\per\second\squared}} = \SI{2}{\second}
+  \qquad
+  h_{\max} = \frac{(\SI{10}{\metre\per\second})^2}{2 \cdot \SI{10}{\metre\per\second\squared}} = \SI{5}{\metre}
+  \qquad
+  R = \SI{17,4}{\metre\per\second} \cdot \SI{2}{\second} \approx \SI{35}{\metre}
+\]
+\end{esempio}
+
+\begin{attenzione}[nel punto più alto la velocità non è zero]
+Nel punto più alto della traiettoria si annulla solo la componente verticale della velocità: quella orizzontale resta $v_{0x}$. E l'accelerazione è sempre $g$ verso il basso, in salita, in cima e in discesa. Solo in un lancio esattamente verticale il corpo si ferma, per un istante, nel punto più alto.
+\end{attenzione}
+
+\input{ud2/generati/lampo-ud2-parabolico}
+
+\subsection{Il moto circolare uniforme}
+
+Un corpo si muove di \textbf{moto circolare uniforme} se percorre una circonferenza con velocità di modulo costante: un punto della ruota di una bicicletta, una provetta in una centrifuga. Il moto si ripete uguale a ogni giro. Il \textbf{periodo} $T$ è il tempo di un giro, in secondi; la \textbf{frequenza} $f = 1/T$ è il numero di giri al secondo, in hertz ($\SI{1}{\hertz} = \SI[per-mode=power]{1}{\second\tothe{-1}}$). Le centrifughe e i motori indicano spesso i giri al minuto: \num{3000} giri al minuto sono $3000/60 = 50$ giri al secondo, cioè \SI{50}{\hertz}.
+
+In un periodo il corpo percorre una circonferenza, lunga $2\pi r$, quindi il modulo della velocità è $v = 2\pi r/T$. Il raggio che va dal centro al corpo, intanto, spazza un angolo giro, cioè $2\pi$ radianti (UD1, sezione «Gli angoli: gradi e radianti»). La \textbf{velocità angolare} $\omega$ (omega) è l'angolo spazzato in un secondo:
+\[
+  \omega = \frac{\Delta\theta}{\Delta t} = \frac{2\pi}{T} = 2\pi f \qquad\text{in } \si{\radian\per\second}
+\]
+Confrontando con $v = 2\pi r/T$ si trova $v = \omega r$: a parità di velocità angolare, i punti più lontani dal centro vanno più veloci. Nella UD4 ritroverai lo stesso simbolo $\omega$ con lo stesso legame con il periodo, con il nome di pulsazione.
+
+Il modulo della velocità è costante, ma la sua direzione cambia di continuo: la velocità è sempre tangente alla circonferenza (figura~\ref{fig:ud2-circolare}). Una velocità che cambia direzione è una velocità che cambia, quindi il moto circolare uniforme è un moto \emph{accelerato}. L'accelerazione punta in ogni istante verso il centro della circonferenza, e si chiama \textbf{accelerazione centripeta} («che va verso il centro»). Il suo modulo è
+
+\begin{formula}[Moto circolare uniforme]
+f = \frac{1}{T} \qquad v = \frac{2\pi r}{T} \qquad \omega = \frac{2\pi}{T} = 2\pi f \qquad v = \omega r
+\\
+a_c = \frac{v^2}{r} = \omega^2 r \qquad \text{diretta verso il centro}
+\end{formula}
+
+Le due espressioni di $a_c$ sono la stessa cosa: con $v = \omega r$ si ha $v^2/r = \omega^2 r^2/r = \omega^2 r$. A parità di raggio, raddoppiare la velocità quadruplica l'accelerazione centripeta.
+
+\begin{figure}[h]
+\centering
+\input{ud2/figure/circolare}
+\caption{Nel moto circolare uniforme la velocità $\vec v$ è tangente alla circonferenza e ha modulo costante; l'accelerazione centripeta $\vec a_c$ punta verso il centro $O$.}
+\label{fig:ud2-circolare}
+\end{figure}
+
+\begin{approfondimento}{da dove viene $v^2/r$}
+In un tempo piccolo $\Delta t$ il corpo percorre un arco lungo $v\,\Delta t$, e il raggio ruota di un angolo $\Delta\theta = v\,\Delta t/r$ (in radianti: arco diviso raggio). Anche il vettore velocità, che resta perpendicolare al raggio, ruota dello stesso angolo. Si disegnano la velocità iniziale e quella finale con la coda nello stesso punto: formano un triangolo isoscele con due lati lunghi $v$ e angolo al vertice $\Delta\theta$. Se l'angolo è piccolo, il terzo lato, che è $|\Delta\vec v|$, è quasi un arco di raggio $v$, lungo $v\,\Delta\theta$. Quindi
+\[
+  a_c = \frac{|\Delta\vec v|}{\Delta t} = \frac{v\,\Delta\theta}{\Delta t} = \frac{v}{\Delta t} \cdot \frac{v\,\Delta t}{r} = \frac{v^2}{r}
+\]
+Il vettore $\Delta\vec v$ è perpendicolare alla velocità e punta verso l'interno della curva: verso il centro.
+\end{approfondimento}
+
+\begin{esempio}[una centrifuga da laboratorio]
+Una centrifuga gira a \num{3000} giri al minuto. Le provette stanno a \SI{10}{\centi\metre} dall'asse di rotazione. Calcola la velocità angolare, la velocità delle provette e la loro accelerazione centripeta, anche in multipli di $g$.
+
+La frequenza è $f = 3000/\SI{60}{\second} = \SI{50}{\hertz}$, quindi, con $\pi \approx 3{,}14$,
+\[
+  \omega = 2\pi f \approx 6{,}28 \cdot \SI{50}{\hertz} = \SI{314}{\radian\per\second}
+  \qquad\qquad
+  v = \omega r = \SI{314}{\radian\per\second} \cdot \SI{0,10}{\metre} \approx \SI{31}{\metre\per\second}
+\]
+(il radiante è un numero puro, e nel prodotto sparisce). L'accelerazione centripeta è $a_c = \omega^2 r$. Il quadrato si fa a mano con $(300 + 14)^2 = \num{90000} + 2 \cdot 300 \cdot 14 + 196 = \num{90000} + \num{8400} + 196 = \num{98596}$:
+\[
+  a_c = \omega^2 r \approx \num{98600}\,\si{\per\second\squared} \cdot \SI{0,10}{\metre} \approx \SI{9900}{\metre\per\second\squared}
+\]
+Diviso per $g \approx \SI{9,8}{\metre\per\second\squared}$ fa circa \num{1000}: l'accelerazione centripeta è circa mille volte quella di gravità, $\approx 1000\,g$.
+\end{esempio}
+
+\begin{attenzione}[uniforme non vuol dire senza accelerazione]
+Nel moto \emph{rettilineo} uniforme l'accelerazione è zero; nel moto \emph{circolare} uniforme no. «Uniforme» dice solo che il modulo della velocità non cambia. Per far girare un corpo in cerchio, come vedremo nella dinamica, serve una forza diretta verso il centro.
+\end{attenzione}
+
+\input{ud2/generati/lampo-ud2-centrifuga}
+
+% -------------------------------------------------------------------------
+\section{I principi della dinamica}
+\label{sec:ud2-principi}
+
+\subsection{Forze e interazioni}
+
+La dinamica studia le cause del moto. Un corpo cambia il suo stato di moto, o si deforma, quando interagisce con altri corpi: il piede che calcia un pallone, la Terra che attira una mela, una molla che tira la mano. La grandezza che misura un'interazione è la \textbf{forza}. È una grandezza vettoriale: conta in quale direzione e in quale verso si spinge o si tira, oltre a quanto forte. Nel SI la forza si misura in \textbf{newton} (\si{\newton}); la definizione dell'unità viene dal secondo principio, più avanti. Per avere un'idea, \SI{1}{\newton} è circa il peso di una mela piccola, da \SI{100}{\gram}.
+
+Le interazioni sono di due tipi. Le \textbf{forze di contatto} agiscono fra corpi che si toccano: la spinta di una mano, la forza di un pavimento sui piedi, l'attrito, la tensione di una fune. Le \textbf{forze a distanza} agiscono anche fra corpi lontani: la forza gravitazionale, e le forze elettriche e magnetiche (UD6). Una forza si misura con il \textbf{dinamometro}, una molla con una scala graduata: la molla si allunga tanto più quanto più forte la si tira.
+
+Quando su un corpo agiscono più forze, il loro effetto complessivo è quello della \textbf{forza risultante} $\vec F_{\text{ris}}$, la somma vettoriale di tutte le forze (UD1, sezione «Somma e differenza di vettori»). Con le componenti, $F_{\text{ris},x}$ è la somma delle componenti $x$ di tutte le forze, e lo stesso per $y$. Due forze uguali e opposte applicate allo stesso corpo hanno risultante nulla.
+
+\subsection{Il primo principio: l'inerzia}
+
+Fino a Galileo si pensava che, per mantenere un corpo in moto, servisse una forza: un carro smette di muoversi se i cavalli smettono di tirare. Galileo capì che il carro si ferma per l'attrito, e che senza attrito continuerebbe a muoversi per sempre. Newton ne fece il primo dei suoi tre principi.
+
+\begin{formula}[Primo principio della dinamica (principio di inerzia)]
+\text{un corpo resta in quiete o in moto rettilineo uniforme}
+\\
+\text{finché la forza risultante che agisce su di esso è nulla:}\qquad \vec F_{\text{ris}} = 0 \;\Longleftrightarrow\; \vec v = \text{costante}
+\end{formula}
+
+La tendenza di un corpo a conservare la sua velocità si chiama \textbf{inerzia}. Il principio non vale in tutti i sistemi di riferimento: su un autobus che frena, un passeggero sente di essere spinto in avanti senza che nessuno lo spinga. È l'autobus che rallenta, mentre il passeggero, per inerzia, continua a muoversi alla velocità di prima. I sistemi di riferimento in cui vale il principio di inerzia si chiamano \textbf{sistemi inerziali}; per i fenomeni di questo corso il suolo è un sistema inerziale con ottima approssimazione, mentre un veicolo che accelera, frena o curva non lo è.
+
+Un corpo è in \textbf{equilibrio} se la sua velocità non cambia; è in \textbf{equilibrio statico} se è fermo e resta fermo. Per il primo principio, la condizione perché un punto materiale sia in equilibrio è
+\[
+  \vec F_{\text{ris}} = 0 \qquad\Longleftrightarrow\qquad F_{\text{ris},x} = 0 \quad\text{e}\quad F_{\text{ris},y} = 0
+\]
+Le applicazioni di questa condizione si trovano nella sezione~\ref{sec:ud2-applicazioni}.
+
+\begin{applicazione}{cinture di sicurezza e colpo di frusta}
+In un urto frontale l'auto si ferma in meno di un decimo di secondo, ma il corpo del passeggero, per inerzia, continua ad andare avanti alla velocità di prima, finché qualcosa non lo ferma: la cintura, oppure il volante e il parabrezza. Nel tamponamento da dietro succede il contrario. Il sedile spinge in avanti il torace, ma la testa, se non c'è un appoggio, per inerzia resta indietro: il collo si piega all'indietro e poi rimbalza in avanti. È il meccanismo del \emph{colpo di frusta}, che può stirare muscoli e legamenti del collo. Il poggiatesta, regolato all'altezza della testa, la spinge in avanti insieme al torace.
+\end{applicazione}
+
+\subsection{Il secondo principio: forza e accelerazione}
+
+Se la forza risultante non è nulla, il corpo accelera. L'esperienza dice che, a parità di forza, un corpo con più massa accelera di meno: spingere una carrozzina vuota è più facile che spingerla con il paziente seduto. Newton espresse il legame così.
+
+\begin{formula}[Secondo principio della dinamica]
+\vec F_{\text{ris}} = m\,\vec a
+\qquad\qquad
+\SI{1}{\newton} = \SI{1}{\kilo\gram} \cdot \SI{1}{\metre\per\second\squared}
+\end{formula}
+
+L'accelerazione ha la direzione e il verso della forza risultante, e il suo modulo è $a = F_{\text{ris}}/m$. La massa $m$ misura l'inerzia del corpo, cioè quanto resiste a cambiare velocità. Il newton è la forza che dà a un corpo di \SI{1}{\kilo\gram} un'accelerazione di \SI{1}{\metre\per\second\squared}. Il primo principio è il caso particolare $\vec F_{\text{ris}} = 0$, che dà $\vec a = 0$. La formula si usa per componenti: $F_{\text{ris},x} = m a_x$ e $F_{\text{ris},y} = m a_y$.
+
+\begin{esempio}
+Un infermiere spinge una carrozzina con il paziente, \SI{90}{\kilo\gram} in tutto. La forza risultante sulla carrozzina, cioè la spinta meno gli attriti, è di \SI{45}{\newton}, in avanti. Quanto vale l'accelerazione? Partendo da ferma, che velocità ha la carrozzina dopo \SI{4}{\second}?
+
+Per il secondo principio:
+\[
+  a = \frac{F_{\text{ris}}}{m} = \frac{\SI{45}{\newton}}{\SI{90}{\kilo\gram}} = \SI{0,5}{\metre\per\second\squared}
+\]
+(infatti $\si{\newton\per\kilo\gram} = \si{\kilo\gram\metre\per\second\squared}/\si{\kilo\gram} = \si{\metre\per\second\squared}$). La forza è costante, quindi il moto è uniformemente accelerato: $v = v_0 + at = 0 + \SI{0,5}{\metre\per\second\squared} \cdot \SI{4}{\second} = \SI{2}{\metre\per\second}$.
+\end{esempio}
+
+\input{ud2/generati/lampo-ud2-secondo}
+
+\subsection{Il terzo principio: azione e reazione}
+
+Le forze nascono sempre da un'interazione fra due corpi, e vengono sempre in coppia: se spingi un muro, il muro spinge te.
+
+\begin{formula}[Terzo principio della dinamica (azione e reazione)]
+\text{se il corpo A esercita sul corpo B la forza } \vec F_{AB}\text{, B esercita su A la forza } \vec F_{BA} = -\vec F_{AB}
+\end{formula}
+
+Le due forze hanno lo stesso modulo, la stessa direzione e versi opposti, e agiscono su corpi \emph{diversi}: una su A, l'altra su B. Per questo non si annullano. Quando cammini, il piede spinge il pavimento all'indietro, e il pavimento spinge il piede in avanti con una forza uguale e opposta: è questa forza, applicata a te, che ti fa avanzare. Sul ghiaccio il piede non riesce a spingere indietro il pavimento, e non si parte. Allo stesso modo un nuotatore spinge l'acqua all'indietro, e l'acqua lo spinge in avanti.
+
+\begin{attenzione}[azione e reazione non stanno sullo stesso corpo]
+Un libro fermo su un tavolo subisce due forze: il peso, verso il basso, e la spinta del tavolo, verso l'alto. Sono uguali e opposte, ma \emph{non} sono una coppia di azione e reazione: agiscono tutte e due sul libro, e sono uguali perché il libro è in equilibrio. La reazione al peso del libro (la Terra attira il libro) è la forza con cui il libro attira la Terra; la reazione alla spinta del tavolo sul libro è la spinta del libro sul tavolo.
+\end{attenzione}
+
+% -------------------------------------------------------------------------
+\section{Le forze}
+\label{sec:ud2-forze}
+
+\subsection{La forza gravitazionale e la forza peso}
+
+Due corpi qualsiasi si attirano. Newton scoprì che la forza è proporzionale al prodotto delle due masse e inversamente proporzionale al quadrato della loro distanza: è la \textbf{legge di gravitazione universale}.
+
+\begin{formula}[Forza gravitazionale e forza peso]
+F = G\,\frac{m_1 m_2}{r^2} \qquad G \approx \SI{6,67e-11}{\newton\metre\squared\per\kilo\gram\squared}
+\\
+F_p = m\,g \qquad\qquad g = G\,\frac{M_T}{R_T^2} \approx \SI{9,8}{\metre\per\second\squared}
+\end{formula}
+
+La forza è attrattiva e diretta lungo la retta che unisce i due corpi; $r$ è la distanza fra i loro centri. La costante di gravitazione $G$ è piccolissima, e fra due oggetti di uso comune la forza è impercettibile. Due persone di \SI{70}{\kilo\gram} a \SI{1}{\metre} di distanza si attirano con la forza
+\[
+  F = \SI{6,67e-11}{\newton\metre\squared\per\kilo\gram\squared} \cdot \frac{\SI{70}{\kilo\gram} \cdot \SI{70}{\kilo\gram}}{(\SI{1}{\metre})^2} = 6{,}67 \cdot 4900 \cdot 10^{-11}\,\si{\newton} \approx \SI{3,3e-7}{\newton}
+\]
+dove $6{,}67 \cdot 4900 \approx \num{32700} = 3{,}27 \cdot 10^{4}$, e $10^{4} \cdot 10^{-11} = 10^{-7}$. La forza diventa importante solo se almeno uno dei due corpi ha una massa enorme, come un pianeta.
+
+La \textbf{forza peso} $\vec F_p$ è la forza gravitazionale che la Terra esercita su un corpo vicino alla sua superficie. Con $m_1 = M_T$ (la massa della Terra, \SI{6,0e24}{\kilo\gram}), $m_2 = m$ e $r = R_T$ (il raggio della Terra, \SI{6,4e6}{\metre}), la forza vale $m \cdot G M_T/R_T^2$. Il fattore $G M_T/R_T^2$ non dipende dal corpo:
+\[
+  \frac{G M_T}{R_T^2} = \frac{\num{6,67e-11} \cdot \num{6,0e24}}{(\num{6,4e6})^2}\,\si{\metre\per\second\squared} = \frac{40 \cdot 10^{13}}{41 \cdot 10^{12}}\,\si{\metre\per\second\squared} \approx \SI{9,8}{\metre\per\second\squared}
+\]
+dove $6{,}67 \cdot 6{,}0 \approx 40$ e $6{,}4^2 \approx 41$. È proprio l'accelerazione di gravità: per il secondo principio, un corpo su cui agisce solo il peso $mg$ accelera di $mg/m = g$, qualunque sia la sua massa. Per questo tutti i corpi cadono allo stesso modo. Il peso è diretto verso il centro della Terra, cioè lungo la verticale e verso il basso.
+
+\begin{attenzione}[massa e peso]
+La massa si misura in chilogrammi e non cambia da un luogo all'altro; il peso è una forza, si misura in newton e dipende da $g$. Un astronauta di \SI{70}{\kilo\gram} pesa sulla Terra $70 \cdot 9{,}8 \approx \SI{690}{\newton}$; sulla Luna, dove $g \approx \SI{1,6}{\metre\per\second\squared}$, pesa circa \SI{110}{\newton}, ma la sua massa è ancora \SI{70}{\kilo\gram}. Quando nella vita quotidiana si dice «peso 70 chili» si parla della massa. Nota anche che la lettera $g$ in corsivo è l'accelerazione di gravità, mentre la g in tondo è il simbolo del grammo; e che «$5\,g$» vuol dire un'accelerazione cinque volte quella di gravità.
+\end{attenzione}
+
+\subsection{La forza normale e l'attrito}
+
+Un corpo appoggiato su una superficie la preme, e la superficie lo spinge con una forza perpendicolare a sé stessa, la \textbf{forza normale} $\vec F_N$ («normale» vuol dire perpendicolare). La superficie si deforma un poco, e spinge tanto quanto serve a impedire al corpo di attraversarla. Per questo il modulo della forza normale non è fissato in anticipo: per un libro fermo su un tavolo orizzontale vale quanto il peso, ma se si preme il libro con la mano diventa più grande, e in un ascensore che accelera cambia (sezione~\ref{sec:ud2-applicazioni}).
+
+Se si cerca di far scivolare un corpo su una superficie, nasce una forza parallela alla superficie che si oppone allo scivolamento: l'\textbf{attrito}. Ha due regimi.
+\begin{itemize}
+  \item \textbf{Attrito statico}: finché il corpo resta fermo, l'attrito è uguale e opposto alla forza che cerca di muoverlo, fino a un valore massimo. Il corpo comincia a scivolare quando la forza applicata supera $F_{s,\max} = \mu_s F_N$.
+  \item \textbf{Attrito dinamico}: mentre il corpo scivola, l'attrito è opposto alla velocità rispetto alla superficie e ha modulo $F_d = \mu_d F_N$, quasi indipendente dalla velocità.
+\end{itemize}
+I numeri puri $\mu_s$ e $\mu_d$ (mu) sono i \textbf{coefficienti di attrito} statico e dinamico; dipendono dai due materiali a contatto, e di solito $\mu_d < \mu_s$: una cassa è più facile da trascinare che da smuovere. Lo stesso simbolo $\mu$ indicherà altre grandezze nella UD4 e nella UD7.
+
+\begin{formula}[Attrito]
+F_s \leq \mu_s F_N \qquad\qquad F_d = \mu_d F_N
+\end{formula}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Superfici a contatto & $\mu_s$ & $\mu_d$ \\
+\midrule
+gomma su asfalto asciutto & 1,0 & 0,8 \\
+gomma su asfalto bagnato & 0,7 & 0,5 \\
+legno su legno & 0,5 & 0,3 \\
+acciaio su ghiaccio & 0,1 & 0,05 \\
+cartilagine articolare con liquido sinoviale & 0,01 & 0,003 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+I valori sono indicativi: dipendono dallo stato delle superfici. La forza di attrito non dipende, in prima approssimazione, dall'area di contatto: conta solo quanto forte i due corpi sono premuti uno contro l'altro, cioè $F_N$.
+
+\begin{esempio}
+Un armadietto di \SI{50}{\kilo\gram} sta su un pavimento orizzontale; i coefficienti di attrito sono $\mu_s = 0{,}40$ e $\mu_d = 0{,}30$. Con quale forza orizzontale bisogna spingerlo per smuoverlo? E per farlo scorrere a velocità costante? Usa $g = \SI{9,8}{\metre\per\second\squared}$.
+
+In verticale l'armadietto è in equilibrio: la forza normale bilancia il peso, $F_N = mg = 50 \cdot \SI{9,8}{\newton} = \SI{490}{\newton}$. L'attrito statico massimo è
+\[
+  F_{s,\max} = \mu_s F_N = 0{,}40 \cdot \SI{490}{\newton} = \SI{196}{\newton}
+\]
+quindi serve una spinta di poco più di \SI{196}{\newton}. Una volta in moto, a velocità costante la risultante deve essere nulla: la spinta deve bilanciare l'attrito dinamico, $F = \mu_d F_N = 0{,}30 \cdot \SI{490}{\newton} = \SI{147}{\newton}$.
+\end{esempio}
+
+\begin{applicazione}{le articolazioni e le protesi}
+Nelle articolazioni sinoviali, come il ginocchio e l'anca, le superfici delle ossa sono rivestite di cartilagine e lubrificate dal liquido sinoviale. Il coefficiente di attrito è bassissimo, cento volte più piccolo di quello fra due pezzi di legno: l'articolazione regge forze di migliaia di newton e scorre quasi senza attrito. Nell'artrosi la cartilagine si consuma, l'attrito aumenta e il movimento diventa doloroso. Le protesi articolari accoppiano materiali scelti perché abbiano un attrito basso e si consumino poco, come una testa di metallo o di ceramica che ruota in una coppa di polietilene.
+\end{applicazione}
+
+\subsection{La tensione}
+
+Una fune tesa tira i corpi a cui è attaccata con una forza diretta lungo la fune stessa: la \textbf{tensione} $\vec F_T$. Una fune può solo tirare, non spingere. Nei problemi si usa la \textbf{fune ideale}: inestensibile e di massa trascurabile. Una fune ideale trasmette la forza da un estremo all'altro senza cambiarla: la tensione ha lo stesso modulo in ogni punto. Una \textbf{carrucola} ideale, cioè senza attrito e di massa trascurabile, cambia la direzione della fune ma non il modulo della tensione.
+
+Nella trazione ortopedica di una gamba si appende una massa a una fune che passa su una o più carrucole e arriva alla caviglia. Una massa di \SI{5}{\kilo\gram} appesa e ferma è in equilibrio: la fune la tiene su con una tensione uguale al suo peso, $\SI{5}{\kilo\gram} \cdot \SI{9,8}{\metre\per\second\squared} = \SI{49}{\newton}$. La stessa tensione, nella direzione dell'ultimo tratto di fune, tira la caviglia. Con due funi che tirano in direzioni diverse la forza totale si trova con la somma di vettori, come nella trazione della UD1 (sezione «Somma e differenza di vettori»).
+
+\subsection{La forza elastica e la legge di Hooke}
+
+Una molla allungata o compressa tira o spinge per tornare alla sua lunghezza di riposo. Per una \textbf{molla ideale}, di massa trascurabile, la forza è proporzionale alla deformazione: è la \textbf{legge di Hooke}.
+
+\begin{formula}[Legge di Hooke]
+F = -k\,x
+\end{formula}
+
+Qui $x$ è la deformazione, cioè di quanto la molla è allungata ($x > 0$) o compressa ($x < 0$) rispetto alla lunghezza di riposo; $k$ è la \textbf{costante elastica}, in \si{\newton\per\metre}, che dice quanto è rigida la molla. Il segno meno dice che la forza è di verso opposto alla deformazione: una molla allungata tira indietro, una compressa spinge in fuori. È una \textbf{forza di richiamo}, che riporta verso la posizione di riposo. La legge vale solo per deformazioni abbastanza piccole: oltre il \emph{limite di elasticità} la molla si deforma in modo permanente e non torna più alla lunghezza di prima.
+
+\begin{esempio}
+Un dinamometro contiene una molla di costante \SI{500}{\newton\per\metre}. Agganciando una borsa, la molla si allunga di \SI{4,0}{\centi\metre}. Quanto pesa la borsa? Qual è la sua massa?
+
+La borsa è ferma: la forza della molla, verso l'alto, bilancia il peso. In modulo:
+\[
+  F_p = k\,x = \SI{500}{\newton\per\metre} \cdot \SI{0,040}{\metre} = \SI{20}{\newton}
+\]
+La massa è $m = F_p/g \approx \SI{20}{\newton} / \SI{9,8}{\metre\per\second\squared} \approx \SI{2,0}{\kilo\gram}$.
+\end{esempio}
+
+\begin{applicazione}{tendini e legamenti}
+Per piccole deformazioni tendini e legamenti si comportano come molle: si allungano in proporzione alla forza e, quando la forza cessa, tornano come prima. Oltre un allungamento di pochi punti percentuali della loro lunghezza le fibre di collagene cominciano a rompersi: è la distorsione, e nei casi gravi la rottura del legamento. Anche il dinamometro a mano usato in riabilitazione e in geriatria per misurare la forza della presa funziona così: la mano stringe un elemento elastico, e la sua deformazione dice la forza.
+\end{applicazione}
+
+\input{ud2/generati/lampo-ud2-hooke}
+
+% -------------------------------------------------------------------------
+\section{Applicare i principi: equilibrio e moto}
+\label{sec:ud2-applicazioni}
+
+\subsection{Il diagramma di corpo libero}
+
+Quasi tutti i problemi di dinamica si risolvono con lo stesso metodo.
+\begin{enumerate}
+  \item Si sceglie il corpo da studiare e lo si disegna isolato, come un punto o un blocchetto.
+  \item Si disegnano \emph{tutte} le forze che agiscono \emph{su quel corpo}, e solo quelle: il peso, e una forza per ogni cosa che lo tocca (superfici, funi, molle, mani). Le forze che il corpo esercita sugli altri non vanno nel disegno. È il \textbf{diagramma di corpo libero} (figura~\ref{fig:ud2-corpo-libero}).
+  \item Si scelgono gli assi, di solito uno nella direzione dell'accelerazione, se la si conosce.
+  \item Si scrive il secondo principio per componenti: $F_{\text{ris},x} = m a_x$ e $F_{\text{ris},y} = m a_y$. Se il corpo è in equilibrio, le accelerazioni sono zero.
+\end{enumerate}
+
+\begin{figure}[h]
+\centering
+\input{ud2/figure/corpo-libero}
+\caption{Diagrammi di corpo libero. (a) Un libro fermo su un tavolo: peso $\vec F_p$ e forza normale $\vec F_N$. (b) Una lampada appesa: peso e tensione del filo $\vec F_T$. (c) Una cassa tirata con la forza $\vec F$ su un pavimento con attrito: oltre al peso e alla forza normale c'è l'attrito $\vec F_a$, opposto al moto.}
+\label{fig:ud2-corpo-libero}
+\end{figure}
+
+\subsection{L'equilibrio traslazionale}
+
+Un corpo fermo, o che si muove a velocità costante, ha risultante nulla. Nei casi (a) e (b) della figura~\ref{fig:ud2-corpo-libero} c'è una sola direzione, e l'equilibrio dice subito $F_N = F_p$ e $F_T = F_p$. Se le forze hanno direzioni diverse si usano le componenti.
+
+\begin{esempio}[una lampada appesa a due funi]
+Una lampada di \SI{6}{\kilo\gram} è appesa al soffitto di un ambulatorio con due funi uguali, ciascuna inclinata di \ang{60} rispetto alla verticale, una a destra e una a sinistra. Quanto vale la tensione di ciascuna fune? Usa $g = \SI{10}{\metre\per\second\squared}$.
+
+\par\medskip
+\noindent\begin{minipage}{\linewidth}
+\centering
+\input{ud2/figure/lampada-funi}
+\captionof{figure}{Diagramma di corpo libero della lampada. Le due tensioni $\vec F_T$ sono dirette lungo le funi, a \ang{60} dalla verticale. Per la fune di destra sono tratteggiate le componenti. Quella verticale, $F_T\cos\ang{60}$, è il cateto adiacente all'angolo di \ang{60}. Quella orizzontale, $F_T\sin\ang{60}$, si annulla con quella dell'altra fune. Le due componenti verticali reggono il peso $\vec F_p$.}
+\label{fig:ud2-lampada}
+\end{minipage}
+\medskip
+
+Il peso è $F_p = mg = \SI{60}{\newton}$, verso il basso. Per simmetria le due funi hanno la stessa tensione $F_T$ (figura~\ref{fig:ud2-lampada}). Si prende l'asse $y$ verticale verso l'alto. Ogni fune forma \ang{60} con la verticale, quindi la sua componente verticale è il cateto adiacente a quell'angolo: $F_T\cos\ang{60} = F_T/2$. Le componenti orizzontali sono uguali e opposte e si annullano. In verticale:
+\[
+  F_{\text{ris},y} = \frac{F_T}{2} + \frac{F_T}{2} - F_p = 0
+  \quad\Longrightarrow\quad
+  F_T = F_p = \SI{60}{\newton}
+\]
+Ciascuna fune regge una tensione pari a tutto il peso, il doppio di quello che reggerebbe se fosse verticale. Più le funi sono aperte, più devono tirare: con funi quasi orizzontali la tensione diventa enorme.
+\end{esempio}
+
+\subsection{Il piano inclinato}
+
+Su un piano inclinato di un angolo $\theta$ conviene prendere gli assi parallelo e perpendicolare al piano, perché il corpo si muove lungo il piano. Il peso, verticale, si scompone in due componenti (figura~\ref{fig:ud2-piano}). L'angolo fra il peso e la perpendicolare al piano è uguale a $\theta$. Ecco perché. Il piano forma l'angolo $\theta$ con l'orizzontale. Se si ruotano di \ang{90} sia l'orizzontale sia il piano, si ottengono la verticale, che è la direzione del peso, e la perpendicolare al piano: l'angolo fra loro resta $\theta$. Un controllo: se $\theta = 0$ il piano è orizzontale, e il peso è proprio perpendicolare al piano; se il piano si inclina di $\theta$, la sua perpendicolare si inclina dello stesso angolo rispetto al peso. Quindi:
+\begin{itemize}
+  \item la componente parallela al piano, che tira il corpo verso il basso lungo il piano, è $F_p\sin\theta = mg\sin\theta$;
+  \item la componente perpendicolare al piano, che preme il corpo contro il piano, è $F_p\cos\theta = mg\cos\theta$, e la forza normale la bilancia: $F_N = mg\cos\theta$.
+\end{itemize}
+Se non c'è attrito, l'unica forza lungo il piano è $mg\sin\theta$, e il corpo scivola giù con accelerazione $a = mg\sin\theta/m = g\sin\theta$. Per $\theta = \ang{90}$ si ritrova la caduta libera, per $\theta = 0$ un piano orizzontale, senza accelerazione.
+
+\begin{figure}[h]
+\centering
+\input{ud2/figure/piano-inclinato}
+\caption{Un corpo su un piano inclinato di un angolo $\theta$. Il peso $\vec F_p$ si scompone nella componente $F_p\sin\theta$ parallela al piano e nella componente $F_p\cos\theta$ perpendicolare al piano, bilanciata dalla forza normale $\vec F_N$.}
+\label{fig:ud2-piano}
+\end{figure}
+
+\begin{formula}[Piano inclinato di un angolo $\theta$]
+F_{\parallel} = mg\sin\theta \qquad F_N = mg\cos\theta \qquad a = g\sin\theta \ \text{(senza attrito)}
+\end{formula}
+
+\begin{esempio}
+Un blocco è appoggiato su un piano inclinato di \ang{30}. (a) Se non c'è attrito, con che accelerazione scivola? (b) Se il coefficiente di attrito statico è $\mu_s = 0{,}5$, resta fermo? Usa $g = \SI{9,8}{\metre\per\second\squared}$.
+
+(a) $a = g\sin\ang{30} = \SI{9,8}{\metre\per\second\squared} \cdot 0{,}5 = \SI{4,9}{\metre\per\second\squared}$.
+
+(b) Il blocco resta fermo se l'attrito statico massimo, $\mu_s F_N = \mu_s mg\cos\theta$, è almeno uguale alla componente del peso lungo il piano, $mg\sin\theta$. Dividendo per $mg$ (la massa si semplifica), la condizione è $\mu_s\cos\theta \geq \sin\theta$:
+\[
+  \mu_s\cos\ang{30} \approx 0{,}5 \cdot 0{,}87 \approx 0{,}43 \qquad\qquad \sin\ang{30} = 0{,}5
+\]
+Poiché $0{,}43 < 0{,}5$, l'attrito non basta: il blocco scivola. Dividendo la condizione per $\cos\theta$ si ottiene $\mu_s \geq \tan\theta$: con $\tan\ang{30} \approx 0{,}58$ servirebbe $\mu_s \geq 0{,}58$.
+\end{esempio}
+
+\begin{applicazione}{le rampe per le carrozzine}
+Le pendenze delle rampe si danno in percentuale: una pendenza dell'8\% vuol dire che la rampa sale di \SI{8}{\centi\metre} ogni \SI{100}{\centi\metre} in orizzontale, cioè $\tan\theta = 0{,}08$. Per angoli così piccoli il cateto orizzontale e l'ipotenusa sono quasi uguali, quindi $\sin\theta \approx \tan\theta = 0{,}08$. Per tenere ferma su una rampa dell'8\% una carrozzina con il paziente, \SI{100}{\kilo\gram} in tutto, serve una forza lungo la rampa di circa $mg\sin\theta \approx 100 \cdot 9{,}8 \cdot 0{,}08 \approx \SI{78}{\newton}$; con una pendenza doppia, la forza raddoppia. Per questo le norme sull'accessibilità fissano una pendenza massima per le rampe.
+\end{applicazione}
+
+\subsection{Il peso apparente: l'ascensore}
+
+Una bilancia pesapersone misura la forza con cui la si preme, che per il terzo principio è uguale alla forza normale $F_N$ con cui la bilancia spinge chi ci sta sopra. In un ascensore fermo $F_N = mg$. Se l'ascensore accelera verso l'alto con accelerazione $a$, anche la persona deve accelerare verso l'alto, e la risultante su di lei deve puntare verso l'alto. Con l'asse $y$ verso l'alto, il secondo principio dà
+\[
+  F_N - mg = m a \quad\Longrightarrow\quad F_N = m\,(g + a)
+\]
+La bilancia segna di più: è il \textbf{peso apparente}. Se l'ascensore accelera verso il basso, $a$ è negativa e la bilancia segna di meno. Se la fune si rompesse e l'ascensore cadesse liberamente, con $a = -g$, la bilancia segnerebbe zero: è l'\textbf{assenza di peso} degli astronauti in orbita, che cadono continuamente verso la Terra insieme alla loro stazione. A velocità costante, in salita o in discesa, $a = 0$ e la bilancia segna il peso vero.
+
+\begin{formula}[Peso apparente (asse verso l'alto)]
+F_N = m\,(g + a)
+\end{formula}
+
+\begin{esempio}
+Una persona di \SI{60}{\kilo\gram} è in un ascensore che scende e, arrivando al piano, frena con un'accelerazione di modulo \SI{2,0}{\metre\per\second\squared}. Quanto vale la forza normale del pavimento? Usa $g = \SI{9,8}{\metre\per\second\squared}$.
+
+L'ascensore scende e rallenta: la velocità è verso il basso e l'accelerazione verso l'alto, $a = +\SI{2,0}{\metre\per\second\squared}$. Quindi
+\[
+  F_N = m\,(g + a) = \SI{60}{\kilo\gram} \cdot (9{,}8 + 2{,}0)\,\si{\metre\per\second\squared} = 60 \cdot \SI{11,8}{\newton} = \SI{708}{\newton}
+\]
+più del peso, $60 \cdot 9{,}8 = \SI{588}{\newton}$. Quello che conta è il verso dell'accelerazione, non quello della velocità.
+\end{esempio}
+
+\begin{applicazione}{le accelerazioni sopportate dal corpo}
+Le accelerazioni si danno spesso in multipli di $g$. Su un pilota che esce da una picchiata, o su un passeggero delle montagne russe in fondo a una discesa, la forza che il sedile esercita può valere molte volte il peso. Per il sangue è come se $g$ fosse più grande: si accumula verso i piedi, e il cuore fatica a mandarlo al cervello. Oltre circa $4$--$5\,g$ sostenuti per qualche secondo la vista si annebbia e si può perdere conoscenza; i piloti indossano tute che stringono le gambe e l'addome per spingere il sangue verso l'alto.
+\end{applicazione}
+
+\input{ud2/generati/lampo-ud2-ascensore}
+
+\subsection{La forza centripeta}
+
+Un corpo in moto circolare uniforme ha l'accelerazione centripeta $a_c = v^2/r$, diretta verso il centro. Per il secondo principio la forza risultante su di esso deve avere la stessa direzione e verso, e modulo $F_c = m\,a_c$:
+
+\begin{formula}[Forza centripeta]
+F_c = m\,\frac{v^2}{r} = m\,\omega^2 r \qquad \text{diretta verso il centro}
+\end{formula}
+
+Si chiama \textbf{forza centripeta}, ma non è un tipo di forza nuovo: è il nome che si dà alla risultante, quale che sia la forza che la fornisce. Per un'auto in curva è l'attrito fra gomme e asfalto; per la Luna è l'attrazione gravitazionale della Terra; per una pietra fatta girare con una fionda è la tensione della corda; per una provetta in una centrifuga è la spinta del fondo del portaprovette. Se la forza viene a mancare, il corpo prosegue per inerzia in linea retta, lungo la tangente.
+
+\begin{esempio}
+Un'auto di \SI{1000}{\kilo\gram} percorre a \SI{20}{\metre\per\second} (\SI{72}{\kilo\metre\per\hour}) una curva di raggio \SI{50}{\metre}. Quale forza centripeta serve? Con quale coefficiente di attrito statico minimo l'auto non sbanda?
+
+\[
+  F_c = m\,\frac{v^2}{r} = \SI{1000}{\kilo\gram} \cdot \frac{\SI{400}{\metre\squared\per\second\squared}}{\SI{50}{\metre}} = \SI{8000}{\newton}
+\]
+La fornisce l'attrito statico (le ruote non scivolano lateralmente), che al massimo vale $\mu_s mg = \mu_s \cdot \SI{9800}{\newton}$. Serve $\mu_s \cdot 9800 \geq 8000$, cioè $\mu_s \geq 8000/9800 \approx 0{,}82$: va bene sull'asfalto asciutto, non su quello bagnato.
+\end{esempio}
+
+\begin{applicazione}{la centrifugazione del sangue}
+Per separare il plasma dalle cellule, le provette di sangue si centrifugano a circa \num{1000}--\num{2000}\,$g$ per una decina di minuti. Visto da chi gira con la provetta, è come se la gravità fosse mille volte più forte: le particelle più dense del liquido, come i globuli rossi, si depositano sul fondo molto più in fretta che sotto la sola gravità. In fondo alla provetta si raccolgono i globuli rossi, sopra un sottile strato di globuli bianchi e piastrine, in alto il plasma. La percentuale del volume occupata dai globuli rossi è l'\emph{ematocrito}.
+\end{applicazione}
+
+\begin{attenzione}[non esiste una «forza centrifuga» che spinge in fuori]
+In un'auto in curva ci si sente spinti verso l'esterno, ma nessun corpo ci spinge: è il nostro corpo che, per inerzia, tende ad andare dritto, mentre l'auto gira. In un sistema di riferimento inerziale sul corpo agiscono solo forze esercitate da altri corpi: il sedile, la cintura, la portiera. La loro risultante punta verso il centro: è la forza centripeta. La «forza centrifuga» compare solo se si descrive il moto dal punto di vista di chi gira, che non è un sistema inerziale.
+\end{attenzione}
+
+% -------------------------------------------------------------------------
+\section{Lavoro e potenza}
+\label{sec:ud2-lavoro}
+
+\subsection{Il lavoro di una forza}
+
+Nel linguaggio comune «lavoro» è qualunque fatica. In fisica il \textbf{lavoro} misura l'effetto di una forza che sposta il suo punto di applicazione. Per una forza costante $\vec F$ e uno spostamento rettilineo $\vec s$ è il prodotto scalare dei due vettori (UD1, sezione «Il prodotto scalare»):
+
+\begin{formula}[Lavoro di una forza costante]
+W = \vec F \cdot \vec s = F\,s\cos\theta \qquad\qquad \SI{1}{\joule} = \SI{1}{\newton} \cdot \SI{1}{\metre}
+\end{formula}
+
+dove $\theta$ è l'angolo fra la forza e lo spostamento. Il lavoro è uno scalare e si misura in \textbf{joule}: \SI{1}{\joule} è il lavoro di una forza di \SI{1}{\newton} che sposta il suo punto di applicazione di \SI{1}{\metre} nella sua stessa direzione. Contano solo la componente della forza lungo lo spostamento, $F\cos\theta$, e il segno del coseno:
+\begin{itemize}
+  \item se la forza ha una componente nel verso dello spostamento ($\theta < \ang{90}$) il lavoro è positivo: la forza aiuta il moto (lavoro \emph{motore});
+  \item se la forza è perpendicolare allo spostamento ($\theta = \ang{90}$) il lavoro è zero: la forza normale su un pavimento orizzontale e la forza centripeta non compiono lavoro;
+  \item se la forza ha una componente opposta allo spostamento ($\theta > \ang{90}$) il lavoro è negativo: la forza si oppone al moto (lavoro \emph{resistente}), come l'attrito, per cui $\theta = \ang{180}$ e $W = -F_d\,s$.
+\end{itemize}
+Se sul corpo agiscono più forze, il \textbf{lavoro totale} è la somma dei lavori delle singole forze, e coincide con il lavoro della forza risultante. Attenzione ai simboli: $W$ in corsivo è il lavoro, mentre W in tondo è il simbolo del watt, l'unità della potenza; $s$ in corsivo è uno spostamento, s in tondo il secondo.
+
+\begin{esempio}
+(a) Un'infermiera tira un trolley con una forza di \SI{50}{\newton}, inclinata di \ang{60} sull'orizzontale, per \SI{20}{\metre} di corridoio. Quanto lavoro compie? (b) Un fisioterapista solleva di \SI{1,0}{\metre}, a velocità costante, una cassetta di attrezzi da \SI{10}{\kilo\gram}. Quanto lavoro compiono la sua forza e il peso? Usa $g = \SI{9,8}{\metre\per\second\squared}$.
+
+(a) $W = F\,s\cos\theta = \SI{50}{\newton} \cdot \SI{20}{\metre} \cdot \cos\ang{60} = \SI{1000}{\joule} \cdot 0{,}5 = \SI{500}{\joule}$.
+
+(b) A velocità costante la forza del fisioterapista bilancia il peso: è verso l'alto e vale $mg = \SI{98}{\newton}$. È parallela allo spostamento, quindi $W_{\text{fis}} = \SI{98}{\newton} \cdot \SI{1,0}{\metre} = \SI{98}{\joule}$. Il peso è opposto allo spostamento: $W_p = -\SI{98}{\joule}$. Il lavoro totale è zero, coerente con la velocità che non cambia (lo vedremo con il teorema dell'energia cinetica).
+\end{esempio}
+
+\begin{attenzione}[reggere un peso fermo non è lavoro, ma stanca]
+Chi regge una valigia stando fermo non compie lavoro meccanico sulla valigia, perché lo spostamento è zero. Eppure si stanca: le fibre muscolari, per tenere la forza, si contraggono e si rilasciano di continuo, e consumano energia chimica che diventa calore (UD5). Il lavoro della fisica è una cosa precisa, e non misura la fatica.
+\end{attenzione}
+
+\subsection{Il lavoro di una forza variabile}
+
+Se la forza cambia lungo il percorso, la formula $W = Fs$ non si può usare per tutto il tratto. Nel caso di una forza parallela allo spostamento, come per la velocità nel grafico $v(t)$, si divide il percorso in tanti piccoli tratti in cui la forza è quasi costante e si sommano i lavori: il lavoro è l'\emph{area sotto il grafico} della forza in funzione della posizione (figura~\ref{fig:ud2-lavoro}).
+
+\begin{figure}[h]
+\centering
+\input{ud2/figure/lavoro-area}
+\caption{Il lavoro è l'area sotto il grafico della forza in funzione della posizione. (a) Per una forza costante è un rettangolo, di area $Fs$. (b) Per allungare una molla da 0 a $x$ la forza cresce da 0 a $kx$, e il lavoro è l'area del triangolo, $\frac12 kx^2$.}
+\label{fig:ud2-lavoro}
+\end{figure}
+
+Per allungare lentamente una molla bisogna tirarla con una forza uguale e opposta a quella elastica, di modulo $kx$, che cresce con l'allungamento. Il lavoro per portarla da 0 a $x$ è l'area del triangolo di base $x$ e altezza $kx$:
+\[
+  W = \frac{1}{2} \cdot x \cdot kx = \frac{1}{2}\,k x^2
+\]
+Nello stesso tratto la forza elastica, opposta allo spostamento, compie il lavoro $-\frac12 kx^2$.
+
+\begin{esempio}
+Un elastico da riabilitazione si comporta come una molla con $k = \SI{200}{\newton\per\metre}$. Quanto lavoro serve per allungarlo di \SI{10}{\centi\metre} partendo dalla lunghezza di riposo? E per allungarlo da \SI{10}{\centi\metre} a \SI{20}{\centi\metre}?
+
+Da 0 a \SI{0,10}{\metre}: $W_1 = \frac12 \cdot \SI{200}{\newton\per\metre} \cdot (\SI{0,10}{\metre})^2 = 100 \cdot \SI{0,01}{\joule} = \SI{1}{\joule}$. Da 0 a \SI{0,20}{\metre} servirebbero $\frac12 \cdot 200 \cdot 0{,}04 = \SI{4}{\joule}$, quindi da \SI{0,10}{\metre} a \SI{0,20}{\metre} servono $4 - 1 = \SI{3}{\joule}$. Il secondo tratto, lungo quanto il primo, costa il triplo, perché la molla tira sempre di più.
+\end{esempio}
+
+\subsection{La potenza}
+
+Salire una rampa di scale di corsa o con calma richiede lo stesso lavoro contro il peso, ma non la stessa fatica. La differenza sta nel tempo: la \textbf{potenza} è il lavoro compiuto in un'unità di tempo.
+
+\begin{formula}[Potenza]
+P = \frac{W}{\Delta t} \qquad\qquad P = F\,v \ \text{(forza parallela alla velocità)} \qquad\qquad \SI{1}{\watt} = \SI{1}{\joule\per\second}
+\end{formula}
+
+La potenza si misura in \textbf{watt}. La seconda formula vale per una forza costante parallela allo spostamento: in un tempo $\Delta t$ il corpo si sposta di $s = v\,\Delta t$, e $P = Fs/\Delta t = Fv$. Con la potenza si misura anche l'energia: il \emph{chilowattora} è il lavoro fatto in un'ora con una potenza di \SI{1}{\kilo\watt}, $\SI{1}{\kilo\watt\hour} = \SI{1000}{\watt} \cdot \SI{3600}{\second} = \SI{3,6e6}{\joule}$.
+
+\begin{esempio}
+Un accompagnatore spinge una carrozzina a velocità costante di \SI{1,0}{\metre\per\second}, con una forza orizzontale di \SI{30}{\newton} che bilancia gli attriti. Che potenza sviluppa? Quanto lavoro compie in \SI{10}{\minute}?
+
+$P = F\,v = \SI{30}{\newton} \cdot \SI{1,0}{\metre\per\second} = \SI{30}{\watt}$. In \SI{10}{\minute}, cioè \SI{600}{\second}, il lavoro è $W = P\,\Delta t = \SI{30}{\watt} \cdot \SI{600}{\second} = \SI{18000}{\joule} = \SI{18}{\kilo\joule}$.
+\end{esempio}
+
+\begin{applicazione}{la potenza del corpo umano}
+A riposo il corpo consuma energia chimica a un ritmo di circa \SI{100}{\watt}, che diventa tutto calore. Durante lo sforzo i muscoli compiono anche lavoro meccanico, ma ne trasformano in lavoro solo un quarto circa dell'energia che consumano (UD5). Un ciclista allenato sviluppa sui pedali circa \SI{250}{\watt} per un'ora; il suo corpo consuma allora circa $250/0{,}25 = \SI{1000}{\watt}$, e $1000 - 250 = \SI{750}{\watt}$ diventano calore da smaltire con il sudore. Nello scatto la potenza meccanica supera per pochi secondi i \SI{1000}{\watt}. Nelle prove da sforzo si misura la potenza erogata su un cicloergometro o salendo di corsa una scala.
+\end{applicazione}
+
+\input{ud2/generati/lampo-ud2-potenza}
+
+% -------------------------------------------------------------------------
+\section{L'energia}
+\label{sec:ud2-energia}
+
+L'\textbf{energia} è la capacità di un sistema di compiere lavoro, e si misura anch'essa in joule. Ha molte forme: l'energia del moto, quella immagazzinata in una molla compressa o in un corpo sollevato, l'energia chimica del cibo, il calore (UD5), l'energia elettrica (UD6). Il lavoro è il modo in cui una forza trasferisce energia da un corpo a un altro, o da una forma all'altra. In questa sezione vediamo l'energia meccanica: quella del moto e quella di posizione.
+
+\subsection{L'energia cinetica e il suo teorema}
+
+Una forza risultante costante $F$, parallela allo spostamento, accelera un corpo di massa $m$ da $v_0$ a $v$ lungo un tratto $\Delta x$. Il suo lavoro è $W = F\,\Delta x = m a\,\Delta x$. Dalla relazione del moto uniformemente accelerato, $v^2 = v_0^2 + 2a\,\Delta x$, si ha $a\,\Delta x = (v^2 - v_0^2)/2$, e quindi
+\[
+  W = m\,\frac{v^2 - v_0^2}{2} = \frac12 m v^2 - \frac12 m v_0^2
+\]
+Il lavoro della forza risultante è uguale alla variazione della grandezza $\frac12 mv^2$, l'\textbf{energia cinetica}. Il risultato vale anche per forze variabili e per moti curvilinei, ed è il \textbf{teorema dell'energia cinetica}.
+
+\begin{formula}[Energia cinetica e teorema dell'energia cinetica]
+E_c = \frac{1}{2} m v^2 \qquad\qquad W_{\text{tot}} = \Delta E_c = E_{c,f} - E_{c,i}
+\end{formula}
+
+L'energia cinetica è uno scalare, sempre positiva o nulla, e non dipende dalla direzione del moto. Dipende dal \emph{quadrato} della velocità: a velocità doppia, energia cinetica quadrupla. Il teorema dice che se il lavoro totale è positivo il corpo accelera, se è negativo rallenta, se è zero il modulo della velocità non cambia, come nel moto circolare uniforme, in cui la forza centripeta è perpendicolare allo spostamento.
+
+\begin{esempio}[lo spazio di frenata]
+(a) Calcola l'energia cinetica di un corridore di \SI{70}{\kilo\gram} che corre a \SI{6}{\metre\per\second}. (b) Un'auto di \SI{1000}{\kilo\gram} a \SI{20}{\metre\per\second} frena con una forza costante di \SI{8000}{\newton}. In quanto spazio si ferma?
+
+(a) $E_c = \frac12 \cdot \SI{70}{\kilo\gram} \cdot (\SI{6}{\metre\per\second})^2 = 35 \cdot \SI{36}{\joule} = \SI{1260}{\joule}$.
+
+(b) La forza frenante è opposta allo spostamento $d$, e compie il lavoro $-F d$. L'energia cinetica finale è zero, quella iniziale è $\frac12 \cdot 1000 \cdot 20^2 = \SI{200000}{\joule}$. Per il teorema:
+\[
+  -F\,d = 0 - \frac12 m v_0^2 \quad\Longrightarrow\quad d = \frac{m v_0^2}{2F} = \frac{\SI{200000}{\joule}}{\SI{8000}{\newton}} = \SI{25}{\metre}
+\]
+A parità di forza frenante, lo spazio di frenata è proporzionale a $v_0^2$: andando al doppio della velocità, serve uno spazio quattro volte più lungo.
+\end{esempio}
+
+\input{ud2/generati/lampo-ud2-cinetica}
+
+\subsection{Forze conservative e forze non conservative}
+
+Un corpo di massa $m$ scende da un punto A a un punto B più basso di $h$. Il lavoro del peso dipende dal percorso? Se il corpo cade in verticale, il peso è parallelo allo spostamento e $W = mgh$. Se scende lungo un piano inclinato di un angolo $\theta$, lungo $L$, la componente del peso lungo il piano è $mg\sin\theta$, e $W = mg\sin\theta \cdot L$; ma $L\sin\theta$ è proprio il dislivello $h$, quindi $W = mgh$ di nuovo. Lo stesso vale per qualunque percorso, che si può pensare fatto di tanti piccoli tratti inclinati: \emph{il lavoro del peso dipende solo dal dislivello fra il punto di partenza e quello di arrivo}, non dalla strada fatta. Se il corpo risale da B ad A, il lavoro del peso è $-mgh$, e su un percorso chiuso, che torna al punto di partenza, il lavoro totale del peso è zero.
+
+Una forza si dice \textbf{conservativa} se il lavoro che compie fra due punti non dipende dal percorso, ma solo dai punti di partenza e di arrivo; in modo equivalente, se il suo lavoro su qualunque percorso chiuso è zero. Sono conservative la forza peso, la forza gravitazionale, la forza elastica di una molla e, come vedremo nella UD6, la forza elettrica fra cariche ferme.
+
+L'attrito, invece, è una forza \textbf{non conservativa}. L'attrito dinamico è sempre opposto al moto, quindi compie un lavoro negativo, $-F_d\,\ell$, in ogni tratto di percorso lungo $\ell$; il lavoro dipende dalla lunghezza del percorso, e su un percorso chiuso non è zero. Spingere una cassa avanti e indietro sul pavimento, fino al punto di partenza, costa lavoro contro l'attrito sia all'andata sia al ritorno. Sono non conservative anche la resistenza dell'aria e la forza dei muscoli.
+
+\subsection{L'energia potenziale}
+
+Il lavoro di una forza conservativa dipende solo dalla posizione iniziale e da quella finale: lo si può quindi scrivere come differenza di una grandezza che dipende solo dalla posizione, l'\textbf{energia potenziale} $E_p$. La si definisce in modo che il lavoro della forza conservativa sia uguale alla \emph{diminuzione} dell'energia potenziale:
+\[
+  W_{AB} = E_{p}(A) - E_{p}(B) = -\Delta E_p
+\]
+Quando una forza conservativa compie un lavoro positivo, l'energia potenziale diminuisce: un sasso che cade perde energia potenziale. Quando il lavoro è negativo, l'energia potenziale aumenta: per sollevare il sasso bisogna fare lavoro contro il peso, e quel lavoro resta immagazzinato come energia potenziale, pronto a essere restituito.
+
+Per il peso, scendendo di $h$ il lavoro è $mgh$, e l'energia potenziale diminuisce di $mgh$. L'\textbf{energia potenziale gravitazionale} di un corpo all'altezza $h$ è quindi $E_p = mgh$. L'altezza si misura da un livello scelto a piacere (il pavimento, il tavolo, il livello del mare), in cui si pone $E_p = 0$: nei conti contano solo le \emph{differenze} di energia potenziale, che non dipendono da questa scelta. Per la molla, il lavoro della forza elastica fra la lunghezza di riposo e la deformazione $x$ è $-\frac12 kx^2$, quindi l'\textbf{energia potenziale elastica} è $E_p = \frac12 kx^2$, nulla quando la molla è a riposo.
+
+\begin{formula}[Energia potenziale]
+W_{\text{cons}} = -\Delta E_p
+\qquad\qquad
+E_p = mgh \ \text{(gravitazionale)}
+\qquad\qquad
+E_p = \frac{1}{2} k x^2 \ \text{(elastica)}
+\end{formula}
+
+L'energia potenziale esiste solo per le forze conservative: per l'attrito non si può definire, perché il suo lavoro non dipende solo dalla posizione. Nota che $mgh$ vale vicino alla superficie della Terra, dove il peso è costante.
+
+\begin{esempio}
+Un fisioterapista solleva un manubrio da \SI{10}{\kilo\gram} dal pavimento a uno scaffale alto \SI{1,5}{\metre}. Di quanto aumenta l'energia potenziale del manubrio? Quanto vale l'energia potenziale sullo scaffale, se si prende lo zero all'altezza di un tavolo alto \SI{0,8}{\metre}? Usa $g = \SI{9,8}{\metre\per\second\squared}$.
+
+$\Delta E_p = mg\,\Delta h = \SI{10}{\kilo\gram} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{1,5}{\metre} = \SI{147}{\joule}$. Con lo zero al tavolo, lo scaffale è $1{,}5 - 0{,}8 = \SI{0,7}{\metre}$ più in alto, e $E_p = 10 \cdot 9{,}8 \cdot 0{,}7 = \SI{68,6}{\joule}$. Il valore dipende dalla scelta dello zero; la variazione fra pavimento e scaffale no: con lo zero al tavolo il pavimento ha $E_p = 10 \cdot 9{,}8 \cdot (-0{,}8) = \SI{-78,4}{\joule}$, e $68{,}6 - (-78{,}4) = \SI{147}{\joule}$.
+\end{esempio}
+
+\subsection{La conservazione dell'energia meccanica}
+
+L'\textbf{energia meccanica} di un corpo è la somma della sua energia cinetica e della sua energia potenziale, $E = E_c + E_p$. Supponiamo che sul corpo compiano lavoro solo forze conservative. Per il teorema dell'energia cinetica il loro lavoro è $\Delta E_c$; per la definizione di energia potenziale è $-\Delta E_p$. Quindi $\Delta E_c = -\Delta E_p$, cioè $\Delta E_c + \Delta E_p = 0$: l'energia meccanica non cambia.
+
+\begin{formula}[Conservazione dell'energia meccanica]
+E = E_c + E_p
+\qquad\qquad
+\text{solo forze conservative:}\quad \frac12 m v_i^2 + E_{p,i} = \frac12 m v_f^2 + E_{p,f}
+\\
+\text{con forze non conservative:}\quad W_{\text{nc}} = \Delta E = E_f - E_i
+\end{formula}
+
+L'energia cinetica e quella potenziale si trasformano una nell'altra, ma la loro somma resta la stessa. È il caso dei \emph{sistemi ideali}, senza attriti né resistenza dell'aria. Se agiscono anche forze non conservative, il loro lavoro $W_{\text{nc}}$ cambia l'energia meccanica: l'attrito, che compie lavoro negativo, la fa diminuire, e l'energia meccanica persa diventa energia interna dei corpi, che si scaldano (UD5). L'energia totale si conserva sempre; quella meccanica solo nei sistemi ideali.
+
+\begin{esempio}
+(a) Ritrova con l'energia la velocità di un corpo che cade da fermo da un'altezza $h$. (b) Una molla con $k = \SI{800}{\newton\per\metre}$, compressa di \SI{5,0}{\centi\metre}, lancia verso l'alto una pallina di \SI{0,10}{\kilo\gram}. Trascurando gli attriti, di quanto sale la pallina sopra il punto di lancio? Usa $g = \SI{9,8}{\metre\per\second\squared}$.
+
+(a) Si prende lo zero dell'energia potenziale al suolo. All'inizio $E_c = 0$ ed $E_p = mgh$; all'arrivo $E_p = 0$ ed $E_c = \frac12 mv^2$. Conservando l'energia, $mgh = \frac12 mv^2$; la massa si semplifica, e $v = \sqrt{2gh}$, come nella caduta libera. Ma ora il risultato vale anche per uno scivolo senza attrito di qualunque forma, perché la forza normale, perpendicolare al moto, non compie lavoro.
+
+(b) L'energia elastica della molla compressa diventa energia potenziale gravitazionale della pallina nel punto più alto, dove la pallina è ferma:
+\[
+  \frac12 k x^2 = \frac12 \cdot \SI{800}{\newton\per\metre} \cdot (\SI{0,050}{\metre})^2 = 400 \cdot \SI{0,0025}{\joule} = \SI{1,0}{\joule}
+  \qquad
+  h = \frac{\SI{1,0}{\joule}}{mg} = \frac{\SI{1,0}{\joule}}{\SI{0,98}{\newton}} \approx \SI{1,0}{\metre}
+\]
+\end{esempio}
+
+\begin{attenzione}[che cosa si conserva]
+La conservazione dell'energia meccanica richiede che le forze non conservative non compiano lavoro. Una forza può agire senza compiere lavoro, come la forza normale di uno scivolo, che è sempre perpendicolare al moto: in quel caso l'energia meccanica si conserva lo stesso. Se c'è attrito, invece, l'energia meccanica finale è minore di quella iniziale, e la differenza è il lavoro dell'attrito cambiato di segno.
+\end{attenzione}
+
+\begin{applicazione}{saltare, correre, cadere}
+Nel salto verticale le gambe spingono il corpo e gli danno, al distacco, un'energia cinetica che in volo diventa energia potenziale. Con una velocità di stacco di \SI{3}{\metre\per\second} e $g \approx \SI{10}{\metre\per\second\squared}$, il centro del corpo sale di $v^2/(2g) = 9/20 \approx \SI{0,45}{\metre}$. Nella corsa, a ogni appoggio il tendine d'Achille e l'arco del piede si allungano come molle e immagazzinano energia elastica, che restituiscono in parte nella spinta successiva: i muscoli devono fornire meno lavoro. In una caduta, invece, tutta l'energia potenziale persa diventa energia cinetica, e all'impatto va assorbita dalla deformazione dei tessuti e del suolo: per questo un tappeto morbido, che si deforma molto, protegge.
+\end{applicazione}
+
+\input{ud2/generati/lampo-ud2-scivolo}
+
+% -------------------------------------------------------------------------
+\section{La quantità di moto}
+\label{sec:ud2-quantita}
+
+\subsection{Quantità di moto e impulso}
+
+Fermare un camion che va a \SI{10}{\kilo\metre\per\hour} è più difficile che fermare una bicicletta alla stessa velocità. E fermare la stessa bicicletta è più difficile se va a \SI{30}{\kilo\metre\per\hour}. Conta il prodotto di massa e velocità, la \textbf{quantità di moto}, $\vec p = m\,\vec v$.
+
+La quantità di moto è un vettore, con la direzione e il verso della velocità, e si misura in \si{\kilo\gram\metre\per\second}. Il simbolo $p$ indica qui la quantità di moto; nella UD3 e nella UD5 la stessa lettera indicherà la pressione.
+
+Il secondo principio si può scrivere con la quantità di moto. Se la massa non cambia, $\Delta\vec p = m\,\Delta\vec v$, e $\vec F_{\text{ris}} = m\vec a = m\,\Delta\vec v/\Delta t = \Delta\vec p/\Delta t$: la forza risultante è la rapidità con cui cambia la quantità di moto. Moltiplicando per $\Delta t$:
+\[
+  \vec F\,\Delta t = \Delta\vec p
+\]
+Il prodotto della forza per il tempo in cui agisce si chiama \textbf{impulso} della forza, $\vec J$, e si misura in $\si{\newton\second} = \si{\kilo\gram\metre\per\second}$. Il \textbf{teorema dell'impulso} dice che l'impulso della forza risultante è uguale alla variazione della quantità di moto. Se la forza cambia nel tempo, come in un urto, la formula vale con la \emph{forza media} $F_m$, quella costante che darebbe lo stesso impulso: l'impulso è l'area sotto il grafico della forza in funzione del tempo (figura~\ref{fig:ud2-impulso}). La parola «impulso» ha qui un significato diverso da quello della UD4, dove indica una perturbazione singola che si propaga in un mezzo.
+
+\begin{formula}[Quantità di moto e impulso]
+\vec p = m\,\vec v \qquad\qquad \vec J = \vec F\,\Delta t = \Delta\vec p \qquad\qquad \vec F_{\text{ris}} = \frac{\Delta\vec p}{\Delta t}
+\end{formula}
+
+\begin{esempio}
+Una palla di \SI{0,40}{\kilo\gram} arriva contro un muro a \SI{10}{\metre\per\second} e rimbalza indietro alla stessa velocità. Il contatto dura \SI{0,020}{\second}. Quanto vale la forza media del muro sulla palla?
+
+Si prende l'asse nel verso in cui la palla rimbalza, cioè uscente dal muro. Prima dell'urto la velocità è $\SI{-10}{\metre\per\second}$, dopo è $\SI{+10}{\metre\per\second}$:
+\[
+  \Delta p = m v_f - m v_i = \SI{0,40}{\kilo\gram} \cdot \SI{10}{\metre\per\second} - \SI{0,40}{\kilo\gram} \cdot (\SI{-10}{\metre\per\second}) = \SI{8,0}{\kilo\gram\metre\per\second}
+\]
+\[
+  F_m = \frac{\Delta p}{\Delta t} = \frac{\SI{8,0}{\kilo\gram\metre\per\second}}{\SI{0,020}{\second}} = \SI{400}{\newton}
+\]
+Se la palla si fosse fermata contro il muro senza rimbalzare, $\Delta p$ sarebbe stato la metà: il rimbalzo raddoppia la variazione della quantità di moto, e quindi la forza a parità di tempo.
+\end{esempio}
+
+\begin{figure}[h]
+\centering
+\input{ud2/figure/impulso}
+\caption{La forza che ferma un passeggero, in funzione del tempo. Contro una superficie rigida l'arresto è brevissimo e la forza enorme; con la cintura e l'airbag l'arresto dura di più e la forza è molto più piccola. La variazione della quantità di moto è la stessa, quindi le due aree sono uguali.}
+\label{fig:ud2-impulso}
+\end{figure}
+
+\begin{applicazione}{cinture, airbag e caschi}
+In un urto a \SI{54}{\kilo\metre\per\hour}, cioè \SI{15}{\metre\per\second}, un passeggero di \SI{70}{\kilo\gram} deve perdere la quantità di moto $70 \cdot 15 = \SI{1050}{\kilo\gram\metre\per\second}$, qualunque cosa lo fermi. Se lo ferma il cruscotto, rigido, in circa un centesimo di secondo, la forza media è $1050/0{,}01 = \SI{105000}{\newton}$, più di cento volte il suo peso. Se la cintura, che si allunga un poco, e l'airbag, che si sgonfia mentre lo frena, allungano l'arresto a circa un decimo di secondo, la forza media scende a $1050/0{,}1 = \SI{10500}{\newton}$, dieci volte di meno, ed è distribuita su una superficie ampia del corpo. Lo stesso principio vale per il casco, la cui imbottitura si schiaccia nell'urto, per le scarpe da corsa ammortizzate e per chi atterra da un salto piegando le ginocchia: si allunga il tempo di arresto per ridurre la forza.
+\end{applicazione}
+
+\input{ud2/generati/lampo-ud2-airbag}
+
+\subsection{La conservazione della quantità di moto}
+
+Consideriamo un \textbf{sistema} di più corpi, per esempio due pattinatori sul ghiaccio. Le forze che i corpi del sistema si scambiano fra loro si chiamano \textbf{forze interne}; quelle dovute a corpi fuori dal sistema \textbf{forze esterne}. Per il terzo principio le forze interne vengono in coppie uguali e opposte: se il pattinatore A spinge B con la forza $\vec F$, B spinge A con $-\vec F$, nello stesso intervallo di tempo. Le due forze cambiano le quantità di moto dei due corpi di $\vec F\,\Delta t$ e di $-\vec F\,\Delta t$, e la quantità di moto totale del sistema, $\vec p_{\text{tot}} = \vec p_A + \vec p_B$, non cambia. A cambiarla possono essere solo le forze esterne. Un sistema su cui la risultante delle forze esterne è nulla si dice \textbf{isolato}.
+
+\begin{formula}[Conservazione della quantità di moto]
+\text{sistema isolato:}\qquad \vec p_{\text{tot}} = m_1\vec v_1 + m_2\vec v_2 + \dots = \text{costante}
+\end{formula}
+
+Poiché la quantità di moto è un vettore, la legge vale per ogni componente, e i segni contano. Si applica bene agli \textbf{urti} e alle \textbf{esplosioni}: durano così poco che, anche se le forze esterne non sono zero, il loro impulso è trascurabile rispetto a quello delle forze interne, enormi. Negli urti la quantità di moto totale si conserva sempre; l'energia cinetica no. Si chiama \textbf{urto elastico} quello in cui si conserva anche l'energia cinetica, come quasi succede fra due palle da biliardo, e \textbf{urto anelastico} quello in cui una parte dell'energia cinetica diventa calore o deformazione. Se dopo l'urto i corpi restano attaccati, l'urto è \textbf{completamente anelastico}, ed è quello che fa perdere più energia cinetica.
+
+\begin{esempio}
+(a) Due pattinatori, di \SI{60}{\kilo\gram} e di \SI{40}{\kilo\gram}, sono fermi sul ghiaccio e si spingono via. Il più leggero si allontana a \SI{3,0}{\metre\per\second}. Con che velocità si muove l'altro? (b) Un ragazzo di \SI{60}{\kilo\gram} che corre a \SI{5,0}{\metre\per\second} salta su un carrello fermo di \SI{40}{\kilo\gram}. Con che velocità si muovono insieme? Quanta energia cinetica si è persa?
+
+(a) Prima della spinta la quantità di moto totale è zero, e resta zero. Con l'asse nel verso del pattinatore leggero:
+\[
+  60\,v_1 + 40 \cdot 3{,}0 = 0 \quad\Longrightarrow\quad v_1 = -\frac{120}{60}\,\si{\metre\per\second} = \SI{-2,0}{\metre\per\second}
+\]
+Il pattinatore più pesante va in verso opposto, più piano.
+
+(b) L'urto è completamente anelastico. La quantità di moto si conserva:
+\[
+  \SI{60}{\kilo\gram} \cdot \SI{5,0}{\metre\per\second} = (60 + 40)\,\si{\kilo\gram} \cdot v \quad\Longrightarrow\quad v = \frac{300}{100}\,\si{\metre\per\second} = \SI{3,0}{\metre\per\second}
+\]
+L'energia cinetica prima è $\frac12 \cdot 60 \cdot 5^2 = \SI{750}{\joule}$, dopo è $\frac12 \cdot 100 \cdot 3^2 = \SI{450}{\joule}$: si sono persi \SI{300}{\joule}, finiti in calore e nella deformazione delle gambe e del carrello.
+\end{esempio}
+
+\begin{attenzione}[la quantità di moto si conserva, l'energia cinetica no]
+In un urto anelastico non si può usare la conservazione dell'energia meccanica per trovare le velocità finali: si usa la conservazione della quantità di moto. E poiché la quantità di moto è un vettore, due corpi uguali che si scontrano frontalmente alla stessa velocità hanno quantità di moto totale nulla: se restano attaccati, si fermano, e tutta la loro energia cinetica va persa.
+\end{attenzione}
+
+\begin{applicazione}{il rinculo del cuore}
+A ogni battito il ventricolo sinistro spinge verso l'alto, nell'aorta, circa \SI{70}{\gram} di sangue. Per la conservazione della quantità di moto il resto del corpo rincula un poco verso il basso. Con il sangue che parte a circa \SI{1}{\metre\per\second} e un corpo di \SI{70}{\kilo\gram}, la velocità di rinculo è
+\[
+  v = \frac{\SI{0,070}{\kilo\gram} \cdot \SI{1}{\metre\per\second}}{\SI{70}{\kilo\gram}} = \SI{0,001}{\metre\per\second} = \SI{1}{\milli\metre\per\second}
+\]
+Il \emph{balistocardiogramma}, sviluppato come esame clinico alla fine degli anni Trenta, registra questi piccolissimi movimenti con il paziente sdraiato su un lettino che scorre quasi senza attrito; oggi sensori simili, nei letti o nei dispositivi indossabili, stimano la frequenza cardiaca senza elettrodi.
+\end{applicazione}
+
+\input{ud2/generati/lampo-ud2-urto}
+
+% -------------------------------------------------------------------------
+\section{Sistemi di corpi e corpo rigido}
+\label{sec:ud2-rigido}
+
+\subsection{Il centro di massa}
+
+Finora i corpi sono stati punti materiali. Un corpo esteso, come il corpo umano, o un sistema di più corpi ha un punto speciale, il \textbf{centro di massa}: la posizione media delle masse, in cui ogni massa conta in proporzione a quanto è grande. Per corpi in un piano, coordinata per coordinata:
+
+\begin{formula}[Centro di massa]
+x_{cm} = \frac{m_1 x_1 + m_2 x_2 + \dots}{m_1 + m_2 + \dots}
+\qquad\qquad
+y_{cm} = \frac{m_1 y_1 + m_2 y_2 + \dots}{m_1 + m_2 + \dots}
+\end{formula}
+
+È una \emph{media pesata} delle posizioni: con masse uguali è la media aritmetica, cioè il punto di mezzo; con masse diverse il centro di massa si avvicina alla massa più grande (figura~\ref{fig:ud2-cm}a). Sta sempre fra la posizione più piccola e quella più grande. Per un corpo omogeneo e simmetrico, come una sfera, un cilindro o un'asta uniforme, il centro di massa è nel centro geometrico. Il centro di massa può anche stare fuori dal corpo: quello di un anello è nel centro del buco.
+
+\begin{figure}[h]
+\centering
+\input{ud2/figure/centro-massa}
+\caption{(a) Il centro di massa di due corpi di massa $3m$ e $m$ divide la loro distanza in parti inversamente proporzionali alle masse: sta tre volte più vicino al corpo più pesante. (b) In una persona in piedi il centro di massa sta circa all'altezza del bacino; la persona è in equilibrio se la verticale che passa per esso cade dentro la base d'appoggio, l'area occupata dai piedi e compresa fra essi.}
+\label{fig:ud2-cm}
+\end{figure}
+
+\begin{esempio}
+Un manubrio è formato da due dischi, di \SI{3}{\kilo\gram} e di \SI{1}{\kilo\gram}, fissati alle estremità di un'asta di massa trascurabile lunga \SI{40}{\centi\metre}. Dove si trova il centro di massa?
+
+Si mette l'origine nel disco da \SI{3}{\kilo\gram}, con l'asse lungo l'asta: $x_1 = 0$ e $x_2 = \SI{40}{\centi\metre}$.
+\[
+  x_{cm} = \frac{\SI{3}{\kilo\gram} \cdot 0 + \SI{1}{\kilo\gram} \cdot \SI{40}{\centi\metre}}{\SI{3}{\kilo\gram} + \SI{1}{\kilo\gram}} = \frac{40}{4}\,\si{\centi\metre} = \SI{10}{\centi\metre}
+\]
+Il centro di massa è a \SI{10}{\centi\metre} dal disco pesante e a \SI{30}{\centi\metre} da quello leggero: le distanze stanno nel rapporto inverso delle masse, $1 : 3$.
+\end{esempio}
+
+Il centro di massa è utile perché si muove in modo semplice anche quando il corpo si muove in modo complicato. Sia $M = m_1 + m_2 + \dots$ la massa totale. Il centro di massa è la media pesata delle posizioni. Quando i corpi si muovono, anche questa media si sposta, e la sua velocità è la media pesata delle velocità, con gli stessi pesi:
+\[
+  \vec v_{cm} = \frac{m_1\vec v_1 + m_2\vec v_2 + \dots}{M}
+  \quad\Longrightarrow\quad
+  M\vec v_{cm} = m_1\vec v_1 + m_2\vec v_2 + \dots = \vec p_{\text{tot}}
+\]
+La quantità di moto totale è quella di un punto con tutta la massa $M$ che si muove con la velocità del centro di massa. Allo stesso modo l'accelerazione del centro di massa $\vec a_{cm}$ è la media pesata delle accelerazioni, e $M\vec a_{cm} = m_1\vec a_1 + m_2\vec a_2 + \dots$ è la somma delle forze risultanti sui singoli corpi. Le forze interne si annullano a coppie per il terzo principio, e restano solo quelle esterne:
+
+\begin{formula}[Moto del centro di massa]
+M\,\vec a_{cm} = \vec F_{\text{est}}
+\end{formula}
+
+Il centro di massa si muove come un punto materiale di massa $M$ su cui agisse la risultante delle sole forze \emph{esterne}. Le forze interne non lo spostano: in un sistema isolato il centro di massa resta fermo o si muove a velocità costante. Un tuffatore che fa una capriola muove braccia e gambe in tutti i modi, ma il suo centro di massa descrive una parabola, come un sasso; i due pattinatori che si spingono via si allontanano in versi opposti, ma il loro centro di massa resta dov'era.
+
+\begin{applicazione}{il baricentro del corpo e l'equilibrio}
+Il peso di un corpo esteso agisce come se fosse applicato tutto nel centro di massa, che per questo si chiama anche \textbf{baricentro}. In una persona in piedi il baricentro si trova all'altezza del bacino, poco davanti all'osso sacro, a circa il 55\% della statura misurata da terra; la sua posizione cambia quando ci si piega o si alzano le braccia. Una persona ferma sta in equilibrio se la verticale che passa per il baricentro cade dentro la \textbf{base d'appoggio} (figura~\ref{fig:ud2-cm}b); se esce, il peso la fa ruotare e cadere. Allargare i piedi, appoggiarsi a un bastone o a un deambulatore allarga la base d'appoggio e rende più difficile cadere: è uno dei motivi per cui si prescrivono agli anziani con disturbi dell'equilibrio. In gravidanza il baricentro si sposta in avanti, e la donna tende a inarcare la schiena all'indietro per riportarlo sopra i piedi.
+\end{applicazione}
+
+\subsection{Il corpo rigido}
+
+Un \textbf{corpo rigido} è un corpo che non si deforma: le distanze fra i suoi punti restano sempre le stesse. È un modello, come il punto materiale, che descrive bene un osso, una porta o una sbarra. Un corpo rigido può \emph{traslare}, cioè spostarsi con tutti i punti che fanno lo stesso spostamento, e può \emph{ruotare} attorno a un asse. Il moto più generale è una traslazione del centro di massa, descritta da $M\vec a_{cm} = \vec F_{\text{est}}$, insieme a una rotazione attorno al centro di massa.
+
+Per un corpo rigido conta anche \emph{dove} è applicata una forza. Una porta si apre facilmente spingendola vicino alla maniglia, a fatica spingendola vicino ai cardini, e non si apre affatto spingendola verso i cardini, lungo il suo piano. L'effetto di rotazione di una forza dipende dal suo modulo, dalla sua direzione e dal suo punto di applicazione.
+
+\subsection{Il momento di una forza}
+
+Una forza $\vec F$ è applicata in un punto di un corpo rigido che può ruotare attorno a un punto $O$ (il cardine della porta, il gomito per l'avambraccio). Sia $\vec r$ il vettore che va da $O$ al punto di applicazione, e $\theta$ l'angolo fra $\vec r$ e $\vec F$. Il \textbf{momento della forza} rispetto a $O$, detto anche momento torcente, misura la capacità della forza di far ruotare il corpo:
+
+\begin{formula}[Momento di una forza]
+\tau = r\,F\sin\theta = F\,b \qquad\qquad b = r\sin\theta \qquad\qquad \vec\tau = \vec r \times \vec F
+\end{formula}
+
+La lettera $\tau$ è la tau greca. Il \textbf{braccio} $b$ è la distanza fra $O$ e la retta d'azione della forza, cioè la retta su cui la forza giace (figura~\ref{fig:ud2-momento}): è il cateto opposto all'angolo $\theta$ nel triangolo rettangolo che ha $r$ come ipotenusa. Nel punto di applicazione, infatti, l'angolo del triangolo è opposto al vertice all'angolo $\theta$ fra $\vec r$ e $\vec F$, quindi è uguale a $\theta$, e $b = r\sin\theta$. Il momento è massimo quando la forza è perpendicolare a $\vec r$ ($\sin\ang{90} = 1$, braccio uguale a $r$), ed è zero se la forza passa per $O$ ($\theta = \ang{0}$ o \ang{180}): spingendo la porta verso i cardini non la si fa ruotare. Il momento si misura in \si{\newton\metre}, come il lavoro, ma non è un'energia e non si scrive in joule.
+
+\begin{figure}[h]
+\centering
+\input{ud2/figure/momento}
+\caption{Il momento della forza $\vec F$ rispetto al punto $O$. Il vettore $\vec r$ va da $O$ al punto di applicazione e forma l'angolo $\theta$ con $\vec F$; il braccio $b = r\sin\theta$ è la distanza fra $O$ e la retta d'azione della forza (tratteggiata). Questa forza fa ruotare l'asta in verso antiorario.}
+\label{fig:ud2-momento}
+\end{figure}
+
+Il momento è un vettore: è il prodotto vettoriale di $\vec r$ e $\vec F$ (UD1, sezione «Il prodotto vettoriale»), perpendicolare al piano in cui stanno $\vec r$ e $\vec F$, con il verso dato dalla regola della mano destra. Quando tutte le forze stanno in un piano, come nei problemi di questo corso, basta un segno: per convenzione il momento è positivo se tende a far ruotare il corpo in verso antiorario, negativo se in verso orario. Il momento di una forza dipende dal punto $O$ scelto.
+
+\begin{esempio}
+Una porta larga \SI{0,80}{\metre} viene spinta sul bordo opposto ai cardini con una forza di \SI{20}{\newton}. Calcola il momento rispetto all'asse dei cardini se la forza è perpendicolare alla porta, se forma un angolo di \ang{30} con la porta, e se è perpendicolare ma applicata a \SI{10}{\centi\metre} dai cardini.
+
+Forza perpendicolare: $\tau = rF\sin\ang{90} = \SI{0,80}{\metre} \cdot \SI{20}{\newton} \cdot 1 = \SI{16}{\newton\metre}$. Con l'angolo di \ang{30} fra la porta (cioè $\vec r$) e la forza: $\tau = 0{,}80 \cdot 20 \cdot \sin\ang{30} = 16 \cdot 0{,}5 = \SI{8}{\newton\metre}$. Vicino ai cardini: $\tau = 0{,}10 \cdot 20 = \SI{2}{\newton\metre}$, otto volte meno che sul bordo.
+\end{esempio}
+
+\subsection{L'equilibrio del corpo rigido}
+
+Un corpo rigido fermo resta fermo se non trasla e non ruota. Per il moto del centro di massa, la prima condizione è che la risultante delle forze esterne sia nulla. Per la rotazione serve una seconda condizione: che la somma dei momenti delle forze esterne sia nulla, cioè che i momenti che fanno ruotare in verso antiorario bilancino quelli che fanno ruotare in verso orario.
+
+\begin{formula}[Equilibrio del corpo rigido]
+\text{equilibrio traslazionale:}\quad \vec F_{\text{ris}} = 0
+\qquad\qquad
+\text{equilibrio rotazionale:}\quad \tau_1 + \tau_2 + \dots = 0
+\end{formula}
+
+Se la risultante delle forze è nulla, la somma dei momenti è la stessa qualunque sia il punto rispetto al quale la si calcola. Conviene allora scegliere il punto in cui è applicata una forza che non si conosce: il suo momento è zero, e quella forza sparisce dall'equazione.
+
+\begin{esempio}[una barella]
+Due soccorritori portano una barella lunga \SI{2,0}{\metre}, di massa trascurabile, tenendola per le estremità. Il paziente pesa \SI{800}{\newton}, e il suo baricentro si trova a \SI{0,80}{\metre} dall'estremità della testa. Quanta forza fa ciascun soccorritore?
+
+Sulla barella agiscono il peso del paziente, verso il basso, e le due forze dei soccorritori, verso l'alto: $F_A$ alla testa e $F_B$ ai piedi. Si calcolano i momenti rispetto all'estremità della testa, così $F_A$ ha momento zero. Il peso, a \SI{0,80}{\metre}, fa ruotare la barella in verso orario; $F_B$, a \SI{2,0}{\metre}, in verso antiorario. Le forze sono perpendicolari alla barella, quindi i bracci sono le distanze:
+\[
+  F_B \cdot \SI{2,0}{\metre} - \SI{800}{\newton} \cdot \SI{0,80}{\metre} = 0
+  \quad\Longrightarrow\quad
+  F_B = \frac{\SI{640}{\newton\metre}}{\SI{2,0}{\metre}} = \SI{320}{\newton}
+\]
+Dall'equilibrio traslazionale, $F_A + F_B = \SI{800}{\newton}$, quindi $F_A = 800 - 320 = \SI{480}{\newton}$. Porta di più chi è più vicino al baricentro.
+\end{esempio}
+
+% -------------------------------------------------------------------------
+\section{Le leve del corpo umano}
+\label{sec:ud2-leve}
+
+\subsection{Le leve}
+
+Una \textbf{leva} è un corpo rigido che può ruotare attorno a un punto fisso, il \textbf{fulcro}. Su di essa agiscono due forze: la \textbf{forza motrice} $\vec F_{\text{mot}}$, che si applica per far funzionare la leva, e la \textbf{resistenza} $\vec F_{\text{res}}$, la forza da vincere. Le distanze del fulcro dalle rette d'azione delle due forze sono i loro bracci, $b_{\text{mot}}$ e $b_{\text{res}}$. Molti libri chiamano la forza motrice «potenza»: qui non lo facciamo, per non confonderla con la potenza della sezione~\ref{sec:ud2-lavoro}, che è un'altra grandezza. All'equilibrio i due momenti rispetto al fulcro si bilanciano:
+
+\begin{formula}[Leva in equilibrio]
+F_{\text{mot}}\,b_{\text{mot}} = F_{\text{res}}\,b_{\text{res}}
+\qquad\qquad
+\text{vantaggio meccanico} = \frac{F_{\text{res}}}{F_{\text{mot}}} = \frac{b_{\text{mot}}}{b_{\text{res}}}
+\end{formula}
+
+Il rapporto fra la resistenza e la forza motrice è il \textbf{vantaggio meccanico}, un numero puro. Qui non gli diamo un simbolo, per non confonderlo con la costante di gravitazione $G$. Se il braccio della forza motrice è più lungo di quello della resistenza, il vantaggio meccanico è maggiore di 1 e la leva è \textbf{vantaggiosa}: con una forza piccola si vince una resistenza grande, come con un piede di porco. Se è più corto, il vantaggio meccanico è minore di 1 e la leva è \textbf{svantaggiosa}: serve una forza più grande della resistenza. Se i bracci sono uguali la leva è \textbf{indifferente}. Una leva svantaggiosa ha però un pregio: l'estremo su cui agisce la resistenza si sposta più della forza motrice, e più in fretta.
+
+Le leve si dividono in tre \textbf{generi}, secondo l'ordine in cui si trovano fulcro, forza motrice e resistenza (figura~\ref{fig:ud2-leve}).
+\begin{itemize}
+  \item \textbf{Primo genere}: il fulcro sta fra la forza motrice e la resistenza, come in un'altalena a bilico o in un paio di forbici. Può essere vantaggiosa, svantaggiosa o indifferente.
+  \item \textbf{Secondo genere}: la resistenza sta fra il fulcro e la forza motrice, come in uno schiaccianoci o in una carriola. Il braccio della forza motrice è sempre più lungo: è sempre vantaggiosa.
+  \item \textbf{Terzo genere}: la forza motrice sta fra il fulcro e la resistenza, come in una pinzetta. È sempre svantaggiosa.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\input{ud2/figure/leve}
+\caption{I tre generi di leva, con il fulcro (triangolo), la forza motrice $\vec F_{\text{mot}}$ e la resistenza $\vec F_{\text{res}}$, e un esempio nel corpo umano per ciascuno.}
+\label{fig:ud2-leve}
+\end{figure}
+
+\subsection{Le leve nel corpo}
+
+Nel corpo umano le ossa fanno da leve, le articolazioni da fulcri e i muscoli, attraverso i tendini, applicano le forze motrici; la resistenza è il peso di una parte del corpo o di un oggetto.
+\begin{itemize}
+  \item \textbf{Primo genere}: la testa, che ruota sull'atlante, la prima vertebra del collo. Il peso del capo agisce davanti al fulcro, e i muscoli della nuca tirano dietro: quando ci si addormenta seduti, i muscoli si rilassano e la testa cade in avanti. Un altro esempio è il tricipite, che estende il gomito tirando l'olecrano, la sporgenza dell'ulna dietro il fulcro.
+  \item \textbf{Secondo genere}: il piede quando ci si alza sulla punta. Il fulcro è nelle teste dei metatarsi, dove il piede poggia; il peso del corpo scende lungo la tibia fino alla caviglia; il polpaccio tira il calcagno verso l'alto attraverso il tendine d'Achille, più lontano dal fulcro.
+  \item \textbf{Terzo genere}: l'avambraccio piegato dal bicipite, che si inserisce sul radio pochi centimetri sotto il gomito, mentre il peso sta nella mano, molto più lontano. È il caso più frequente: la maggior parte dei muscoli degli arti lavora con leve di terzo genere.
+\end{itemize}
+Le leve di terzo genere sono svantaggiose: i muscoli devono sviluppare forze molto più grandi dei pesi che sollevano. In cambio, un piccolo accorciamento del muscolo produce un ampio movimento della mano o del piede: il corpo è fatto per muoversi velocemente e su grandi distanze, più che per sollevare pesi.
+
+\begin{esempio}[il bicipite]
+L'avambraccio è piegato ad angolo retto, orizzontale, e la mano regge una massa di \SI{5,0}{\kilo\gram} a \SI{35}{\centi\metre} dal gomito. L'avambraccio con la mano pesa \SI{15}{\newton}, e il suo baricentro è a \SI{15}{\centi\metre} dal gomito. Il bicipite tira verticalmente verso l'alto a \SI{5,0}{\centi\metre} dal gomito. Calcola la forza del bicipite e quella che l'omero esercita sull'avambraccio nel gomito. Usa $g = \SI{10}{\metre\per\second\squared}$.
+
+Il peso della massa è $F_p = 5{,}0 \cdot 10 = \SI{50}{\newton}$. Si calcolano i momenti rispetto al gomito (figura~\ref{fig:ud2-avambraccio}), così la forza del gomito, che non si conosce, ha momento zero. Tutte le forze sono verticali, cioè perpendicolari all'avambraccio, e i bracci sono le distanze dal gomito. Il bicipite fa ruotare in verso antiorario, i due pesi in verso orario:
+\[
+  F_b \cdot \SI{5,0}{\centi\metre} = \SI{50}{\newton} \cdot \SI{35}{\centi\metre} + \SI{15}{\newton} \cdot \SI{15}{\centi\metre} = (1750 + 225)\,\si{\newton\centi\metre} = \SI{1975}{\newton\centi\metre}
+\]
+\[
+  F_b = \frac{\SI{1975}{\newton\centi\metre}}{\SI{5,0}{\centi\metre}} = \SI{395}{\newton}
+\]
+Le distanze compaiono in entrambi i membri, quindi si possono lasciare in centimetri. Il bicipite tira con circa \SI{400}{\newton}, otto volte il peso che la mano regge. Per l'equilibrio traslazionale la somma delle forze verticali è zero. Chiamando $F_g$ la forza del gomito, presa verso l'alto:
+\[
+  F_b + F_g - \SI{50}{\newton} - \SI{15}{\newton} = 0
+  \quad\Longrightarrow\quad
+  F_g = 65 - 395 = \SI{-330}{\newton}
+\]
+Il segno meno dice che la forza del gomito è verso il \emph{basso}: il bicipite tira l'avambraccio verso l'alto più di quanto i pesi lo tirino verso il basso, e l'omero lo preme in giù con \SI{330}{\newton}.
+\end{esempio}
+
+\begin{figure}[h]
+\centering
+\input{ud2/figure/avambraccio}
+\caption{L'avambraccio orizzontale è una leva di terzo genere con il fulcro nel gomito $O$. Il bicipite tira con la forza $\vec F_b$ a una distanza $b_1$ dal gomito; il peso $\vec F_p$ che la mano regge agisce a una distanza $b_2$ molto maggiore; il peso dell'avambraccio $\vec F_{av}$ agisce nel suo baricentro.}
+\label{fig:ud2-avambraccio}
+\end{figure}
+
+\begin{attenzione}[nel corpo le forze muscolari sono grandi]
+Proprio perché le leve del corpo sono quasi sempre svantaggiose, le forze nei muscoli, nei tendini e nelle articolazioni sono molto più grandi dei pesi in gioco. Nei quesiti, un risultato in cui il muscolo tira \emph{meno} del peso che regge, con il muscolo più vicino al fulcro del peso, è il segno di un rapporto fra bracci rovesciato.
+\end{attenzione}
+
+\input{ud2/generati/lampo-ud2-bicipite}
+
+\begin{applicazione}{la schiena e il sollevamento dei pesi}
+Quando ci si china in avanti per sollevare una cassa, la colonna lombare fa da fulcro. Il peso della parte alta del corpo e quello della cassa agiscono a qualche decina di centimetri davanti alla colonna, mentre i muscoli che raddrizzano la schiena tirano a circa \SI{5}{\centi\metre} dietro di essa: una leva molto svantaggiosa. In un modello semplificato, con il tronco di \SI{400}{\newton} che agisce a \SI{25}{\centi\metre} dal fulcro e una cassa di \SI{200}{\newton} tenuta a \SI{40}{\centi\metre}, l'equilibrio dei momenti dà la forza dei muscoli:
+\[
+  F_{\text{mot}} = \frac{\SI{400}{\newton} \cdot \SI{25}{\centi\metre} + \SI{200}{\newton} \cdot \SI{40}{\centi\metre}}{\SI{5}{\centi\metre}} = \frac{(10000 + 8000)\,\si{\newton\centi\metre}}{\SI{5}{\centi\metre}} = \SI{3600}{\newton}
+\]
+I dischi intervertebrali devono reggere questa forza e i pesi, cioè migliaia di newton: per questo il mal di schiena da sollevamento è così frequente. Piegando le ginocchia e tenendo la cassa vicino al corpo, il tronco resta più verticale e i bracci dei pesi si accorciano, e con loro la forza dei muscoli e la compressione dei dischi.
+\end{applicazione}
+
+\begin{approfondimento}{il momento come vettore e il verso di rotazione}
+Il segno «antiorario positivo» è un modo abbreviato di usare il prodotto vettoriale. Con l'asse $x$ verso destra e l'asse $y$ verso l'alto sul foglio, l'asse $z$ esce dal foglio verso chi legge (UD1). Per una forza che fa ruotare in verso antiorario, come in figura~\ref{fig:ud2-momento}, la regola della mano destra (pollice lungo $\vec r$, indice lungo $\vec F$: il medio indica $\vec r \times \vec F$) dà un momento che esce dal foglio, cioè nel verso positivo di $z$; per una rotazione oraria il momento entra nel foglio. Se si chiudono le dita della mano destra nel verso della rotazione, il pollice indica il verso del momento. Quando le forze non stanno tutte in un piano, come nelle articolazioni della spalla o dell'anca, i momenti si sommano come vettori.
+\end{approfondimento}
+
+\riepilogoformule

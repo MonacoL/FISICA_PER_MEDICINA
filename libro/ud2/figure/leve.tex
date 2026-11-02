@@ -1,0 +1,37 @@
+% I tre generi di leva, con il fulcro (triangolo), la forza motrice F_mot e la
+% resistenza F_res, e un esempio nel corpo umano per ciascuno.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \tikzset{
+    asta/.style={fill=richiamo!25, draw=richiamo, thick},
+    fulcro/.style={fill=richiamo!70, draw=richiamo},
+    motrice/.style={->, medica, very thick},
+    resistenza/.style={->, attenzione, very thick},
+  }
+  % primo genere: fulcro fra le due forze
+  \begin{scope}
+    \filldraw[asta] (-1.6,0) rectangle (1.6,0.14);
+    \filldraw[fulcro] (0.3,0) -- (0.05,-0.45) -- (0.55,-0.45) -- cycle;
+    \draw[resistenza] (-1.4,0.14) -- (-1.4,-0.9) node[below] {$\vec F_{\text{res}}$};
+    \draw[motrice] (1.4,0.14) -- (1.4,-0.9) node[below] {$\vec F_{\text{mot}}$};
+    \node[align=center] at (0,1.9) {\textbf{primo genere}\\fulcro in mezzo};
+    \node[align=center, text width=3.6cm] at (0,-2.35) {la testa sull'atlante: muscoli della nuca contro il peso del capo};
+  \end{scope}
+  % secondo genere: resistenza fra fulcro e forza motrice
+  \begin{scope}[xshift=4.6cm]
+    \filldraw[asta] (-1.6,0) rectangle (1.6,0.14);
+    \filldraw[fulcro] (-1.5,0) -- (-1.75,-0.45) -- (-1.25,-0.45) -- cycle;
+    \draw[resistenza] (-0.3,0.14) -- (-0.3,-0.9) node[below] {$\vec F_{\text{res}}$};
+    \draw[motrice] (1.4,0.14) -- (1.4,1.1) node[right] {$\vec F_{\text{mot}}$};
+    \node[align=center] at (0,1.9) {\textbf{secondo genere}\\resistenza in mezzo};
+    \node[align=center, text width=3.6cm] at (0,-2.35) {il piede sulle punte: polpaccio contro il peso del corpo};
+  \end{scope}
+  % terzo genere: forza motrice fra fulcro e resistenza
+  \begin{scope}[xshift=9.2cm]
+    \filldraw[asta] (-1.6,0) rectangle (1.6,0.14);
+    \filldraw[fulcro] (-1.5,0) -- (-1.75,-0.45) -- (-1.25,-0.45) -- cycle;
+    \draw[motrice] (-0.8,0.14) -- (-0.8,1.1) node[right] {$\vec F_{\text{mot}}$};
+    \draw[resistenza] (1.4,0.14) -- (1.4,-0.9) node[below] {$\vec F_{\text{res}}$};
+    \node[align=center] at (0,1.9) {\textbf{terzo genere}\\forza motrice in mezzo};
+    \node[align=center, text width=3.6cm] at (0,-2.35) {l'avambraccio: bicipite contro il peso in mano};
+  \end{scope}
+\end{tikzpicture}

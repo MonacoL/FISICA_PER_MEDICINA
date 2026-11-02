@@ -1,0 +1,27 @@
+% Moto parabolico: traiettoria di un corpo lanciato a 45 gradi, con le componenti
+% della velocità in alcuni punti. vx resta costante, vy diminuisce, si annulla nel
+% punto più alto e poi diventa negativa.
+\begin{tikzpicture}[>=Stealth, font=\small, x=1.25cm, y=1.25cm]
+  \draw[->] (0,0) -- (7.0,0) node[below] {$x$};
+  \draw[->] (0,0) -- (0,2.6) node[left] {$y$};
+  \draw[formula, very thick, domain=0:6, samples=60] plot (\x, {\x - \x*\x/6});
+  % punti con le componenti della velocità
+  \foreach \px/\vy in {0/0.9, 1.5/0.45, 3/0, 4.5/-0.45, 6/-0.9} {
+    \pgfmathsetmacro{\py}{\px - \px*\px/6}
+    \fill (\px,\py) circle (1.5pt);
+    \draw[->, esempio, thick] (\px,\py) -- ++(0.9,0);
+    \ifdim \vy pt=0pt\else
+      \draw[->, medica, thick] (\px,\py) -- ++(0,\vy);
+      \draw[->, attenzione, thick] (\px,\py) -- ++(0.9,\vy);
+    \fi
+  }
+  \node[esempio, above] at (3.45,1.5) {$v_x$};
+  \node[medica, left] at (0,0.75) {$v_{0y}$};
+  \node[esempio, below] at (0.45,0) {$v_{0x}$};
+  \node[attenzione, above left] at (0.75,0.85) {$\vec v_0$};
+  \draw (0.6,0) arc (0:45:0.6); \node at (0.8,0.3) {$\theta$};
+  % altezza massima e gittata
+  \draw[dashed, richiamo] (3,0) -- (3,1.5);
+  \draw[<->, richiamo] (3.3,0) -- (3.3,1.48) node[midway, right] {$h_{\max}$};
+  \draw[<->, richiamo] (0,-0.45) -- (6,-0.45) node[midway, below] {gittata $R$};
+\end{tikzpicture}

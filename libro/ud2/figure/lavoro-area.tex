@@ -1,0 +1,27 @@
+% Lavoro come area sotto il grafico della forza in funzione dello spostamento:
+% (a) forza costante, (b) forza elastica F = kx, che dà l'area di un triangolo.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \begin{scope}
+    \draw[->] (0,0) -- (3.6,0) node[below] {$x$};
+    \draw[->] (0,0) -- (0,2.4) node[left] {$F$};
+    \fill[formula!20] (0,0) rectangle (2.6,1.3);
+    \draw[formula, very thick] (0,1.3) -- (3.2,1.3);
+    \draw[dashed] (2.6,0) -- (2.6,1.3);
+    \node[left] at (0,1.3) {$F$};
+    \node[below] at (2.6,0) {$s$};
+    \node at (1.3,0.65) {$W = F s$};
+    \node at (1.7,-0.9) {(a) forza costante};
+  \end{scope}
+  \begin{scope}[xshift=5.2cm]
+    \draw[->] (0,0) -- (3.6,0) node[below] {$x$};
+    \draw[->] (0,0) -- (0,2.4) node[left] {$F$};
+    \fill[esempio!25] (0,0) -- (2.6,1.95) -- (2.6,0) -- cycle;
+    \draw[esempio, very thick] (0,0) -- (3.1,2.325) node[above left] {$F = kx$};
+    \draw[dashed] (2.6,0) -- (2.6,1.95);
+    \draw[dashed] (0,1.95) -- (2.6,1.95);
+    \node[left] at (0,1.95) {$kx$};
+    \node[below] at (2.6,0) {$x$};
+    \node at (1.85,0.5) {$W = \tfrac12 kx^2$};
+    \node at (1.7,-0.9) {(b) molla};
+  \end{scope}
+\end{tikzpicture}

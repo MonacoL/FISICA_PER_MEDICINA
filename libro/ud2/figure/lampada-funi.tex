@@ -1,0 +1,33 @@
+% Diagramma di corpo libero di una lampada appesa a due funi, ciascuna a 60 gradi
+% dalla verticale: le due tensioni F_T lungo le funi e il peso F_p. Per la fune
+% di destra sono tratteggiate le componenti F_T cos 60 (verticale) e
+% F_T sin 60 (orizzontale). In equilibrio F_T = F_p, e le tre frecce hanno la
+% stessa lunghezza.
+\begin{tikzpicture}[>=Stealth, font=\small, scale=1.3]
+  \coordinate (K) at (0,0);
+  % soffitto e funi
+  \fill[richiamo!25] (-4.0,2.0) rectangle (4.0,2.15);
+  \draw[thick] (-4.0,2.0) -- (4.0,2.0);
+  \draw[thick] (K) -- (30:4.0);
+  \draw[thick] (K) -- (150:4.0);
+  % lampada
+  \filldraw[fill=esempio!35, draw=esempio, thick] (-0.2,-0.1) -- (0.2,-0.1) -- (0.5,-0.6) -- (-0.5,-0.6) -- cycle;
+  \draw[thick] (K) -- (0,-0.1);
+  \fill (K) circle (1.4pt);
+  % verticale di riferimento e angolo di 60 gradi
+  \draw[dotted] (K) -- (0,1.9);
+  \draw (0,0.7) arc (90:30:0.7);
+  \node at (60:0.95) {\ang{60}};
+  \draw (0,0.7) arc (90:150:0.7);
+  \node at (120:0.95) {\ang{60}};
+  % forze
+  \draw[->, formula, very thick] (K) -- (30:2.0) coordinate (T) node[below right, xshift=2pt] {$\vec F_T$};
+  \draw[->, formula, very thick] (K) -- (150:2.0) node[below left] {$\vec F_T$};
+  \draw[->, attenzione, very thick] (K) -- (0,-2.0) node[right] {$\vec F_p$};
+  % componenti della tensione di destra
+  \draw[->, formula!70, thick, dashed] (K) -- (T |- K) coordinate (Tx);
+  \node[formula, right] at (Tx) {$F_T\sin\ang{60}$};
+  \draw[->, formula!70, thick, dashed] (K) -- (K |- T) coordinate (Ty);
+  \node[formula, above] at (Ty) {$F_T\cos\ang{60}$};
+  \draw[dotted] (Tx) -- (T) -- (Ty);
+\end{tikzpicture}

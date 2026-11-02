@@ -1,0 +1,43 @@
+% (a) Centro di massa di due corpi su un asse: sta più vicino al corpo più pesante.
+% (b) Persona in piedi: il centro di massa sta circa all'altezza del bacino, e la
+% verticale che passa per esso cade dentro la base d'appoggio dei piedi.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \begin{scope}
+    \draw[->] (-0.4,0) -- (5.4,0) node[below] {$x$};
+    \draw[thick, richiamo] (0.5,0) -- (4.5,0);
+    \fill[esempio] (0.5,0) circle (0.35);
+    \fill[esempio] (4.5,0) circle (0.2);
+    \node[above] at (0.5,0.35) {$m_1 = 3m$};
+    \node[above] at (4.5,0.25) {$m_2 = m$};
+    \draw (0.5,0.07) -- (0.5,-0.07); \node[below] at (0.5,-0.35) {$x_1$};
+    \draw (4.5,0.07) -- (4.5,-0.07); \node[below] at (4.5,-0.25) {$x_2$};
+    \draw[attenzione, thick] (1.5,0) circle (0.12);
+    \fill[attenzione] (1.5,0) -- ++(0.12,0) arc (0:90:0.12) -- cycle;
+    \fill[attenzione] (1.5,0) -- ++(-0.12,0) arc (180:270:0.12) -- cycle;
+    \node[attenzione, below] at (1.5,-0.25) {$x_{cm}$};
+    \draw[<->, richiamo] (0.5,-1.0) -- (1.5,-1.0) node[midway, below] {$d$};
+    \draw[<->, richiamo] (1.5,-1.0) -- (4.5,-1.0) node[midway, below] {$3d$};
+    \node at (2.5,-2.0) {(a)};
+  \end{scope}
+  \begin{scope}[xshift=8.0cm, yshift=-1.6cm]
+    % persona stilizzata: bacino a 1.7, baricentro a 1.85 (circa 55% di 3.33)
+    \draw[thick] (0,3.05) circle (0.28);
+    \draw[thick] (0,2.77) -- (0,1.7);
+    \draw[thick] (0,2.6) -- (-0.5,1.75); \draw[thick] (0,2.6) -- (0.5,1.75);
+    \draw[thick] (0,1.7) -- (-0.25,0.05) -- (-0.05,0.05);
+    \draw[thick] (0,1.7) -- (0.25,0.05) -- (0.45,0.05);
+    \fill[richiamo!30] (-0.35,-0.05) rectangle (0.5,0.0);
+    \draw[thick] (-1.0,0) -- (1.2,0);
+    % centro di massa
+    \coordinate (CM) at (0,1.85);
+    \draw[attenzione, thick] (CM) circle (0.12);
+    \fill[attenzione] (CM) -- ++(0.12,0) arc (0:90:0.12) -- cycle;
+    \fill[attenzione] (CM) -- ++(-0.12,0) arc (180:270:0.12) -- cycle;
+    \node[attenzione, right] at (0.55,1.95) {baricentro};
+    \draw[->, attenzione, thick] (CM) -- (0,0.6) node[right] {$\vec F_p$};
+    \draw[dashed, attenzione] (0,0.6) -- (0,0);
+    \draw[|<->|, medica] (-0.3,-0.3) -- (0.5,-0.3);
+    \node[medica, below] at (0.1,-0.35) {base d'appoggio};
+    \node at (0.1,-1.2) {(b)};
+  \end{scope}
+\end{tikzpicture}

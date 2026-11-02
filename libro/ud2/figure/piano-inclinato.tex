@@ -1,0 +1,28 @@
+% Piano inclinato di un angolo theta: il peso si scompone in una componente
+% parallela al piano, F_p sin(theta), e una perpendicolare, F_p cos(theta),
+% bilanciata dalla forza normale.
+\begin{tikzpicture}[>=Stealth, font=\small, scale=1.35]
+  \def\ang{30}
+  \fill[richiamo!20] (0,0) -- (6,0) -- (6,{6*tan(\ang)}) -- cycle;
+  \draw[thick] (0,0) -- (6,0) -- (6,{6*tan(\ang)}) -- cycle;
+  \draw (1.1,0) arc (0:\ang:1.1); \node at (1.35,0.3) {$\theta$};
+  % blocco sul piano
+  \begin{scope}[shift={(3.6,{3.6*tan(\ang)})}, rotate=\ang]
+    \filldraw[fill=esempio!35, draw=esempio, thick] (-0.5,0) rectangle (0.5,0.7);
+    \coordinate (C) at (0,0.35);
+  \end{scope}
+  \fill (C) circle (1.4pt);
+  % peso
+  \draw[->, attenzione, very thick] (C) -- ++(0,-2.0) coordinate (Pp) node[below] {$\vec F_p$};
+  % componenti del peso
+  \draw[->, attenzione!70, thick, dashed] (C) -- ++({180+\ang}:1.0) coordinate (Ppar);
+  \node[attenzione, above left] at (Ppar) {$F_p\sin\theta$};
+  \draw[->, attenzione!70, thick, dashed] (C) -- ++({\ang-90}:1.732) coordinate (Pperp);
+  \node[attenzione, right] at (Pperp) {$F_p\cos\theta$};
+  \draw[dotted] (Ppar) -- (Pp) -- (Pperp);
+  % forza normale
+  \draw[->, formula, very thick] (C) -- ++({\ang+90}:1.732) node[above] {$\vec F_N$};
+  % angolo fra peso e componente perpendicolare
+  \draw ($(C)+(0,-0.7)$) arc (-90:{\ang-90}:0.7);
+  \node at ($(C)+({-90+\ang/2}:0.95)$) {$\theta$};
+\end{tikzpicture}
