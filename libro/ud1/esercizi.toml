@@ -572,6 +572,7 @@ dati.d = { valore = "2,40", unita = "m" }
   [[problema.parte]]
   domanda = '''Quanto vale il seno dell'angolo $\alpha$ che la pedana forma con il pavimento? L'angolo è maggiore o minore di \ang{30}?'''
   calcolo = "h / math.sqrt(h**2 + d**2)"
+  rapido = '''0,28, minore di \ang{30}'''
   risultato = { valore = 0.28, cifre = 2 }
   soluzione = '''Il dislivello è il cateto opposto ad $\alpha$; l'ipotenusa è la lunghezza trovata al punto (a):
 \[
@@ -603,6 +604,7 @@ La componente $y$ è negativa: il marcatore si è spostato nel verso negativo de
   [[problema.parte]]
   domanda = '''Di quanto si è spostato il marcatore? La tolleranza ammessa è di \SI{4}{\milli\metre}: va corretta la posizione del paziente?'''
   calcolo = "math.sqrt((xQ - xP)**2 + (yQ - yP)**2)"
+  rapido = '''\SI{5}{\milli\metre}: sì, va riposizionato'''
   risultato = { valore = 5, unita = "mm", cifre = 1 }
   soluzione = '''La distanza fra $P$ e $Q$ è il modulo di $\vec s$. Con le componenti del punto (a):
 \[
@@ -741,7 +743,7 @@ Le componenti si arrotondano a \SI{34}{\kilo\metre} e \SI{14}{\kilo\metre} prima
   domanda = '''Quanto vale la tangente dell'angolo $\theta$ che lo spostamento totale forma con l'asse $x$? L'angolo è maggiore o minore di \ang{30}? In che direzione deve volare l'elicottero per tornare alla base in linea retta?'''
   calcolo = "(d2 * sin45) / (d1 + d2 * cos45)"
   risultato = { valore = 0.42, cifre = 2 }
-  rapido = '''0,42, ritorno verso ovest e un po' a sud'''
+  rapido = '''0,42, minore di \ang{30}; ritorno verso ovest e un po' a sud'''
   soluzione = '''La tangente è il rapporto fra le componenti del punto (a):
 \[
   \tan\theta = \frac{R_y}{R_x} = \frac{\SI{14,2}{\kilo\metre}}{\SI{34,2}{\kilo\metre}} \approx 0{,}42
@@ -777,6 +779,7 @@ Le forze sono perpendicolari, quindi lo stesso risultato viene da Pitagora: $R =
   [[problema.parte]]
   domanda = '''Di quale fattore è aumentata la forza che preme la rotula contro il femore, passando da \ang{120} a \ang{90}? Che cosa succede con il ginocchio disteso?'''
   calcolo = "(2 * F * cos45) / (2 * F * cos60)"
+  rapido = '''1,4; con il ginocchio disteso la somma è quasi nulla'''
   risultato = { valore = 1.4, cifre = 2 }
   soluzione = '''Con i risultati dei punti (a) e (b):
 \[
