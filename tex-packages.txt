@@ -24,7 +24,7 @@ cm-super
 caption
 float
 multirow
-tabularx
+tools
 hyperref
 bookmark
 etoolbox
