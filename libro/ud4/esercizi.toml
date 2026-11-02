@@ -136,7 +136,7 @@ soluzione = '''La potenza della sorgente si distribuisce su una sfera di superfi
 \[
   \frac{I_2}{I_1} = \left(\frac{r_1}{r_2}\right)^{2} = \left(\frac{\SI{1}{\metre}}{\SI{3}{\metre}}\right)^{2} = \frac{1}{9}
 \]
-A \SI{3}{\metre} l'intensità è $I/9$. Chi scrive 3 ha usato il rapporto delle distanze senza elevarlo al quadrato; chi scrive 4 ha usato la differenza delle distanze, $\SI{3}{\metre} - \SI{1}{\metre} = \SI{2}{\metre}$, invece del rapporto.'''
+A \SI{3}{\metre} l'intensità è $I/9$. Chi scrive 3 ha usato il rapporto delle distanze senza elevarlo al quadrato; chi scrive 4 ha elevato al quadrato la differenza delle distanze, $(\SI{3}{\metre} - \SI{1}{\metre})^2$, invece del rapporto.'''
 
 [[quesito]]
 id = "ud4-decibel"
@@ -188,7 +188,7 @@ tipo = "multipla"
 lampo = true
 testo = '''Un'ambulanza con la sirena accesa si avvicina a un pedone fermo, gli passa accanto e si allontana. Rispetto alla frequenza emessa dalla sirena, il pedone sente una frequenza'''
 corretta = "A"
-soluzione = '''È l'effetto Doppler. Mentre la sorgente si avvicina, i fronti d'onda davanti a lei sono più ravvicinati: la lunghezza d'onda che arriva al pedone è più corta e la frequenza più alta. Mentre si allontana, i fronti d'onda dietro di lei sono più distanziati: la frequenza è più bassa. Quando l'ambulanza passa accanto al pedone il suono passa di colpo dal più acuto al più grave.'''
+soluzione = '''È l'effetto Doppler. Mentre la sorgente si avvicina, i fronti d'onda davanti a lei sono più ravvicinati: la lunghezza d'onda che arriva al pedone è più corta e la frequenza più alta. Mentre si allontana, i fronti d'onda dietro di lei sono più distanziati: la frequenza è più bassa. Nel breve tratto in cui l'ambulanza passa accanto al pedone il suono scende rapidamente dal più acuto al più grave.'''
 
   [[quesito.opzione]]
   testo = '''più alta mentre l'ambulanza si avvicina, più bassa mentre si allontana'''

@@ -18,7 +18,7 @@ Al termine di questa unità sai:
 \end{itemize}
 \end{tcolorbox}
 
-Il suono della voce, il battito che si ascolta con lo stetoscopio, gli ultrasuoni dell'ecografia e l'onda del polso che si sente al polso sono onde meccaniche. Questa unità parte dal modello più semplice di oscillazione, l'oscillatore armonico, e arriva alle onde sonore e ai loro usi in medicina. Gli strumenti di matematica che servono sono le potenze di 10 (UD1, sezione «La notazione scientifica»), il seno e il coseno (UD1, sezione «Le funzioni trigonometriche») e i logaritmi, che si ripassano qui. Forza, energia e potenza sono trattate nella UD2: qui basta il loro significato, richiamato in una riga quando servono.
+Il suono della voce, il battito che si ascolta con lo stetoscopio, gli ultrasuoni dell'ecografia e l'onda sfigmica che si sente palpando il polso sono onde meccaniche. Questa unità parte dal modello più semplice di oscillazione, l'oscillatore armonico, e arriva alle onde sonore e ai loro usi in medicina. Gli strumenti di matematica che servono sono le potenze di 10 (UD1, sezione «La notazione scientifica»), il seno e il coseno (UD1, sezione «Le funzioni trigonometriche») e i logaritmi, che si ripassano qui. Forza, energia e potenza sono trattate nella UD2: qui basta il loro significato, richiamato in una riga quando servono.
 
 % -------------------------------------------------------------------------
 \section{Che cos'è un'onda meccanica}
@@ -106,7 +106,7 @@ Il periodo, con $2\pi \approx 6{,}28$:
 \[
   T = \frac{2\pi}{\omega} = \frac{6{,}28}{\SI{20}{\radian\per\second}} \approx \SI{0,31}{\second}
 \]
-La frequenza è l'inverso del periodo: $f = 1/T = 1/\SI{0,31}{\second} \approx \SI{3,2}{\hertz}$. La massa compie circa tre oscillazioni al secondo.
+La frequenza si ricava più facilmente dalla pulsazione: $f = \omega/(2\pi) = 20/6{,}28\ \si{\hertz} \approx \SI{3,2}{\hertz}$ (infatti $6{,}28 \cdot 3 \approx 19$, poco meno di 20). Controllo con $f = 1/T$: $3{,}2 \cdot 0{,}31 \approx 1$. La massa compie circa tre oscillazioni al secondo.
 \end{esempio}
 
 Anche i fenomeni periodici del corpo si descrivono con periodo e frequenza. Un cuore che batte 75 volte al minuto ha frequenza $f = 75/\SI{60}{\second} = \SI{1,25}{\hertz}$ e periodo $T = 1/f = \SI{0,8}{\second}$.
@@ -142,7 +142,7 @@ Un'onda armonica si può guardare in due modi (figura~\ref{fig:ud4-grandezze}): 
 
 \begin{itemize}
   \item L'\textbf{ampiezza} $A$ è lo spostamento massimo dei punti del mezzo dalla posizione di equilibrio.
-  \item La \textbf{lunghezza d'onda} $\lambda$ (lambda), in metri, è la distanza fra due punti consecutivi che si trovano nella stessa fase di oscillazione: per esempio fra due \textbf{creste} (i punti più alti dell'onda), fra due \textbf{avvallamenti} (i punti più bassi) o fra due compressioni.
+  \item La \textbf{lunghezza d'onda} $\lambda$ (lambda), in metri, è la distanza fra due punti consecutivi che si trovano nella stessa fase di oscillazione, cioè nello stesso punto del loro moto avanti e indietro (tutti e due al massimo, oppure tutti e due che passano per l'equilibrio salendo): per esempio fra due \textbf{creste} (i punti più alti dell'onda), fra due \textbf{avvallamenti} (i punti più bassi) o fra due compressioni.
   \item Il \textbf{periodo} $T$ e la \textbf{frequenza} $f = 1/T$ sono quelli dell'oscillazione di ogni punto del mezzo, e sono gli stessi della sorgente. La pulsazione è $\omega = 2\pi f$.
   \item La \textbf{velocità di propagazione} $v$ è la velocità con cui avanza la perturbazione. In un periodo la sorgente compie un'oscillazione completa e l'onda avanza di una lunghezza d'onda, quindi $v = \lambda/T = \lambda f$.
 \end{itemize}
@@ -162,7 +162,7 @@ La frequenza è fissata dalla sorgente; la velocità dipende dal mezzo, come ved
 \]
 (b) La frequenza in hertz è $\SI{5}{\mega\hertz} = \SI{5e6}{\hertz}$:
 \[
-  \lambda = \frac{v}{f} = \frac{\SI{1540}{\metre\per\second}}{\SI{5e6}{\hertz}} = \frac{1540}{5} \cdot 10^{-6}\,\si{\metre} = 308 \cdot 10^{-6}\,\si{\metre} \approx \SI{0,3}{\milli\metre}
+  \lambda = \frac{v}{f} = \frac{\SI{1540}{\metre\per\second}}{\SI{5e6}{\hertz}} = \frac{1540}{5} \cdot 10^{-6}\,\si{\metre} = 308 \cdot 10^{-6}\,\si{\metre} = 0{,}308 \cdot 10^{-3}\,\si{\metre} \approx \SI{0,3}{\milli\metre}
 \]
 La lunghezza d'onda dell'ecografo è di qualche decimo di millimetro: è l'ordine di grandezza dei dettagli più piccoli che l'immagine riesce a mostrare.
 \end{esempio}
@@ -175,7 +175,7 @@ Quando un'onda passa da un mezzo a un altro, per esempio dal grasso al muscolo, 
 
 \subsection{L'equazione dell'onda armonica}
 
-Per un'onda armonica che si propaga lungo l'asse $x$ conviene definire il \textbf{numero d'onda} $k = 2\pi/\lambda$, in radianti al metro: fa con la lunghezza d'onda quello che la pulsazione fa con il periodo. Lo spostamento $y$ del punto del mezzo che si trova in $x$, all'istante $t$, è
+Per un'onda armonica che si propaga lungo l'asse $x$ conviene definire il \textbf{numero d'onda} $k = 2\pi/\lambda$, in radianti al metro: fa con la lunghezza d'onda quello che la pulsazione fa con il periodo. Attenzione: è lo stesso simbolo della costante della molla, ma è un'altra grandezza. La costante della molla si misura in \si{\newton\per\metre} e compare solo nell'oscillatore; il numero d'onda si misura in \si{\radian\per\metre} e compare solo nell'equazione dell'onda. Lo spostamento $y$ del punto del mezzo che si trova in $x$, all'istante $t$, è
 
 \begin{formula}[Onda armonica]
 y(x,t) = A\sin(kx - \omega t)
@@ -187,7 +187,7 @@ Si legge così:
 \begin{itemize}
   \item fissato il punto $x$, lo spostamento oscilla nel tempo con pulsazione $\omega$: ogni punto è un oscillatore armonico;
   \item fissato l'istante $t$, lo spostamento è una sinusoide nello spazio, che si ripete ogni $\lambda$: è l'istantanea della figura~\ref{fig:ud4-grandezze}a;
-  \item con il segno meno davanti a $\omega t$ l'onda avanza verso le $x$ positive; con il segno più, $y = A\sin(kx + \omega t)$, verso le $x$ negative.
+  \item con il segno meno davanti a $\omega t$ l'onda avanza verso le $x$ positive; con il segno più, $y = A\sin(kx + \omega t)$, verso le $x$ negative. Infatti una cresta è un punto in cui $kx - \omega t$ ha un valore fisso: se $t$ cresce, anche $x$ deve crescere per tenere fisso quel valore, quindi la cresta si sposta verso le $x$ positive.
 \end{itemize}
 Il rapporto fra pulsazione e numero d'onda è la velocità: $\omega/k = (2\pi/T)/(2\pi/\lambda) = \lambda/T = v$.
 
@@ -207,7 +207,7 @@ Davanti a $\omega t$ c'è il segno meno: l'onda avanza verso le $x$ positive. Co
 \end{esempio}
 
 \begin{attenzione}[due velocità diverse]
-La velocità di propagazione $v$ è quella con cui la forma dell'onda avanza, ed è la stessa per tutte le onde in uno stesso mezzo. Le particelle del mezzo, invece, oscillano intorno alla loro posizione con una velocità che cambia di continuo: è nulla nelle creste e massima quando passano per la posizione di equilibrio. Non vanno confuse.
+La velocità di propagazione $v$ è quella con cui la forma dell'onda avanza, ed è la stessa per tutte le onde dello stesso tipo in uno stesso mezzo, qualunque sia la loro frequenza (per le onde di cui ci occupiamo). Le particelle del mezzo, invece, oscillano intorno alla loro posizione con una velocità che cambia di continuo: è nulla nelle creste e massima quando passano per la posizione di equilibrio. Non vanno confuse.
 \end{attenzione}
 
 % -------------------------------------------------------------------------
@@ -238,7 +238,7 @@ Controllo delle unità: $\si{\newton} = \si{\kilo\gram\metre\per\second\squared}
 
 \subsection{Onde longitudinali nei fluidi: il suono}
 
-In un fluido la rigidità è data dal \textbf{modulo di compressibilità} $B$: dice quanta pressione in più serve per ridurre il volume di una certa frazione, e si misura in pascal come la pressione ($\SI{1}{\pascal} = \SI{1}{\newton\per\metre\squared}$, UD3). Un fluido poco comprimibile, come l'acqua, ha un $B$ grande. L'inerzia è data dalla densità $\rho$ (rho), in \si{\kilo\gram\per\metre\cubed}.
+In un fluido la rigidità è data dal \textbf{modulo di compressibilità} $B$, il rapporto fra l'aumento di pressione e la frazione di volume persa, $B = \Delta p/(\Delta V/V)$: per ridurre il volume dell'1\% serve un aumento di pressione pari a $B/100$. Poiché $\Delta V/V$ è un numero puro, $B$ si misura in pascal come la pressione ($\SI{1}{\pascal} = \SI{1}{\newton\per\metre\squared}$, UD3). Un fluido poco comprimibile, come l'acqua, ha un $B$ grande. L'inerzia è data dalla densità $\rho$ (rho), in \si{\kilo\gram\per\metre\cubed}.
 
 \begin{formula}[Velocità del suono in un fluido]
 v = \sqrt{\frac{B}{\rho}}
@@ -253,7 +253,11 @@ L'acqua ha $B \approx \SI{2,2e9}{\pascal}$ e $\rho = \SI{1000}{\kilo\gram\per\me
 La radice di $10^{6}$ è $10^{3}$; per $\sqrt{2{,}2}$ basta notare che $1{,}5^2 = 2{,}25$, quindi $\sqrt{2{,}2}$ è poco meno di 1,5. Il valore misurato è circa \SI{1480}{\metre\per\second}.
 \end{esempio}
 
-L'aria è molto più comprimibile dell'acqua (il suo $B$ è circa \SI{1,4e5}{\pascal}, più di diecimila volte più piccolo), ma è anche circa 800 volte meno densa: il risultato è che il suono in aria è circa quattro volte più lento che in acqua, $v \approx \SI{340}{\metre\per\second}$ a temperatura ambiente. Nei gas la velocità del suono cresce con la temperatura.
+L'aria è molto più comprimibile dell'acqua: ha $B \approx \SI{1,4e5}{\pascal}$, più di diecimila volte meno dell'acqua, ma è anche molto meno densa, $\rho \approx \SI{1,2}{\kilo\gram\per\metre\cubed}$, circa 800 volte meno. Il conto diretto dà
+\[
+  v = \sqrt{\frac{\SI{1,4e5}{\pascal}}{\SI{1,2}{\kilo\gram\per\metre\cubed}}} \approx \sqrt{11{,}7 \cdot 10^{4}}\,\si{\metre\per\second} = \sqrt{11{,}7} \cdot 10^{2}\,\si{\metre\per\second} \approx \SI{3,4e2}{\metre\per\second}
+\]
+perché $1{,}4/1{,}2 \approx 1{,}17$ e $3{,}4^2 = 11{,}56$. A temperatura ambiente il suono in aria viaggia quindi a circa \SI{340}{\metre\per\second}, circa quattro volte più lento che in acqua ($1480/340 \approx 4{,}4$). Nei gas la velocità del suono cresce con la temperatura.
 
 \begin{applicazione}{l'onda del polso e la rigidità delle arterie}
 A ogni battito il sangue spinto nell'aorta dilata la parete elastica dell'arteria, e la dilatazione corre lungo le arterie come un'onda, l'\textbf{onda sfigmica}, che si sente palpando il polso. Più l'arteria è rigida, più l'onda è veloce, come sulla corda più tesa. Se l'onda impiega \SI{75}{\milli\second} dalla carotide alla femorale, che distano \SI{0,60}{\metre}, la sua velocità è $v = \SI{0,60}{\metre}/\SI{0,075}{\second} = \SI{8}{\metre\per\second}$. Con l'età e con l'arteriosclerosi la velocità cresce, ed è un indice di rischio cardiovascolare. È la velocità della deformazione della parete, non quella del sangue, che nell'aorta non supera circa \SI{1}{\metre\per\second}.
@@ -314,7 +318,7 @@ Mezza lunghezza d'onda ($n = 0$): l'interferenza è distruttiva, e l'ascoltatore
 \input{ud4/generati/lampo-ud4-interferenza}
 
 \begin{attenzione}[l'interferenza non distrugge l'energia]
-Nei punti di interferenza distruttiva l'onda si annulla, ma l'energia non sparisce: si sposta nei punti di interferenza costruttiva, dove l'onda è più intensa. Inoltre per avere una figura di interferenza stabile le due sorgenti devono avere la stessa frequenza e mantenere la stessa differenza di fase: due persone che parlano insieme non producono zone di silenzio.
+Nei punti di interferenza distruttiva l'onda si annulla, ma l'energia non sparisce: si sposta nei punti di interferenza costruttiva, dove l'onda è più intensa. Inoltre per avere una figura di interferenza stabile le due sorgenti devono avere la stessa frequenza e mantenere la stessa differenza di fase, cioè oscillare sempre con lo stesso ritardo l'una rispetto all'altra: due persone che parlano insieme non producono zone di silenzio.
 \end{attenzione}
 
 \begin{applicazione}{le cuffie antirumore}
@@ -333,6 +337,7 @@ Anche l'aria in un tubo vibra in onde stazionarie. Il condotto uditivo è un tub
 \begin{center}
 \input{ud4/figure/stazionarie}
 \end{center}
+Le prime tre onde stazionarie su una corda di lunghezza $L$: N indica un nodo, V un ventre; la linea continua e quella tratteggiata sono le due posizioni estreme della corda.
 \end{approfondimento}
 
 % -------------------------------------------------------------------------
@@ -341,7 +346,11 @@ Anche l'aria in un tubo vibra in onde stazionarie. Il condotto uditivo è un tub
 
 \subsection{Energia e potenza}
 
-Un'onda mette in oscillazione i punti del mezzo che attraversa: a ogni punto cede l'energia di un oscillatore armonico, che come abbiamo visto è proporzionale al quadrato dell'ampiezza. L'energia di un oscillatore cresce anche con la frequenza: a parità di ampiezza, un punto che oscilla più in fretta si muove più veloce. Per questo l'energia trasportata da un'onda è proporzionale al quadrato dell'ampiezza \emph{e} al quadrato della frequenza.
+Un'onda mette in oscillazione i punti del mezzo che attraversa: a ogni punto cede l'energia di un oscillatore armonico, che come abbiamo visto è proporzionale al quadrato dell'ampiezza. Nella formula $E = \frac{1}{2}kA^2$ la frequenza non compare, ma l'energia dipende anche da lei: è nascosta nella costante $k$. Da $\omega = \sqrt{k/m}$ viene $k = m\omega^2$, e sostituendo si ottiene
+\[
+  E = \frac{1}{2} k A^2 = \frac{1}{2} m\,\omega^2 A^2
+\]
+A parità di massa l'energia è proporzionale al quadrato della pulsazione, cioè della frequenza, e al quadrato dell'ampiezza: a parità di ampiezza, un punto che oscilla più in fretta si muove più veloce. Per questo l'energia trasportata da un'onda è proporzionale al quadrato dell'ampiezza \emph{e} al quadrato della frequenza.
 
 La \textbf{potenza} è l'energia trasportata in un secondo, e si misura in watt ($\SI{1}{\watt} = \SI{1}{\joule\per\second}$, UD2). Per un'onda armonica su una corda la potenza trasportata è
 
@@ -349,7 +358,7 @@ La \textbf{potenza} è l'energia trasportata in un secondo, e si misura in watt 
 P = \frac{1}{2}\,\mu\,\omega^2 A^2\, v
 \end{formula}
 
-Non serve ricordare il fattore $1/2$, ma le proporzionalità sì: la potenza è proporzionale al quadrato della pulsazione (cioè della frequenza), al quadrato dell'ampiezza e alla velocità dell'onda. Lo stesso vale, con le grandezze del mezzo al posto di $\mu$, per le onde in tutti i mezzi elastici.
+La quantità $\frac{1}{2}\mu\,\omega^2 A^2$ è l'energia di un metro di corda, che ha massa $\mu$; in un secondo l'onda percorre $v$ metri, e da qui il fattore $v$. Non serve ricordare il fattore $1/2$, ma le proporzionalità sì: la potenza è proporzionale al quadrato della pulsazione (cioè della frequenza), al quadrato dell'ampiezza e alla velocità dell'onda. Lo stesso vale, con le grandezze del mezzo al posto di $\mu$, per le onde in tutti i mezzi elastici.
 
 \begin{esempio}
 Su una corda viaggia un'onda armonica. Di che fattore cambia la potenza trasportata se (a) si raddoppia l'ampiezza; (b) si raddoppia la frequenza e si dimezza l'ampiezza, sulla stessa corda?
@@ -365,10 +374,10 @@ La potenza non cambia: l'effetto della frequenza doppia compensa esattamente que
 
 \subsection{L'intensità}
 
-Per le onde che si propagano nello spazio, come il suono, conta quanta energia arriva su una superficie. L'\textbf{intensità} $I$ di un'onda è l'energia che attraversa in un secondo una superficie di \SI{1}{\metre\squared} perpendicolare alla direzione di propagazione: è la potenza $P$ che attraversa la superficie, divisa per l'area $S$. Si misura in \si{\watt\per\metre\squared}, ed è proporzionale al quadrato dell'ampiezza.
+Per le onde che si propagano nello spazio, come il suono, conta quanta energia arriva su una superficie. L'\textbf{intensità} $I$ di un'onda è l'energia che attraversa in un secondo una superficie di \SI{1}{\metre\squared} perpendicolare alla direzione di propagazione: è la potenza $P$ che attraversa la superficie, divisa per l'area $S$. Si misura in \si{\watt\per\metre\squared}, ed è proporzionale al quadrato dell'ampiezza e al quadrato della frequenza; a parità di frequenza e di mezzo, al solo quadrato dell'ampiezza.
 
 \begin{formula}[Intensità]
-I = \frac{P}{S} \qquad\qquad I \propto A^2
+I = \frac{P}{S} \qquad\qquad I \propto f^2 A^2
 \end{formula}
 
 Il simbolo $\propto$ si legge «è proporzionale a». Una sonda per la terapia a ultrasuoni che eroga \SI{3,0}{\watt} su $\SI{5,0}{\centi\metre\squared} = \SI{5,0e-4}{\metre\squared}$ produce un'intensità $I = \SI{3,0}{\watt}/\SI{5,0e-4}{\metre\squared} = \SI{6,0e3}{\watt\per\metre\squared}$.
@@ -398,7 +407,7 @@ A \SI{4,0}{\metre} la distanza è doppia, e l'intensità si divide per $2^2 = 4$
 \end{esempio}
 
 \begin{attenzione}[intensità e ampiezza non scendono allo stesso modo]
-La legge dell'inverso del quadrato vale per l'intensità. Poiché l'intensità è proporzionale al quadrato dell'ampiezza, l'ampiezza diminuisce come $1/r$: raddoppiando la distanza l'intensità diventa un quarto e l'ampiezza la metà. La legge vale inoltre per una sorgente piccola, in un mezzo che non assorbe l'onda e senza pareti che la riflettano.
+La legge dell'inverso del quadrato vale per l'intensità. Poiché, a frequenza fissata, l'intensità è proporzionale al quadrato dell'ampiezza, l'ampiezza diminuisce come $1/r$: raddoppiando la distanza l'intensità diventa un quarto e l'ampiezza la metà. La legge vale inoltre per una sorgente piccola, in un mezzo che non assorbe l'onda e senza pareti che la riflettano.
 \end{attenzione}
 
 \input{ud4/generati/lampo-ud4-distanza}
@@ -414,7 +423,7 @@ Il suono è un'onda longitudinale di pressione: la sorgente spinge e richiama gl
 Tre caratteristiche del suono si collegano alle grandezze dell'onda:
 \begin{itemize}
   \item l'\textbf{altezza} (acuto o grave) dipende dalla frequenza: un suono acuto ha frequenza alta;
-  \item l'\textbf{intensità} percepita (forte o debole) dipende dall'intensità dell'onda, cioè dall'ampiezza;
+  \item l'\textbf{intensità} percepita (forte o debole) dipende dall'intensità dell'onda, cioè, a parità di frequenza, dall'ampiezza;
   \item il \textbf{timbro}, che distingue la stessa nota suonata da un violino o da un pianoforte, dipende da quali \emph{armoniche}, cioè frequenze multiple della frequenza più bassa (la \emph{fondamentale}), accompagnano il suono e con che ampiezza.
 \end{itemize}
 
@@ -469,7 +478,7 @@ I_0 = \SI{e-12}{\watt\per\metre\squared}
 I = I_0 \cdot 10^{\beta/10}
 \end{formula}
 
-Il livello $\beta$ (beta) si misura in \textbf{decibel} (\si{\deci\bel}), un decimo del bel: il fattore 10 davanti al logaritmo serve proprio a passare dai bel ai decibel. La soglia di udibilità corrisponde a $\beta = 10\log_{10} 1 = \SI{0}{\deci\bel}$, la soglia del dolore a $10\log_{10} 10^{12} = \SI{120}{\deci\bel}$. La seconda forma, $I = I_0 \cdot 10^{\beta/10}$, serve per tornare dal livello all'intensità.
+Il logaritmo da solo, $\log_{10}(I/I_0)$, dà il livello in \textbf{bel} (\si{\bel}): conta quante potenze di 10 separano $I$ dalla soglia. Il bel è un'unità troppo grande per l'uso pratico, e si usa il suo decimo, il \textbf{decibel} (\si{\deci\bel}): per questo davanti al logaritmo c'è il fattore 10, e $\SI{1}{\bel} = \SI{10}{\deci\bel}$. Il livello $\beta$ (beta) si misura in decibel. La soglia di udibilità corrisponde a $\beta = 10\log_{10} 1 = \SI{0}{\deci\bel}$, la soglia del dolore a $10\log_{10} 10^{12} = \SI{120}{\deci\bel}$. Dividendo per 10 i due membri della definizione si ha $\log_{10}(I/I_0) = \beta/10$, e per la definizione di logaritmo $I/I_0 = 10^{\beta/10}$: è la forma $I = I_0 \cdot 10^{\beta/10}$ del riquadro, che serve per tornare dal livello all'intensità.
 
 \begin{center}
 \small
@@ -488,6 +497,11 @@ soglia del dolore & $1$ & 120 \\
 \bottomrule
 \end{tabular}
 \end{center}
+
+Il valore a \SI{85}{\deci\bel} si ricava così: $85 = 80 + 5$, e $10^{5/10} = 10^{0,5} = \sqrt{10} \approx 3{,}2$; quindi
+\[
+  I = 10^{-12} \cdot 10^{8} \cdot 10^{0,5}\,\si{\watt\per\metre\squared} \approx 3{,}2 \cdot 10^{-4}\,\si{\watt\per\metre\squared} \approx \SI{3e-4}{\watt\per\metre\squared}
+\]
 
 Il modo più veloce di ragionare è sulle differenze di livello. Se l'intensità passa da $I_1$ a $I_2$, il livello cambia di
 \[
@@ -562,7 +576,9 @@ I dettagli più piccoli che un'ecografia distingue sono dell'ordine della lunghe
 \section{L'effetto Doppler}
 \label{sec:ud4-doppler}
 
-Quando un'ambulanza con la sirena accesa ci passa accanto, il suono è più acuto mentre si avvicina e diventa di colpo più grave quando si allontana. La sirena emette sempre la stessa frequenza: a cambiare è la frequenza che arriva a noi. È l'\textbf{effetto Doppler}: la frequenza percepita cambia quando la sorgente, l'osservatore o tutti e due si muovono l'uno rispetto all'altro.
+Quando un'ambulanza con la sirena accesa ci passa accanto, il suono è più acuto mentre si avvicina e diventa più grave quando si allontana. La sirena emette sempre la stessa frequenza: a cambiare è la frequenza che arriva a noi. È l'\textbf{effetto Doppler}: la frequenza percepita cambia quando la sorgente, l'osservatore o tutti e due si muovono l'uno rispetto all'altro.
+
+Un \textbf{fronte d'onda} è l'insieme dei punti del mezzo che si trovano nella stessa fase di oscillazione, per esempio tutti i punti di una stessa compressione. Per una sorgente piccola e ferma i fronti d'onda sono sfere (cerchi, nel disegno) centrate sulla sorgente, e due fronti consecutivi distano una lunghezza d'onda.
 
 \textbf{Sorgente in moto.} Ogni fronte d'onda parte dal punto in cui si trova la sorgente quando lo emette, e da lì si allarga con la velocità dell'onda, che dipende solo dal mezzo. Se la sorgente si muove, emette ogni fronte un po' più avanti del precedente (figura~\ref{fig:ud4-doppler}). Davanti alla sorgente i fronti si addensano: la lunghezza d'onda è più corta, e con $f = v/\lambda$ la frequenza che arriva all'osservatore è più alta. Dietro la sorgente i fronti si diradano: la lunghezza d'onda è più lunga e la frequenza più bassa.
 
@@ -583,7 +599,7 @@ In sintesi:
 \end{itemize}
 
 \begin{attenzione}[conta la velocità, non la distanza]
-L'effetto Doppler dipende dalla velocità con cui la distanza fra sorgente e osservatore cambia, non dalla distanza. Un'ambulanza che si avvicina a velocità costante ha un suono acuto e costante: diventa più forte, non più acuto, man mano che arriva. Il cambio di altezza avviene quando passa e comincia ad allontanarsi.
+L'effetto Doppler dipende dalla velocità con cui la distanza fra sorgente e osservatore cambia, non dalla distanza. Un'ambulanza che viene dritta verso di noi a velocità costante ha un suono acuto e costante: diventa più forte, non più acuto, man mano che arriva. Se ci passa di lato, il suono si abbassa nel breve tratto in cui ci passa accanto, quando la sua velocità smette di essere diretta verso di noi.
 \end{attenzione}
 
 \input{ud4/generati/lampo-ud4-doppler}
@@ -601,7 +617,7 @@ con i segni in alto quando si avvicinano. Nella flussimetria, per sangue con vel
 \[
   \Delta f \approx \frac{2 \cdot \SI{2e6}{\hertz} \cdot \SI{0,5}{\metre\per\second}}{\SI{1540}{\metre\per\second}} = \frac{\num{2e6}}{1540}\,\si{\hertz} \approx \SI{1300}{\hertz}
 \]
-Lo spostamento cade nel campo udibile: per questo gli apparecchi Doppler fanno anche \emph{sentire} il flusso del sangue. Se il fascio forma un angolo $\theta$ con la direzione del flusso, conta solo la componente della velocità lungo il fascio, e $\Delta f$ va moltiplicato per $\cos\theta$.
+Il quoziente si fa con le potenze di 10: $\num{2e6}/1540 = (2/1{,}54) \cdot 10^{3}$, e $2/1{,}54 \approx 1{,}3$ perché $1{,}54 \cdot 1{,}3 \approx 2{,}0$, come nell'esempio dell'ecografia. Lo spostamento cade nel campo udibile: per questo gli apparecchi Doppler fanno anche \emph{sentire} il flusso del sangue. Se il fascio forma un angolo $\theta$ con la direzione del flusso, conta solo la componente della velocità lungo il fascio, e $\Delta f$ va moltiplicato per $\cos\theta$.
 \end{approfondimento}
 
 \riepilogoformule
