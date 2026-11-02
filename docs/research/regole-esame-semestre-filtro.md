@@ -102,7 +102,7 @@ Queste regole sono scritte per il 2025/26. Per il 2026/27 non ho trovato ancora 
 
 ## 5. Note utili per chi scrive un corso
 
-- **Il programma ufficiale è il Syllabus MUR di Fisica 2026**, pubblicato il 19/06/2026 e citato dal DD 249/2026 (art. 1 c. 2) come riferimento delle prove. Pagina MUR: https://www.mur.gov.it/it/news/venerdi-19062026/semestre-aperto-aa-2026-2027. PDF: https://www.mur.gov.it/sites/default/files/2026-06/Syllabus_FISICA_%20finale%202026.pdf [P]. Le 7 unità didattiche, con il loro peso in CFU (6 CFU in totale), sono:
+- **Il programma ufficiale è il syllabus MUR di Fisica 2026**, pubblicato il 19/06/2026 e citato dal DD 249/2026 (art. 1 c. 2) come riferimento delle prove. Pagina MUR: https://www.mur.gov.it/it/news/venerdi-19062026/semestre-aperto-aa-2026-2027. PDF: https://www.mur.gov.it/sites/default/files/2026-06/Syllabus_FISICA_%20finale%202026.pdf [P]. Le 7 unità didattiche, con il loro peso in CFU (6 CFU in totale), sono:
   1. Introduzione ai metodi della fisica: 0,2 CFU, di cui almeno il 20% di esercitazioni (notazione scientifica, SI, conversioni, ordini di grandezza, trigonometria, vettori);
   2. Meccanica: 1,4 CFU, ≥ 25% di esercitazioni (cinematica, dinamica, lavoro ed energia, quantità di moto, corpo rigido, leve nel corpo umano);
   3. Meccanica dei fluidi: 1,2 CFU, ≥ 25% (Stevino, Pascal, Archimede, continuità, Bernoulli con stenosi e aneurisma, Poiseuille, tensione superficiale, Laplace);
@@ -110,7 +110,7 @@ Queste regole sono scritte per il 2025/26. Per il 2026/27 non ho trovato ancora 
   5. Termodinamica: 1 CFU, ≥ 30%;
   6. Elettricità e magnetismo: 1,2 CFU;
   7. Fisica delle radiazioni: 0,6 CFU, ≥ 20% (onde e.m., spettro, fotone, Lambert-Beer, decadimento ed emivita, radiazioni ionizzanti, ottica e lenti sottili).
-- Il Syllabus chiede di saper *"risolvere problemi ed esercizi numerici"* e di usare *"correttamente le unità di misura [...] conoscendo i fattori di conversione"*. Senza calcolatrice e con solo 2 fogli di brutta, i calcoli vanno fatti a mano: conviene allenare il calcolo approssimato, la notazione scientifica e i numeri "facili". Nelle prove 2025 i dati numerici erano scelti per questo (es. 2 m/s, 20 g e 40 g; 1000 Ω in parallelo).
+- Il syllabus chiede di saper *"risolvere problemi ed esercizi numerici"* e di usare *"correttamente le unità di misura [...] conoscendo i fattori di conversione"*. Senza calcolatrice e con solo 2 fogli di brutta, i calcoli vanno fatti a mano: conviene allenare il calcolo approssimato, la notazione scientifica e i numeri "facili". Nelle prove 2025 i dati numerici erano scelti per questo (es. 2 m/s, 20 g e 40 g; 1000 Ω in parallelo).
 - Con 50 minuti per 31 domande restano circa 1,6 minuti a domanda nel 2026/27 (erano circa 1,45 nel 2025/26).
 - La penalità di −0,1 è bassa: con 5 opzioni, una risposta a caso ha un valore atteso positivo (0,2·1 − 0,8·0,1 = +0,12). È una deduzione aritmetica dal DM 941 art. 8, non una regola ufficiale. Vale anche per i completamenti, dove però indovinare è molto più difficile.
 - **Esercitazioni ufficiali:** la piattaforma gratuita *www.semestreaperto-medodovet.it* (MUR/CRUI, realizzata da CISIA) offre quesiti di Biologia, Fisica e Chimica. Il MUR annuncia: *"Da novembre saranno inoltre disponibili simulazioni delle prove d'esame"*. Comunicato MUR del 01/09/2026 [P]: https://www.mur.gov.it/it/news/martedi-01092026/medicina-semestre-aperto-online-le-prime-esercitazioni-prepararsi-agli-esami
@@ -144,7 +144,7 @@ Queste regole sono scritte per il 2025/26. Per il 2026/27 non ho trovato ancora 
 - DM 754 del 20/10/2025 (semplificazioni all'Allegato 2 del DM 418): https://www.mur.gov.it/sites/default/files/2025-10/Decreto%20Ministeriale%20n.%20754%20del%20%2020-10-2025.pdf
 - Comunicato MUR del 01/09/2026 (piattaforma di esercitazioni): https://www.mur.gov.it/it/news/martedi-01092026/medicina-semestre-aperto-online-le-prime-esercitazioni-prepararsi-agli-esami
 - Università di Bari, D.R. 2288/2026, bando del semestre aperto 2026/27 (consultato: nessuna regola sui materiali d'esame): https://www.uniba.it/it/didattica/numero-programmato/semestre-aperto/2026-2027/allegati/dr_2288_26_semestre_aperto.pdf
-- Università di Milano-Bicocca, notizia sui Syllabus 2026/27: https://www.unimib.it/news/medicina-pubblicati-dal-mur-syllabus-del-semestre-aperto-lanno-accademico-20262027
+- Università di Milano-Bicocca, notizia sui syllabus 2026/27: https://www.unimib.it/news/medicina-pubblicati-dal-mur-syllabus-del-semestre-aperto-lanno-accademico-20262027
 
 **Secondarie (solo come segnalazioni)**
 - futura.study, testi delle prove 2025/26: https://futura.study/preparazione-test-universitari/test-medicina-anni-precedenti/2025
