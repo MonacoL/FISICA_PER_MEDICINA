@@ -20,7 +20,7 @@ Argomenti: la UD (`ud7`) e la parte (`dispensa` | `eserciziario`). Se mancano, c
 2. **Controllo automatico.** Lancia `uv run controllo <ud>`. Se esce con codice diverso da zero, fermati e riporta il rapporto del comando: i revisori leggono solo una UD che compila pulita. Se passa, il PDF è in `libro/build/<ud>.pdf`.
 3. **Revisori.** Lancia in parallelo, con il tool Agent, un agente per ogni revisore della tabella. Il prompt contiene solo UD, parte e questi percorsi, nient'altro:
    - `libro/build/<ud>.pdf`;
-   - i sorgenti della parte: `libro/<ud>/dispensa.tex` o `libro/<ud>/eserciziario.tex`;
+   - i sorgenti della parte: per la dispensa `libro/<ud>/dispensa.tex`; per l'eserciziario la fonte degli esercizi `libro/<ud>/esercizi.toml` (le posizioni dei rilievi si danno lì) e il file generato `libro/<ud>/generati/eserciziario.tex`;
    - per un eserciziario, anche `libro/<ud>/dispensa.tex` come riferimento: è la dispensa già unita della stessa UD;
    - `docs/research/syllabus-fisica.md`, con l'indicazione della sezione della UD;
    - `CONTEXT.md` e `docs/adr/0004-calibrazione-sul-formato-esame.md`;

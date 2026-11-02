@@ -29,8 +29,635 @@ c = 3e8
 h = 6.6e-34
 eV = 1.6e-19
 hc_eVnm = 1240
+sin30 = 0.5
+sin45 = 0.71
+sin60 = 0.87
 
 # ==================================================================== problemi
+
+# ==================================================================== problemi
+
+[[problema]]
+id = "ud7-onde-verde"
+livello = 1
+testo = '''Una luce verde ha nel vuoto lunghezza d'onda {{lam}}. Calcola la sua frequenza.'''
+dati.lam = { valore = 500, unita = "nm" }
+
+  [[problema.parte]]
+  calcolo = "c / (lam * 1e-9)"
+  risultato = { valore = 6.0e14, unita = "Hz", cifre = 2 }
+  soluzione = '''La lunghezza d'onda in metri è $\SI{500}{\nano\metre} = 500 \cdot 10^{-9}\,\si{\metre} = \SI{5e-7}{\metre}$. Dalla relazione $c = \lambda f$:
+\[
+  f = \frac{c}{\lambda} = \frac{\SI{3e8}{\metre\per\second}}{\SI{5e-7}{\metre}} = \frac{3}{5} \cdot 10^{8-(-7)}\,\si{\hertz} = 0{,}6 \cdot 10^{15}\,\si{\hertz} = \SI{6,0e14}{\hertz}
+\]'''
+
+[[problema]]
+id = "ud7-onde-microonde"
+livello = 1
+testo = '''Un forno a microonde lavora a una frequenza di circa {{f}}. Calcola il periodo dell'onda.'''
+dati.f = { valore = "2,5", unita = "GHz" }
+
+  [[problema.parte]]
+  calcolo = "1 / (f * 1e9)"
+  risultato = { valore = 4.0e-10, unita = "s", cifre = 2 }
+  soluzione = '''La frequenza in hertz è $\SI{2,5}{\giga\hertz} = \SI{2,5e9}{\hertz}$. Il periodo è l'inverso della frequenza:
+\[
+  T = \frac{1}{f} = \frac{1}{\SI{2,5e9}{\hertz}} = \frac{1}{2{,}5} \cdot 10^{-9}\,\si{\second} = 0{,}40 \cdot 10^{-9}\,\si{\second} = \SI{4,0e-10}{\second}
+\]'''
+
+[[problema]]
+id = "ud7-onde-risonanza"
+livello = 1
+testo = '''Un tomografo a risonanza magnetica da \SI{1,5}{\tesla} usa onde radio di frequenza {{f}}. Calcola la loro lunghezza d'onda nel vuoto.'''
+dati.f = { valore = 64, unita = "MHz" }
+
+  [[problema.parte]]
+  calcolo = "c / (f * 1e6)"
+  risultato = { valore = 4.7, unita = "m", cifre = 2 }
+  soluzione = '''La frequenza in hertz è $\SI{64}{\mega\hertz} = 64 \cdot \SI{e6}{\hertz} = \SI{6,4e7}{\hertz}$. Dalla relazione $c = \lambda f$:
+\[
+  \lambda = \frac{c}{f} = \frac{\SI{3e8}{\metre\per\second}}{\SI{6,4e7}{\hertz}} = \frac{3}{6{,}4} \cdot 10^{8-7}\,\si{\metre} \approx 0{,}47 \cdot 10\,\si{\metre} = \SI{4,7}{\metre}
+\]
+Sono onde radio: la lunghezza d'onda è più grande del corpo del paziente.'''
+
+[[problema]]
+id = "ud7-onde-laser"
+livello = 1
+testo = '''Un laser da {{P}} illumina in modo uniforme una superficie di {{S}}, perpendicolare al fascio. Calcola l'intensità sulla superficie.'''
+dati.P = { valore = "5,0", unita = "mW" }
+dati.S = { valore = "2,0", unita = "\\milli\\metre\\squared" }
+
+  [[problema.parte]]
+  calcolo = "(P * 1e-3) / (S * 1e-6)"
+  risultato = { valore = 2.5e3, unita = "W/m^2", cifre = 2 }
+  soluzione = '''Si portano le grandezze in unità del SI. La potenza è $\SI{5,0}{\milli\watt} = \SI{5,0e-3}{\watt}$. Un millimetro quadrato è $(\SI{e-3}{\metre})^2 = \SI{e-6}{\metre\squared}$, quindi la superficie è $S = \SI{2,0e-6}{\metre\squared}$. L'intensità è la potenza divisa per la superficie:
+\[
+  I = \frac{P}{S} = \frac{\SI{5,0e-3}{\watt}}{\SI{2,0e-6}{\metre\squared}} = \frac{5{,}0}{2{,}0} \cdot 10^{-3-(-6)}\,\si{\watt\per\metre\squared} = \SI{2,5e3}{\watt\per\metre\squared}
+\]'''
+
+[[problema]]
+id = "ud7-onde-lampada"
+livello = 2
+testo = '''Una piccola lampada a infrarossi per fisioterapia emette una potenza di {{P}} allo stesso modo in tutte le direzioni.'''
+dati.P = { valore = 100, unita = "W" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità a \SI{2,0}{\metre} dalla lampada?'''
+  calcolo = "P / (4 * math.pi * 2.0**2)"
+  risultato = { valore = 2.0, unita = "W/m^2", cifre = 2 }
+  soluzione = '''A \SI{2,0}{\metre} la potenza si distribuisce su una sfera di raggio $r = \SI{2,0}{\metre}$, di superficie $4\pi r^2 = 4 \cdot 3{,}14 \cdot (\SI{2,0}{\metre})^2 = 4 \cdot 3{,}14 \cdot \SI{4,0}{\metre\squared} \approx \SI{50}{\metre\squared}$. Quindi
+\[
+  I = \frac{P}{4\pi r^2} = \frac{\SI{100}{\watt}}{\SI{50}{\metre\squared}} = \SI{2,0}{\watt\per\metre\squared}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità a \SI{4,0}{\metre}?'''
+  calcolo = "P / (4 * math.pi * 2.0**2) * (2.0 / 4.0)**2"
+  risultato = { valore = 0.50, unita = "W/m^2", cifre = 2 }
+  soluzione = '''La distanza raddoppia, da \SI{2,0}{\metre} a \SI{4,0}{\metre}. Per la legge dell'inverso del quadrato l'intensità si divide per $2^2 = 4$:
+\[
+  I_2 = I_1 \left(\frac{r_1}{r_2}\right)^{2} = \SI{2,0}{\watt\per\metre\squared} \cdot \left(\frac{2{,}0}{4{,}0}\right)^{2} = \frac{\SI{2,0}{\watt\per\metre\squared}}{4} = \SI{0,50}{\watt\per\metre\squared}
+\]'''
+
+[[problema]]
+id = "ud7-onde-antenna"
+livello = 2
+testo = '''L'antenna di una stazione radio si può trattare come una sorgente piccola che emette allo stesso modo in tutte le direzioni. A {{r1}} dall'antenna il campo elettrico dell'onda ha ampiezza {{E1}}. Ci si allontana fino al punto in cui l'ampiezza è {{E2}}.'''
+dati.r1 = { valore = "2,0", unita = "m" }
+dati.E1 = { valore = 12, unita = "\\volt\\per\\metre" }
+dati.E2 = { valore = "6,0", unita = "\\volt\\per\\metre" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il rapporto fra l'intensità nel nuovo punto e quella a \SI{2,0}{\metre}?'''
+  calcolo = "(E2 / E1)**2"
+  risultato = { valore = 0.25, cifre = 2 }
+  soluzione = '''L'intensità è proporzionale al quadrato dell'ampiezza, $I \propto E_0^2$. L'ampiezza si dimezza, da \SI{12}{\volt\per\metre} a \SI{6,0}{\volt\per\metre}, quindi
+\[
+  \frac{I_2}{I_1} = \left(\frac{E_2}{E_1}\right)^{2} = \left(\frac{6{,}0}{12}\right)^{2} = \left(\frac{1}{2}\right)^{2} = \frac{1}{4} = 0{,}25
+\]'''
+
+  [[problema.parte]]
+  domanda = '''A che distanza dall'antenna si trova il nuovo punto?'''
+  calcolo = "r1 * math.sqrt(1 / (E2 / E1)**2)"
+  risultato = { valore = 4.0, unita = "m", cifre = 2 }
+  soluzione = '''Per la legge dell'inverso del quadrato $I_2/I_1 = (r_1/r_2)^2$. Dal punto (a) $(r_1/r_2)^2 = 1/4$, quindi $r_1/r_2 = 1/2$: la distanza è doppia,
+\[
+  r_2 = 2\, r_1 = 2 \cdot \SI{2,0}{\metre} = \SI{4,0}{\metre}
+\]
+Per una sorgente di questo tipo l'ampiezza del campo diminuisce come $1/r$, l'intensità come $1/r^2$.'''
+
+[[problema]]
+id = "ud7-onde-sole"
+livello = 2
+testo = '''Al suolo, in una giornata di sole, la radiazione solare ha un'intensità di circa {{I}}. Una persona prende il sole con {{S}} di pelle perpendicolare ai raggi per {{t}}.'''
+dati.I = { valore = 1000, unita = "W/m^2" }
+dati.S = { valore = "0,50", unita = "\\metre\\squared" }
+dati.t = { valore = 10, unita = "\\minute" }
+
+  [[problema.parte]]
+  domanda = '''Quale potenza arriva sulla pelle esposta?'''
+  calcolo = "I * S"
+  risultato = { valore = 500, unita = "W", cifre = 2 }
+  soluzione = '''Da $I = P/S$ si ricava $P = I S$:
+\[
+  P = I S = \SI{1000}{\watt\per\metre\squared} \cdot \SI{0,50}{\metre\squared} = \SI{500}{\watt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanta energia riceve la pelle in tutto, se la assorbe tutta?'''
+  calcolo = "I * S * t * 60"
+  risultato = { valore = 3.0e5, unita = "J", cifre = 2 }
+  soluzione = '''La potenza è l'energia che arriva in un secondo: \SI{500}{\watt} sono \SI{500}{\joule} ogni secondo. Il tempo è $\SI{10}{\minute} = 10 \cdot \SI{60}{\second} = \SI{600}{\second}$, quindi
+\[
+  E = P t = \SI{500}{\watt} \cdot \SI{600}{\second} = \SI{300000}{\joule} = \SI{3,0e5}{\joule}
+\]'''
+
+[[problema]]
+id = "ud7-spettro-periodo"
+livello = 2
+testo = '''Un'onda elettromagnetica si propaga nel vuoto con periodo {{T}}.'''
+dati.T = { valore = "2,0e-15", unita = "s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la sua frequenza?'''
+  calcolo = "1 / T"
+  risultato = { valore = 5.0e14, unita = "Hz", cifre = 2 }
+  soluzione = '''La frequenza è l'inverso del periodo:
+\[
+  f = \frac{1}{T} = \frac{1}{\SI{2,0e-15}{\second}} = \frac{1}{2{,}0} \cdot 10^{15}\,\si{\hertz} = 0{,}50 \cdot 10^{15}\,\si{\hertz} = \SI{5,0e14}{\hertz}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la sua lunghezza d'onda, in nanometri? A quale regione dello spettro appartiene?'''
+  calcolo = "c / (1 / T) * 1e9"
+  risultato = { valore = 600, unita = "nm", cifre = 2 }
+  soluzione = '''Dalla relazione $c = \lambda f$, con la frequenza del punto (a):
+\[
+  \lambda = \frac{c}{f} = \frac{\SI{3e8}{\metre\per\second}}{\SI{5,0e14}{\hertz}} = \frac{3}{5{,}0} \cdot 10^{8-14}\,\si{\metre} = 0{,}60 \cdot 10^{-6}\,\si{\metre} = \SI{6,0e-7}{\metre}
+\]
+In nanometri: $\SI{6,0e-7}{\metre} = 600 \cdot 10^{-9}\,\si{\metre} = \SI{600}{\nano\metre}$. È fra \SI{400}{\nano\metre} e \SI{700}{\nano\metre}: luce visibile, di colore arancione.'''
+
+[[problema]]
+id = "ud7-onde-puntatore"
+livello = 3
+testo = '''Un puntatore laser rosso emette una potenza di {{P}} con lunghezza d'onda {{lam}}, in un fascio di diametro {{d}}.'''
+dati.P = { valore = "1,0", unita = "mW" }
+dati.lam = { valore = 650, unita = "nm" }
+dati.d = { valore = "1,0", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Calcola l'intensità del fascio e confrontala con quella del Sole al suolo, circa \SI{1000}{\watt\per\metre\squared}.'''
+  calcolo = "(P * 1e-3) / (math.pi * (d * 1e-3 / 2)**2)"
+  risultato = { valore = 1.3e3, unita = "W/m^2", cifre = 2 }
+  soluzione = '''La sezione del fascio è un cerchio di raggio $r = \SI{0,50}{\milli\metre} = \SI{5,0e-4}{\metre}$:
+\[
+  S = \pi r^2 = 3{,}14 \cdot (\SI{5,0e-4}{\metre})^2 = 3{,}14 \cdot \SI{25e-8}{\metre\squared} \approx \SI{78,5e-8}{\metre\squared} = \SI{7,85e-7}{\metre\squared}
+\]
+La potenza è $\SI{1,0}{\milli\watt} = \SI{1,0e-3}{\watt}$, quindi
+\[
+  I = \frac{P}{S} = \frac{\SI{1,0e-3}{\watt}}{\SI{7,85e-7}{\metre\squared}} = \frac{1{,}0}{7{,}85} \cdot 10^{-3-(-7)}\,\si{\watt\per\metre\squared} \approx 0{,}127 \cdot 10^{4}\,\si{\watt\per\metre\squared} \approx \SI{1,3e3}{\watt\per\metre\squared}
+\]
+È poco più dell'intensità del Sole al suolo, anche se la potenza è solo un milliwatt: è concentrata su una superficie piccolissima.'''
+
+  [[problema.parte]]
+  domanda = '''Se il fascio entra nell'occhio, il cristallino lo concentra sulla retina in una macchia di diametro \SI{20}{\micro\metre}. Quanto vale l'intensità sulla retina, se tutta la potenza arriva lì?'''
+  calcolo = "(P * 1e-3) / (math.pi * (20e-6 / 2)**2)"
+  risultato = { valore = 3.2e6, unita = "W/m^2", cifre = 2 }
+  soluzione = '''La potenza è la stessa, la superficie più piccola. Il diametro passa da \SI{1,0}{\milli\metre} a \SI{20}{\micro\metre}, cioè diventa più piccolo di un fattore
+\[
+  \frac{\SI{1,0e-3}{\metre}}{\SI{2,0e-5}{\metre}} = \frac{1{,}0}{2{,}0} \cdot 10^{-3-(-5)} = 0{,}5 \cdot 10^{2} = 50
+\]
+L'area di un cerchio va come il quadrato del diametro, quindi diventa $50^2 = 2500$ volte più piccola, e l'intensità $2500$ volte più grande:
+\[
+  I_\text{retina} = \SI{1,27e3}{\watt\per\metre\squared} \cdot \num{2,5e3} \approx 3{,}2 \cdot 10^{3+3}\,\si{\watt\per\metre\squared} = \SI{3,2e6}{\watt\per\metre\squared}
+\]
+Più di tremila volte l'intensità del Sole: per questo non si deve mai guardare dentro un fascio laser.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la frequenza della luce del laser.'''
+  calcolo = "c / (lam * 1e-9)"
+  risultato = { valore = 4.6e14, unita = "Hz", cifre = 2 }
+  soluzione = '''La lunghezza d'onda è $\SI{650}{\nano\metre} = \SI{6,5e-7}{\metre}$. Da $c = \lambda f$:
+\[
+  f = \frac{c}{\lambda} = \frac{\SI{3e8}{\metre\per\second}}{\SI{6,5e-7}{\metre}} = \frac{3}{6{,}5} \cdot 10^{8-(-7)}\,\si{\hertz} \approx 0{,}46 \cdot 10^{15}\,\si{\hertz} = \SI{4,6e14}{\hertz}
+\]'''
+
+[[problema]]
+id = "ud7-onde-yag"
+livello = 3
+testo = '''Un laser Nd:YAG usato in oculistica emette luce di lunghezza d'onda {{lam}} in impulsi brevissimi. Ogni impulso porta un'energia di {{E}} in un tempo di {{tau}}, e colpisce una zona circolare di diametro {{d}}.'''
+dati.lam = { valore = 1064, unita = "nm" }
+dati.E = { valore = 10, unita = "\\milli\\joule" }
+dati.tau = { valore = 10, unita = "\\nano\\second" }
+dati.d = { valore = "0,50", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la potenza durante l'impulso?'''
+  calcolo = "(E * 1e-3) / (tau * 1e-9)"
+  risultato = { valore = 1.0e6, unita = "W", cifre = 2 }
+  soluzione = '''La potenza è l'energia divisa per il tempo in cui viene emessa. Con $E = \SI{10}{\milli\joule} = \SI{e-2}{\joule}$ e $\tau = \SI{10}{\nano\second} = \SI{e-8}{\second}$:
+\[
+  P = \frac{E}{\tau} = \frac{\SI{e-2}{\joule}}{\SI{e-8}{\second}} = 10^{-2-(-8)}\,\si{\watt} = \SI{1,0e6}{\watt}
+\]
+Un milione di watt, anche se l'energia è piccola: è tutta concentrata in un tempo brevissimo.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità durante l'impulso?'''
+  calcolo = "(E * 1e-3) / (tau * 1e-9) / (math.pi * (d * 1e-3 / 2)**2)"
+  risultato = { valore = 5.1e12, unita = "W/m^2", cifre = 2 }
+  soluzione = '''La zona colpita è un cerchio di raggio $r = \SI{0,25}{\milli\metre} = \SI{2,5e-4}{\metre}$:
+\[
+  S = \pi r^2 = 3{,}14 \cdot \SI{6,25e-8}{\metre\squared} \approx \SI{19,6e-8}{\metre\squared} = \SI{1,96e-7}{\metre\squared}
+\]
+Con la potenza del punto (a):
+\[
+  I = \frac{P}{S} = \frac{\SI{1,0e6}{\watt}}{\SI{1,96e-7}{\metre\squared}} = \frac{1{,}0}{1{,}96} \cdot 10^{6-(-7)}\,\si{\watt\per\metre\squared} \approx 0{,}51 \cdot 10^{13}\,\si{\watt\per\metre\squared} = \SI{5,1e12}{\watt\per\metre\squared}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la frequenza della luce? A quale regione dello spettro appartiene?'''
+  calcolo = "c / (lam * 1e-9)"
+  risultato = { valore = 2.8e14, unita = "Hz", cifre = 2 }
+  soluzione = '''La lunghezza d'onda è $\SI{1064}{\nano\metre} = \SI{1,064e-6}{\metre}$. Da $c = \lambda f$:
+\[
+  f = \frac{c}{\lambda} = \frac{\SI{3e8}{\metre\per\second}}{\SI{1,064e-6}{\metre}} = \frac{3}{1{,}064} \cdot 10^{8-(-6)}\,\si{\hertz} \approx 2{,}8 \cdot 10^{14}\,\si{\hertz}
+\]
+La lunghezza d'onda è maggiore di \SI{700}{\nano\metre}: è infrarosso, invisibile all'occhio.'''
+
+[[problema]]
+id = "ud7-onde-brachiterapia"
+livello = 3
+testo = '''Nella brachiterapia una piccola sorgente radioattiva di iridio-192 viene portata vicino al tumore. La sorgente, praticamente puntiforme, emette raggi $\gamma$ allo stesso modo in tutte le direzioni; a {{r1}} da essa l'intensità dei raggi $\gamma$ vale {{I1}}.'''
+dati.r1 = { valore = "1,0", unita = "m" }
+dati.I1 = { valore = "2,0e-3", unita = "W/m^2" }
+
+  [[problema.parte]]
+  domanda = '''Quale potenza emette la sorgente sotto forma di raggi $\gamma$?'''
+  calcolo = "4 * math.pi * r1**2 * I1"
+  risultato = { valore = 2.5e-2, unita = "W", cifre = 2 }
+  soluzione = '''A \SI{1,0}{\metre} tutta la potenza attraversa una sfera di raggio $r_1 = \SI{1,0}{\metre}$, di superficie $4\pi r_1^2 = 4 \cdot 3{,}14 \cdot \SI{1,0}{\metre\squared} \approx \SI{12,6}{\metre\squared}$. Da $I = P/S$:
+\[
+  P = I_1 \cdot 4\pi r_1^2 = \SI{2,0e-3}{\watt\per\metre\squared} \cdot \SI{12,6}{\metre\squared} \approx \SI{25e-3}{\watt} = \SI{2,5e-2}{\watt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità a \SI{2,5}{\metre} dalla sorgente?'''
+  calcolo = "I1 * (r1 / 2.5)**2"
+  risultato = { valore = 3.2e-4, unita = "W/m^2", cifre = 2 }
+  soluzione = '''Per la legge dell'inverso del quadrato:
+\[
+  I_2 = I_1 \left(\frac{r_1}{r_2}\right)^{2} = \SI{2,0e-3}{\watt\per\metre\squared} \cdot \left(\frac{1{,}0}{2{,}5}\right)^{2}
+\]
+\[
+  I_2 = \SI{2,0e-3}{\watt\per\metre\squared} \cdot 0{,}16 = \SI{0,32e-3}{\watt\per\metre\squared} = \SI{3,2e-4}{\watt\per\metre\squared}
+\]
+dove $(1/2{,}5)^2 = 0{,}4^2 = 0{,}16$.'''
+
+  [[problema.parte]]
+  domanda = '''A quale distanza dalla sorgente l'intensità scende a \SI{2,0e-5}{\watt\per\metre\squared}?'''
+  calcolo = "r1 * math.sqrt(I1 / 2.0e-5)"
+  risultato = { valore = 10, unita = "m", cifre = 2 }
+  soluzione = '''L'intensità deve diventare
+\[
+  \frac{I_1}{I_3} = \frac{\SI{2,0e-3}{\watt\per\metre\squared}}{\SI{2,0e-5}{\watt\per\metre\squared}} = 10^{-3-(-5)} = 10^{2} = 100
+\]
+volte più piccola. Poiché l'intensità va come $1/r^2$, la distanza deve diventare $\sqrt{100} = 10$ volte più grande: $r_3 = 10 \cdot \SI{1,0}{\metre} = \SI{10}{\metre}$. Per questo, durante il trattamento, il personale esce dalla stanza, che ha pareti schermate.'''
+
+[[problema]]
+id = "ud7-spettro-saturimetro"
+livello = 3
+testo = '''Un saturimetro da dito misura quanto ossigeno trasporta il sangue con due LED: uno rosso, di lunghezza d'onda {{lr}}, e uno infrarosso, di lunghezza d'onda {{li}}. L'emoglobina legata all'ossigeno e quella senza ossigeno assorbono le due radiazioni in modo diverso.'''
+dati.lr = { valore = 660, unita = "nm" }
+dati.li = { valore = 940, unita = "nm" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la frequenza della luce rossa.'''
+  calcolo = "c / (lr * 1e-9)"
+  risultato = { valore = 4.5e14, unita = "Hz", cifre = 2 }
+  soluzione = '''La lunghezza d'onda è $\SI{660}{\nano\metre} = \SI{6,6e-7}{\metre}$. Da $c = \lambda f$:
+\[
+  f_\text{rosso} = \frac{c}{\lambda} = \frac{\SI{3e8}{\metre\per\second}}{\SI{6,6e-7}{\metre}} = \frac{3}{6{,}6} \cdot 10^{8-(-7)}\,\si{\hertz} \approx 0{,}45 \cdot 10^{15}\,\si{\hertz} = \SI{4,5e14}{\hertz}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola il periodo della radiazione infrarossa.'''
+  calcolo = "(li * 1e-9) / c"
+  risultato = { valore = 3.1e-15, unita = "s", cifre = 2 }
+  soluzione = '''In un periodo l'onda avanza di una lunghezza d'onda, quindi $T = \lambda/c$. Con $\lambda = \SI{940}{\nano\metre} = \SI{9,4e-7}{\metre}$:
+\[
+  T = \frac{\lambda}{c} = \frac{\SI{9,4e-7}{\metre}}{\SI{3e8}{\metre\per\second}} = \frac{9{,}4}{3} \cdot 10^{-7-8}\,\si{\second} \approx \SI{3,1e-15}{\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quante volte la frequenza della luce rossa è più grande di quella della radiazione infrarossa? In quale regione dello spettro si trova ciascuna delle due?'''
+  calcolo = "li / lr"
+  risultato = { valore = 1.4, cifre = 2 }
+  soluzione = '''Nel vuoto $f = c/\lambda$, e $c$ è la stessa per le due radiazioni: il rapporto delle frequenze è il rapporto inverso delle lunghezze d'onda,
+\[
+  \frac{f_\text{rosso}}{f_\text{IR}} = \frac{\lambda_\text{IR}}{\lambda_\text{rosso}} = \frac{940}{660} = \frac{47}{33} \approx 1{,}4
+\]
+La luce a \SI{660}{\nano\metre} è fra \SI{400}{\nano\metre} e \SI{700}{\nano\metre}: è visibile, rossa. La radiazione a \SI{940}{\nano\metre} supera \SI{700}{\nano\metre}: è infrarosso. L'infrarosso viene prima del visibile nell'ordine di frequenza crescente, e infatti ha la frequenza più bassa.'''
+
+[[problema]]
+id = "ud7-fotone-raggiox"
+livello = 1
+testo = '''Un fotone X usato in radiografia ha lunghezza d'onda {{lam}}. Calcola la sua energia in joule con la relazione $E = hc/\lambda$.'''
+dati.lam = { valore = "0,10", unita = "nm" }
+
+  [[problema.parte]]
+  calcolo = "h * c / (lam * 1e-9)"
+  risultato = { valore = 2.0e-15, unita = "J", cifre = 2 }
+  soluzione = '''La lunghezza d'onda in metri è $\SI{0,10}{\nano\metre} = 0{,}10 \cdot \SI{e-9}{\metre} = \SI{e-10}{\metre}$. Allora
+\[
+  E = \frac{hc}{\lambda} = \frac{\SI{6,6e-34}{\joule\second} \cdot \SI{3e8}{\metre\per\second}}{\SI{e-10}{\metre}} = 6{,}6 \cdot 3 \cdot 10^{-34+8-(-10)}\,\si{\joule} = 19{,}8 \cdot 10^{-16}\,\si{\joule} \approx \SI{2,0e-15}{\joule}
+\]
+In elettronvolt sono $1240/0{,}10 = \SI{12400}{\electronvolt}$, circa \SI{12}{\kilo\electronvolt}.'''
+
+[[problema]]
+id = "ud7-fotone-lasik"
+livello = 1
+testo = '''Il laser a eccimeri usato nella chirurgia refrattiva della cornea emette ultravioletto con lunghezza d'onda {{lam}}. Quanta energia ha ciascun fotone, in elettronvolt?'''
+dati.lam = { valore = 193, unita = "nm" }
+
+  [[problema.parte]]
+  calcolo = "hc_eVnm / lam"
+  risultato = { valore = 6.4, unita = "eV", cifre = 2 }
+  soluzione = '''Con la formula pratica:
+\[
+  E \approx \frac{1240}{\lambda\,[\si{\nano\metre}]}\,\si{\electronvolt} = \frac{1240}{193}\,\si{\electronvolt} \approx \SI{6,4}{\electronvolt}
+\]
+Per il conto a mano: $193 \cdot 6 = 1158$, restano $1240 - 1158 = 82$, e $82/193 \approx 0{,}4$.'''
+
+[[problema]]
+id = "ud7-fotone-frequenza"
+livello = 1
+testo = '''Una luce arancione ha frequenza {{f}}. Calcola l'energia di un suo fotone in joule.'''
+dati.f = { valore = "5,0e14", unita = "Hz" }
+
+  [[problema.parte]]
+  calcolo = "h * f"
+  risultato = { valore = 3.3e-19, unita = "J", cifre = 2 }
+  soluzione = '''Dalla relazione $E = hf$:
+\[
+  E = \SI{6,6e-34}{\joule\second} \cdot \SI{5,0e14}{\hertz} = 6{,}6 \cdot 5{,}0 \cdot 10^{-34+14}\,\si{\joule} = 33 \cdot 10^{-20}\,\si{\joule} = \SI{3,3e-19}{\joule}
+\]
+In elettronvolt: $3{,}3/1{,}6 \approx \SI{2,1}{\electronvolt}$, come ci si aspetta per la luce visibile.'''
+
+[[problema]]
+id = "ud7-fotone-fototerapia"
+livello = 1
+testo = '''Una lampada per la fototerapia dell'ittero neonatale emette luce blu con una potenza di {{P}}. Ogni fotone ha un'energia di {{E}}. Quanti fotoni emette la lampada ogni secondo?'''
+dati.P = { valore = "0,44", unita = "W" }
+dati.E = { valore = "4,4e-19", unita = "J" }
+
+  [[problema.parte]]
+  calcolo = "P / E"
+  risultato = { valore = 1.0e18, unita = "s^-1", cifre = 2 }
+  soluzione = '''La lampada emette \SI{0,44}{\joule} al secondo. Il numero di fotoni al secondo è l'energia al secondo divisa per l'energia di un fotone:
+\[
+  N = \frac{P}{E} = \frac{\SI{0,44}{\joule\per\second}}{\SI{4,4e-19}{\joule}} = \frac{0{,}44}{4{,}4} \cdot 10^{0-(-19)}\,\si[per-mode=power]{\second\tothe{-1}} = 0{,}1 \cdot 10^{19}\,\si[per-mode=power]{\second\tothe{-1}} = \SI[per-mode=power]{1,0e18}{\second\tothe{-1}}
+\]'''
+
+[[problema]]
+id = "ud7-fotone-saturimetro"
+livello = 2
+testo = '''Il LED rosso di un saturimetro emette luce con lunghezza d'onda {{lam}} e una potenza di {{P}}.'''
+dati.lam = { valore = 660, unita = "nm" }
+dati.P = { valore = "3,0", unita = "mW" }
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia di un fotone in joule.'''
+  calcolo = "h * c / (lam * 1e-9)"
+  risultato = { valore = 3.0e-19, unita = "J", cifre = 2 }
+  soluzione = '''La lunghezza d'onda è $\SI{660}{\nano\metre} = \SI{6,6e-7}{\metre}$. Dalla relazione $E = hc/\lambda$:
+\[
+  E = \frac{\SI{6,6e-34}{\joule\second} \cdot \SI{3e8}{\metre\per\second}}{\SI{6,6e-7}{\metre}} = \frac{6{,}6 \cdot 3}{6{,}6} \cdot 10^{-34+8-(-7)}\,\si{\joule} = 3 \cdot 10^{-19}\,\si{\joule} = \SI{3,0e-19}{\joule}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanti fotoni emette il LED ogni secondo?'''
+  calcolo = "P * 1e-3 / (h * c / (lam * 1e-9))"
+  risultato = { valore = 1.0e16, unita = "s^-1", cifre = 2 }
+  soluzione = '''La potenza è $\SI{3,0}{\milli\watt} = \SI{3,0e-3}{\joule\per\second}$. Con l'energia del punto (a):
+\[
+  N = \frac{P}{E} = \frac{\SI{3,0e-3}{\joule\per\second}}{\SI{3,0e-19}{\joule}} = 1 \cdot 10^{-3-(-19)}\,\si[per-mode=power]{\second\tothe{-1}} = \SI[per-mode=power]{1,0e16}{\second\tothe{-1}}
+\]'''
+
+[[problema]]
+id = "ud7-fotone-tecnezio"
+livello = 2
+testo = '''Il tecnezio-99m, usato nella scintigrafia, emette fotoni $\gamma$ di energia {{E}}.'''
+dati.E = { valore = 140, unita = "keV" }
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia di un fotone in joule.'''
+  calcolo = "E * 1e3 * eV"
+  risultato = { valore = 2.24e-14, unita = "J", cifre = 3 }
+  soluzione = '''$\SI{140}{\kilo\electronvolt} = \SI{1,40e5}{\electronvolt}$, e ogni elettronvolt vale \SI{1,6e-19}{\joule}:
+\[
+  E = \num{1,40e5} \cdot \SI{1,6e-19}{\joule} = 1{,}40 \cdot 1{,}6 \cdot 10^{5-19}\,\si{\joule} = 2{,}24 \cdot 10^{-14}\,\si{\joule}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la frequenza della radiazione.'''
+  calcolo = "E * 1e3 * eV / h"
+  risultato = { valore = 3.4e19, unita = "Hz", cifre = 2 }
+  soluzione = '''Da $E = hf$, con l'energia del punto (a):
+\[
+  f = \frac{E}{h} = \frac{\SI{2,24e-14}{\joule}}{\SI{6,6e-34}{\joule\second}} = \frac{2{,}24}{6{,}6} \cdot 10^{-14-(-34)}\,\si{\hertz} \approx 0{,}34 \cdot 10^{20}\,\si{\hertz} = \SI{3,4e19}{\hertz}
+\]'''
+
+[[problema]]
+id = "ud7-fotone-cobalto"
+livello = 2
+testo = '''Nella radioterapia con il cobalto-60 i fotoni $\gamma$ hanno un'energia media di {{E}}. In una seduta il tessuto da trattare assorbe {{Q}} per ogni chilogrammo.'''
+dati.E = { valore = "1,25", unita = "\\mega\\electronvolt" }
+dati.Q = { valore = "2,0", unita = "J" }
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia di un fotone in joule.'''
+  calcolo = "E * 1e6 * eV"
+  risultato = { valore = 2.0e-13, unita = "J", cifre = 2 }
+  soluzione = '''$\SI{1,25}{\mega\electronvolt} = \SI{1,25e6}{\electronvolt}$:
+\[
+  E = \num{1,25e6} \cdot \SI{1,6e-19}{\joule} = 1{,}25 \cdot 1{,}6 \cdot 10^{6-19}\,\si{\joule} = 2{,}0 \cdot 10^{-13}\,\si{\joule}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanti fotoni deve assorbire un chilogrammo di tessuto, se ognuno cede tutta la sua energia?'''
+  calcolo = "Q / (E * 1e6 * eV)"
+  risultato = { valore = 1.0e13, cifre = 2 }
+  soluzione = '''Il numero di fotoni è l'energia assorbita divisa per l'energia di un fotone, quella del punto (a):
+\[
+  N = \frac{\SI{2,0}{\joule}}{\SI{2,0e-13}{\joule}} = 1 \cdot 10^{0-(-13)} = \num{1,0e13}
+\]'''
+
+[[problema]]
+id = "ud7-ioniz-risonanza"
+livello = 2
+testo = '''In un tomografo per risonanza magnetica gli impulsi a radiofrequenza hanno frequenza di circa {{f}}.'''
+dati.f = { valore = 64, unita = "MHz" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la lunghezza d'onda nel vuoto.'''
+  calcolo = "c / (f * 1e6)"
+  risultato = { valore = 4.7, unita = "m", cifre = 2 }
+  soluzione = '''La frequenza è $\SI{64}{\mega\hertz} = \SI{6,4e7}{\hertz}$. Dalla relazione $c = \lambda f$:
+\[
+  \lambda = \frac{c}{f} = \frac{\SI{3e8}{\metre\per\second}}{\SI{6,4e7}{\hertz}} = \frac{3}{6{,}4} \cdot 10^{8-7}\,\si{\metre} \approx 0{,}47 \cdot \SI{10}{\metre} = \SI{4,7}{\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia di un fotone in elettronvolt. Questi fotoni possono ionizzare i tessuti?'''
+  calcolo = "hc_eVnm / (c / (f * 1e6) * 1e9)"
+  risultato = { valore = 2.6e-7, unita = "eV", cifre = 2 }
+  soluzione = '''La lunghezza d'onda del punto (a) in nanometri è $\SI{4,7}{\metre} = \SI{4,7e9}{\nano\metre}$. Con la formula pratica:
+\[
+  E \approx \frac{1240}{\num{4,7e9}}\,\si{\electronvolt} = \frac{1240}{4{,}7} \cdot 10^{-9}\,\si{\electronvolt} \approx 264 \cdot 10^{-9}\,\si{\electronvolt} \approx \SI{2,6e-7}{\electronvolt}
+\]
+L'energia di ionizzazione è circa \SI{10}{\electronvolt}, quasi 40 milioni di volte di più ($10/\num{2,6e-7} \approx \num{4e7}$). Le onde radio della risonanza magnetica non sono ionizzanti, per quanto intenso sia l'impulso.'''
+
+[[problema]]
+id = "ud7-ioniz-reparto"
+livello = 3
+testo = '''In un ospedale si usano tre radiazioni: l'infrarosso emesso dalla pelle, che la termocamera rileva intorno a {{lamIR}}; l'ultravioletto di una lampada germicida, con {{lamUV}}; i raggi X di un apparecchio per radiografie dentali, con {{lamX}}. Per ionizzare una molecola d'acqua serve un'energia di circa {{Eion}}.'''
+dati.lamIR = { valore = 10, unita = "\\micro\\metre" }
+dati.lamUV = { valore = 254, unita = "nm" }
+dati.lamX = { valore = "0,050", unita = "nm" }
+dati.Eion = { valore = "12,6", unita = "eV" }
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia di un fotone infrarosso, in elettronvolt.'''
+  calcolo = "hc_eVnm / (lamIR * 1e3)"
+  risultato = { valore = 0.12, unita = "eV", cifre = 2 }
+  soluzione = '''$\SI{10}{\micro\metre} = 10 \cdot \SI{e3}{\nano\metre} = \SI{e4}{\nano\metre}$. Con la formula pratica $E \approx 1240/10^4 = \SI{0,124}{\electronvolt} \approx \SI{0,12}{\electronvolt}$.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia di un fotone ultravioletto della lampada, in elettronvolt.'''
+  calcolo = "hc_eVnm / lamUV"
+  risultato = { valore = 4.9, unita = "eV", cifre = 2 }
+  soluzione = '''$E \approx 1240/254\,\si{\electronvolt}$. A mano: $254 \cdot 5 = 1270$, poco più di 1240, quindi $E$ è poco meno di 5: $E \approx \SI{4,9}{\electronvolt}$.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia di un fotone X, in kiloelettronvolt.'''
+  calcolo = "hc_eVnm / lamX / 1e3"
+  risultato = { valore = 24.8, unita = "keV", cifre = 3 }
+  soluzione = '''$E \approx 1240/0{,}050\,\si{\electronvolt} = 1240 \cdot 20\,\si{\electronvolt} = \SI{24800}{\electronvolt} = \SI{24,8}{\kilo\electronvolt}$.'''
+
+  [[problema.parte]]
+  domanda = '''Qual è la massima lunghezza d'onda di un fotone capace di ionizzare l'acqua? Quali delle tre radiazioni sono ionizzanti?'''
+  calcolo = "hc_eVnm / Eion"
+  risultato = { valore = 98, unita = "nm", cifre = 2 }
+  soluzione = '''Il fotone ionizza se $E \geq \SI{12,6}{\electronvolt}$, cioè se $1240/\lambda \geq 12{,}6$, cioè se
+\[
+  \lambda \leq \frac{1240}{12{,}6}\,\si{\nano\metre} \approx \SI{98}{\nano\metre}
+\]
+È ultravioletto lontano. Solo i raggi X ($\SI{24,8}{\kilo\electronvolt}$, circa 2000 volte la soglia) sono ionizzanti. L'infrarosso (\SI{0,12}{\electronvolt}) scalda soltanto. L'ultravioletto della lampada (\SI{4,9}{\electronvolt}) non ionizza, ma i suoi fotoni bastano a rompere alcuni legami chimici: per questo uccide i batteri danneggiandone il DNA.'''
+
+[[problema]]
+id = "ud7-fotone-tubo-x"
+livello = 3
+testo = '''Un tubo radiogeno, che si può trattare come una sorgente puntiforme, produce a {{r1}} di distanza un fascio di intensità {{I}}, formato da fotoni di {{E}}.'''
+dati.r1 = { valore = "1,0", unita = "m" }
+dati.I = { valore = "2,0e-3", unita = "W/m^2" }
+dati.E = { valore = 50, unita = "keV" }
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia di un fotone in joule.'''
+  calcolo = "E * 1e3 * eV"
+  risultato = { valore = 8.0e-15, unita = "J", cifre = 2 }
+  soluzione = '''$\SI{50}{\kilo\electronvolt} = \SI{5,0e4}{\electronvolt}$, quindi $E = \num{5,0e4} \cdot \SI{1,6e-19}{\joule} = 8{,}0 \cdot 10^{4-19}\,\si{\joule} = \SI{8,0e-15}{\joule}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti fotoni attraversano ogni secondo una superficie di \SI{1}{\centi\metre\squared}, perpendicolare al fascio, a \SI{1,0}{\metre} dal tubo?'''
+  calcolo = "I * 1e-4 / (E * 1e3 * eV)"
+  risultato = { valore = 2.5e7, unita = "s^-1", cifre = 2 }
+  soluzione = '''L'intensità è l'energia che attraversa \SI{1}{\metre\squared} in un secondo. Su $\SI{1}{\centi\metre\squared} = \SI{e-4}{\metre\squared}$ passa, ogni secondo, l'energia $\SI{2,0e-3}{\watt\per\metre\squared} \cdot \SI{e-4}{\metre\squared} = \SI{2,0e-7}{\joule}$. Divisa per l'energia di un fotone, quella del punto (a):
+\[
+  N = \frac{\SI{2,0e-7}{\joule}}{\SI{8,0e-15}{\joule}} = 0{,}25 \cdot 10^{-7-(-15)} = 0{,}25 \cdot 10^{8} = \num{2,5e7}
+\]
+fotoni al secondo.'''
+
+  [[problema.parte]]
+  domanda = '''E quanti a \SI{3,0}{\metre} dal tubo, dove sta il tecnico di radiologia?'''
+  calcolo = "I * 1e-4 / (E * 1e3 * eV) * (1.0 / 3.0)**2"
+  risultato = { valore = 2.8e6, unita = "s^-1", cifre = 2 }
+  soluzione = '''L'energia dei fotoni non cambia con la distanza; cambia il loro numero per unità di superficie. Per la legge dell'inverso del quadrato, a distanza tripla l'intensità è $1/3^2 = 1/9$, e lo stesso vale per il numero di fotoni:
+\[
+  N = \frac{\num{2,5e7}}{9} \approx \num{2,8e6}
+\]
+fotoni al secondo. Ogni fotone che arriva è ionizzante quanto a \SI{1}{\metre}: la distanza riduce il numero di fotoni, non l'energia del singolo fotone.'''
+
+[[problema]]
+id = "ud7-fotone-uv-pelle"
+livello = 3
+testo = '''In una giornata d'estate l'ultravioletto del Sole arriva al suolo con un'intensità di circa {{I}}. Una persona espone al sole {{S}} di pelle, perpendicolare ai raggi, per {{t}}. Per semplicità considera tutti i fotoni ultravioletti con lunghezza d'onda {{lam}}, e supponi che la pelle assorba tutta la radiazione.'''
+dati.I = { valore = 30, unita = "W/m^2" }
+dati.S = { valore = "0,20", unita = "\\metre\\squared" }
+dati.t = { valore = 30, unita = "\\minute" }
+dati.lam = { valore = 310, unita = "nm" }
+
+  [[problema.parte]]
+  domanda = '''Quanta energia ultravioletta assorbe la pelle?'''
+  calcolo = "I * S * t * 60"
+  risultato = { valore = 1.1e4, unita = "J", cifre = 2 }
+  soluzione = '''La potenza che arriva sulla pelle è $P = I S = \SI{30}{\watt\per\metre\squared} \cdot \SI{0,20}{\metre\squared} = \SI{6,0}{\watt}$. In $\SI{30}{\minute} = 30 \cdot \SI{60}{\second} = \SI{1800}{\second}$ l'energia è
+\[
+  P t = \SI{6,0}{\watt} \cdot \SI{1800}{\second} = \SI{10800}{\joule} \approx \SI{1,1e4}{\joule}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia di un fotone, in elettronvolt.'''
+  calcolo = "hc_eVnm / lam"
+  risultato = { valore = 4.0, unita = "eV", cifre = 2 }
+  soluzione = '''$E \approx 1240/310\,\si{\electronvolt} = \SI{4,0}{\electronvolt}$, perché $310 \cdot 4 = 1240$. È meno della soglia di ionizzazione (circa \SI{10}{\electronvolt}): l'ultravioletto del Sole non è ionizzante, ma ha abbastanza energia per modificare legami chimici nel DNA della pelle.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti fotoni ultravioletti assorbe la pelle?'''
+  calcolo = "I * S * t * 60 / (hc_eVnm / lam * eV)"
+  risultato = { valore = 1.7e22, cifre = 2 }
+  soluzione = '''L'energia di un fotone, quella del punto (b), in joule è $4{,}0 \cdot \SI{1,6e-19}{\joule} = \SI{6,4e-19}{\joule}$. Il numero di fotoni è l'energia del punto (a) divisa per l'energia di un fotone:
+\[
+  N = \frac{\SI{1,08e4}{\joule}}{\SI{6,4e-19}{\joule}} = \frac{1{,}08}{6{,}4} \cdot 10^{4-(-19)} \approx 0{,}17 \cdot 10^{23} = \num{1,7e22}
+\]'''
+
+[[problema]]
+id = "ud7-fotone-pet"
+livello = 3
+testo = '''Nella PET il paziente riceve un radiofarmaco al fluoro-18, che decade $\beta^+$. Ogni positrone emesso incontra quasi subito un elettrone e le due particelle si annichilano: spariscono e al loro posto escono due fotoni $\gamma$, ciascuno di {{E}}. Al momento dell'esame l'attività nel paziente è {{A}}.'''
+dati.E = { valore = 511, unita = "keV" }
+dati.A = { valore = 400, unita = "MBq" }
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia di un fotone in joule.'''
+  calcolo = "E * 1e3 * eV"
+  risultato = { valore = 8.2e-14, unita = "J", cifre = 2 }
+  soluzione = '''$\SI{511}{\kilo\electronvolt} = \SI{5,11e5}{\electronvolt}$, quindi
+\[
+  E = \num{5,11e5} \cdot \SI{1,6e-19}{\joule} = 5{,}11 \cdot 1{,}6 \cdot 10^{5-19}\,\si{\joule} \approx 8{,}18 \cdot 10^{-14}\,\si{\joule} \approx \SI{8,2e-14}{\joule}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola la lunghezza d'onda dei fotoni.'''
+  calcolo = "hc_eVnm / (E * 1e3)"
+  risultato = { valore = 2.4e-3, unita = "nm", cifre = 2 }
+  soluzione = '''Dalla formula pratica, $\lambda\,[\si{\nano\metre}] \approx 1240/E\,[\si{\electronvolt}]$:
+\[
+  \lambda \approx \frac{\num{1,24e3}}{\num{5,11e5}}\,\si{\nano\metre} = \frac{1{,}24}{5{,}11} \cdot 10^{3-5}\,\si{\nano\metre} \approx 0{,}243 \cdot 10^{-2}\,\si{\nano\metre} \approx \SI{2,4e-3}{\nano\metre}
+\]
+Sono raggi $\gamma$: meno di \SI{0,01}{\nano\metre}.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti fotoni $\gamma$ escono dal paziente ogni secondo, se nessuno viene assorbito?'''
+  calcolo = "2 * A * 1e6"
+  risultato = { valore = 8.0e8, unita = "s^-1", cifre = 2 }
+  soluzione = '''$\SI{400}{\mega\becquerel}$ sono $\num{4,0e8}$ decadimenti al secondo, e ogni decadimento dà due fotoni: $2 \cdot \num{4,0e8} = \num{8,0e8}$ fotoni al secondo.'''
+
+  [[problema.parte]]
+  domanda = '''Un fotone da \SI{511}{\kilo\electronvolt} può cedere la sua energia ionizzando molte molecole. Se ogni ionizzazione costa circa \SI{10}{\electronvolt}, quante ionizzazioni può produrre al massimo?'''
+  calcolo = "E * 1e3 / 10"
+  risultato = { valore = 5.1e4, cifre = 2 }
+  soluzione = '''$\num{5,11e5}\,\si{\electronvolt} / \SI{10}{\electronvolt} = \num{5,11e4} \approx \num{5,1e4}$: un solo fotone $\gamma$ può ionizzare decine di migliaia di molecole. Per questo il personale della medicina nucleare si protegge con tempo, distanza e schermature.'''
 
 [[problema]]
 id = "ud7-hvl-tessuto"
@@ -65,6 +692,255 @@ dati.x12 = { valore = "0,50", unita = "cm" }
   soluzione = '''L'intensità deve scendere sotto $1/100$. Con 6 spessori emivalenti passa $1/2^6 = 1/64$, ancora più dell'\SI{1}{\percent}; con 7 passa $1/2^7 = 1/128$, meno dell'\SI{1}{\percent}. Servono 7 spessori emivalenti in tutto, cioè $7 \cdot \SI{0,50}{\centi\metre} = \SI{3,5}{\centi\metre}$: ai \SI{2,0}{\centi\metre} del punto (a) se ne aggiungono $\SI{3,5}{\centi\metre} - \SI{2,0}{\centi\metre} = \SI{1,5}{\centi\metre}$.'''
 
 [[problema]]
+id = "ud7-lb-grembiule"
+livello = 1
+testo = '''Per i raggi X di una radiografia il piombo di un grembiule di protezione ha uno spessore emivalente di {{x12}}. Calcola il coefficiente di attenuazione lineare del piombo, in \si[per-mode=power]{\centi\metre\tothe{-1}}.'''
+dati.x12 = { valore = "0,25", unita = "mm" }
+
+  [[problema.parte]]
+  calcolo = "ln2 / (x12 / 10)"
+  risultato = { valore = 28, unita = "cm^-1", cifre = 2 }
+  soluzione = '''Dalla formula dello spessore emivalente, $\mu = \ln 2 / x_{1/2}$. Lo spessore in centimetri è $\SI{0,25}{\milli\metre} = \SI{0,025}{\centi\metre} = \SI{2,5e-2}{\centi\metre}$:
+\[
+  \mu = \frac{\ln 2}{x_{1/2}} = \frac{0{,}69}{\SI{2,5e-2}{\centi\metre}} = 0{,}276 \cdot 10^{0-(-2)}\,\si[per-mode=power]{\centi\metre\tothe{-1}} = \SI[per-mode=power]{27,6}{\centi\metre\tothe{-1}} \approx \SI[per-mode=power]{28}{\centi\metre\tothe{-1}}
+\]
+È circa cento volte il $\mu$ dei tessuti molli (\SI[per-mode=power]{0,23}{\centi\metre\tothe{-1}} nell'esempio della dispensa): per questo bastano pochi decimi di millimetro di piombo.'''
+
+[[problema]]
+id = "ud7-lb-muscolo"
+livello = 1
+testo = '''Un fascio monocromatico di raggi X attraversa {{x}} di muscolo, che per quei fotoni ha coefficiente di attenuazione {{mu}}. Quale frazione dell'intensità esce dal muscolo? Usa $e^{-1} \approx 0{,}37$.'''
+dati.x = { valore = 10, unita = "cm" }
+dati.mu = { valore = "0,20", unita = "cm^-1" }
+
+  [[problema.parte]]
+  calcolo = "math.exp(-mu * x)"
+  risultato = { valore = 0.14, cifre = 2 }
+  soluzione = '''Dalla legge di Lambert-Beer, con $\mu x = \SI[per-mode=power]{0,20}{\centi\metre\tothe{-1}} \cdot \SI{10}{\centi\metre} = 2{,}0$ (un numero puro):
+\[
+  \frac{I}{I_0} = e^{-\mu x} = e^{-2} = \left(e^{-1}\right)^2 \approx 0{,}37^2 \approx 0{,}14
+\]
+Esce circa il \SI{14}{\percent} dell'intensità.'''
+
+[[problema]]
+id = "ud7-lb-nadh"
+livello = 1
+testo = '''In un laboratorio di analisi si misura con lo spettrofotometro la concentrazione di NADH, che a \SI{340}{\nano\metre} ha coefficiente di assorbimento molare {{eps}}. Nella cuvetta, con cammino {{l}}, l'assorbanza misurata è {{A}}. Calcola la concentrazione di NADH.'''
+dati.eps = { valore = "6,2e3", unita = "\\litre\\per\\mole\\per\\centi\\metre" }
+dati.l = { valore = "1,0", unita = "cm" }
+dati.A = { valore = "0,62" }
+
+  [[problema.parte]]
+  calcolo = "A / (eps * l)"
+  risultato = { valore = 1.0e-4, unita = "\\mole\\per\\litre", cifre = 2 }
+  soluzione = '''Dalla legge di Beer $A = \varepsilon c \ell$ si ricava $c = A/(\varepsilon \ell)$:
+\[
+  c = \frac{0{,}62}{\SI{6,2e3}{\litre\per\mole\per\centi\metre} \cdot \SI{1,0}{\centi\metre}} = \frac{0{,}62}{6{,}2} \cdot 10^{-3}\,\si{\mole\per\litre} = 0{,}10 \cdot 10^{-3}\,\si{\mole\per\litre} = \SI{1,0e-4}{\mole\per\litre}
+\]'''
+
+[[problema]]
+id = "ud7-lb-alluminio"
+livello = 2
+testo = '''Davanti al tubo radiogeno si mette un filtro di alluminio, che toglie i fotoni di bassa energia, inutili per l'immagine. Per i fotoni di una certa energia {{x}} di alluminio riducono l'intensità a $1/8$.'''
+dati.x = { valore = "1,2", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale lo spessore emivalente dell'alluminio per quei fotoni?'''
+  calcolo = "x / 3"
+  risultato = { valore = 0.40, unita = "cm", cifre = 2 }
+  soluzione = '''$1/8 = 1/2^3$: \SI{1,2}{\centi\metre} sono 3 spessori emivalenti, quindi $x_{1/2} = \SI{1,2}{\centi\metre}/3 = \SI{0,40}{\centi\metre}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il coefficiente di attenuazione lineare?'''
+  calcolo = "ln2 / (x / 3)"
+  risultato = { valore = 1.7, unita = "cm^-1", cifre = 2 }
+  soluzione = '''Con lo spessore emivalente del punto (a):
+\[
+  \mu = \frac{\ln 2}{x_{1/2}} = \frac{0{,}69}{\SI{0,40}{\centi\metre}} \approx \SI[per-mode=power]{1,7}{\centi\metre\tothe{-1}}
+\]'''
+
+[[problema]]
+id = "ud7-lb-taratura"
+livello = 2
+testo = '''Per un dosaggio colorimetrico si prepara una soluzione di riferimento con concentrazione {{c1}}: nella cuvetta, con cammino {{l}}, la sua assorbanza è {{A1}}. Poi si mette nella stessa cuvetta il campione del paziente, alla stessa lunghezza d'onda, e si misura un'assorbanza di {{A2}}.'''
+dati.c1 = { valore = "2,0e-4", unita = "\\mole\\per\\litre" }
+dati.l = { valore = "1,0", unita = "cm" }
+dati.A1 = { valore = "0,40" }
+dati.A2 = { valore = "0,30" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il coefficiente di assorbimento molare della sostanza?'''
+  calcolo = "A1 / (c1 * l)"
+  risultato = { valore = 2.0e3, unita = "\\litre\\per\\mole\\per\\centi\\metre", cifre = 2 }
+  soluzione = '''Da $A = \varepsilon c \ell$ si ricava $\varepsilon = A/(c\ell)$:
+\[
+  \varepsilon = \frac{0{,}40}{\SI{2,0e-4}{\mole\per\litre} \cdot \SI{1,0}{\centi\metre}} = 0{,}20 \cdot 10^{0-(-4)}\,\si{\litre\per\mole\per\centi\metre} = \SI{2,0e3}{\litre\per\mole\per\centi\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la concentrazione nel campione?'''
+  calcolo = "A2 / ((A1 / (c1 * l)) * l)"
+  risultato = { valore = 1.5e-4, unita = "\\mole\\per\\litre", cifre = 2 }
+  soluzione = '''Con il valore di $\varepsilon$ del punto (a):
+\[
+  c = \frac{A}{\varepsilon \ell} = \frac{0{,}30}{\SI{2,0e3}{\litre\per\mole\per\centi\metre} \cdot \SI{1,0}{\centi\metre}} = 0{,}15 \cdot 10^{-3}\,\si{\mole\per\litre} = \SI{1,5e-4}{\mole\per\litre}
+\]
+Si arriva allo stesso risultato con una proporzione: a parità di $\varepsilon$ e di $\ell$ l'assorbanza è proporzionale alla concentrazione, e $0{,}30/0{,}40 = 3/4$, quindi $c = \tfrac34 \cdot \SI{2,0e-4}{\mole\per\litre} = \SI{1,5e-4}{\mole\per\litre}$.'''
+
+[[problema]]
+id = "ud7-lb-cuvetta"
+livello = 2
+testo = '''Una soluzione in una cuvetta con cammino di \SI{1,0}{\centi\metre} lascia passare il {{p}} della luce. Usa $\log_{10} 2 \approx 0{,}30$.'''
+dati.p = { valore = 50, unita = "\\percent" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'assorbanza?'''
+  calcolo = "math.log10(100 / p)"
+  risultato = { valore = 0.30, cifre = 2 }
+  soluzione = '''Passa la metà della luce, quindi $I_0/I = 2$ e $A = \log_{10} 2 \approx 0{,}30$.'''
+
+  [[problema.parte]]
+  domanda = '''La stessa soluzione si mette in una cuvetta con cammino di \SI{2,0}{\centi\metre}. Quale percentuale della luce passa?'''
+  calcolo = "100 * 10**(-2 * math.log10(100 / p))"
+  risultato = { valore = 25, unita = "\\percent", cifre = 2 }
+  soluzione = '''L'assorbanza è proporzionale al cammino $\ell$: raddoppiando $\ell$ raddoppia, $A = 2 \cdot 0{,}30 = 0{,}60$. Allora
+\[
+  \frac{I}{I_0} = 10^{-0{,}60} = \left(10^{-0{,}30}\right)^2 = \left(\frac12\right)^2 = \frac14
+\]
+Passa il \SI{25}{\percent} della luce. È lo stesso risultato che si ottiene ragionando a strati: ogni centimetro lascia passare metà della luce che gli arriva.'''
+
+[[problema]]
+id = "ud7-lb-osso"
+livello = 3
+testo = '''In una radiografia del braccio due fasci di raggi X attraversano \SI{12}{\centi\metre} di spessore. Il primo passa solo nei tessuti molli, che hanno spessore emivalente {{xt}}. Il secondo attraversa \SI{9}{\centi\metre} di tessuti molli e \SI{3}{\centi\metre} di osso, che ha spessore emivalente {{xo}}.'''
+dati.xt = { valore = "3,0", unita = "cm" }
+dati.xo = { valore = "1,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quale frazione dell'intensità esce dal primo percorso?'''
+  calcolo = "2**(-12 / xt)"
+  risultato = { valore = 0.0625, cifre = 3 }
+  soluzione = '''\SI{12}{\centi\metre} di tessuto sono $12/3 = 4$ spessori emivalenti: $I/I_0 = 1/2^4 = 1/16 = 0{,}0625$.'''
+
+  [[problema.parte]]
+  domanda = '''Quale frazione esce dal secondo percorso?'''
+  calcolo = "2**(-9 / xt) * 2**(-3 / xo)"
+  risultato = { valore = 0.0156, cifre = 3 }
+  soluzione = '''Gli strati si attraversano uno dopo l'altro, e ognuno moltiplica l'intensità per la sua frazione. \SI{9}{\centi\metre} di tessuto sono $9/3 = 3$ spessori emivalenti, \SI{3}{\centi\metre} di osso sono $3/1 = 3$ spessori emivalenti: in tutto 6 dimezzamenti.
+\[
+  \frac{I}{I_0} = \frac{1}{2^3} \cdot \frac{1}{2^3} = \frac{1}{2^6} = \frac{1}{64} \approx 0{,}0156
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quante volte l'intensità che arriva al rivelatore dietro i tessuti molli è maggiore di quella che arriva dietro l'osso?'''
+  calcolo = "2**(-12 / xt) / (2**(-9 / xt) * 2**(-3 / xo))"
+  risultato = { valore = 4.0, cifre = 2 }
+  soluzione = '''$\dfrac{1/16}{1/64} = \dfrac{64}{16} = 4{,}0$. Dietro l'osso arriva un quarto della radiazione: la pellicola, o il rivelatore digitale, riceve meno raggi X e l'osso appare chiaro sul fondo più scuro dei tessuti molli.'''
+
+[[problema]]
+id = "ud7-lb-tecnezio-schermo"
+livello = 3
+testo = '''In medicina nucleare il flacone con il tecnezio-99m sta in un contenitore di piombo con pareti spesse {{s}}. Per i raggi $\gamma$ del tecnezio il piombo ha spessore emivalente {{x12}}.'''
+dati.s = { valore = "2,1", unita = "mm" }
+dati.x12 = { valore = "0,30", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Quale frazione dei raggi $\gamma$ attraversa la parete?'''
+  calcolo = "2**(-s / x12)"
+  risultato = { valore = 0.0078, cifre = 2 }
+  soluzione = '''La parete contiene $n = \SI{2,1}{\milli\metre}/\SI{0,30}{\milli\metre} = 7$ spessori emivalenti:
+\[
+  \frac{I}{I_0} = \frac{1}{2^7} = \frac{1}{128} \approx 0{,}0078
+\]
+Passa meno dell'\SI{1}{\percent}.'''
+
+  [[problema.parte]]
+  domanda = '''Quale spessore minimo, in numero intero di spessori emivalenti, riduce l'intensità a meno di un millesimo?'''
+  calcolo = "10 * x12"
+  risultato = { valore = 3.0, unita = "mm", cifre = 2 }
+  soluzione = '''Con 9 spessori emivalenti passa $1/2^9 = 1/512$, più di un millesimo; con 10 passa $1/2^{10} = 1/1024$, meno di un millesimo. Servono $10 \cdot \SI{0,30}{\milli\metre} = \SI{3,0}{\milli\metre}$ di piombo.'''
+
+  [[problema.parte]]
+  domanda = '''Un tecnico si trova a \SI{25}{\centi\metre} dal flacone chiuso in un contenitore con pareti da \SI{3,0}{\milli\metre}. Se il flacone non fosse schermato, a quale distanza dovrebbe stare per ricevere la stessa intensità? Considera il flacone una sorgente puntiforme e trascura l'assorbimento dell'aria.'''
+  calcolo = "0.25 * math.sqrt(2**10)"
+  risultato = { valore = 8.0, unita = "m", cifre = 2 }
+  soluzione = '''Lo schermo da \SI{3,0}{\milli\metre} riduce l'intensità di un fattore $2^{10} = 1024$. Senza schermo la stessa riduzione deve venire dalla distanza: per la legge dell'inverso del quadrato $I_2/I_1 = (r_1/r_2)^2$, quindi
+\[
+  \left(\frac{r_2}{r_1}\right)^2 = 1024 \quad\Longrightarrow\quad \frac{r_2}{r_1} = \sqrt{1024} = 32
+\]
+e $r_2 = 32 \cdot \SI{25}{\centi\metre} = \SI{800}{\centi\metre} = \SI{8,0}{\metre}$. Tre millimetri di piombo valgono quanto allontanarsi di quasi otto metri: per questo i radiofarmaci si maneggiano schermati.'''
+
+[[problema]]
+id = "ud7-lb-saturimetro"
+livello = 3
+testo = '''Un saturimetro illumina il polpastrello con un LED infrarosso a \SI{940}{\nano\metre}. A quella lunghezza d'onda il dito, nel suo insieme, ha un'assorbanza di {{A}}. A ogni battito il sangue arterioso in più fa crescere l'assorbanza infrarossa di {{dAir}} e quella rossa, a \SI{660}{\nano\metre}, di {{dAr}}. Per l'emoglobina del sangue considera, a \SI{940}{\nano\metre}, un coefficiente di assorbimento molare {{eps}} e una concentrazione {{c}}. Usa $\log_{10} 2 \approx 0{,}30$.'''
+dati.A = { valore = "1,3" }
+dati.dAir = { valore = "0,010" }
+dati.dAr = { valore = "0,0050" }
+dati.eps = { valore = "1,0e3", unita = "\\litre\\per\\mole\\per\\centi\\metre" }
+dati.c = { valore = "2,0e-3", unita = "\\mole\\per\\litre" }
+
+  [[problema.parte]]
+  domanda = '''Quale percentuale della luce infrarossa arriva al sensore?'''
+  calcolo = "100 * 10**(-A)"
+  risultato = { valore = 5.0, unita = "\\percent", cifre = 2 }
+  soluzione = '''Da $I/I_0 = 10^{-A}$ con $A = 1{,}3 = 2 - 0{,}7$:
+\[
+  \frac{I}{I_0} = 10^{-1{,}3} = 10^{-2} \cdot 10^{0{,}7} = 10^{-2} \cdot \frac{10^{1}}{10^{0{,}3}} \approx 10^{-2} \cdot \frac{10}{2} = 0{,}05
+\]
+dove si è usato $10^{0{,}3} \approx 2$, cioè $\log_{10} 2 \approx 0{,}30$. Arriva al sensore circa il \SI{5,0}{\percent} della luce.'''
+
+  [[problema.parte]]
+  domanda = '''Di quanto aumenta, a ogni battito, lo spessore di sangue attraversato dalla luce? Dai il risultato in millimetri.'''
+  calcolo = "dAir / (eps * c) * 10"
+  risultato = { valore = 0.050, unita = "mm", cifre = 2 }
+  soluzione = '''L'aumento di assorbanza viene dal sangue arterioso in più, di spessore $\Delta\ell$: per la legge di Beer $\Delta A = \varepsilon c\, \Delta\ell$. Il prodotto $\varepsilon c$ vale
+\[
+  \varepsilon c = \SI{1,0e3}{\litre\per\mole\per\centi\metre} \cdot \SI{2,0e-3}{\mole\per\litre} = 2{,}0 \cdot 10^{3-3}\,\si[per-mode=power]{\centi\metre\tothe{-1}} = \SI[per-mode=power]{2,0}{\centi\metre\tothe{-1}}
+\]
+quindi
+\[
+  \Delta\ell = \frac{\Delta A}{\varepsilon c} = \frac{0{,}010}{\SI[per-mode=power]{2,0}{\centi\metre\tothe{-1}}} = \SI{0,0050}{\centi\metre} = \SI{0,050}{\milli\metre}
+\]
+Il sangue che pulsa aggiunge appena cinque centesimi di millimetro: per questo il segnale utile è una piccola variazione su un fondo molto più grande.'''
+
+  [[problema.parte]]
+  domanda = '''Lo strumento calcola il rapporto $R$ fra la variazione di assorbanza nel rosso e quella nell'infrarosso. Quanto vale $R$?'''
+  calcolo = "dAr / dAir"
+  risultato = { valore = 0.50, cifre = 2 }
+  soluzione = '''$R = \Delta A_\text{rosso}/\Delta A_\text{IR} = 0{,}0050/0{,}010 = 0{,}50$. Le due variazioni vengono dallo stesso sangue arterioso, con lo stesso $\Delta\ell$: il rapporto dipende solo da quanto l'emoglobina di quel sangue assorbe alle due lunghezze d'onda, cioè da quanta è legata all'ossigeno. Lo strumento, tarato, trasforma $R$ nella saturazione; pelle, tessuti e sangue venoso non entrano nel conto, perché il loro contributo non pulsa.'''
+
+[[problema]]
+id = "ud7-lb-fototerapia"
+livello = 3
+testo = '''L'ittero del neonato si cura con la fototerapia: una lampada a luce blu, di lunghezza d'onda {{lam}}, illumina la pelle, e la bilirubina dei capillari assorbe la luce e si trasforma in una forma che il corpo elimina. Sulla pelle l'intensità è {{I0}}. Per questa luce la pelle ha uno spessore emivalente di {{x12}}, e i capillari da raggiungere sono a {{x}} di profondità.'''
+dati.lam = { valore = 460, unita = "nm" }
+dati.I0 = { valore = 32, unita = "W/m^2" }
+dati.x12 = { valore = "0,50", unita = "mm" }
+dati.x = { valore = "1,5", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'energia di un fotone della lampada, in elettronvolt?'''
+  calcolo = "hc_eVnm / lam"
+  risultato = { valore = 2.7, unita = "eV", cifre = 2 }
+  soluzione = '''Con la formula pratica $E \approx 1240/\lambda$, con $\lambda$ in nanometri: $E \approx 1240/460 \approx \SI{2,7}{\electronvolt}$. È luce visibile, non ionizzante.'''
+
+  [[problema.parte]]
+  domanda = '''Quale intensità arriva ai capillari?'''
+  calcolo = "I0 / 2**(x / x12)"
+  risultato = { valore = 4.0, unita = "W/m^2", cifre = 2 }
+  soluzione = '''\SI{1,5}{\milli\metre} sono $1{,}5/0{,}50 = 3$ spessori emivalenti: $I = \SI{32}{\watt\per\metre\squared}/2^3 = \SI{32}{\watt\per\metre\squared}/8 = \SI{4,0}{\watt\per\metre\squared}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti fotoni arrivano ai capillari ogni secondo, per ogni metro quadro?'''
+  calcolo = "(I0 / 2**(x / x12)) / ((hc_eVnm / lam) * eV)"
+  risultato = { valore = 9.3e18, unita = "\\second\\tothe{-1}\\metre\\tothe{-2}", cifre = 2 }
+  soluzione = '''L'intensità è l'energia che arriva in un secondo su un metro quadro; divisa per l'energia di un fotone dà il numero di fotoni. L'energia del fotone in joule è $E = 2{,}7 \cdot \SI{1,6e-19}{\joule} \approx \SI{4,3e-19}{\joule}$:
+\[
+  \frac{I}{E} = \frac{\SI{4,0}{\watt\per\metre\squared}}{\SI{4,3e-19}{\joule}} \approx 0{,}93 \cdot 10^{0-(-19)}\,\si[per-mode=power]{\second\tothe{-1}\metre\tothe{-2}} = \SI[per-mode=power]{9,3e18}{\second\tothe{-1}\metre\tothe{-2}}
+\]'''
+
+[[problema]]
 id = "ud7-tecnezio"
 livello = 3
 testo = '''Per una scintigrafia un paziente deve ricevere alle 14:00 un radiofarmaco al tecnezio-99m (emivita {{T12}}) con attività {{A}}. La dose viene preparata alle 8:00 dello stesso giorno.'''
@@ -94,7 +970,963 @@ dati.A = { valore = 400, unita = "MBq" }
   risultato = { valore = 25, unita = "MBq", cifre = 2 }
   soluzione = '''\SI{24}{\hour} sono $24/6 = 4$ emivite: $\SI{400}{\mega\becquerel} / 2^4 = \SI{400}{\mega\becquerel} / 16 = \SI{25}{\mega\becquerel}$. In realtà l'attività sarà ancora più bassa, perché una parte del radiofarmaco viene eliminata con le urine.'''
 
-# ============================================================= quesiti d'esame
+[[problema]]
+id = "ud7-radio-neutroni"
+livello = 1
+testo = '''Lo iodio-131, $\nuclide{131}{53}{I}$, si usa nella terapia della tiroide; l'isotopo stabile dello iodio è lo iodio-127. Quanti neutroni ha il nucleo di iodio-131?'''
+
+  [[problema.parte]]
+  calcolo = "131 - 53"
+  risultato = { valore = 78, cifre = 2 }
+  soluzione = '''Il numero in alto è il numero di massa $A = Z + N$, quello in basso il numero atomico $Z$. I neutroni sono
+\[
+  N = A - Z = 131 - 53 = 78
+\]
+Lo iodio-127 ha gli stessi 53 protoni, perché è lo stesso elemento, e $127 - 53 = 74$ neutroni: i due nuclei sono isotopi, e lo iodio-131 ha 4 neutroni in più.'''
+
+[[problema]]
+id = "ud7-radio-cobalto"
+livello = 1
+testo = '''Il cobalto-60, usato in passato per la radioterapia, ha costante di decadimento {{lam}}. Calcola la sua emivita in anni (un anno ha circa \SI{3,15e7}{\second}).'''
+dati.lam = { valore = "4,2e-9", unita = "s^-1" }
+
+  [[problema.parte]]
+  calcolo = "ln2 / lam / (365 * 86400)"
+  risultato = { valore = 5.2, unita = "anni", cifre = 2 }
+  soluzione = '''Dalla relazione $T_{1/2} = \ln 2 / \lambda$:
+\[
+  T_{1/2} = \frac{0{,}69}{\SI[per-mode=power]{4,2e-9}{\second\tothe{-1}}} = \frac{0{,}69}{4{,}2} \cdot 10^{9} \,\si{\second} \approx 0{,}164 \cdot 10^{9}\,\si{\second} = \SI{1,64e8}{\second}
+\]
+In anni:
+\[
+  T_{1/2} = \frac{\SI{1,64e8}{\second}}{\SI{3,15e7}{\second}} = \frac{1{,}64}{3{,}15} \cdot 10^{8-7} \approx 0{,}52 \cdot 10 = \SI{5,2}{anni}
+\]'''
+
+[[problema]]
+id = "ud7-radio-fluoro"
+livello = 1
+testo = '''Il fluoro-18, usato nella PET, ha emivita di {{T12}}. Calcola la sua costante di decadimento.'''
+dati.T12 = { valore = 110, unita = "minuti" }
+
+  [[problema.parte]]
+  calcolo = "ln2 / (T12 * 60)"
+  risultato = { valore = 1.0e-4, unita = "s^-1", cifre = 2 }
+  soluzione = '''L'emivita in secondi è $110 \cdot \SI{60}{\second} = \SI{6600}{\second} = \SI{6,6e3}{\second}$. Da $T_{1/2} = \ln 2/\lambda$:
+\[
+  \lambda = \frac{\ln 2}{T_{1/2}} = \frac{0{,}69}{\SI{6,6e3}{\second}} = \frac{0{,}69}{6{,}6} \cdot 10^{-3}\,\si[per-mode=power]{\second\tothe{-1}} \approx 0{,}10 \cdot 10^{-3}\,\si[per-mode=power]{\second\tothe{-1}} = \SI[per-mode=power]{1,0e-4}{\second\tothe{-1}}
+\]
+Ogni nucleo di fluoro-18 ha circa una probabilità su \num{10000} di decadere in un secondo.'''
+
+[[problema]]
+id = "ud7-radio-gallio"
+livello = 1
+testo = '''Il gallio-68 (emivita {{T12}}) si usa nella PET per i tumori neuroendocrini. Da un generatore si estrae un'attività di {{A0}}. Quanto vale l'attività dopo {{t}}?'''
+dati.T12 = { valore = 68, unita = "minuti" }
+dati.A0 = { valore = 800, unita = "MBq" }
+dati.t = { valore = 204, unita = "minuti" }
+
+  [[problema.parte]]
+  calcolo = "A0 / 2**(t / T12)"
+  risultato = { valore = 100, unita = "MBq", cifre = 2 }
+  soluzione = '''Il numero di emivite è $n = \SI{204}{minuti}/\SI{68}{minuti} = 3$. Da $\mathcal{A} = \mathcal{A}_0/2^n$:
+\[
+  \mathcal{A} = \frac{\SI{800}{\mega\becquerel}}{2^3} = \frac{\SI{800}{\mega\becquerel}}{8} = \SI{100}{\mega\becquerel}
+\]'''
+
+[[problema]]
+id = "ud7-radio-radio223"
+livello = 2
+testo = '''Il radio-223, $\nuclide{223}{88}{Ra}$, si usa per curare le metastasi ossee: emette particelle $\alpha$, che si fermano in meno di un decimo di millimetro di tessuto e colpiscono solo le cellule vicine. La sua catena di decadimento comincia con tre decadimenti $\alpha$, uno dopo l'altro, seguiti da un decadimento $\beta^-$.'''
+
+  [[problema.parte]]
+  domanda = '''Quale numero di massa ha il nucleo che si forma dopo i tre decadimenti $\alpha$?'''
+  calcolo = "223 - 3 * 4"
+  risultato = { valore = 211, cifre = 3 }
+  soluzione = '''Ogni particella $\alpha$ porta via 4 nucleoni, quindi tre decadimenti $\alpha$ tolgono $3 \cdot 4 = 12$ nucleoni:
+\[
+  A = 223 - 12 = 211
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanti neutroni ha il nucleo che si forma dopo il decadimento $\beta^-$?'''
+  calcolo = "(223 - 3 * 4) - (88 - 3 * 2 + 1)"
+  risultato = { valore = 128, cifre = 3 }
+  soluzione = '''Ogni decadimento $\alpha$ toglie 2 protoni: dopo i tre $\alpha$ il numero atomico è $88 - 3 \cdot 2 = 82$, il piombo-211. Il decadimento $\beta^-$ trasforma un neutrone in protone: $Z$ sale a $82 + 1 = 83$ (bismuto) e il numero di massa resta 211, quello del punto (a). I neutroni sono
+\[
+  N = A - Z = 211 - 83 = 128
+\]
+La catena è $\nuclide{223}{88}{Ra} \to \nuclide{219}{86}{Rn} \to \nuclide{215}{84}{Po} \to \nuclide{211}{82}{Pb} \to \nuclide{211}{83}{Bi}$.'''
+
+[[problema]]
+id = "ud7-radio-rifiuti"
+livello = 2
+testo = '''In un reparto di medicina nucleare un contenitore di rifiuti radioattivi ha attività {{A0}}. Dopo {{t}} l'attività misurata è {{A1}}. Il contenitore si può smaltire quando l'attività scende a {{Alim}}.'''
+dati.A0 = { valore = 640, unita = "kBq" }
+dati.A1 = { valore = 80, unita = "kBq" }
+dati.t = { valore = 30, unita = "h" }
+dati.Alim = { valore = 10, unita = "kBq" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'emivita del radioisotopo contenuto nei rifiuti?'''
+  calcolo = "t / math.log2(A0 / A1)"
+  risultato = { valore = 10, unita = "h", cifre = 2 }
+  soluzione = '''Da 640 a \SI{80}{\kilo\becquerel} l'attività si riduce di un fattore $640/80 = 8 = 2^3$: in \SI{30}{\hour} sono passate 3 emivite, quindi
+\[
+  T_{1/2} = \frac{\SI{30}{\hour}}{3} = \SI{10}{\hour}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Dopo quante ore dalla prima misura si può smaltire il contenitore?'''
+  calcolo = "math.log2(A0 / Alim) * t / math.log2(A0 / A1)"
+  risultato = { valore = 60, unita = "h", cifre = 2 }
+  soluzione = '''Da 640 a \SI{10}{\kilo\becquerel} il fattore è $640/10 = 64 = 2^6$: servono 6 emivite. Con l'emivita del punto (a):
+\[
+  t = 6 \cdot \SI{10}{\hour} = \SI{60}{\hour}
+\]
+cioè altre \SI{30}{\hour} dopo la seconda misura.'''
+
+[[problema]]
+id = "ud7-radio-fosforo"
+livello = 2
+testo = '''Un preparato di fosforo-32, emettitore $\beta^-$ con emivita di {{T12}}, contiene {{N0}} nuclei.'''
+dati.T12 = { valore = 14, unita = "giorni" }
+dati.N0 = { valore = "4,0e14" }
+
+  [[problema.parte]]
+  domanda = '''Quanti nuclei di fosforo-32 restano dopo \SI{28}{giorni}?'''
+  calcolo = "N0 / 2**(28 / T12)"
+  risultato = { valore = 1.0e14, cifre = 2 }
+  soluzione = '''\SI{28}{giorni} sono $28/14 = 2$ emivite. Da $N = N_0/2^n$:
+\[
+  N = \frac{\num{4,0e14}}{2^2} = \frac{\num{4,0e14}}{4} = \num{1,0e14}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quale attività ha il preparato in quel momento?'''
+  calcolo = "ln2 / (T12 * 86400) * N0 / 2**(28 / T12) / 1e6"
+  risultato = { valore = 57, unita = "MBq", cifre = 2 }
+  soluzione = '''Serve $\lambda$, con l'emivita in secondi: $T_{1/2} = 14 \cdot \SI{86400}{\second} = \SI{1209600}{\second} \approx \SI{1,21e6}{\second}$.
+\[
+  \lambda = \frac{\ln 2}{T_{1/2}} = \frac{0{,}69}{\SI{1,21e6}{\second}} \approx 0{,}57 \cdot 10^{-6}\,\si[per-mode=power]{\second\tothe{-1}} = \SI[per-mode=power]{5,7e-7}{\second\tothe{-1}}
+\]
+Con i nuclei del punto (a), da $\mathcal{A} = \lambda N$:
+\[
+  \mathcal{A} = \SI[per-mode=power]{5,7e-7}{\second\tothe{-1}} \cdot \num{1,0e14} = 5{,}7 \cdot 10^{-7+14}\,\si{\becquerel} = \SI{5,7e7}{\becquerel} = \SI{57}{\mega\becquerel}
+\]'''
+
+[[problema]]
+id = "ud7-radio-siringa"
+livello = 2
+testo = '''Una siringa contiene {{N0}} nuclei di tecnezio-99m (emivita {{T12}}). Supponi che ogni decadimento emetta un fotone $\gamma$.'''
+dati.N0 = { valore = "8,0e12" }
+dati.T12 = { valore = "6,0", unita = "h" }
+
+  [[problema.parte]]
+  domanda = '''Quanti nuclei di tecnezio-99m restano dopo \SI{12}{\hour}?'''
+  calcolo = "N0 / 2**(12 / T12)"
+  risultato = { valore = 2.0e12, cifre = 2 }
+  soluzione = '''\SI{12}{\hour} sono $12/6 = 2$ emivite:
+\[
+  N = \frac{\num{8,0e12}}{2^2} = \frac{\num{8,0e12}}{4} = \num{2,0e12}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanti fotoni $\gamma$ sono stati emessi in quelle \SI{12}{\hour}?'''
+  calcolo = "N0 - N0 / 2**(12 / T12)"
+  risultato = { valore = 6.0e12, cifre = 2 }
+  soluzione = '''I fotoni emessi sono tanti quanti i nuclei decaduti, cioè quelli iniziali meno quelli rimasti al punto (a):
+\[
+  \num{8,0e12} - \num{2,0e12} = \num{6,0e12}
+\]
+Attenzione: $\num{2,0e12}$ sono i nuclei rimasti, non quelli decaduti. Nel decadimento $\gamma$ il nucleo non cambia: resta tecnezio-99, ma non più eccitato.'''
+
+[[problema]]
+id = "ud7-radio-pet"
+livello = 3
+testo = '''Per un esame PET un paziente riceve alle 10:00 una dose di FDG, un radiofarmaco al fluoro-18 (emivita {{T12}}), con attività {{A}}. Il fluoro-18 decade $\beta^+$ e diventa ossigeno-18; il positrone si annichila con un elettrone e produce due fotoni da {{E}} ciascuno. La dose viene prodotta alle 6:20 dello stesso giorno.'''
+dati.T12 = { valore = 110, unita = "minuti" }
+dati.A = { valore = 400, unita = "MBq" }
+dati.E = { valore = 511, unita = "keV" }
+
+  [[problema.parte]]
+  domanda = '''Quale attività deve avere la dose quando viene prodotta?'''
+  calcolo = "A * 2**(220 / T12) / 1000"
+  risultato = { valore = 1.6, unita = "GBq", cifre = 2 }
+  soluzione = '''Dalle 6:20 alle 10:00 passano \SI{3}{\hour} e \SI{40}{minuti}, cioè $180 + 40 = \SI{220}{minuti}$: sono $220/110 = 2$ emivite. In due emivite l'attività si riduce a $1/2^2 = 1/4$, quindi alla produzione serve
+\[
+  \mathcal{A}_0 = 4 \cdot \SI{400}{\mega\becquerel} = \SI{1600}{\mega\becquerel} = \SI{1,6}{\giga\becquerel}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanti fotoni da \SI{511}{\kilo\electronvolt} al secondo escono dal paziente al momento dell'iniezione, se nessuno viene assorbito?'''
+  calcolo = "2 * A * 1e6"
+  risultato = { valore = 8.0e8, unita = "s^-1", cifre = 2 }
+  soluzione = '''L'attività è il numero di decadimenti al secondo: $\SI{400}{\mega\becquerel} = \SI[per-mode=power]{4,0e8}{\second\tothe{-1}}$. Ogni decadimento dà un positrone, e ogni annichilazione due fotoni:
+\[
+  2 \cdot \SI[per-mode=power]{4,0e8}{\second\tothe{-1}} = \SI[per-mode=power]{8,0e8}{\second\tothe{-1}}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanta energia portano in tutto, in joule, i due fotoni di un'annichilazione?'''
+  calcolo = "2 * 511e3 * eV"
+  risultato = { valore = 1.6e-13, unita = "J", cifre = 2 }
+  soluzione = '''I due fotoni portano $2 \cdot \SI{511}{\kilo\electronvolt} = \SI{1022}{\kilo\electronvolt} \approx \SI{1,0e6}{\electronvolt}$. Con $\SI{1}{\electronvolt} \approx \SI{1,6e-19}{\joule}$:
+\[
+  E \approx \num{1,0e6} \cdot \SI{1,6e-19}{\joule} = 1{,}6 \cdot 10^{6-19}\,\si{\joule} = \SI{1,6e-13}{\joule}
+\]
+È l'energia che viene dalla massa dell'elettrone e del positrone, che scompaiono entrambi.'''
+
+[[problema]]
+id = "ud7-radio-ipertiroidismo"
+livello = 3
+testo = '''Per curare l'ipertiroidismo un paziente ingerisce una capsula di iodio-131, $\nuclide{131}{53}{I}$, con attività {{A0}}. Lo iodio-131 ha emivita {{T12}} e decade $\beta^-$: gli elettroni emessi si fermano in pochi millimetri e cedono la loro energia alla tiroide, dove lo iodio si concentra.'''
+dati.A0 = { valore = 550, unita = "MBq" }
+dati.T12 = { valore = 8, unita = "giorni" }
+
+  [[problema.parte]]
+  domanda = '''Qual è il numero atomico del nucleo che si forma?'''
+  calcolo = "53 + 1"
+  risultato = { valore = 54, cifre = 2 }
+  soluzione = '''Nel decadimento $\beta^-$ un neutrone diventa protone: $Z$ sale di 1 e $A$ non cambia. Il nucleo figlio ha $Z = 53 + 1 = 54$, lo xeno-131:
+$\nuclide{131}{53}{I} \to \nuclide{131}{54}{Xe} + \nuclide{0}{-1}{e} + \bar\nu$. In basso: $53 = 54 + (-1)$.'''
+
+  [[problema.parte]]
+  domanda = '''Trascurando l'eliminazione biologica, dopo quanti giorni l'attività scende sotto un millesimo di quella iniziale, in numero intero di emivite?'''
+  calcolo = "math.ceil(math.log2(1000)) * T12"
+  risultato = { valore = 80, unita = "giorni", cifre = 2 }
+  soluzione = '''Serve $2^n > 1000$. Con 9 emivite $2^9 = 512$: l'attività è ancora $1/512$, più di un millesimo. Con 10 emivite $2^{10} = 1024$: l'attività è $1/1024$, meno di un millesimo. Il tempo è
+\[
+  t = 10 \cdot \SI{8}{giorni} = \SI{80}{giorni}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanti nuclei di iodio-131 contiene la capsula?'''
+  calcolo = "A0 * 1e6 / (ln2 / (T12 * 86400))"
+  risultato = { valore = 5.5e14, cifre = 2 }
+  soluzione = '''Serve $\lambda$, con l'emivita in secondi: $T_{1/2} = 8 \cdot \SI{86400}{\second} = \SI{691200}{\second} \approx \SI{6,9e5}{\second}$, quindi
+\[
+  \lambda = \frac{\ln 2}{T_{1/2}} \approx \frac{0{,}69}{\SI{6,9e5}{\second}} = \SI[per-mode=power]{1,0e-6}{\second\tothe{-1}}
+\]
+L'attività è $\SI{550}{\mega\becquerel} = \SI[per-mode=power]{5,5e8}{\second\tothe{-1}}$. Da $\mathcal{A} = \lambda N$:
+\[
+  N_0 = \frac{\mathcal{A}_0}{\lambda} = \frac{\SI[per-mode=power]{5,5e8}{\second\tothe{-1}}}{\SI[per-mode=power]{1,0e-6}{\second\tothe{-1}}} = 5{,}5 \cdot 10^{8-(-6)} = \num{5,5e14}
+\]'''
+
+[[problema]]
+id = "ud7-radio-datazione"
+livello = 3
+testo = '''In un organismo vivo ogni grammo di carbonio ha un'attività di {{avivo}}, dovuta al carbonio-14 ($\nuclide{14}{6}{C}$, emivita {{T12}}). Il carbonio estratto da un osso antico ha massa {{m}} e un'attività totale di {{a}}.'''
+dati.avivo = { valore = "0,24", unita = "Bq" }
+dati.T12 = { valore = 5730, unita = "anni" }
+dati.m = { valore = "5,0", unita = "\\gram" }
+dati.a = { valore = "0,15", unita = "Bq" }
+
+  [[problema.parte]]
+  domanda = '''Quanti neutroni ha il carbonio-14? E il carbonio-12, $\nuclide{12}{6}{C}$?'''
+  calcolo = "14 - 6"
+  risultato = { valore = 8, cifre = 1 }
+  soluzione = '''Da $N = A - Z$: il carbonio-14 ha $14 - 6 = 8$ neutroni, il carbonio-12 ne ha $12 - 6 = 6$. Hanno lo stesso numero di protoni, quindi sono isotopi dello stesso elemento, con le stesse proprietà chimiche: per questo un organismo vivo li assorbe insieme. Il carbonio-14 ha troppi neutroni ed è instabile: decade $\beta^-$ in azoto-14.'''
+
+  [[problema.parte]]
+  domanda = '''Da quanti anni è morto l'organismo?'''
+  calcolo = "T12 * math.log2(avivo / (a / m))"
+  risultato = { valore = 17200, unita = "anni", cifre = 3 }
+  soluzione = '''L'attività di ogni grammo dell'osso è $\SI{0,15}{\becquerel}/5{,}0 = \SI{0,030}{\becquerel}$. Rispetto all'organismo vivo si è ridotta di un fattore $0{,}24/0{,}030 = 8 = 2^3$: sono passate 3 emivite.
+\[
+  t = 3 \cdot \SI{5730}{anni} = \SI{17190}{anni} \approx \SI{17200}{anni}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quando l'attività scende sotto un millesimo di quella di un organismo vivo la misura non è più affidabile. Dopo quanti anni succede, in numero intero di emivite?'''
+  calcolo = "math.ceil(math.log2(1000)) * T12"
+  risultato = { valore = 57300, unita = "anni", cifre = 3 }
+  soluzione = '''Serve $2^n > 1000$: $2^9 = 512$ non basta, $2^{10} = 1024$ sì. Dopo 10 emivite
+\[
+  t = 10 \cdot \SI{5730}{anni} = \SI{57300}{anni}
+\]
+Per questo il carbonio-14 data reperti fino a circa \num{50000} anni.'''
+
+[[problema]]
+id = "ud7-ottica-indice-vetro"
+livello = 1
+testo = '''Nel vetro di una lente per occhiali la luce viaggia a {{v}}. Calcola l'indice di rifrazione del vetro.'''
+dati.v = { valore = "2,0e8", unita = "m/s" }
+
+  [[problema.parte]]
+  calcolo = "c / v"
+  risultato = { valore = 1.5, cifre = 2 }
+  soluzione = '''L'indice di rifrazione è il rapporto fra la velocità della luce nel vuoto e quella nel mezzo:
+\[
+  n = \frac{c}{v} = \frac{\SI{3,0e8}{\metre\per\second}}{\SI{2,0e8}{\metre\per\second}} = \frac{3{,}0}{2{,}0} \cdot 10^{8-8} = 1{,}5 \cdot 10^0 = 1{,}5
+\]
+È il valore tipico del vetro comune. $n$ è un numero puro: le unità si semplificano.'''
+
+[[problema]]
+id = "ud7-ottica-snell-60"
+livello = 1
+testo = '''Le lenti oftalmiche ad alto indice sono fatte di un materiale con indice di rifrazione {{n}}. Un raggio di luce passa dall'aria a questo materiale con angolo di incidenza di \ang{60}. Calcola l'angolo di rifrazione.'''
+dati.n = { valore = "1,73" }
+
+  [[problema.parte]]
+  calcolo = "math.degrees(math.asin(sin60 / n))"
+  risultato = { valore = 30, unita = "\\degree", cifre = 2 }
+  soluzione = '''Dalla legge di Snell, con $n_1 = 1$ per l'aria:
+\[
+  \sin\theta_2 = \frac{n_1}{n_2}\sin\theta_1 = \frac{1}{1{,}73} \cdot 0{,}87 = \frac{0{,}87}{1{,}73} \approx 0{,}50
+  \qquad\Longrightarrow\qquad
+  \theta_2 = \ang{30}
+\]
+Il conto torna esatto se si nota che $1{,}73 \approx \sqrt 3$ e $\sin\ang{60} = \sqrt 3/2$: il rapporto è $1/2$. Il raggio si avvicina alla normale, perché passa in un mezzo più denso.'''
+
+[[problema]]
+id = "ud7-ottica-focale"
+livello = 1
+testo = '''Una lente convergente per occhiali da lettura ha potere diottrico {{D}}. Calcola la sua distanza focale in centimetri.'''
+dati.D = { valore = "5,0", unita = "D" }
+
+  [[problema.parte]]
+  calcolo = "100 / D"
+  risultato = { valore = 20, unita = "cm", cifre = 2 }
+  soluzione = '''Da $D = 1/f$, con $D$ in diottrie si ottiene $f$ in metri:
+\[
+  f = \frac{1}{D} = \frac{1}{\SI{5,0}{D}} = \SI{0,20}{\metre} = \SI{20}{\centi\metre}
+\]'''
+
+[[problema]]
+id = "ud7-ottica-coniugati"
+livello = 1
+testo = '''Un oggetto si trova a {{p}} da una lente convergente con distanza focale {{f}}. A che distanza dalla lente si forma l'immagine?'''
+dati.p = { valore = 60, unita = "cm" }
+dati.f = { valore = 12, unita = "cm" }
+
+  [[problema.parte]]
+  calcolo = "1 / (1/f - 1/p)"
+  risultato = { valore = 15, unita = "cm", cifre = 2 }
+  soluzione = '''Dalla legge dei punti coniugati, con tutte le distanze in centimetri:
+\[
+  \frac{1}{q} = \frac{1}{f} - \frac{1}{p} = \frac{1}{12} - \frac{1}{60} = \frac{5}{60} - \frac{1}{60} = \frac{4}{60} = \frac{1}{15}\,\si[per-mode=power]{\centi\metre\tothe{-1}}
+  \qquad\Longrightarrow\qquad
+  q = \SI{15}{\centi\metre}
+\]
+$q > 0$: l'immagine è reale, dall'altra parte della lente. L'oggetto è oltre $2f = \SI{24}{\centi\metre}$, e infatti l'immagine cade fra $f$ e $2f$.'''
+
+[[problema]]
+id = "ud7-ottica-riflesso-rifratto"
+livello = 2
+testo = '''Il materiale di una lente a contatto ha indice di rifrazione {{n}}. Un raggio di luce arriva dall'aria sulla sua superficie con angolo di incidenza di \ang{45}: una parte viene riflessa, una parte entra nel materiale.'''
+dati.n = { valore = "1,41" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'angolo di rifrazione?'''
+  calcolo = "math.degrees(math.asin(sin45 / n))"
+  risultato = { valore = 30, unita = "\\degree", cifre = 2 }
+  soluzione = '''Dalla legge di Snell, con $n_1 = 1$:
+\[
+  \sin\theta_2 = \frac{n_1}{n_2}\sin\theta_1 = \frac{0{,}71}{1{,}41} \approx 0{,}50
+  \qquad\Longrightarrow\qquad
+  \theta_2 = \ang{30}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quale angolo formano fra loro il raggio riflesso e il raggio rifratto?'''
+  calcolo = "180 - 45 - math.degrees(math.asin(sin45 / n))"
+  risultato = { valore = 105, unita = "\\degree", cifre = 3 }
+  soluzione = '''Per la legge della riflessione il raggio riflesso forma \ang{45} con la normale, dalla parte dell'aria. Il raggio rifratto forma \ang{30} con la normale, dalla parte del materiale. Le due metà della normale, sopra e sotto la superficie, formano un angolo piatto di \ang{180}, e i due raggi stanno dalla stessa parte della normale. L'angolo fra i due raggi è quindi
+\[
+  \ang{180} - \ang{45} - \ang{30} = \ang{105}
+\]'''
+
+[[problema]]
+id = "ud7-ottica-laser-occhio"
+livello = 2
+testo = '''Un laser verde per la fotocoagulazione della retina emette luce con lunghezza d'onda nel vuoto di {{lam0}}. Nell'umor acqueo dell'occhio la lunghezza d'onda della stessa luce è {{lam}}.'''
+dati.lam0 = { valore = 532, unita = "nm" }
+dati.lam = { valore = 400, unita = "nm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'indice di rifrazione dell'umor acqueo?'''
+  calcolo = "lam0 / lam"
+  risultato = { valore = 1.33, cifre = 3 }
+  soluzione = '''Da $\lambda_{\text{mezzo}} = \lambda_0/n$:
+\[
+  n = \frac{\lambda_0}{\lambda_{\text{mezzo}}} = \frac{\SI{532}{\nano\metre}}{\SI{400}{\nano\metre}} = 1{,}33
+\]
+È lo stesso indice dell'acqua, di cui l'umor acqueo è fatto quasi tutto.'''
+
+  [[problema.parte]]
+  domanda = '''Con quale velocità viaggia la luce nell'umor acqueo?'''
+  calcolo = "c / (lam0 / lam)"
+  risultato = { valore = 2.3e8, unita = "m/s", cifre = 2 }
+  soluzione = '''Da $n = c/v$, con $1{,}33 \approx 4/3$:
+\[
+  v = \frac{c}{n} = \frac{\SI{3,0e8}{\metre\per\second}}{4/3} = \frac{3}{4} \cdot \SI{3,0e8}{\metre\per\second} = \SI{2,25e8}{\metre\per\second} \approx \SI{2,3e8}{\metre\per\second}
+\]
+La frequenza invece non cambia: la fissa il laser, e resta la stessa in aria e nell'occhio. Per questo $v$ e $\lambda$ si riducono dello stesso fattore $n$.'''
+
+[[problema]]
+id = "ud7-ottica-immagine-reale"
+livello = 2
+testo = '''Un oggetto alto {{h}} si trova a {{p}} da una lente convergente con distanza focale {{f}}.'''
+dati.h = { valore = "4,0", unita = "cm" }
+dati.p = { valore = 30, unita = "cm" }
+dati.f = { valore = 20, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''A che distanza dalla lente si forma l'immagine?'''
+  calcolo = "1 / (1/f - 1/p)"
+  risultato = { valore = 60, unita = "cm", cifre = 2 }
+  soluzione = '''Dalla legge dei punti coniugati:
+\[
+  \frac{1}{q} = \frac{1}{f} - \frac{1}{p} = \frac{1}{20} - \frac{1}{30} = \frac{3}{60} - \frac{2}{60} = \frac{1}{60}\,\si[per-mode=power]{\centi\metre\tothe{-1}}
+  \qquad\Longrightarrow\qquad
+  q = \SI{60}{\centi\metre}
+\]
+$q > 0$: l'immagine è reale, oltre la lente.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto è alta l'immagine, ed è diritta o capovolta?'''
+  calcolo = "-(1 / (1/f - 1/p)) / p * h"
+  risultato = { valore = -8.0, unita = "cm", cifre = 2 }
+  soluzione = '''Con la $q$ del punto (a):
+\[
+  m = -\frac{q}{p} = -\frac{60}{30} = -2
+  \qquad\qquad
+  h_i = m\,h_o = -2 \cdot \SI{4,0}{\centi\metre} = \SI{-8,0}{\centi\metre}
+\]
+L'immagine è alta \SI{8,0}{\centi\metre}, il doppio dell'oggetto, e il segno meno dice che è capovolta. L'oggetto è fra $f$ e $2f$: è il caso del proiettore.'''
+
+[[problema]]
+id = "ud7-ottica-lente-ingrandimento"
+livello = 2
+testo = '''Un dermatologo osserva un neo con una lente d'ingrandimento di distanza focale {{f}}, tenuta a {{p}} dalla pelle.'''
+dati.f = { valore = "5,0", unita = "cm" }
+dati.p = { valore = "4,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Dove si forma l'immagine del neo?'''
+  calcolo = "1 / (1/f - 1/p)"
+  risultato = { valore = -20, unita = "cm", cifre = 2 }
+  soluzione = '''Dalla legge dei punti coniugati:
+\[
+  \frac{1}{q} = \frac{1}{f} - \frac{1}{p} = \frac{1}{5} - \frac{1}{4} = \frac{4}{20} - \frac{5}{20} = -\frac{1}{20}\,\si[per-mode=power]{\centi\metre\tothe{-1}}
+  \qquad\Longrightarrow\qquad
+  q = \SI{-20}{\centi\metre}
+\]
+$q < 0$: l'immagine è virtuale, a \SI{20}{\centi\metre} dalla lente dalla stessa parte del neo. Il dermatologo la vede guardando attraverso la lente, ma non la potrebbe raccogliere su uno schermo.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'ingrandimento?'''
+  calcolo = "-(1 / (1/f - 1/p)) / p"
+  risultato = { valore = 5.0, cifre = 2 }
+  soluzione = '''Con la $q$ del punto (a):
+\[
+  m = -\frac{q}{p} = -\frac{-20}{4{,}0} = +5{,}0
+\]
+$m > 0$: l'immagine è diritta, e cinque volte più grande del neo. È quello che succede quando l'oggetto sta fra la lente e il fuoco.'''
+
+[[problema]]
+id = "ud7-ottica-accomodazione"
+livello = 3
+testo = '''In un modello semplificato dell'occhio, cornea e cristallino si sostituiscono con una sola lente convergente sottile, a {{d}} dalla retina. Questa distanza non cambia: per mettere a fuoco oggetti a distanze diverse cambia il potere diottrico della lente.'''
+dati.d = { valore = "2,0", unita = "cm" }
+dati.p = { valore = 25, unita = "cm" }
+dati.Dmax = { valore = 51, unita = "D" }
+
+  [[problema.parte]]
+  domanda = '''Quale potere diottrico serve per vedere nitido un oggetto molto lontano?'''
+  calcolo = "1 / (d / 100)"
+  risultato = { valore = 50, unita = "D", cifre = 2 }
+  soluzione = '''L'immagine deve cadere sulla retina, quindi $q = \SI{2,0}{\centi\metre} = \SI{0,020}{\metre}$. Per un oggetto molto lontano $1/p \approx 0$ e l'immagine si forma nel fuoco: $f = q$.
+\[
+  D = \frac{1}{p} + \frac{1}{q} \approx 0 + \frac{1}{\SI{0,020}{\metre}} = \SI{50}{D}
+\]
+Il valore è un po' più basso dei circa \SI{60}{D} dell'occhio vero, perché il modello è semplificato.'''
+
+  [[problema.parte]]
+  domanda = '''Quale potere diottrico serve per leggere un testo a \SI{25}{\centi\metre}?'''
+  calcolo = "1 / (p / 100) + 1 / (d / 100)"
+  risultato = { valore = 54, unita = "D", cifre = 2 }
+  soluzione = '''Ora $p = \SI{0,25}{\metre}$ e $q$ è sempre \SI{0,020}{\metre}:
+\[
+  D = \frac{1}{p} + \frac{1}{q} = \frac{1}{\SI{0,25}{\metre}} + \frac{1}{\SI{0,020}{\metre}} = \SI{4}{D} + \SI{50}{D} = \SI{54}{D}
+\]
+Per passare da lontano a vicino il cristallino deve aggiungere \SI{4}{D}: è l'accomodazione.'''
+
+  [[problema.parte]]
+  domanda = '''A sessant'anni il cristallino si è irrigidito, e il potere diottrico arriva al massimo a \SI{51}{D}. Dove si trova ora il punto prossimo?'''
+  calcolo = "1 / (Dmax - 1 / (d / 100))"
+  risultato = { valore = 1.0, unita = "m", cifre = 2 }
+  soluzione = '''Il punto prossimo è l'oggetto più vicino che l'occhio mette a fuoco con il potere diottrico massimo. Dalla legge dei punti coniugati:
+\[
+  \frac{1}{p} = D_{\max} - \frac{1}{q} = \SI{51}{D} - \SI{50}{D} = \SI{1}{D}
+  \qquad\Longrightarrow\qquad
+  p = \frac{1}{\SI{1}{D}} = \SI{1,0}{\metre}
+\]
+Il punto prossimo si è allontanato da \SI{25}{\centi\metre} a \SI{1,0}{\metre}: è la presbiopia. Per leggere servono occhiali con lente convergente.'''
+
+[[problema]]
+id = "ud7-ottica-presbite"
+livello = 3
+testo = '''Un paziente presbite ha il punto prossimo a {{pp}}. Gli servono occhiali per leggere un libro tenuto a {{pl}} dagli occhi. Trascura la distanza fra le lenti e gli occhi.'''
+dati.pp = { valore = "2,0", unita = "m" }
+dati.pl = { valore = 25, unita = "cm" }
+dati.pt = { valore = 40, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quale potere diottrico devono avere le lenti?'''
+  calcolo = "1 / (pl / 100) - 1 / pp"
+  risultato = { valore = 3.5, unita = "D", cifre = 2 }
+  soluzione = '''La lente deve formare del libro un'immagine virtuale nel punto prossimo del paziente, dove lui la vede nitida: $p = \SI{0,25}{\metre}$ e $q = \SI{-2,0}{\metre}$ (negativa perché l'immagine è virtuale, dalla stessa parte del libro).
+\[
+  D = \frac{1}{p} + \frac{1}{q} = \frac{1}{\SI{0,25}{\metre}} - \frac{1}{\SI{2,0}{\metre}} = \SI{4}{D} - \SI{0,5}{D} = \SI{3,5}{D}
+\]
+$D > 0$: la lente è convergente.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la distanza focale di queste lenti, in centimetri?'''
+  calcolo = "100 / (1 / (pl / 100) - 1 / pp)"
+  risultato = { valore = 29, unita = "cm", cifre = 2 }
+  soluzione = '''Dal potere diottrico del punto (a):
+\[
+  f = \frac{1}{D} = \frac{1}{\SI{3,5}{D}} = \frac{2}{7}\,\si{\metre} \approx \SI{0,29}{\metre} = \SI{29}{\centi\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Il paziente vuole un secondo paio di occhiali per leggere sul tablet, che tiene a \SI{40}{\centi\metre}. Quale potere diottrico serve?'''
+  calcolo = "1 / (pt / 100) - 1 / pp"
+  risultato = { valore = 2.0, unita = "D", cifre = 2 }
+  soluzione = '''Stesso ragionamento, con $p = \SI{0,40}{\metre}$ e sempre $q = \SI{-2,0}{\metre}$:
+\[
+  D = \frac{1}{\SI{0,40}{\metre}} - \frac{1}{\SI{2,0}{\metre}} = \SI{2,5}{D} - \SI{0,5}{D} = \SI{2,0}{D}
+\]
+Più lontano è il testo, meno potente deve essere la lente.'''
+
+[[problema]]
+id = "ud7-ottica-vetrino"
+livello = 3
+testo = '''Per mostrare un vetrino istologico a una classe, se ne proietta l'immagine su uno schermo con una lente convergente di distanza focale {{f}}. L'immagine sullo schermo deve essere quattro volte più grande del vetrino.'''
+dati.f = { valore = 20, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''A che distanza dalla lente va messo il vetrino?'''
+  calcolo = "5 * f / 4"
+  risultato = { valore = 25, unita = "cm", cifre = 2 }
+  soluzione = '''L'immagine su uno schermo è reale, quindi capovolta: $m = -4$. Da $m = -q/p$ si ha $q = 4p$. Nella legge dei punti coniugati:
+\[
+  \frac{1}{p} + \frac{1}{4p} = \frac{4}{4p} + \frac{1}{4p} = \frac{5}{4p} = \frac{1}{f}
+  \qquad\Longrightarrow\qquad
+  p = \frac{5f}{4} = \frac{5 \cdot \SI{20}{\centi\metre}}{4} = \SI{25}{\centi\metre}
+\]
+Il vetrino è fra $f$ e $2f$, come si aspetta per un'immagine reale ingrandita.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto deve distare lo schermo dal vetrino?'''
+  calcolo = "5 * f / 4 + 4 * (5 * f / 4)"
+  risultato = { valore = 125, unita = "cm", cifre = 3 }
+  soluzione = '''Lo schermo è a $q = 4p = 4 \cdot \SI{25}{\centi\metre} = \SI{100}{\centi\metre}$ dalla lente, dalla parte opposta al vetrino. La distanza fra vetrino e schermo è
+\[
+  p + q = \SI{25}{\centi\metre} + \SI{100}{\centi\metre} = \SI{125}{\centi\metre}
+\]
+Controllo: $1/25 + 1/100 = 4/100 + 1/100 = 5/100 = 1/20$, che è proprio $1/f$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il potere diottrico della lente? Come va inserito il vetrino perché il preparato si veda diritto?'''
+  calcolo = "100 / f"
+  risultato = { valore = 5.0, unita = "D", cifre = 2 }
+  soluzione = '''Con $f$ in metri:
+\[
+  D = \frac{1}{f} = \frac{1}{\SI{0,20}{\metre}} = \SI{5,0}{D}
+\]
+L'immagine è capovolta ($m < 0$): per vederla diritta sullo schermo il vetrino va inserito capovolto, come le diapositive in un proiettore.'''
+
+[[problema]]
+id = "ud7-ottica-guida-luce"
+livello = 3
+testo = '''Un modello semplice di guida di luce, come quelle che portano la luce negli strumenti medici, è una bacchetta di vetro con indice di rifrazione {{n}} circondata dall'aria. La luce viaggia dentro la bacchetta e ne colpisce la parete laterale.'''
+dati.n = { valore = "1,41" }
+
+  [[problema.parte]]
+  domanda = '''Con quale velocità viaggia la luce nel vetro?'''
+  calcolo = "c / n"
+  risultato = { valore = 2.1e8, unita = "m/s", cifre = 2 }
+  soluzione = '''Da $n = c/v$, con $1/1{,}41 \approx 0{,}71$ (perché $1{,}41 \approx \sqrt 2$ e $1/\sqrt 2 = \sqrt 2/2$):
+\[
+  v = \frac{c}{n} = \frac{\SI{3,0e8}{\metre\per\second}}{1{,}41} \approx 0{,}71 \cdot \SI{3,0e8}{\metre\per\second} \approx \SI{2,1e8}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Un raggio colpisce la parete dall'interno con angolo di incidenza di \ang{30}. Con quale angolo esce nell'aria?'''
+  calcolo = "math.degrees(math.asin(n * sin30))"
+  risultato = { valore = 45, unita = "\\degree", cifre = 2 }
+  soluzione = '''Dalla legge di Snell, con $n_1 = 1{,}41$ (vetro) e $n_2 = 1$ (aria):
+\[
+  \sin\theta_2 = \frac{n_1}{n_2}\sin\theta_1 = 1{,}41 \cdot 0{,}5 \approx 0{,}71
+  \qquad\Longrightarrow\qquad
+  \theta_2 = \ang{45}
+\]
+Il raggio si allontana dalla normale, perché passa in un mezzo meno denso. Questa luce esce dalla parete e va persa.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'angolo limite del vetro in aria? Che cosa succede a un raggio che colpisce la parete con angolo di incidenza di \ang{60}?'''
+  calcolo = "math.degrees(math.asin(1 / n))"
+  risultato = { valore = 45, unita = "\\degree", cifre = 2 }
+  soluzione = '''All'angolo limite il raggio rifratto esce radente, $\theta_2 = \ang{90}$:
+\[
+  \sin\theta_\ell = \frac{n_2}{n_1} = \frac{1}{1{,}41} \approx 0{,}71
+  \qquad\Longrightarrow\qquad
+  \theta_\ell = \ang{45}
+\]
+Un raggio a \ang{60} supera l'angolo limite. La legge di Snell darebbe $\sin\theta_2 = 1{,}41 \cdot 0{,}87 \approx 1{,}2$, ma un seno non può superare 1: il raggio rifratto non c'è, e tutta la luce viene riflessa dentro la bacchetta. È la riflessione totale, che tiene la luce dentro le fibre ottiche degli endoscopi.'''
+
+# ==================================================================== quesiti d'esame
+
+[[quesito]]
+id = "ud7-onde-ampiezza"
+tipo = "multipla"
+testo = '''In un punto l'ampiezza del campo elettrico di un'onda elettromagnetica diventa tre volte più grande. L'intensità dell'onda in quel punto'''
+corretta = "A"
+calcolo = "3**2"
+soluzione = '''L'intensità è proporzionale al quadrato dell'ampiezza, $I \propto E_0^2$. Se $E_0$ diventa $3E_0$, l'intensità si moltiplica per $3^2 = 9$.'''
+
+  [[quesito.opzione]]
+  testo = '''diventa 9 volte più grande'''
+  valore = 9
+  [[quesito.opzione]]
+  testo = '''diventa 3 volte più grande'''
+  commento = '''Tratta l'intensità come proporzionale all'ampiezza, non al suo quadrato.'''
+  [[quesito.opzione]]
+  testo = '''diventa 6 volte più grande'''
+  commento = '''Moltiplica per 2 invece di elevare al quadrato: $3 \cdot 2 = 6$ invece di $3^2 = 9$.'''
+  [[quesito.opzione]]
+  testo = '''diventa circa 1,7 volte più grande'''
+  commento = '''Prende la radice quadrata invece del quadrato: $\sqrt{3} \approx 1{,}7$.'''
+  [[quesito.opzione]]
+  testo = '''diventa 9 volte più piccola'''
+  commento = '''Confonde con la legge dell'inverso del quadrato, che riguarda la distanza dalla sorgente: un'ampiezza più grande vuol dire un'intensità più grande.'''
+
+[[quesito]]
+id = "ud7-onde-distanza"
+tipo = "multipla"
+testo = '''Durante un esame radiologico un tecnico si trova a {{r1}} dal paziente, che diffonde la radiazione come una sorgente piccola. Se il tecnico si allontana fino a {{r2}}, l'intensità della radiazione che lo raggiunge'''
+dati.r1 = { valore = 50, unita = "cm" }
+dati.r2 = { valore = "2,0", unita = "m" }
+corretta = "B"
+calcolo = "(r1 / 100 / r2)**2"
+soluzione = '''La distanza passa da \SI{0,50}{\metre} a \SI{2,0}{\metre}: diventa $2{,}0/0{,}50 = 4$ volte più grande. Per la legge dell'inverso del quadrato l'intensità si divide per $4^2 = 16$: $I_2/I_1 = (r_1/r_2)^2 = (1/4)^2 = 1/16$.'''
+
+  [[quesito.opzione]]
+  testo = '''diventa un quarto'''
+  commento = '''Divide per il rapporto delle distanze, 4, invece che per il suo quadrato.'''
+  [[quesito.opzione]]
+  testo = '''diventa $1/16$'''
+  valore = 0.0625
+  [[quesito.opzione]]
+  testo = '''diventa 16 volte più grande'''
+  commento = '''Usa il quadrato giusto ma rovescia il rapporto: allontanandosi l'intensità diminuisce.'''
+  [[quesito.opzione]]
+  testo = '''diventa la metà'''
+  commento = '''Prende la radice quadrata del rapporto delle distanze, $\sqrt{4} = 2$, invece del quadrato.'''
+  [[quesito.opzione]]
+  testo = '''diventa circa $4/9$'''
+  commento = '''Usa la differenza delle distanze, $\SI{2,0}{\metre} - \SI{0,50}{\metre} = \SI{1,5}{\metre}$, invece del loro rapporto: $(1/1{,}5)^2 = 4/9$.'''
+
+[[quesito]]
+id = "ud7-onde-campi"
+tipo = "multipla"
+testo = '''Un'onda elettromagnetica si propaga lungo l'asse $x$, e il suo campo elettrico oscilla lungo l'asse $y$. Il campo magnetico dell'onda'''
+corretta = "C"
+soluzione = '''L'onda elettromagnetica è trasversale: $\vec E$ e $\vec B$ sono perpendicolari tra loro e alla direzione di propagazione. Con propagazione lungo $x$ ed $\vec E$ lungo $y$, $\vec B$ oscilla lungo $z$. I due campi oscillano insieme: sono massimi e nulli negli stessi punti e negli stessi istanti.'''
+
+  [[quesito.opzione]]
+  testo = '''oscilla lungo $x$, la direzione di propagazione'''
+  commento = '''Tratta l'onda come longitudinale: nell'onda elettromagnetica entrambi i campi sono perpendicolari alla direzione di propagazione.'''
+  [[quesito.opzione]]
+  testo = '''oscilla lungo $y$, insieme al campo elettrico'''
+  commento = '''Dimentica che $\vec E$ e $\vec B$ sono perpendicolari tra loro.'''
+  [[quesito.opzione]]
+  testo = '''oscilla lungo $z$, ed è massimo dove è massimo il campo elettrico'''
+  [[quesito.opzione]]
+  testo = '''non oscilla: è costante e diretto lungo $z$'''
+  commento = '''Un campo magnetico costante non fa parte dell'onda: è proprio il campo elettrico che varia a generare un campo magnetico che varia, e viceversa.'''
+  [[quesito.opzione]]
+  testo = '''oscilla lungo $z$, ed è massimo dove il campo elettrico è nullo'''
+  commento = '''La direzione è giusta, ma i due campi oscillano insieme, non sfasati: raggiungono il massimo e lo zero negli stessi punti.'''
+
+[[quesito]]
+id = "ud7-spettro-regione"
+tipo = "multipla"
+testo = '''Una radiazione elettromagnetica ha nel vuoto frequenza {{f}}. A quale regione dello spettro appartiene?'''
+dati.f = { valore = "1,0e15", unita = "Hz" }
+corretta = "D"
+soluzione = '''Da $c = \lambda f$: $\lambda = c/f = (\SI{3e8}{\metre\per\second})/(\SI{1,0e15}{\hertz}) = 3 \cdot 10^{8-15}\,\si{\metre} = \SI{3e-7}{\metre} = \SI{300}{\nano\metre}$. È fra \SI{10}{\nano\metre} e \SI{400}{\nano\metre}: ultravioletto.'''
+
+  [[quesito.opzione]]
+  testo = '''infrarosso'''
+  commento = '''Sbaglia l'esponente, $10^{8-15} = 10^{-6}$ invece di $10^{-7}$: con $\lambda = \SI{3e-6}{\metre} = \SI{3000}{\nano\metre}$ sarebbe infrarosso.'''
+  [[quesito.opzione]]
+  testo = '''luce visibile'''
+  commento = '''Trova \SI{300}{\nano\metre} ma dimentica che il visibile comincia a \SI{400}{\nano\metre}, con il violetto: sotto c'è l'ultravioletto.'''
+  [[quesito.opzione]]
+  testo = '''raggi X'''
+  commento = '''Associa una frequenza molto alta ai raggi X, che però hanno $\lambda$ sotto \SI{10}{\nano\metre}, cioè frequenze più di 30 volte maggiori.'''
+  [[quesito.opzione]]
+  testo = '''ultravioletto'''
+  [[quesito.opzione]]
+  testo = '''onde radio'''
+  commento = '''Rovescia la formula, $\lambda = f/c = \num{1,0e15}/\num{3e8} \approx \SI{3e6}{\metre}$: la lunghezza d'onda è $c/f$.'''
+
+[[quesito]]
+id = "ud7-onde-periodo-fm"
+tipo = "completamento"
+testo = '''Una stazione radio FM trasmette a {{f}}. Il periodo dell'onda vale \completa\ \si{\nano\second}.'''
+dati.f = { valore = 100, unita = "MHz" }
+calcolo = "1 / (f * 1e6) * 1e9"
+risposta = "10"
+soluzione = '''La frequenza è $\SI{100}{\mega\hertz} = \SI{e8}{\hertz}$, quindi $T = 1/f = \SI{e-8}{\second} = 10 \cdot \SI{e-9}{\second} = \SI{10}{\nano\second}$.'''
+
+[[quesito]]
+id = "ud7-onde-fototerapia"
+tipo = "completamento"
+testo = '''Una lampada per la fototerapia dei neonati con ittero porta una potenza di {{P}} di luce blu su una superficie di {{S}}. L'intensità della luce sulla superficie vale \completa\ \si{\watt\per\metre\squared}.'''
+dati.P = { valore = "3,0", unita = "W" }
+dati.S = { valore = "0,20", unita = "\\metre\\squared" }
+calcolo = "P / S"
+risposta = "15"
+soluzione = '''L'intensità è la potenza divisa per la superficie: $I = P/S = \SI{3,0}{\watt}/\SI{0,20}{\metre\squared} = \SI{15}{\watt\per\metre\squared}$.'''
+
+[[quesito]]
+id = "ud7-fotone-tripla"
+tipo = "multipla"
+testo = '''Un fotone ultravioletto ha un'energia di {{E0}}. Quanto vale l'energia di un fotone con lunghezza d'onda tre volte più grande?'''
+dati.E0 = { valore = 6, unita = "eV" }
+corretta = "E"
+calcolo = "E0 / 3"
+soluzione = '''Da $E = hc/\lambda$ l'energia è inversamente proporzionale alla lunghezza d'onda: se $\lambda$ triplica, $E$ diventa un terzo, $\SI{6}{\electronvolt}/3 = \SI{2}{\electronvolt}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{18}{\electronvolt}'''
+  commento = '''Tratta l'energia come direttamente proporzionale a $\lambda$: $6 \cdot 3 = 18$. È la frequenza, non la lunghezza d'onda, a essere proporzionale all'energia.'''
+  [[quesito.opzione]]
+  testo = '''\SI{6}{\electronvolt}'''
+  commento = '''Pensa che tutti i fotoni abbiano la stessa energia, come hanno tutti la stessa velocità $c$ nel vuoto.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,67}{\electronvolt}'''
+  commento = '''Divide per $3^2 = 9$, come se l'energia andasse con l'inverso del quadrato di $\lambda$: $6/9 \approx 0{,}67$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{54}{\electronvolt}'''
+  commento = '''Moltiplica per $3^2 = 9$: sbaglia due volte, verso della proporzionalità e quadrato.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\electronvolt}'''
+  valore = 2
+
+[[quesito]]
+id = "ud7-fotone-laser"
+tipo = "multipla"
+testo = '''Un puntatore laser emette luce rossa con lunghezza d'onda {{lam}} e una potenza di {{P}}. Quanti fotoni emette al secondo?'''
+dati.lam = { valore = 620, unita = "nm" }
+dati.P = { valore = "1,6", unita = "mW" }
+corretta = "A"
+calcolo = "P * 1e-3 / (hc_eVnm / lam * eV)"
+soluzione = '''Ogni fotone ha $E \approx 1240/620 = \SI{2}{\electronvolt} = 2 \cdot \SI{1,6e-19}{\joule} = \SI{3,2e-19}{\joule}$. Il laser emette $\SI{1,6}{\milli\watt} = \SI{1,6e-3}{\joule}$ al secondo, quindi
+\[
+  N = \frac{P}{E} = \frac{\SI{1,6e-3}{\joule\per\second}}{\SI{3,2e-19}{\joule}} = 0{,}5 \cdot 10^{-3-(-19)}\,\si[per-mode=power]{\second\tothe{-1}} = \SI[per-mode=power]{5e15}{\second\tothe{-1}}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''$5 \cdot 10^{15}$'''
+  valore = 5e15
+  [[quesito.opzione]]
+  testo = '''$2 \cdot 10^{-16}$'''
+  commento = '''Divide l'energia del fotone per la potenza invece del contrario: $\num{3,2e-19}/\num{1,6e-3} = \num{2e-16}$. Un numero di fotoni minore di 1 al secondo è già un segnale d'errore.'''
+  [[quesito.opzione]]
+  testo = '''$8 \cdot 10^{-4}$'''
+  commento = '''Divide la potenza in watt per l'energia in elettronvolt, senza convertirla in joule: $\num{1,6e-3}/2 = \num{8e-4}$.'''
+  [[quesito.opzione]]
+  testo = '''$1 \cdot 10^{16}$'''
+  commento = '''Usa per il fotone \SI{1}{\electronvolt}, cioè \SI{1,6e-19}{\joule}, dimenticando che ne ha 2: $\num{1,6e-3}/\num{1,6e-19} = \num{e16}$.'''
+  [[quesito.opzione]]
+  testo = '''$5 \cdot 10^{18}$'''
+  commento = '''Dimentica il prefisso milli e usa \SI{1,6}{\watt}: $1{,}6/\num{3,2e-19} = \num{5e18}$.'''
+
+[[quesito]]
+id = "ud7-ioniz-quale"
+tipo = "multipla"
+testo = '''Per ionizzare una molecola biologica serve un'energia di circa \SI{10}{\electronvolt}. Quale di queste radiazioni può ionizzarla?'''
+corretta = "B"
+soluzione = '''Conta l'energia del singolo fotone, $E \approx 1240/\lambda$. Per superare \SI{10}{\electronvolt} serve $\lambda$ minore di circa \SI{120}{\nano\metre}. Il fotone da \SI{60}{\nano\metre} ha $1240/60 \approx \SI{21}{\electronvolt}$: è ultravioletto lontano, ionizzante.'''
+
+  [[quesito.opzione]]
+  testo = '''luce violetta con $\lambda = \SI{400}{\nano\metre}$, il colore più energetico del visibile'''
+  commento = '''Il violetto è il visibile più energetico, ma ogni fotone ha $1240/400 \approx \SI{3}{\electronvolt}$, meno della soglia.'''
+  [[quesito.opzione]]
+  testo = '''ultravioletto con $\lambda = \SI{60}{\nano\metre}$'''
+  [[quesito.opzione]]
+  testo = '''infrarosso con $\lambda = \SI{10}{\micro\metre}$'''
+  commento = '''Lega la lunghezza d'onda grande a un'energia grande: è il contrario, $1240/10^4 \approx \SI{0,12}{\electronvolt}$.'''
+  [[quesito.opzione]]
+  testo = '''microonde di un apparecchio per diatermia da \SI{1000}{\watt}'''
+  commento = '''Confonde la potenza del fascio con l'energia del singolo fotone: un fotone di microonde ha circa \SI{e-5}{\electronvolt}, comunque sia intenso il fascio.'''
+  [[quesito.opzione]]
+  testo = '''ultravioletto di una lampada abbronzante, con $\lambda = \SI{350}{\nano\metre}$'''
+  commento = '''Pensa che tutto l'ultravioletto sia ionizzante: a \SI{350}{\nano\metre} il fotone ha $1240/350 \approx \SI{3,5}{\electronvolt}$. Può danneggiare la pelle, ma non ionizza.'''
+
+[[quesito]]
+id = "ud7-fotone-mammografia"
+tipo = "multipla"
+testo = '''In una mammografia si usano raggi X con lunghezza d'onda di circa {{lam}}. Quanto vale l'energia di un fotone?'''
+dati.lam = { valore = "0,062", unita = "nm" }
+corretta = "C"
+calcolo = "hc_eVnm / lam / 1e3"
+soluzione = '''Con la formula pratica: $E \approx 1240/0{,}062\,\si{\electronvolt}$. Poiché $0{,}062 = 62 \cdot 10^{-3}$, $E \approx (1240/62) \cdot 10^{3}\,\si{\electronvolt} = 20 \cdot 10^{3}\,\si{\electronvolt} = \SI{20}{\kilo\electronvolt}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\electronvolt}'''
+  commento = '''Calcola $1240/62$ e dimentica il fattore $10^{3}$ che viene da $0{,}062 = 62 \cdot 10^{-3}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\kilo\electronvolt}'''
+  commento = '''Sbaglia la virgola, come se fosse $\lambda = \SI{0,62}{\nano\metre}$: $1240/0{,}62 = \SI{2000}{\electronvolt}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\kilo\electronvolt}'''
+  valore = 20
+  [[quesito.opzione]]
+  testo = '''\SI{77}{\electronvolt}'''
+  commento = '''Moltiplica invece di dividere: $1240 \cdot 0{,}062 \approx 77$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{200}{\kilo\electronvolt}'''
+  commento = '''Sbaglia la virgola nell'altro verso, come se fosse $\lambda = \SI{0,0062}{\nano\metre}$: $1240/0{,}0062 = \SI{200000}{\electronvolt}$.'''
+
+[[quesito]]
+id = "ud7-ioniz-soglia"
+tipo = "completamento"
+testo = '''Per ionizzare una certa molecola serve un'energia di {{Eion}}. Un fotone può ionizzarla solo se la sua lunghezza d'onda è minore di \completa\ nm.'''
+dati.Eion = { valore = "12,4", unita = "eV" }
+calcolo = "hc_eVnm / Eion"
+risposta = "100"
+soluzione = '''Il fotone ionizza se $E \approx 1240/\lambda \geq 12{,}4$, cioè se $\lambda \leq 1240/12{,}4 = \SI{100}{\nano\metre}$. Fotoni con lunghezza d'onda maggiore, anche se sono moltissimi, non ionizzano.'''
+
+[[quesito]]
+id = "ud7-fotone-rapporto"
+tipo = "completamento"
+testo = '''Un fotone X ha lunghezza d'onda {{lamX}}, un fotone di luce verde {{lamV}}. L'energia del fotone X è \completa\ volte quella del fotone di luce verde.'''
+dati.lamX = { valore = "0,05", unita = "nm" }
+dati.lamV = { valore = 500, unita = "nm" }
+calcolo = "lamV / lamX"
+risposta = "10000"
+soluzione = '''Da $E = hc/\lambda$ il rapporto delle energie è l'inverso del rapporto delle lunghezze d'onda: $E_X/E_V = \lambda_V/\lambda_X = 500/0{,}05 = \num{10000}$. Il fotone verde ha circa \SI{2,5}{\electronvolt}, quello X circa \SI{25}{\kilo\electronvolt}.'''
+
+[[quesito]]
+id = "ud7-assorbanza"
+tipo = "completamento"
+testo = '''Una soluzione lascia passare il {{p}} della luce che la colpisce. La sua assorbanza vale \completa.'''
+dati.p = { valore = 10, unita = "\\percent" }
+calcolo = "math.log10(100 / p)"
+risposta = "1"
+soluzione = '''Se passa il \SI{10}{\percent}, $I_0/I = 10$ e $A = \log_{10} 10 = 1$.'''
+
+[[quesito]]
+id = "ud7-lb-filtri"
+tipo = "multipla"
+testo = '''Un filtro di alluminio lascia passare $1/3$ dei fotoni di una certa energia che lo colpiscono. Quale frazione di quei fotoni passa attraverso due filtri uguali sovrapposti?'''
+corretta = "D"
+calcolo = "(1/3)**2"
+soluzione = '''Ogni filtro lascia passare una frazione fissa di quello che gli arriva. Il primo lascia passare $1/3$ dei fotoni, il secondo $1/3$ di quel terzo: $1/3 \cdot 1/3 = 1/9$. Raddoppiare lo spessore eleva al quadrato la frazione trasmessa.'''
+
+  [[quesito.opzione]]
+  testo = '''$1/6$'''
+  commento = '''Pensa che raddoppiare lo spessore dimezzi la frazione trasmessa: $\tfrac12 \cdot \tfrac13 = \tfrac16$. L'attenuazione è esponenziale, non lineare.'''
+  [[quesito.opzione]]
+  testo = '''nessuno'''
+  commento = '''Pensa che ogni filtro tolga una quantità fissa, $2/3$ dei fotoni iniziali: dopo il primo ne resta $1/3$ e il secondo li toglierebbe tutti. Ogni filtro toglie invece una frazione di quelli che gli arrivano.'''
+  [[quesito.opzione]]
+  testo = '''$2/9$'''
+  commento = '''Moltiplica la frazione che passa il primo filtro, $1/3$, per quella che il secondo assorbe, $2/3$: così trova i fotoni fermati dal secondo filtro, non quelli che passano.'''
+  [[quesito.opzione]]
+  testo = '''$1/9$'''
+  valore = 0.1111111111111111
+  [[quesito.opzione]]
+  testo = '''$1/3$'''
+  commento = '''Pensa che la frazione trasmessa dipenda solo dal materiale, come il coefficiente $\mu$. La frazione dipende anche dallo spessore: $e^{-\mu x}$.'''
+
+[[quesito]]
+id = "ud7-lb-concentrazione"
+tipo = "multipla"
+testo = '''Nello spettrofotometro una soluzione lascia passare il {{p}} della luce. Una soluzione della stessa sostanza, con concentrazione doppia, nella stessa cuvetta e alla stessa lunghezza d'onda, lascia passare'''
+dati.p = { valore = 50, unita = "\\percent" }
+corretta = "E"
+calcolo = "100 * (p / 100)**2"
+soluzione = '''Per la legge di Beer $A = \varepsilon c \ell$: con concentrazione doppia l'assorbanza raddoppia. Se $I/I_0 = 10^{-A} = 1/2$, con $2A$ si ha $I/I_0 = 10^{-2A} = (10^{-A})^2 = (1/2)^2 = 1/4$, cioè il \SI{25}{\percent}.'''
+
+  [[quesito.opzione]]
+  testo = '''lo \SI{0}{\percent}'''
+  commento = '''Raddoppia la frazione assorbita, dal \SI{50}{\percent} al \SI{100}{\percent}: tratta l'assorbimento come proporzionale alla concentrazione. È l'assorbanza, il logaritmo, a essere proporzionale a $c$.'''
+  [[quesito.opzione]]
+  testo = '''il \SI{50}{\percent}'''
+  commento = '''Pensa che l'assorbimento dipenda solo dalla sostanza e dalla cuvetta. Nella legge di Beer compare anche la concentrazione.'''
+  [[quesito.opzione]]
+  testo = '''il \SI{75}{\percent}'''
+  commento = '''Trova bene che passa $1/4$ della luce, ma risponde con la frazione assorbita, $3/4$.'''
+  [[quesito.opzione]]
+  testo = '''il \SI{40}{\percent}'''
+  commento = '''Prende l'assorbanza per la frazione assorbita: $A = 2 \cdot 0{,}30 = 0{,}60$, quindi passerebbe $1 - 0{,}60 = 0{,}40$. L'assorbanza è un logaritmo: $I/I_0 = 10^{-A}$.'''
+  [[quesito.opzione]]
+  testo = '''il \SI{25}{\percent}'''
+  valore = 25.0
+
+[[quesito]]
+id = "ud7-lb-pulsatile"
+tipo = "multipla"
+testo = '''Il saturimetro da dito usa solo la parte dell'assorbanza che varia a ogni battito. Perché?'''
+corretta = "A"
+soluzione = '''A ogni battito arriva al dito un po' di sangue arterioso in più, e l'assorbanza cresce. Pelle, tessuti e sangue venoso assorbono anche loro, ma sempre allo stesso modo: usando solo la parte che pulsa lo strumento misura l'emoglobina del sangue arterioso.'''
+
+  [[quesito.opzione]]
+  testo = '''Per togliere il contributo di pelle, tessuti e sangue venoso, che resta costante.'''
+  [[quesito.opzione]]
+  testo = '''Perché i LED si accendono solo durante il battito.'''
+  commento = '''I LED illuminano il dito di continuo: a ogni battito cambia lo spessore di sangue arterioso attraversato, non la luce emessa.'''
+  [[quesito.opzione]]
+  testo = '''Perché il sangue venoso non assorbe la luce rossa e infrarossa.'''
+  commento = '''Anche il sangue venoso contiene emoglobina e assorbe; il suo contributo però non pulsa, e per questo si può togliere.'''
+  [[quesito.opzione]]
+  testo = '''Perché a ogni battito l'assorbanza diminuisce e al sensore arriva più luce.'''
+  commento = '''Inverte l'effetto: il sangue in più aumenta lo spessore attraversato, quindi l'assorbanza cresce e al sensore arriva meno luce.'''
+  [[quesito.opzione]]
+  testo = '''Perché la luce infrarossa diventa ionizzante quando attraversa il sangue arterioso.'''
+  commento = '''Un fotone a \SI{940}{\nano\metre} ha circa $1240/940 \approx \SI{1,3}{\electronvolt}$, molto meno dei \SI{10}{\electronvolt} che servono per ionizzare, e la sua energia non cambia nel sangue.'''
+
+[[quesito]]
+id = "ud7-lb-calcestruzzo"
+tipo = "multipla"
+testo = '''La parete di una sala di radiologia deve ridurre l'intensità dei raggi X a circa un millesimo. Per questi raggi lo spessore emivalente del calcestruzzo è {{x12}}. Lo spessore di calcestruzzo necessario è circa'''
+dati.x12 = { valore = "2,0", unita = "cm" }
+corretta = "B"
+calcolo = "x12 * round(math.log2(1000))"
+soluzione = '''$2^{10} = 1024 \approx 1000$: per ridurre l'intensità a un millesimo servono circa 10 spessori emivalenti, cioè $10 \cdot \SI{2,0}{\centi\metre} = \SI{20}{\centi\metre}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{6,0}{\centi\metre}'''
+  commento = '''Confonde $1/1000 = 1/10^3$ con $1/2^3$: conta 3 spessori emivalenti, che riducono l'intensità solo a $1/8$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\centi\metre}'''
+  valore = 20.0
+  [[quesito.opzione]]
+  testo = '''\SI{9}{\centi\metre}'''
+  commento = '''Usa il logaritmo in base 10, $\log_{10} 1000 = 3$, nella legge con l'esponenziale $e$: $x = 3/\mu = 3/(0{,}69/\SI{2,0}{\centi\metre}) \approx 3/\SI[per-mode=power]{0,35}{\centi\metre\tothe{-1}} \approx \SI{9}{\centi\metre}$. Con $e$ serve il logaritmo naturale, $\ln 1000 \approx 6{,}9$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{4}{\centi\metre}'''
+  commento = '''Pensa che ogni spessore emivalente tolga metà dell'intensità iniziale: due spessori, \SI{4}{\centi\metre}, spegnerebbero tutto il fascio, e un millesimo resterebbe poco prima. Ogni spessore toglie metà di quello che gli arriva.'''
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\metre}'''
+  commento = '''Divide il fattore 1000 per 2 invece di chiedersi quante volte si deve dimezzare: $1000/2 = 500$ spessori, $500 \cdot \SI{2,0}{\centi\metre} = \SI{1000}{\centi\metre}$.'''
+
+[[quesito]]
+id = "ud7-lb-piombo-tc"
+tipo = "completamento"
+testo = '''Per i raggi $\gamma$ del tecnezio-99m, {{x}} di piombo riducono l'intensità a $1/32$ di quella iniziale. Lo spessore emivalente del piombo, in millimetri, vale \completa.'''
+dati.x = { valore = "1,5", unita = "mm" }
+calcolo = "x / 5"
+risposta = "0,3"
+soluzione = '''$1/32 = 1/2^5$: \SI{1,5}{\milli\metre} sono 5 spessori emivalenti, quindi $x_{1/2} = \SI{1,5}{\milli\metre}/5 = \SI{0,3}{\milli\metre}$.'''
 
 [[quesito]]
 id = "ud7-beta"
@@ -119,15 +1951,216 @@ soluzione = '''Nel decadimento $\beta^-$ un neutrone diventa protone ed esce un 
   commento = '''Il nucleo resta lo stesso: succede solo nel decadimento $\gamma$.'''
 
 [[quesito]]
-id = "ud7-assorbanza"
-tipo = "completamento"
-testo = '''Una soluzione lascia passare il {{p}} della luce che la colpisce. La sua assorbanza vale \completa.'''
-dati.p = { valore = 10, unita = "\\percent" }
-calcolo = "math.log10(100 / p)"
-risposta = "1"
-soluzione = '''Se passa il \SI{10}{\percent}, $I_0/I = 10$ e $A = \log_{10} 10 = 1$.'''
+id = "ud7-radio-isotopi"
+tipo = "multipla"
+testo = '''Quale coppia è formata da due isotopi dello stesso elemento?'''
+corretta = "C"
+soluzione = '''Gli isotopi hanno lo stesso numero atomico $Z$ e un diverso numero di neutroni $N = A - Z$. Lo iodio-123 e lo iodio-131 hanno entrambi $Z = 53$, e hanno $123 - 53 = 70$ e $131 - 53 = 78$ neutroni.'''
 
-# ============================================== quesiti lampo, in ordine di dispensa
+  [[quesito.opzione]]
+  testo = '''$\nuclide{14}{6}{C}$ e $\nuclide{14}{7}{N}$'''
+  commento = '''Hanno lo stesso numero di massa, ma $Z$ diverso: sono elementi diversi.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{13}{6}{C}$ e $\nuclide{14}{7}{N}$'''
+  commento = '''Hanno lo stesso numero di neutroni, $13 - 6 = 14 - 7 = 7$, ma $Z$ diverso: per essere isotopi deve essere uguale $Z$, non $N$.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{123}{53}{I}$ e $\nuclide{131}{53}{I}$'''
+  [[quesito.opzione]]
+  testo = '''il tecnezio-99m e il tecnezio-99, entrambi con $Z = 43$ e $A = 99$'''
+  commento = '''Hanno lo stesso $Z$ e anche lo stesso $N$: sono lo stesso nucleo, una volta eccitato e una volta no. Gli isotopi devono avere $N$ diverso.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{226}{88}{Ra}$ e $\nuclide{222}{86}{Rn}$'''
+  commento = '''Sono il nucleo padre e il nucleo figlio di un decadimento $\alpha$, che cambia $Z$: sono elementi diversi.'''
+
+[[quesito]]
+id = "ud7-radio-annichilazione"
+tipo = "multipla"
+testo = '''In un esame PET il fluoro-18 emette un positrone, che si annichila con un elettrone del tessuto. Che cosa rivela lo strumento?'''
+corretta = "D"
+soluzione = '''Il positrone percorre pochi millimetri, incontra un elettrone e i due si annichilano: la loro massa diventa l'energia di due fotoni da \SI{511}{\kilo\electronvolt}, che partono in direzioni opposte. Lo strumento rivela le coppie di fotoni.'''
+
+  [[quesito.opzione]]
+  testo = '''un solo fotone da \SI{511}{\kilo\electronvolt}'''
+  commento = '''Dall'annichilazione nascono due fotoni, non uno: \SI{511}{\kilo\electronvolt} è l'energia di ciascuno.'''
+  [[quesito.opzione]]
+  testo = '''il positrone, che esce dal corpo del paziente'''
+  commento = '''Il positrone non esce: si ferma in pochi millimetri e si annichila quasi subito.'''
+  [[quesito.opzione]]
+  testo = '''due fotoni da \SI{1022}{\kilo\electronvolt} che partono nella stessa direzione'''
+  commento = '''Attribuisce a ogni fotone l'energia totale, $2 \cdot \SI{511}{\kilo\electronvolt}$, e sbaglia anche la direzione: i due fotoni partono in versi opposti.'''
+  [[quesito.opzione]]
+  testo = '''due fotoni da \SI{511}{\kilo\electronvolt} che partono in direzioni opposte'''
+  [[quesito.opzione]]
+  testo = '''un fotone $\gamma$ da \SI{140}{\kilo\electronvolt} emesso dal nucleo'''
+  commento = '''Confonde la PET con la scintigrafia: i fotoni da \SI{140}{\kilo\electronvolt} sono quelli del tecnezio-99m.'''
+
+[[quesito]]
+id = "ud7-radio-gamma"
+tipo = "multipla"
+testo = '''Quale affermazione sul decadimento $\gamma$ è corretta?'''
+corretta = "E"
+soluzione = '''Nel decadimento $\gamma$ un nucleo eccitato cede l'energia in eccesso emettendo un fotone. Il fotone non contiene nucleoni e non ha carica, quindi $A$ e $Z$ non cambiano: il nucleo resta lo stesso, ma con meno energia.'''
+
+  [[quesito.opzione]]
+  testo = '''Il numero atomico del nucleo aumenta di 1.'''
+  commento = '''Succede nel decadimento $\beta^-$, in cui un neutrone diventa protone.'''
+  [[quesito.opzione]]
+  testo = '''I raggi $\gamma$ si fermano con un foglio di carta.'''
+  commento = '''Confonde i raggi $\gamma$ con le particelle $\alpha$: i $\gamma$ sono i più penetranti, e per attenuarli servono centimetri di piombo.'''
+  [[quesito.opzione]]
+  testo = '''Un centimetro di piombo ferma tutti i raggi $\gamma$.'''
+  commento = '''I raggi $\gamma$ si attenuano in modo esponenziale (Lambert-Beer): nessuno spessore li ferma tutti, ne riduce solo l'intensità.'''
+  [[quesito.opzione]]
+  testo = '''Il numero di massa diminuisce di 1, perché il nucleo perde energia.'''
+  commento = '''Confonde l'energia con i nucleoni: il fotone porta via energia, ma non contiene nucleoni.'''
+  [[quesito.opzione]]
+  testo = '''Il nucleo passa a uno stato di energia più bassa senza cambiare né $A$ né $Z$.'''
+
+[[quesito]]
+id = "ud7-radio-figlio"
+tipo = "completamento"
+testo = '''Il gallio-68, $\nuclide{68}{31}{Ga}$, usato nella PET, decade $\beta^+$. Il nucleo che si forma ha \completa\ neutroni.'''
+calcolo = "68 - (31 - 1)"
+risposta = "38"
+soluzione = '''Nel decadimento $\beta^+$ un protone diventa neutrone: $Z$ scende da 31 a 30 (zinco) e $A$ resta 68. I neutroni sono $N = 68 - 30 = 38$, uno in più dei $68 - 31 = 37$ del gallio-68:
+$\nuclide{68}{31}{Ga} \to \nuclide{68}{30}{Zn} + \nuclide{0}{+1}{e} + \nu$.'''
+
+[[quesito]]
+id = "ud7-radio-attivita"
+tipo = "completamento"
+testo = '''Una dose di radiofarmaco contiene {{N}} nuclei di un radioisotopo con costante di decadimento {{lam}}. La sua attività vale \completa\ MBq.'''
+dati.N = { valore = "4e12" }
+dati.lam = { valore = "5e-5", unita = "s^-1" }
+calcolo = "lam * N / 1e6"
+risposta = "200"
+soluzione = '''Da $\mathcal{A} = \lambda N$:
+\[
+  \mathcal{A} = \SI[per-mode=power]{5e-5}{\second\tothe{-1}} \cdot \num{4e12} = 20 \cdot 10^{-5+12}\,\si{\becquerel} = \SI{2e8}{\becquerel} = \SI{200}{\mega\becquerel}
+\]'''
+
+[[quesito]]
+id = "ud7-ottica-aria-acqua"
+tipo = "multipla"
+testo = '''Un fascio di luce passa dall'aria all'acqua ($n = 1{,}33$). Quale affermazione è corretta?'''
+corretta = "A"
+soluzione = '''La frequenza la fissa la sorgente e non cambia passando da un mezzo all'altro. In acqua la velocità diventa $v = c/n$, più piccola di $c$. Poiché $v = \lambda f$ con $f$ fissa, anche la lunghezza d'onda si riduce dello stesso fattore: $\lambda = \lambda_0/n$.'''
+
+  [[quesito.opzione]]
+  testo = '''La frequenza resta uguale; velocità e lunghezza d'onda diminuiscono.'''
+  [[quesito.opzione]]
+  testo = '''La frequenza diminuisce; la velocità resta uguale.'''
+  commento = '''Tratta la velocità della luce come se fosse $c$ in ogni mezzo, ma lo è solo nel vuoto; ed è la frequenza, non la velocità, a restare uguale.'''
+  [[quesito.opzione]]
+  testo = '''Frequenza e lunghezza d'onda restano uguali; la velocità diminuisce.'''
+  commento = '''Dimentica che $v = \lambda f$: se la velocità diminuisce e la frequenza no, deve diminuire la lunghezza d'onda.'''
+  [[quesito.opzione]]
+  testo = '''La frequenza resta uguale; la velocità diminuisce e la lunghezza d'onda aumenta.'''
+  commento = '''Moltiplica per $n$ invece di dividere: $\lambda_{\text{mezzo}} = \lambda_0/n$, non $n\lambda_0$.'''
+  [[quesito.opzione]]
+  testo = '''La velocità aumenta, perché l'acqua è più densa dell'aria.'''
+  commento = '''Ragiona come per il suono. Per la luce un mezzo otticamente più denso, con $n$ più alto, vuol dire velocità più bassa: $v = c/n$.'''
+
+[[quesito]]
+id = "ud7-ottica-trova-n"
+tipo = "multipla"
+testo = '''Un raggio di luce passa dall'aria a un materiale trasparente. L'angolo di incidenza è \ang{45} e l'angolo di rifrazione è \ang{30}. L'indice di rifrazione del materiale vale circa'''
+corretta = "C"
+calcolo = "round(sin45 / sin30, 1)"
+soluzione = '''Dalla legge di Snell con $n_1 = 1$:
+\[
+  n_2 = \frac{\sin\theta_1}{\sin\theta_2} = \frac{\sin\ang{45}}{\sin\ang{30}} = \frac{0{,}71}{0{,}5} = 1{,}42 \approx 1{,}4
+\]
+È $\sqrt 2$: il rapporto esatto è $(\sqrt 2/2)/(1/2) = \sqrt 2$.'''
+
+  [[quesito.opzione]]
+  testo = '''$0{,}70$'''
+  commento = '''Scambia i due mezzi: $\sin\ang{30}/\sin\ang{45} = 0{,}5/0{,}71 \approx 0{,}70$. Un indice minore di 1 vorrebbe dire luce più veloce che nel vuoto.'''
+  [[quesito.opzione]]
+  testo = '''$1{,}5$'''
+  commento = '''Fa il rapporto fra gli angoli, $45/30 = 1{,}5$, invece che fra i loro seni.'''
+  [[quesito.opzione]]
+  testo = '''$1{,}4$'''
+  valore = 1.4
+  [[quesito.opzione]]
+  testo = '''$2{,}0$'''
+  commento = '''Dimentica il seno dell'angolo di incidenza, come se valesse 1: $1/\sin\ang{30} = 1/0{,}5 = 2$.'''
+  [[quesito.opzione]]
+  testo = '''$0{,}67$'''
+  commento = '''Fa il rapporto fra gli angoli, e per di più rovesciato: $30/45 \approx 0{,}67$.'''
+
+[[quesito]]
+id = "ud7-ottica-diottrie"
+tipo = "multipla"
+testo = '''Una lente convergente per occhiali da lettura ha distanza focale di {{f}}. Il suo potere diottrico è'''
+dati.f = { valore = 40, unita = "cm" }
+corretta = "D"
+calcolo = "1 / (f / 100)"
+soluzione = '''Il potere diottrico si calcola con la focale in metri: $f = \SI{40}{\centi\metre} = \SI{0,40}{\metre}$, quindi $D = 1/\SI{0,40}{\metre} = \SI{2,5}{D}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0,025}{D}'''
+  commento = '''Lascia la focale in centimetri: $1/40 = 0{,}025$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,4}{D}'''
+  commento = '''Converte la focale in metri ma si dimentica di farne l'inverso.'''
+  [[quesito.opzione]]
+  testo = '''\SI{25}{D}'''
+  commento = '''Sbaglia la conversione: \SI{40}{\centi\metre} sono \SI{0,40}{\metre}, non \SI{0,04}{\metre} ($1/0{,}04 = 25$).'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,5}{D}'''
+  valore = 2.5
+  [[quesito.opzione]]
+  testo = '''\SI{40}{D}'''
+  commento = '''Confonde il potere diottrico con la distanza focale in centimetri.'''
+
+[[quesito]]
+id = "ud7-ottica-virtuale"
+tipo = "multipla"
+testo = '''Un oggetto si trova a {{p}} da una lente convergente con distanza focale di {{f}}. L'immagine è'''
+dati.p = { valore = 5, unita = "cm" }
+dati.f = { valore = 10, unita = "cm" }
+corretta = "E"
+calcolo = "1 / (1/f - 1/p)"
+soluzione = '''L'oggetto è fra la lente e il fuoco. Dalla legge dei punti coniugati $1/q = 1/10 - 1/5 = 1/10 - 2/10 = -1/10$, quindi $q = \SI{-10}{\centi\metre}$: l'immagine è virtuale, dalla stessa parte dell'oggetto. L'ingrandimento è $m = -q/p = -(-10)/5 = +2$: diritta e alta il doppio. È la lente d'ingrandimento.'''
+
+  [[quesito.opzione]]
+  testo = '''reale e capovolta, a \SI{10}{\centi\metre} oltre la lente, ingrandita 2 volte'''
+  commento = '''Scambia $1/f$ e $1/p$: $1/q = 1/5 - 1/10 = +1/10$. Il segno di $q$ cambia, e con lui tutto il tipo di immagine.'''
+  [[quesito.opzione]]
+  testo = '''virtuale e diritta, a \SI{10}{\centi\metre} davanti alla lente, alta la metà dell'oggetto'''
+  commento = '''Rovescia l'ingrandimento: usa $p/q$ invece di $q/p$.'''
+  [[quesito.opzione]]
+  testo = '''reale e capovolta, a circa \SI{3,3}{\centi\metre} oltre la lente'''
+  commento = '''Somma invece di sottrarre: $1/q = 1/10 + 1/5 = 3/10$, quindi $q \approx \SI{3,3}{\centi\metre}$.'''
+  [[quesito.opzione]]
+  testo = '''non si forma: l'immagine va all'infinito'''
+  commento = '''L'immagine va all'infinito solo con l'oggetto nel fuoco, a \SI{10}{\centi\metre}; qui l'oggetto è più vicino.'''
+  [[quesito.opzione]]
+  testo = '''virtuale e diritta, a \SI{10}{\centi\metre} davanti alla lente, ingrandita 2 volte'''
+  valore = -10
+
+[[quesito]]
+id = "ud7-ottica-ipermetrope"
+tipo = "completamento"
+testo = '''Un paziente ipermetrope ha il punto prossimo a {{pp}}. Per leggere un testo a {{pl}}, trascurando la distanza fra lente e occhio, gli servono lenti convergenti con potere diottrico di \completa D.'''
+dati.pp = { valore = 50, unita = "cm" }
+dati.pl = { valore = 25, unita = "cm" }
+calcolo = "1 / (pl / 100) - 1 / (pp / 100)"
+risposta = "2"
+soluzione = '''La lente forma del testo ($p = \SI{0,25}{\metre}$) un'immagine virtuale nel punto prossimo ($q = \SI{-0,50}{\metre}$):
+$D = 1/p + 1/q = \SI{4}{D} - \SI{2}{D} = \SI{2}{D}$.'''
+
+[[quesito]]
+id = "ud7-ottica-ingrandimento"
+tipo = "completamento"
+testo = '''Un oggetto si trova a {{p}} da una lente convergente con distanza focale di {{f}}. L'ingrandimento $m$ dell'immagine vale \completa.'''
+dati.p = { valore = 16, unita = "cm" }
+dati.f = { valore = 12, unita = "cm" }
+calcolo = "-(1 / (1/f - 1/p)) / p"
+risposta = "-3"
+soluzione = '''Dalla legge dei punti coniugati $1/q = 1/12 - 1/16 = 4/48 - 3/48 = 1/48$, quindi $q = \SI{48}{\centi\metre}$. L'ingrandimento è $m = -q/p = -48/16 = -3$: l'immagine è reale, capovolta e tre volte più grande dell'oggetto.'''
+
+# ==================================================================== quesiti lampo, in ordine di dispensa
 
 [[quesito]]
 id = "ud7-lambda"
