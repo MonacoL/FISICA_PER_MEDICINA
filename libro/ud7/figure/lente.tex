@@ -1,0 +1,27 @@
+% Lente convergente sottile: i tre raggi notevoli.
+% Scala: f = 1,5; oggetto a p = 4,5 alto 1,2; immagine a q = 2,25, alta -0,6
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % asse ottico, fuochi e lente
+  \draw[->] (-5.6,0) -- (4.4,0) node[right] {asse};
+  \draw[<->, very thick, formula] (0,-1.6) -- (0,1.6) node[above] {lente};
+  \foreach \x/\nome in {-3/2F, -1.5/F, 1.5/F', 3/2F'} {
+    \fill (\x,0) circle (1.3pt) node[below] {$\nome$};
+  }
+  % oggetto e immagine
+  \draw[->, very thick] (-4.5,0) -- (-4.5,1.2) node[above] {$B$};
+  \node[below] at (-4.5,0) {$A$};
+  \draw[->, very thick, attenzione] (2.25,0) -- (2.25,-0.6) node[below] {$B'$};
+  \node[above, attenzione] at (2.25,0) {$A'$};
+  % 1: parallelo all'asse, poi per F'
+  \draw[esempio, thick] (-4.5,1.2) -- (0,1.2) -- (3.4,-1.52);
+  % 2: per il centro, senza deviazione
+  \draw[medica, thick] (-4.5,1.2) -- (3.4,-0.907);
+  % 3: per F, poi parallelo all'asse
+  \draw[approfondimento, thick] (-4.5,1.2) -- (0,-0.6) -- (3.4,-0.6);
+  % distanze
+  \draw[|<->|] (-4.5,-1.15) -- (0,-1.15) node[midway, below] {$p$};
+  \draw[|<->|] (0,-1.95) -- (2.25,-1.95) node[midway, below] {$q$};
+  \node[esempio] at (-2.3,1.5) {1};
+  \node[medica] at (-2.6,0.95) {2};
+  \node[approfondimento] at (-3.25,0.4) {3};
+\end{tikzpicture}

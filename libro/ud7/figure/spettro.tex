@@ -1,0 +1,29 @@
+% Spettro elettromagnetico: regioni in ordine di frequenza crescente
+\begin{tikzpicture}[>=Stealth, font=\small,
+  regione/.style={minimum width=2.1cm, minimum height=1cm, align=center,
+                  text width=1.9cm, inner sep=1pt}]
+  \foreach \i/\nome/\col in {
+      0/{onde\\radio}/formula!20,
+      1/microonde/formula!35,
+      2/infrarosso/attenzione!30,
+      4/ultravioletto/approfondimento!25,
+      5/{raggi X}/approfondimento!45,
+      6/{raggi $\gamma$}/approfondimento!65} {
+    \node[regione, fill=\col] at (2.1*\i,0) {\nome};
+  }
+  % il visibile, sfumato dal rosso al violetto
+  \shade[left color=red!60, right color=violet!60, middle color=green!50]
+    (2.1*3-1.05,-0.5) rectangle (2.1*3+1.05,0.5);
+  \node[regione] at (2.1*3,0) {visibile};
+  % frecce
+  \draw[->, thick] (-1.05,0.85) -- (13.65,0.85)
+    node[pos=0.28, above] {frequenza ed energia del fotone crescenti};
+  \draw[<-, thick] (-1.05,-0.85) -- (13.65,-0.85)
+    node[pos=0.5, below] {lunghezza d'onda crescente};
+  % soglia di ionizzazione, nell'ultravioletto
+  \draw[attenzione, very thick, dashed] (2.1*4+0.5,-0.6) -- (2.1*4+0.5,1.3);
+  \node[attenzione, above] at (2.1*4+0.5,1.3)
+    {soglia di ionizzazione (circa \SI{10}{\electronvolt})};
+  \node at (2.1*1.5,-1.75) {$\longleftarrow$ non ionizzanti};
+  \node at (2.1*5.6,-1.75) {ionizzanti $\longrightarrow$};
+\end{tikzpicture}

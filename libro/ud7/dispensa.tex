@@ -1,17 +1,221 @@
 % UD7 — Dispensa
-% PROTOTIPO del template: per ora contiene solo le due parti che mancavano
-% ai PDF UD7 (Lambert-Beer e radioattività). Le sezioni esistenti (onde EM,
-% spettro, fotone, ottica) si riscrivono nel ticket "UD7 Radiazioni: Dispensa".
+% Riscrive nel template la dispensa UD7 esistente (onde EM, spettro, fotone,
+% ottica: ADR 0003) e aggiunge Lambert-Beer e radioattività.
 \dispensa
 
 \begin{tcolorbox}[fisbox={formula}{formulaBg},title={Obiettivi dell'unità}]
-Al termine di questa parte sai:
+Al termine di questa unità sai:
 \begin{itemize}
+  \item descrivere un'onda elettromagnetica come due campi, elettrico e magnetico, che oscillano perpendicolari tra loro e alla direzione di propagazione, e usare lunghezza d'onda, frequenza, velocità, ampiezza e intensità;
+  \item mettere in ordine le regioni dello spettro elettromagnetico per frequenza e per lunghezza d'onda;
+  \item calcolare l'energia di un fotone dalla sua frequenza o dalla sua lunghezza d'onda, e decidere se una radiazione è ionizzante;
   \item calcolare quanta radiazione attraversa uno strato di materiale con la legge di Lambert-Beer e lo spessore emivalente;
-  \item descrivere un nucleo instabile e i decadimenti $\alpha$, $\beta$ e $\gamma$, scrivendo il nucleo figlio;
-  \item usare la legge del decadimento radioattivo, l'attività e l'emivita.
+  \item descrivere un nucleo instabile e i decadimenti $\alpha$, $\beta$ e $\gamma$, e usare la legge del decadimento, l'attività e l'emivita;
+  \item applicare le leggi della riflessione e della rifrazione, e trovare l'immagine di una lente convergente con la legge dei punti coniugati.
 \end{itemize}
 \end{tcolorbox}
+
+% -------------------------------------------------------------------------
+\section{La radiazione elettromagnetica}
+\label{sec:ud7-onde-em}
+
+\subsection{Che cos'è un'onda elettromagnetica}
+
+Un'onda è una perturbazione che si propaga trasportando energia, ma non materia. Le onde sonore e le onde sull'acqua hanno bisogno di un mezzo che vibri; le onde elettromagnetiche no: si propagano anche nel vuoto. Luce, onde radio, raggi X sono tutte onde elettromagnetiche.
+
+Un'onda elettromagnetica è fatta di un campo elettrico $\vec E$ e di un campo magnetico $\vec B$ che oscillano nel tempo e nello spazio (figura~\ref{fig:ud7-onda-em}):
+\begin{itemize}
+  \item $\vec E$ e $\vec B$ sono perpendicolari tra loro;
+  \item entrambi sono perpendicolari alla direzione in cui l'onda avanza: l'onda elettromagnetica è un'onda \textbf{trasversale};
+  \item oscillano insieme: raggiungono il massimo e lo zero negli stessi punti e negli stessi istanti.
+\end{itemize}
+Un campo elettrico che varia genera un campo magnetico che varia, e viceversa: i due campi si sostengono a vicenda, ed è per questo che l'onda non ha bisogno di un mezzo. Le onde elettromagnetiche sono emesse da cariche elettriche accelerate, come gli elettroni che oscillano in un'antenna, e da atomi e nuclei che passano da un livello di energia più alto a uno più basso.
+
+\begin{figure}[h]
+\centering
+\input{ud7/figure/onda-em}
+\caption{Un'onda elettromagnetica che avanza lungo $x$. Il campo elettrico (blu) oscilla nel piano verticale, il campo magnetico (verde) nel piano perpendicolare. $\lambda$ è la lunghezza d'onda, $E_0$ l'ampiezza del campo elettrico.}
+\label{fig:ud7-onda-em}
+\end{figure}
+
+\subsection{Le grandezze che descrivono l'onda}
+
+\begin{itemize}
+  \item La \textbf{lunghezza d'onda} $\lambda$, in metri, è la distanza fra due massimi consecutivi.
+  \item Il \textbf{periodo} $T$, in secondi, è il tempo di un'oscillazione completa.
+  \item La \textbf{frequenza} $f$ è il numero di oscillazioni al secondo, $f = 1/T$. Si misura in hertz: $\SI{1}{\hertz} = \SI[per-mode=power]{1}{\second\tothe{-1}}$.
+  \item La \textbf{velocità di propagazione}: in un periodo l'onda avanza di una lunghezza d'onda, quindi $v = \lambda/T = \lambda f$. Nel vuoto tutte le onde elettromagnetiche hanno la stessa velocità, la velocità della luce $c \approx \SI{3e8}{\metre\per\second}$.
+  \item L'\textbf{ampiezza} è il valore massimo dei campi: $E_0$ per il campo elettrico, $B_0$ per quello magnetico.
+  \item L'\textbf{intensità} $I$ è l'energia che attraversa in un secondo una superficie di \SI{1}{\metre\squared} perpendicolare alla propagazione, cioè la potenza $P$ divisa per l'area $S$ della superficie: $I = P/S$. Si misura in \si{\watt\per\metre\squared}, ed è proporzionale al quadrato dell'ampiezza: $I \propto E_0^2$, dove il simbolo $\propto$ si legge «è proporzionale a».
+\end{itemize}
+
+\begin{formula}[Onde elettromagnetiche]
+f = \frac{1}{T}
+\qquad\qquad
+c = \lambda f, \quad c \approx \SI{3e8}{\metre\per\second}
+\qquad\qquad
+I = \frac{P}{S} \propto E_0^2
+\end{formula}
+
+Poiché nel vuoto $c$ è la stessa per tutte, $\lambda$ e $f$ sono inversamente proporzionali: se la frequenza raddoppia, la lunghezza d'onda si dimezza. Poiché l'intensità va come il quadrato dell'ampiezza, raddoppiando $E_0$ l'intensità diventa quattro volte più grande.
+
+\begin{richiamo}{potenze di 10 e prefissi}
+Per moltiplicare potenze di 10 si sommano gli esponenti, per dividerle si sottraggono:
+\[
+  10^{a} \cdot 10^{b} = 10^{a+b} \qquad\qquad \frac{10^{a}}{10^{b}} = 10^{a-b} \qquad\qquad \text{per esempio } \frac{10^{9}}{10^{-6}} = 10^{9-(-6)} = 10^{15}
+\]
+I prefissi da ricordare: nano (n) $= 10^{-9}$, micro ($\mu$) $= 10^{-6}$, milli (m) $= 10^{-3}$, kilo (k) $= 10^{3}$, mega (M) $= 10^{6}$, giga (G) $= 10^{9}$. Per esempio $\SI{500}{\nano\metre} = 500 \cdot 10^{-9}\,\si{\metre} = \SI{5e-7}{\metre}$.
+\end{richiamo}
+
+\begin{esempio}
+Una stazione radio trasmette a \SI{100}{\mega\hertz}. Quanto vale la lunghezza d'onda?
+
+La frequenza in hertz è $\SI{100}{\mega\hertz} = 100 \cdot \SI{e6}{\hertz} = \SI{e8}{\hertz}$. Dalla relazione $c = \lambda f$:
+\[
+  \lambda = \frac{c}{f} = \frac{\SI{3e8}{\metre\per\second}}{\SI{e8}{\hertz}} = \SI{3}{\metre}
+\]
+\end{esempio}
+
+\begin{quesitolampo}{ql:ud7-lambda}
+Due onde elettromagnetiche si propagano nel vuoto, e la seconda ha frequenza doppia della prima. La lunghezza d'onda della seconda, rispetto a quella della prima, è
+\opzioni{la metà}{un quarto}{uguale}{il doppio}{quattro volte}
+\end{quesitolampo}
+
+\subsection{Intensità e distanza: la legge dell'inverso del quadrato}
+
+Una sorgente piccola, che emette la stessa potenza $P$ in tutte le direzioni, distribuisce l'energia su sfere sempre più grandi. A distanza $r$ la superficie della sfera è $4\pi r^2$, quindi l'intensità diminuisce con il quadrato della distanza:
+
+\begin{formula}[Legge dell'inverso del quadrato]
+I = \frac{P}{4\pi r^2}
+\qquad\qquad
+\frac{I_2}{I_1} = \left(\frac{r_1}{r_2}\right)^{2}
+\end{formula}
+
+Raddoppiando la distanza l'intensità diventa un quarto; triplicandola, un nono.
+
+\begin{applicazione}{radioprotezione}
+La distanza è la protezione più semplice contro le radiazioni. Un tecnico di radiologia che passa da \SI{1}{\metre} a \SI{3}{\metre} dalla sorgente riduce l'intensità che lo raggiunge di $3^2 = 9$ volte. Le tre regole della radioprotezione sono: ridurre il tempo di esposizione, aumentare la distanza, mettere una schermatura (barriere di piombo, sezione~\ref{sec:ud7-lambert-beer}).
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{Lo spettro elettromagnetico}
+\label{sec:ud7-spettro}
+
+Le onde elettromagnetiche coprono un intervallo enorme di frequenze. Lo spettro si divide in regioni che hanno la stessa natura fisica ma interagiscono con la materia in modi diversi. In ordine di frequenza crescente, e quindi di lunghezza d'onda decrescente, le regioni sono: onde radio, microonde, infrarosso, luce visibile, ultravioletto, raggi X, raggi $\gamma$ (figura~\ref{fig:ud7-spettro}).
+
+\begin{figure}[h]
+\centering
+\input{ud7/figure/spettro}
+\caption{Lo spettro elettromagnetico. Da sinistra a destra crescono frequenza ed energia del fotone e diminuisce la lunghezza d'onda. Il fotone, l'elettronvolt (eV) e la soglia di ionizzazione sono spiegati nella sezione~\ref{sec:ud7-fotone}.}
+\label{fig:ud7-spettro}
+\end{figure}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}l l X@{}}
+\toprule
+Regione & $\lambda$ (indicativa) & Esempi e usi medici \\
+\midrule
+onde radio & più di \SI{30}{\centi\metre} & radio e TV; risonanza magnetica \\
+microonde & da \SI{1}{\milli\metre} a \SI{30}{\centi\metre} & telefonia, forno a microonde; diatermia \\
+infrarosso & da \SI{700}{\nano\metre} a \SI{1}{\milli\metre} & calore emesso dal corpo; termografia, saturimetro \\
+visibile & da \SI{400}{\nano\metre} (violetto) a \SI{700}{\nano\metre} (rosso) & visione; endoscopia \\
+ultravioletto & da \SI{10}{\nano\metre} a \SI{400}{\nano\metre} & abbronzatura ed eritema; lampade germicide \\
+raggi X & da \SI{0,01}{\nano\metre} a \SI{10}{\nano\metre} & radiografia, TC, mammografia \\
+raggi $\gamma$ & meno di \SI{0,01}{\nano\metre} & decadimenti nucleari; PET, scintigrafia, radioterapia \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+I confini fra le regioni non sono netti. Raggi X e raggi $\gamma$, per esempio, si sovrappongono: si distinguono per l'origine, gli X dagli elettroni dell'atomo, i $\gamma$ dal nucleo.
+
+\begin{attenzione}[l'ordine dello spettro]
+L'ordine delle regioni è una domanda classica. Basta ricordarne uno: radio, microonde, infrarosso, visibile, ultravioletto, X, $\gamma$ è l'ordine di frequenza crescente, e quindi di lunghezza d'onda \emph{decrescente}. Nel visibile, il rosso ha la lunghezza d'onda più lunga e il violetto la più corta.
+\end{attenzione}
+
+\begin{quesitolampo}{ql:ud7-spettro}
+Quale sequenza è in ordine di lunghezza d'onda crescente?
+\begin{opzionilunghe}
+  \item raggi X, ultravioletto, raggi $\gamma$, visibile, onde radio
+  \item onde radio, infrarosso, visibile, ultravioletto, raggi X
+  \item raggi $\gamma$, raggi X, visibile, infrarosso, microonde
+  \item visibile, ultravioletto, infrarosso, microonde, onde radio
+  \item microonde, onde radio, infrarosso, visibile, raggi $\gamma$
+\end{opzionilunghe}
+\end{quesitolampo}
+
+% -------------------------------------------------------------------------
+\section{Il fotone e le radiazioni ionizzanti}
+\label{sec:ud7-fotone}
+
+\subsection{Il fotone}
+
+Per capire che cosa fa la radiazione alla materia l'immagine dell'onda non basta. La radiazione elettromagnetica viene emessa e assorbita in pacchetti di energia, i \textbf{fotoni}: l'energia di un fascio non può essere divisa in parti più piccole di un fotone. L'energia di un fotone dipende solo dalla frequenza:
+
+\begin{formula}[Energia del fotone]
+E = h f = \frac{h c}{\lambda}
+\qquad\qquad
+h \approx \SI{6,6e-34}{\joule\second}
+\end{formula}
+
+$h$ è la \textbf{costante di Planck}. Più alta è la frequenza, più energia porta ogni fotone: un fotone di raggi X ha molta più energia di un fotone di luce visibile.
+
+L'energia di un fotone, in joule, è un numero molto piccolo. Per questo si usa l'\textbf{elettronvolt}: \SI{1}{\electronvolt} è l'energia che acquista un elettrone accelerato da una differenza di potenziale di \SI{1}{\volt}, e vale circa \SI{1,6e-19}{\joule}. Con i suoi multipli: $\SI{1}{\kilo\electronvolt} = \SI{e3}{\electronvolt}$, $\SI{1}{\mega\electronvolt} = \SI{e6}{\electronvolt}$. Per i conti a mente conviene una formula pratica. Il prodotto $hc$ vale $\SI{6,6e-34}{\joule\second} \cdot \SI{3e8}{\metre\per\second} \approx \SI{2e-25}{\joule\metre}$; diviso per \SI{1,6e-19}{\joule} (un elettronvolt) dà circa \SI{1,24e-6}{\electronvolt\metre}, e poiché $\SI{1}{\metre} = \SI{e9}{\nano\metre}$, $hc \approx \SI{1240}{\electronvolt\nano\metre}$. Quindi:
+
+\begin{formula}[Energia del fotone: formula pratica]
+E\,[\si{\electronvolt}] \approx \frac{1240}{\lambda\,[\si{\nano\metre}]}
+\qquad\qquad
+\SI{1}{\electronvolt} \approx \SI{1,6e-19}{\joule}
+\end{formula}
+
+\begin{esempio}
+Quanta energia ha un fotone di luce verde con $\lambda = \SI{500}{\nano\metre}$? Quanti fotoni al secondo emette un puntatore laser verde da \SI{1}{\milli\watt}?
+
+Con la formula pratica:
+\[
+  E \approx \frac{1240}{500}\,\si{\electronvolt} \approx \SI{2,5}{\electronvolt}
+  \qquad\Longrightarrow\qquad
+  E \approx 2{,}5 \cdot \SI{1,6e-19}{\joule} = \SI{4e-19}{\joule}
+\]
+Lo stesso risultato viene da $E = hc/\lambda$:
+\[
+  E = \frac{\SI{6,6e-34}{\joule\second} \cdot \SI{3e8}{\metre\per\second}}{\SI{5e-7}{\metre}} = \frac{6{,}6 \cdot 3}{5} \cdot 10^{-34+8-(-7)}\,\si{\joule} \approx \frac{20}{5} \cdot 10^{-19}\,\si{\joule} = \SI{4e-19}{\joule}
+\]
+
+Il laser emette $\SI{1}{\milli\watt} = \SI{e-3}{\joule}$ al secondo. Il numero di fotoni al secondo è l'energia al secondo divisa per l'energia di un fotone:
+\[
+  N = \frac{P}{E} = \frac{\SI{e-3}{\joule\per\second}}{\SI{4e-19}{\joule}} = \frac{1}{4} \cdot 10^{-3-(-19)}\,\si{\per\second} = 0{,}25 \cdot 10^{16}\,\si{\per\second} = \SI{2,5e15}{\per\second}
+\]
+\end{esempio}
+
+\begin{quesitolampo}{ql:ud7-fotone}
+Un fotone di luce rossa ha lunghezza d'onda di \SI{620}{\nano\metre}. La sua energia, in elettronvolt, vale circa \completa.
+\end{quesitolampo}
+
+\subsection{Radiazioni ionizzanti e non ionizzanti}
+
+Quello che decide l'effetto di una radiazione su un atomo o su una molecola è l'energia del \emph{singolo fotone}, non l'intensità del fascio.
+
+\begin{itemize}
+  \item Per strappare un elettrone a un atomo o a una molecola biologica, cioè per \textbf{ionizzarla}, serve un'energia dell'ordine di \SI{10}{\electronvolt}: è l'\textbf{energia di ionizzazione}. Con la formula pratica, $\lambda \approx 1240/10 \approx \SI{120}{\nano\metre}$: solo l'ultravioletto più energetico, i raggi X e i raggi $\gamma$ hanno fotoni abbastanza energetici. Queste sono le \textbf{radiazioni ionizzanti}: possono rompere legami nel DNA e produrre radicali liberi.
+  \item Onde radio, microonde, infrarosso e luce visibile sono \textbf{radiazioni non ionizzanti}: ogni fotone ha troppo poca energia. Il loro effetto principale sui tessuti è il riscaldamento, usato per esempio nella diatermia.
+  \item L'ultravioletto vicino al visibile non ionizza, ma i suoi fotoni (qualche elettronvolt) bastano a modificare alcuni legami chimici: per questo provoca eritemi e danni al DNA della pelle.
+\end{itemize}
+
+\begin{attenzione}[un fascio intenso non diventa ionizzante]
+Un forno a microonde emette moltissimi fotoni, ma con $\lambda \approx \SI{12}{\centi\metre} = \SI{1,2e8}{\nano\metre}$ ciascuno ha un'energia di circa $1240/(\num{1,2e8}) \approx \SI{e-5}{\electronvolt}$, un milione di volte meno di quella che serve per ionizzare. Aumentare il numero di fotoni non serve: per ionizzare una molecola serve un \emph{singolo} fotone abbastanza energetico. Le microonde possono però scaldare, e ustionare, i tessuti.
+\end{attenzione}
+
+\begin{quesitolampo}{ql:ud7-ionizzanti}
+Quale affermazione è corretta?
+\begin{opzionilunghe}
+  \item Una radiazione diventa ionizzante quando la sua intensità è abbastanza alta.
+  \item Le onde radio sono ionizzanti perché hanno una lunghezza d'onda molto lunga.
+  \item La luce visibile è ionizzante, perché viene assorbita dalla retina.
+  \item I raggi X non sono ionizzanti, perché non hanno carica elettrica.
+  \item Le microonde non sono ionizzanti, perché ogni fotone ha troppo poca energia.
+\end{opzionilunghe}
+\end{quesitolampo}
 
 % -------------------------------------------------------------------------
 \section{Assorbimento della radiazione: la legge di Lambert-Beer}
@@ -29,17 +233,19 @@ I(x) = I_0 \, e^{-\mu x}
 
 $I_0$ è l'intensità che entra, $I(x)$ quella che esce dopo uno spessore $x$, e $\mu$ è il \textbf{coefficiente di attenuazione lineare}, che si misura in \si[per-mode=power]{\metre\tothe{-1}} (o, più spesso, in \si[per-mode=power]{\centi\metre\tothe{-1}}). Il prodotto $\mu x$ è un numero puro. Il coefficiente $\mu$ dipende dal materiale e dall'energia dei fotoni: per i raggi X il piombo e l'osso hanno $\mu$ molto più grande dei tessuti molli.
 
+Poiché $\mu$ dipende dall'energia, la legge con un solo valore di $\mu$ vale per un fascio \textbf{monocromatico}, fatto di fotoni tutti della stessa energia. Il fascio di una radiografia contiene fotoni di energie diverse: per lui la legge è un'approssimazione, e lo spessore emivalente della prossima sottosezione va inteso come un valore medio.
+
 \begin{richiamo}{esponenziali e logaritmi}
 Il numero di Nepero vale $e \approx 2{,}72$. Il logaritmo naturale è l'operazione inversa dell'esponenziale: $\ln(e^{a}) = a$ e $e^{\ln b} = b$. I valori da ricordare:
 \[
   \ln 2 \approx 0{,}69 \qquad \ln 10 \approx 2{,}3 \qquad e^{-1} \approx 0{,}37 \qquad \log_{10} 2 \approx 0{,}30
 \]
-Proprietà che servono di continuo: $e^{a}\,e^{b} = e^{a+b}$, quindi $(e^{-a})^n = e^{-na}$; e $\log_{10}(10^n) = n$. Per stimare le potenze di 2 senza calcolatrice: $2^{10} = 1024 \approx 10^3$.
+Proprietà che servono di continuo: $e^{a}\,e^{b} = e^{a+b}$, quindi $(e^{-a})^n = e^{-na}$; $\ln(1/b) = -\ln b$; $\log_{10}(10^n) = n$. Per stimare le potenze di 2 senza calcolatrice: $2^{10} = 1024 \approx 10^3$.
 \end{richiamo}
 
 \subsection{Lo spessore emivalente}
 
-L'esponenziale è scomodo da calcolare a mano. Conviene allora usare lo \textbf{spessore emivalente} $x_{1/2}$: lo spessore che dimezza l'intensità. Ponendo $I = I_0/2$ nella legge di Lambert-Beer si ottiene $e^{-\mu x_{1/2}} = 1/2$, cioè $\mu x_{1/2} = \ln 2$:
+L'esponenziale è scomodo da calcolare a mano. Conviene allora usare lo \textbf{spessore emivalente} $x_{1/2}$: lo spessore che dimezza l'intensità. Ponendo $I = I_0/2$ nella legge di Lambert-Beer si ottiene $e^{-\mu x_{1/2}} = 1/2$. Prendendo il logaritmo naturale dei due membri, $-\mu x_{1/2} = \ln(1/2) = -\ln 2$, cioè $\mu x_{1/2} = \ln 2$:
 
 \begin{formula}[Spessore emivalente]
 x_{1/2} = \frac{\ln 2}{\mu} \approx \frac{0{,}69}{\mu}
@@ -47,7 +253,7 @@ x_{1/2} = \frac{\ln 2}{\mu} \approx \frac{0{,}69}{\mu}
 I = \frac{I_0}{2^n} \quad \text{dopo } n = \frac{x}{x_{1/2}} \text{ spessori emivalenti}
 \end{formula}
 
-Con lo spessore emivalente i conti diventano potenze di 2: uno spessore emivalente lascia passare $1/2$, due lasciano passare $1/4$, tre $1/8$, dieci circa un millesimo.
+Se lo spessore è $x = n\,x_{1/2}$, allora $e^{-\mu x} = (e^{-\mu x_{1/2}})^n = (1/2)^n$. Con lo spessore emivalente i conti diventano potenze di 2: uno spessore emivalente lascia passare $1/2$, due lasciano passare $1/4$, tre $1/8$, dieci circa un millesimo.
 
 \begin{figure}[h]
 \centering
@@ -70,7 +276,7 @@ Il coefficiente di attenuazione è
 \end{esempio}
 
 \begin{attenzione}[l'attenuazione non è lineare]
-Raddoppiare lo spessore \emph{non} dimezza l'intensità trasmessa: la eleva al quadrato. Se uno strato lascia passare $1/4$, due strati uguali lasciano passare $1/16$, non $1/8$. E non confondere l'attenuazione con la legge dell'inverso del quadrato: quella dipende dalla distanza dalla sorgente anche nel vuoto, l'attenuazione dipende dal materiale attraversato.
+Raddoppiare lo spessore \emph{non} dimezza la frazione trasmessa $I/I_0$: la eleva al quadrato. Se uno strato lascia passare $1/4$, due strati uguali lasciano passare $1/16$, non $1/8$. E non confondere l'attenuazione con la legge dell'inverso del quadrato (sezione~\ref{sec:ud7-onde-em}): quella dipende dalla distanza dalla sorgente, anche nel vuoto; l'attenuazione dipende dal materiale attraversato.
 \end{attenzione}
 
 \begin{quesitolampo}{ql:ud7-hvl}
@@ -80,16 +286,16 @@ Dopo \SI{2}{\centi\metre} di un certo materiale l'intensità di un fascio è rid
 
 \subsection{Assorbanza e concentrazione}
 
-In chimica e in laboratorio la stessa legge si scrive con i logaritmi in base 10. Si definisce l'\textbf{assorbanza} $A$ di un campione, e per una soluzione diluita l'assorbanza è proporzionale alla concentrazione $c$ della sostanza che assorbe e al cammino $\ell$ della luce nella cuvetta:
+In chimica e in laboratorio la stessa legge si scrive con i logaritmi in base 10. Si definisce \textbf{assorbanza} di un campione il numero $A = \log_{10}(I_0/I)$, cioè $I/I_0 = 10^{-A}$. Per una soluzione diluita, illuminata con luce monocromatica, l'assorbanza è proporzionale alla concentrazione $c$ della sostanza che assorbe (qui $c$ non è la velocità della luce) e al cammino $\ell$ della luce nella cuvetta:
 
 \begin{formula}[Assorbanza (legge di Beer)]
 A = \log_{10} \frac{I_0}{I} = \varepsilon \, c \, \ell
 \end{formula}
 
-$\varepsilon$ è il \textbf{coefficiente di assorbimento molare}, caratteristico della sostanza e della lunghezza d'onda. Un'assorbanza $A = 1$ vuol dire che passa un decimo della luce, $A = 2$ un centesimo. Misurando l'assorbanza si ricava la concentrazione: è il principio dello spettrofotometro.
+$\varepsilon$ è il \textbf{coefficiente di assorbimento molare}, caratteristico della sostanza e della lunghezza d'onda. Con $c$ in \si{\mole\per\litre} e $\ell$ in \si{\centi\metre}, $\varepsilon$ si misura in \si{\litre\per\mole\per\centi\metre}, e il prodotto $\varepsilon c \ell$ è un numero puro, come deve essere un logaritmo. Con $A = 1$ si ha $I/I_0 = 10^{-1}$: passa un decimo della luce; con $A = 2$, $I/I_0 = 10^{-2}$: un centesimo. Misurando l'assorbanza si ricava la concentrazione: è il principio dello spettrofotometro.
 
 \begin{applicazione}{il saturimetro}
-Il saturimetro da dito misura quanta parte dell'emoglobina è legata all'ossigeno. Un LED rosso (circa \SI{660}{\nano\metre}) e uno infrarosso (circa \SI{940}{\nano\metre}) illuminano il polpastrello, e un sensore misura la luce trasmessa. L'emoglobina ossigenata e quella non ossigenata assorbono in modo diverso alle due lunghezze d'onda; dal rapporto delle due assorbanze, applicando la legge di Lambert-Beer, lo strumento ricava la saturazione.
+Il saturimetro da dito misura quanta parte dell'emoglobina è legata all'ossigeno. Un LED rosso (circa \SI{660}{\nano\metre}) e uno infrarosso (circa \SI{940}{\nano\metre}) illuminano il polpastrello, e un sensore misura la luce trasmessa. L'emoglobina ossigenata e quella non ossigenata assorbono in modo diverso alle due lunghezze d'onda. A ogni battito il sangue arterioso aumenta un poco lo spessore attraversato, e l'assorbanza cresce: lo strumento usa solo questa parte che pulsa, così toglie il contributo costante di pelle, tessuti e sangue venoso. Dal rapporto fra le variazioni di assorbanza alle due lunghezze d'onda ricava la saturazione.
 \end{applicazione}
 
 \begin{approfondimento}{da dove viene l'esponenziale}
@@ -110,7 +316,7 @@ La stessa equazione, con il tempo al posto dello spessore, descrive il decadimen
 
 \subsection{Nuclei e isotopi}
 
-Il nucleo di un atomo contiene $Z$ protoni e $N$ neutroni. $Z$ è il \textbf{numero atomico} e decide di quale elemento si tratta; $A = Z + N$ è il \textbf{numero di massa}. Un nucleo si indica con il simbolo dell'elemento, $A$ in alto e $Z$ in basso: per esempio $\nuclide{12}{6}{C}$ è il carbonio con 6 protoni e 6 neutroni.
+Il nucleo di un atomo contiene $Z$ protoni e $N$ neutroni; protoni e neutroni insieme si chiamano \textbf{nucleoni}. $Z$ è il \textbf{numero atomico} e decide di quale elemento si tratta; $A = Z + N$ è il \textbf{numero di massa}, cioè il numero di nucleoni. Attenzione ai simboli: qui $A$ è il numero di massa, non l'assorbanza della sezione precedente. Un nucleo si indica con il simbolo dell'elemento, $A$ in alto e $Z$ in basso: per esempio $\nuclide{12}{6}{C}$ è il carbonio con 6 protoni e 6 neutroni.
 
 Nuclei con lo stesso $Z$ e diverso $N$ sono \textbf{isotopi} dello stesso elemento: hanno le stesse proprietà chimiche ma massa diversa. Il carbonio ha, tra gli altri, gli isotopi $\nuclide{12}{6}{C}$ e $\nuclide{14}{6}{C}$.
 
@@ -124,25 +330,27 @@ In ogni decadimento si conservano il numero di massa totale e la carica totale: 
 \small
 \begin{tabularx}{\linewidth}{@{}l X c c l@{}}
 \toprule
-Decadimento & Che cosa viene emesso & $\Delta A$ & $\Delta Z$ & Si ferma con \\
+Decadimento & Che cosa viene emesso & $\Delta A$ & $\Delta Z$ & Schermatura \\
 \midrule
-$\alpha$ & un nucleo di elio $\nuclide{4}{2}{He}$ (2 protoni e 2 neutroni) & $-4$ & $-2$ & un foglio di carta, la pelle \\
-$\beta^-$ & un elettrone (e un antineutrino): un neutrone diventa protone & $0$ & $+1$ & pochi mm di alluminio \\
-$\beta^+$ & un positrone (e un neutrino): un protone diventa neutrone & $0$ & $-1$ & pochi mm di alluminio \\
-$\gamma$ & un fotone di alta energia da un nucleo eccitato & $0$ & $0$ & cm di piombo, m di cemento \\
+$\alpha$ & un nucleo di elio $\nuclide{4}{2}{He}$ (2 protoni e 2 neutroni) & $-4$ & $-2$ & si ferma con un foglio di carta, la pelle \\
+$\beta^-$ & un elettrone (e un antineutrino): un neutrone diventa protone & $0$ & $+1$ & si ferma con pochi mm di alluminio \\
+$\beta^+$ & un positrone (e un neutrino): un protone diventa neutrone & $0$ & $-1$ & si ferma con pochi mm di alluminio \\
+$\gamma$ & un fotone di alta energia da un nucleo eccitato & $0$ & $0$ & non si ferma: si attenua con cm di piombo \\
 \bottomrule
 \end{tabularx}
 \end{center}
 
-Alcuni esempi:
+Il \textbf{positrone} $e^+$ è l'antiparticella dell'elettrone: ha la stessa massa e carica $+1$, misurata in unità della carica del protone. Il \textbf{neutrino} $\nu$ e l'\textbf{antineutrino} $\bar\nu$ sono particelle senza carica e quasi senza massa, che attraversano la materia quasi senza interagire: nel bilancio hanno $A = 0$ e $Z = 0$. Un nucleo è \textbf{eccitato} quando ha energia in eccesso, che cede emettendo un fotone $\gamma$ senza cambiare né $A$ né $Z$. Nel bilancio elettrone e positrone si scrivono $\nuclide{0}{-1}{e}$ e $\nuclide{0}{+1}{e}$: non contengono nucleoni e hanno carica $-1$ e $+1$. Alcuni esempi:
 \[
   \nuclide{226}{88}{Ra} \to \nuclide{222}{86}{Rn} + \nuclide{4}{2}{He}
   \qquad
-  \nuclide{14}{6}{C} \to \nuclide{14}{7}{N} + e^- + \bar\nu
+  \nuclide{14}{6}{C} \to \nuclide{14}{7}{N} + \nuclide{0}{-1}{e} + \bar\nu
   \qquad
-  \nuclide{18}{9}{F} \to \nuclide{18}{8}{O} + e^+ + \nu
+  \nuclide{18}{9}{F} \to \nuclide{18}{8}{O} + \nuclide{0}{+1}{e} + \nu
 \]
-I raggi $\gamma$, come i raggi X, non hanno carica e non si fermano in un punto preciso: la loro intensità diminuisce secondo la legge di Lambert-Beer, ed è per questo che serve uno spessore di piombo tanto maggiore.
+Nel secondo esempio, in basso: $6 = 7 + (-1)$; nel terzo: $9 = 8 + 1$.
+
+I raggi $\gamma$, come i raggi X, non hanno carica e interagiscono poco con la materia: non si fermano a una profondità precisa, ma la loro intensità diminuisce secondo la legge di Lambert-Beer, con un $\mu$ piccolo. Per questo non esiste uno spessore che li ferma tutti, e per ridurne molto l'intensità servono centimetri di piombo.
 
 \begin{attenzione}[il decadimento $\alpha$ toglie 4 al numero di massa]
 La particella $\alpha$ contiene 4 nucleoni, di cui 2 protoni: il numero di massa scende di 4 e il numero atomico di 2. Un errore frequente è togliere 2 a entrambi. Nei decadimenti $\beta$, invece, il numero di massa non cambia.
@@ -154,9 +362,9 @@ Il nucleo $\nuclide{238}{92}{U}$ decade emettendo una particella $\alpha$. Il nu
 
 \subsection{La legge del decadimento e l'emivita}
 
-Non si può prevedere quando decadrà un singolo nucleo: si sa solo che ogni nucleo ha la stessa probabilità di decadere in ogni secondo, e che questa probabilità non dipende da quanto tempo è già passato. Ne segue che in ogni intervallo di tempo decade la stessa \emph{frazione} dei nuclei presenti. È la stessa situazione dell'assorbimento: il numero $N$ di nuclei non ancora decaduti diminuisce in modo esponenziale.
+Non si può prevedere quando decadrà un singolo nucleo: si sa solo che ogni nucleo ha la stessa probabilità di decadere nell'unità di tempo, e che questa probabilità non dipende da quanto tempo è già passato. Ne segue che in ogni intervallo di tempo decade la stessa \emph{frazione} dei nuclei presenti. È la stessa situazione dell'assorbimento: il numero $N$ di nuclei non ancora decaduti diminuisce in modo esponenziale. (Qui $N$ non è più il numero di neutroni, ma il numero di nuclei.)
 
-La costante $\lambda$, che si misura in \si[per-mode=power]{\second\tothe{-1}}, è la \textbf{costante di decadimento}. L'\textbf{attività} $\mathcal{A}$ è il numero di decadimenti al secondo e si misura in becquerel: $\SI{1}{\becquerel} = 1$ decadimento al secondo. L'\textbf{emivita} $T_{1/2}$ è il tempo in cui metà dei nuclei decade.
+La probabilità di decadere per unità di tempo è la \textbf{costante di decadimento} $\lambda$, che si misura in \si[per-mode=power]{\second\tothe{-1}}. Attenzione: qui $\lambda$ non è la lunghezza d'onda, ma la costante di decadimento. Quando $\lambda$ è piccola, come per quasi tutti i radioisotopi usati in medicina, $\lambda \cdot \SI{1}{\second}$ è la probabilità che un nucleo decada in un secondo. Se ci sono $N$ nuclei, in un secondo ne decadono in media $\lambda N$. Questo numero è l'\textbf{attività} $\mathcal{A}$, cioè il numero di decadimenti al secondo. L'attività si misura in becquerel: $\SI{1}{\becquerel} = 1$ decadimento al secondo $= \SI[per-mode=power]{1}{\second\tothe{-1}}$. L'\textbf{emivita} $T_{1/2}$ è il tempo in cui metà dei nuclei decade. Si ricava come lo spessore emivalente: ponendo $N = N_0/2$ si ottiene $\lambda T_{1/2} = \ln 2$.
 
 \begin{formula}[Decadimento radioattivo]
 N(t) = N_0\, e^{-\lambda t}
@@ -168,7 +376,7 @@ T_{1/2} = \frac{\ln 2}{\lambda}
 N = \frac{N_0}{2^n}, \quad \mathcal{A} = \frac{\mathcal{A}_0}{2^n} \quad \text{dopo } n = \frac{t}{T_{1/2}} \text{ emivite}
 \end{formula}
 
-L'attività è proporzionale a $N$, quindi diminuisce con la stessa emivita dei nuclei.
+L'attività è proporzionale a $N$, quindi diminuisce con la stessa emivita dei nuclei. Attenzione a non confondere $\mathcal{A}$, l'attività, con $A$, il numero di massa.
 
 \begin{figure}[h]
 \centering
@@ -178,17 +386,19 @@ L'attività è proporzionale a $N$, quindi diminuisce con la stessa emivita dei 
 \end{figure}
 
 \begin{esempio}
-Per curare l'ipertiroidismo si somministra iodio-131, con emivita di \SI{8}{giorni}. Una capsula ha attività \SI{3,2}{\giga\becquerel}. Quanto vale l'attività dopo \SI{24}{giorni}? Quanti nuclei di iodio-131 contiene all'inizio?
+Dopo l'asportazione di un tumore della tiroide si somministra iodio-131, con emivita di \SI{8}{giorni}, per distruggere il tessuto tiroideo rimasto. Una capsula ha attività \SI{3,2}{\giga\becquerel}. Quanto vale l'attività dopo \SI{24}{giorni}? Quanti nuclei di iodio-131 contiene all'inizio?
 
-\SI{24}{giorni} sono $n = 24/8 = 3$ emivite:
+In \SI{24}{giorni} ci sono $n = \SI{24}{giorni} / \SI{8}{giorni} = 3$ emivite, quindi
 \[
-  \mathcal{A} = \frac{\SI{3,2}{\giga\becquerel}}{2^3} = \SI{0,4}{\giga\becquerel} = \SI{400}{\mega\becquerel}
+  \mathcal{A} = \frac{\SI{3,2}{\giga\becquerel}}{2^3} = \frac{\SI{3,2}{\giga\becquerel}}{8} = \SI{0,4}{\giga\becquerel} = \SI{400}{\mega\becquerel}
 \]
-Per il numero di nuclei serve $\lambda$, con l'emivita in secondi ($\SI{1}{giorno} = \SI{86400}{\second}$):
+Per il numero di nuclei serve $\lambda$, con l'emivita in secondi. Un giorno ha $\SI{86400}{\second}$, quindi $T_{1/2} = 8 \cdot \SI{86400}{\second} = \SI{691200}{\second} \approx \SI{6,9e5}{\second}$:
 \[
-  \lambda = \frac{\ln 2}{T_{1/2}} = \frac{0{,}69}{8 \cdot \SI{86400}{\second}} \approx \SI[per-mode=power]{1,0e-6}{\second\tothe{-1}}
-  \qquad
-  N_0 = \frac{\mathcal{A}_0}{\lambda} = \frac{\SI[per-mode=power]{3,2e9}{\second\tothe{-1}}}{\SI[per-mode=power]{1,0e-6}{\second\tothe{-1}}} = \num{3,2e15}
+  \lambda = \frac{\ln 2}{T_{1/2}} \approx \frac{0{,}69}{\SI{6,9e5}{\second}} = \num{0,1e-5}\,\si[per-mode=power]{\second\tothe{-1}} = \SI[per-mode=power]{1,0e-6}{\second\tothe{-1}}
+\]
+L'attività iniziale in unità SI è $\SI{3,2}{\giga\becquerel} = \SI{3,2e9}{\becquerel} = \SI[per-mode=power]{3,2e9}{\second\tothe{-1}}$. Da $\mathcal{A} = \lambda N$:
+\[
+  N_0 = \frac{\mathcal{A}_0}{\lambda} = \frac{\SI[per-mode=power]{3,2e9}{\second\tothe{-1}}}{\SI[per-mode=power]{1,0e-6}{\second\tothe{-1}}} = 3{,}2 \cdot 10^{9-(-6)} = \num{3,2e15}
 \]
 \end{esempio}
 
@@ -202,13 +412,200 @@ L'attività di un campione radioattivo scende da \SI{800}{\kilo\becquerel} a \SI
 \end{quesitolampo}
 
 \begin{applicazione}{medicina nucleare}
-In una \textbf{scintigrafia} si somministra al paziente un radiofarmaco con tecnezio-99m, che emette fotoni $\gamma$ da \SI{140}{\kilo\electronvolt}: abbastanza penetranti da uscire dal corpo ed essere raccolti da una gamma camera. La sua emivita, circa \SI{6}{ore}, è abbastanza lunga per fare l'esame e abbastanza corta da limitare la dose al paziente.
+In una \textbf{scintigrafia} si somministra al paziente un radiofarmaco con tecnezio-99m, che emette fotoni $\gamma$ da \SI{140}{\kilo\electronvolt}. La «m» sta per metastabile: il nucleo resta eccitato per un po' e poi emette il $\gamma$. Quei fotoni sono abbastanza penetranti da uscire dal corpo ed essere raccolti da una gamma camera. L'emivita, circa \SI{6}{ore}, è abbastanza lunga per fare l'esame e abbastanza corta da limitare la \textbf{dose}, cioè l'energia della radiazione assorbita da ogni chilogrammo di tessuto del paziente. La dose si misura in gray: $\SI{1}{Gy} = \SI{1}{\joule\per\kilo\gram}$.
 
-Nella \textbf{PET} si usano emettitori $\beta^+$ come il fluoro-18 (emivita circa \SI{110}{minuti}). Il positrone emesso incontra quasi subito un elettrone: si annichilano e producono due fotoni da \SI{511}{\kilo\electronvolt} in direzioni opposte. Rivelando le coppie di fotoni lo strumento ricostruisce dove si trova il radiofarmaco.
+Nella \textbf{PET} si usano emettitori $\beta^+$ come il fluoro-18 (emivita circa \SI{110}{minuti}). Il positrone emesso incontra quasi subito un elettrone e i due si \textbf{annichilano}: scompaiono entrambi, e la loro massa diventa l'energia di due fotoni da \SI{511}{\kilo\electronvolt} che partono in direzioni opposte. Rivelando le coppie di fotoni lo strumento ricostruisce dove si trova il radiofarmaco.
 \end{applicazione}
 
 \begin{approfondimento}{la datazione con il carbonio-14}
 Finché un organismo è vivo, scambia carbonio con l'ambiente e il rapporto fra $\nuclide{14}{6}{C}$ e $\nuclide{12}{6}{C}$ nei suoi tessuti resta quello dell'atmosfera. Dopo la morte lo scambio si ferma e il carbonio-14 decade con emivita di circa \num{5730} anni. Se in un reperto la frazione di carbonio-14 è $1/4$ di quella di un organismo vivo, sono passate due emivite: circa \num{11500} anni.
 \end{approfondimento}
+
+% -------------------------------------------------------------------------
+\section{Ottica geometrica}
+\label{sec:ud7-ottica}
+
+Quando la lunghezza d'onda è molto più piccola degli oggetti che la luce incontra, si può descrivere la luce con dei \textbf{raggi}: linee rette che indicano la direzione in cui la luce si propaga. Gli angoli si misurano sempre rispetto alla \textbf{normale}, la retta perpendicolare alla superficie nel punto in cui arriva il raggio.
+
+\subsection{L'indice di rifrazione}
+
+Nei materiali trasparenti la luce viaggia più lentamente che nel vuoto. Il rapporto fra le due velocità è l'\textbf{indice di rifrazione} del materiale:
+
+\begin{formula}[Indice di rifrazione]
+n = \frac{c}{v} \quad (n \geq 1)
+\qquad\qquad
+\lambda_{\text{mezzo}} = \frac{\lambda_0}{n}
+\qquad\qquad
+f_{\text{mezzo}} = f_0
+\end{formula}
+
+Quando la luce passa da un mezzo all'altro la frequenza non cambia, perché la fissa la sorgente; cambiano la velocità e la lunghezza d'onda. Un mezzo con $n$ più alto si dice otticamente più denso.
+
+\begin{center}
+\small
+\begin{tabular}{@{}lc@{\qquad}lc@{}}
+\toprule
+Mezzo & $n$ & Mezzo & $n$ \\
+\midrule
+vuoto & 1 (esatto) & cornea & 1,38 \\
+aria & $1{,}0003 \approx 1$ & cristallino & circa 1,40 \\
+acqua, umor acqueo & 1,33 & vetro comune & circa 1,5 \\
+alcol etilico & 1,36 & diamante & 2,42 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{quesitolampo}{ql:ud7-indice}
+Nel vuoto una luce gialla ha lunghezza d'onda di \SI{600}{\nano\metre}. In un vetro con indice di rifrazione $n = 1{,}5$ la sua lunghezza d'onda, in nanometri, è \completa.
+\end{quesitolampo}
+
+\subsection{Le leggi della riflessione e della rifrazione}
+
+Un raggio che arriva sulla superficie fra due mezzi in generale si divide in due: un raggio \textbf{riflesso}, che torna nel primo mezzo, e un raggio \textbf{rifratto}, che passa nel secondo (figura~\ref{fig:ud7-rifrazione}).
+
+\begin{figure}[h]
+\centering
+\input{ud7/figure/rifrazione}
+\caption{Riflessione e rifrazione. Gli angoli si misurano dalla normale. Passando in un mezzo più denso il raggio rifratto si avvicina alla normale.}
+\label{fig:ud7-rifrazione}
+\end{figure}
+
+\begin{formula}[Riflessione e rifrazione]
+\theta_1' = \theta_1
+\qquad\qquad
+n_1 \sin\theta_1 = n_2 \sin\theta_2 \quad \text{(legge di Snell)}
+\end{formula}
+
+Raggio incidente, raggio riflesso, raggio rifratto e normale stanno nello stesso piano. Nella riflessione l'angolo di riflessione $\theta_1'$ è uguale all'angolo di incidenza $\theta_1$. Nella rifrazione vale la legge di Snell, da cui:
+\begin{itemize}
+  \item passando in un mezzo più denso ($n_2 > n_1$) il raggio si avvicina alla normale ($\theta_2 < \theta_1$);
+  \item passando in un mezzo meno denso ($n_2 < n_1$) il raggio si allontana dalla normale;
+  \item un raggio perpendicolare alla superficie ($\theta_1 = 0$) passa senza essere deviato.
+\end{itemize}
+L'indice di rifrazione dipende un poco dalla lunghezza d'onda: il violetto viene deviato più del rosso. È così che un prisma separa i colori della luce bianca.
+
+\begin{richiamo}{il seno di un angolo}
+In un triangolo rettangolo il seno di un angolo è il rapporto fra il cateto opposto e l'ipotenusa: vale 0 per un angolo di \ang{0} e 1 per un angolo di \ang{90}, e cresce con l'angolo. I valori da ricordare:
+\[
+  \sin \ang{30} = 0{,}5 \qquad \sin \ang{45} = \frac{\sqrt 2}{2} \approx 0{,}71 \qquad \sin \ang{60} = \frac{\sqrt 3}{2} \approx 0{,}87 \qquad \sin \ang{90} = 1
+\]
+\end{richiamo}
+
+\begin{esempio}
+Un raggio di luce passa dall'aria ($n_1 = 1$) in un materiale trasparente con $n_2 \approx 1{,}41$ (cioè $\sqrt 2$), con angolo di incidenza di \ang{45}. Quanto vale l'angolo di rifrazione? Con quale velocità viaggia la luce nel materiale?
+
+Dalla legge di Snell:
+\[
+  \sin\theta_2 = \frac{n_1}{n_2} \sin\theta_1 = \frac{1}{\sqrt 2} \cdot \frac{\sqrt 2}{2} = \frac{1}{2} = 0{,}5
+  \qquad\Longrightarrow\qquad
+  \theta_2 = \ang{30}
+\]
+Il raggio si avvicina alla normale, perché passa in un mezzo più denso. La velocità nel materiale è
+\[
+  v = \frac{c}{\sqrt 2} = \frac{\sqrt 2}{2}\,c \approx 0{,}71 \cdot \SI{3e8}{\metre\per\second} \approx \SI{2,1e8}{\metre\per\second}
+\]
+\end{esempio}
+
+\begin{approfondimento}{angolo limite, riflessione totale ed endoscopia}
+Se la luce passa da un mezzo più denso a uno meno denso ($n_1 > n_2$), il raggio rifratto si allontana dalla normale. C'è un angolo di incidenza, l'\textbf{angolo limite} $\theta_\ell$, per cui il raggio rifratto esce radente alla superficie ($\theta_2 = \ang{90}$): dalla legge di Snell, $\sin\theta_\ell = n_2/n_1$. Per angoli di incidenza più grandi il raggio rifratto non c'è più e tutta la luce viene riflessa: è la \textbf{riflessione totale}. Per il vetro in aria, $\sin\theta_\ell = 1/1{,}5 \approx 0{,}67$: poco meno di $\sin\ang{45} \approx 0{,}71$, quindi l'angolo limite è poco meno di \ang{45} (circa \ang{42}).
+
+Una fibra ottica ha un nucleo con indice $n_1$ circondato da un rivestimento con indice $n_2 < n_1$. La luce che colpisce la parete con un angolo maggiore dell'angolo limite resta intrappolata e percorre la fibra anche quando questa è curva. Fasci di migliaia di fibre portano luce e immagini negli endoscopi (gastroscopia, colonscopia, artroscopia).
+\end{approfondimento}
+
+\subsection{Le lenti convergenti sottili}
+
+Una lente è un corpo trasparente limitato da due superfici curve; è \textbf{sottile} quando il suo spessore è piccolo rispetto alle distanze in gioco. Una lente \textbf{convergente}, più spessa al centro che ai bordi, fa passare per un punto dietro la lente, il \textbf{fuoco} $F'$, i raggi che arrivano paralleli all'asse ottico. La distanza fra il centro della lente e il fuoco è la \textbf{distanza focale} $f$. Ogni lente ha due fuochi alla stessa distanza $f$: $F$ davanti alla lente, dalla parte da cui arriva la luce, e $F'$ dietro.
+
+Quanto una lente devia i raggi si misura con il \textbf{potere diottrico} $D = 1/f$. Con $f$ in metri, $D$ si misura in diottrie (D): una lente con $f = \SI{50}{\centi\metre} = \SI{0,5}{\metre}$ ha $D = \SI{2}{D}$. Più corta è la focale, più alto è il potere diottrico.
+
+Per trovare l'immagine di un oggetto bastano due dei tre \textbf{raggi notevoli} (figura~\ref{fig:ud7-lente}):
+\begin{enumerate}
+  \item il raggio parallelo all'asse, dopo la lente, passa per il fuoco $F'$;
+  \item il raggio che passa per il centro della lente prosegue senza essere deviato;
+  \item il raggio che passa per il fuoco $F$, davanti alla lente, esce parallelo all'asse.
+\end{enumerate}
+
+\begin{figure}[h]
+\centering
+\input{ud7/figure/lente}
+\caption{I tre raggi notevoli di una lente convergente. L'oggetto $AB$ è oltre $2F$: l'immagine $A'B'$ è reale, capovolta e più piccola, fra $F'$ e $2F'$.}
+\label{fig:ud7-lente}
+\end{figure}
+
+L'oggetto e la sua immagine si chiamano \textbf{punti coniugati}. La distanza $p$ dell'oggetto dalla lente e la distanza $q$ dell'immagine sono legate dalla \textbf{legge dei punti coniugati}:
+
+\begin{formula}[Lente sottile]
+\frac{1}{p} + \frac{1}{q} = \frac{1}{f}
+\qquad\qquad
+m = \frac{h_i}{h_o} = -\frac{q}{p}
+\qquad\qquad
+D = \frac{1}{f}
+\end{formula}
+
+$m$ è l'\textbf{ingrandimento}: il rapporto fra l'altezza dell'immagine $h_i$ e quella dell'oggetto $h_o$. Le regole dei segni, per una lente convergente con la luce che arriva da sinistra:
+\begin{itemize}
+  \item $p > 0$ per un oggetto reale, davanti alla lente;
+  \item $q > 0$: immagine \textbf{reale}, dall'altra parte della lente, che si può raccogliere su uno schermo;
+  \item $q < 0$: immagine \textbf{virtuale}, dalla stessa parte dell'oggetto, che si vede solo guardando attraverso la lente;
+  \item $m < 0$: immagine capovolta; $m > 0$: diritta. Se $|m| > 1$ l'immagine è ingrandita, se $|m| < 1$ è rimpicciolita.
+\end{itemize}
+
+\begin{center}
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+Oggetto & Immagine & Com'è & Dove si usa \\
+\midrule
+molto lontano & nel fuoco, $q = f$ & reale & \\
+oltre $2f$ & fra $f$ e $2f$ & reale, capovolta, rimpicciolita & occhio, fotocamera \\
+in $2f$ & in $2f$ & reale, capovolta, uguale ($m = -1$) & \\
+fra $f$ e $2f$ & oltre $2f$ & reale, capovolta, ingrandita & proiettore \\
+nel fuoco & all'infinito & nessuna immagine & \\
+fra la lente e $f$ & davanti alla lente, $q < 0$ & virtuale, diritta, ingrandita & lente d'ingrandimento \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{esempio}
+Un oggetto alto \SI{2}{\centi\metre} si trova a \SI{30}{\centi\metre} da una lente convergente con $f = \SI{10}{\centi\metre}$. Dove si forma l'immagine e com'è?
+
+Dalla legge dei punti coniugati:
+\[
+  \frac{1}{q} = \frac{1}{f} - \frac{1}{p} = \frac{1}{10} - \frac{1}{30} = \frac{3}{30} - \frac{1}{30} = \frac{2}{30} = \frac{1}{15}\,\si[per-mode=power]{\centi\metre\tothe{-1}}
+  \qquad\Longrightarrow\qquad
+  q = \SI{15}{\centi\metre}
+\]
+\[
+  m = -\frac{q}{p} = -\frac{15}{30} = -0{,}5
+  \qquad\qquad
+  h_i = m\,h_o = -0{,}5 \cdot \SI{2}{\centi\metre} = \SI{-1}{\centi\metre}
+\]
+L'immagine è reale ($q > 0$), a \SI{15}{\centi\metre} oltre la lente, capovolta ($m < 0$) e alta la metà dell'oggetto.
+\end{esempio}
+
+\begin{attenzione}[focale in metri per le diottrie]
+Nella legge dei punti coniugati $p$, $q$ e $f$ possono stare in qualsiasi unità, purché sia la stessa per tutti. Nel potere diottrico, invece, $f$ va in metri: una lente con $f = \SI{20}{\centi\metre}$ ha $D = 1/\SI{0,2}{\metre} = \SI{5}{D}$, non $1/20$.
+\end{attenzione}
+
+\begin{quesitolampo}{ql:ud7-lente}
+Un oggetto si trova a \SI{20}{\centi\metre} da una lente convergente con distanza focale di \SI{10}{\centi\metre}. L'immagine è
+\begin{opzionilunghe}
+  \item virtuale e diritta, a \SI{20}{\centi\metre} davanti alla lente
+  \item reale e capovolta, a \SI{10}{\centi\metre} oltre la lente, alta la metà dell'oggetto
+  \item reale e capovolta, a \SI{20}{\centi\metre} oltre la lente, alta come l'oggetto
+  \item reale e diritta, a \SI{20}{\centi\metre} oltre la lente, alta il doppio dell'oggetto
+  \item virtuale e capovolta, all'infinito
+\end{opzionilunghe}
+\end{quesitolampo}
+
+\begin{applicazione}{l'occhio e la correzione con le lenti}
+Cornea e cristallino formano insieme un sistema convergente di circa \SI{60}{D}, che forma sulla retina un'immagine reale, capovolta e rimpicciolita; la cornea dà circa due terzi del potere diottrico. La distanza fra cristallino e retina è fissa: per mettere a fuoco oggetti a distanze diverse il cristallino cambia curvatura, e quindi potere diottrico. È l'\textbf{accomodazione}. Il punto più vicino che l'occhio vede nitido è il \textbf{punto prossimo}, a circa \SI{25}{\centi\metre} in un adulto giovane.
+
+Nell'occhio ipermetrope, e in quello presbite che con l'età perde accomodazione, il punto prossimo è più lontano. Una lente convergente davanti all'occhio forma, di un testo a \SI{25}{\centi\metre}, un'immagine virtuale nel punto prossimo del paziente. Se il punto prossimo è a \SI{1}{\metre}: $p = \SI{0,25}{\metre}$ e $q = \SI{-1}{\metre}$ (immagine virtuale), quindi
+\[
+  D = \frac{1}{p} + \frac{1}{q} = \frac{1}{\SI{0,25}{\metre}} - \frac{1}{\SI{1}{\metre}} = \SI{4}{D} - \SI{1}{D} = \SI{3}{D}
+\]
+trascurando la distanza fra la lente e l'occhio.
+\end{applicazione}
 
 \riepilogoformule

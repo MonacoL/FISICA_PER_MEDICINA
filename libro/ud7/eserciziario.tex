@@ -55,9 +55,15 @@ Problema~\ref{pb:ud7-piombo} & (a) \SI{2,0}{\centi\metre}; (b) \SI{3,5}{\centi\m
 Problema~\ref{pb:ud7-tecnezio} & (a) \SI{800}{\mega\becquerel}; (b) \num{1,3e13}; (c) \SI{25}{\mega\becquerel} \\
 Quesito~\ref{qe:ud7-beta} & B \\
 Quesito~\ref{qe:ud7-assorbanza} & 1 \\
+Quesito lampo~\ref{ql:ud7-lambda} & A \\
+Quesito lampo~\ref{ql:ud7-spettro} & C \\
+Quesito lampo~\ref{ql:ud7-fotone} & 2 \\
+Quesito lampo~\ref{ql:ud7-ionizzanti} & E \\
 Quesito lampo~\ref{ql:ud7-hvl} & D \\
 Quesito lampo~\ref{ql:ud7-alfa} & 234 \\
 Quesito lampo~\ref{ql:ud7-emivita} & B \\
+Quesito lampo~\ref{ql:ud7-indice} & 400 \\
+Quesito lampo~\ref{ql:ud7-lente} & C \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -105,6 +111,36 @@ Lo spessore emivalente è quello per cui $e^{-\mu x} = 1/2$:
 
 \subsection*{Quesiti lampo}
 
+\soluzionelampo{ql:ud7-lambda}
+\textbf{Risposta A.} Nel vuoto tutte le onde elettromagnetiche hanno la stessa velocità $c = \lambda f$. Se $f$ raddoppia e $c$ resta uguale, $\lambda$ si dimezza.
+\begin{itemize}
+  \item B) Tratta $\lambda$ come inversamente proporzionale al quadrato della frequenza.
+  \item C) Confonde la lunghezza d'onda con la velocità, che nel vuoto è la stessa per tutte le onde.
+  \item D) Tratta $\lambda$ come direttamente proporzionale a $f$.
+  \item E) Sbaglia due volte: proporzionalità diretta e al quadrato.
+\end{itemize}
+
+\soluzionelampo{ql:ud7-spettro}
+\textbf{Risposta C.} In ordine di frequenza crescente lo spettro è radio, microonde, infrarosso, visibile, ultravioletto, X, $\gamma$; la lunghezza d'onda cresce nell'ordine opposto: $\gamma$, X, visibile, infrarosso, microonde.
+\begin{itemize}
+  \item A) Mette i raggi $\gamma$ fra l'ultravioletto e il visibile.
+  \item B) È l'ordine di lunghezza d'onda \emph{decrescente}: scambia frequenza e lunghezza d'onda.
+  \item D) Mette l'ultravioletto fra il visibile e l'infrarosso.
+  \item E) Mette le microonde prima delle onde radio e salta da visibile a $\gamma$ nel verso sbagliato.
+\end{itemize}
+
+\soluzionelampo{ql:ud7-fotone}
+\textbf{Risposta: 2.} Con la formula pratica $E \approx 1240/\lambda = 1240/620 = \SI{2}{\electronvolt}$.
+
+\soluzionelampo{ql:ud7-ionizzanti}
+\textbf{Risposta E.} Una radiazione è ionizzante se il singolo fotone ha un'energia maggiore dell'energia di ionizzazione, circa \SI{10}{\electronvolt}. Un fotone di microonde ha circa \SI{e-5}{\electronvolt}, troppo poco, anche se i fotoni sono moltissimi.
+\begin{itemize}
+  \item A) Confonde l'intensità del fascio con l'energia del singolo fotone.
+  \item B) Una lunghezza d'onda lunga vuol dire fotoni di energia \emph{bassa}.
+  \item C) Essere assorbita non vuol dire ionizzare: i fotoni visibili hanno circa \SIrange{2}{3}{\electronvolt}.
+  \item D) I raggi X sono ionizzanti anche se non hanno carica: conta l'energia del fotone.
+\end{itemize}
+
 \soluzionelampo{ql:ud7-hvl}
 \textbf{Risposta D.} Ridurre a $1/4 = 1/2^2$ vuol dire attraversare 2 spessori emivalenti, quindi $x_{1/2} = \SI{1}{\centi\metre}$. \SI{5}{\centi\metre} sono 5 spessori emivalenti: $I/I_0 = 1/2^5 = 1/32$.
 \begin{itemize}
@@ -125,4 +161,16 @@ $\nuclide{238}{92}{U} \to \nuclide{234}{90}{Th} + \nuclide{4}{2}{He}$.
   \item C) Pensa che l'emivita sia sempre metà del tempo trascorso.
   \item D) Considera tutto l'intervallo come una sola emivita: in un'emivita l'attività si dimezza soltanto.
   \item E) Moltiplica invece di dividere.
+\end{itemize}
+
+\soluzionelampo{ql:ud7-indice}
+\textbf{Risposta: 400.} Passando nel vetro la frequenza non cambia e la velocità diventa $c/n$, quindi anche la lunghezza d'onda si divide per $n$: $\lambda = \SI{600}{\nano\metre}/1{,}5 = \SI{400}{\nano\metre}$.
+
+\soluzionelampo{ql:ud7-lente}
+\textbf{Risposta C.} L'oggetto è a $p = 2f$. Dalla legge dei punti coniugati $1/q = 1/10 - 1/20 = 1/20$, quindi $q = \SI{20}{\centi\metre}$: l'immagine è reale, oltre la lente. L'ingrandimento è $m = -q/p = -1$: capovolta e alta come l'oggetto.
+\begin{itemize}
+  \item A) L'immagine è virtuale solo se l'oggetto è fra la lente e il fuoco.
+  \item B) Mette l'immagine nel fuoco, come se l'oggetto fosse molto lontano.
+  \item D) Con una sola lente convergente un'immagine reale è sempre capovolta, e qui $|m| = 1$.
+  \item E) L'immagine va all'infinito solo quando l'oggetto è nel fuoco.
 \end{itemize}
