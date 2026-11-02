@@ -1,0 +1,206 @@
+# Esercizi della UD4: fonte unica (ADR 0006). `uv run controllo ud4` ne ricava
+# generati/eserciziario.tex, un generati/lampo-<id>.tex per ogni quesito lampo,
+# la pagina web build/web/ud4.html, e ricalcola ogni risultato.
+#
+# Il formato è descritto in testa a libro/ud7/esercizi.toml.
+# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
+# arriveranno con il ticket dell'eserciziario UD4.
+
+titolo = "Eserciziario UD4 · Onde meccaniche"
+
+# ==================================================================== quesiti lampo, in ordine di dispensa
+
+[[quesito]]
+id = "ud4-respiro"
+tipo = "completamento"
+lampo = true
+testo = '''Un paziente a riposo compie {{n}} atti respiratori al minuto. Il periodo del respiro, in secondi, è \completa.'''
+dati.n = { valore = 15 }
+calcolo = "60 / n"
+risposta = "4"
+soluzione = '''La frequenza è il numero di cicli diviso per il tempo in cui avvengono. Un minuto è \SI{60}{\second}:
+\[
+  f = \frac{15}{\SI{60}{\second}} = \SI{0,25}{\hertz}
+\]
+Il periodo è l'inverso della frequenza:
+\[
+  T = \frac{1}{f} = \frac{1}{\SI{0,25}{\hertz}} = \SI{4}{\second}
+\]
+Lo stesso risultato viene dal ragionamento diretto: 15 respiri in \SI{60}{\second} vuol dire un respiro ogni $60/15 = 4$ secondi. Chi scrive 0,25 ha dato la frequenza invece del periodo.'''
+
+[[quesito]]
+id = "ud4-lunghezza"
+tipo = "multipla"
+lampo = true
+testo = '''Una sonda ecografica emette ultrasuoni di frequenza {{f}} in un tessuto in cui il suono si propaga a {{v}}. La lunghezza d'onda degli ultrasuoni nel tessuto è'''
+dati.f = { valore = 3, unita = "MHz" }
+dati.v = { valore = 1500, unita = "m/s" }
+corretta = "D"
+calcolo = "v / (f * 1e6)"
+soluzione = '''La frequenza in hertz è $\SI{3}{\mega\hertz} = \SI{3e6}{\hertz}$. Dalla relazione $v = \lambda f$:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{1,5e3}{\metre\per\second}}{\SI{3e6}{\hertz}} = \frac{1{,}5}{3} \cdot 10^{3-6}\,\si{\metre} = 0{,}5 \cdot 10^{-3}\,\si{\metre} = \SI{0,5}{\milli\metre}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{2e3}{\metre}'''
+  commento = '''Rovescia la formula: $f/v = \num{3e6}/1500 = 2000$, che non è nemmeno una lunghezza (si misura in \si{\per\metre}).'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,5}{\metre}'''
+  commento = '''Legge i megahertz come kilohertz: $1500/3000 = 0{,}5$. Il prefisso mega vale $10^{6}$, non $10^{3}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{4,5e9}{\metre}'''
+  commento = '''Moltiplica velocità e frequenza invece di dividere: $v f$ non è una lunghezza (si misura in \si{\metre\per\second\squared}).'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,5}{\milli\metre}'''
+  valore = 5e-4
+  [[quesito.opzione]]
+  testo = '''\SI{0,5}{\micro\metre}'''
+  commento = '''Legge i megahertz come gigahertz, $10^{9}$ invece di $10^{6}$: il risultato è mille volte troppo piccolo.'''
+
+[[quesito]]
+id = "ud4-corda"
+tipo = "multipla"
+lampo = true
+testo = '''La tensione di una corda viene quadruplicata, senza cambiare la corda. La velocità delle onde trasversali sulla corda'''
+corretta = "B"
+calcolo = "math.sqrt(4)"
+soluzione = '''La velocità delle onde su una corda è $v = \sqrt{F/\mu}$: la densità lineare $\mu$ resta la stessa, la tensione $F$ diventa $4F$. Quindi
+\[
+  v' = \sqrt{\frac{4F}{\mu}} = \sqrt{4} \cdot \sqrt{\frac{F}{\mu}} = 2v
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''diventa 4 volte più grande'''
+  commento = '''Dimentica la radice quadrata: la velocità è proporzionale alla radice della tensione, non alla tensione.'''
+  [[quesito.opzione]]
+  testo = '''raddoppia'''
+  valore = 2
+  [[quesito.opzione]]
+  testo = '''si dimezza'''
+  commento = '''Rovescia la frazione sotto la radice: è la densità lineare a stare al denominatore. Una corda più tesa trasmette la perturbazione più in fretta.'''
+  [[quesito.opzione]]
+  testo = '''resta la stessa'''
+  commento = '''Pensa che la velocità dipenda solo dalla sorgente. La velocità dipende dal mezzo, e la tensione è una proprietà della corda: cambiandola cambia il mezzo.'''
+  [[quesito.opzione]]
+  testo = '''diventa 16 volte più grande'''
+  commento = '''Eleva al quadrato invece di estrarre la radice: $4^2 = 16$ invece di $\sqrt{4} = 2$.'''
+
+[[quesito]]
+id = "ud4-interferenza"
+tipo = "multipla"
+lampo = true
+testo = '''Due altoparlanti, collegati allo stesso amplificatore, emettono in fase un suono di frequenza {{f}}; la velocità del suono nell'aria è {{v}}. Un ascoltatore si trova a {{r1}} da un altoparlante e a {{r2}} dall'altro. Nel punto in cui si trova l'ascoltatore l'interferenza è'''
+dati.f = { valore = 170, unita = "Hz" }
+dati.v = { valore = 340, unita = "m/s" }
+dati.r1 = { valore = "5,0", unita = "m" }
+dati.r2 = { valore = "8,0", unita = "m" }
+corretta = "E"
+calcolo = "(r2 - r1) / (v / f)"
+soluzione = '''Prima si calcola la lunghezza d'onda:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{340}{\metre\per\second}}{\SI{170}{\hertz}} = \SI{2,0}{\metre}
+\]
+La differenza di cammino è $\Delta r = \SI{8,0}{\metre} - \SI{5,0}{\metre} = \SI{3,0}{\metre}$. In lunghezze d'onda:
+\[
+  \frac{\Delta r}{\lambda} = \frac{\SI{3,0}{\metre}}{\SI{2,0}{\metre}} = 1{,}5 = 1 + \frac{1}{2}
+\]
+La differenza di cammino è un numero intero di lunghezze d'onda più mezza: le due onde arrivano in opposizione di fase e l'interferenza è distruttiva.'''
+
+  [[quesito.opzione]]
+  testo = '''costruttiva, perché le due sorgenti emettono in fase'''
+  commento = '''Le onde partono in fase, ma percorrono cammini diversi: è la differenza di cammino a decidere come arrivano.'''
+  [[quesito.opzione]]
+  testo = '''costruttiva, perché la differenza di cammino è una volta e mezza la lunghezza d'onda'''
+  commento = '''Il conto è giusto, ma la regola è rovesciata: una differenza di cammino pari a un numero intero di lunghezze d'onda più mezza dà interferenza distruttiva.'''
+  [[quesito.opzione]]
+  testo = '''costruttiva, perché la differenza di cammino è \SI{3}{\metre}, un numero intero di metri'''
+  commento = '''La differenza di cammino va confrontata con la lunghezza d'onda, non con il metro: \SI{3}{\metre} sono 1,5 lunghezze d'onda.'''
+  [[quesito.opzione]]
+  testo = '''distruttiva, perché basta una differenza di cammino qualsiasi per avere interferenza distruttiva'''
+  commento = '''Se la differenza di cammino fosse un numero intero di lunghezze d'onda, per esempio \SI{4}{\metre}, l'interferenza sarebbe costruttiva.'''
+  [[quesito.opzione]]
+  testo = '''distruttiva, perché la differenza di cammino è una volta e mezza la lunghezza d'onda'''
+  valore = 1.5
+
+[[quesito]]
+id = "ud4-distanza"
+tipo = "completamento"
+lampo = true
+testo = '''Un altoparlante, che si può trattare come una sorgente piccola che emette allo stesso modo in tutte le direzioni, produce a {{r1}} di distanza un'intensità sonora $I$. A {{r2}} di distanza l'intensità vale $I$ diviso \completa.'''
+dati.r1 = { valore = 1, unita = "m" }
+dati.r2 = { valore = 3, unita = "m" }
+calcolo = "(r2 / r1)**2"
+risposta = "9"
+soluzione = '''La potenza della sorgente si distribuisce su una sfera di superficie $4\pi r^2$, quindi l'intensità è inversamente proporzionale al quadrato della distanza:
+\[
+  \frac{I_2}{I_1} = \left(\frac{r_1}{r_2}\right)^{2} = \left(\frac{\SI{1}{\metre}}{\SI{3}{\metre}}\right)^{2} = \frac{1}{9}
+\]
+A \SI{3}{\metre} l'intensità è $I/9$. Chi scrive 3 ha usato il rapporto delle distanze senza elevarlo al quadrato; chi scrive 4 ha usato la differenza delle distanze, $\SI{3}{\metre} - \SI{1}{\metre} = \SI{2}{\metre}$, invece del rapporto.'''
+
+[[quesito]]
+id = "ud4-decibel"
+tipo = "multipla"
+lampo = true
+testo = '''In una corsia d'ospedale l'intensità del suono è \SI{e-5}{\watt\per\metre\squared}. Con la soglia di udibilità $I_0 = \SI{e-12}{\watt\per\metre\squared}$, il livello di intensità sonora è'''
+corretta = "C"
+calcolo = "10 * math.log10(1e-5 / 1e-12)"
+soluzione = '''Dalla definizione del livello di intensità sonora:
+\[
+  \beta = 10 \log_{10}\frac{I}{I_0} = 10 \log_{10}\frac{10^{-5}}{10^{-12}} = 10 \log_{10} 10^{-5-(-12)} = 10 \log_{10} 10^{7} = 10 \cdot 7\,\si{\deci\bel} = \SI{70}{\deci\bel}
+\]
+È il rumore di una strada trafficata: troppo, per una corsia (sezione~\ref{sec:ud4-suono}).'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{-50}{\deci\bel}'''
+  commento = '''Calcola $10 \log_{10} 10^{-5}$ senza dividere per $I_0$: il livello si misura sempre rispetto alla soglia di udibilità.'''
+  [[quesito.opzione]]
+  testo = '''\SI{7}{\deci\bel}'''
+  commento = '''Dimentica il fattore 10 davanti al logaritmo: 7 è il livello in bel, non in decibel.'''
+  [[quesito.opzione]]
+  testo = '''\SI{70}{\deci\bel}'''
+  valore = 70
+  [[quesito.opzione]]
+  testo = '''\SI{170}{\deci\bel}'''
+  commento = '''Sbaglia il segno nel quoziente delle potenze: $5 + 12 = 17$ invece di $-5-(-12) = 7$. Sarebbe un livello oltre la soglia del dolore.'''
+  [[quesito.opzione]]
+  testo = '''\SI{e7}{\deci\bel}'''
+  commento = '''Si ferma al rapporto $I/I_0 = 10^{7}$ e dimentica il logaritmo.'''
+
+[[quesito]]
+id = "ud4-ecografia"
+tipo = "completamento"
+lampo = true
+testo = '''In un esame ecografico l'eco di una struttura torna alla sonda {{t}} dopo l'emissione dell'impulso. Con una velocità del suono nei tessuti di {{v}}, la struttura si trova a una profondità, in centimetri, di \completa.'''
+dati.t = { valore = 100, unita = "\\micro\\second" }
+dati.v = { valore = 1540, unita = "m/s" }
+calcolo = "v * t * 1e-6 / 2 * 100"
+risposta = "7,7"
+soluzione = '''In \SI{100}{\micro\second} $= \SI{e-4}{\second}$ l'impulso va dalla sonda alla struttura e torna indietro: percorre due volte la profondità $d$. Quindi $2d = vt$ e
+\[
+  d = \frac{v t}{2} = \frac{\SI{1540}{\metre\per\second} \cdot \SI{e-4}{\second}}{2} = \frac{\SI{0,154}{\metre}}{2} = \SI{0,077}{\metre} = \SI{7,7}{\centi\metre}
+\]
+Chi scrive 15,4 ha dimenticato che il tempo misurato è quello di andata e ritorno.'''
+
+[[quesito]]
+id = "ud4-doppler"
+tipo = "multipla"
+lampo = true
+testo = '''Un'ambulanza con la sirena accesa si avvicina a un pedone fermo, gli passa accanto e si allontana. Rispetto alla frequenza emessa dalla sirena, il pedone sente una frequenza'''
+corretta = "A"
+soluzione = '''È l'effetto Doppler. Mentre la sorgente si avvicina, i fronti d'onda davanti a lei sono più ravvicinati: la lunghezza d'onda che arriva al pedone è più corta e la frequenza più alta. Mentre si allontana, i fronti d'onda dietro di lei sono più distanziati: la frequenza è più bassa. Quando l'ambulanza passa accanto al pedone il suono passa di colpo dal più acuto al più grave.'''
+
+  [[quesito.opzione]]
+  testo = '''più alta mentre l'ambulanza si avvicina, più bassa mentre si allontana'''
+  [[quesito.opzione]]
+  testo = '''più bassa mentre l'ambulanza si avvicina, più alta mentre si allontana'''
+  commento = '''Rovescia l'effetto: è davanti alla sorgente in moto che i fronti d'onda si addensano, quindi la frequenza sale mentre la sorgente si avvicina.'''
+  [[quesito.opzione]]
+  testo = '''uguale: cambia solo l'intensità del suono, maggiore quando l'ambulanza è vicina'''
+  commento = '''L'intensità cambia davvero con la distanza, ma per l'effetto Doppler cambia anche la frequenza percepita: il moto della sorgente cambia la lunghezza d'onda che arriva all'ascoltatore.'''
+  [[quesito.opzione]]
+  testo = '''tanto più alta quanto più l'ambulanza è vicina, qualunque sia il verso del moto'''
+  commento = '''L'effetto Doppler dipende dalla velocità con cui la sorgente si avvicina o si allontana, non dalla distanza.'''
+  [[quesito.opzione]]
+  testo = '''più alta sia mentre si avvicina sia mentre si allontana, perché l'ambulanza è in moto'''
+  commento = '''Conta il verso del moto: se la distanza diminuisce la frequenza sale, se la distanza aumenta la frequenza scende.'''

@@ -1,0 +1,16 @@
+% Effetto Doppler: la sorgente si muove verso destra a metà della velocità
+% dell'onda. Ogni cerchio è un fronte d'onda emesso quando la sorgente stava
+% nel suo centro: davanti alla sorgente i fronti sono più vicini.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \foreach \t in {1,...,5} {
+    \draw[formula, thick] ({-0.25*\t},0) circle ({0.5*\t});
+    \fill[formula!60] ({-0.25*\t},0) circle (1.1pt);
+  }
+  \fill[esempio] (0,0) circle (2.5pt);
+  \draw[->, esempio, very thick] (0,0) -- (0.7,0) node[pos=0.6, below=1pt] {$v_s$};
+  % osservatori
+  \fill[medica] (1.9,0) circle (3pt);
+  \node[align=left, anchor=west] at (2.1,0) {osservatore davanti:\\$\lambda$ più corta, $f$ più alta};
+  \fill[medica] (-4.3,0) circle (3pt);
+  \node[align=right, anchor=east] at (-4.5,0) {osservatore dietro:\\$\lambda$ più lunga, $f$ più bassa};
+\end{tikzpicture}
