@@ -1,0 +1,37 @@
+% Carrucola del piede in una trazione ortopedica (problema ud2-dinamica-trazione):
+% la gamba arriva da sinistra, i due tratti di fune partono verso il fondo del
+% letto, a 30 gradi sopra e sotto l'orizzontale. Su ogni tratto la tensione F_T;
+% per il tratto in alto sono tratteggiate le componenti F_T cos 30 (orizzontale)
+% e F_T sin 30 (verticale). La risultante F, orizzontale, è in grigio scuro.
+\begin{tikzpicture}[>=Stealth, font=\small, scale=1.1]
+  \coordinate (K) at (0,0);
+  % gamba e piede
+  \fill[esempio!25] (-3.2,-0.25) rectangle (-0.55,0.25);
+  \draw[esempio, thick] (-3.2,0.25) -- (-0.55,0.25) (-3.2,-0.25) -- (-0.55,-0.25);
+  \node[esempio, above] at (-2.0,0.25) {gamba};
+  % carrucola del piede
+  \filldraw[fill=richiamo!25, draw=black, thick] (K) circle (0.45);
+  \fill (K) circle (1.3pt);
+  % tratti di fune, verso il fondo del letto
+  \draw[thick] ($(K)+(120:0.45)$) -- ++(30:3.6);
+  \draw[thick] ($(K)+(240:0.45)$) -- ++(-30:3.6);
+  \node[right] at ($(K)+(120:0.45)+(30:3.6)$) {al letto};
+  \node[right] at ($(K)+(240:0.45)+(-30:3.6)$) {al letto};
+  % orizzontale di riferimento e angoli
+  \draw[dotted] (K) -- (2.25,0);
+  \draw (1.0,0) arc (0:30:1.0);
+  \node at (15:1.35) {\ang{30}};
+  \draw (1.0,0) arc (0:-30:1.0);
+  \node at (-15:1.35) {\ang{30}};
+  % tensioni applicate alla carrucola
+  \draw[->, formula, very thick] (K) -- (30:2.6) coordinate (T) node[right] {$\vec F_T$};
+  \draw[->, formula, very thick] (K) -- (-30:2.6) node[right] {$\vec F_T$};
+  % componenti della tensione in alto
+  \draw[->, formula!70, thick, dashed] (K) -- (T |- K) coordinate (Tx);
+  \draw[->, formula!70, thick, dashed] (Tx) -- (T);
+  \node[formula, right] at ($(Tx)!0.5!(T)$) {$F_T\sin\ang{30}$};
+  \node[formula, right] at (Tx) {$F_T\cos\ang{30}$};
+  % risultante
+  \draw[->, black!75, very thick] (0,-2.7) -- (3.3,-2.7) node[right] {$\vec F = 2F_T\cos\ang{30}$};
+  \node[left] at (0,-2.7) {risultante:};
+\end{tikzpicture}
