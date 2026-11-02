@@ -3,13 +3,2919 @@
 # la pagina web build/web/ud2.html, e ricalcola ogni risultato.
 #
 # Il formato è descritto in testa a libro/ud7/esercizi.toml.
-# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
-# arrivano con il ticket dell'eserciziario UD2.
 
 titolo = "Eserciziario UD2 · Meccanica"
 
 [costanti]
 g = 10
+sin30 = 0.5
+cos30 = 0.87
+sin45 = 0.71
+G = 6.67e-11
+sin60 = 0.87
+
+# ==================================================================== quesiti lampo, in ordine di dispensa
+
+# ==================================================================== problemi
+
+[[problema]]
+id = "ud2-cinematica-nervo"
+livello = 1
+testo = '''Un impulso nervoso viaggia lungo una fibra motoria mielinizzata con velocità costante di {{v}}. Quanto tempo impiega a percorrere i {{d}} che separano il midollo spinale dai muscoli del piede?'''
+dati.v = { valore = 60, unita = "m/s" }
+dati.d = { valore = "1,2", unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "d / v"
+  risultato = { valore = 0.020, unita = "s", cifre = 2 }
+  soluzione = '''L'impulso si muove di moto uniforme, quindi $\Delta x = v\,t$:
+\[
+  t = \frac{\Delta x}{v} = \frac{\SI{1,2}{\metre}}{\SI{60}{\metre\per\second}} = \SI{0,020}{\second} = \SI{20}{\milli\second}
+\]
+Venti millesimi di secondo: è uno dei motivi per cui il tempo di reazione non può scendere sotto un certo limite.'''
+
+[[problema]]
+id = "ud2-cinematica-ambulanza"
+livello = 1
+testo = '''Un'ambulanza parte da ferma e raggiunge la velocità di {{v}} in {{t}}. Calcola la sua accelerazione media.'''
+dati.v = { valore = 90, unita = "\\kilo\\metre\\per\\hour" }
+dati.t = { valore = "12,5", unita = "s" }
+
+  [[problema.parte]]
+  calcolo = "(v / 3.6) / t"
+  risultato = { valore = 2.0, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  soluzione = '''La velocità finale in unità del SI è $90/3{,}6 = \SI{25}{\metre\per\second}$. Quella iniziale è zero, quindi
+\[
+  a_m = \frac{v_2 - v_1}{\Delta t} = \frac{\SI{25}{\metre\per\second} - \SI{0}{\metre\per\second}}{\SI{12,5}{\second}} = \SI{2,0}{\metre\per\second\squared}
+\]
+In media la velocità cresce di \SI{2}{\metre\per\second} ogni secondo.'''
+
+[[problema]]
+id = "ud2-cinematica-flacone"
+livello = 1
+testo = '''Un flacone di soluzione fisiologica scivola da una mensola alta {{h}} e cade da fermo fino al pavimento. Trascurando la resistenza dell'aria e usando $g = \SI{10}{\metre\per\second\squared}$, quanto dura la caduta?'''
+dati.h = { valore = "1,8", unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "math.sqrt(2 * h / g)"
+  risultato = { valore = 0.60, unita = "s", cifre = 2 }
+  soluzione = '''È una caduta libera da fermo: da $h = \frac12 g t^2$ si ha $t = \sqrt{2h/g}$, e
+\[
+  t = \sqrt{\frac{2 \cdot \SI{1,8}{\metre}}{\SI{10}{\metre\per\second\squared}}} = \sqrt{\SI{0,36}{\second\squared}} = \SI{0,60}{\second}
+\]
+Poco più di mezzo secondo: per questo è difficile riprendere al volo un oggetto che cade da un ripiano.'''
+
+[[problema]]
+id = "ud2-cinematica-turbina"
+livello = 1
+testo = '''La fresa di una turbina odontoiatrica gira a \num{300000} giri al minuto. Calcola la frequenza di rotazione, in hertz, e il periodo.'''
+
+  [[problema.parte]]
+  calcolo = "60 / 300000"
+  risultato = { valore = 2.0e-4, unita = "s", cifre = 2 }
+  rapido = '''$f = \SI{5,0e3}{\hertz}$; $T = \SI{2,0e-4}{\second}$'''
+  soluzione = '''In un minuto ci sono \SI{60}{\second}, quindi i giri al secondo sono
+\[
+  f = \frac{\num{300000}}{\SI{60}{\second}} = \SI{5000}{\hertz} = \SI{5,0e3}{\hertz}
+\]
+Il periodo è l'inverso della frequenza:
+\[
+  T = \frac{1}{f} = \frac{1}{\SI{5e3}{\hertz}} = \frac{1}{5} \cdot 10^{-3}\,\si{\second} = 0{,}2 \cdot 10^{-3}\,\si{\second} = \SI{2,0e-4}{\second}
+\]
+Due decimi di millesimo di secondo per ogni giro.'''
+
+[[problema]]
+id = "ud2-cinematica-carrello"
+livello = 1
+testo = '''Un robot che distribuisce i farmaci in reparto percorre {{d1}} in linea retta lungo un corridoio, poi gira di \ang{90} ed entra in una stanza, dove percorre altri {{d2}} in linea retta. Quanto vale il modulo del suo spostamento? E la distanza percorsa?'''
+dati.d1 = { valore = 12, unita = "m" }
+dati.d2 = { valore = "5,0", unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "math.sqrt(d1**2 + d2**2)"
+  risultato = { valore = 13, unita = "m", cifre = 2 }
+  rapido = '''spostamento \SI{13}{\metre}; distanza percorsa \SI{17}{\metre}'''
+  soluzione = '''Si mette l'asse $x$ lungo il corridoio e l'asse $y$ lungo la stanza. Lo spostamento ha componenti $\Delta x = \SI{12}{\metre}$ e $\Delta y = \SI{5,0}{\metre}$, perpendicolari fra loro; il suo modulo, per il teorema di Pitagora, è
+\[
+  |\Delta\vec r| = \sqrt{(\SI{12}{\metre})^2 + (\SI{5,0}{\metre})^2} = \sqrt{144 + 25}\,\si{\metre} = \sqrt{169}\,\si{\metre} = \SI{13}{\metre}
+\]
+La distanza percorsa è la lunghezza della strada fatta: $12 + 5 = \SI{17}{\metre}$. È più grande del modulo dello spostamento, perché il robot non è andato dritto.'''
+
+[[problema]]
+id = "ud2-cinematica-carrozzina"
+livello = 2
+testo = '''Una carrozzina elettrica parte da ferma lungo un corridoio rettilineo e accelera in modo uniforme per {{t1}}, fino a raggiungere {{v}}. Poi prosegue a questa velocità costante per altri {{t2}}.'''
+dati.t1 = { valore = "4,0", unita = "s" }
+dati.v = { valore = "2,0", unita = "m/s" }
+dati.t2 = { valore = 16, unita = "s" }
+
+  [[problema.parte]]
+  domanda = '''Quanta strada percorre nei primi {{t1}}?'''
+  calcolo = "0.5 * t1 * v"
+  risultato = { valore = 4.0, unita = "m", cifre = 2 }
+  soluzione = '''Nel grafico velocità-tempo il primo tratto è una retta che sale da 0 a \SI{2,0}{\metre\per\second} in \SI{4,0}{\second}. Lo spostamento è l'area sotto il grafico, un triangolo di base \SI{4,0}{\second} e altezza \SI{2,0}{\metre\per\second}:
+\[
+  \Delta x_1 = \frac{\SI{4,0}{\second} \cdot \SI{2,0}{\metre\per\second}}{2} = \SI{4,0}{\metre}
+\]
+Lo stesso risultato viene da $\Delta x = (v_0 + v)\,t/2 = (0 + 2{,}0) \cdot 4{,}0/2$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la velocità media su tutti i \SI{20}{\second} del tragitto?'''
+  calcolo = "(0.5 * t1 * v + v * t2) / (t1 + t2)"
+  risultato = { valore = 1.8, unita = "m/s", cifre = 2 }
+  soluzione = '''Nel secondo tratto la velocità è costante: $\Delta x_2 = v\,t_2 = \SI{2,0}{\metre\per\second} \cdot \SI{16}{\second} = \SI{32}{\metre}$ (nel grafico è un rettangolo). Con lo spostamento del punto (a), in tutto la carrozzina percorre $4{,}0 + 32 = \SI{36}{\metre}$ in $4{,}0 + 16 = \SI{20}{\second}$:
+\[
+  v_m = \frac{\Delta x}{\Delta t} = \frac{\SI{36}{\metre}}{\SI{20}{\second}} = \SI{1,8}{\metre\per\second}
+\]
+Non è la media fra \SI{1,0}{\metre\per\second} (la velocità media del primo tratto) e \SI{2,0}{\metre\per\second}: la carrozzina passa molto più tempo nel tratto veloce.'''
+
+[[problema]]
+id = "ud2-cinematica-aereo"
+livello = 2
+testo = '''Un aereo ambulanza parte da fermo sulla pista e, con accelerazione costante, percorre i primi {{x1}} in {{t1}}.'''
+dati.x1 = { valore = 400, unita = "m" }
+dati.t1 = { valore = 20, unita = "s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'accelerazione dell'aereo?'''
+  calcolo = "2 * x1 / t1**2"
+  risultato = { valore = 2.0, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  soluzione = '''L'aereo parte da fermo, quindi $\Delta x = \frac12 a t^2$, e
+\[
+  a = \frac{2\,\Delta x}{t^2} = \frac{2 \cdot \SI{400}{\metre}}{(\SI{20}{\second})^2} = \frac{\SI{800}{\metre}}{\SI{400}{\second\squared}} = \SI{2,0}{\metre\per\second\squared}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Per decollare l'aereo deve raggiungere \SI{216}{\kilo\metre\per\hour}. Quanta pista gli serve in tutto, dalla partenza?'''
+  calcolo = "(216 / 3.6)**2 / (2 * 2 * x1 / t1**2)"
+  risultato = { valore = 900, unita = "m", cifre = 2 }
+  soluzione = '''La velocità di decollo è $216/3{,}6 = \SI{60}{\metre\per\second}$. Il tempo non serve: con l'accelerazione del punto (a) si usa $v^2 = v_0^2 + 2a\,\Delta x$, con $v_0 = 0$:
+\[
+  \Delta x = \frac{v^2}{2a} = \frac{(\SI{60}{\metre\per\second})^2}{2 \cdot \SI{2,0}{\metre\per\second\squared}} = \frac{\SI{3600}{\metre\squared\per\second\squared}}{\SI{4,0}{\metre\per\second\squared}} = \SI{900}{\metre}
+\]'''
+
+[[problema]]
+id = "ud2-cinematica-palla"
+livello = 2
+testo = '''Durante un esercizio di riabilitazione della spalla, un paziente lancia una pallina verticalmente verso l'alto. La pallina sale fino a {{h}} sopra la sua mano e ricade nella mano. Trascura la resistenza dell'aria e usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.h = { valore = "3,2", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Con quale velocità la pallina lascia la mano?'''
+  calcolo = "math.sqrt(2 * g * h)"
+  risultato = { valore = 8.0, unita = "m/s", cifre = 2 }
+  soluzione = '''Nel punto più alto la velocità è nulla. Con l'asse verso l'alto, da $v^2 = v_0^2 - 2g\,h$ con $v = 0$:
+\[
+  v_0 = \sqrt{2gh} = \sqrt{2 \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{3,2}{\metre}} = \sqrt{\SI{64}{\metre\squared\per\second\squared}} = \SI{8,0}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto tempo passa fra il lancio e il ritorno della pallina nella mano?'''
+  calcolo = "2 * math.sqrt(2 * g * h) / g"
+  risultato = { valore = 1.6, unita = "s", cifre = 2 }
+  soluzione = '''In salita la velocità passa da \SI{8,0}{\metre\per\second} a zero. Da $v = v_0 - gt$ con $v = 0$:
+\[
+  t_{\text{salita}} = \frac{v_0}{g} = \frac{\SI{8,0}{\metre\per\second}}{\SI{10}{\metre\per\second\squared}} = \SI{0,80}{\second}
+\]
+La discesa, dallo stesso punto più alto alla stessa quota di partenza, dura lo stesso tempo. In tutto $2 \cdot \SI{0,80}{\second} = \SI{1,6}{\second}$.'''
+
+[[problema]]
+id = "ud2-cinematica-tuffo"
+livello = 2
+testo = '''Un tuffatore prende la rincorsa e si stacca dal bordo di una piattaforma, {{h}} sopra l'acqua, con una velocità orizzontale di {{v}}. Trascura la resistenza dell'aria e le dimensioni del corpo, e usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.h = { valore = "7,2", unita = "m" }
+dati.v = { valore = "2,5", unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto dura il volo, fino all'acqua?'''
+  calcolo = "math.sqrt(2 * h / g)"
+  risultato = { valore = 1.2, unita = "s", cifre = 2 }
+  soluzione = '''Per il principio di indipendenza dei moti, in verticale il tuffatore si muove come un corpo lasciato cadere da fermo: la sua velocità iniziale è orizzontale, quindi $v_{0y} = 0$. Da $h = \frac12 g t^2$:
+\[
+  t = \sqrt{\frac{2h}{g}} = \sqrt{\frac{2 \cdot \SI{7,2}{\metre}}{\SI{10}{\metre\per\second\squared}}} = \sqrt{\SI{1,44}{\second\squared}} = \SI{1,2}{\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''A che distanza orizzontale dal bordo della piattaforma entra in acqua?'''
+  calcolo = "v * math.sqrt(2 * h / g)"
+  risultato = { valore = 3.0, unita = "m", cifre = 2 }
+  soluzione = '''In orizzontale l'accelerazione è zero: la velocità resta \SI{2,5}{\metre\per\second} per tutto il volo, che dura il tempo del punto (a). Quindi
+\[
+  x = v_{0x}\,t = \SI{2,5}{\metre\per\second} \cdot \SI{1,2}{\second} = \SI{3,0}{\metre}
+\]'''
+
+[[problema]]
+id = "ud2-cinematica-pilota"
+livello = 2
+testo = '''Nella centrifuga umana usata per addestrare i piloti, la cabina con il pilota percorre una circonferenza di raggio {{r}} di moto circolare uniforme, e compie un giro ogni {{T}}.'''
+dati.r = { valore = "8,0", unita = "m" }
+dati.T = { valore = "4,0", unita = "s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il modulo della velocità della cabina?'''
+  calcolo = "2 * math.pi * r / T"
+  risultato = { valore = 12.6, unita = "m/s", cifre = 3 }
+  soluzione = '''In un periodo la cabina percorre una circonferenza, lunga $2\pi r$. Con $\pi \approx 3{,}14$:
+\[
+  v = \frac{2\pi r}{T} = \frac{2 \cdot 3{,}14 \cdot \SI{8,0}{\metre}}{\SI{4,0}{\second}} = \frac{\SI{50,24}{\metre}}{\SI{4,0}{\second}} \approx \SI{12,6}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'accelerazione centripeta del pilota? Esprimila anche in multipli di $g = \SI{10}{\metre\per\second\squared}$.'''
+  calcolo = "(2 * math.pi * r / T)**2 / r"
+  risultato = { valore = 20, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  rapido = '''$a_c \approx \SI{20}{\metre\per\second\squared}$, circa $2\,g$'''
+  soluzione = '''Con la velocità del punto (a):
+\[
+  a_c = \frac{v^2}{r} = \frac{(\SI{12,6}{\metre\per\second})^2}{\SI{8,0}{\metre}} \approx \frac{\SI{159}{\metre\squared\per\second\squared}}{\SI{8,0}{\metre}} \approx \SI{20}{\metre\per\second\squared}
+\]
+In multipli di $g$: $20/10 = 2$, cioè circa $2\,g$. Le centrifughe per piloti arrivano a 9 o 10 $g$ girando più in fretta: a parità di raggio, l'accelerazione cresce con il quadrato della velocità.'''
+
+[[problema]]
+id = "ud2-cinematica-incontro"
+livello = 3
+testo = '''Un'ambulanza parte dall'ospedale verso il luogo di un incidente, distante {{d}} lungo una strada rettilinea, e viaggia alla velocità costante di {{va}}. Nello stesso istante, dal luogo dell'incidente, parte verso l'ospedale sulla stessa strada l'auto che trasporta un ferito, alla velocità costante di {{vb}}. Ambulanza e auto si incontrano lungo la strada.'''
+dati.d = { valore = "7,0", unita = "\\kilo\\metre" }
+dati.va = { valore = 72, unita = "\\kilo\\metre\\per\\hour" }
+dati.vb = { valore = 54, unita = "\\kilo\\metre\\per\\hour" }
+
+  [[problema.parte]]
+  domanda = '''Dopo quanto tempo dalla partenza si incontrano?'''
+  calcolo = "d * 1000 / ((va + vb) / 3.6)"
+  risultato = { valore = 200, unita = "s", cifre = 2 }
+  soluzione = '''Le velocità in unità del SI sono $72/3{,}6 = \SI{20}{\metre\per\second}$ e $54/3{,}6 = \SI{15}{\metre\per\second}$; la distanza è \SI{7000}{\metre}. Si mette l'asse $x$ lungo la strada, con l'origine all'ospedale e il verso positivo verso l'incidente. L'ambulanza si muove nel verso positivo, l'auto nel verso negativo, e le loro leggi orarie (in metri, con $t$ in secondi) sono
+\[
+  x_A = 20\,t \qquad\qquad x_B = 7000 - 15\,t
+\]
+Si incontrano quando sono nello stesso punto, $x_A = x_B$:
+\[
+  20\,t = 7000 - 15\,t \quad\Longrightarrow\quad 35\,t = 7000 \quad\Longrightarrow\quad t = \frac{7000}{35} = \SI{200}{\second}
+\]
+cioè 3 minuti e 20 secondi. Ogni secondo la distanza fra i due veicoli diminuisce di $20 + 15 = \SI{35}{\metre}$.'''
+
+  [[problema.parte]]
+  domanda = '''A che distanza dall'ospedale avviene l'incontro?'''
+  calcolo = "va / 3.6 * d * 1000 / ((va + vb) / 3.6)"
+  risultato = { valore = 4.0e3, unita = "m", cifre = 2 }
+  soluzione = '''Si mette il tempo del punto (a) nella legge oraria dell'ambulanza:
+\[
+  x_A = \SI{20}{\metre\per\second} \cdot \SI{200}{\second} = \SI{4000}{\metre} = \SI{4,0}{\kilo\metre}
+\]
+Controllo con l'auto: $x_B = 7000 - 15 \cdot 200 = 7000 - 3000 = \SI{4000}{\metre}$. L'ambulanza, più veloce, fa più di metà strada.'''
+
+  [[problema.parte]]
+  domanda = '''A che distanza l'uno dall'altra si trovano i due veicoli un minuto dopo la partenza?'''
+  calcolo = "d * 1000 - (va + vb) / 3.6 * 60"
+  risultato = { valore = 4.9e3, unita = "m", cifre = 2 }
+  soluzione = '''Dopo \SI{60}{\second} le posizioni sono
+\[
+  x_A = 20 \cdot 60 = \SI{1200}{\metre} \qquad\qquad x_B = 7000 - 15 \cdot 60 = 7000 - 900 = \SI{6100}{\metre}
+\]
+e la distanza fra i due è $6100 - 1200 = \SI{4900}{\metre} = \SI{4,9}{\kilo\metre}$. Lo stesso risultato viene da $7000 - 35 \cdot 60 = 7000 - 2100$.'''
+
+[[problema]]
+id = "ud2-cinematica-aorta"
+livello = 3
+testo = '''Con l'ecocardiografia Doppler si misura la velocità del sangue che esce dal ventricolo sinistro. In un paziente, durante la sistole, la velocità cresce in modo uniforme da zero a {{vp}} in {{t1}}, poi torna a zero, sempre in modo uniforme, in altri {{t2}}. Tratta il moto del sangue come un moto lungo una retta.'''
+dati.vp = { valore = "1,2", unita = "m/s" }
+dati.t1 = { valore = "0,10", unita = "s" }
+dati.t2 = { valore = "0,20", unita = "s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'accelerazione del sangue nella prima fase?'''
+  calcolo = "vp / t1"
+  risultato = { valore = 12, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  soluzione = '''L'accelerazione è costante, quindi è uguale a quella media:
+\[
+  a_1 = \frac{\Delta v}{\Delta t} = \frac{\SI{1,2}{\metre\per\second} - \SI{0}{\metre\per\second}}{\SI{0,10}{\second}} = \SI{12}{\metre\per\second\squared}
+\]
+Nel grafico velocità-tempo è la pendenza del primo tratto, che sale.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'accelerazione nella seconda fase?'''
+  calcolo = "(0 - vp) / t2"
+  risultato = { valore = -6.0, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  soluzione = '''Ora la velocità scende da \SI{1,2}{\metre\per\second} a zero:
+\[
+  a_2 = \frac{\SI{0}{\metre\per\second} - \SI{1,2}{\metre\per\second}}{\SI{0,20}{\second}} = \SI{-6,0}{\metre\per\second\squared}
+\]
+È negativa: il sangue si muove ancora nel verso positivo, ma rallenta. Il modulo è metà di quello della prima fase, perché la stessa variazione di velocità avviene in un tempo doppio.'''
+
+  [[problema.parte]]
+  domanda = '''Quanta strada percorre il sangue durante la sistole? Qual è la sua velocità media?'''
+  calcolo = "0.5 * (t1 + t2) * vp"
+  risultato = { valore = 0.18, unita = "m", cifre = 2 }
+  rapido = '''\SI{0,18}{\metre} $= \SI{18}{\centi\metre}$; $v_m = \SI{0,60}{\metre\per\second}$'''
+  soluzione = '''Lo spostamento è l'area sotto il grafico velocità-tempo. Il grafico è un triangolo con la base lunga $0{,}10 + 0{,}20 = \SI{0,30}{\second}$ e l'altezza \SI{1,2}{\metre\per\second}:
+\[
+  \Delta x = \frac{\SI{0,30}{\second} \cdot \SI{1,2}{\metre\per\second}}{2} = \SI{0,18}{\metre} = \SI{18}{\centi\metre}
+\]
+La velocità media è
+\[
+  v_m = \frac{\Delta x}{\Delta t} = \frac{\SI{0,18}{\metre}}{\SI{0,30}{\second}} = \SI{0,60}{\metre\per\second}
+\]
+metà della velocità di picco, come in ciascuna delle due fasi. In ecocardiografia quest'area si chiama integrale velocità-tempo: moltiplicata per la sezione del vaso dà il volume di sangue espulso a ogni battito.'''
+
+[[problema]]
+id = "ud2-cinematica-rilievi"
+livello = 3
+testo = '''Dopo un incidente in cui è stato investito un pedone, la polizia misura sull'asfalto segni di frenata lunghi {{d}}. Su quell'asfalto un'auto con le ruote bloccate rallenta con un'accelerazione costante di modulo {{a}}. L'auto si è fermata alla fine dei segni.'''
+dati.d = { valore = 36, unita = "m" }
+dati.a = { valore = "8,0", unita = "\\metre\\per\\second\\squared" }
+
+  [[problema.parte]]
+  domanda = '''A che velocità andava l'auto quando ha cominciato a frenare? Esprimila anche in \si{\kilo\metre\per\hour}.'''
+  calcolo = "math.sqrt(2 * a * d)"
+  risultato = { valore = 24, unita = "m/s", cifre = 2 }
+  rapido = '''\SI{24}{\metre\per\second}, circa \SI{86}{\kilo\metre\per\hour}'''
+  soluzione = '''Si mette l'asse nel verso del moto: l'accelerazione è $a = \SI{-8,0}{\metre\per\second\squared}$ e la velocità finale è zero. Da $v^2 = v_0^2 + 2a\,\Delta x$:
+\[
+  0 = v_0^2 + 2 \cdot (\SI{-8,0}{\metre\per\second\squared}) \cdot \SI{36}{\metre}
+  \quad\Longrightarrow\quad
+  v_0 = \sqrt{2 \cdot 8{,}0 \cdot 36}\,\si{\metre\per\second} = \sqrt{576}\,\si{\metre\per\second} = \SI{24}{\metre\per\second}
+\]
+In chilometri orari: $24 \cdot 3{,}6 \approx \SI{86}{\kilo\metre\per\hour}$, molto sopra il limite urbano di \SI{50}{\kilo\metre\per\hour}.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto è durata la frenata?'''
+  calcolo = "math.sqrt(2 * a * d) / a"
+  risultato = { valore = 3.0, unita = "s", cifre = 2 }
+  soluzione = '''Con la velocità del punto (a), da $v = v_0 + a\,t$ con $v = 0$:
+\[
+  t = \frac{0 - v_0}{a} = \frac{\SI{-24}{\metre\per\second}}{\SI{-8,0}{\metre\per\second\squared}} = \SI{3,0}{\second}
+\]
+Controllo: la velocità media della frenata è $(24 + 0)/2 = \SI{12}{\metre\per\second}$, e $12 \cdot 3{,}0 = \SI{36}{\metre}$.'''
+
+  [[problema.parte]]
+  domanda = '''Se l'auto fosse andata a \SI{36}{\kilo\metre\per\hour}, con un tempo di reazione del conducente di \SI{1,0}{\second} e la stessa accelerazione di frenata, quanto sarebbe stato lo spazio di arresto, dal momento in cui il conducente vede il pedone?'''
+  calcolo = "10 * 1.0 + 10**2 / (2 * a)"
+  risultato = { valore = 16, unita = "m", cifre = 2 }
+  soluzione = '''La velocità è $36/3{,}6 = \SI{10}{\metre\per\second}$. I due tratti si studiano separatamente. Durante il tempo di reazione l'auto va ancora a velocità costante:
+\[
+  \Delta x_1 = v_0\,t_r = \SI{10}{\metre\per\second} \cdot \SI{1,0}{\second} = \SI{10}{\metre}
+\]
+Durante la frenata, come nel punto (a):
+\[
+  \Delta x_2 = \frac{v_0^2}{2|a|} = \frac{\SI{100}{\metre\squared\per\second\squared}}{\SI{16}{\metre\per\second\squared}} \approx \SI{6,3}{\metre}
+\]
+In tutto $10 + 6{,}3 \approx \SI{16}{\metre}$. A \SI{24}{\metre\per\second}, con lo stesso tempo di reazione, lo spazio di arresto sarebbe stato $24 + 36 = \SI{60}{\metre}$: quasi quattro volte di più.'''
+
+[[problema]]
+id = "ud2-cinematica-telo"
+livello = 3
+testo = '''Un uomo si lascia cadere da una finestra, {{h}} sopra il telo di salvataggio tenuto dai vigili del fuoco. Il telo cede sotto il suo peso e lo ferma dopo un abbassamento di {{s}}. Trascura la resistenza dell'aria, supponi costante l'accelerazione durante l'arresto e usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.h = { valore = "12,8", unita = "m" }
+dati.s = { valore = "0,80", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità arriva sul telo?'''
+  calcolo = "math.sqrt(2 * g * h)"
+  risultato = { valore = 16, unita = "m/s", cifre = 2 }
+  soluzione = '''È una caduta libera da fermo:
+\[
+  v = \sqrt{2gh} = \sqrt{2 \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{12,8}{\metre}} = \sqrt{\SI{256}{\metre\squared\per\second\squared}} = \SI{16}{\metre\per\second}
+\]
+circa \SI{58}{\kilo\metre\per\hour}.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il modulo dell'accelerazione durante l'arresto? Esprimila anche in multipli di $g$.'''
+  calcolo = "2 * g * h / (2 * s)"
+  risultato = { valore = 160, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  rapido = '''\SI{160}{\metre\per\second\squared}, cioè $16\,g$'''
+  soluzione = '''Nel telo la velocità passa da \SI{16}{\metre\per\second} a zero in \SI{0,80}{\metre}. Da $v^2 = v_0^2 + 2a\,\Delta x$ con $v = 0$, in modulo:
+\[
+  |a| = \frac{v_0^2}{2\,\Delta x} = \frac{\SI{256}{\metre\squared\per\second\squared}}{2 \cdot \SI{0,80}{\metre}} = \frac{\SI{256}{\metre\squared\per\second\squared}}{\SI{1,6}{\metre}} = \SI{160}{\metre\per\second\squared}
+\]
+In multipli di $g$: $160/10 = 16$, cioè $16\,g$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto dura l'arresto?'''
+  calcolo = "2 * s / math.sqrt(2 * g * h)"
+  risultato = { valore = 0.10, unita = "s", cifre = 2 }
+  soluzione = '''Durante l'arresto l'accelerazione è costante, quindi la velocità media è la media fra quella iniziale e quella finale: $(16 + 0)/2 = \SI{8}{\metre\per\second}$. Il tempo è
+\[
+  t = \frac{\Delta x}{v_m} = \frac{\SI{0,80}{\metre}}{\SI{8}{\metre\per\second}} = \SI{0,10}{\second}
+\]
+Lo stesso risultato viene da $t = v_0/|a| = 16/160$.'''
+
+  [[problema.parte]]
+  domanda = '''Se l'uomo cadesse sul cemento, fermandosi in \SI{2,0}{\centi\metre}, quanto varrebbe il modulo dell'accelerazione?'''
+  calcolo = "2 * g * h / (2 * 0.020)"
+  risultato = { valore = 6.4e3, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  soluzione = '''La velocità di arrivo è la stessa, \SI{16}{\metre\per\second}; lo spazio di arresto è $\SI{2,0}{\centi\metre} = \SI{0,020}{\metre}$:
+\[
+  |a| = \frac{\SI{256}{\metre\squared\per\second\squared}}{2 \cdot \SI{0,020}{\metre}} = \frac{\SI{256}{\metre\squared\per\second\squared}}{\SI{0,040}{\metre}} = \SI{6400}{\metre\per\second\squared} = \SI{6,4e3}{\metre\per\second\squared}
+\]
+cioè $640\,g$. A parità di velocità, l'accelerazione è inversamente proporzionale allo spazio di arresto: il telo lo allunga di $0{,}80/0{,}020 = 40$ volte, e divide per 40 l'accelerazione. È questo che rende la caduta sopravvivibile.'''
+
+[[problema]]
+id = "ud2-cinematica-terrazzo"
+livello = 3
+testo = '''Dal tetto di un edificio, {{h}} sopra il suolo, si lancia una palla verticalmente verso l'alto a {{v0}}. La palla sale, poi ricade oltre il bordo del tetto fino al suolo. Trascura la resistenza dell'aria e usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.h = { valore = 15, unita = "m" }
+dati.v0 = { valore = 10, unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Qual è l'altezza massima che la palla raggiunge, misurata dal suolo?'''
+  calcolo = "h + v0**2 / (2 * g)"
+  risultato = { valore = 20, unita = "m", cifre = 2 }
+  soluzione = '''Si mette l'asse $y$ verso l'alto, con l'origine al suolo: la palla parte da $y_0 = \SI{15}{\metre}$. Nel punto più alto $v = 0$, e da $v^2 = v_0^2 - 2g\,(y - y_0)$ la palla sale sopra il tetto di
+\[
+  y - y_0 = \frac{v_0^2}{2g} = \frac{\SI{100}{\metre\squared\per\second\squared}}{\SI{20}{\metre\per\second\squared}} = \SI{5}{\metre}
+\]
+L'altezza massima dal suolo è $15 + 5 = \SI{20}{\metre}$.'''
+
+  [[problema.parte]]
+  domanda = '''Dopo quanto tempo dal lancio la palla tocca il suolo?'''
+  calcolo = "(v0 + math.sqrt(v0**2 + 2 * g * h)) / g"
+  risultato = { valore = 3.0, unita = "s", cifre = 2 }
+  soluzione = '''La legge oraria è $y = 15 + 10\,t - 5\,t^2$ (in metri, con $t$ in secondi). Al suolo $y = 0$:
+\[
+  15 + 10\,t - 5\,t^2 = 0 \quad\Longrightarrow\quad t^2 - 2\,t - 3 = 0
+\]
+dividendo tutto per $-5$. Con $A = 1$, $B = -2$, $C = -3$ il discriminante è $\Delta = (-2)^2 - 4 \cdot 1 \cdot (-3) = 4 + 12 = 16$, e
+\[
+  t = \frac{2 \pm \sqrt{16}}{2} = \frac{2 \pm 4}{2} \quad\Longrightarrow\quad t = \SI{3}{\second} \quad\text{oppure}\quad t = \SI{-1}{\second}
+\]
+Il tempo negativo è un istante prima del lancio, e si scarta: la palla tocca il suolo dopo \SI{3,0}{\second}.
+
+Si può anche spezzare il moto: la salita dura $v_0/g = \SI{1}{\second}$; poi la palla cade da ferma da \SI{20}{\metre}, in $\sqrt{2 \cdot 20/10} = \sqrt 4 = \SI{2}{\second}$. In tutto \SI{3}{\second}.'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità tocca il suolo?'''
+  calcolo = "math.sqrt(v0**2 + 2 * g * h)"
+  risultato = { valore = 20, unita = "m/s", cifre = 2 }
+  soluzione = '''Con il tempo del punto (b), da $v = v_0 - gt$:
+\[
+  v = \SI{10}{\metre\per\second} - \SI{10}{\metre\per\second\squared} \cdot \SI{3}{\second} = \SI{-20}{\metre\per\second}
+\]
+Il segno meno dice che la palla va verso il basso; il modulo è \SI{20}{\metre\per\second}. Controllo: è la velocità di un corpo che cade da fermo da \SI{20}{\metre}, l'altezza massima del punto (a), $\sqrt{2 \cdot 10 \cdot 20} = \sqrt{400} = 20$.'''
+
+[[problema]]
+id = "ud2-cinematica-salto"
+livello = 3
+testo = '''Un atleta di salto in lungo si stacca da terra a {{v0}}, con un angolo di \ang{30} sopra l'orizzontale. Tratta l'atleta come un punto materiale che atterra alla stessa quota da cui è partito, trascura la resistenza dell'aria e usa $g = \SI{10}{\metre\per\second\squared}$, $\sin\ang{30} = 0{,}5$, $\cos\ang{30} \approx 0{,}87$.'''
+dati.v0 = { valore = 10, unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto valgono le componenti orizzontale e verticale della velocità iniziale?'''
+  calcolo = "v0 * cos30"
+  risultato = { valore = 8.7, unita = "m/s", cifre = 2 }
+  rapido = '''$v_{0x} \approx \SI{8,7}{\metre\per\second}$; $v_{0y} = \SI{5,0}{\metre\per\second}$'''
+  soluzione = '''Con le formule delle componenti:
+\[
+  v_{0x} = v_0\cos\ang{30} \approx \SI{10}{\metre\per\second} \cdot 0{,}87 = \SI{8,7}{\metre\per\second}
+  \qquad\qquad
+  v_{0y} = v_0\sin\ang{30} = \SI{10}{\metre\per\second} \cdot 0{,}5 = \SI{5,0}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto dura il salto? Di quanto sale l'atleta nel punto più alto?'''
+  calcolo = "2 * v0 * sin30 / g"
+  risultato = { valore = 1.0, unita = "s", cifre = 2 }
+  rapido = '''$t_v = \SI{1,0}{\second}$; $h_{\max} = \SI{1,25}{\metre}$'''
+  soluzione = '''Il tempo di volo dipende solo dalla componente verticale del punto (a):
+\[
+  t_v = \frac{2v_{0y}}{g} = \frac{2 \cdot \SI{5,0}{\metre\per\second}}{\SI{10}{\metre\per\second\squared}} = \SI{1,0}{\second}
+  \qquad\qquad
+  h_{\max} = \frac{v_{0y}^2}{2g} = \frac{\SI{25}{\metre\squared\per\second\squared}}{\SI{20}{\metre\per\second\squared}} = \SI{1,25}{\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto è lungo il salto?'''
+  calcolo = "v0 * cos30 * 2 * v0 * sin30 / g"
+  risultato = { valore = 8.7, unita = "m", cifre = 2 }
+  soluzione = '''In orizzontale la velocità resta $v_{0x}$ per tutto il volo. Con i risultati dei punti (a) e (b):
+\[
+  R = v_{0x}\,t_v = \SI{8,7}{\metre\per\second} \cdot \SI{1,0}{\second} = \SI{8,7}{\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto sarebbe lungo il salto se l'atleta si staccasse con la stessa velocità ma a \ang{45}? Usa $\sin\ang{45} = \cos\ang{45} \approx 0{,}71$.'''
+  calcolo = "2 * v0**2 * sin45 * sin45 / g"
+  risultato = { valore = 10, unita = "m", cifre = 2 }
+  soluzione = '''Con la formula della gittata, $R = 2v_0^2\sin\theta\cos\theta/g$, e $\sin\ang{45}\cos\ang{45} \approx 0{,}71 \cdot 0{,}71 \approx 0{,}50$:
+\[
+  R = \frac{2 \cdot (\SI{10}{\metre\per\second})^2 \cdot 0{,}50}{\SI{10}{\metre\per\second\squared}} = \frac{\SI{100}{\metre\squared\per\second\squared}}{\SI{10}{\metre\per\second\squared}} = \SI{10}{\metre}
+\]
+A parità di velocità, \ang{45} è l'angolo della gittata massima. Nella realtà un saltatore si stacca con un angolo più basso: per salire più in alto dovrebbe rinunciare a parte della velocità della rincorsa.'''
+
+[[problema]]
+id = "ud2-cinematica-protocollo"
+livello = 3
+testo = '''Un protocollo di laboratorio chiede di centrifugare dei campioni di sangue «a 400 $g$», cioè con un'accelerazione centripeta circa 400 volte quella di gravità. Nella centrifuga A le provette stanno a {{rA}} dall'asse di rotazione, e il rotore gira a \num{1500} giri al minuto. Usa $\pi \approx 3{,}14$ e $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.rA = { valore = 16, unita = "cm" }
+dati.rB = { valore = "4,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto valgono la frequenza di rotazione e la velocità angolare della centrifuga A?'''
+  calcolo = "2 * math.pi * 1500 / 60"
+  risultato = { valore = 157, unita = "\\radian\\per\\second", cifre = 3 }
+  rapido = '''$f = \SI{25}{\hertz}$; $\omega \approx \SI{157}{\radian\per\second}$'''
+  soluzione = '''I giri al secondo sono $f = 1500/\SI{60}{\second} = \SI{25}{\hertz}$. La velocità angolare è
+\[
+  \omega = 2\pi f \approx 6{,}28 \cdot \SI{25}{\hertz} = \SI{157}{\radian\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'accelerazione centripeta delle provette nella centrifuga A? Il protocollo è rispettato?'''
+  calcolo = "(2 * math.pi * 1500 / 60)**2 * rA / 100"
+  risultato = { valore = 3.9e3, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  rapido = '''$a_c \approx \SI{3,9e3}{\metre\per\second\squared}$, circa $400\,g$: sì'''
+  soluzione = '''Il raggio è $\SI{16}{\centi\metre} = \SI{0,16}{\metre}$. Con la velocità angolare del punto (a), $\omega^2 = 157^2 = (150 + 7)^2 = \num{22500} + 2 \cdot 150 \cdot 7 + 49 = \num{22500} + \num{2100} + 49 = \num{24649}$, in \si{\per\second\squared}:
+\[
+  a_c = \omega^2 r \approx \num{24600}\,\si{\per\second\squared} \cdot \SI{0,16}{\metre} \approx \SI{3940}{\metre\per\second\squared} \approx \SI{3,9e3}{\metre\per\second\squared}
+\]
+In multipli di $g$: $3940/10 \approx 394$, cioè circa $400\,g$. Il protocollo è rispettato.'''
+
+  [[problema.parte]]
+  domanda = '''Nella centrifuga B, più piccola, le provette stanno a {{rB}} dall'asse. A quanti giri al minuto deve girare per dare ai campioni la stessa accelerazione centripeta?'''
+  calcolo = "1500 / 60 * math.sqrt(rA / rB)"
+  risultato = { valore = 50, unita = "Hz", cifre = 2 }
+  rapido = '''$f_B = \SI{50}{\hertz}$, cioè \num{3000} giri al minuto'''
+  soluzione = '''L'accelerazione centripeta è $a_c = \omega^2 r$. Il raggio di B è $4{,}0/16 = 1/4$ di quello di A: per avere la stessa accelerazione, $\omega^2$ deve essere 4 volte più grande, cioè $\omega$ deve essere $\sqrt 4 = 2$ volte più grande:
+\[
+  \omega_B^2\,r_B = \omega_A^2\,r_A
+  \quad\Longrightarrow\quad
+  \frac{\omega_B}{\omega_A} = \sqrt{\frac{r_A}{r_B}} = \sqrt{\frac{\SI{16}{\centi\metre}}{\SI{4,0}{\centi\metre}}} = \sqrt 4 = 2
+\]
+La frequenza raddoppia anche lei, $f_B = 2 \cdot \SI{25}{\hertz} = \SI{50}{\hertz}$, cioè $2 \cdot 1500 = \num{3000}$ giri al minuto. Per questo un protocollo serio indica l'accelerazione in multipli di $g$ e non i giri al minuto: gli stessi giri danno accelerazioni diverse in centrifughe di raggio diverso.'''
+
+[[problema]]
+id = "ud2-cinematica-elisoccorso"
+livello = 3
+testo = '''L'elicottero del soccorso sanitario parte dalla base e vola in linea retta per {{d1}} verso est, poi per {{d2}} verso nord, fino al luogo di un incidente in montagna. Il modulo della sua velocità resta sempre {{v}}; trascura il tempo della virata.'''
+dati.d1 = { valore = 30, unita = "\\kilo\\metre" }
+dati.d2 = { valore = 40, unita = "\\kilo\\metre" }
+dati.v = { valore = 210, unita = "\\kilo\\metre\\per\\hour" }
+
+  [[problema.parte]]
+  domanda = '''Quanto dura il volo?'''
+  calcolo = "(d1 + d2) / v * 60"
+  risultato = { valore = 20, unita = "\\minute", cifre = 2 }
+  soluzione = '''L'elicottero percorre in tutto $30 + 40 = \SI{70}{\kilo\metre}$ con velocità di modulo costante. Il tempo è la distanza percorsa divisa per la velocità:
+\[
+  t = \frac{\SI{70}{\kilo\metre}}{\SI{210}{\kilo\metre\per\hour}} = \frac{1}{3}\,\si{\hour} = \SI{20}{\minute}
+\]
+Qui conviene lasciare i chilometri e le ore: le unità sono coerenti.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il modulo dello spostamento?'''
+  calcolo = "math.sqrt(d1**2 + d2**2)"
+  risultato = { valore = 50, unita = "\\kilo\\metre", cifre = 2 }
+  soluzione = '''Con l'asse $x$ verso est e l'asse $y$ verso nord, lo spostamento ha componenti $\Delta x = \SI{30}{\kilo\metre}$ e $\Delta y = \SI{40}{\kilo\metre}$. Il suo modulo è
+\[
+  |\Delta\vec r| = \sqrt{30^2 + 40^2}\,\si{\kilo\metre} = \sqrt{900 + 1600}\,\si{\kilo\metre} = \sqrt{2500}\,\si{\kilo\metre} = \SI{50}{\kilo\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il modulo della velocità media? Confrontalo con la velocità scalare media.'''
+  calcolo = "math.sqrt(d1**2 + d2**2) / ((d1 + d2) / v)"
+  risultato = { valore = 150, unita = "\\kilo\\metre\\per\\hour", cifre = 2 }
+  rapido = '''$|\vec v_m| = \SI{150}{\kilo\metre\per\hour}$; velocità scalare media \SI{210}{\kilo\metre\per\hour}'''
+  soluzione = '''La velocità media è lo spostamento diviso per il tempo. Con i risultati dei punti (a) e (b):
+\[
+  |\vec v_m| = \frac{|\Delta\vec r|}{\Delta t} = \frac{\SI{50}{\kilo\metre}}{\frac13\,\si{\hour}} = 3 \cdot \SI{50}{\kilo\metre\per\hour} = \SI{150}{\kilo\metre\per\hour}
+\]
+La velocità scalare media è la distanza percorsa divisa per il tempo, $\SI{70}{\kilo\metre} / \frac13\,\si{\hour} = \SI{210}{\kilo\metre\per\hour}$: coincide con il modulo costante della velocità. Il modulo della velocità media è più piccolo, perché l'elicottero non è andato dritto.'''
+
+  [[problema.parte]]
+  domanda = '''Al ritorno l'elicottero vola in linea retta dal luogo dell'incidente alla base, alla stessa velocità. Quanto dura il volo di ritorno?'''
+  calcolo = "math.sqrt(d1**2 + d2**2) / v * 60"
+  risultato = { valore = 14, unita = "\\minute", cifre = 2 }
+  soluzione = '''In linea retta la strada è lunga quanto il modulo dello spostamento del punto (b), \SI{50}{\kilo\metre}:
+\[
+  t = \frac{\SI{50}{\kilo\metre}}{\SI{210}{\kilo\metre\per\hour}} = \frac{5}{21}\,\si{\hour} = \frac{5 \cdot 60}{21}\,\si{\minute} = \frac{300}{21}\,\si{\minute} \approx \SI{14}{\minute}
+\]
+Sei minuti meno dell'andata: è il motivo per cui l'elisoccorso, quando può, vola in linea retta.'''
+
+[[problema]]
+id = "ud2-dinamica-neonato"
+livello = 1
+testo = '''Una madre di {{M}} tiene in braccio il suo neonato di {{m}}. Considera i loro centri a {{d}} di distanza. Con quale forza gravitazionale si attirano?'''
+dati.M = { valore = 60, unita = "\\kilo\\gram" }
+dati.m = { valore = "3,0", unita = "\\kilo\\gram" }
+dati.d = { valore = "0,50", unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "G * M * m / d**2"
+  risultato = { valore = 4.8e-8, unita = "\\newton", cifre = 2 }
+  soluzione = '''Per la legge di gravitazione universale la forza è proporzionale al prodotto delle masse e inversamente proporzionale al quadrato della distanza. Il prodotto delle masse è $60 \cdot 3{,}0 = \SI{180}{\kilo\gram\squared}$, il quadrato della distanza è $(\SI{0,50}{\metre})^2 = \SI{0,25}{\metre\squared}$, e $180/0{,}25 = 180 \cdot 4 = 720$:
+\[
+  F = G\,\frac{Mm}{d^2} = \SI{6,67e-11}{\newton\metre\squared\per\kilo\gram\squared} \cdot \frac{\SI{180}{\kilo\gram\squared}}{\SI{0,25}{\metre\squared}} = 6{,}67 \cdot 720 \cdot 10^{-11}\,\si{\newton} \approx 4{,}8 \cdot 10^{3} \cdot 10^{-11}\,\si{\newton} = \SI{4,8e-8}{\newton}
+\]
+dove $6{,}67 \cdot 720 \approx 4800$ e $10^{3} \cdot 10^{-11} = 10^{3-11} = 10^{-8}$. Il peso del neonato è $3{,}0 \cdot 9{,}8 \approx \SI{29}{\newton}$, quasi un miliardo di volte di più: fra due persone la forza gravitazionale è impercettibile.'''
+
+[[problema]]
+id = "ud2-dinamica-carrello"
+livello = 1
+testo = '''Un carrello delle medicazioni, spinto lungo un corridoio, accelera di {{a}} sotto una forza risultante di {{F}}, diretta in avanti. Qual è la massa del carrello?'''
+dati.F = { valore = 150, unita = "\\newton" }
+dati.a = { valore = "2,5", unita = "\\metre\\per\\second\\squared" }
+
+  [[problema.parte]]
+  calcolo = "F / a"
+  risultato = { valore = 60, unita = "\\kilo\\gram", cifre = 2 }
+  soluzione = '''Dal secondo principio, $F_{\text{ris}} = ma$, la massa è la forza risultante divisa per l'accelerazione:
+\[
+  m = \frac{F_{\text{ris}}}{a} = \frac{\SI{150}{\newton}}{\SI{2,5}{\metre\per\second\squared}} = \SI{60}{\kilo\gram}
+\]
+Le unità tornano: $\si{\newton}/(\si{\metre\per\second\squared}) = (\si{\kilo\gram\metre\per\second\squared})/(\si{\metre\per\second\squared}) = \si{\kilo\gram}$.'''
+
+[[problema]]
+id = "ud2-dinamica-telo"
+livello = 1
+testo = '''Per spostare un paziente allettato verso la testata del letto si usa un telo ad alto scorrimento. Il paziente ha una massa di {{m}}, e per farlo scivolare a velocità costante serve una forza orizzontale di {{F}}. Quanto vale il coefficiente di attrito dinamico fra il telo e il materasso? Usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.m = { valore = 70, unita = "\\kilo\\gram" }
+dati.F = { valore = 105, unita = "\\newton" }
+
+  [[problema.parte]]
+  calcolo = "F / (m * g)"
+  risultato = { valore = 0.15, cifre = 2 }
+  soluzione = '''Il letto è orizzontale: in verticale la forza normale bilancia il peso, $F_N = mg = \SI{70}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} = \SI{700}{\newton}$. Il paziente scivola a velocità costante, quindi la risultante orizzontale è nulla: la forza applicata bilancia l'attrito dinamico, $F = F_d = \mu_d F_N$. Quindi
+\[
+  \mu_d = \frac{F}{F_N} = \frac{\SI{105}{\newton}}{\SI{700}{\newton}} = 0{,}15
+\]
+È un numero puro. Senza il telo, a contatto diretto con il lenzuolo, l'attrito sarebbe molto più alto, e lo spostamento faticoso per l'operatore e doloroso per la pelle del paziente.'''
+
+[[problema]]
+id = "ud2-dinamica-elastico"
+livello = 1
+testo = '''In riabilitazione un paziente tira un elastico, che si comporta come una molla ideale, con una forza di {{F}}: l'elastico si allunga di {{x}}. Quanto vale la sua costante elastica?'''
+dati.F = { valore = 30, unita = "\\newton" }
+dati.x = { valore = 25, unita = "cm" }
+
+  [[problema.parte]]
+  calcolo = "F / (x / 100)"
+  risultato = { valore = 120, unita = "\\newton\\per\\metre", cifre = 2 }
+  soluzione = '''L'allungamento in metri è $x = \SI{25}{\centi\metre} = \SI{0,25}{\metre}$. In modulo la legge di Hooke dice $F = kx$, quindi
+\[
+  k = \frac{F}{x} = \frac{\SI{30}{\newton}}{\SI{0,25}{\metre}} = 30 \cdot 4\,\si{\newton\per\metre} = \SI{120}{\newton\per\metre}
+\]
+Chi lascia l'allungamento in centimetri trova $30/25 = 1{,}2$, un valore cento volte troppo piccolo: la costante elastica si misura in newton \emph{al metro}.'''
+
+[[problema]]
+id = "ud2-dinamica-giostra"
+livello = 1
+testo = '''Un bambino di {{m}} siede su una giostra, a {{r}} dall'asse di rotazione, e gira con una velocità di modulo costante {{v}}. Quanto vale la forza centripeta che agisce su di lui?'''
+dati.m = { valore = 25, unita = "\\kilo\\gram" }
+dati.r = { valore = "2,0", unita = "m" }
+dati.v = { valore = "2,0", unita = "m/s" }
+
+  [[problema.parte]]
+  calcolo = "m * v**2 / r"
+  risultato = { valore = 50, unita = "\\newton", cifre = 2 }
+  soluzione = '''Il bambino è in moto circolare uniforme, quindi la risultante delle forze su di lui è diretta verso l'asse e ha modulo
+\[
+  F_c = m\,\frac{v^2}{r} = \SI{25}{\kilo\gram} \cdot \frac{(\SI{2,0}{\metre\per\second})^2}{\SI{2,0}{\metre}} = \SI{25}{\kilo\gram} \cdot \frac{\SI{4,0}{\metre\squared\per\second\squared}}{\SI{2,0}{\metre}} = \SI{25}{\kilo\gram} \cdot \SI{2,0}{\metre\per\second\squared} = \SI{50}{\newton}
+\]
+La forniscono il sedile e la sbarra a cui il bambino si tiene: la forza centripeta non è una forza in più, è il nome della risultante.'''
+
+[[problema]]
+id = "ud2-dinamica-frenata"
+livello = 2
+testo = '''Un'ambulanza viaggia a {{v}} su asfalto asciutto. Davanti a un ostacolo il conducente frena di colpo, e le ruote si bloccano e strisciano sull'asfalto. Il coefficiente di attrito dinamico fra gomma e asfalto asciutto è {{mud}}. Usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.v = { valore = 24, unita = "m/s" }
+dati.mud = { valore = "0,80" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il modulo dell'accelerazione dell'ambulanza durante la frenata?'''
+  calcolo = "mud * g"
+  risultato = { valore = 8.0, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  soluzione = '''La strada è orizzontale, quindi $F_N = mg$, e l'unica forza orizzontale è l'attrito dinamico, opposto al moto: $F_d = \mu_d F_N = \mu_d mg$. Per il secondo principio il modulo dell'accelerazione è
+\[
+  a = \frac{F_d}{m} = \frac{\mu_d mg}{m} = \mu_d g = 0{,}80 \cdot \SI{10}{\metre\per\second\squared} = \SI{8,0}{\metre\per\second\squared}
+\]
+La massa si semplifica: non serve conoscerla.'''
+
+  [[problema.parte]]
+  domanda = '''Che spazio percorre l'ambulanza prima di fermarsi?'''
+  calcolo = "v**2 / (2 * mud * g)"
+  risultato = { valore = 36, unita = "m", cifre = 2 }
+  soluzione = '''L'attrito dinamico è costante, quindi il moto è uniformemente decelerato, con l'accelerazione del punto (a). Dalla relazione $v^2 = v_0^2 + 2a\,\Delta x$, con velocità finale nulla e $a = \SI{-8,0}{\metre\per\second\squared}$:
+\[
+  \Delta x = \frac{v_0^2}{2\,|a|} = \frac{(\SI{24}{\metre\per\second})^2}{2 \cdot \SI{8,0}{\metre\per\second\squared}} = \frac{\SI{576}{\metre\squared\per\second\squared}}{\SI{16}{\metre\per\second\squared}} = \SI{36}{\metre}
+\]
+Su asfalto bagnato, con $\mu_d = 0{,}5$, l'accelerazione sarebbe \SI{5}{\metre\per\second\squared} e lo spazio $576/10 \approx \SI{58}{\metre}$.'''
+
+[[problema]]
+id = "ud2-dinamica-bilancia"
+livello = 2
+testo = '''Un uomo di {{m}} sta su una bilancia pesapersone dentro l'ascensore dell'ospedale. La bilancia misura la forza con cui la si preme e la divide per $g = \SI{10}{\metre\per\second\squared}$. Per qualche secondo indica {{mb}}.'''
+dati.m = { valore = 75, unita = "\\kilo\\gram" }
+dati.mb = { valore = 66, unita = "\\kilo\\gram" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale, in quei secondi, la forza normale che la bilancia esercita sull'uomo?'''
+  calcolo = "mb * g"
+  risultato = { valore = 660, unita = "\\newton", cifre = 2 }
+  soluzione = '''La bilancia mostra la forza con cui l'uomo la preme, divisa per $g$. Quindi quella forza è $\SI{66}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} = \SI{660}{\newton}$. Per il terzo principio la bilancia spinge l'uomo con una forza uguale e opposta: $F_N = \SI{660}{\newton}$, verso l'alto. È meno del peso, $mg = 75 \cdot 10 = \SI{750}{\newton}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'accelerazione dell'ascensore, in modulo, e qual è il suo verso? Si può dire se l'ascensore sale o scende?'''
+  calcolo = "g - mb * g / m"
+  risultato = { valore = 1.2, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  rapido = '''\SI{1,2}{\metre\per\second\squared} verso il basso; non si può dire se sale o scende'''
+  soluzione = '''Sull'uomo agiscono il peso, verso il basso, e la forza normale del punto (a), verso l'alto. Con l'asse $y$ verso l'alto, il secondo principio dà $F_N - mg = ma$:
+\[
+  a = \frac{F_N - mg}{m} = \frac{\SI{660}{\newton} - \SI{750}{\newton}}{\SI{75}{\kilo\gram}} = \frac{\SI{-90}{\newton}}{\SI{75}{\kilo\gram}} = \SI{-1,2}{\metre\per\second\squared}
+\]
+Il segno meno dice che l'accelerazione è verso il basso, di modulo \SI{1,2}{\metre\per\second\squared}. La bilancia dice il verso dell'accelerazione, non quello della velocità: l'ascensore può partire verso il basso oppure rallentare mentre sale, arrivando a un piano più alto.'''
+
+[[problema]]
+id = "ud2-dinamica-pesaneonati"
+livello = 2
+testo = '''Una bilancia pesaneonati a molla viene tarata appendendo un peso campione di {{Fc}}: la molla si allunga di {{xc}}. Poi si appende il neonato, in una fascia di massa trascurabile, e all'equilibrio la molla si allunga di {{x}}. Usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.Fc = { valore = "5,0", unita = "\\newton" }
+dati.xc = { valore = "2,0", unita = "cm" }
+dati.x = { valore = 14, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la costante elastica della molla?'''
+  calcolo = "Fc / (xc / 100)"
+  risultato = { valore = 250, unita = "\\newton\\per\\metre", cifre = 2 }
+  soluzione = '''Il peso campione è fermo: la forza della molla, verso l'alto, bilancia il suo peso, quindi in modulo $kx_c = F_c$. Con $x_c = \SI{2,0}{\centi\metre} = \SI{0,020}{\metre}$:
+\[
+  k = \frac{F_c}{x_c} = \frac{\SI{5,0}{\newton}}{\SI{0,020}{\metre}} = \SI{250}{\newton\per\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Qual è la massa del neonato?'''
+  calcolo = "Fc / (xc / 100) * (x / 100) / g"
+  risultato = { valore = 3.5, unita = "\\kilo\\gram", cifre = 2 }
+  soluzione = '''All'equilibrio la forza della molla bilancia il peso del neonato. Con la costante del punto (a) e $x = \SI{0,14}{\metre}$:
+\[
+  F_p = kx = \SI{250}{\newton\per\metre} \cdot \SI{0,14}{\metre} = \SI{35}{\newton}
+  \qquad\qquad
+  m = \frac{F_p}{g} = \frac{\SI{35}{\newton}}{\SI{10}{\metre\per\second\squared}} = \SI{3,5}{\kilo\gram}
+\]
+Più in fretta: l'allungamento è $14/2{,}0 = 7$ volte quello di taratura, quindi il peso è $7 \cdot \SI{5,0}{\newton} = \SI{35}{\newton}$.'''
+
+[[problema]]
+id = "ud2-dinamica-cassa"
+livello = 2
+testo = '''Un'infermiera spinge in orizzontale, con una forza di {{F}}, una cassa di flaconi di soluzione fisiologica di {{m}} ferma sul pavimento. I coefficienti di attrito fra la cassa e il pavimento sono $\mu_s = 0{,}40$ e $\mu_d = 0{,}30$. Usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.F = { valore = 150, unita = "\\newton" }
+dati.m = { valore = 30, unita = "\\kilo\\gram" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'attrito statico massimo? La cassa si muove?'''
+  calcolo = "0.40 * m * g"
+  risultato = { valore = 120, unita = "\\newton", cifre = 2 }
+  rapido = '''\SI{120}{\newton}; sì, perché $\SI{150}{\newton} > \SI{120}{\newton}$'''
+  soluzione = '''In verticale la cassa è in equilibrio: $F_N = mg = \SI{30}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} = \SI{300}{\newton}$. L'attrito statico massimo è
+\[
+  F_{s,\max} = \mu_s F_N = 0{,}40 \cdot \SI{300}{\newton} = \SI{120}{\newton}
+\]
+La spinta, \SI{150}{\newton}, è più grande: l'attrito statico non riesce a tenere ferma la cassa, che comincia a scivolare.'''
+
+  [[problema.parte]]
+  domanda = '''Con quale accelerazione si muove la cassa, se la spinta resta la stessa?'''
+  calcolo = "(F - 0.30 * m * g) / m"
+  risultato = { valore = 2.0, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  soluzione = '''Dal punto (a) la cassa scivola, quindi l'attrito non è più quello statico ma quello dinamico, opposto al moto:
+\[
+  F_d = \mu_d F_N = 0{,}30 \cdot \SI{300}{\newton} = \SI{90}{\newton}
+\]
+La risultante orizzontale è la spinta meno l'attrito, $150 - 90 = \SI{60}{\newton}$, e per il secondo principio
+\[
+  a = \frac{F - F_d}{m} = \frac{\SI{60}{\newton}}{\SI{30}{\kilo\gram}} = \SI{2,0}{\metre\per\second\squared}
+\]
+Chi usa l'attrito statico trova $(150 - 120)/30 = \SI{1,0}{\metre\per\second\squared}$: ma $\mu_s$ vale solo finché la cassa è ferma.'''
+
+[[problema]]
+id = "ud2-dinamica-curva"
+livello = 2
+testo = '''Un'ambulanza di {{m}} affronta una curva di raggio {{r}} su una strada sterrata, piana. Il coefficiente di attrito statico fra le gomme e il fondo è $\mu_s = 0{,}50$. Usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.m = { valore = 2000, unita = "\\kilo\\gram" }
+dati.r = { valore = 80, unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Qual è la forza di attrito statico massima che il fondo può esercitare sull'ambulanza?'''
+  calcolo = "0.50 * m * g"
+  risultato = { valore = 1.0e4, unita = "\\newton", cifre = 2 }
+  soluzione = '''La strada è piana, quindi la forza normale bilancia il peso: $F_N = mg = \SI{2000}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} = \SI{20000}{\newton}$. L'attrito statico massimo è
+\[
+  F_{s,\max} = \mu_s F_N = 0{,}50 \cdot \SI{20000}{\newton} = \SI{10000}{\newton} = \SI{1,0e4}{\newton}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Qual è la velocità massima con cui l'ambulanza può percorrere la curva senza sbandare?'''
+  calcolo = "math.sqrt(0.50 * m * g * r / m)"
+  risultato = { valore = 20, unita = "m/s", cifre = 2 }
+  soluzione = '''In curva le ruote non scivolano lateralmente: la forza centripeta è l'attrito statico, che al massimo vale quanto trovato nel punto (a). La velocità è massima quando la forza centripeta richiesta è proprio $F_{s,\max}$:
+\[
+  m\,\frac{v^2}{r} = F_{s,\max}
+  \quad\Longrightarrow\quad
+  v^2 = \frac{F_{s,\max}\,r}{m} = \frac{\SI{1,0e4}{\newton} \cdot \SI{80}{\metre}}{\SI{2000}{\kilo\gram}} = \frac{\num{800000}}{2000}\,\si{\metre\squared\per\second\squared} = \SI{400}{\metre\squared\per\second\squared}
+\]
+quindi $v = \SI{20}{\metre\per\second}$, cioè $20 \cdot 3{,}6 = \SI{72}{\kilo\metre\per\hour}$. Scritto in lettere, $v^2 = \mu_s g r$: la massa si semplifica, e la velocità massima è la stessa per un'auto e per un'ambulanza.'''
+
+[[problema]]
+id = "ud2-dinamica-trazione"
+livello = 3
+testo = '''In una trazione ortopedica della gamba si appende una massa di {{m}} a una fune. La fune passa su una carrucola fissata al letto, poi su una carrucola agganciata al piede, poi su una seconda carrucola fissata al letto, ed è legata al telaio. Così due tratti di fune tirano la carrucola del piede: uno inclinato di \ang{30} sopra l'orizzontale, l'altro di \ang{30} sotto, nello stesso piano verticale. Funi e carrucole sono ideali, e la massa è ferma. Usa $g = \SI{10}{\metre\per\second\squared}$, $\sin\ang{30} = 0{,}5$ e $\cos\ang{30} \approx 0{,}87$.'''
+dati.m = { valore = "3,0", unita = "\\kilo\\gram" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la tensione della fune?'''
+  calcolo = "m * g"
+  risultato = { valore = 30, unita = "\\newton", cifre = 2 }
+  soluzione = '''La massa appesa è ferma: la tensione, verso l'alto, bilancia il peso. Quindi $F_T = mg = \SI{3,0}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} = \SI{30}{\newton}$. La fune e le carrucole sono ideali, quindi la tensione è la stessa in tutti i tratti.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza che la fune esercita sul piede, e in che direzione è diretta?'''
+  calcolo = "2 * m * g * sin60"
+  risultato = { valore = 52, unita = "\\newton", cifre = 2 }
+  rapido = '''\SI{52}{\newton}, orizzontale'''
+  soluzione = '''Sulla carrucola del piede tirano due tratti di fune, ciascuno con tensione \SI{30}{\newton}. Si prende l'asse $x$ orizzontale, nel verso in cui tirano le funi, e l'asse $y$ verticale. Ogni tratto forma \ang{30} con l'orizzontale, quindi ha componente orizzontale $F_T\cos\ang{30}$ e componente verticale $F_T\sin\ang{30}$, verso l'alto per un tratto e verso il basso per l'altro. Le componenti verticali si annullano; quelle orizzontali si sommano:
+\[
+  F_x = 2\,F_T\cos\ang{30} = 2 \cdot \SI{30}{\newton} \cdot 0{,}87 = \SI{52,2}{\newton} \approx \SI{52}{\newton}
+  \qquad\qquad
+  F_y = F_T\sin\ang{30} - F_T\sin\ang{30} = 0
+\]
+La forza sul piede è orizzontale, lungo la gamba, e vale circa \SI{52}{\newton}: più di quanto darebbe una fune sola, \SI{30}{\newton}, ma meno del doppio, perché i due tratti non sono paralleli.'''
+
+  [[problema.parte]]
+  domanda = '''Per regolare la trazione si aprono i due tratti di fune fino a \ang{60} sopra e sotto l'orizzontale. Quanto vale ora la forza sul piede?'''
+  calcolo = "2 * m * g * sin30"
+  risultato = { valore = 30, unita = "\\newton", cifre = 2 }
+  soluzione = '''La tensione non cambia: è sempre il peso della massa, \SI{30}{\newton}. Cambia l'angolo. Con $\cos\ang{60} = \sin\ang{30} = 0{,}5$:
+\[
+  F_x = 2\,F_T\cos\ang{60} = 2 \cdot \SI{30}{\newton} \cdot 0{,}5 = \SI{30}{\newton}
+\]
+Le componenti verticali si annullano ancora. Più i tratti di fune sono aperti, meno tirano lungo la gamba: con la stessa massa si regola la trazione cambiando la geometria delle carrucole.'''
+
+[[problema]]
+id = "ud2-dinamica-scivolo"
+livello = 3
+testo = '''Nel magazzino della farmacia ospedaliera un pacco di {{m}} viene appoggiato, fermo, in cima a uno scivolo di carico inclinato di \ang{30}. Fra il pacco e lo scivolo i coefficienti di attrito sono $\mu_s = 0{,}40$ e $\mu_d = 0{,}20$. Usa $g = \SI{10}{\metre\per\second\squared}$, $\sin\ang{30} = 0{,}5$ e $\cos\ang{30} \approx 0{,}87$.'''
+dati.m = { valore = "5,0", unita = "\\kilo\\gram" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'attrito statico massimo? Il pacco resta fermo?'''
+  calcolo = "0.40 * m * g * sin60"
+  risultato = { valore = 17, unita = "\\newton", cifre = 2 }
+  rapido = '''$\approx\SI{17}{\newton}$; no, scivola'''
+  soluzione = '''Il peso è $F_p = mg = \SI{50}{\newton}$. Con gli assi parallelo e perpendicolare allo scivolo, il peso ha componente lungo lo scivolo $mg\sin\ang{30} = 50 \cdot 0{,}5 = \SI{25}{\newton}$ e componente perpendicolare $mg\cos\ang{30} = 50 \cdot 0{,}87 = \SI{43,5}{\newton}$. In direzione perpendicolare il pacco non si muove, quindi $F_N = \SI{43,5}{\newton}$. L'attrito statico massimo è
+\[
+  F_{s,\max} = \mu_s F_N = 0{,}40 \cdot \SI{43,5}{\newton} = \SI{17,4}{\newton} \approx \SI{17}{\newton}
+\]
+Per restare fermo l'attrito dovrebbe bilanciare \SI{25}{\newton}: non ce la fa, e il pacco scivola.'''
+
+  [[problema.parte]]
+  domanda = '''Con quale accelerazione scende il pacco?'''
+  calcolo = "g * (sin30 - 0.20 * sin60)"
+  risultato = { valore = 3.3, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  soluzione = '''Mentre il pacco scivola agisce l'attrito dinamico, rivolto verso l'alto lungo lo scivolo. Con la forza normale del punto (a):
+\[
+  F_d = \mu_d F_N = 0{,}20 \cdot \SI{43,5}{\newton} = \SI{8,7}{\newton}
+\]
+Lungo lo scivolo, con l'asse verso il basso, la risultante è $25 - 8{,}7 = \SI{16,3}{\newton}$, e per il secondo principio
+\[
+  a = \frac{\SI{16,3}{\newton}}{\SI{5,0}{\kilo\gram}} = \SI{3,26}{\metre\per\second\squared} \approx \SI{3,3}{\metre\per\second\squared}
+\]
+In lettere, $a = g\,(\sin\theta - \mu_d\cos\theta)$: la massa si semplifica. Senza attrito sarebbe $g\sin\ang{30} = \SI{5}{\metre\per\second\squared}$.'''
+
+  [[problema.parte]]
+  domanda = '''Lo scivolo è lungo \SI{2,0}{\metre}. Con che velocità il pacco arriva in fondo?'''
+  calcolo = "math.sqrt(2 * g * (sin30 - 0.20 * sin60) * 2.0)"
+  risultato = { valore = 3.6, unita = "m/s", cifre = 2 }
+  soluzione = '''L'accelerazione del punto (b) è costante e il pacco parte da fermo. Dalla relazione $v^2 = v_0^2 + 2a\,\Delta x$ con $v_0 = 0$:
+\[
+  v^2 = 2 \cdot \SI{3,26}{\metre\per\second\squared} \cdot \SI{2,0}{\metre} = \SI{13,04}{\metre\squared\per\second\squared}
+  \qquad\Longrightarrow\qquad
+  v \approx \SI{3,6}{\metre\per\second}
+\]
+perché $3{,}6^2 = 12{,}96$, appena sotto $13{,}04$.'''
+
+[[problema]]
+id = "ud2-dinamica-montaletti"
+livello = 3
+testo = '''Il montaletti di un ospedale ha una cabina di {{mc}} e trasporta un letto con il paziente, {{ml}} in tutto. Parte da fermo verso l'alto con un'accelerazione costante di {{a}}, che dura {{t}}; poi sale a velocità costante. La cabina è retta da un cavo verticale di massa trascurabile. Usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.mc = { valore = 500, unita = "\\kilo\\gram" }
+dati.ml = { valore = 150, unita = "\\kilo\\gram" }
+dati.a = { valore = "1,2", unita = "\\metre\\per\\second\\squared" }
+dati.t = { valore = "2,5", unita = "s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la tensione del cavo durante la partenza?'''
+  calcolo = "(mc + ml) * (g + a)"
+  risultato = { valore = 7.3e3, unita = "\\newton", cifre = 2 }
+  soluzione = '''Si studia come un unico corpo la cabina con il letto: la massa è $500 + 150 = \SI{650}{\kilo\gram}$, e tutto accelera insieme verso l'alto. Le forze esterne sono il peso, verso il basso, e la tensione del cavo, verso l'alto. Con l'asse $y$ verso l'alto, $F_T - Mg = Ma$, quindi
+\[
+  F_T = M\,(g + a) = \SI{650}{\kilo\gram} \cdot (10 + 1{,}2)\,\si{\metre\per\second\squared} = 650 \cdot \SI{11,2}{\newton} = \SI{7280}{\newton} \approx \SI{7,3e3}{\newton}
+\]
+dove $650 \cdot 11{,}2 = 6500 + 650 \cdot 1{,}2 = 6500 + 780 = 7280$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale, durante la partenza, la forza che il pavimento della cabina esercita sul letto?'''
+  calcolo = "ml * (g + a)"
+  risultato = { valore = 1.7e3, unita = "\\newton", cifre = 2 }
+  soluzione = '''Ora il corpo da studiare è il solo letto con il paziente. Su di esso agiscono il suo peso e la forza normale del pavimento, e accelera come la cabina:
+\[
+  F_N = m\,(g + a) = \SI{150}{\kilo\gram} \cdot \SI{11,2}{\metre\per\second\squared} = \SI{1680}{\newton} \approx \SI{1,7e3}{\newton}
+\]
+Il peso del letto è \SI{1500}{\newton}: durante la partenza il pavimento lo spinge con il 12\% in più. Il cavo non tocca il letto, quindi la tensione non compare in questo diagramma di corpo libero.'''
+
+  [[problema.parte]]
+  domanda = '''Che velocità ha il montaletti alla fine della partenza? Quanto vale poi la tensione del cavo, mentre sale a velocità costante?'''
+  calcolo = "(mc + ml) * g"
+  risultato = { valore = 6.5e3, unita = "\\newton", cifre = 2 }
+  rapido = '''\SI{3,0}{\metre\per\second}; $F_T = \SI{6,5e3}{\newton}$'''
+  soluzione = '''L'accelerazione è costante e la cabina parte da ferma: $v = at = \SI{1,2}{\metre\per\second\squared} \cdot \SI{2,5}{\second} = \SI{3,0}{\metre\per\second}$. Poi la velocità resta costante, quindi l'accelerazione è nulla e la risultante anche. La tensione bilancia il peso:
+\[
+  F_T = Mg = \SI{650}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} = \SI{6500}{\newton} = \SI{6,5e3}{\newton}
+\]
+Il cavo tira meno che alla partenza anche se la cabina si sta muovendo: per il primo principio, a velocità costante non serve una forza risultante.'''
+
+[[problema]]
+id = "ud2-dinamica-stazione"
+livello = 3
+testo = '''Un'astronauta di {{m}} vive sulla Stazione spaziale internazionale, che gira intorno alla Terra su un'orbita circolare a {{h}} di quota. Il raggio della Terra è $R_T = \SI{6,4e6}{\metre}$, e sulla superficie $g = \SI{9,8}{\metre\per\second\squared}$.'''
+dati.m = { valore = 70, unita = "\\kilo\\gram" }
+dati.h = { valore = 400, unita = "\\kilo\\metre" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'accelerazione di gravità alla quota della stazione?'''
+  calcolo = "9.8 * (6.4e6 / (6.4e6 + h * 1e3))**2"
+  risultato = { valore = 8.7, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  soluzione = '''La forza gravitazionale della Terra è inversamente proporzionale al quadrato della distanza dal centro, quindi anche l'accelerazione che dà: $g' = GM_T/r^2$. Alla superficie $r = R_T$, alla stazione $r = R_T + h = 6{,}4 \cdot 10^{6} + 0{,}4 \cdot 10^{6} = \SI{6,8e6}{\metre}$. Facendo il rapporto, $G$ e $M_T$ si semplificano:
+\[
+  g' = g\,\left(\frac{R_T}{R_T + h}\right)^2 = \SI{9,8}{\metre\per\second\squared} \cdot \left(\frac{6{,}4}{6{,}8}\right)^2
+\]
+\[
+  g' = \SI{9,8}{\metre\per\second\squared} \cdot \left(\frac{16}{17}\right)^2 = \SI{9,8}{\metre\per\second\squared} \cdot \frac{256}{289} \approx 9{,}8 \cdot 0{,}886\,\si{\metre\per\second\squared} \approx \SI{8,7}{\metre\per\second\squared}
+\]
+dove $6{,}4/6{,}8 = 64/68 = 16/17$, e $9{,}8 \cdot 0{,}886 \approx 8{,}68$. A \SI{400}{\kilo\metre} di quota la gravità è ancora quasi il 90\% di quella al suolo.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza peso dell'astronauta sulla stazione?'''
+  calcolo = "m * 9.8 * (6.4e6 / (6.4e6 + h * 1e3))**2"
+  risultato = { valore = 610, unita = "\\newton", cifre = 2 }
+  soluzione = '''Con l'accelerazione del punto (a):
+\[
+  F_p = m\,g' = \SI{70}{\kilo\gram} \cdot \SI{8,68}{\metre\per\second\squared} \approx \SI{608}{\newton} \approx \SI{6,1e2}{\newton}
+\]
+Al suolo pesa $70 \cdot 9{,}8 = \SI{686}{\newton}$. Il peso non è affatto sparito: se gli astronauti fluttuano non è perché la gravità manca.'''
+
+  [[problema.parte]]
+  domanda = '''Quale velocità deve avere la stazione perché la forza peso sia proprio la forza centripeta della sua orbita? Perché l'astronauta si sente senza peso?'''
+  calcolo = "math.sqrt(9.8 * (6.4e6 / (6.4e6 + h * 1e3))**2 * (6.4e6 + h * 1e3))"
+  risultato = { valore = 7.7e3, unita = "m/s", cifre = 2 }
+  rapido = '''$\approx\SI{7,7e3}{\metre\per\second}$; cade insieme alla stazione'''
+  soluzione = '''Sulla stazione, e su ogni cosa che contiene, agisce solo il peso, diretto verso il centro della Terra. In orbita circolare il peso fa da forza centripeta: $m g' = m v^2/r$, quindi $v^2 = g' r$ (la massa si semplifica):
+\[
+  v^2 = \SI{8,68}{\metre\per\second\squared} \cdot \SI{6,8e6}{\metre} \approx \SI{59e6}{\metre\squared\per\second\squared}
+  \qquad\Longrightarrow\qquad
+  v \approx \sqrt{59} \cdot 10^{3}\,\si{\metre\per\second} \approx \SI{7,7e3}{\metre\per\second}
+\]
+dove $8{,}68 \cdot 6{,}8 \approx 59$, $\sqrt{10^{6}} = 10^{3}$ e $7{,}7^2 \approx 59$. Sono quasi \SI{28000}{\kilo\metre\per\hour}. L'astronauta e la stazione hanno la stessa accelerazione $g'$, verso la Terra: cadono insieme, continuamente, e il pavimento non deve spingere l'astronauta. Una bilancia sotto i suoi piedi segnerebbe zero, come in un ascensore in caduta libera.'''
+
+[[problema]]
+id = "ud2-dinamica-tavolo"
+livello = 3
+testo = '''In un'esercitazione di laboratorio un blocco di {{m1}} sta su un tavolo orizzontale. È legato a una fune ideale che passa su una carrucola ideale, sul bordo del tavolo, e regge all'altro capo un pesetto di {{m2}}, appeso in verticale. Il blocco viene spinto appena e poi si muove verso la carrucola, mentre il pesetto scende. Il coefficiente di attrito dinamico fra blocco e tavolo è $\mu_d = 0{,}20$. Usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.m1 = { valore = "4,0", unita = "\\kilo\\gram" }
+dati.m2 = { valore = "1,0", unita = "\\kilo\\gram" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza di attrito sul blocco?'''
+  calcolo = "0.20 * m1 * g"
+  risultato = { valore = 8.0, unita = "\\newton", cifre = 2 }
+  soluzione = '''Il tavolo è orizzontale e la fune tira il blocco in orizzontale, quindi in verticale sul blocco ci sono solo il peso e la forza normale: $F_N = m_1 g = \SI{40}{\newton}$. Il blocco scivola, quindi l'attrito è dinamico:
+\[
+  F_d = \mu_d F_N = 0{,}20 \cdot \SI{40}{\newton} = \SI{8,0}{\newton}
+\]
+diretto all'indietro, contro il moto.'''
+
+  [[problema.parte]]
+  domanda = '''Con quale accelerazione si muovono il blocco e il pesetto?'''
+  calcolo = "(m2 * g - 0.20 * m1 * g) / (m1 + m2)"
+  risultato = { valore = 0.40, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  soluzione = '''La fune è inestensibile, quindi i due corpi hanno accelerazioni dello stesso modulo $a$: il blocco verso la carrucola, il pesetto verso il basso. Si scrive il secondo principio per ciascun corpo, prendendo come verso positivo quello del moto.
+\begin{itemize}
+  \item Blocco, in orizzontale: la tensione tira avanti, l'attrito indietro: $F_T - F_d = m_1 a$.
+  \item Pesetto, in verticale: il peso tira giù, la tensione su: $m_2 g - F_T = m_2 a$.
+\end{itemize}
+Sommando le due equazioni la tensione si elimina:
+\[
+  m_2 g - F_d = (m_1 + m_2)\,a
+  \quad\Longrightarrow\quad
+  a = \frac{\SI{10}{\newton} - \SI{8,0}{\newton}}{\SI{5,0}{\kilo\gram}} = \frac{\SI{2,0}{\newton}}{\SI{5,0}{\kilo\gram}} = \SI{0,40}{\metre\per\second\squared}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la tensione della fune?'''
+  calcolo = "m2 * (g - (m2 * g - 0.20 * m1 * g) / (m1 + m2))"
+  risultato = { valore = 9.6, unita = "\\newton", cifre = 2 }
+  soluzione = '''Dall'equazione del pesetto, con l'accelerazione del punto (b):
+\[
+  F_T = m_2\,(g - a) = \SI{1,0}{\kilo\gram} \cdot (10 - 0{,}40)\,\si{\metre\per\second\squared} = \SI{9,6}{\newton}
+\]
+Controllo con l'equazione del blocco: $F_T = m_1 a + F_d = 4{,}0 \cdot 0{,}40 + 8{,}0 = 1{,}6 + 8{,}0 = \SI{9,6}{\newton}$. La tensione è minore del peso del pesetto, \SI{10}{\newton}: se fossero uguali, il pesetto non potrebbe accelerare verso il basso.'''
+
+[[problema]]
+id = "ud2-dinamica-lampada"
+livello = 3
+testo = '''In una sala visita una lampada di {{m}} è appesa a due cavi. Il primo è fissato al soffitto ed è inclinato di \ang{60} rispetto alla verticale; il secondo è orizzontale ed è fissato alla parete. La lampada è ferma. Usa $g = \SI{10}{\metre\per\second\squared}$, $\cos\ang{60} = 0{,}5$ e $\sin\ang{60} \approx 0{,}87$.'''
+dati.m = { valore = 12, unita = "\\kilo\\gram" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la tensione del cavo inclinato?'''
+  calcolo = "m * g / sin30"
+  risultato = { valore = 240, unita = "\\newton", cifre = 2 }
+  soluzione = '''Sulla lampada agiscono tre forze: il peso $F_p = mg = \SI{120}{\newton}$, verso il basso; la tensione $F_{T1}$ del cavo inclinato; la tensione $F_{T2}$ del cavo orizzontale. Si prendono l'asse $x$ orizzontale e l'asse $y$ verticale verso l'alto. Il cavo inclinato forma \ang{60} con la verticale: la sua componente verticale, cateto adiacente a quell'angolo, è $F_{T1}\cos\ang{60}$, e quella orizzontale è $F_{T1}\sin\ang{60}$. Il cavo orizzontale non ha componente verticale, quindi in verticale l'equilibrio riguarda solo il cavo inclinato e il peso:
+\[
+  F_{T1}\cos\ang{60} - F_p = 0
+  \quad\Longrightarrow\quad
+  F_{T1} = \frac{F_p}{\cos\ang{60}} = \frac{\SI{120}{\newton}}{0{,}5} = \SI{240}{\newton}
+\]
+Il cavo inclinato regge il doppio del peso della lampada.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la tensione del cavo orizzontale?'''
+  calcolo = "m * g / sin30 * sin60"
+  risultato = { valore = 210, unita = "\\newton", cifre = 2 }
+  soluzione = '''In orizzontale la componente del cavo inclinato e la tensione del cavo orizzontale sono opposte, e devono annullarsi:
+\[
+  F_{T2} = F_{T1}\sin\ang{60} = \SI{240}{\newton} \cdot 0{,}87 = \SI{208,8}{\newton} \approx \SI{2,1e2}{\newton}
+\]
+Anche il cavo orizzontale tira più del peso della lampada, anche se non la regge affatto in verticale: serve a tenere il primo cavo inclinato.'''
+
+  [[problema.parte]]
+  domanda = '''Si accorcia il cavo orizzontale, e il cavo inclinato forma ora \ang{30} con la verticale. Quanto valgono le due tensioni?'''
+  calcolo = "m * g / sin60"
+  risultato = { valore = 140, unita = "\\newton", cifre = 2 }
+  rapido = '''cavo inclinato $\approx\SI{1,4e2}{\newton}$; cavo orizzontale $\approx\SI{69}{\newton}$'''
+  soluzione = '''Si rifanno gli stessi passaggi con l'angolo di \ang{30}: $\cos\ang{30} \approx 0{,}87$ e $\sin\ang{30} = 0{,}5$. In verticale:
+\[
+  F_{T1} = \frac{F_p}{\cos\ang{30}} = \frac{\SI{120}{\newton}}{0{,}87} \approx \SI{138}{\newton} \approx \SI{1,4e2}{\newton}
+\]
+perché $0{,}87 \cdot 138 \approx 120$. In orizzontale: $F_{T2} = F_{T1}\sin\ang{30} \approx 138 \cdot 0{,}5 = \SI{69}{\newton}$. Con il cavo più vicino alla verticale tutte e due le tensioni calano: il cavo inclinato si avvicina al peso della lampada, quello orizzontale a zero.'''
+
+[[problema]]
+id = "ud2-dinamica-centrifuga"
+livello = 3
+testo = '''Una centrifuga da laboratorio gira a \num{6000} giri al minuto. Una provetta di sangue di {{m}} sta a {{r}} dall'asse di rotazione. Usa $\pi \approx 3{,}14$ e $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.m = { valore = 10, unita = "\\gram" }
+dati.r = { valore = "8,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la velocità angolare della provetta?'''
+  calcolo = "2 * math.pi * 6000 / 60"
+  risultato = { valore = 628, unita = "\\radian\\per\\second", cifre = 3 }
+  soluzione = '''La frequenza in giri al secondo è $f = 6000/\SI{60}{\second} = \SI{100}{\hertz}$. Quindi
+\[
+  \omega = 2\pi f \approx 6{,}28 \cdot \SI{100}{\hertz} = \SI{628}{\radian\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'accelerazione centripeta della provetta, anche in multipli di $g$?'''
+  calcolo = "(2 * math.pi * 6000 / 60)**2 * r / 100"
+  risultato = { valore = 3.2e4, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  rapido = '''$\approx\SI{3,2e4}{\metre\per\second\squared}$, circa $\num{3200}\,g$'''
+  soluzione = '''Con il raggio in metri, $r = \SI{0,080}{\metre}$, e la velocità angolare del punto (a). Il quadrato si fa a mano: $628^2 = (600 + 28)^2 = \num{360000} + 2 \cdot 600 \cdot 28 + 784 = \num{360000} + \num{33600} + 784 = \num{394384} \approx \num{3,94e5}$:
+\[
+  a_c = \omega^2 r \approx \num{3,94e5}\,\si{\per\second\squared} \cdot \SI{0,080}{\metre} = 3{,}94 \cdot 8{,}0 \cdot 10^{5-2}\,\si{\metre\per\second\squared} \approx 31{,}5 \cdot 10^{3}\,\si{\metre\per\second\squared} \approx \SI{3,2e4}{\metre\per\second\squared}
+\]
+In multipli di $g$: $\num{31500}/10 \approx 3200$, cioè circa $3200\,g$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza che il fondo del portaprovette esercita sulla provetta? A quale massa, ferma sul tavolo, corrisponderebbe un peso uguale?'''
+  calcolo = "m / 1000 * (2 * math.pi * 6000 / 60)**2 * r / 100"
+  risultato = { valore = 3.2e2, unita = "\\newton", cifre = 2 }
+  rapido = '''$\approx\SI{3,2e2}{\newton}$; circa \SI{32}{\kilo\gram}'''
+  soluzione = '''La massa in chilogrammi è $m = \SI{10}{\gram} = \SI{0,010}{\kilo\gram}$. La spinta del fondo è la forza centripeta della provetta (il suo peso è verticale e trascurabile al confronto, \SI{0,1}{\newton}):
+\[
+  F_c = m\,a_c = \SI{0,010}{\kilo\gram} \cdot \SI{3,15e4}{\metre\per\second\squared} = 3{,}15 \cdot 10^{-2+4}\,\si{\newton} \approx \SI{3,2e2}{\newton}
+\]
+Un peso di circa \SI{320}{\newton} è quello di una massa di $320/10 = \SI{32}{\kilo\gram}$. Per questo le provette da centrifuga sono di plastica spessa, e il rotore va sempre bilanciato con provette di massa uguale in posizioni opposte.'''
+
+[[problema]]
+id = "ud2-dinamica-toboga"
+livello = 3
+testo = '''Il soccorso alpino trasporta un ferito su un toboga, una barella a slitta: ferito e toboga hanno una massa di {{m}} in tutto. Un soccorritore lo trascina sulla neve piana tirando una fune inclinata di \ang{30} sopra l'orizzontale con una forza di {{F}}. Il coefficiente di attrito dinamico fra toboga e neve è $\mu_d = 0{,}10$. Usa $g = \SI{10}{\metre\per\second\squared}$, $\sin\ang{30} = 0{,}5$ e $\cos\ang{30} \approx 0{,}87$.'''
+dati.m = { valore = 100, unita = "\\kilo\\gram" }
+dati.F = { valore = 250, unita = "\\newton" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza normale della neve sul toboga?'''
+  calcolo = "m * g - F * sin30"
+  risultato = { valore = 875, unita = "\\newton", cifre = 3 }
+  soluzione = '''Sul toboga agiscono il peso $mg = \SI{1000}{\newton}$, verso il basso; la forza normale $F_N$, verso l'alto; la forza della fune, inclinata di \ang{30}; l'attrito, all'indietro. La componente verticale della fune è $F\sin\ang{30} = 250 \cdot 0{,}5 = \SI{125}{\newton}$, verso l'alto. In verticale il toboga non si muove, quindi
+\[
+  F_N + F\sin\ang{30} - mg = 0
+  \quad\Longrightarrow\quad
+  F_N = \SI{1000}{\newton} - \SI{125}{\newton} = \SI{875}{\newton}
+\]
+La forza normale è minore del peso: la fune solleva un poco il toboga.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'attrito dinamico?'''
+  calcolo = "0.10 * (m * g - F * sin30)"
+  risultato = { valore = 87.5, unita = "\\newton", cifre = 3 }
+  soluzione = '''L'attrito dinamico è proporzionale alla forza normale del punto (a), non al peso:
+\[
+  F_d = \mu_d F_N = 0{,}10 \cdot \SI{875}{\newton} = \SI{87,5}{\newton}
+\]
+Chi usa $F_N = mg$ trova \SI{100}{\newton}: tirando verso l'alto si riduce l'attrito.'''
+
+  [[problema.parte]]
+  domanda = '''Con quale accelerazione si muove il toboga?'''
+  calcolo = "(F * sin60 - 0.10 * (m * g - F * sin30)) / m"
+  risultato = { valore = 1.3, unita = "\\metre\\per\\second\\squared", cifre = 2 }
+  soluzione = '''In orizzontale tirano avanti la componente orizzontale della fune, $F\cos\ang{30} = 250 \cdot 0{,}87 = \SI{217,5}{\newton}$, e indietro l'attrito del punto (b). Per il secondo principio
+\[
+  a = \frac{F\cos\ang{30} - F_d}{m} = \frac{\SI{217,5}{\newton} - \SI{87,5}{\newton}}{\SI{100}{\kilo\gram}} = \frac{\SI{130}{\newton}}{\SI{100}{\kilo\gram}} = \SI{1,3}{\metre\per\second\squared}
+\]'''
+
+[[problema]]
+id = "ud2-energia-barella"
+livello = 1
+testo = '''Un barelliere tira una barella su ruote lungo un corridoio orizzontale di {{s}}. La forza con cui tira la maniglia vale {{F}} ed è inclinata di {{theta}} sopra l'orizzontale. Quanto lavoro compie la sua forza?'''
+dati.F = { valore = 120, unita = "\\newton" }
+dati.s = { valore = 15, unita = "m" }
+dati.theta = { valore = 30, unita = "\\degree" }
+
+  [[problema.parte]]
+  calcolo = "F * s * cos30"
+  risultato = { valore = 1.6e3, unita = "J", cifre = 2 }
+  soluzione = '''Lo spostamento è orizzontale e la forza forma con esso l'angolo $\theta = \ang{30}$. Conta solo la componente della forza lungo lo spostamento, $F\cos\theta$, con $\cos\ang{30} \approx 0{,}87$:
+\[
+  W = F\,s\cos\theta = \SI{120}{\newton} \cdot \SI{15}{\metre} \cdot 0{,}87 = \SI{1800}{\joule} \cdot 0{,}87 \approx \SI{1,6e3}{\joule}
+\]
+La componente verticale della forza, $F\sin\ang{30} = \SI{60}{\newton}$, è perpendicolare allo spostamento e non compie lavoro: alleggerisce soltanto la barella sulle ruote.'''
+
+[[problema]]
+id = "ud2-energia-tennis"
+livello = 1
+testo = '''Una palla da tennis di {{m}} lascia la racchetta, al servizio, a {{v}}. Calcola la sua energia cinetica.'''
+dati.m = { valore = 58, unita = "\\gram" }
+dati.v = { valore = 40, unita = "m/s" }
+
+  [[problema.parte]]
+  calcolo = "0.5 * (m / 1000) * v**2"
+  risultato = { valore = 46, unita = "J", cifre = 2 }
+  soluzione = '''La massa in chilogrammi è $m = \SI{58}{\gram} = \SI{0,058}{\kilo\gram}$. L'energia cinetica è
+\[
+  E_c = \frac12 m v^2 = \frac12 \cdot \SI{0,058}{\kilo\gram} \cdot (\SI{40}{\metre\per\second})^2 = \SI{0,029}{\kilo\gram} \cdot \SI{1600}{\metre\squared\per\second\squared} = \SI{46,4}{\joule} \approx \SI{46}{\joule}
+\]
+Si arrotonda a due cifre significative, come i dati.'''
+
+[[problema]]
+id = "ud2-energia-cuore"
+livello = 1
+testo = '''A ogni battito il ventricolo sinistro compie sul sangue un lavoro meccanico di circa {{W}}. La frequenza cardiaca a riposo è di {{fc}} battiti al minuto. Calcola la potenza meccanica media del ventricolo sinistro.'''
+dati.W = { valore = "1,0", unita = "J" }
+dati.fc = { valore = 72 }
+
+  [[problema.parte]]
+  calcolo = "W * fc / 60"
+  risultato = { valore = 1.2, unita = "W", cifre = 2 }
+  soluzione = '''In un minuto, cioè in \SI{60}{\second}, il cuore batte 72 volte e il ventricolo compie il lavoro $72 \cdot \SI{1,0}{\joule} = \SI{72}{\joule}$. La potenza media è il lavoro diviso per il tempo:
+\[
+  P = \frac{W}{\Delta t} = \frac{\SI{72}{\joule}}{\SI{60}{\second}} = \SI{1,2}{\watt}
+\]
+È poco più di un watt: una piccola parte dei circa \SI{100}{\watt} che il corpo consuma a riposo.'''
+
+[[problema]]
+id = "ud2-energia-dinamometro"
+livello = 1
+testo = '''Un dinamometro a molla per misurare la forza della presa contiene una molla di costante elastica {{k}}. Un paziente stringe l'impugnatura e la molla si comprime di {{x}}. Quanta energia potenziale elastica è immagazzinata nella molla?'''
+dati.k = { valore = "2,0e4", unita = "\\newton\\per\\metre" }
+dati.x = { valore = "1,2", unita = "cm" }
+
+  [[problema.parte]]
+  calcolo = "0.5 * k * (x / 100)**2"
+  risultato = { valore = 1.4, unita = "J", cifre = 2 }
+  soluzione = '''La compressione in metri è $x = \SI{1,2}{\centi\metre} = \SI{1,2e-2}{\metre}$, e il suo quadrato è $x^2 = 1{,}44 \cdot 10^{-4}\,\si{\metre\squared}$. L'energia potenziale elastica è
+\[
+  E_p = \frac12 k x^2 = \frac12 \cdot \SI{2,0e4}{\newton\per\metre} \cdot \SI{1,44e-4}{\metre\squared} = 1{,}0 \cdot 1{,}44 \cdot 10^{4-4}\,\si{\joule} \approx \SI{1,4}{\joule}
+\]
+La forza della presa, per la legge di Hooke, è $kx = \SI{2,0e4}{\newton\per\metre} \cdot \SI{0,012}{\metre} = \SI{240}{\newton}$.'''
+
+[[problema]]
+id = "ud2-energia-flebo"
+livello = 1
+testo = '''Un'infermiera prende una sacca per flebo di {{m}} dal piano di un carrello, alto {{h1}}, e la appende al gancio dell'asta, alto {{h2}}. Di quanto aumenta l'energia potenziale gravitazionale della sacca? Usa $g = \SI{9,8}{\metre\per\second\squared}$.'''
+dati.m = { valore = "0,50", unita = "\\kilo\\gram" }
+dati.h1 = { valore = "0,90", unita = "m" }
+dati.h2 = { valore = "1,80", unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "m * 9.8 * (h2 - h1)"
+  risultato = { valore = 4.4, unita = "J", cifre = 2 }
+  soluzione = '''Conta solo il dislivello fra la posizione iniziale e quella finale, $\Delta h = 1{,}80 - 0{,}90 = \SI{0,90}{\metre}$:
+\[
+  \Delta E_p = mg\,\Delta h = \SI{0,50}{\kilo\gram} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{0,90}{\metre} = \SI{4,9}{\newton} \cdot \SI{0,90}{\metre} \approx \SI{4,4}{\joule}
+\]
+Non serve scegliere dove mettere lo zero dell'energia potenziale: la variazione non dipende da questa scelta.'''
+
+[[problema]]
+id = "ud2-energia-carrello"
+livello = 2
+testo = '''Un carrello per le emergenze, di massa {{m}}, viene spinto in un corridoio orizzontale fino alla velocità di {{v}}; poi viene lasciato andare, e si ferma dopo {{d}} per effetto degli attriti.'''
+dati.m = { valore = 60, unita = "\\kilo\\gram" }
+dati.v = { valore = "2,0", unita = "m/s" }
+dati.d = { valore = "4,0", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'energia cinetica del carrello quando viene lasciato andare?'''
+  calcolo = "0.5 * m * v**2"
+  risultato = { valore = 120, unita = "J", cifre = 2 }
+  soluzione = '''\[
+  E_c = \frac12 m v^2 = \frac12 \cdot \SI{60}{\kilo\gram} \cdot (\SI{2,0}{\metre\per\second})^2 = \SI{30}{\kilo\gram} \cdot \SI{4,0}{\metre\squared\per\second\squared} = \SI{120}{\joule}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza media degli attriti, considerata costante?'''
+  calcolo = "0.5 * m * v**2 / d"
+  risultato = { valore = 30, unita = "\\newton", cifre = 2 }
+  soluzione = '''Dopo il rilascio, in orizzontale agiscono solo gli attriti, opposti allo spostamento: il loro lavoro è $-F\,d$. Il peso e la forza normale sono verticali e non compiono lavoro. Per il teorema dell'energia cinetica il lavoro totale è la variazione dell'energia cinetica, da \SI{120}{\joule} a zero:
+\[
+  -F\,d = 0 - \SI{120}{\joule}
+  \quad\Longrightarrow\quad
+  F = \frac{\SI{120}{\joule}}{\SI{4,0}{\metre}} = \SI{30}{\newton}
+\]'''
+
+[[problema]]
+id = "ud2-energia-pedana"
+livello = 2
+testo = '''In un esercizio di riabilitazione del ginocchio il paziente, seduto, spinge con il piede una pedana frenata da un sistema di elastici. La forza del piede è sempre parallela allo spostamento della pedana. Nei primi {{x1}} di corsa la forza cresce in modo uniforme da zero a {{F}}; nei successivi {{x2}} resta costante a {{F}}.'''
+dati.x1 = { valore = "5,0", unita = "cm" }
+dati.x2 = { valore = 15, unita = "cm" }
+dati.F = { valore = 400, unita = "\\newton" }
+
+  [[problema.parte]]
+  domanda = '''Quanto lavoro compie il piede nei primi \SI{5,0}{\centi\metre}?'''
+  calcolo = "0.5 * F * x1 / 100"
+  risultato = { valore = 10, unita = "J", cifre = 2 }
+  soluzione = '''La forza non è costante: il lavoro è l'area sotto il grafico della forza in funzione della posizione. Nel primo tratto il grafico è una retta che sale da zero a \SI{400}{\newton}, e l'area è quella di un triangolo di base $\SI{5,0}{\centi\metre} = \SI{0,050}{\metre}$ e altezza \SI{400}{\newton}:
+\[
+  W_1 = \frac12 \cdot \SI{0,050}{\metre} \cdot \SI{400}{\newton} = \SI{10}{\joule}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto lavoro compie il piede in tutta la corsa?'''
+  calcolo = "0.5 * F * x1 / 100 + F * x2 / 100"
+  risultato = { valore = 70, unita = "J", cifre = 2 }
+  soluzione = '''Nel secondo tratto la forza è costante, e l'area è un rettangolo di base $\SI{15}{\centi\metre} = \SI{0,15}{\metre}$ e altezza \SI{400}{\newton}: $W_2 = \SI{400}{\newton} \cdot \SI{0,15}{\metre} = \SI{60}{\joule}$. Il lavoro totale è la somma delle due aree:
+\[
+  W = W_1 + W_2 = \SI{10}{\joule} + \SI{60}{\joule} = \SI{70}{\joule}
+\]
+Chi usa $W = Fs$ con la forza massima su tutta la corsa, $400 \cdot 0{,}20 = \SI{80}{\joule}$, sbaglia sul primo tratto, dove la forza media è solo metà di quella massima.'''
+
+[[problema]]
+id = "ud2-energia-biopsia"
+livello = 2
+testo = '''Un ago per biopsia automatico è spinto da una molla di costante elastica {{k}}, compressa di {{x}}. Quando si preme il pulsante la molla si distende fino alla lunghezza di riposo e lancia il carrello che porta l'ago, di massa complessiva {{m}}. Trascura gli attriti e supponi che tutta l'energia della molla passi al carrello.'''
+dati.k = { valore = "2,0e3", unita = "\\newton\\per\\metre" }
+dati.x = { valore = "2,0", unita = "cm" }
+dati.m = { valore = 10, unita = "\\gram" }
+
+  [[problema.parte]]
+  domanda = '''Quanta energia è immagazzinata nella molla compressa?'''
+  calcolo = "0.5 * k * (x / 100)**2"
+  risultato = { valore = 0.40, unita = "J", cifre = 2 }
+  soluzione = '''La compressione in metri è $x = \SI{0,020}{\metre}$, e $x^2 = \SI{4,0e-4}{\metre\squared}$:
+\[
+  E_p = \frac12 k x^2 = \frac12 \cdot \SI{2,0e3}{\newton\per\metre} \cdot \SI{4,0e-4}{\metre\squared} = \SI{1,0e3}{\newton\per\metre} \cdot \SI{4,0e-4}{\metre\squared} = \SI{0,40}{\joule}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità parte il carrello?'''
+  calcolo = "math.sqrt(2 * 0.5 * k * (x / 100)**2 / (m / 1000))"
+  risultato = { valore = 8.9, unita = "m/s", cifre = 2 }
+  soluzione = '''L'energia elastica diventa energia cinetica del carrello, di massa $m = \SI{10}{\gram} = \SI{0,010}{\kilo\gram}$:
+\[
+  \frac12 m v^2 = \SI{0,40}{\joule}
+  \quad\Longrightarrow\quad
+  v = \sqrt{\frac{2 \cdot \SI{0,40}{\joule}}{\SI{0,010}{\kilo\gram}}} = \sqrt{\SI{80}{\metre\squared\per\second\squared}} \approx \SI{8,9}{\metre\per\second}
+\]
+Per la radice: $8{,}9^2 \approx 79$ e $9^2 = 81$, quindi $\sqrt{80}$ è poco meno di 9.'''
+
+[[problema]]
+id = "ud2-energia-slitta"
+livello = 2
+testo = '''Nella riabilitazione sportiva si usa la spinta della slitta: l'atleta spinge in orizzontale una slitta carica, di massa totale {{m}}, su un manto di erba sintetica. Il coefficiente di attrito dinamico fra slitta ed erba è {{mu}}, e la slitta procede a velocità costante di {{v}}. Usa $g = \SI{9,8}{\metre\per\second\squared}$.'''
+dati.m = { valore = 80, unita = "\\kilo\\gram" }
+dati.mu = { valore = "0,40" }
+dati.v = { valore = "1,5", unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Con che forza spinge l'atleta?'''
+  calcolo = "mu * m * 9.8"
+  risultato = { valore = 314, unita = "\\newton", cifre = 3 }
+  soluzione = '''In verticale la slitta è in equilibrio: $F_N = mg = \SI{80}{\kilo\gram} \cdot \SI{9,8}{\metre\per\second\squared} = \SI{784}{\newton}$. L'attrito dinamico è $F_d = \mu_d F_N = 0{,}40 \cdot \SI{784}{\newton} \approx \SI{314}{\newton}$. A velocità costante la risultante è nulla, quindi la spinta bilancia l'attrito: $F \approx \SI{314}{\newton}$.'''
+
+  [[problema.parte]]
+  domanda = '''Che potenza sviluppa?'''
+  calcolo = "mu * m * 9.8 * v"
+  risultato = { valore = 4.7e2, unita = "W", cifre = 2 }
+  soluzione = '''La spinta è parallela alla velocità, quindi
+\[
+  P = F\,v = \SI{313,6}{\newton} \cdot \SI{1,5}{\metre\per\second} \approx \SI{470}{\watt} = \SI{4,7e2}{\watt}
+\]
+Il lavoro totale sulla slitta è zero, perché la velocità non cambia; ma l'atleta compie un lavoro positivo, e l'attrito un lavoro negativo uguale e opposto, che diventa calore.'''
+
+[[problema]]
+id = "ud2-energia-pallone"
+livello = 2
+testo = '''Un paziente lancia verticalmente verso l'alto una palla zavorrata, che lascia le sue mani a {{v}}. Trascura la resistenza dell'aria e usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.v = { valore = "6,0", unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Di quanto sale la palla sopra il punto di lancio?'''
+  calcolo = "v**2 / (2 * g)"
+  risultato = { valore = 1.8, unita = "m", cifre = 2 }
+  soluzione = '''Si prende lo zero dell'energia potenziale nel punto di lancio. Nel punto più alto la palla è ferma, e tutta l'energia cinetica iniziale è diventata energia potenziale:
+\[
+  \frac12 m v_0^2 = mgh
+  \quad\Longrightarrow\quad
+  h = \frac{v_0^2}{2g} = \frac{\SI{36}{\metre\squared\per\second\squared}}{\SI{20}{\metre\per\second\squared}} = \SI{1,8}{\metre}
+\]
+La massa si semplifica: non serve conoscerla.'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità passa la palla a metà di questa altezza?'''
+  calcolo = "math.sqrt(v**2 - 2 * g * (v**2 / (2 * g)) / 2)"
+  risultato = { valore = 4.2, unita = "m/s", cifre = 2 }
+  soluzione = '''A metà altezza, $h/2 = \SI{0,90}{\metre}$, la palla ha guadagnato metà dell'energia potenziale finale, quindi ha perso metà dell'energia cinetica iniziale:
+\[
+  \frac12 m v^2 = \frac12 m v_0^2 - mg\,\frac{h}{2}
+  \quad\Longrightarrow\quad
+  v^2 = v_0^2 - 2g\,\frac{h}{2} = \SI{36}{\metre\squared\per\second\squared} - 2 \cdot 10 \cdot \SI{0,90}{\metre\squared\per\second\squared} = \SI{18}{\metre\squared\per\second\squared}
+\]
+e $v = \sqrt{18} \approx \SI{4,2}{\metre\per\second}$. Non è metà della velocità iniziale, \SI{3,0}{\metre\per\second}: metà dell'energia cinetica corrisponde a una velocità divisa per $\sqrt{2}$, cioè $6{,}0/1{,}41 \approx 4{,}2$.'''
+
+[[problema]]
+id = "ud2-energia-materasso"
+livello = 3
+testo = '''Una ginnasta di {{m}} si lascia cadere da ferma da un'altezza di {{h}} sopra un materasso. Il materasso, toccato dai piedi, si schiaccia di {{d}} prima di fermarla. Trascura la resistenza dell'aria e usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.m = { valore = 60, unita = "\\kilo\\gram" }
+dati.h = { valore = "1,25", unita = "m" }
+dati.d = { valore = 25, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità tocca il materasso?'''
+  calcolo = "math.sqrt(2 * g * h)"
+  risultato = { valore = 5.0, unita = "m/s", cifre = 2 }
+  soluzione = '''Durante la caduta compie lavoro solo il peso, e l'energia meccanica si conserva. Con lo zero dell'energia potenziale alla superficie del materasso, $mgh = \frac12 mv^2$, e
+\[
+  v = \sqrt{2gh} = \sqrt{2 \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{1,25}{\metre}} = \sqrt{\SI{25}{\metre\squared\per\second\squared}} = \SI{5,0}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza media con cui il materasso la frena? Quante volte il suo peso?'''
+  calcolo = "m * g * (h + d / 100) / (d / 100)"
+  risultato = { valore = 3.6e3, unita = "\\newton", cifre = 2 }
+  rapido = '''\SI{3,6e3}{\newton}; sei volte il peso'''
+  soluzione = '''Conviene guardare tutto il moto, dalla partenza all'arresto: l'energia cinetica è zero all'inizio e alla fine, quindi per il teorema dell'energia cinetica il lavoro totale è zero. Il peso agisce su tutta la discesa, $h + d = 1{,}25 + 0{,}25 = \SI{1,50}{\metre}$, e compie il lavoro positivo $mg(h + d)$; la forza del materasso agisce solo sugli ultimi $d = \SI{0,25}{\metre}$, verso l'alto, e compie il lavoro $-F\,d$:
+\[
+  mg(h + d) - F\,d = 0
+  \quad\Longrightarrow\quad
+  F = \frac{mg(h + d)}{d} = \frac{\SI{600}{\newton} \cdot \SI{1,50}{\metre}}{\SI{0,25}{\metre}} = \SI{600}{\newton} \cdot 6 = \SI{3600}{\newton}
+\]
+È $3600/600 = 6$ volte il peso della ginnasta. Chi dimentica il lavoro del peso durante lo schiacciamento trova $\frac12 mv^2/d = \SI{750}{\joule}/\SI{0,25}{\metre} = \SI{3000}{\newton}$: è la forza \emph{risultante} durante la frenata, non quella del materasso.'''
+
+  [[problema.parte]]
+  domanda = '''Se cadesse dalla stessa altezza su un pavimento rigido, che si deforma (insieme ai talloni) di \SI{1,0}{\centi\metre}, quanto varrebbe la forza media?'''
+  calcolo = "m * g * (h + 0.010) / 0.010"
+  risultato = { valore = 7.6e4, unita = "\\newton", cifre = 2 }
+  rapido = '''\SI{7,6e4}{\newton}, circa 126 volte il peso'''
+  soluzione = '''Lo stesso bilancio, con $d = \SI{0,010}{\metre}$ e $h + d = \SI{1,26}{\metre}$:
+\[
+  F = \frac{\SI{600}{\newton} \cdot \SI{1,26}{\metre}}{\SI{0,010}{\metre}} = \SI{600}{\newton} \cdot 126 = \SI{75600}{\newton} \approx \SI{7,6e4}{\newton}
+\]
+Circa 126 volte il peso. L'energia da assorbire è quasi la stessa, ma su uno spazio 25 volte più corto: la forza è più di venti volte più grande. Per questo il materasso protegge.'''
+
+[[problema]]
+id = "ud2-energia-rampa"
+livello = 3
+testo = '''Una carrozzina con il paziente, di massa totale {{m}}, parte da ferma in cima a una rampa lunga {{L}} (misurati lungo la rampa) con un dislivello di {{h}}. L'accompagnatore la lascia scendere senza trattenerla. Gli attriti delle ruote e dei cuscinetti equivalgono a una forza costante di {{Fr}}, parallela alla rampa e opposta al moto. Usa $g = \SI{9,8}{\metre\per\second\squared}$.'''
+dati.m = { valore = 100, unita = "\\kilo\\gram" }
+dati.L = { valore = 10, unita = "m" }
+dati.h = { valore = "0,60", unita = "m" }
+dati.Fr = { valore = 30, unita = "\\newton" }
+
+  [[problema.parte]]
+  domanda = '''Quanto lavoro compiono il peso e gli attriti durante la discesa?'''
+  calcolo = "m * 9.8 * h"
+  risultato = { valore = 588, unita = "J", cifre = 3 }
+  rapido = '''peso \SI{588}{\joule}; attriti \SI{-300}{\joule}'''
+  soluzione = '''Il lavoro del peso dipende solo dal dislivello, non dalla lunghezza della rampa:
+\[
+  W_p = mgh = \SI{100}{\kilo\gram} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{0,60}{\metre} = \SI{588}{\joule}
+\]
+Gli attriti sono opposti allo spostamento lungo tutta la rampa, e il loro lavoro dipende dalla lunghezza del percorso: $W_r = -F_r L = -\SI{30}{\newton} \cdot \SI{10}{\metre} = \SI{-300}{\joule}$. La forza normale è perpendicolare alla rampa e non compie lavoro.'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità arriva in fondo?'''
+  calcolo = "math.sqrt(2 * (m * 9.8 * h - Fr * L) / m)"
+  risultato = { valore = 2.4, unita = "m/s", cifre = 2 }
+  soluzione = '''Per il teorema dell'energia cinetica il lavoro totale, $588 - 300 = \SI{288}{\joule}$, è l'energia cinetica in fondo (quella iniziale è zero):
+\[
+  \frac12 m v^2 = \SI{288}{\joule}
+  \quad\Longrightarrow\quad
+  v^2 = \frac{2 \cdot \SI{288}{\joule}}{\SI{100}{\kilo\gram}} = \SI{5,76}{\metre\squared\per\second\squared}
+  \quad\Longrightarrow\quad
+  v = \SI{2,4}{\metre\per\second}
+\]
+Si può dire lo stesso con l'energia meccanica: il lavoro degli attriti, \SI{-300}{\joule}, è la variazione dell'energia meccanica, che passa da \SI{588}{\joule} di energia potenziale (con lo zero in fondo) a \SI{288}{\joule} di energia cinetica.'''
+
+  [[problema.parte]]
+  domanda = '''Per farla scendere invece a velocità costante, fin dalla partenza, con che forza parallela alla rampa la deve trattenere l'accompagnatore?'''
+  calcolo = "(m * 9.8 * h - Fr * L) / L"
+  risultato = { valore = 29, unita = "\\newton", cifre = 2 }
+  soluzione = '''A velocità costante l'energia cinetica non cambia, e il lavoro totale è zero. Il lavoro dell'accompagnatore, che tira verso l'alto della rampa mentre la carrozzina scende, è $-F L$:
+\[
+  \SI{588}{\joule} - \SI{300}{\joule} - F \cdot \SI{10}{\metre} = 0
+  \quad\Longrightarrow\quad
+  F = \frac{\SI{288}{\joule}}{\SI{10}{\metre}} \approx \SI{29}{\newton}
+\]
+Lo stesso risultato viene dalle forze: la componente del peso lungo la rampa è $mg\sin\theta = mg\,h/L = 980 \cdot 0{,}060 = \SI{58,8}{\newton}$, gli attriti ne bilanciano \SI{30}{\newton}, e l'accompagnatore il resto, \SI{28,8}{\newton}.'''
+
+[[problema]]
+id = "ud2-energia-gradino"
+livello = 3
+testo = '''In una prova da sforzo con il gradino, un paziente di {{m}} sale e scende da uno scalino alto {{h}}, al ritmo di {{n}} salite al minuto, per {{t}}. Usa $g = \SI{9,8}{\metre\per\second\squared}$.'''
+dati.m = { valore = 70, unita = "\\kilo\\gram" }
+dati.h = { valore = "0,30", unita = "m" }
+dati.n = { valore = 24 }
+dati.t = { valore = "3,0", unita = "\\minute" }
+
+  [[problema.parte]]
+  domanda = '''Quanto lavoro compiono i muscoli contro il peso in una salita? Quanto vale il lavoro del peso in un ciclo completo, salita e discesa?'''
+  calcolo = "m * 9.8 * h"
+  risultato = { valore = 206, unita = "J", cifre = 3 }
+  rapido = '''\SI{206}{\joule}; zero'''
+  soluzione = '''In ogni salita il corpo si alza di $h$, e i muscoli compiono contro il peso il lavoro
+\[
+  W = mgh = \SI{70}{\kilo\gram} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{0,30}{\metre} = \SI{686}{\newton} \cdot \SI{0,30}{\metre} \approx \SI{206}{\joule}
+\]
+Il peso è una forza conservativa: in salita compie \SI{-206}{\joule}, in discesa \SI{+206}{\joule}, e sul ciclo completo, che riporta il paziente al punto di partenza, il suo lavoro è zero. In discesa sono i muscoli a frenare il corpo, con un lavoro negativo; qui ne trascuriamo il costo.'''
+
+  [[problema.parte]]
+  domanda = '''Qual è la potenza meccanica media che i muscoli sviluppano nelle salite?'''
+  calcolo = "m * 9.8 * h * n / 60"
+  risultato = { valore = 82, unita = "W", cifre = 2 }
+  soluzione = '''In un minuto le salite sono 24, quindi in un secondo $24/60 = 0{,}40$. La potenza media è il lavoro compiuto in un secondo:
+\[
+  P = \SI{205,8}{\joule} \cdot \SI{0,40}{\per\second} \approx \SI{82}{\watt}
+\]
+Lo stesso viene dal totale: in \SI{3,0}{\minute} le salite sono $24 \cdot 3 = 72$, il lavoro è $72 \cdot \SI{205,8}{\joule} \approx \SI{14800}{\joule}$, e diviso per $\SI{180}{\second}$ dà circa \SI{82}{\watt}. La durata della prova non cambia la potenza, solo il lavoro totale.'''
+
+  [[problema.parte]]
+  domanda = '''I muscoli trasformano in lavoro meccanico circa un quarto dell'energia chimica che consumano. Quanta potenza consumano per le salite, e quanta di questa diventa calore?'''
+  calcolo = "m * 9.8 * h * n / 60 / 0.25"
+  risultato = { valore = 3.3e2, unita = "W", cifre = 2 }
+  rapido = '''circa \SI{330}{\watt} consumati; circa \SI{250}{\watt} in calore'''
+  soluzione = '''Se il lavoro meccanico è un quarto dell'energia consumata, l'energia consumata è quattro volte il lavoro:
+\[
+  P_{\text{cons}} = \frac{P}{0{,}25} = 4 \cdot \SI{82,3}{\watt} \approx \SI{329}{\watt} \approx \SI{3,3e2}{\watt}
+\]
+La parte che non diventa lavoro diventa calore: $329 - 82 \approx \SI{247}{\watt}$, circa \SI{250}{\watt}, da aggiungere ai circa \SI{100}{\watt} del metabolismo a riposo.'''
+
+[[problema]]
+id = "ud2-energia-altalena"
+livello = 3
+testo = '''In un parco giochi un bambino di {{m}} siede su un'altalena con le corde lunghe {{L}}. Un adulto lo tira indietro finché le corde formano un angolo di {{theta}} con la verticale, e lo lascia andare da fermo. Tratta il bambino come un punto materiale all'estremità delle corde, trascura gli attriti e la massa del seggiolino, e usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.m = { valore = 25, unita = "\\kilo\\gram" }
+dati.L = { valore = "2,5", unita = "m" }
+dati.theta = { valore = 60, unita = "\\degree" }
+
+  [[problema.parte]]
+  domanda = '''Di quanto si trova più in alto il bambino, alla partenza, rispetto al punto più basso della traiettoria?'''
+  calcolo = "L * (1 - 0.5)"
+  risultato = { valore = 1.25, unita = "m", cifre = 3 }
+  soluzione = '''Con le corde inclinate di $\theta$ sulla verticale, il bambino si trova a una distanza $L\cos\theta$ sotto il punto di aggancio; nel punto più basso si trova a una distanza $L$. Il dislivello è la differenza:
+\[
+  h = L - L\cos\theta = L(1 - \cos\ang{60}) = \SI{2,5}{\metre} \cdot (1 - 0{,}5) = \SI{1,25}{\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità passa per il punto più basso?'''
+  calcolo = "math.sqrt(2 * g * L * (1 - 0.5))"
+  risultato = { valore = 5.0, unita = "m/s", cifre = 2 }
+  soluzione = '''Sul bambino agiscono il peso e la tensione delle corde. La tensione è sempre lungo le corde, quindi perpendicolare alla traiettoria circolare: non compie lavoro. Compie lavoro solo il peso, e l'energia meccanica si conserva:
+\[
+  mgh = \frac12 mv^2
+  \quad\Longrightarrow\quad
+  v = \sqrt{2gh} = \sqrt{2 \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{1,25}{\metre}} = \sqrt{\SI{25}{\metre\squared\per\second\squared}} = \SI{5,0}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale, nel punto più basso, la tensione complessiva delle corde?'''
+  calcolo = "m * g + m * 2 * g * L * (1 - 0.5) / L"
+  risultato = { valore = 500, unita = "\\newton", cifre = 2 }
+  soluzione = '''Nel punto più basso il bambino percorre un arco di circonferenza di raggio $L$, e la risultante delle forze deve essere la forza centripeta $mv^2/L$, diretta verso l'alto, verso il punto di aggancio. La tensione è verso l'alto, il peso verso il basso:
+\[
+  F_T - mg = \frac{mv^2}{L}
+  \quad\Longrightarrow\quad
+  F_T = \SI{250}{\newton} + \frac{\SI{25}{\kilo\gram} \cdot \SI{25}{\metre\squared\per\second\squared}}{\SI{2,5}{\metre}} = \SI{250}{\newton} + \SI{250}{\newton} = \SI{500}{\newton}
+\]
+Le corde reggono il doppio del peso del bambino. Chi pone $F_T = mg$ dimentica che nel punto più basso il moto è curvo: serve una risultante verso il centro.'''
+
+[[problema]]
+id = "ud2-energia-ambulanza"
+livello = 3
+testo = '''Un'ambulanza viaggia a {{v}} su una strada orizzontale. L'autista vede un ostacolo, impiega {{tr}} a reagire e poi frena con le ruote bloccate, che strisciano sull'asfalto. I coefficienti di attrito dinamico gomma-asfalto sono {{mua}} su asfalto asciutto e {{mub}} su asfalto bagnato. Usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.v = { valore = 72, unita = "\\kilo\\metre\\per\\hour" }
+dati.tr = { valore = "1,0", unita = "s" }
+dati.mua = { valore = "0,8" }
+dati.mub = { valore = "0,5" }
+
+  [[problema.parte]]
+  domanda = '''Quanta strada percorre l'ambulanza durante il tempo di reazione?'''
+  calcolo = "v / 3.6 * tr"
+  risultato = { valore = 20, unita = "m", cifre = 2 }
+  soluzione = '''La velocità in metri al secondo è $\SI{72}{\kilo\metre\per\hour} = 72/3{,}6 = \SI{20}{\metre\per\second}$. Durante il tempo di reazione l'ambulanza va ancora di moto uniforme:
+\[
+  s_r = v\,t_r = \SI{20}{\metre\per\second} \cdot \SI{1,0}{\second} = \SI{20}{\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto è lungo lo spazio di frenata su asfalto asciutto? Quanto lo spazio totale di arresto?'''
+  calcolo = "(v / 3.6)**2 / (2 * mua * g)"
+  risultato = { valore = 25, unita = "m", cifre = 2 }
+  rapido = '''frenata \SI{25}{\metre}; arresto \SI{45}{\metre}'''
+  soluzione = '''Sulla strada orizzontale la forza normale bilancia il peso, $F_N = mg$, e l'attrito dinamico vale $\mu_d mg$. È l'unica forza che compie lavoro, opposta allo spostamento $d$. Per il teorema dell'energia cinetica:
+\[
+  -\mu_d mg\,d = 0 - \frac12 mv^2
+  \quad\Longrightarrow\quad
+  d = \frac{v^2}{2\mu_d g} = \frac{\SI{400}{\metre\squared\per\second\squared}}{2 \cdot 0{,}8 \cdot \SI{10}{\metre\per\second\squared}} = \frac{400}{16}\,\si{\metre} = \SI{25}{\metre}
+\]
+La massa dell'ambulanza si semplifica. Lo spazio totale di arresto è $20 + 25 = \SI{45}{\metre}$.'''
+
+  [[problema.parte]]
+  domanda = '''E su asfalto bagnato, quanto è lungo lo spazio totale di arresto?'''
+  calcolo = "v / 3.6 * tr + (v / 3.6)**2 / (2 * mub * g)"
+  risultato = { valore = 60, unita = "m", cifre = 2 }
+  soluzione = '''Lo spazio di reazione non cambia, \SI{20}{\metre}. Lo spazio di frenata è inversamente proporzionale al coefficiente di attrito:
+\[
+  d = \frac{\SI{400}{\metre\squared\per\second\squared}}{2 \cdot 0{,}5 \cdot \SI{10}{\metre\per\second\squared}} = \SI{40}{\metre}
+\]
+Lo spazio totale è $20 + 40 = \SI{60}{\metre}$, un terzo in più che sull'asciutto.'''
+
+[[problema]]
+id = "ud2-energia-salto"
+livello = 3
+testo = '''In un test di salto verticale su una pedana, un atleta di {{m}} parte accosciato e spinge con le gambe: durante la spinta il suo centro di massa sale di {{s}}. Dopo lo stacco il centro di massa sale ancora di {{h}}. Trascura la resistenza dell'aria e usa $g = \SI{10}{\metre\per\second\squared}$.'''
+dati.m = { valore = 70, unita = "\\kilo\\gram" }
+dati.s = { valore = 35, unita = "cm" }
+dati.h = { valore = 20, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità si stacca dalla pedana?'''
+  calcolo = "math.sqrt(2 * g * h / 100)"
+  risultato = { valore = 2.0, unita = "m/s", cifre = 2 }
+  soluzione = '''Dopo lo stacco agisce solo il peso, e l'energia meccanica si conserva: l'energia cinetica allo stacco diventa energia potenziale nel punto più alto, $\frac12 mv^2 = mgh$:
+\[
+  v = \sqrt{2gh} = \sqrt{2 \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{0,20}{\metre}} = \sqrt{\SI{4,0}{\metre\squared\per\second\squared}} = \SI{2,0}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto lavoro compiono le gambe durante la spinta?'''
+  calcolo = "0.5 * m * 2 * g * h / 100 + m * g * s / 100"
+  risultato = { valore = 385, unita = "J", cifre = 3 }
+  soluzione = '''Durante la spinta agiscono la forza delle gambe (attraverso la spinta della pedana sui piedi) e il peso. Per il teorema dell'energia cinetica la somma dei loro lavori è l'energia cinetica allo stacco, perché all'inizio l'atleta è fermo:
+\[
+  E_c = \frac12 \cdot \SI{70}{\kilo\gram} \cdot (\SI{2,0}{\metre\per\second})^2 = \SI{140}{\joule}
+  \qquad
+  W_p = -mg\,s = -\SI{700}{\newton} \cdot \SI{0,35}{\metre} = \SI{-245}{\joule}
+\]
+\[
+  W_{\text{gambe}} + W_p = E_c
+  \quad\Longrightarrow\quad
+  W_{\text{gambe}} = \SI{140}{\joule} + \SI{245}{\joule} = \SI{385}{\joule}
+\]
+Controllo: le gambe devono alzare il centro di massa di $0{,}35 + 0{,}20 = \SI{0,55}{\metre}$ in tutto, e $mg \cdot \SI{0,55}{\metre} = 700 \cdot 0{,}55 = \SI{385}{\joule}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza media delle gambe durante la spinta, supposta verticale e costante?'''
+  calcolo = "(0.5 * m * 2 * g * h / 100 + m * g * s / 100) / (s / 100)"
+  risultato = { valore = 1.1e3, unita = "\\newton", cifre = 2 }
+  soluzione = '''La forza è parallela allo spostamento di \SI{0,35}{\metre}, quindi
+\[
+  F = \frac{W_{\text{gambe}}}{s} = \frac{\SI{385}{\joule}}{\SI{0,35}{\metre}} = \SI{1100}{\newton} = \SI{1,1e3}{\newton}
+\]
+È circa 1,6 volte il peso dell'atleta, $1100/700 \approx 1{,}6$.'''
+
+  [[problema.parte]]
+  domanda = '''La pedana misura che la spinta dura \SI{0,25}{\second}. Quanto vale la potenza media delle gambe?'''
+  calcolo = "(0.5 * m * 2 * g * h / 100 + m * g * s / 100) / 0.25"
+  risultato = { valore = 1.5e3, unita = "W", cifre = 2 }
+  soluzione = '''\[
+  P = \frac{W_{\text{gambe}}}{\Delta t} = \frac{\SI{385}{\joule}}{\SI{0,25}{\second}} = 385 \cdot 4\,\si{\watt} = \SI{1540}{\watt} \approx \SI{1,5e3}{\watt}
+\]
+È il valore tipico di uno sforzo esplosivo: oltre \SI{1000}{\watt}, ma solo per una frazione di secondo.'''
+
+[[problema]]
+id = "ud2-energia-tendine"
+livello = 3
+testo = '''Nella corsa, a ogni appoggio il tendine d'Achille viene teso e si allunga come una molla. Trattalo come una molla ideale di costante elastica {{k}}. Nel momento di massimo carico la forza sul tendine arriva a {{F}}.'''
+dati.k = { valore = "2,5e5", unita = "\\newton\\per\\metre" }
+dati.F = { valore = 4000, unita = "\\newton" }
+
+  [[problema.parte]]
+  domanda = '''Di quanto si allunga il tendine?'''
+  calcolo = "F / k * 100"
+  risultato = { valore = 1.6, unita = "cm", cifre = 2 }
+  soluzione = '''Per la legge di Hooke, in modulo $F = kx$:
+\[
+  x = \frac{F}{k} = \frac{\SI{4000}{\newton}}{\SI{2,5e5}{\newton\per\metre}} = \frac{4}{2{,}5} \cdot 10^{3-5}\,\si{\metre} = 1{,}6 \cdot 10^{-2}\,\si{\metre} = \SI{1,6}{\centi\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanta energia elastica immagazzina?'''
+  calcolo = "0.5 * F * F / k"
+  risultato = { valore = 32, unita = "J", cifre = 2 }
+  soluzione = '''L'energia elastica è il lavoro per allungare il tendine, cioè l'area del triangolo sotto il grafico della forza, di base $x = \SI{0,016}{\metre}$ e altezza $F = kx = \SI{4000}{\newton}$:
+\[
+  E_p = \frac12 k x^2 = \frac12 F x = \frac12 \cdot \SI{4000}{\newton} \cdot \SI{0,016}{\metre} = \SI{2000}{\newton} \cdot \SI{0,016}{\metre} = \SI{32}{\joule}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Il tendine restituisce nella spinta il \SI{90}{\percent} dell'energia immagazzinata; il resto diventa calore. Quanta energia restituisce a ogni appoggio, e quanta ne dissipa?'''
+  calcolo = "0.90 * 0.5 * F * F / k"
+  risultato = { valore = 29, unita = "J", cifre = 2 }
+  rapido = '''circa \SI{29}{\joule} restituiti; \SI{3,2}{\joule} in calore'''
+  soluzione = '''Restituisce $0{,}90 \cdot \SI{32}{\joule} = \SI{28,8}{\joule} \approx \SI{29}{\joule}$ e dissipa $32 - 28{,}8 = \SI{3,2}{\joule}$, che scaldano il tendine.'''
+
+  [[problema.parte]]
+  domanda = '''Il corridore fa 180 passi al minuto, e a ogni passo lavora il tendine della gamba d'appoggio. Quanto vale la potenza media restituita dai due tendini insieme?'''
+  calcolo = "180 * 0.90 * 0.5 * F * F / k / 60"
+  risultato = { valore = 86, unita = "W", cifre = 2 }
+  soluzione = '''In un secondo i passi sono $180/60 = 3$, e a ogni passo un tendine restituisce \SI{28,8}{\joule}:
+\[
+  P = 3\,\si{\per\second} \cdot \SI{28,8}{\joule} = \SI{86,4}{\watt} \approx \SI{86}{\watt}
+\]
+È una potenza che i muscoli non devono fornire: con un rendimento di un quarto, risparmiano un consumo di circa $4 \cdot 86 \approx \SI{350}{\watt}$.'''
+
+[[problema]]
+id = "ud2-rigido-calcio"
+livello = 1
+testo = '''Un calciatore colpisce un pallone di {{m}}, inizialmente fermo, che parte a {{v}}. Il piede resta a contatto con il pallone per {{dt}}. Calcola la forza media del piede sul pallone.'''
+dati.m = { valore = "0,45", unita = "\\kilo\\gram" }
+dati.v = { valore = 20, unita = "m/s" }
+dati.dt = { valore = "9,0", unita = "\\milli\\second" }
+
+  [[problema.parte]]
+  calcolo = "m * v / (dt * 1e-3)"
+  risultato = { valore = 1.0e3, unita = "\\newton", cifre = 2 }
+  soluzione = '''Per il teorema dell'impulso $F_m\,\Delta t = \Delta p$. La quantità di moto del pallone passa da zero a $mv$:
+\[
+  \Delta p = mv = \SI{0,45}{\kilo\gram} \cdot \SI{20}{\metre\per\second} = \SI{9,0}{\kilo\gram\metre\per\second}
+\]
+Il tempo di contatto è $\SI{9,0}{\milli\second} = \SI{9,0e-3}{\second}$, quindi
+\[
+  F_m = \frac{\Delta p}{\Delta t} = \frac{\SI{9,0}{\kilo\gram\metre\per\second}}{\SI{9,0e-3}{\second}} = 1 \cdot 10^{0-(-3)}\,\si{\newton} = \SI{1,0e3}{\newton}
+\]
+Il peso del pallone è circa $0{,}45 \cdot 10 = \SI{4,5}{\newton}$: durante il calcio il piede spinge con una forza più di duecento volte maggiore, ma per pochi millesimi di secondo.'''
+
+[[problema]]
+id = "ud2-rigido-carrozzina"
+livello = 1
+testo = '''Durante una seduta di riabilitazione un paziente in carrozzina è fermo su un pavimento liscio, con i freni sbloccati. Paziente e carrozzina hanno insieme una massa di {{M}}. Il paziente lancia in avanti, in orizzontale, una palla medica di {{mb}} a {{vb}}. Trascurando l'attrito, con che velocità rincula la carrozzina?'''
+dati.M = { valore = 80, unita = "\\kilo\\gram" }
+dati.mb = { valore = "2,0", unita = "\\kilo\\gram" }
+dati.vb = { valore = "6,0", unita = "m/s" }
+
+  [[problema.parte]]
+  calcolo = "mb * vb / M"
+  risultato = { valore = 0.15, unita = "m/s", cifre = 2 }
+  soluzione = '''Il sistema formato da paziente, carrozzina e palla è isolato in orizzontale: senza attrito, nessuna forza esterna orizzontale agisce su di esso. Prima del lancio è tutto fermo, quindi la quantità di moto totale è zero, e resta zero. Con l'asse nel verso del lancio, e $v$ la velocità della carrozzina:
+\[
+  M v + m_b v_b = 0
+  \quad\Longrightarrow\quad
+  v = -\frac{m_b v_b}{M} = -\frac{\SI{2,0}{\kilo\gram} \cdot \SI{6,0}{\metre\per\second}}{\SI{80}{\kilo\gram}} = -\frac{12}{80}\,\si{\metre\per\second} = \SI{-0,15}{\metre\per\second}
+\]
+Il segno meno dice che la carrozzina va all'indietro, a \SI{0,15}{\metre\per\second}. La sua massa è 40 volte quella della palla, e la sua velocità 40 volte più piccola.'''
+
+[[problema]]
+id = "ud2-rigido-gamba"
+livello = 1
+testo = '''In un modello semplificato dell'arto inferiore teso di un adulto la coscia ha massa {{m1}}, con il centro di massa a {{x1}} dall'anca; la gamba, dal ginocchio alla caviglia, ha massa {{m2}}, con il centro di massa a {{x2}} dall'anca; il piede ha massa {{m3}}, con il centro di massa a {{x3}} dall'anca. Le distanze sono misurate lungo l'arto. A che distanza dall'anca si trova il centro di massa dell'intero arto?'''
+dati.m1 = { valore = "7,0", unita = "\\kilo\\gram" }
+dati.x1 = { valore = 20, unita = "cm" }
+dati.m2 = { valore = "3,0", unita = "\\kilo\\gram" }
+dati.x2 = { valore = 60, unita = "cm" }
+dati.m3 = { valore = "1,0", unita = "\\kilo\\gram" }
+dati.x3 = { valore = 90, unita = "cm" }
+
+  [[problema.parte]]
+  calcolo = "(m1 * x1 + m2 * x2 + m3 * x3) / (m1 + m2 + m3)"
+  risultato = { valore = 37, unita = "cm", cifre = 2 }
+  soluzione = '''Si mette l'origine nell'anca, con l'asse lungo l'arto. Il centro di massa è la media delle posizioni pesata con le masse:
+\[
+  x_{cm} = \frac{m_1 x_1 + m_2 x_2 + m_3 x_3}{m_1 + m_2 + m_3} = \frac{7{,}0 \cdot 20 + 3{,}0 \cdot 60 + 1{,}0 \cdot 90}{7{,}0 + 3{,}0 + 1{,}0}\,\si{\centi\metre}
+\]
+\[
+  x_{cm} = \frac{140 + 180 + 90}{11}\,\si{\centi\metre} = \frac{410}{11}\,\si{\centi\metre} \approx \SI{37}{\centi\metre}
+\]
+Le masse compaiono sopra e sotto la frazione, quindi basta che abbiano tutte la stessa unità; le distanze si possono lasciare in centimetri. Il risultato sta fra 20 e \SI{90}{\centi\metre}, più vicino alla coscia, che ha la massa maggiore.'''
+
+[[problema]]
+id = "ud2-rigido-cavigliera"
+livello = 1
+testo = '''Durante la riabilitazione del ginocchio un paziente, seduto sul bordo del lettino, solleva la gamba con una cavigliera zavorrata di peso {{F}}, che si trova a {{r}} dal ginocchio. In questo istante la gamba forma un angolo di \ang{60} con la verticale. Calcola il momento del peso della cavigliera rispetto al ginocchio.'''
+dati.F = { valore = 50, unita = "\\newton" }
+dati.r = { valore = "0,40", unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "r * F * sin60"
+  risultato = { valore = 17, unita = "\\newton\\metre", cifre = 2 }
+  soluzione = '''Il vettore $\vec r$ va dal ginocchio alla cavigliera, lungo la gamba; il peso $\vec F$ è verticale, verso il basso. La gamba forma \ang{60} con la verticale, quindi l'angolo fra $\vec r$ e $\vec F$ è $\theta = \ang{60}$:
+\[
+  \tau = rF\sin\theta = \SI{0,40}{\metre} \cdot \SI{50}{\newton} \cdot \sin\ang{60} = \SI{20}{\newton\metre} \cdot 0{,}87 \approx \SI{17}{\newton\metre}
+\]
+Con la gamba tesa in orizzontale l'angolo sarebbe \ang{90} e il momento massimo, \SI{20}{\newton\metre}; con la gamba verticale sarebbe zero. Per questo l'esercizio diventa più faticoso man mano che la gamba si alza.'''
+
+[[problema]]
+id = "ud2-rigido-pinza"
+livello = 1
+testo = '''Una pinza da estrazione dentaria è una leva di primo genere con il fulcro nel perno. La mano del dentista stringe i manici a {{bm}} dal perno, le punte stringono il dente a {{br}} dal perno, e le forze sono perpendicolari alla pinza. Se la mano stringe con una forza di {{Fm}}, con quale forza le punte stringono il dente?'''
+dati.bm = { valore = 10, unita = "cm" }
+dati.br = { valore = "2,0", unita = "cm" }
+dati.Fm = { valore = 40, unita = "\\newton" }
+
+  [[problema.parte]]
+  calcolo = "Fm * bm / br"
+  risultato = { valore = 200, unita = "\\newton", cifre = 2 }
+  soluzione = '''La forza della mano è la forza motrice, quella del dente sulle punte la resistenza. All'equilibrio i momenti rispetto al perno si bilanciano, $F_{\text{mot}}\,b_{\text{mot}} = F_{\text{res}}\,b_{\text{res}}$, quindi
+\[
+  F_{\text{res}} = F_{\text{mot}}\,\frac{b_{\text{mot}}}{b_{\text{res}}} = \SI{40}{\newton} \cdot \frac{\SI{10}{\centi\metre}}{\SI{2,0}{\centi\metre}} = \SI{40}{\newton} \cdot 5 = \SI{200}{\newton}
+\]
+Per il terzo principio le punte stringono il dente con la stessa forza. Il vantaggio meccanico è $b_{\text{mot}}/b_{\text{res}} = 5$: la leva è vantaggiosa, perché la mano sta molto più lontano dal perno del dente.'''
+
+[[problema]]
+id = "ud2-rigido-racchetta"
+livello = 2
+testo = '''Al servizio un tennista colpisce la pallina, di massa {{m}}, nel punto più alto del lancio, dove è praticamente ferma. Durante il contatto la forza della racchetta sulla pallina cresce in modo uniforme da zero a {{Fmax}} in {{t1}}, poi torna a zero, sempre in modo uniforme, in altri {{t1}}.'''
+dati.m = { valore = 60, unita = "\\gram" }
+dati.Fmax = { valore = 1500, unita = "\\newton" }
+dati.t1 = { valore = "2,0", unita = "\\milli\\second" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'impulso della racchetta sulla pallina?'''
+  calcolo = "0.5 * Fmax * 2 * t1 * 1e-3"
+  risultato = { valore = 3.0, unita = "\\newton\\second", cifre = 2 }
+  soluzione = '''L'impulso è l'area sotto il grafico della forza in funzione del tempo. Qui il grafico è un triangolo, con la base uguale alla durata del contatto, $2 \cdot \SI{2,0}{\milli\second} = \SI{4,0}{\milli\second} = \SI{4,0e-3}{\second}$, e l'altezza uguale alla forza massima:
+\[
+  J = \frac12 \cdot \SI{4,0e-3}{\second} \cdot \SI{1500}{\newton} = \SI{4,0e-3}{\second} \cdot \SI{750}{\newton} = 3000 \cdot 10^{-3}\,\si{\newton\second} = \SI{3,0}{\newton\second}
+\]
+La forza media è quella costante che dà lo stesso impulso nello stesso tempo: $F_m = \SI{3,0}{\newton\second}/\SI{4,0e-3}{\second} = \SI{750}{\newton}$, metà della forza massima.'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità parte la pallina?'''
+  calcolo = "0.5 * Fmax * 2 * t1 * 1e-3 / (m * 1e-3)"
+  risultato = { valore = 50, unita = "m/s", cifre = 2 }
+  soluzione = '''Durante il contatto la forza della racchetta è enormemente più grande del peso della pallina, che si può trascurare. Per il teorema dell'impulso $\Delta p = J$, e la pallina parte da ferma, quindi $mv = J$. La massa è $\SI{60}{\gram} = \SI{0,060}{\kilo\gram}$:
+\[
+  v = \frac{J}{m} = \frac{\SI{3,0}{\newton\second}}{\SI{0,060}{\kilo\gram}} = \SI{50}{\metre\per\second}
+\]
+Sono $50 \cdot 3{,}6 = \SI{180}{\kilo\metre\per\hour}$, una velocità tipica di un buon servizio.'''
+
+[[problema]]
+id = "ud2-rigido-placcaggio"
+livello = 2
+testo = '''In un placcaggio un giocatore di rugby di {{m1}}, che corre a {{v1}}, si scontra frontalmente con un avversario di {{m2}} che gli corre incontro a {{v2}}. Dopo l'urto i due restano avvinghiati. Durante l'urto trascura le forze orizzontali del terreno.'''
+dati.m1 = { valore = 90, unita = "\\kilo\\gram" }
+dati.v1 = { valore = "6,0", unita = "m/s" }
+dati.m2 = { valore = 60, unita = "\\kilo\\gram" }
+dati.v2 = { valore = "5,0", unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità, e in che verso, si muovono i due giocatori subito dopo l'urto?'''
+  calcolo = "(m1 * v1 - m2 * v2) / (m1 + m2)"
+  risultato = { valore = 1.6, unita = "m/s", cifre = 2 }
+  rapido = '''\SI{1,6}{\metre\per\second}, nel verso in cui correva il giocatore di \SI{90}{\kilo\gram}'''
+  soluzione = '''La quantità di moto totale si conserva. Si prende l'asse nel verso del primo giocatore: la velocità dell'avversario è allora $\SI{-5,0}{\metre\per\second}$. Prima dell'urto
+\[
+  p_{\text{tot}} = \SI{90}{\kilo\gram} \cdot \SI{6,0}{\metre\per\second} + \SI{60}{\kilo\gram} \cdot (\SI{-5,0}{\metre\per\second}) = (540 - 300)\,\si{\kilo\gram\metre\per\second} = \SI{240}{\kilo\gram\metre\per\second}
+\]
+Dopo l'urto i due giocatori si muovono insieme, con massa $90 + 60 = \SI{150}{\kilo\gram}$:
+\[
+  v = \frac{p_{\text{tot}}}{m_1 + m_2} = \frac{\SI{240}{\kilo\gram\metre\per\second}}{\SI{150}{\kilo\gram}} = \SI{1,6}{\metre\per\second}
+\]
+La velocità è positiva: i due vanno nel verso in cui correva il giocatore più pesante, che aveva la quantità di moto maggiore in modulo.'''
+
+  [[problema.parte]]
+  domanda = '''Quanta energia cinetica si è persa nell'urto?'''
+  calcolo = "0.5 * m1 * v1**2 + 0.5 * m2 * v2**2 - 0.5 * (m1 + m2) * ((m1 * v1 - m2 * v2) / (m1 + m2))**2"
+  risultato = { valore = 2.2e3, unita = "J", cifre = 2 }
+  soluzione = '''L'energia cinetica non ha segno: si sommano le energie dei due giocatori, qualunque sia il loro verso. Prima dell'urto
+\[
+  E_{c,i} = \frac12 \cdot 90 \cdot 6{,}0^2\,\si{\joule} + \frac12 \cdot 60 \cdot 5{,}0^2\,\si{\joule} = (45 \cdot 36 + 30 \cdot 25)\,\si{\joule} = (1620 + 750)\,\si{\joule} = \SI{2370}{\joule}
+\]
+Dopo l'urto, con la velocità del punto (a):
+\[
+  E_{c,f} = \frac12 \cdot 150 \cdot 1{,}6^2\,\si{\joule} = 75 \cdot 2{,}56\,\si{\joule} = \SI{192}{\joule}
+\]
+Si sono persi $2370 - 192 = \SI{2178}{\joule} \approx \SI{2,2e3}{\joule}$, più del 90\% dell'energia iniziale, finiti nella deformazione dei corpi e in calore. L'urto è completamente anelastico.'''
+
+[[problema]]
+id = "ud2-rigido-elastico"
+livello = 2
+testo = '''Su una rotaia a cuscino d'aria, praticamente senza attrito, un carrello di {{m1}} che si muove a {{v1}} urta un carrello fermo di {{m2}}. Subito dopo l'urto il primo carrello prosegue nello stesso verso a {{v1f}}.'''
+dati.m1 = { valore = "0,30", unita = "\\kilo\\gram" }
+dati.v1 = { valore = "2,0", unita = "m/s" }
+dati.m2 = { valore = "0,10", unita = "\\kilo\\gram" }
+dati.v1f = { valore = "1,0", unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità si muove il secondo carrello dopo l'urto?'''
+  calcolo = "(m1 * v1 - m1 * v1f) / m2"
+  risultato = { valore = 3.0, unita = "m/s", cifre = 2 }
+  soluzione = '''La quantità di moto totale si conserva. Con l'asse nel verso del moto, e $v_2$ la velocità del secondo carrello dopo l'urto:
+\[
+  m_1 v_1 = m_1 v_{1f} + m_2 v_2
+\]
+\[
+  v_2 = \frac{m_1 v_1 - m_1 v_{1f}}{m_2} = \frac{0{,}30 \cdot 2{,}0 - 0{,}30 \cdot 1{,}0}{0{,}10}\,\si{\metre\per\second} = \frac{0{,}60 - 0{,}30}{0{,}10}\,\si{\metre\per\second} = \SI{3,0}{\metre\per\second}
+\]
+Il carrello leggero parte più veloce di quanto andasse quello pesante.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia cinetica totale dopo l'urto. L'urto è elastico?'''
+  calcolo = "0.5 * m1 * v1f**2 + 0.5 * m2 * ((m1 * v1 - m1 * v1f) / m2)**2"
+  risultato = { valore = 0.60, unita = "J", cifre = 2 }
+  rapido = '''\SI{0,60}{\joule}, uguale all'energia cinetica prima dell'urto: l'urto è elastico'''
+  soluzione = '''Con la velocità del punto (a), dopo l'urto
+\[
+  E_{c,f} = \frac12 \cdot 0{,}30 \cdot 1{,}0^2\,\si{\joule} + \frac12 \cdot 0{,}10 \cdot 3{,}0^2\,\si{\joule} = (0{,}15 + 0{,}45)\,\si{\joule} = \SI{0,60}{\joule}
+\]
+Prima dell'urto si muoveva solo il primo carrello:
+\[
+  E_{c,i} = \frac12 \cdot 0{,}30 \cdot 2{,}0^2\,\si{\joule} = 0{,}15 \cdot 4{,}0\,\si{\joule} = \SI{0,60}{\joule}
+\]
+L'energia cinetica è la stessa prima e dopo: si conserva anche lei, oltre alla quantità di moto, e l'urto è elastico.'''
+
+[[problema]]
+id = "ud2-rigido-barca"
+livello = 2
+testo = '''Una barca a remi di {{mb}}, lunga {{L}}, è ferma sull'acqua di un lago; il suo centro di massa è a metà della lunghezza. Una persona di {{mp}} sta in piedi a poppa, l'estremità posteriore. Trascura l'attrito dell'acqua.'''
+dati.mb = { valore = 120, unita = "\\kilo\\gram" }
+dati.L = { valore = "3,0", unita = "m" }
+dati.mp = { valore = 60, unita = "\\kilo\\gram" }
+
+  [[problema.parte]]
+  domanda = '''A che distanza dalla poppa si trova il centro di massa del sistema formato dalla barca e dalla persona?'''
+  calcolo = "(mp * 0 + mb * L / 2) / (mp + mb)"
+  risultato = { valore = 1.0, unita = "m", cifre = 2 }
+  soluzione = '''Si mette l'origine nella poppa, con l'asse lungo la barca verso la prua. La persona è in $x = 0$, il centro di massa della barca in $x = \SI{1,5}{\metre}$:
+\[
+  x_{cm} = \frac{\SI{60}{\kilo\gram} \cdot 0 + \SI{120}{\kilo\gram} \cdot \SI{1,5}{\metre}}{\SI{60}{\kilo\gram} + \SI{120}{\kilo\gram}} = \frac{180}{180}\,\si{\metre} = \SI{1,0}{\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''La persona cammina fino alla prua, l'estremità anteriore. Di quanto si sposta la barca rispetto all'acqua, e in che verso?'''
+  calcolo = "(mp * L + mb * L / 2) / (mp + mb) - (mp * 0 + mb * L / 2) / (mp + mb)"
+  risultato = { valore = 1.0, unita = "m", cifre = 2 }
+  rapido = '''\SI{1,0}{\metre}, all'indietro, in verso opposto al cammino della persona'''
+  soluzione = '''Con la persona a prua, in $x = \SI{3,0}{\metre}$ rispetto alla barca, il centro di massa del sistema è
+\[
+  x'_{cm} = \frac{\SI{60}{\kilo\gram} \cdot \SI{3,0}{\metre} + \SI{120}{\kilo\gram} \cdot \SI{1,5}{\metre}}{\SI{180}{\kilo\gram}} = \frac{180 + 180}{180}\,\si{\metre} = \SI{2,0}{\metre}
+\]
+dalla poppa. Le forze fra la persona e la barca sono interne, e in orizzontale non ci sono forze esterne: il centro di massa, fermo all'inizio, resta fermo rispetto all'acqua. Prima stava a \SI{1,0}{\metre} dalla poppa, ora a \SI{2,0}{\metre}: la poppa si è allontanata di $2{,}0 - 1{,}0 = \SI{1,0}{\metre}$ all'indietro, e con lei tutta la barca. La persona, che ha percorso \SI{3,0}{\metre} sulla barca, si è spostata di $3{,}0 - 1{,}0 = \SI{2,0}{\metre}$ in avanti rispetto all'acqua. Controllo: $60 \cdot 2{,}0 = 120 \cdot 1{,}0$, gli spostamenti stanno nel rapporto inverso delle masse.'''
+
+[[problema]]
+id = "ud2-rigido-trampolino"
+livello = 2
+testo = '''Un trampolino per i tuffi è un'asse orizzontale lunga {{L}}, di massa trascurabile. L'estremità posteriore A è fissata al pavimento con un bullone; a {{d}} da A l'asse appoggia su un sostegno B. Un tuffatore di peso {{Fp}} sta fermo all'estremità libera.'''
+dati.L = { valore = "3,0", unita = "m" }
+dati.d = { valore = "1,0", unita = "m" }
+dati.Fp = { valore = 600, unita = "\\newton" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza del bullone sull'asse, e in che verso agisce?'''
+  calcolo = "Fp * (L - d) / d"
+  risultato = { valore = 1.2e3, unita = "\\newton", cifre = 2 }
+  rapido = '''\SI{1,2e3}{\newton}, verso il basso'''
+  soluzione = '''Si calcolano i momenti rispetto al sostegno B, così la sua forza, che non si conosce, ha momento zero. Il tuffatore sta a $3{,}0 - 1{,}0 = \SI{2,0}{\metre}$ da B, da una parte; il bullone a \SI{1,0}{\metre}, dall'altra. Il peso del tuffatore tende a far ruotare l'asse attorno a B abbassando l'estremità libera e sollevando A: per impedirlo il bullone deve tirare A verso il \emph{basso}. Le forze sono verticali, perpendicolari all'asse, e i bracci sono le distanze da B:
+\[
+  F_A \cdot \SI{1,0}{\metre} = \SI{600}{\newton} \cdot \SI{2,0}{\metre}
+  \quad\Longrightarrow\quad
+  F_A = \frac{\SI{1200}{\newton\metre}}{\SI{1,0}{\metre}} = \SI{1,2e3}{\newton}
+\]
+Il bullone ha un braccio lungo la metà di quello del tuffatore, quindi deve tirare con il doppio della forza.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza del sostegno B sull'asse?'''
+  calcolo = "Fp * (L - d) / d + Fp"
+  risultato = { valore = 1.8e3, unita = "\\newton", cifre = 2 }
+  soluzione = '''Per l'equilibrio traslazionale la somma delle forze verticali è zero. Verso il basso agiscono il peso del tuffatore e la forza del bullone trovata al punto (a); verso l'alto la forza $F_B$ del sostegno:
+\[
+  F_B - F_A - F_p = 0
+  \quad\Longrightarrow\quad
+  F_B = 1200\,\si{\newton} + 600\,\si{\newton} = \SI{1,8e3}{\newton}
+\]
+Il sostegno regge il triplo del peso del tuffatore.'''
+
+[[problema]]
+id = "ud2-rigido-atterraggio"
+livello = 3
+testo = '''Durante un allenamento una ginnasta di {{m}} salta giù da una piattaforma alta {{h}}, partendo da ferma, e atterra in piedi. Usa $g = \SI{10}{\metre\per\second\squared}$ e trascura la resistenza dell'aria.'''
+dati.m = { valore = 60, unita = "\\kilo\\gram" }
+dati.h = { valore = "0,80", unita = "m" }
+dati.dt1 = { valore = "0,010", unita = "s" }
+dati.dt2 = { valore = "0,30", unita = "s" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità tocca terra?'''
+  calcolo = "math.sqrt(2 * g * h)"
+  risultato = { valore = 4.0, unita = "m/s", cifre = 2 }
+  soluzione = '''È una caduta libera da ferma: da $v^2 = 2gh$
+\[
+  v = \sqrt{2gh} = \sqrt{2 \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{0,80}{\metre}} = \sqrt{\SI{16}{\metre\squared\per\second\squared}} = \SI{4,0}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Se atterra con le gambe rigide, si ferma in {{dt1}}. Quanto vale la forza media del suolo su di lei?'''
+  calcolo = "m * math.sqrt(2 * g * h) / dt1 + m * g"
+  risultato = { valore = 2.5e4, unita = "\\newton", cifre = 2 }
+  soluzione = '''Si prende l'asse verso l'alto. Al contatto la velocità è $\SI{-4,0}{\metre\per\second}$, alla fine zero:
+\[
+  \Delta p = 0 - \SI{60}{\kilo\gram} \cdot (\SI{-4,0}{\metre\per\second}) = \SI{240}{\kilo\gram\metre\per\second}
+\]
+Durante l'arresto agiscono il peso, $mg = 60 \cdot 10 = \SI{600}{\newton}$ verso il basso, e la forza del suolo $F_s$ verso l'alto. Il teorema dell'impulso vale per la forza \emph{risultante}:
+\[
+  (F_s - mg)\,\Delta t = \Delta p
+  \quad\Longrightarrow\quad
+  F_s = \frac{\Delta p}{\Delta t} + mg = \frac{\SI{240}{\kilo\gram\metre\per\second}}{\SI{0,010}{\second}} + \SI{600}{\newton} = (24000 + 600)\,\si{\newton} \approx \SI{2,5e4}{\newton}
+\]
+Circa quaranta volte il peso della ginnasta: è così che ci si frattura un calcagno o una tibia. Qui il peso cambia poco il risultato.'''
+
+  [[problema.parte]]
+  domanda = '''Se invece piega le ginocchia, si ferma in {{dt2}}. Quanto vale ora la forza media del suolo?'''
+  calcolo = "m * math.sqrt(2 * g * h) / dt2 + m * g"
+  risultato = { valore = 1.4e3, unita = "\\newton", cifre = 2 }
+  soluzione = '''La variazione della quantità di moto è la stessa del punto (b), \SI{240}{\kilo\gram\metre\per\second}, ma il tempo è trenta volte più lungo:
+\[
+  F_s = \frac{\SI{240}{\kilo\gram\metre\per\second}}{\SI{0,30}{\second}} + \SI{600}{\newton} = (800 + 600)\,\si{\newton} = \SI{1,4e3}{\newton}
+\]
+Poco più del doppio del peso, e circa diciotto volte meno che con le gambe rigide. Qui il peso non è trascurabile: è quasi metà della forza del suolo.'''
+
+[[problema]]
+id = "ud2-rigido-testa"
+livello = 3
+testo = '''La testa di un adulto pesa circa {{Fp}} e ruota sull'atlante, la prima vertebra del collo, che fa da fulcro. I muscoli della nuca tirano verso il basso a {{bm}} dietro il fulcro. Considera tutte le forze verticali, con i bracci misurati in orizzontale.'''
+dati.Fp = { valore = 50, unita = "\\newton" }
+dati.bm = { valore = "5,0", unita = "cm" }
+dati.b1 = { valore = "2,0", unita = "cm" }
+dati.b2 = { valore = "6,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Con la testa eretta il baricentro del capo si trova {{b1}} davanti al fulcro. Che genere di leva è? Quanta forza fanno i muscoli della nuca?'''
+  calcolo = "Fp * b1 / bm"
+  risultato = { valore = 20, unita = "\\newton", cifre = 2 }
+  rapido = '''leva di primo genere; \SI{20}{\newton}'''
+  soluzione = '''Il fulcro sta fra la forza motrice, i muscoli della nuca dietro, e la resistenza, il peso del capo davanti: è una leva di primo genere. All'equilibrio i momenti rispetto al fulcro si bilanciano:
+\[
+  F_{\text{mot}} \cdot \SI{5,0}{\centi\metre} = \SI{50}{\newton} \cdot \SI{2,0}{\centi\metre}
+  \quad\Longrightarrow\quad
+  F_{\text{mot}} = \frac{\SI{100}{\newton\centi\metre}}{\SI{5,0}{\centi\metre}} = \SI{20}{\newton}
+\]
+In questa posizione la leva è vantaggiosa: il braccio dei muscoli è più lungo di quello del peso.'''
+
+  [[problema.parte]]
+  domanda = '''Chinando la testa per guardare lo smartphone, il baricentro del capo si sposta a {{b2}} davanti al fulcro. Quanta forza fanno ora i muscoli?'''
+  calcolo = "Fp * b2 / bm"
+  risultato = { valore = 60, unita = "\\newton", cifre = 2 }
+  soluzione = '''Cambia solo il braccio del peso:
+\[
+  F_{\text{mot}} = F_p\,\frac{b_{\text{res}}}{b_{\text{mot}}} = \SI{50}{\newton} \cdot \frac{\SI{6,0}{\centi\metre}}{\SI{5,0}{\centi\metre}} = \frac{\SI{300}{\newton\centi\metre}}{\SI{5,0}{\centi\metre}} = \SI{60}{\newton}
+\]
+Il braccio del peso è triplicato, e con lui la forza dei muscoli. Ora la leva è svantaggiosa: i muscoli tirano più del peso che reggono.'''
+
+  [[problema.parte]]
+  domanda = '''Nella posizione del punto (b), quanto vale la forza che l'atlante esercita sul capo?'''
+  calcolo = "Fp * b2 / bm + Fp"
+  risultato = { valore = 110, unita = "\\newton", cifre = 2 }
+  soluzione = '''Sul capo agiscono tre forze verticali: il peso, \SI{50}{\newton} verso il basso; la forza dei muscoli, \SI{60}{\newton} verso il basso; la forza $F_a$ dell'atlante, verso l'alto. Per l'equilibrio traslazionale
+\[
+  F_a - \SI{60}{\newton} - \SI{50}{\newton} = 0
+  \quad\Longrightarrow\quad
+  F_a = \SI{110}{\newton}
+\]
+Più del doppio del peso della testa, contro i \SI{70}{\newton} della testa eretta ($20 + 50$). Tenuta per ore, questa posizione affatica i muscoli e carica le vertebre del collo.'''
+
+[[problema]]
+id = "ud2-rigido-schiena"
+livello = 3
+testo = '''Un magazziniere solleva una cassa di peso {{Fc}}. Nel modello semplificato della dispensa la colonna lombare fa da fulcro, i muscoli che raddrizzano la schiena tirano verso il basso a {{bm}} dietro la colonna, e tutte le forze sono verticali. La parte del corpo sopra la colonna lombare (busto, testa e braccia) pesa {{Ft}}.'''
+dati.Fc = { valore = 250, unita = "\\newton" }
+dati.bm = { valore = "5,0", unita = "cm" }
+dati.Ft = { valore = 450, unita = "\\newton" }
+dati.bt1 = { valore = 30, unita = "cm" }
+dati.bc1 = { valore = 42, unita = "cm" }
+dati.bt2 = { valore = 10, unita = "cm" }
+dati.bc2 = { valore = 22, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Si china in avanti con le gambe tese: il baricentro del busto è {{bt1}} davanti alla colonna, la cassa {{bc1}} davanti. Quanta forza fanno i muscoli della schiena?'''
+  calcolo = "(Ft * bt1 + Fc * bc1) / bm"
+  risultato = { valore = 4.8e3, unita = "\\newton", cifre = 2 }
+  soluzione = '''I due pesi fanno ruotare il busto in avanti, i muscoli lo tengono indietro. All'equilibrio i momenti rispetto alla colonna si bilanciano:
+\[
+  F_{\text{mot}} \cdot \SI{5,0}{\centi\metre} = \SI{450}{\newton} \cdot \SI{30}{\centi\metre} + \SI{250}{\newton} \cdot \SI{42}{\centi\metre} = (13500 + 10500)\,\si{\newton\centi\metre} = \SI{24000}{\newton\centi\metre}
+\]
+\[
+  F_{\text{mot}} = \frac{\SI{24000}{\newton\centi\metre}}{\SI{5,0}{\centi\metre}} = \SI{4,8e3}{\newton}
+\]
+Quasi venti volte il peso della cassa.'''
+
+  [[problema.parte]]
+  domanda = '''In questa posizione, quanto vale la forza che la colonna deve reggere?'''
+  calcolo = "(Ft * bt1 + Fc * bc1) / bm + Ft + Fc"
+  risultato = { valore = 5.5e3, unita = "\\newton", cifre = 2 }
+  soluzione = '''Sulla parte alta del corpo agiscono, verso il basso, la forza dei muscoli e i due pesi; verso l'alto la forza della colonna, $F_c$. Per l'equilibrio traslazionale
+\[
+  F_c = 4800\,\si{\newton} + 450\,\si{\newton} + 250\,\si{\newton} = \SI{5,5e3}{\newton}
+\]
+Per il terzo principio i dischi lombari sono compressi con la stessa forza: quasi otto volte la somma dei due pesi, $5500/700 \approx 7{,}9$.'''
+
+  [[problema.parte]]
+  domanda = '''Se si accovaccia, con la schiena più dritta e la cassa vicina al corpo, il busto agisce {{bt2}} davanti alla colonna e la cassa {{bc2}} davanti. Quanto valgono ora la forza dei muscoli e quella sulla colonna?'''
+  calcolo = "(Ft * bt2 + Fc * bc2) / bm"
+  risultato = { valore = 2.0e3, unita = "\\newton", cifre = 2 }
+  rapido = '''muscoli \SI{2,0e3}{\newton}; colonna \SI{2,7e3}{\newton}'''
+  soluzione = '''Con i nuovi bracci:
+\[
+  F_{\text{mot}} = \frac{\SI{450}{\newton} \cdot \SI{10}{\centi\metre} + \SI{250}{\newton} \cdot \SI{22}{\centi\metre}}{\SI{5,0}{\centi\metre}} = \frac{(4500 + 5500)\,\si{\newton\centi\metre}}{\SI{5,0}{\centi\metre}} = \SI{2,0e3}{\newton}
+\]
+e sulla colonna $2000 + 450 + 250 = \SI{2,7e3}{\newton}$. La forza sui dischi si riduce a meno della metà, $2700/5500 \approx 0{,}5$, senza che cambi niente nei pesi: cambiano solo i bracci.'''
+
+[[problema]]
+id = "ud2-rigido-deltoide"
+livello = 3
+testo = '''Un paziente in riabilitazione tiene il braccio teso in orizzontale, di lato, con in mano un manubrio di peso {{Fm}}, a {{xm}} dalla spalla. Il braccio pesa {{Fb}}, con il baricentro a {{xb}} dalla spalla. Il deltoide si inserisce sull'omero a {{xd}} dalla spalla e tira verso l'alto e verso il corpo, lungo una retta che forma un angolo di \ang{30} con il braccio.'''
+dati.Fm = { valore = 20, unita = "\\newton" }
+dati.xm = { valore = 60, unita = "cm" }
+dati.Fb = { valore = 35, unita = "\\newton" }
+dati.xb = { valore = 30, unita = "cm" }
+dati.xd = { valore = 15, unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanta forza fa il deltoide?'''
+  calcolo = "(Fb * xb + Fm * xm) / (xd * sin30)"
+  risultato = { valore = 300, unita = "\\newton", cifre = 2 }
+  soluzione = '''Si calcolano i momenti rispetto alla spalla, così la forza dell'articolazione, che non si conosce, ha momento zero. Il braccio del deltoide è la distanza fra la spalla e la retta d'azione della sua forza: nel triangolo rettangolo che ha per ipotenusa il tratto di omero lungo \SI{15}{\centi\metre}, è il cateto opposto all'angolo di \ang{30}:
+\[
+  b_d = \SI{15}{\centi\metre} \cdot \sin\ang{30} = \SI{15}{\centi\metre} \cdot 0{,}5 = \SI{7,5}{\centi\metre}
+\]
+I pesi sono verticali, perpendicolari al braccio, e i loro bracci sono le distanze dalla spalla. Il deltoide fa ruotare il braccio verso l'alto, i pesi verso il basso:
+\[
+  F_d \cdot \SI{7,5}{\centi\metre} = \SI{35}{\newton} \cdot \SI{30}{\centi\metre} + \SI{20}{\newton} \cdot \SI{60}{\centi\metre} = (1050 + 1200)\,\si{\newton\centi\metre} = \SI{2250}{\newton\centi\metre}
+\]
+\[
+  F_d = \frac{\SI{2250}{\newton\centi\metre}}{\SI{7,5}{\centi\metre}} = \SI{300}{\newton}
+\]
+Quindici volte il peso del manubrio: l'inserzione è vicina alla spalla e la forza è molto inclinata.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto valgono la componente orizzontale e la componente verticale della forza che la spalla esercita sull'omero?'''
+  calcolo = "(Fb * xb + Fm * xm) / (xd * sin30) * cos30"
+  risultato = { valore = 2.6e2, unita = "\\newton", cifre = 2 }
+  rapido = '''orizzontale \SI{2,6e2}{\newton}, verso l'esterno; verticale \SI{95}{\newton}, verso il basso'''
+  soluzione = '''Si scompone la forza del deltoide. Lungo il braccio, verso il corpo:
+\[
+  F_d \cos\ang{30} = \SI{300}{\newton} \cdot 0{,}87 = \SI{261}{\newton}
+\]
+in verticale, verso l'alto: $F_d \sin\ang{30} = \SI{300}{\newton} \cdot 0{,}5 = \SI{150}{\newton}$.
+
+Per l'equilibrio traslazionale ogni componente della risultante è zero. In orizzontale l'unica altra forza è quella della spalla, che deve spingere l'omero verso l'esterno con circa \SI{2,6e2}{\newton}: il deltoide preme la testa dell'omero contro la spalla. In verticale verso l'alto c'è \SI{150}{\newton}, verso il basso $35 + 20 = \SI{55}{\newton}$; la spalla deve dare i $150 - 55 = \SI{95}{\newton}$ che mancano, verso il basso. Le forze nell'articolazione sono molto più grandi dei pesi in gioco.'''
+
+[[problema]]
+id = "ud2-rigido-incrocio"
+livello = 3
+testo = '''Un perito ricostruisce un incidente a un incrocio. Un'auto di {{m1}} viaggiava verso est a {{v1}}, un'altra di {{m2}} verso nord a {{v2}}. Dopo l'urto le due auto sono rimaste incastrate. Durante l'urto trascura le forze esterne.'''
+dati.m1 = { valore = 1000, unita = "\\kilo\\gram" }
+dati.v1 = { valore = 20, unita = "m/s" }
+dati.m2 = { valore = 1500, unita = "\\kilo\\gram" }
+dati.v2 = { valore = 10, unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il modulo della quantità di moto totale prima dell'urto?'''
+  calcolo = "math.sqrt((m1 * v1)**2 + (m2 * v2)**2)"
+  risultato = { valore = 2.5e4, unita = "\\kilo\\gram\\metre\\per\\second", cifre = 2 }
+  soluzione = '''La quantità di moto è un vettore. Con l'asse $x$ verso est e l'asse $y$ verso nord, la prima auto ha solo la componente $x$, la seconda solo la componente $y$:
+\[
+  p_x = \SI{1000}{\kilo\gram} \cdot \SI{20}{\metre\per\second} = \SI{2,0e4}{\kilo\gram\metre\per\second}
+  \qquad
+  p_y = \SI{1500}{\kilo\gram} \cdot \SI{10}{\metre\per\second} = \SI{1,5e4}{\kilo\gram\metre\per\second}
+\]
+Le due componenti sono perpendicolari, e il modulo si trova con il teorema di Pitagora:
+\[
+  p = \sqrt{p_x^2 + p_y^2} = \sqrt{2{,}0^2 + 1{,}5^2} \cdot 10^4\,\si{\kilo\gram\metre\per\second}
+\]
+\[
+  p = \sqrt{4{,}00 + 2{,}25} \cdot 10^4\,\si{\kilo\gram\metre\per\second} = \sqrt{6{,}25} \cdot 10^4\,\si{\kilo\gram\metre\per\second} = \SI{2,5e4}{\kilo\gram\metre\per\second}
+\]
+Non si possono sommare i moduli, $20000 + 15000$: i due vettori non sono paralleli.'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità si muovono le auto subito dopo l'urto? Quanto valgono le sue componenti?'''
+  calcolo = "math.sqrt((m1 * v1)**2 + (m2 * v2)**2) / (m1 + m2)"
+  risultato = { valore = 10, unita = "m/s", cifre = 2 }
+  rapido = '''\SI{10}{\metre\per\second}; \SI{8,0}{\metre\per\second} verso est e \SI{6,0}{\metre\per\second} verso nord'''
+  soluzione = '''La quantità di moto si conserva componente per componente. Dopo l'urto la massa è $1000 + 1500 = \SI{2500}{\kilo\gram}$:
+\[
+  v_x = \frac{\SI{2,0e4}{\kilo\gram\metre\per\second}}{\SI{2500}{\kilo\gram}} = \SI{8,0}{\metre\per\second}
+  \qquad
+  v_y = \frac{\SI{1,5e4}{\kilo\gram\metre\per\second}}{\SI{2500}{\kilo\gram}} = \SI{6,0}{\metre\per\second}
+\]
+e il modulo è $v = p/M = \SI{2,5e4}{\kilo\gram\metre\per\second}/\SI{2500}{\kilo\gram} = \SI{10}{\metre\per\second}$, lo stesso che dà Pitagora: $\sqrt{8{,}0^2 + 6{,}0^2} = \sqrt{100} = 10$. Le auto escono verso nord-est, più verso est che verso nord. Le tracce sull'asfalto permettono al perito di fare il conto al contrario, e risalire alle velocità prima dell'urto.'''
+
+  [[problema.parte]]
+  domanda = '''Quanta energia cinetica si è persa nell'urto?'''
+  calcolo = "0.5 * m1 * v1**2 + 0.5 * m2 * v2**2 - 0.5 * (m1 + m2) * ((m1 * v1)**2 + (m2 * v2)**2) / (m1 + m2)**2"
+  risultato = { valore = 1.5e5, unita = "J", cifre = 2 }
+  soluzione = '''Prima dell'urto:
+\[
+  E_{c,i} = \frac12 \cdot 1000 \cdot 20^2\,\si{\joule} + \frac12 \cdot 1500 \cdot 10^2\,\si{\joule} = (200000 + 75000)\,\si{\joule} = \SI{2,75e5}{\joule}
+\]
+Dopo, con la velocità del punto (b):
+\[
+  E_{c,f} = \frac12 \cdot 2500 \cdot 10^2\,\si{\joule} = \SI{1,25e5}{\joule}
+\]
+Si sono persi $(2{,}75 - 1{,}25) \cdot 10^5\,\si{\joule} = \SI{1,5e5}{\joule}$, più di metà dell'energia iniziale, spesi nella deformazione delle lamiere.'''
+
+[[problema]]
+id = "ud2-rigido-tavola"
+livello = 3
+testo = '''Per trovare la posizione del baricentro di un paziente lo si fa sdraiare supino su una tavola rigida lunga {{L}}, di massa trascurabile. Un'estremità della tavola, A, appoggia su un sostegno; l'altra, B, su una bilancia che misura la forza in newton. Il paziente pesa {{Fp}}, è alto {{H}} e ha le piante dei piedi esattamente sopra B. La bilancia segna {{FB}}.'''
+dati.L = { valore = "2,0", unita = "m" }
+dati.Fp = { valore = 700, unita = "\\newton" }
+dati.H = { valore = "1,60", unita = "m" }
+dati.FB = { valore = 392, unita = "\\newton" }
+dati.Fa = { valore = 80, unita = "\\newton" }
+dati.d = { valore = "0,60", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''A che distanza da A si trova il baricentro del paziente?'''
+  calcolo = "FB * L / Fp"
+  risultato = { valore = 1.12, unita = "m", cifre = 3 }
+  soluzione = '''Sulla tavola agiscono la forza del sostegno in A, la forza della bilancia in B, tutte e due verso l'alto, e il peso del paziente, che agisce nel suo baricentro, a una distanza $x$ da A. Si calcolano i momenti rispetto ad A, così la forza del sostegno ha momento zero. Le forze sono verticali, e i bracci sono le distanze da A:
+\[
+  F_B \cdot L = F_p \cdot x
+  \quad\Longrightarrow\quad
+  x = \frac{F_B\,L}{F_p} = \frac{\SI{392}{\newton} \cdot \SI{2,0}{\metre}}{\SI{700}{\newton}} = \frac{784}{700}\,\si{\metre} = \SI{1,12}{\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''A che altezza da terra si trova il baricentro quando il paziente sta in piedi? Che frazione della statura è?'''
+  calcolo = "L - FB * L / Fp"
+  risultato = { valore = 0.88, unita = "m", cifre = 2 }
+  rapido = '''\SI{0,88}{\metre}, il 55\% della statura'''
+  soluzione = '''I piedi sono in B, quindi il baricentro dista dai piedi
+\[
+  L - x = \SI{2,0}{\metre} - \SI{1,12}{\metre} = \SI{0,88}{\metre}
+\]
+In piedi, con il corpo nella stessa posizione, è l'altezza del baricentro da terra. Come frazione della statura: $0{,}88/1{,}60 = 0{,}55$, cioè il 55\%, all'altezza del bacino.'''
+
+  [[problema.parte]]
+  domanda = '''Il paziente porta le braccia distese sopra la testa, lungo la tavola. Le due braccia pesano insieme {{Fa}}, e il loro baricentro si sposta di {{d}} verso A. Quanto segna ora la bilancia?'''
+  calcolo = "(FB * L - Fa * d) / L"
+  risultato = { valore = 368, unita = "\\newton", cifre = 3 }
+  soluzione = '''Il peso totale non cambia, ma una sua parte si avvicina ad A. Il momento delle braccia rispetto ad A diminuisce di $\SI{80}{\newton} \cdot \SI{0,60}{\metre} = \SI{48}{\newton\metre}$, e il momento totale dei pesi passa da $\SI{392}{\newton} \cdot \SI{2,0}{\metre} = \SI{784}{\newton\metre}$ a $784 - 48 = \SI{736}{\newton\metre}$. La bilancia lo deve bilanciare:
+\[
+  F_B' = \frac{\SI{736}{\newton\metre}}{\SI{2,0}{\metre}} = \SI{368}{\newton}
+\]
+Il baricentro del corpo si è spostato verso la testa di $\SI{48}{\newton\metre}/\SI{700}{\newton} \approx \SI{0,07}{\metre}$, circa \SI{7}{\centi\metre}: la sua posizione cambia con la postura.'''
+
+[[problema]]
+id = "ud2-rigido-frusta"
+livello = 3
+testo = '''Un'auto di {{m1}}, ferma a un semaforo, viene tamponata da un'auto di {{m2}} che arriva a {{v2}}. Dopo l'urto le due auto restano incastrate. L'urto dura {{dt}}.'''
+dati.m1 = { valore = 1000, unita = "\\kilo\\gram" }
+dati.m2 = { valore = 1500, unita = "\\kilo\\gram" }
+dati.v2 = { valore = 10, unita = "m/s" }
+dati.dt = { valore = "0,10", unita = "s" }
+dati.mt = { valore = "5,0", unita = "\\kilo\\gram" }
+dati.dtt = { valore = "0,20", unita = "s" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità si muovono le due auto subito dopo l'urto?'''
+  calcolo = "m2 * v2 / (m1 + m2)"
+  risultato = { valore = 6.0, unita = "m/s", cifre = 2 }
+  soluzione = '''Durante l'urto la quantità di moto totale si conserva. Prima si muove solo l'auto che tampona; dopo, le due auto insieme:
+\[
+  m_2 v_2 = (m_1 + m_2)\,v
+  \quad\Longrightarrow\quad
+  v = \frac{\SI{1500}{\kilo\gram} \cdot \SI{10}{\metre\per\second}}{\SI{2500}{\kilo\gram}} = \frac{15000}{2500}\,\si{\metre\per\second} = \SI{6,0}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la forza media che l'auto che tampona esercita su quella ferma?'''
+  calcolo = "m1 * m2 * v2 / (m1 + m2) / dt"
+  risultato = { valore = 6.0e4, unita = "\\newton", cifre = 2 }
+  soluzione = '''Per il teorema dell'impulso applicato all'auto ferma, che passa da zero a \SI{6,0}{\metre\per\second}:
+\[
+  F_m = \frac{\Delta p}{\Delta t} = \frac{\SI{1000}{\kilo\gram} \cdot \SI{6,0}{\metre\per\second}}{\SI{0,10}{\second}} = \frac{\SI{6000}{\kilo\gram\metre\per\second}}{\SI{0,10}{\second}} = \SI{6,0e4}{\newton}
+\]
+Controllo con il terzo principio: l'auto che tampona passa da 10 a \SI{6,0}{\metre\per\second}, e la sua quantità di moto cambia di $1500 \cdot (6{,}0 - 10) = \SI{-6000}{\kilo\gram\metre\per\second}$, uguale e opposta. Le due auto si scambiano forze uguali e opposte per lo stesso tempo.'''
+
+  [[problema.parte]]
+  domanda = '''Nell'auto tamponata il sedile spinge in avanti il busto del passeggero. Senza un poggiatesta regolato, la testa, di massa {{mt}}, resta indietro, e il collo, piegandosi all'indietro, la porta a \SI{6,0}{\metre\per\second} in {{dtt}}. Quanto vale la forza media del collo sulla testa?'''
+  calcolo = "mt * m2 * v2 / (m1 + m2) / dtt"
+  risultato = { valore = 150, unita = "\\newton", cifre = 2 }
+  soluzione = '''La testa passa da ferma alla velocità dell'auto, \SI{6,0}{\metre\per\second}, e la forza orizzontale che la accelera è quella del collo:
+\[
+  F_m = \frac{\Delta p}{\Delta t} = \frac{\SI{5,0}{\kilo\gram} \cdot \SI{6,0}{\metre\per\second}}{\SI{0,20}{\second}} = \frac{\SI{30}{\kilo\gram\metre\per\second}}{\SI{0,20}{\second}} = \SI{150}{\newton}
+\]
+Circa tre volte il peso della testa, $5{,}0 \cdot 10 = \SI{50}{\newton}$, applicato mentre il collo è piegato: è il colpo di frusta. Un poggiatesta regolato all'altezza della testa la spinge in avanti insieme al busto, e il collo non si piega.'''
+
+# ==================================================================== quesiti d'esame
+
+[[quesito]]
+id = "ud2-cinematica-punto-alto"
+tipo = "multipla"
+testo = '''Una palla viene lanciata verticalmente verso l'alto. Trascurando la resistenza dell'aria, nell'istante in cui raggiunge il punto più alto'''
+corretta = "D"
+soluzione = '''Nel punto più alto la palla smette di salire e comincia a scendere: la sua velocità passa da positiva (verso l'alto) a negativa (verso il basso), e nell'istante del cambio è nulla. L'accelerazione invece è $g$, verso il basso, per tutto il volo: in salita fa diminuire la velocità, in cima la fa diventare negativa, in discesa ne fa crescere il modulo.'''
+
+  [[quesito.opzione]]
+  testo = '''la velocità e l'accelerazione sono tutte e due nulle'''
+  commento = '''La velocità è nulla, l'accelerazione no. Se anche l'accelerazione fosse nulla, la velocità resterebbe zero e la palla rimarrebbe ferma lassù.'''
+  [[quesito.opzione]]
+  testo = '''la velocità è diretta verso l'alto e l'accelerazione verso il basso'''
+  commento = '''Vale in tutta la salita, ma non nel punto più alto: lì la velocità cambia verso, e nell'istante del cambio è nulla.'''
+  [[quesito.opzione]]
+  testo = '''la velocità è nulla e l'accelerazione sta cambiando verso, da verso l'alto a verso il basso'''
+  commento = '''L'accelerazione è verso il basso anche in salita: è per questo che la palla, salendo, rallenta. Cambia verso la velocità, non l'accelerazione.'''
+  [[quesito.opzione]]
+  testo = '''la velocità è nulla e l'accelerazione vale $g$, verso il basso'''
+  [[quesito.opzione]]
+  testo = '''la velocità è nulla e l'accelerazione è minore di $g$, perché la palla è più lontana dalla Terra'''
+  commento = '''Vicino alla superficie della Terra, per altezze di qualche metro o di qualche centinaio di metri, $g$ non cambia in modo apprezzabile. L'accelerazione è $g$ in tutti i punti della traiettoria.'''
+
+[[quesito]]
+id = "ud2-cinematica-altezza"
+tipo = "multipla"
+testo = '''Un oggetto lasciato cadere da fermo da un'altezza $h$ arriva a terra con velocità di modulo $v$. Trascurando la resistenza dell'aria, per arrivare a terra con velocità $3v$ deve essere lasciato cadere da un'altezza'''
+corretta = "B"
+calcolo = "3**2"
+soluzione = '''Dalla relazione $v^2 = 2gh$ l'altezza è $h = v^2/(2g)$: è proporzionale al \emph{quadrato} della velocità di arrivo. Se la velocità diventa $3v$, l'altezza deve diventare
+\[
+  h' = \frac{(3v)^2}{2g} = 9\,\frac{v^2}{2g} = 9h
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''$3h$'''
+  commento = '''Tratta la velocità di arrivo come proporzionale all'altezza. È proporzionale alla sua radice, $v = \sqrt{2gh}$: da $3h$ l'oggetto arriverebbe a $\sqrt3\,v \approx 1{,}7\,v$.'''
+  [[quesito.opzione]]
+  testo = '''$9h$'''
+  valore = 9
+  [[quesito.opzione]]
+  testo = '''$\sqrt3\,h$'''
+  commento = '''Rovescia la relazione: è la velocità a crescere come la radice dell'altezza, quindi l'altezza cresce come il quadrato della velocità, non come la sua radice.'''
+  [[quesito.opzione]]
+  testo = '''$6h$'''
+  commento = '''Moltiplica 3 per 2 invece di elevarlo al quadrato: $3 \cdot 2 = 6$ invece di $3^2 = 9$. Forse confonde l'esponente di $v^2$ con il 2 di $2gh$.'''
+  [[quesito.opzione]]
+  testo = '''dipende dalla massa dell'oggetto'''
+  commento = '''Senza la resistenza dell'aria tutti i corpi cadono con la stessa accelerazione $g$, qualunque sia la loro massa: in $v = \sqrt{2gh}$ la massa non compare.'''
+
+[[quesito]]
+id = "ud2-cinematica-primi-secondi"
+tipo = "multipla"
+testo = '''Un'auto parte da ferma e accelera in linea retta con accelerazione costante di {{a}}. Nei primi {{t}} percorre'''
+dati.a = { valore = 2, unita = "\\metre\\per\\second\\squared" }
+dati.t = { valore = 5, unita = "s" }
+corretta = "E"
+calcolo = "0.5 * a * t**2"
+soluzione = '''L'auto parte da ferma, $v_0 = 0$, quindi lo spostamento è
+\[
+  \Delta x = \frac12 a t^2 = \frac12 \cdot \SI{2}{\metre\per\second\squared} \cdot (\SI{5}{\second})^2 = \SI{1}{\metre\per\second\squared} \cdot \SI{25}{\second\squared} = \SI{25}{\metre}
+\]
+Lo stesso risultato viene dalla velocità media: la velocità finale è $at = \SI{10}{\metre\per\second}$, quella media $(0 + 10)/2 = \SI{5}{\metre\per\second}$, e $5 \cdot 5 = 25$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\metre}'''
+  commento = '''È il valore della velocità dopo \SI{5}{\second}, $v = at = \SI{10}{\metre\per\second}$, non lo spazio percorso.'''
+  [[quesito.opzione]]
+  testo = '''\SI{50}{\metre}'''
+  commento = '''Dimentica il fattore $\frac12$: $a t^2 = 2 \cdot 25 = 50$. È lo spazio che l'auto percorrerebbe se andasse sempre alla velocità finale, \SI{10}{\metre\per\second}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5}{\metre}'''
+  commento = '''Calcola $\frac12 a t = \frac12 \cdot 2 \cdot 5$: dimentica il quadrato del tempo. Le unità lo mostrano, $(\si{\metre\per\second\squared}) \cdot \si{\second}$ è una velocità.'''
+  [[quesito.opzione]]
+  testo = '''\SI{100}{\metre}'''
+  commento = '''Eleva al quadrato tutto il prodotto, $(at)^2 = 10^2 = 100$, invece del solo tempo; e dimentica il $\frac12$. Le unità di $(at)^2$ sono \si{\metre\squared\per\second\squared}, non metri.'''
+  [[quesito.opzione]]
+  testo = '''\SI{25}{\metre}'''
+  valore = 25
+
+[[quesito]]
+id = "ud2-cinematica-due-provette"
+tipo = "multipla"
+testo = '''In una centrifuga in funzione due provette ruotano insieme, una a {{r1}} e l'altra a {{r2}} dall'asse di rotazione. Il rapporto fra l'accelerazione centripeta della provetta più lontana dall'asse e quella della provetta più vicina è'''
+dati.r1 = { valore = 5, unita = "cm" }
+dati.r2 = { valore = 10, unita = "cm" }
+corretta = "A"
+calcolo = "r2 / r1"
+soluzione = '''Le due provette compiono un giro nello stesso tempo: hanno lo stesso periodo e la stessa velocità angolare $\omega$. Con $a_c = \omega^2 r$, a parità di $\omega$ l'accelerazione è proporzionale al raggio:
+\[
+  \frac{a_2}{a_1} = \frac{\omega^2 r_2}{\omega^2 r_1} = \frac{r_2}{r_1} = \frac{\SI{10}{\centi\metre}}{\SI{5}{\centi\metre}} = 2
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''2'''
+  valore = 2
+  [[quesito.opzione]]
+  testo = '''$1/2$'''
+  commento = '''Usa $a_c = v^2/r$ come se le due provette avessero la stessa velocità. Ma la provetta più lontana percorre una circonferenza doppia nello stesso tempo, quindi va al doppio della velocità ($v = \omega r$): $v^2$ diventa 4 volte più grande, e $4/2 = 2$.'''
+  [[quesito.opzione]]
+  testo = '''4'''
+  commento = '''Eleva al quadrato il rapporto dei raggi. A parità di velocità angolare, in $a_c = \omega^2 r$ il raggio compare alla prima potenza; al quadrato c'è $\omega$, che è la stessa per tutte e due.'''
+  [[quesito.opzione]]
+  testo = '''1'''
+  commento = '''Le due provette hanno lo stesso periodo e la stessa velocità angolare, ma non la stessa velocità né la stessa accelerazione: entrambe dipendono dal raggio.'''
+  [[quesito.opzione]]
+  testo = '''dipende dalla velocità di rotazione della centrifuga'''
+  commento = '''La velocità angolare è la stessa per le due provette e nel rapporto si semplifica: a qualunque velocità giri la centrifuga, il rapporto è quello dei raggi.'''
+
+[[quesito]]
+id = "ud2-cinematica-velocita-cima"
+tipo = "multipla"
+testo = '''Un pallone viene calciato dal suolo con una velocità iniziale che ha componente orizzontale {{vx}} e componente verticale {{vy}}. Trascurando la resistenza dell'aria, nel punto più alto della traiettoria il modulo della velocità del pallone è'''
+dati.vx = { valore = 8, unita = "m/s" }
+dati.vy = { valore = 6, unita = "m/s" }
+corretta = "C"
+calcolo = "vx"
+soluzione = '''In orizzontale l'accelerazione è zero, quindi la componente orizzontale della velocità resta \SI{8}{\metre\per\second} per tutto il volo. In verticale la velocità diminuisce e, nel punto più alto, si annulla. In cima resta solo la componente orizzontale: la velocità è orizzontale e vale \SI{8}{\metre\per\second}.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0}{\metre\per\second}'''
+  commento = '''Nel punto più alto si annulla solo la componente verticale. Il pallone si ferma in cima solo in un lancio esattamente verticale.'''
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\metre\per\second}'''
+  commento = '''È il modulo della velocità iniziale, $\sqrt{8^2 + 6^2} = \sqrt{100}$. Ma la componente verticale non resta \SI{6}{\metre\per\second}: in cima è nulla.'''
+  [[quesito.opzione]]
+  testo = '''\SI{8}{\metre\per\second}'''
+  valore = 8
+  [[quesito.opzione]]
+  testo = '''\SI{6}{\metre\per\second}'''
+  commento = '''Scambia le componenti: in cima si annulla la componente verticale, \SI{6}{\metre\per\second}, e resta quella orizzontale, \SI{8}{\metre\per\second}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{14}{\metre\per\second}'''
+  commento = '''Somma le due componenti come numeri, $8 + 6$. Le componenti si sommano come vettori, e comunque in cima quella verticale è nulla.'''
+
+[[quesito]]
+id = "ud2-cinematica-pendenza"
+tipo = "completamento"
+testo = '''Il grafico orario di un corpo che si muove lungo una retta è un segmento che va dal punto $t = \SI{2}{\second}$, $x = \SI{16}{\metre}$ al punto $t = \SI{5}{\second}$, $x = \SI{4}{\metre}$. La velocità del corpo, in metri al secondo, è \completa.'''
+calcolo = "(4 - 16) / (5 - 2)"
+risposta = "-4"
+soluzione = '''Il grafico orario è un segmento di retta, quindi la velocità è costante ed è uguale alla pendenza:
+\[
+  v = \frac{x_2 - x_1}{t_2 - t_1} = \frac{\SI{4}{\metre} - \SI{16}{\metre}}{\SI{5}{\second} - \SI{2}{\second}} = \frac{\SI{-12}{\metre}}{\SI{3}{\second}} = \SI{-4}{\metre\per\second}
+\]
+Il segno meno dice che il corpo si muove nel verso negativo dell'asse: il grafico scende. Chi scrive 4 ha dimenticato il segno; chi scrive 0,8 ha diviso la posizione finale per il tempo finale, $4/5$, invece dello spostamento per la durata.'''
+
+[[quesito]]
+id = "ud2-cinematica-terzo-secondo"
+tipo = "completamento"
+testo = '''Un sasso viene lasciato cadere da fermo in un pozzo profondo. Trascurando la resistenza dell'aria e usando $g = \SI{10}{\metre\per\second\squared}$, durante il terzo secondo di caduta, cioè fra $t = \SI{2}{\second}$ e $t = \SI{3}{\second}$, il sasso percorre, in metri, \completa.'''
+calcolo = "0.5 * g * 3**2 - 0.5 * g * 2**2"
+risposta = "25"
+soluzione = '''Dalla partenza il sasso cade di $\frac12 g t^2$. Fino a \SI{3}{\second} cade di $\frac12 \cdot 10 \cdot 9 = \SI{45}{\metre}$, fino a \SI{2}{\second} di $\frac12 \cdot 10 \cdot 4 = \SI{20}{\metre}$. Nel terzo secondo percorre la differenza:
+\[
+  \Delta y = \SI{45}{\metre} - \SI{20}{\metre} = \SI{25}{\metre}
+\]
+Si può anche usare la velocità media: a \SI{2}{\second} la velocità è $10 \cdot 2 = \SI{20}{\metre\per\second}$, a \SI{3}{\second} è \SI{30}{\metre\per\second}, la media è \SI{25}{\metre\per\second} e dura \SI{1}{\second}. Chi scrive 45 ha calcolato tutta la caduta dei primi tre secondi; chi scrive 5 ha usato $\frac12 g \cdot (\SI{1}{\second})^2$, come se il sasso partisse da fermo all'inizio del terzo secondo.'''
+
+[[quesito]]
+id = "ud2-cinematica-giri"
+tipo = "completamento"
+testo = '''Il rotore di una centrifuga compie un giro completo in \SI{0,025}{\second}. Gira a \completa\ giri al minuto.'''
+calcolo = "60 / 0.025"
+risposta = "2400"
+soluzione = '''La frequenza è l'inverso del periodo:
+\[
+  f = \frac{1}{T} = \frac{1}{\SI{0,025}{\second}} = \SI{40}{\hertz}
+\]
+cioè 40 giri al secondo. In un minuto ci sono 60 secondi: $40 \cdot 60 = \num{2400}$ giri al minuto. Chi scrive 40 si è fermato ai giri al secondo; chi scrive 1,5 ha moltiplicato il periodo per 60, $0{,}025 \cdot 60$, che è il tempo di 60 giri in secondi.'''
+
+[[quesito]]
+id = "ud2-dinamica-tamponamento"
+tipo = "multipla"
+testo = '''Un'auto di \SI{1000}{\kilo\gram} tampona un furgone di \SI{3000}{\kilo\gram}. Durante l'urto, la forza che l'auto esercita sul furgone, confrontata con la forza che il furgone esercita sull'auto,'''
+corretta = "C"
+soluzione = '''Le due forze sono una coppia di azione e reazione: per il terzo principio hanno lo stesso modulo, la stessa direzione e versi opposti, qualunque siano le masse e le velocità. Sono diverse le \emph{accelerazioni}: per il secondo principio $a = F/m$, e l'auto, con un terzo della massa, subisce un'accelerazione tre volte più grande di quella del furgone.'''
+
+  [[quesito.opzione]]
+  testo = '''è tre volte più piccola, perché l'auto ha un terzo della massa'''
+  commento = '''Confonde la forza con l'accelerazione: è l'accelerazione del furgone a essere tre volte più piccola di quella dell'auto, perché la stessa forza agisce su una massa tripla.'''
+  [[quesito.opzione]]
+  testo = '''è tre volte più grande, perché è l'auto che urta'''
+  commento = '''Pensa che chi «colpisce» spinga di più. Il terzo principio non distingue chi urta e chi è urtato: le due forze sono sempre uguali in modulo.'''
+  [[quesito.opzione]]
+  testo = '''ha lo stesso modulo e verso opposto'''
+  [[quesito.opzione]]
+  testo = '''ha lo stesso modulo e lo stesso verso'''
+  commento = '''Il modulo è giusto, ma le forze di azione e reazione hanno versi opposti: l'auto spinge il furgone in avanti, il furgone spinge l'auto all'indietro.'''
+  [[quesito.opzione]]
+  testo = '''è uguale solo se i due veicoli hanno la stessa velocità'''
+  commento = '''Il terzo principio vale in ogni istante, qualunque sia lo stato di moto dei due corpi: le velocità non entrano nel confronto fra le due forze.'''
+
+[[quesito]]
+id = "ud2-dinamica-cassa-ferma"
+tipo = "multipla"
+testo = '''Una cassa di {{m}} è ferma su una rampa inclinata di \ang{30}. Il coefficiente di attrito statico fra cassa e rampa è $0{,}8$. Con $g = \SI{10}{\metre\per\second\squared}$, la forza di attrito statico che agisce sulla cassa vale'''
+dati.m = { valore = 10, unita = "\\kilo\\gram" }
+corretta = "E"
+calcolo = "m * g * sin30"
+soluzione = '''La cassa è ferma, quindi lungo la rampa la risultante è nulla: l'attrito statico bilancia esattamente la componente del peso parallela alla rampa,
+\[
+  F_s = mg\sin\ang{30} = \SI{10}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} \cdot 0{,}5 = \SI{50}{\newton}
+\]
+Il coefficiente $\mu_s$ serve solo a sapere che la cassa resta ferma: l'attrito massimo, $\mu_s mg\cos\ang{30} \approx 0{,}8 \cdot 100 \cdot 0{,}87 \approx \SI{70}{\newton}$, è più grande di \SI{50}{\newton}. L'attrito statico vale solo quanto serve.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{87}{\newton}'''
+  commento = '''Usa il coseno al posto del seno: $mg\cos\ang{30} \approx 100 \cdot 0{,}87 = \SI{87}{\newton}$ è la componente del peso perpendicolare alla rampa, bilanciata dalla forza normale.'''
+  [[quesito.opzione]]
+  testo = '''\SI{100}{\newton}'''
+  commento = '''È tutto il peso, $mg$. L'attrito è parallelo alla rampa, e deve bilanciare solo la componente del peso lungo la rampa.'''
+  [[quesito.opzione]]
+  testo = '''\SI{70}{\newton}'''
+  commento = '''È l'attrito statico \emph{massimo}, $\mu_s mg\cos\ang{30} \approx 0{,}8 \cdot 100 \cdot 0{,}87 \approx \SI{70}{\newton}$. Finché la cassa è ferma l'attrito statico vale solo quanto serve a tenerla ferma, \SI{50}{\newton}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0}{\newton}, perché la cassa è ferma'''
+  commento = '''Pensa che l'attrito agisca solo sui corpi in moto. Senza attrito la cassa scivolerebbe giù: è l'attrito statico a tenerla ferma.'''
+  [[quesito.opzione]]
+  testo = '''\SI{50}{\newton}'''
+  valore = 50
+
+[[quesito]]
+id = "ud2-dinamica-curva-stretta"
+tipo = "multipla"
+testo = '''Un'auto percorre una curva piana. Se affronta una curva di raggio dimezzato a velocità doppia, la forza di attrito che serve a tenerla in curva'''
+corretta = "A"
+calcolo = "2**2 / 0.5"
+soluzione = '''La forza di attrito è la forza centripeta, $F_c = mv^2/r$: è proporzionale al quadrato della velocità e inversamente proporzionale al raggio. Raddoppiare la velocità moltiplica la forza per $2^2 = 4$, dimezzare il raggio la moltiplica per 2:
+\[
+  \frac{F_2}{F_1} = \frac{(2v)^2/(r/2)}{v^2/r} = \frac{4}{1/2} = 8
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''diventa 8 volte più grande'''
+  valore = 8
+  [[quesito.opzione]]
+  testo = '''diventa 4 volte più grande'''
+  commento = '''Tiene conto del quadrato della velocità, $2^2 = 4$, ma dimentica che anche il raggio è cambiato: con un raggio dimezzato la forza raddoppia ancora.'''
+  [[quesito.opzione]]
+  testo = '''diventa 16 volte più grande'''
+  commento = '''Eleva al quadrato anche il raggio, come se fosse $F_c = mv^2/r^2$: $2^2 \cdot 2^2 = 16$. Nella forza centripeta il raggio compare alla prima potenza.'''
+  [[quesito.opzione]]
+  testo = '''non cambia, perché i due effetti si compensano'''
+  commento = '''Tratta la forza come proporzionale a $v$ e a $r$ alla prima potenza, in modo che il raddoppio e il dimezzamento si annullino. Ma la velocità entra al quadrato, e il raggio al denominatore: tutte e due le modifiche fanno crescere la forza.'''
+  [[quesito.opzione]]
+  testo = '''diventa 2 volte più grande'''
+  commento = '''Mette il raggio al numeratore, come in $m\omega^2 r$: $4 \cdot \frac12 = 2$. Ma qui è fissata la velocità $v$, non $\omega$, e la formula da usare è $mv^2/r$.'''
+
+[[quesito]]
+id = "ud2-dinamica-satellite"
+tipo = "multipla"
+testo = '''Un satellite di massa $m$ si trova a una quota uguale al raggio terrestre, cioè a una distanza dal centro della Terra doppia di quella della superficie. Rispetto al peso che avrebbe sulla superficie, il suo peso a quella quota'''
+corretta = "B"
+calcolo = "1 / 2**2"
+soluzione = '''Per la legge di gravitazione universale la forza peso è inversamente proporzionale al quadrato della distanza dal centro della Terra. Se la distanza raddoppia, il peso si divide per $2^2 = 4$: diventa un quarto. La massa del satellite resta $m$.'''
+
+  [[quesito.opzione]]
+  testo = '''diventa la metà'''
+  commento = '''Tratta la forza come inversamente proporzionale alla distanza, non al suo quadrato.'''
+  [[quesito.opzione]]
+  testo = '''diventa un quarto'''
+  valore = 0.25
+  [[quesito.opzione]]
+  testo = '''non cambia, perché la massa del satellite è la stessa'''
+  commento = '''Confonde massa e peso: la massa non cambia, ma il peso è $mg$, e $g$ diminuisce allontanandosi dalla Terra.'''
+  [[quesito.opzione]]
+  testo = '''diventa nullo, perché in orbita i corpi non pesano'''
+  commento = '''In orbita i corpi sembrano senza peso perché cadono insieme al satellite, non perché la gravità manchi: è proprio il peso a fare da forza centripeta dell'orbita.'''
+  [[quesito.opzione]]
+  testo = '''diventa il doppio'''
+  commento = '''Tratta la forza come proporzionale alla distanza: la gravitazione invece diminuisce allontanandosi.'''
+
+[[quesito]]
+id = "ud2-dinamica-trascinamento"
+tipo = "multipla"
+testo = '''Un blocco di {{m}} viene tirato su un pavimento orizzontale con una forza orizzontale di {{F}}. Il coefficiente di attrito dinamico è $0{,}40$. Con $g = \SI{10}{\metre\per\second\squared}$, l'accelerazione del blocco vale'''
+dati.m = { valore = 5, unita = "\\kilo\\gram" }
+dati.F = { valore = 30, unita = "\\newton" }
+corretta = "D"
+calcolo = "(F - 0.40 * m * g) / m"
+soluzione = '''Sul pavimento orizzontale $F_N = mg = \SI{50}{\newton}$, e l'attrito dinamico vale $F_d = 0{,}40 \cdot \SI{50}{\newton} = \SI{20}{\newton}$, opposto al moto. La risultante orizzontale è $30 - 20 = \SI{10}{\newton}$, e
+\[
+  a = \frac{\SI{10}{\newton}}{\SI{5}{\kilo\gram}} = \SI{2}{\metre\per\second\squared}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{6}{\metre\per\second\squared}'''
+  commento = '''Ignora l'attrito: $30/5 = 6$. La forza applicata non è la forza risultante.'''
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\metre\per\second\squared}'''
+  commento = '''Somma l'attrito alla forza applicata, $(30 + 20)/5$: l'attrito è opposto al moto, quindi si sottrae.'''
+  [[quesito.opzione]]
+  testo = '''\SI{4}{\metre\per\second\squared}'''
+  commento = '''Divide per la massa la sola forza di attrito, $20/5$, invece della risultante.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\metre\per\second\squared}'''
+  valore = 2
+  [[quesito.opzione]]
+  testo = '''\SI{5,6}{\metre\per\second\squared}'''
+  commento = '''Calcola l'attrito con la massa al posto della forza normale, $0{,}40 \cdot 5 = 2$, e trova $(30 - 2)/5 = 5{,}6$. L'attrito è $\mu_d F_N$, e qui $F_N = mg = \SI{50}{\newton}$.'''
+
+[[quesito]]
+id = "ud2-dinamica-tilt"
+tipo = "completamento"
+testo = '''Nel tilt test per lo studio delle sincopi il paziente è legato a un lettino che viene inclinato di \ang{60} rispetto all'orizzontale, con i piedi appoggiati su una pedana. Per un paziente di {{m}}, con $g = \SI{10}{\metre\per\second\squared}$, la forza che il piano del lettino esercita sul paziente, perpendicolare al piano, vale \completa\ \si{\newton}.'''
+dati.m = { valore = 70, unita = "\\kilo\\gram" }
+calcolo = "m * g * sin30"
+risposta = "350"
+soluzione = '''Il lettino è un piano inclinato di \ang{60}. La componente del peso perpendicolare al piano è $mg\cos\ang{60}$, e la forza normale la bilancia:
+\[
+  F_N = mg\cos\ang{60} = \SI{70}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} \cdot 0{,}5 = \SI{350}{\newton}
+\]
+La componente lungo il piano, $mg\sin\ang{60} \approx 700 \cdot 0{,}87 \approx \SI{609}{\newton}$, la regge la pedana sotto i piedi. Chi scrive 609 ha usato il seno al posto del coseno; chi scrive 700 ha preso tutto il peso.'''
+
+[[quesito]]
+id = "ud2-dinamica-slitta"
+tipo = "completamento"
+testo = '''Due soccorritori tirano una slitta di {{m}} su un lago ghiacciato, con attrito trascurabile. Le loro funi sono orizzontali e perpendicolari fra loro: una tira con {{F1}}, l'altra con {{F2}}. L'accelerazione della slitta vale \completa\ \si{\metre\per\second\squared}.'''
+dati.m = { valore = 10, unita = "\\kilo\\gram" }
+dati.F1 = { valore = 30, unita = "\\newton" }
+dati.F2 = { valore = 40, unita = "\\newton" }
+calcolo = "math.sqrt(F1**2 + F2**2) / m"
+risposta = "5"
+soluzione = '''In verticale peso e forza normale si bilanciano. In orizzontale la risultante è la somma vettoriale delle due forze, che sono perpendicolari: il suo modulo si trova con il teorema di Pitagora,
+\[
+  F_{\text{ris}} = \sqrt{(\SI{30}{\newton})^2 + (\SI{40}{\newton})^2} = \sqrt{900 + 1600}\,\si{\newton} = \sqrt{2500}\,\si{\newton} = \SI{50}{\newton}
+\]
+Per il secondo principio $a = F_{\text{ris}}/m = \SI{50}{\newton}/\SI{10}{\kilo\gram} = \SI{5}{\metre\per\second\squared}$. Chi scrive 7 ha sommato i moduli, $30 + 40 = 70$, come se le funi tirassero nella stessa direzione.'''
+
+[[quesito]]
+id = "ud2-dinamica-luna"
+tipo = "completamento"
+testo = '''Sulla Luna, dove $g \approx \SI{1,6}{\metre\per\second\squared}$, un astronauta con la tuta pesa {{Fp}}. La sua massa, compresa la tuta, è \completa\ \si{\kilo\gram}.'''
+dati.Fp = { valore = 240, unita = "\\newton" }
+calcolo = "Fp / 1.6"
+risposta = "150"
+soluzione = '''Il peso è $F_p = mg$, con la $g$ del luogo in cui si trova il corpo. Quindi
+\[
+  m = \frac{F_p}{g} = \frac{\SI{240}{\newton}}{\SI{1,6}{\metre\per\second\squared}} = \SI{150}{\kilo\gram}
+\]
+perché $240/1{,}6 = 2400/16 = 150$. La massa è la stessa che sulla Terra. Chi scrive 24 ha diviso per la $g$ terrestre, $\SI{10}{\metre\per\second\squared}$.'''
+
+[[quesito]]
+id = "ud2-energia-centripeta"
+tipo = "multipla"
+testo = '''Su un tavolo orizzontale senza attrito un dischetto di {{m}}, legato con un filo a un chiodo, percorre una circonferenza di raggio {{r}} con velocità di modulo costante {{v}}. Il lavoro compiuto dalla tensione del filo in un giro completo è'''
+dati.m = { valore = "0,20", unita = "\\kilo\\gram" }
+dati.r = { valore = "0,50", unita = "m" }
+dati.v = { valore = "5,0", unita = "m/s" }
+corretta = "A"
+calcolo = "0 * m * v**2 / r"
+soluzione = '''La tensione del filo è la forza centripeta: è sempre diretta verso il chiodo, cioè lungo il raggio, mentre lo spostamento in ogni tratto è lungo la tangente. Forza e spostamento sono perpendicolari, $\cos\ang{90} = 0$, e il lavoro è zero in ogni tratto, quindi anche sul giro intero. Lo conferma il teorema dell'energia cinetica: la velocità ha modulo costante, l'energia cinetica non cambia, e il lavoro totale è zero. La tensione vale $mv^2/r = 0{,}20 \cdot 25/0{,}50 = \SI{10}{\newton}$, ma non serve.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0}{\joule}'''
+  valore = 0
+  [[quesito.opzione]]
+  testo = '''\SI{31}{\joule}'''
+  commento = '''Moltiplica la tensione, \SI{10}{\newton}, per la lunghezza della circonferenza, $2\pi r \approx \SI{3,1}{\metre}$, come se la forza fosse parallela allo spostamento. È perpendicolare.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,5}{\joule}'''
+  commento = '''È l'energia cinetica del dischetto, $\frac12 mv^2 = \frac12 \cdot 0{,}20 \cdot 25$. Il lavoro è la \emph{variazione} dell'energia cinetica, che qui è zero.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5,0}{\joule}'''
+  commento = '''Moltiplica la tensione, \SI{10}{\newton}, per il raggio, \SI{0,50}{\metre}: il dischetto non si sposta lungo il raggio, ma lungo la circonferenza.'''
+  [[quesito.opzione]]
+  testo = '''\SI{-31}{\joule}'''
+  commento = '''Pensa che la tensione, diretta verso il centro, si opponga al moto. Non è né concorde né opposta allo spostamento: è perpendicolare, e non compie lavoro.'''
+
+[[quesito]]
+id = "ud2-energia-pulmino"
+tipo = "multipla"
+testo = '''Un pulmino per il trasporto dei pazienti viaggia su una strada orizzontale alla velocità costante di {{v}}. Le forze resistenti (attriti e resistenza dell'aria) hanno in tutto un modulo di {{F}}. La potenza che il motore spende per vincerle è'''
+dati.v = { valore = 72, unita = "\\kilo\\metre\\per\\hour" }
+dati.F = { valore = 500, unita = "\\newton" }
+corretta = "D"
+calcolo = "F * v / 3.6 / 1000"
+soluzione = '''A velocità costante la forza motrice bilancia le forze resistenti, e vale \SI{500}{\newton}. È parallela alla velocità, che in metri al secondo è $72/3{,}6 = \SI{20}{\metre\per\second}$. Quindi
+\[
+  P = F\,v = \SI{500}{\newton} \cdot \SI{20}{\metre\per\second} = \SI{10000}{\watt} = \SI{10}{\kilo\watt}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{36}{\kilo\watt}'''
+  commento = '''Usa la velocità in chilometri all'ora, $500 \cdot 72 = 36000$: il watt è un newton per un metro al secondo, e la velocità va prima convertita.'''
+  [[quesito.opzione]]
+  testo = '''\SI{25}{\watt}'''
+  commento = '''Divide la forza per la velocità, $500/20$. La potenza è il \emph{prodotto} di forza e velocità.'''
+  [[quesito.opzione]]
+  testo = '''\SI{130}{\kilo\watt}'''
+  commento = '''Converte la velocità nel verso sbagliato, moltiplicando per 3,6: $72 \cdot 3{,}6 \approx \SI{259}{\metre\per\second}$, e $500 \cdot 259 \approx \SI{130000}{\watt}$. Da \si{\kilo\metre\per\hour} a \si{\metre\per\second} si divide per 3,6.'''
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\kilo\watt}'''
+  valore = 10
+  [[quesito.opzione]]
+  testo = '''\SI{0}{\watt}, perché a velocità costante la forza risultante è nulla'''
+  commento = '''È nullo il lavoro \emph{totale}, perché l'energia cinetica non cambia. La forza del motore, da sola, compie un lavoro positivo, uguale e opposto a quello negativo delle forze resistenti.'''
+
+[[quesito]]
+id = "ud2-energia-andata-ritorno"
+tipo = "multipla"
+testo = '''Un'infermiera trascina un contenitore sul pavimento orizzontale di un corridoio per {{s}}, e poi lo riporta indietro, lungo la stessa strada, fino al punto di partenza. L'attrito dinamico fra contenitore e pavimento ha modulo {{Fd}}. Il lavoro compiuto dall'attrito sull'intero percorso, andata e ritorno, è'''
+dati.s = { valore = "5,0", unita = "m" }
+dati.Fd = { valore = 40, unita = "\\newton" }
+corretta = "C"
+calcolo = "-2 * Fd * s"
+soluzione = '''L'attrito dinamico è sempre opposto al moto: all'andata punta indietro, al ritorno punta in avanti. In tutti e due i tratti compie un lavoro negativo:
+\[
+  W = -F_d\,s - F_d\,s = -2 \cdot \SI{40}{\newton} \cdot \SI{5,0}{\metre} = \SI{-400}{\joule}
+\]
+Il percorso è chiuso, ma il lavoro non è zero: l'attrito non è una forza conservativa.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0}{\joule}, perché il contenitore torna al punto di partenza'''
+  commento = '''Varrebbe per una forza conservativa, come il peso. L'attrito cambia verso insieme al moto, e il suo lavoro è negativo sia all'andata sia al ritorno: non si compensano.'''
+  [[quesito.opzione]]
+  testo = '''\SI{-200}{\joule}'''
+  commento = '''È il lavoro della sola andata, $-40 \cdot 5{,}0$. Al ritorno l'attrito compie altri \SI{-200}{\joule}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{-400}{\joule}'''
+  valore = -400
+  [[quesito.opzione]]
+  testo = '''\SI{400}{\joule}'''
+  commento = '''È il lavoro che l'infermiera compie \emph{contro} l'attrito, se trascina a velocità costante. L'attrito si oppone allo spostamento, e il suo lavoro è negativo.'''
+  [[quesito.opzione]]
+  testo = '''non si può calcolare senza la massa del contenitore'''
+  commento = '''La massa servirebbe per calcolare l'attrito da $\mu_d F_N$; ma il modulo dell'attrito è già dato, e il lavoro dipende solo da forza e spostamento.'''
+
+[[quesito]]
+id = "ud2-energia-meta-velocita"
+tipo = "multipla"
+testo = '''Una pallina parte da ferma da un'altezza {{H}} e scende lungo una guida senza attrito, fino al punto più basso, ad altezza zero. A quale altezza la sua velocità è metà di quella che avrà nel punto più basso?'''
+dati.H = { valore = "0,80", unita = "m" }
+corretta = "E"
+calcolo = "H * (1 - 0.5**2)"
+soluzione = '''L'energia meccanica si conserva: la forza normale della guida è perpendicolare al moto e non compie lavoro. Nel punto più basso l'energia cinetica è $mgH$. Con metà della velocità l'energia cinetica è $(1/2)^2 = 1/4$ di questo valore, quindi la pallina ha perso solo un quarto della sua energia potenziale iniziale: è scesa di $H/4 = \SI{0,20}{\metre}$. La sua altezza è
+\[
+  h = H - \frac{H}{4} = \frac34 \cdot \SI{0,80}{\metre} = \SI{0,60}{\metre}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0,40}{\metre}'''
+  commento = '''Tratta l'energia cinetica come proporzionale alla velocità: a metà altezza l'energia cinetica è metà di quella finale, ma la velocità è quella finale divisa per $\sqrt2$, circa il \SI{71}{\percent}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,20}{\metre}'''
+  commento = '''È il tratto di cui la pallina è scesa, $H/4$, non l'altezza a cui si trova, $H - H/4$.'''
+  [[quesito.opzione]]
+  testo = '''dipende dalla forma della guida'''
+  commento = '''Senza attrito la normale non compie lavoro, e il lavoro del peso dipende solo dal dislivello: la velocità a una data altezza è la stessa per qualunque forma della guida.'''
+  [[quesito.opzione]]
+  testo = '''dipende dalla massa della pallina'''
+  commento = '''La massa compare sia nell'energia potenziale, $mgh$, sia in quella cinetica, $\frac12 mv^2$, e si semplifica.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,60}{\metre}'''
+  valore = 0.60
+
+[[quesito]]
+id = "ud2-energia-protesi"
+tipo = "multipla"
+testo = '''L'ammortizzatore di una protesi di gamba contiene una molla ideale. Per comprimerla di {{x1}} a partire dalla lunghezza di riposo serve un lavoro di {{W1}}. Per comprimerla di {{x2}}, sempre a partire dalla lunghezza di riposo, serve un lavoro di'''
+dati.x1 = { valore = "2,0", unita = "cm" }
+dati.W1 = { valore = "0,40", unita = "J" }
+dati.x2 = { valore = "6,0", unita = "cm" }
+corretta = "B"
+calcolo = "W1 * (x2 / x1)**2"
+soluzione = '''Il lavoro per comprimere una molla di $x$ a partire dalla lunghezza di riposo è $\frac12 kx^2$, proporzionale al quadrato della compressione. La compressione triplica, da 2,0 a \SI{6,0}{\centi\metre}, e il lavoro si moltiplica per $3^2 = 9$:
+\[
+  W_2 = 9 \cdot \SI{0,40}{\joule} = \SI{3,6}{\joule}
+\]
+Con i numeri: da $0{,}40 = \frac12 k\,(0{,}020)^2$ si ha $k = \SI{2000}{\newton\per\metre}$, e $\frac12 \cdot 2000 \cdot (0{,}060)^2 = 1000 \cdot 0{,}0036 = \SI{3,6}{\joule}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{1,2}{\joule}'''
+  commento = '''Tratta il lavoro come proporzionale alla compressione, $3 \cdot 0{,}40$, come se la forza fosse costante. La forza della molla cresce con la compressione, e il lavoro cresce con il suo quadrato.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3,6}{\joule}'''
+  valore = 3.6
+  [[quesito.opzione]]
+  testo = '''\SI{3,2}{\joule}'''
+  commento = '''È il lavoro per il solo tratto da 2,0 a \SI{6,0}{\centi\metre}, $3{,}6 - 0{,}40$: la domanda chiede di partire dalla lunghezza di riposo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,8}{\joule}'''
+  commento = '''Ricava la costante elastica dimenticando il $\frac12$, $k = 0{,}40/(0{,}020)^2 = \SI{1000}{\newton\per\metre}$, e poi usa la formula giusta, $\frac12 \cdot 1000 \cdot 0{,}0036$. Il fattore $\frac12$ va usato tutte e due le volte, e allora si semplifica.'''
+  [[quesito.opzione]]
+  testo = '''\SI{7,2}{\joule}'''
+  commento = '''Ricava bene la costante elastica, $k = \SI{2000}{\newton\per\metre}$, ma poi dimentica il $\frac12$: $2000 \cdot 0{,}0036 = \SI{7,2}{\joule}$.'''
+
+[[quesito]]
+id = "ud2-energia-aerosol"
+tipo = "completamento"
+testo = '''Un apparecchio per aerosol di potenza {{P}} viene usato per {{t}} al giorno, per {{n}} giorni. L'energia elettrica che consuma in tutto, espressa in chilowattora, è \completa.'''
+dati.P = { valore = 100, unita = "W" }
+dati.t = { valore = 30, unita = "\\minute" }
+dati.n = { valore = 30 }
+calcolo = "P / 1000 * (t / 60) * n"
+risposta = "1,5"
+soluzione = '''Il tempo totale di uso è $30 \cdot \SI{30}{\minute} = \SI{900}{\minute} = \SI{15}{\hour}$. La potenza in chilowatt è $\SI{100}{\watt} = \SI{0,1}{\kilo\watt}$. L'energia è la potenza per il tempo:
+\[
+  E = P\,\Delta t = \SI{0,1}{\kilo\watt} \cdot \SI{15}{\hour} = \SI{1,5}{\kilo\watt\hour}
+\]
+In joule sono $1{,}5 \cdot \SI{3,6e6}{\joule} = \SI{5,4e6}{\joule}$. Chi scrive 1500 ha lasciato la potenza in watt (sono \si{\watt\hour}, non \si{\kilo\watt\hour}); chi scrive 90 ha lasciato il tempo in minuti, $0{,}1 \cdot 900$.'''
+
+[[quesito]]
+id = "ud2-energia-ascensore"
+tipo = "completamento"
+testo = '''Un visitatore di {{m}} sale in ascensore dal piano terra al quinto piano di un ospedale, che si trova {{h5}} sopra il piano terra. Si sceglie lo zero dell'energia potenziale al secondo piano, {{h2}} sopra il piano terra. Con $g = \SI{10}{\metre\per\second\squared}$, l'energia potenziale gravitazionale del visitatore al quinto piano, in chilojoule, è \completa.'''
+dati.m = { valore = 80, unita = "\\kilo\\gram" }
+dati.h5 = { valore = 15, unita = "m" }
+dati.h2 = { valore = 6, unita = "m" }
+calcolo = "m * g * (h5 - h2) / 1000"
+risposta = "7,2"
+soluzione = '''L'altezza si misura dal livello in cui si è posto lo zero, il secondo piano: il quinto piano è $15 - 6 = \SI{9}{\metre}$ più in alto. Quindi
+\[
+  E_p = mgh = \SI{80}{\kilo\gram} \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{9}{\metre} = \SI{7200}{\joule} = \SI{7,2}{\kilo\joule}
+\]
+Chi scrive 12 ha misurato l'altezza dal piano terra, $80 \cdot 10 \cdot 15 = \SI{12000}{\joule}$: sarebbe la \emph{variazione} di energia potenziale dal piano terra al quinto piano, che non dipende dallo zero. Chi scrive 4,8 ha usato l'altezza del secondo piano, $80 \cdot 10 \cdot 6$.'''
+
+[[quesito]]
+id = "ud2-rigido-esplosione"
+tipo = "multipla"
+testo = '''Un razzo di segnalazione viene lanciato in obliquo da un terreno orizzontale: senza esplosione toccherebbe terra a {{R}} dal punto di lancio. Nel punto più alto della traiettoria esplode in due frammenti di uguale massa; uno dei due resta fermo subito dopo l'esplosione e cade in verticale. Trascurando la resistenza dell'aria, l'altro frammento tocca terra a una distanza dal punto di lancio di'''
+dati.R = { valore = 100, unita = "m" }
+corretta = "E"
+calcolo = "2 * R - R / 2"
+soluzione = '''Le forze dell'esplosione sono interne: il centro di massa dei due frammenti, su cui agisce solo il peso, continua la parabola del razzo e arriva a terra a \SI{100}{\metre}. Il punto più alto della parabola è a metà, sopra i \SI{50}{\metre}, e lì cade il frammento fermo. Nel punto più alto la velocità verticale è zero per tutti e due i frammenti, quindi toccano terra insieme, mentre il centro di massa arriva a \SI{100}{\metre}. Con masse uguali il centro di massa è a metà fra i frammenti:
+\[
+  \frac{x_1 + x_2}{2} = \SI{100}{\metre}
+  \quad\Longrightarrow\quad
+  x_2 = \SI{200}{\metre} - \SI{50}{\metre} = \SI{150}{\metre}
+\]
+Lo stesso risultato viene dalla quantità di moto: l'altro frammento, con metà della massa, porta tutta la quantità di moto orizzontale e ha velocità orizzontale doppia; nella seconda metà del volo percorre quindi \SI{100}{\metre} invece di \SI{50}{\metre}, e $50 + 100 = 150$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{100}{\metre}'''
+  commento = '''È il punto in cui arriva il centro di massa, non il secondo frammento: i due frammenti cadono in punti diversi, uno prima e uno dopo il centro di massa.'''
+  [[quesito.opzione]]
+  testo = '''\SI{50}{\metre}'''
+  commento = '''Fa cadere in verticale anche il secondo frammento. Ma la quantità di moto orizzontale si conserva nell'esplosione: se un frammento la perde tutta, l'altro la porta con sé, con velocità orizzontale doppia.'''
+  [[quesito.opzione]]
+  testo = '''\SI{200}{\metre}'''
+  commento = '''Dà al frammento la velocità orizzontale doppia per tutto il volo, dal punto di lancio: $2 \cdot 100$. La velocità raddoppia solo dopo l'esplosione, cioè nella seconda metà del volo, a partire da \SI{50}{\metre}.'''
+  [[quesito.opzione]]
+  testo = '''non si può stabilire senza conoscere la massa del razzo'''
+  commento = '''Basta il rapporto fra le masse dei frammenti, che sono uguali: nella posizione del centro di massa la massa totale si semplifica.'''
+  [[quesito.opzione]]
+  testo = '''\SI{150}{\metre}'''
+  valore = 150
+
+[[quesito]]
+id = "ud2-rigido-cm-asta"
+tipo = "multipla"
+testo = '''Una sbarra leggera, di massa trascurabile e lunga {{L}}, porta a un'estremità una zavorra di {{m1}} e all'altra una zavorra di {{m2}}. Il centro di massa del sistema si trova, dalla zavorra di {{m1}}, a'''
+dati.L = { valore = 80, unita = "cm" }
+dati.m1 = { valore = 2, unita = "\\kilo\\gram" }
+dati.m2 = { valore = 6, unita = "\\kilo\\gram" }
+corretta = "A"
+calcolo = "(m1 * 0 + m2 * L) / (m1 + m2)"
+soluzione = '''Si mette l'origine nella zavorra da \SI{2}{\kilo\gram}, con l'asse lungo la sbarra:
+\[
+  x_{cm} = \frac{\SI{2}{\kilo\gram} \cdot 0 + \SI{6}{\kilo\gram} \cdot \SI{80}{\centi\metre}}{\SI{2}{\kilo\gram} + \SI{6}{\kilo\gram}} = \frac{480}{8}\,\si{\centi\metre} = \SI{60}{\centi\metre}
+\]
+Il centro di massa è a \SI{60}{\centi\metre} dalla zavorra leggera e a \SI{20}{\centi\metre} da quella pesante: le distanze stanno nel rapporto inverso delle masse, $3 : 1$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{60}{\centi\metre}'''
+  valore = 60
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\centi\metre}'''
+  commento = '''Pesa ogni posizione con la massa sbagliata, $(6 \cdot 0 + 2 \cdot 80)/8 = 20$: così trova la distanza dalla zavorra \emph{pesante}. Il centro di massa si avvicina alla massa più grande, quindi è lontano da quella da \SI{2}{\kilo\gram}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{40}{\centi\metre}'''
+  commento = '''È il punto di mezzo della sbarra, la media aritmetica delle posizioni: vale solo per masse uguali.'''
+  [[quesito.opzione]]
+  testo = '''\SI{120}{\centi\metre}'''
+  commento = '''Divide per la differenza delle masse invece che per la somma, $480/4$. Il risultato cade fuori dalla sbarra, mentre il centro di massa sta sempre fra le due zavorre.'''
+  [[quesito.opzione]]
+  testo = '''\SI{27}{\centi\metre}'''
+  commento = '''Divide la lunghezza per il rapporto delle masse, $80/3$. Le distanze dal centro di massa stanno nel rapporto $1 : 3$, quindi la sbarra va divisa in $1 + 3 = 4$ parti, e la distanza dalla zavorra leggera è $3/4$ della lunghezza.'''
+
+[[quesito]]
+id = "ud2-rigido-manovella"
+tipo = "multipla"
+testo = '''La manovella che alza lo schienale di un letto d'ospedale è lunga {{r}}, dal perno all'impugnatura. Un'infermiera spinge l'impugnatura con una forza di {{F}} che forma un angolo di \ang{30} con la manovella. Il momento della forza rispetto al perno vale'''
+dati.r = { valore = 20, unita = "cm" }
+dati.F = { valore = 50, unita = "\\newton" }
+corretta = "B"
+calcolo = "r / 100 * F * sin30"
+soluzione = '''Il braccio della manovella in metri è $r = \SI{0,20}{\metre}$, e l'angolo fra $\vec r$, lungo la manovella, e la forza è \ang{30}:
+\[
+  \tau = rF\sin\theta = \SI{0,20}{\metre} \cdot \SI{50}{\newton} \cdot \sin\ang{30} = \SI{10}{\newton\metre} \cdot 0{,}5 = \SI{5}{\newton\metre}
+\]
+Spingendo perpendicolarmente alla manovella l'infermiera otterrebbe il doppio, \SI{10}{\newton\metre}, con la stessa forza.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\newton\metre}'''
+  commento = '''Dimentica il seno dell'angolo: $0{,}20 \cdot 50$. Vale solo se la forza è perpendicolare alla manovella.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5}{\newton\metre}'''
+  valore = 5
+  [[quesito.opzione]]
+  testo = '''\SI{8,7}{\newton\metre}'''
+  commento = '''Usa il coseno al posto del seno, $10 \cdot \cos\ang{30} = 10 \cdot 0{,}87$. Il braccio è il cateto \emph{opposto} all'angolo fra $\vec r$ e la forza, $b = r\sin\theta$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{500}{\newton\metre}'''
+  commento = '''Lascia il braccio in centimetri, $20 \cdot 50 \cdot 0{,}5 = 500$: il momento in \si{\newton\metre} vuole la distanza in metri.'''
+  [[quesito.opzione]]
+  testo = '''\SI{250}{\newton\metre}'''
+  commento = '''Divide la forza per la distanza, $50/0{,}20$, e ignora l'angolo: il momento è il \emph{prodotto} della forza per il braccio, e $F/r$ non ha nemmeno le unità di un momento.'''
+
+[[quesito]]
+id = "ud2-rigido-punta"
+tipo = "multipla"
+testo = '''Quando ci si alza sulla punta dei piedi, il polpaccio tira il calcagno verso l'alto attraverso il tendine d'Achille, mentre il peso del corpo scende lungo la tibia fino alla caviglia. Il piede si comporta come una leva'''
+corretta = "D"
+soluzione = '''Il piede ruota attorno al punto in cui poggia a terra, le teste dei metatarsi: lì è il fulcro. La resistenza, il peso del corpo, agisce nella caviglia; la forza motrice, quella del tendine d'Achille, agisce nel calcagno, ancora più lontano dal fulcro. La resistenza sta fra il fulcro e la forza motrice: è una leva di secondo genere, sempre vantaggiosa, perché il braccio della forza motrice è più lungo di quello della resistenza.'''
+
+  [[quesito.opzione]]
+  testo = '''di primo genere, con il fulcro nella caviglia, fra il tendine d'Achille e la punta del piede'''
+  commento = '''Nella caviglia agisce il peso del corpo, cioè la resistenza. Il piede ruota attorno alla punta, che resta ferma a terra: il fulcro è nelle teste dei metatarsi.'''
+  [[quesito.opzione]]
+  testo = '''di terzo genere, svantaggiosa come la maggior parte delle leve del corpo'''
+  commento = '''Nel terzo genere la forza motrice sta fra il fulcro e la resistenza. Qui il tendine d'Achille tira il calcagno, più lontano dal fulcro della caviglia: è la resistenza a stare in mezzo.'''
+  [[quesito.opzione]]
+  testo = '''di primo genere, indifferente, perché la caviglia sta a metà del piede'''
+  commento = '''La caviglia non fa da fulcro, e i bracci non sono uguali: il calcagno, dove tira il tendine, è più lontano dalla punta del piede di quanto lo sia la caviglia.'''
+  [[quesito.opzione]]
+  testo = '''di secondo genere, con la resistenza fra il fulcro e la forza motrice'''
+  [[quesito.opzione]]
+  testo = '''di secondo genere, svantaggiosa, perché il polpaccio deve sollevare tutto il corpo'''
+  commento = '''Il genere è giusto, ma una leva di secondo genere è sempre vantaggiosa: il braccio della forza motrice, dal fulcro al calcagno, è più lungo di quello della resistenza, dal fulcro alla caviglia.'''
+
+[[quesito]]
+id = "ud2-rigido-anelastico"
+tipo = "multipla"
+testo = '''Su una rotaia senza attrito un carrello che si muove con velocità $v$ urta un carrello identico, fermo, e i due restano agganciati. La frazione dell'energia cinetica iniziale che si perde nell'urto è'''
+corretta = "C"
+calcolo = "1 - 2 * 0.5**2"
+soluzione = '''Sia $m$ la massa di ciascun carrello. La quantità di moto si conserva: $mv = 2m\,v_f$, quindi $v_f = v/2$. L'energia cinetica finale è
+\[
+  E_{c,f} = \frac12 \cdot 2m \cdot \left(\frac{v}{2}\right)^2 = \frac14\,mv^2 = \frac12 \cdot \left(\frac12\,mv^2\right) = \frac12\,E_{c,i}
+\]
+Resta metà dell'energia cinetica iniziale, e l'altra metà si perde, qualunque sia $v$.'''
+
+  [[quesito.opzione]]
+  testo = '''nessuna, perché l'energia si conserva'''
+  commento = '''Si conserva l'energia totale, non l'energia cinetica: i carrelli restano agganciati, l'urto è completamente anelastico e una parte dell'energia cinetica diventa calore e deformazione.'''
+  [[quesito.opzione]]
+  testo = '''dipende dalla velocità iniziale $v$'''
+  commento = '''L'energia finale e quella iniziale sono tutte e due proporzionali a $v^2$, che nel rapporto si semplifica: la frazione persa è la stessa a qualunque velocità.'''
+  [[quesito.opzione]]
+  testo = '''metà'''
+  valore = 0.5
+  [[quesito.opzione]]
+  testo = '''tre quarti'''
+  commento = '''Dimezza la velocità ma dimentica che dopo l'urto si muove una massa doppia: $\frac12 m (v/2)^2 = \frac14 \cdot \frac12 mv^2$, quindi resterebbe un quarto. Con la massa $2m$ l'energia finale è il doppio, metà di quella iniziale.'''
+  [[quesito.opzione]]
+  testo = '''tutta, perché i carrelli si fermano'''
+  commento = '''I carrelli non si fermano: la quantità di moto totale, $mv$, non è zero e resta $mv$ dopo l'urto. Si fermerebbero se si scontrassero con velocità uguali e opposte.'''
+
+[[quesito]]
+id = "ud2-rigido-brachiale"
+tipo = "completamento"
+testo = '''Con l'avambraccio orizzontale, il muscolo brachiale si inserisce sull'ulna a {{bm}} dal gomito, mentre la mano regge un peso a {{br}} dal gomito; tutte le forze sono verticali. Il vantaggio meccanico di questa leva vale \completa.'''
+dati.bm = { valore = 3, unita = "cm" }
+dati.br = { valore = 30, unita = "cm" }
+calcolo = "bm / br"
+risposta = "0,1"
+soluzione = '''Il gomito è il fulcro, il muscolo applica la forza motrice, il peso nella mano è la resistenza. Il vantaggio meccanico è il rapporto fra i bracci:
+\[
+  \frac{F_{\text{res}}}{F_{\text{mot}}} = \frac{b_{\text{mot}}}{b_{\text{res}}} = \frac{\SI{3}{\centi\metre}}{\SI{30}{\centi\metre}} = 0{,}1
+\]
+È una leva di terzo genere, svantaggiosa: il muscolo tira con una forza dieci volte il peso. Chi scrive 10 ha rovesciato il rapporto: un vantaggio meccanico maggiore di 1 vorrebbe dire una leva vantaggiosa, e il terzo genere non lo è mai.'''
+
+[[quesito]]
+id = "ud2-rigido-altalena"
+tipo = "completamento"
+testo = '''Su un'altalena a bilico un bambino di {{m1}} siede a {{d1}} dal fulcro. Perché l'altalena stia in equilibrio orizzontale, il padre, di {{m2}}, deve sedersi dall'altra parte a una distanza dal fulcro di \completa\ \si{\metre}.'''
+dati.m1 = { valore = 30, unita = "\\kilo\\gram" }
+dati.d1 = { valore = "2,0", unita = "m" }
+dati.m2 = { valore = 75, unita = "\\kilo\\gram" }
+calcolo = "m1 * d1 / m2"
+risposta = "0,8"
+soluzione = '''All'equilibrio i momenti dei due pesi rispetto al fulcro si bilanciano: $m_1 g\,d_1 = m_2 g\,d_2$. Il fattore $g$ si semplifica:
+\[
+  d_2 = \frac{m_1 d_1}{m_2} = \frac{\SI{30}{\kilo\gram} \cdot \SI{2,0}{\metre}}{\SI{75}{\kilo\gram}} = \frac{60}{75}\,\si{\metre} = \SI{0,8}{\metre}
+\]
+Il padre, più pesante, deve stare più vicino al fulcro. Chi scrive 5 ha rovesciato il rapporto delle masse, $75 \cdot 2{,}0/30$.'''
 
 # ==================================================================== quesiti lampo, in ordine di dispensa
 
