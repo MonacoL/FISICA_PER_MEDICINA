@@ -1,0 +1,16 @@
+% Nuclei non ancora decaduti in funzione del tempo
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.62\linewidth, height=5.2cm,
+  axis lines=left, xmin=0, xmax=4.4, ymin=0, ymax=1.12,
+  xlabel={tempo $t$}, ylabel={$N$},
+  xtick={0,1,2,3,4}, xticklabels={$0$,$T_{1/2}$,$2T_{1/2}$,$3T_{1/2}$,$4T_{1/2}$},
+  ytick={0,0.25,0.5,1}, yticklabels={$0$,$N_0/4$,$N_0/2$,$N_0$},
+  tick label style={font=\small}, label style={font=\small},
+]
+  \addplot[attenzione, very thick, domain=0:4.4, samples=80] {2^(-x)};
+  \foreach \n/\v in {1/0.5, 2/0.25, 3/0.125} {
+    \edef\tmp{\noexpand\draw[dashed, gray] (axis cs:\n,0) -- (axis cs:\n,\v) -- (axis cs:0,\v);}\tmp
+  }
+\end{axis}
+\end{tikzpicture}

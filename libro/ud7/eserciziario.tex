@@ -1,0 +1,128 @@
+% UD7 — Eserciziario
+% PROTOTIPO: pochi esercizi scritti a mano, solo per vedere l'impaginazione.
+% Il formato vero degli esercizi lo decide il ticket "Fonte unica degli esercizi".
+\eserciziario{Campione del template: Lambert-Beer e radioattività}
+
+\begin{tcolorbox}[fisbox={formula}{formulaBg},title={Come usare l'Eserciziario}]
+\textbf{Livello 1}: applicazione diretta di una formula.\\
+\textbf{Livello 2}: due passaggi, il risultato del primo serve nel secondo.\\
+\textbf{Livello 3}: problemi che combinano più concetti, spesso in un contesto medico.\\
+\textbf{Quesiti d'esame}: nel formato della prova, da risolvere senza calcolatrice.
+
+Prova da solo, poi controlla nei Risultati rapidi; se il risultato non torna, leggi la Soluzione svolta.
+\end{tcolorbox}
+
+\section*{Problemi}
+
+\livello{1}{Applicazione diretta delle formule}
+
+\problema\label{pb:ud7-hvl-tessuto}
+Un tessuto ha coefficiente di attenuazione $\mu = \SI[per-mode=power]{0,35}{\centi\metre\tothe{-1}}$ per i raggi X di una radiografia. Calcola lo spessore emivalente.
+
+\livello{2}{Problemi a due passaggi}
+
+\problema\label{pb:ud7-piombo}
+Per certi raggi $\gamma$ lo spessore emivalente del piombo è \SI{0,50}{\centi\metre}.
+(a) Quale spessore riduce l'intensità a $1/16$?
+(b) Qual è lo spessore minimo, in numero intero di spessori emivalenti, che riduce l'intensità sotto l'\SI{1}{\percent}?
+
+\livello{3}{Problemi di media difficoltà}
+
+\problema\label{pb:ud7-tecnezio}
+Per una scintigrafia un paziente deve ricevere alle 14:00 un radiofarmaco al tecnezio-99m (emivita \SI{6,0}{\hour}) con attività \SI{400}{\mega\becquerel}. La dose viene preparata alle 8:00 dello stesso giorno.
+(a) Quale attività deve avere alla preparazione?
+(b) Quanti nuclei di tecnezio-99m riceve il paziente?
+(c) Trascurando l'eliminazione biologica, quale attività resta nel paziente 24 ore dopo la somministrazione?
+
+\section*{Quesiti d'esame}
+
+\quesito\label{qe:ud7-beta}
+Il fosforo-32, usato in alcune terapie, decade $\beta^-$. Quale nucleo si forma?
+\opzioni{$\nuclide{32}{14}{Si}$}{$\nuclide{32}{16}{S}$}{$\nuclide{31}{15}{P}$}{$\nuclide{28}{13}{Al}$}{$\nuclide{32}{15}{P}$}
+
+\quesito\label{qe:ud7-assorbanza}
+Una soluzione lascia passare il \SI{10}{\percent} della luce che la colpisce. La sua assorbanza vale \completa.
+
+\section*{Risultati rapidi}
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Esercizio & Risultato \\
+\midrule
+Problema~\ref{pb:ud7-hvl-tessuto} & $x_{1/2} \approx \SI{2,0}{\centi\metre}$ \\
+Problema~\ref{pb:ud7-piombo} & (a) \SI{2,0}{\centi\metre}; (b) \SI{3,5}{\centi\metre} \\
+Problema~\ref{pb:ud7-tecnezio} & (a) \SI{800}{\mega\becquerel}; (b) \num{1,3e13}; (c) \SI{25}{\mega\becquerel} \\
+Quesito~\ref{qe:ud7-beta} & B \\
+Quesito~\ref{qe:ud7-assorbanza} & 1 \\
+Quesito lampo~\ref{ql:ud7-hvl} & D \\
+Quesito lampo~\ref{ql:ud7-alfa} & 234 \\
+Quesito lampo~\ref{ql:ud7-emivita} & B \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Soluzioni svolte}
+
+\subsection*{Problemi}
+
+\solproblema{pb:ud7-hvl-tessuto}
+Lo spessore emivalente è quello per cui $e^{-\mu x} = 1/2$:
+\[
+  x_{1/2} = \frac{\ln 2}{\mu} = \frac{0{,}69}{\SI[per-mode=power]{0,35}{\centi\metre\tothe{-1}}} \approx \SI{2,0}{\centi\metre}
+\]
+
+\solproblema{pb:ud7-piombo}
+(a) $1/16 = 1/2^4$: servono 4 spessori emivalenti, cioè $4 \cdot \SI{0,50}{\centi\metre} = \SI{2,0}{\centi\metre}$.
+
+(b) L'intensità deve scendere sotto $1/100$. Con 6 spessori emivalenti passa $1/2^6 = 1/64$, ancora più dell'\SI{1}{\percent}; con 7 passa $1/128$, meno dell'\SI{1}{\percent}. Lo spessore è $7 \cdot \SI{0,50}{\centi\metre} = \SI{3,5}{\centi\metre}$.
+
+\solproblema{pb:ud7-tecnezio}
+(a) Dalle 8:00 alle 14:00 passano \SI{6}{\hour}, cioè un'emivita: l'attività si dimezza. Alla preparazione serve il doppio, \SI{800}{\mega\becquerel}.
+
+(b) Dalla relazione $\mathcal{A} = \lambda N$, con l'emivita in secondi ($\SI{6,0}{\hour} = \SI{21600}{\second}$):
+\[
+  \lambda = \frac{\ln 2}{T_{1/2}} = \frac{0{,}69}{\SI{21600}{\second}} \approx \SI[per-mode=power]{3,2e-5}{\second\tothe{-1}}
+  \qquad
+  N = \frac{\mathcal{A}}{\lambda} = \frac{\SI[per-mode=power]{4,0e8}{\second\tothe{-1}}}{\SI[per-mode=power]{3,2e-5}{\second\tothe{-1}}} \approx \num{1,3e13}
+\]
+
+(c) \SI{24}{\hour} sono 4 emivite: $\SI{400}{\mega\becquerel} / 2^4 = \SI{25}{\mega\becquerel}$. In realtà l'attività sarà ancora più bassa, perché una parte del radiofarmaco viene eliminata con le urine.
+
+\subsection*{Quesiti d'esame}
+
+\solquesito{qe:ud7-beta}
+\textbf{Risposta B.} Nel decadimento $\beta^-$ un neutrone diventa protone ed esce un elettrone: il numero di massa resta 32, il numero atomico sale da 15 a 16, che è lo zolfo.
+\begin{itemize}
+  \item A) $Z$ diminuisce di 1: è il decadimento $\beta^+$, non $\beta^-$.
+  \item C) Toglie un neutrone al nucleo: nessun decadimento $\beta$ cambia il numero di massa.
+  \item D) $A - 4$ e $Z - 2$: è il decadimento $\alpha$.
+  \item E) Il nucleo resta lo stesso: succede solo nel decadimento $\gamma$.
+\end{itemize}
+
+\solquesito{qe:ud7-assorbanza}
+\textbf{Risposta: 1.} Se passa il \SI{10}{\percent}, $I_0/I = 10$ e $A = \log_{10} 10 = 1$.
+
+\subsection*{Quesiti lampo}
+
+\soluzionelampo{ql:ud7-hvl}
+\textbf{Risposta D.} Ridurre a $1/4 = 1/2^2$ vuol dire attraversare 2 spessori emivalenti, quindi $x_{1/2} = \SI{1}{\centi\metre}$. \SI{5}{\centi\metre} sono 5 spessori emivalenti: $I/I_0 = 1/2^5 = 1/32$.
+\begin{itemize}
+  \item A) Tratta l'attenuazione come una proporzione: «$1/4$ in \SI{2}{\centi\metre}, quindi $1/10$ in \SI{5}{\centi\metre}». L'attenuazione è esponenziale, non lineare.
+  \item B) È la frazione dopo \SI{4}{\centi\metre}: manca l'ultimo centimetro.
+  \item C) Applica la legge dell'inverso del quadrato, che dipende dalla distanza dalla sorgente, non dal materiale.
+  \item E) Scambia $1/4$ con $1/2$ e prende \SI{2}{\centi\metre} come spessore emivalente: $1/2^{2,5} \approx 1/6$.
+\end{itemize}
+
+\soluzionelampo{ql:ud7-alfa}
+\textbf{Risposta: 234.} La particella $\alpha$ porta via 4 nucleoni: $A = 238 - 4 = 234$. Il numero atomico scende da 92 a 90 (torio):
+$\nuclide{238}{92}{U} \to \nuclide{234}{90}{Th} + \nuclide{4}{2}{He}$.
+
+\soluzionelampo{ql:ud7-emivita}
+\textbf{Risposta B.} Da 800 a \SI{100}{\kilo\becquerel} l'attività si riduce di un fattore $8 = 2^3$: sono passate 3 emivite. $T_{1/2} = \SI{15}{giorni}/3 = \SI{5}{giorni}$.
+\begin{itemize}
+  \item A) Divide il tempo per il fattore di riduzione, 8, invece che per il numero di emivite, 3.
+  \item C) Pensa che l'emivita sia sempre metà del tempo trascorso.
+  \item D) Considera tutto l'intervallo come una sola emivita: in un'emivita l'attività si dimezza soltanto.
+  \item E) Moltiplica invece di dividere.
+\end{itemize}
