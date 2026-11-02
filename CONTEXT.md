@@ -70,6 +70,10 @@ Un'opzione sbagliata di un quesito a risposta multipla, costruita su un errore p
 **Risultati rapidi**:
 Tabella dell'eserciziario con il solo risultato finale di ogni esercizio, per controllare subito la propria risposta.
 
+**Fonte degli esercizi**:
+Il file `esercizi.toml` di una unità didattica, dove problemi, quesiti d'esame e quesiti lampo si scrivono una volta sola, con i dati, il calcolo del risultato e la soluzione svolta. Da lì si generano l'eserciziario, i quesiti lampo della dispensa e la pagina web (ADR 0006).
+_Avoid_: database, sorgente degli esercizi
+
 **Soluzione svolta**:
 La risoluzione completa di un esercizio: principio fisico, formula, conto con le unità e, per la risposta multipla, il commento a ogni distrattore.
 _Avoid_: correzione

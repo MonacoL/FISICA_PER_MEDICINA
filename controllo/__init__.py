@@ -1,5 +1,6 @@
-"""Controllo automatico delle Unità didattiche: compila ogni UD da sola e il Libro, controlla
-riferimenti, etichette, pacchetti, segnaposto e overfull hbox."""
+"""Controllo automatico delle Unità didattiche: genera gli esercizi dalla loro fonte unica e
+ricalcola i risultati, compila ogni UD da sola e il Libro, controlla riferimenti, etichette,
+pacchetti, segnaposto e overfull hbox."""
 
 import argparse
 import os
@@ -8,6 +9,8 @@ import subprocess
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
+
+from controllo.esercizi import genera
 
 RADICE = Path(__file__).resolve().parent.parent
 
@@ -227,7 +230,7 @@ def rapporto(intestazione: str, errori: list[str], avvisi: list[str]) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="controllo",
-        description="Compila con latexmk ogni Unità didattica indicata e, una volta, il Libro.",
+        description="Genera gli esercizi, compila con latexmk ogni Unità didattica indicata e, una volta, il Libro.",
     )
     parser.add_argument("ud", nargs="+", help="le Unità didattiche, per esempio ud7")
     parser.add_argument(
@@ -247,11 +250,20 @@ def main() -> None:
     documenti = [(ud.upper(), f"{ud.lower()}.tex") for ud in argomenti.ud]
     documenti.append(("Libro", "libro.tex"))
 
+    riuscito = True
+    # Prima gli esercizi: i file generati servono alla compilazione di ogni UD e del Libro.
+    for fonte in sorted(argomenti.cartella.glob("*/esercizi.toml")):
+        ud = fonte.parent.name
+        errori_esercizi, avvisi_esercizi = genera(argomenti.cartella, ud)
+        stato = "da sistemare" if errori_esercizi else "tornano"
+        rapporto(f"Esercizi {ud.upper()}: {stato}", errori_esercizi, avvisi_esercizi)
+        riuscito = riuscito and not errori_esercizi
+
     problemi = segnaposti(argomenti.cartella) + pacchetti_assenti(
         argomenti.cartella, argomenti.pacchetti
     )
     rapporto(f"Sorgenti: {'da sistemare' if problemi else 'puliti'}", problemi, [])
-    riuscito = not problemi
+    riuscito = riuscito and not problemi
     for nome, sorgente in documenti:
         esito = compila(argomenti.cartella, sorgente)
         stato = "compila" if esito.compila else "non compila"

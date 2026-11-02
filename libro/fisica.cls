@@ -30,6 +30,7 @@
 % --- Tabelle, liste, figure ----------------------------------------------
 \RequirePackage{booktabs}
 \RequirePackage{tabularx}
+\RequirePackage{longtable}
 \RequirePackage[inline]{enumitem}
 \setlist{itemsep=0.15em,topsep=0.3em}
 \RequirePackage{caption}
