@@ -1,0 +1,623 @@
+% UD4 — Dispensa
+% Scritta da zero (non esisteva una dispensa UD4; l'eserciziario PDF esistente
+% ha dato livello, argomenti e contesti medici: ADR 0003). I quesiti lampo
+% vengono da esercizi.toml (ADR 0006): si modificano lì.
+\dispensa
+
+\begin{tcolorbox}[fisbox={formula}{formulaBg},title={Obiettivi dell'unità}]
+Al termine di questa unità sai:
+\begin{itemize}
+  \item spiegare che cos'è un'onda meccanica e distinguere le onde trasversali da quelle longitudinali;
+  \item descrivere il moto dell'oscillatore armonico e usare ampiezza, periodo, frequenza e pulsazione;
+  \item usare lunghezza d'onda, frequenza e velocità di un'onda, con la relazione $v = \lambda f$, e leggere l'equazione di un'onda armonica;
+  \item calcolare la velocità delle onde su una corda e del suono in un fluido, e ricordare la velocità del suono in aria, in acqua, nei tessuti e nelle ossa;
+  \item applicare il principio di sovrapposizione e decidere se due onde interferiscono in modo costruttivo o distruttivo;
+  \item collegare l'energia di un'onda alla sua ampiezza, calcolare potenza e intensità e usare la legge dell'inverso del quadrato della distanza;
+  \item calcolare a mano il livello di intensità sonora in decibel, e passare dai decibel all'intensità;
+  \item descrivere l'effetto Doppler e il suo uso nella flussimetria, e calcolare la profondità di una struttura in un'ecografia.
+\end{itemize}
+\end{tcolorbox}
+
+Il suono della voce, il battito che si ascolta con lo stetoscopio, gli ultrasuoni dell'ecografia e l'onda sfigmica che si sente palpando il polso sono onde meccaniche. Questa unità parte dal modello più semplice di oscillazione, l'oscillatore armonico, e arriva alle onde sonore e ai loro usi in medicina. Gli strumenti di matematica che servono sono le potenze di 10 (UD1, sezione «La notazione scientifica»), il seno e il coseno (UD1, sezione «Le funzioni trigonometriche») e i logaritmi, che si ripassano qui. Forza, energia e potenza sono trattate nella UD2: qui basta il loro significato, richiamato in una riga quando servono.
+
+% -------------------------------------------------------------------------
+\section{Che cos'è un'onda meccanica}
+\label{sec:ud4-onde}
+
+Se si dà uno strattone all'estremo di una corda tesa, si vede una gobba che corre lungo la corda. La corda non si sposta: ogni suo pezzetto si alza e si riabbassa, e quello che avanza è la deformazione. Un'\textbf{onda meccanica} è una perturbazione che si propaga in un mezzo materiale (una corda, l'aria, l'acqua, un tessuto) e che trasporta energia, ma non materia.
+
+L'onda si propaga perché le parti del mezzo sono legate fra loro da forze elastiche: un pezzetto spostato dalla sua posizione di equilibrio tira o spinge quelli vicini, che si spostano a loro volta, e così via. Per questo un'onda meccanica ha bisogno di un mezzo: nel vuoto il suono non si propaga. Le onde elettromagnetiche, come la luce, sono diverse: si propagano anche nel vuoto, e sono l'argomento della UD7.
+
+Le onde meccaniche si dividono in due tipi, secondo la direzione in cui oscillano le particelle del mezzo (figura~\ref{fig:ud4-tipi}):
+\begin{itemize}
+  \item nelle \textbf{onde trasversali} le particelle oscillano perpendicolari alla direzione di propagazione: è il caso della corda;
+  \item nelle \textbf{onde longitudinali} le particelle oscillano lungo la direzione di propagazione: il mezzo si comprime e si dilata, formando \textbf{compressioni} e \textbf{rarefazioni} che avanzano. Il suono è un'onda longitudinale.
+\end{itemize}
+Nei solidi si propagano onde di tutti e due i tipi. Nei fluidi (liquidi e gas) solo onde longitudinali: un fluido resiste alla compressione, ma non a uno scorrimento laterale di uno strato sull'altro, quindi non può trasmettere un'oscillazione trasversale.
+
+\begin{figure}[h]
+\centering
+\input{ud4/figure/tipi-onda}
+\caption{(a) In un'onda trasversale, come quella su una corda, le particelle oscillano perpendicolari alla direzione di propagazione. (b) In un'onda longitudinale, come il suono, oscillano lungo la direzione di propagazione: ogni riga verticale è uno strato di aria, e gli strati si addensano nelle compressioni e si diradano nelle rarefazioni. La lunghezza d'onda $\lambda$ è la distanza fra due compressioni.}
+\label{fig:ud4-tipi}
+\end{figure}
+
+Una perturbazione singola, come lo strattone alla corda, si chiama \textbf{impulso}. Se la sorgente oscilla con regolarità, la perturbazione si ripete e l'onda è \textbf{periodica}. Per capire le onde periodiche si parte dal moto della sorgente.
+
+\begin{attenzione}[l'onda trasporta energia, non materia]
+Un tappo che galleggia sull'acqua, al passaggio di un'onda, sale e scende ma resta dove si trova. Allo stesso modo, quando parliamo, l'aria non viaggia dalla nostra bocca all'orecchio di chi ascolta: gli strati di aria oscillano avanti e indietro di pochissimo, e a viaggiare è l'energia.
+\end{attenzione}
+
+% -------------------------------------------------------------------------
+\section{L'oscillatore armonico}
+\label{sec:ud4-oscillatore}
+
+\subsection{Il moto armonico}
+
+Una massa $m$ è attaccata a una molla, e può scorrere senza attrito su un piano orizzontale. Se la si sposta di un tratto $x$ dalla posizione di equilibrio, la molla la richiama indietro con una forza proporzionale allo spostamento e di verso opposto, $F = -kx$ (legge di Hooke, UD2). La costante $k$ si misura in \si{\newton\per\metre} e dice quanto è rigida la molla. Lasciata andare, la massa oscilla avanti e indietro fra $-A$ e $+A$ (figura~\ref{fig:ud4-oscillatore}). È l'\textbf{oscillatore armonico}, e il suo moto si chiama \textbf{moto armonico}.
+
+\begin{figure}[h]
+\centering
+\input{ud4/figure/oscillatore}
+\caption{L'oscillatore armonico. A sinistra, una massa $m$ attaccata a una molla di costante $k$ oscilla fra $-A$ e $+A$ intorno alla posizione di equilibrio $x = 0$. A destra, la posizione della massa in funzione del tempo, partendo da $x = A$: è un coseno, con ampiezza $A$ e periodo $T$.}
+\label{fig:ud4-oscillatore}
+\end{figure}
+
+Le grandezze che descrivono il moto sono:
+\begin{itemize}
+  \item l'\textbf{ampiezza} $A$, in metri: lo spostamento massimo dalla posizione di equilibrio;
+  \item il \textbf{periodo} $T$, in secondi: il tempo di un'oscillazione completa, per esempio da $+A$ a $-A$ e di nuovo a $+A$;
+  \item la \textbf{frequenza} $f$, il numero di oscillazioni in un secondo: $f = 1/T$. Si misura in hertz, $\SI{1}{\hertz} = \SI[per-mode=power]{1}{\second\tothe{-1}}$, cioè un'oscillazione al secondo;
+  \item la \textbf{pulsazione} $\omega$ (omega), in radianti al secondo: $\omega = 2\pi f = 2\pi/T$. Il richiamo qui sotto spiega da dove viene il $2\pi$.
+\end{itemize}
+
+Se si comincia a contare il tempo quando la massa è in $x = A$, la sua posizione è
+\[
+  x(t) = A\cos(\omega t)
+\]
+L'angolo $\omega t$, in radianti, cresce con il tempo. Dopo un periodo vale $\omega T = 2\pi$, cioè un giro completo, e il coseno torna al valore di partenza: il moto si ripete.
+
+\begin{richiamo}{seno e coseno come funzioni periodiche}
+Nella circonferenza goniometrica (UD1, sezione «Le funzioni trigonometriche») il punto $P$ all'angolo $\theta$ ha coordinate $(\cos\theta, \sin\theta)$. Se l'angolo continua a crescere, $P$ gira sulla circonferenza e dopo un giro, $\ang{360} = 2\pi\ \si{\radian}$, torna al punto di partenza: seno e coseno riprendono gli stessi valori. Si dice che sono funzioni \emph{periodiche} di periodo $2\pi$:
+\[
+  \cos(\theta + 2\pi) = \cos\theta \qquad \sin(\theta + 2\pi) = \sin\theta
+\]
+Il loro grafico è un'onda che oscilla fra $-1$ e $+1$: il coseno vale 1 a \ang{0}, 0 a \ang{90}, $-1$ a \ang{180}, 0 a \ang{270} e di nuovo 1 a \ang{360}. Il seno ha la stessa forma, spostata di \ang{90}. Moltiplicando per $A$ si ottiene un'oscillazione fra $-A$ e $+A$. Da $\omega T = 2\pi$ viene $\omega = 2\pi/T = 2\pi f$; nei conti a mente $2\pi \approx 6{,}28$.
+\end{richiamo}
+
+Il periodo dell'oscillatore dipende solo dalla massa e dalla molla, non dall'ampiezza:
+
+\begin{formula}[Oscillatore armonico]
+f = \frac{1}{T} \qquad \omega = 2\pi f = \frac{2\pi}{T}
+\qquad\qquad
+x(t) = A\cos(\omega t) \qquad \omega = \sqrt{\frac{k}{m}} \qquad T = 2\pi\sqrt{\frac{m}{k}}
+\end{formula}
+
+Una massa più grande oscilla più lentamente (periodo più lungo); una molla più rigida la fa oscillare più in fretta (periodo più corto).
+
+\begin{esempio}
+Una massa di \SI{0,50}{\kilo\gram} è attaccata a una molla con $k = \SI{200}{\newton\per\metre}$. Calcola pulsazione, periodo e frequenza dell'oscillazione.
+
+La pulsazione è
+\[
+  \omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{\SI{200}{\newton\per\metre}}{\SI{0,50}{\kilo\gram}}} = \sqrt{400}\,\si{\radian\per\second} = \SI{20}{\radian\per\second}
+\]
+Il periodo, con $2\pi \approx 6{,}28$:
+\[
+  T = \frac{2\pi}{\omega} = \frac{6{,}28}{\SI{20}{\radian\per\second}} \approx \SI{0,31}{\second}
+\]
+La frequenza si ricava più facilmente dalla pulsazione: $f = \omega/(2\pi) = 20/6{,}28\ \si{\hertz} \approx \SI{3,2}{\hertz}$ (infatti $6{,}28 \cdot 3 \approx 19$, poco meno di 20). Controllo con $f = 1/T$: $3{,}2 \cdot 0{,}31 \approx 1$. La massa compie circa tre oscillazioni al secondo.
+\end{esempio}
+
+Anche i fenomeni periodici del corpo si descrivono con periodo e frequenza. Un cuore che batte 75 volte al minuto ha frequenza $f = 75/\SI{60}{\second} = \SI{1,25}{\hertz}$ e periodo $T = 1/f = \SI{0,8}{\second}$.
+
+\input{ud4/generati/lampo-ud4-respiro}
+
+\subsection{L'energia dell'oscillatore}
+
+Mentre oscilla, la massa scambia energia con la molla. Agli estremi ($x = \pm A$) è ferma e tutta l'energia sta nella molla deformata; nel centro ($x = 0$) la molla è a riposo e tutta l'energia è energia di movimento (energia cinetica, UD2). Senza attriti l'energia totale resta la stessa, e vale
+\[
+  E = \frac{1}{2} k A^2
+\]
+L'energia è proporzionale al \emph{quadrato} dell'ampiezza: raddoppiando l'ampiezza l'energia diventa quattro volte più grande. Lo ritroveremo per l'energia trasportata dalle onde.
+
+\subsection{Dall'oscillatore all'onda}
+
+L'oscillatore armonico è il modello di base delle sorgenti di onde. Un diapason, le corde vocali, la membrana di un altoparlante, il cristallo della sonda di un ecografo oscillano avanti e indietro, e trascinano il mezzo che li circonda. Se si muove su e giù con moto armonico l'estremo di una corda, ogni punto della corda ripete lo stesso moto armonico, con un ritardo che cresce con la distanza dalla sorgente: il risultato è un'\textbf{onda armonica}, la cui forma, in ogni istante, è una sinusoide.
+
+% -------------------------------------------------------------------------
+\section{Le grandezze di un'onda}
+\label{sec:ud4-grandezze}
+
+\subsection{Lunghezza d'onda, periodo e velocità}
+
+Un'onda armonica si può guardare in due modi (figura~\ref{fig:ud4-grandezze}): fotografando tutto il mezzo a un istante fissato, oppure seguendo un solo punto del mezzo nel tempo.
+
+\begin{figure}[h]
+\centering
+\input{ud4/figure/grandezze}
+\caption{(a) Un'istantanea dell'onda: lo spostamento $y$ dei punti del mezzo in funzione della posizione $x$. La lunghezza d'onda $\lambda$ è la distanza fra due creste. (b) Lo spostamento di un solo punto del mezzo in funzione del tempo: il punto oscilla con moto armonico di periodo $T$. In tutti e due i grafici $A$ è l'ampiezza.}
+\label{fig:ud4-grandezze}
+\end{figure}
+
+\begin{itemize}
+  \item L'\textbf{ampiezza} $A$ è lo spostamento massimo dei punti del mezzo dalla posizione di equilibrio.
+  \item La \textbf{lunghezza d'onda} $\lambda$ (lambda), in metri, è la distanza fra due punti consecutivi che si trovano nella stessa fase di oscillazione, cioè nello stesso punto del loro moto avanti e indietro (tutti e due al massimo, oppure tutti e due che passano per l'equilibrio salendo): per esempio fra due \textbf{creste} (i punti più alti dell'onda), fra due \textbf{avvallamenti} (i punti più bassi) o fra due compressioni.
+  \item Il \textbf{periodo} $T$ e la \textbf{frequenza} $f = 1/T$ sono quelli dell'oscillazione di ogni punto del mezzo, e sono gli stessi della sorgente. La pulsazione è $\omega = 2\pi f$.
+  \item La \textbf{velocità di propagazione} $v$ è la velocità con cui avanza la perturbazione. In un periodo la sorgente compie un'oscillazione completa e l'onda avanza di una lunghezza d'onda, quindi $v = \lambda/T = \lambda f$.
+\end{itemize}
+
+\begin{formula}[Relazione fondamentale delle onde]
+v = \frac{\lambda}{T} = \lambda f
+\end{formula}
+
+La frequenza è fissata dalla sorgente; la velocità dipende dal mezzo, come vedremo nella sezione~\ref{sec:ud4-velocita}. La lunghezza d'onda è la conseguenza: $\lambda = v/f$. In uno stesso mezzo, una frequenza doppia dà una lunghezza d'onda dimezzata.
+
+\begin{esempio}
+(a) Il La del diapason ha frequenza \SI{440}{\hertz}. Quanto vale la sua lunghezza d'onda in aria, dove il suono viaggia a \SI{340}{\metre\per\second}? (b) Un ecografo emette ultrasuoni a \SI{5}{\mega\hertz} in un tessuto molle, dove il suono viaggia a \SI{1540}{\metre\per\second}. Quanto vale la lunghezza d'onda?
+
+(a) Dalla relazione $v = \lambda f$:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{340}{\metre\per\second}}{\SI{440}{\hertz}} = \frac{34}{44}\,\si{\metre} \approx \SI{0,77}{\metre}
+\]
+(b) La frequenza in hertz è $\SI{5}{\mega\hertz} = \SI{5e6}{\hertz}$:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{1540}{\metre\per\second}}{\SI{5e6}{\hertz}} = \frac{1540}{5} \cdot 10^{-6}\,\si{\metre} = 308 \cdot 10^{-6}\,\si{\metre} = 0{,}308 \cdot 10^{-3}\,\si{\metre} \approx \SI{0,3}{\milli\metre}
+\]
+La lunghezza d'onda dell'ecografo è di qualche decimo di millimetro: è l'ordine di grandezza dei dettagli più piccoli che l'immagine riesce a mostrare.
+\end{esempio}
+
+\begin{attenzione}[da un mezzo all'altro cambia $\lambda$, non $f$]
+Quando un'onda passa da un mezzo a un altro, per esempio dal grasso al muscolo, la frequenza resta quella della sorgente; cambia la velocità, e con lei la lunghezza d'onda. Il conto si fa sempre con la velocità del mezzo in cui l'onda si trova.
+\end{attenzione}
+
+\input{ud4/generati/lampo-ud4-lunghezza}
+
+\subsection{L'equazione dell'onda armonica}
+
+Per un'onda armonica che si propaga lungo l'asse $x$ conviene definire il \textbf{numero d'onda} $k = 2\pi/\lambda$, in radianti al metro: fa con la lunghezza d'onda quello che la pulsazione fa con il periodo. Attenzione: è lo stesso simbolo della costante della molla, ma è un'altra grandezza. La costante della molla si misura in \si{\newton\per\metre} e compare solo nell'oscillatore; il numero d'onda si misura in \si{\radian\per\metre} e compare solo nell'equazione dell'onda. Lo spostamento $y$ del punto del mezzo che si trova in $x$, all'istante $t$, è
+
+\begin{formula}[Onda armonica]
+y(x,t) = A\sin(kx - \omega t)
+\qquad\quad
+k = \frac{2\pi}{\lambda} \qquad \omega = \frac{2\pi}{T} \qquad v = \frac{\omega}{k}
+\end{formula}
+
+Si legge così:
+\begin{itemize}
+  \item fissato il punto $x$, lo spostamento oscilla nel tempo con pulsazione $\omega$: ogni punto è un oscillatore armonico;
+  \item fissato l'istante $t$, lo spostamento è una sinusoide nello spazio, che si ripete ogni $\lambda$: è l'istantanea della figura~\ref{fig:ud4-grandezze}a;
+  \item con il segno meno davanti a $\omega t$ l'onda avanza verso le $x$ positive; con il segno più, $y = A\sin(kx + \omega t)$, verso le $x$ negative. Infatti una cresta è un punto in cui $kx - \omega t$ ha un valore fisso: se $t$ cresce, anche $x$ deve crescere per tenere fisso quel valore, quindi la cresta si sposta verso le $x$ positive.
+\end{itemize}
+Il rapporto fra pulsazione e numero d'onda è la velocità: $\omega/k = (2\pi/T)/(2\pi/\lambda) = \lambda/T = v$.
+
+\begin{esempio}
+Su una corda viaggia un'onda descritta, in unità del SI, da $y(x,t) = 0{,}020\,\sin(4{,}0\,x - 20\,t)$. Ricava ampiezza, lunghezza d'onda, frequenza, velocità e verso di propagazione.
+
+Si confronta con $y = A\sin(kx - \omega t)$: $A = \SI{0,020}{\metre} = \SI{2,0}{\centi\metre}$, $k = \SI{4,0}{\radian\per\metre}$, $\omega = \SI{20}{\radian\per\second}$. Quindi, con $2\pi \approx 6{,}28$:
+\[
+  \lambda = \frac{2\pi}{k} = \frac{6{,}28}{\SI{4,0}{\radian\per\metre}} \approx \SI{1,6}{\metre}
+  \qquad\qquad
+  f = \frac{\omega}{2\pi} = \frac{\SI{20}{\radian\per\second}}{6{,}28} \approx \SI{3,2}{\hertz}
+\]
+\[
+  v = \frac{\omega}{k} = \frac{\SI{20}{\radian\per\second}}{\SI{4,0}{\radian\per\metre}} = \SI{5,0}{\metre\per\second}
+\]
+Davanti a $\omega t$ c'è il segno meno: l'onda avanza verso le $x$ positive. Controllo: $\lambda f \approx \SI{1,6}{\metre} \cdot \SI{3,2}{\hertz} \approx \SI{5,1}{\metre\per\second}$, che con gli arrotondamenti coincide con $v$.
+\end{esempio}
+
+\begin{attenzione}[due velocità diverse]
+La velocità di propagazione $v$ è quella con cui la forma dell'onda avanza, ed è la stessa per tutte le onde dello stesso tipo in uno stesso mezzo, qualunque sia la loro frequenza (per le onde di cui ci occupiamo). Le particelle del mezzo, invece, oscillano intorno alla loro posizione con una velocità che cambia di continuo: è nulla nelle creste e massima quando passano per la posizione di equilibrio. Non vanno confuse.
+\end{attenzione}
+
+% -------------------------------------------------------------------------
+\section{La velocità delle onde: la corda e i fluidi}
+\label{sec:ud4-velocita}
+
+La velocità di un'onda meccanica dipende dal mezzo, non dalla sorgente. In tutti i casi vale la stessa idea: l'onda è tanto più veloce quanto più il mezzo è rigido, cioè quanto più forte richiama indietro una parte spostata, e tanto più lenta quanto più il mezzo è denso, cioè quanto più inerzia ha.
+
+\subsection{Onde trasversali su una corda}
+
+Su una corda tesa la rigidità è data dalla \textbf{tensione} $F$, cioè dalla forza con cui la corda è tirata, in newton. L'inerzia è data dalla \textbf{densità lineare} $\mu$ (mu), la massa di un metro di corda, in \si{\kilo\gram\per\metre}: $\mu = m/L$ per una corda di massa $m$ e lunghezza $L$.
+
+\begin{formula}[Velocità delle onde su una corda]
+v = \sqrt{\frac{F}{\mu}}
+\end{formula}
+
+\begin{esempio}
+Una corda lunga \SI{2,0}{\metre} ha una massa di \SI{20}{\gram} ed è tesa con una forza di \SI{100}{\newton}. Con che velocità si propagano le onde trasversali?
+
+La densità lineare è $\mu = m/L = \SI{0,020}{\kilo\gram}/\SI{2,0}{\metre} = \SI{0,010}{\kilo\gram\per\metre}$. Quindi
+\[
+  v = \sqrt{\frac{F}{\mu}} = \sqrt{\frac{\SI{100}{\newton}}{\SI{0,010}{\kilo\gram\per\metre}}} = \sqrt{\num{10000}}\,\si{\metre\per\second} = \SI{100}{\metre\per\second}
+\]
+Controllo delle unità: $\si{\newton} = \si{\kilo\gram\metre\per\second\squared}$, quindi $\si{\newton}/(\si{\kilo\gram\per\metre}) = \si{\metre\squared\per\second\squared}$, e la radice dà \si{\metre\per\second}.
+\end{esempio}
+
+\input{ud4/generati/lampo-ud4-corda}
+
+\subsection{Onde longitudinali nei fluidi: il suono}
+
+In un fluido la rigidità è data dal \textbf{modulo di compressibilità} $B$, il rapporto fra l'aumento di pressione e la frazione di volume persa, $B = \Delta p/(\Delta V/V)$: per ridurre il volume dell'1\% serve un aumento di pressione pari a $B/100$. Poiché $\Delta V/V$ è un numero puro, $B$ si misura in pascal come la pressione ($\SI{1}{\pascal} = \SI{1}{\newton\per\metre\squared}$, UD3). Un fluido poco comprimibile, come l'acqua, ha un $B$ grande. L'inerzia è data dalla densità $\rho$ (rho), in \si{\kilo\gram\per\metre\cubed}.
+
+\begin{formula}[Velocità del suono in un fluido]
+v = \sqrt{\frac{B}{\rho}}
+\end{formula}
+
+\begin{esempio}
+L'acqua ha $B \approx \SI{2,2e9}{\pascal}$ e $\rho = \SI{1000}{\kilo\gram\per\metre\cubed}$. Stima la velocità del suono in acqua.
+
+\[
+  v = \sqrt{\frac{B}{\rho}} = \sqrt{\frac{\SI{2,2e9}{\pascal}}{\SI{e3}{\kilo\gram\per\metre\cubed}}} = \sqrt{2{,}2 \cdot 10^{6}}\,\si{\metre\per\second} = \sqrt{2{,}2} \cdot 10^{3}\,\si{\metre\per\second} \approx \SI{1,5e3}{\metre\per\second}
+\]
+La radice di $10^{6}$ è $10^{3}$; per $\sqrt{2{,}2}$ basta notare che $1{,}5^2 = 2{,}25$, quindi $\sqrt{2{,}2}$ è poco meno di 1,5. Il valore misurato è circa \SI{1480}{\metre\per\second}.
+\end{esempio}
+
+L'aria è molto più comprimibile dell'acqua: ha $B \approx \SI{1,4e5}{\pascal}$, più di diecimila volte meno dell'acqua, ma è anche molto meno densa, $\rho \approx \SI{1,2}{\kilo\gram\per\metre\cubed}$, circa 800 volte meno. Il conto diretto dà
+\[
+  v = \sqrt{\frac{\SI{1,4e5}{\pascal}}{\SI{1,2}{\kilo\gram\per\metre\cubed}}} \approx \sqrt{11{,}7 \cdot 10^{4}}\,\si{\metre\per\second} = \sqrt{11{,}7} \cdot 10^{2}\,\si{\metre\per\second} \approx \SI{3,4e2}{\metre\per\second}
+\]
+perché $1{,}4/1{,}2 \approx 1{,}17$ e $3{,}4^2 = 11{,}56$. A temperatura ambiente il suono in aria viaggia quindi a circa \SI{340}{\metre\per\second}, circa quattro volte più lento che in acqua ($1480/340 \approx 4{,}4$). Nei gas la velocità del suono cresce con la temperatura.
+
+\begin{applicazione}{l'onda del polso e la rigidità delle arterie}
+A ogni battito il sangue spinto nell'aorta dilata la parete elastica dell'arteria, e la dilatazione corre lungo le arterie come un'onda, l'\textbf{onda sfigmica}, che si sente palpando il polso. Più l'arteria è rigida, più l'onda è veloce, come sulla corda più tesa. Se l'onda impiega \SI{75}{\milli\second} dalla carotide alla femorale, che distano \SI{0,60}{\metre}, la sua velocità è $v = \SI{0,60}{\metre}/\SI{0,075}{\second} = \SI{8}{\metre\per\second}$. Con l'età e con l'arteriosclerosi la velocità cresce, ed è un indice di rischio cardiovascolare. È la velocità della deformazione della parete, non quella del sangue, che nell'aorta non supera circa \SI{1}{\metre\per\second}.
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{Sovrapposizione e interferenza}
+\label{sec:ud4-interferenza}
+
+\subsection{Il principio di sovrapposizione}
+
+Che cosa succede quando due onde arrivano nello stesso punto del mezzo nello stesso istante? Per le onde di piccola ampiezza, come quelle di cui ci occupiamo, vale il \textbf{principio di sovrapposizione}: lo spostamento risultante è la somma degli spostamenti che produrrebbero le due onde da sole,
+\[
+  y = y_1 + y_2
+\]
+Dopo essersi incontrate, le due onde proseguono ciascuna per la sua strada, come se non si fossero incontrate. Per questo in una stanza si possono ascoltare insieme più voci, e distinguerle.
+
+\subsection{Interferenza costruttiva e distruttiva}
+
+Il caso più importante è quello di due onde con la stessa frequenza. Il risultato dipende da come si trovano le loro oscillazioni nel punto in cui si incontrano (figura~\ref{fig:ud4-interferenza}):
+\begin{itemize}
+  \item se le due onde arrivano \textbf{in fase}, cioè con le creste insieme alle creste e gli avvallamenti insieme agli avvallamenti, gli spostamenti si sommano: l'ampiezza risultante è $A_1 + A_2$. È l'\textbf{interferenza costruttiva};
+  \item se arrivano \textbf{in opposizione di fase}, con le creste di una insieme agli avvallamenti dell'altra, gli spostamenti si sottraggono: l'ampiezza risultante è $|A_1 - A_2|$, ed è nulla se le due ampiezze sono uguali. È l'\textbf{interferenza distruttiva}.
+\end{itemize}
+Nei casi intermedi l'ampiezza risultante sta fra $|A_1 - A_2|$ e $A_1 + A_2$.
+
+\begin{figure}[h]
+\centering
+\input{ud4/figure/interferenza}
+\caption{Due onde con la stessa frequenza e la stessa ampiezza. (a) In fase, si sommano in un'onda di ampiezza doppia. (b) In opposizione di fase, si annullano.}
+\label{fig:ud4-interferenza}
+\end{figure}
+
+Spesso due onde partono in fase da due sorgenti, per esempio da due altoparlanti collegati allo stesso amplificatore, e arrivano in un punto dopo aver percorso distanze diverse, $r_1$ e $r_2$. La \textbf{differenza di cammino} $\Delta r = |r_2 - r_1|$ decide come arrivano:
+\begin{itemize}
+  \item se $\Delta r$ è un numero intero di lunghezze d'onda, una delle due onde è in ritardo di un numero intero di oscillazioni, e le onde arrivano in fase: interferenza costruttiva;
+  \item se $\Delta r$ è un numero intero di lunghezze d'onda più mezza, una delle due è in ritardo di mezza oscillazione, e le onde arrivano in opposizione di fase: interferenza distruttiva.
+\end{itemize}
+
+\begin{formula}[Interferenza di due sorgenti in fase]
+\Delta r = n\lambda \ \ \text{costruttiva}
+\qquad\qquad
+\Delta r = \left(n + \tfrac{1}{2}\right)\lambda \ \ \text{distruttiva}
+\qquad\qquad
+n = 0, 1, 2, \dots
+\end{formula}
+
+\begin{esempio}
+Due altoparlanti in fase emettono un suono di \SI{680}{\hertz} in aria ($v = \SI{340}{\metre\per\second}$). Un ascoltatore si trova a \SI{3,00}{\metre} da uno e a \SI{3,25}{\metre} dall'altro. L'interferenza è costruttiva o distruttiva?
+
+La lunghezza d'onda è $\lambda = v/f = \SI{340}{\metre\per\second}/\SI{680}{\hertz} = \SI{0,50}{\metre}$. La differenza di cammino è $\Delta r = \SI{3,25}{\metre} - \SI{3,00}{\metre} = \SI{0,25}{\metre}$, cioè
+\[
+  \frac{\Delta r}{\lambda} = \frac{\SI{0,25}{\metre}}{\SI{0,50}{\metre}} = \frac{1}{2}
+\]
+Mezza lunghezza d'onda ($n = 0$): l'interferenza è distruttiva, e l'ascoltatore sente il suono molto attenuato. Spostandosi di qualche decina di centimetri lo sentirebbe di nuovo forte.
+\end{esempio}
+
+\input{ud4/generati/lampo-ud4-interferenza}
+
+\begin{attenzione}[l'interferenza non distrugge l'energia]
+Nei punti di interferenza distruttiva l'onda si annulla, ma l'energia non sparisce: si sposta nei punti di interferenza costruttiva, dove l'onda è più intensa. Inoltre per avere una figura di interferenza stabile le due sorgenti devono avere la stessa frequenza e mantenere la stessa differenza di fase, cioè oscillare sempre con lo stesso ritardo l'una rispetto all'altra: due persone che parlano insieme non producono zone di silenzio.
+\end{attenzione}
+
+\begin{applicazione}{le cuffie antirumore}
+Le cuffie a cancellazione attiva hanno un microfono che registra il rumore esterno e un altoparlante che emette la stessa onda in opposizione di fase: nell'orecchio le due onde interferiscono in modo distruttivo. Funzionano bene sui rumori costanti e gravi, e si usano per esempio per proteggere i pazienti dal rumore di un tomografo a risonanza magnetica.
+\end{applicazione}
+
+\begin{approfondimento}{le onde stazionarie}
+Un'onda su una corda fissa agli estremi si riflette e torna indietro, e si sovrappone a quella di andata. Per certe frequenze il risultato è un'\textbf{onda stazionaria}: la corda oscilla senza che si veda una forma che avanza (figura in fondo a questo riquadro). I \textbf{nodi} restano sempre fermi, perché lì le due onde interferiscono sempre in modo distruttivo; a metà fra due nodi i \textbf{ventri} oscillano con l'ampiezza massima. Due nodi vicini distano $\lambda/2$. Gli estremi fissi sono nodi, quindi sulla lunghezza $L$ della corda sta un numero intero $n$ di mezze lunghezze d'onda: $\lambda_n = 2L/n$ e, con $f = v/\lambda$,
+\[
+  f_n = n\,\frac{v}{2L} = n f_1 \qquad n = 1, 2, 3, \dots
+\]
+La frequenza più bassa, $f_1$, è la \textbf{fondamentale}; le altre sono le \textbf{armoniche}. Una corda di chitarra più corta o più tesa dà una nota più acuta.
+
+Anche l'aria in un tubo vibra in onde stazionarie. Il condotto uditivo è un tubo lungo circa \SI{2,5}{\centi\metre}, chiuso dal timpano: l'estremo chiuso è un nodo e quello aperto un ventre, quindi $L = \lambda_1/4$ e $\lambda_1 = \SI{10}{\centi\metre}$. La sua frequenza fondamentale è $f_1 = v/(4L) = (\SI{340}{\metre\per\second})/(\SI{0,10}{\metre}) = \SI{3400}{\hertz}$: il condotto rinforza i suoni vicini a questa frequenza, ed è uno dei motivi per cui l'orecchio è più sensibile fra 2000 e \SI{5000}{\hertz}, e per cui il danno da rumore colpisce per primo l'udito intorno ai \SI{4000}{\hertz}.
+
+\begin{center}
+\input{ud4/figure/stazionarie}
+\end{center}
+Le prime tre onde stazionarie su una corda di lunghezza $L$: N indica un nodo, V un ventre; la linea continua e quella tratteggiata sono le due posizioni estreme della corda.
+\end{approfondimento}
+
+% -------------------------------------------------------------------------
+\section{L'energia trasportata dalle onde}
+\label{sec:ud4-energia}
+
+\subsection{Energia e potenza}
+
+Un'onda mette in oscillazione i punti del mezzo che attraversa: a ogni punto cede l'energia di un oscillatore armonico, che come abbiamo visto è proporzionale al quadrato dell'ampiezza. Nella formula $E = \frac{1}{2}kA^2$ la frequenza non compare, ma l'energia dipende anche da lei: è nascosta nella costante $k$. Da $\omega = \sqrt{k/m}$ viene $k = m\omega^2$, e sostituendo si ottiene
+\[
+  E = \frac{1}{2} k A^2 = \frac{1}{2} m\,\omega^2 A^2
+\]
+A parità di massa l'energia è proporzionale al quadrato della pulsazione, cioè della frequenza, e al quadrato dell'ampiezza: a parità di ampiezza, un punto che oscilla più in fretta si muove più veloce. Per questo l'energia trasportata da un'onda è proporzionale al quadrato dell'ampiezza \emph{e} al quadrato della frequenza.
+
+La \textbf{potenza} è l'energia trasportata in un secondo, e si misura in watt ($\SI{1}{\watt} = \SI{1}{\joule\per\second}$, UD2). Per un'onda armonica su una corda la potenza trasportata è
+
+\begin{formula}[Potenza di un'onda su una corda]
+P = \frac{1}{2}\,\mu\,\omega^2 A^2\, v
+\end{formula}
+
+La quantità $\frac{1}{2}\mu\,\omega^2 A^2$ è l'energia di un metro di corda, che ha massa $\mu$; in un secondo l'onda percorre $v$ metri, e da qui il fattore $v$. Non serve ricordare il fattore $1/2$, ma le proporzionalità sì: la potenza è proporzionale al quadrato della pulsazione (cioè della frequenza), al quadrato dell'ampiezza e alla velocità dell'onda. Lo stesso vale, con le grandezze del mezzo al posto di $\mu$, per le onde in tutti i mezzi elastici.
+
+\begin{esempio}
+Su una corda viaggia un'onda armonica. Di che fattore cambia la potenza trasportata se (a) si raddoppia l'ampiezza; (b) si raddoppia la frequenza e si dimezza l'ampiezza, sulla stessa corda?
+
+(a) La potenza è proporzionale ad $A^2$: con $A' = 2A$ diventa $2^2 = 4$ volte più grande.
+
+(b) La velocità resta la stessa, perché la corda è la stessa. Con $\omega' = 2\omega$ e $A' = A/2$:
+\[
+  \frac{P'}{P} = \left(\frac{\omega'}{\omega}\right)^{2} \left(\frac{A'}{A}\right)^{2} = 2^2 \cdot \left(\frac{1}{2}\right)^{2} = 4 \cdot \frac{1}{4} = 1
+\]
+La potenza non cambia: l'effetto della frequenza doppia compensa esattamente quello dell'ampiezza dimezzata.
+\end{esempio}
+
+\subsection{L'intensità}
+
+Per le onde che si propagano nello spazio, come il suono, conta quanta energia arriva su una superficie. L'\textbf{intensità} $I$ di un'onda è l'energia che attraversa in un secondo una superficie di \SI{1}{\metre\squared} perpendicolare alla direzione di propagazione: è la potenza $P$ che attraversa la superficie, divisa per l'area $S$. Si misura in \si{\watt\per\metre\squared}, ed è proporzionale al quadrato dell'ampiezza e al quadrato della frequenza; a parità di frequenza e di mezzo, al solo quadrato dell'ampiezza.
+
+\begin{formula}[Intensità]
+I = \frac{P}{S} \qquad\qquad I \propto f^2 A^2
+\end{formula}
+
+Il simbolo $\propto$ si legge «è proporzionale a». Una sonda per la terapia a ultrasuoni che eroga \SI{3,0}{\watt} su $\SI{5,0}{\centi\metre\squared} = \SI{5,0e-4}{\metre\squared}$ produce un'intensità $I = \SI{3,0}{\watt}/\SI{5,0e-4}{\metre\squared} = \SI{6,0e3}{\watt\per\metre\squared}$.
+\subsection{La legge dell'inverso del quadrato}
+
+Una sorgente piccola che emette la stessa potenza $P$ in tutte le direzioni (si dice \emph{isotropa}) distribuisce l'energia su sfere sempre più grandi. A distanza $r$ la superficie della sfera è $4\pi r^2$, quindi l'intensità diminuisce con il quadrato della distanza:
+
+\begin{formula}[Legge dell'inverso del quadrato]
+I = \frac{P}{4\pi r^2}
+\qquad\qquad
+\frac{I_2}{I_1} = \left(\frac{r_1}{r_2}\right)^{2}
+\end{formula}
+
+Raddoppiando la distanza l'intensità diventa un quarto; triplicandola, un nono.
+
+\begin{esempio}
+Una sorgente sonora isotropa emette una potenza di \SI{0,10}{\watt}. Calcola l'intensità a \SI{2,0}{\metre} e a \SI{4,0}{\metre}.
+
+A \SI{2,0}{\metre} la superficie della sfera è $4\pi r^2 = 4 \cdot 3{,}14 \cdot (\SI{2,0}{\metre})^2 = 16 \cdot 3{,}14\,\si{\metre\squared} \approx \SI{50}{\metre\squared}$. Quindi
+\[
+  I_1 = \frac{P}{4\pi r^2} = \frac{\SI{0,10}{\watt}}{\SI{50}{\metre\squared}} = \SI{2,0e-3}{\watt\per\metre\squared}
+\]
+A \SI{4,0}{\metre} la distanza è doppia, e l'intensità si divide per $2^2 = 4$:
+\[
+  I_2 = I_1 \left(\frac{r_1}{r_2}\right)^{2} = \SI{2,0e-3}{\watt\per\metre\squared} \cdot \frac{1}{4} = \SI{5,0e-4}{\watt\per\metre\squared}
+\]
+\end{esempio}
+
+\begin{attenzione}[intensità e ampiezza non scendono allo stesso modo]
+La legge dell'inverso del quadrato vale per l'intensità. Poiché, a frequenza fissata, l'intensità è proporzionale al quadrato dell'ampiezza, l'ampiezza diminuisce come $1/r$: raddoppiando la distanza l'intensità diventa un quarto e l'ampiezza la metà. La legge vale inoltre per una sorgente piccola, in un mezzo che non assorbe l'onda e senza pareti che la riflettano.
+\end{attenzione}
+
+\input{ud4/generati/lampo-ud4-distanza}
+
+% -------------------------------------------------------------------------
+\section{Il suono}
+\label{sec:ud4-suono}
+
+\subsection{Che cos'è il suono}
+
+Il suono è un'onda longitudinale di pressione: la sorgente spinge e richiama gli strati di aria (o di un altro mezzo), e nelle compressioni la pressione è un po' più alta di quella di equilibrio, nelle rarefazioni un po' più bassa. L'orecchio umano sente le onde di frequenza compresa fra circa \SI{20}{\hertz} e \SI{20000}{\hertz}. Sotto i \SI{20}{\hertz} ci sono gli \textbf{infrasuoni}, sopra i \SI{20}{\kilo\hertz} gli \textbf{ultrasuoni}; con l'età il limite superiore dell'udito si abbassa.
+
+Tre caratteristiche del suono si collegano alle grandezze dell'onda:
+\begin{itemize}
+  \item l'\textbf{altezza} (acuto o grave) dipende dalla frequenza: un suono acuto ha frequenza alta;
+  \item l'\textbf{intensità} percepita (forte o debole) dipende dall'intensità dell'onda, cioè, a parità di frequenza, dall'ampiezza;
+  \item il \textbf{timbro}, che distingue la stessa nota suonata da un violino o da un pianoforte, dipende da quali \emph{armoniche}, cioè frequenze multiple della frequenza più bassa (la \emph{fondamentale}), accompagnano il suono e con che ampiezza.
+\end{itemize}
+
+\subsection{La velocità del suono nei diversi mezzi}
+
+Dalla formula $v = \sqrt{B/\rho}$ il suono è più veloce nei mezzi più rigidi. Nei liquidi e nei tessuti molli, che sono fatti soprattutto di acqua, viaggia a circa \SI{1500}{\metre\per\second}; nei solidi, come l'osso, ancora più veloce; nei gas, molto più comprimibili, molto più lento. I valori da ricordare:
+
+\begin{center}
+\small
+\begin{tabular}{@{}l r@{}}
+\toprule
+Mezzo & $v$ del suono (\si{\metre\per\second}) \\
+\midrule
+aria (\SI{20}{\celsius}) & 340 \\
+grasso & 1450 \\
+acqua & 1480 \\
+tessuto molle (valore medio usato dagli ecografi) & 1540 \\
+sangue & 1570 \\
+muscolo & 1580 \\
+osso compatto & da 3000 a 4000 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{L'intensità del suono e la sua percezione}
+
+L'orecchio è sensibile a intensità molto diverse. Il suono più debole che si riesce a sentire, alla frequenza di \SI{1000}{\hertz}, ha un'intensità di circa \SI{e-12}{\watt\per\metre\squared}: è la \textbf{soglia di udibilità} $I_0$. Un suono di circa \SI{1}{\watt\per\metre\squared} è già doloroso: è la \textbf{soglia del dolore}. Fra le due ci sono dodici ordini di grandezza.
+
+La sensazione di intensità non cresce in proporzione all'intensità: un suono dieci volte più intenso sembra all'orecchio circa due volte più forte, uno cento volte più intenso circa quattro volte più forte. Ogni volta che l'intensità si moltiplica per 10, la sensazione aumenta di uno stesso passo. Per questo il suono non si descrive con l'intensità ma con una scala logaritmica, che conta le potenze di 10: il livello di intensità sonora, in decibel.
+
+\begin{richiamo}{i logaritmi in base 10}
+Il logaritmo in base 10 di un numero positivo $x$ è l'esponente a cui elevare 10 per ottenere $x$:
+\[
+  \log_{10} x = n \quad \Longleftrightarrow \quad 10^{n} = x
+\]
+Per le potenze di 10 il logaritmo è l'esponente: $\log_{10} 1000 = \log_{10} 10^{3} = 3$, $\log_{10} 1 = \log_{10} 10^{0} = 0$, $\log_{10} 0{,}01 = \log_{10} 10^{-2} = -2$. Le regole, che vengono da quelle delle potenze (UD1, sezione «La notazione scientifica»):
+\[
+  \log_{10}(a \cdot b) = \log_{10} a + \log_{10} b
+  \qquad
+  \log_{10}\frac{a}{b} = \log_{10} a - \log_{10} b
+  \qquad
+  \log_{10} a^{n} = n \log_{10} a
+\]
+Un valore da ricordare: $\log_{10} 2 \approx 0{,}3$ (perché $2^{10} = 1024 \approx 10^{3}$). Da questo, $\log_{10} 4 = 2\log_{10} 2 \approx 0{,}6$ e $\log_{10} 5 = \log_{10}(10/2) = 1 - 0{,}3 = 0{,}7$. Per esempio $\log_{10}(2 \cdot 10^{5}) = \log_{10} 2 + 5 \approx 5{,}3$.
+\end{richiamo}
+
+\begin{formula}[Livello di intensità sonora]
+\beta = 10 \log_{10}\frac{I}{I_0}
+\qquad\qquad
+I_0 = \SI{e-12}{\watt\per\metre\squared}
+\qquad\qquad
+I = I_0 \cdot 10^{\beta/10}
+\end{formula}
+
+Il logaritmo da solo, $\log_{10}(I/I_0)$, dà il livello in \textbf{bel} (\si{\bel}): conta quante potenze di 10 separano $I$ dalla soglia. Il bel è un'unità troppo grande per l'uso pratico, e si usa il suo decimo, il \textbf{decibel} (\si{\deci\bel}): per questo davanti al logaritmo c'è il fattore 10, e $\SI{1}{\bel} = \SI{10}{\deci\bel}$. Il livello $\beta$ (beta) si misura in decibel. La soglia di udibilità corrisponde a $\beta = 10\log_{10} 1 = \SI{0}{\deci\bel}$, la soglia del dolore a $10\log_{10} 10^{12} = \SI{120}{\deci\bel}$. Dividendo per 10 i due membri della definizione si ha $\log_{10}(I/I_0) = \beta/10$, e per la definizione di logaritmo $I/I_0 = 10^{\beta/10}$: è la forma $I = I_0 \cdot 10^{\beta/10}$ del riquadro, che serve per tornare dal livello all'intensità.
+
+\begin{center}
+\small
+\begin{tabular}{@{}l r r@{}}
+\toprule
+Suono & $I$ (\si{\watt\per\metre\squared}) & $\beta$ (\si{\deci\bel}) \\
+\midrule
+soglia di udibilità & $10^{-12}$ & 0 \\
+fruscio di foglie, respiro & $10^{-11}$ & 10 \\
+sussurro, biblioteca silenziosa & $10^{-9}$ & 30 \\
+conversazione normale & $10^{-6}$ & 60 \\
+strada trafficata & $10^{-5}$ & 70 \\
+limite per l'esposizione al lavoro (8 ore al giorno) & circa $3 \cdot 10^{-4}$ & 85 \\
+concerto rock, sirena da vicino & $10^{-1}$ & 110 \\
+soglia del dolore & $1$ & 120 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Il valore a \SI{85}{\deci\bel} si ricava così: $85 = 80 + 5$, e $10^{5/10} = 10^{0,5} = \sqrt{10} \approx 3{,}2$; quindi
+\[
+  I = 10^{-12} \cdot 10^{8} \cdot 10^{0,5}\,\si{\watt\per\metre\squared} \approx 3{,}2 \cdot 10^{-4}\,\si{\watt\per\metre\squared} \approx \SI{3e-4}{\watt\per\metre\squared}
+\]
+
+Il modo più veloce di ragionare è sulle differenze di livello. Se l'intensità passa da $I_1$ a $I_2$, il livello cambia di
+\[
+  \beta_2 - \beta_1 = 10\log_{10}\frac{I_2}{I_0} - 10\log_{10}\frac{I_1}{I_0} = 10\log_{10}\frac{I_2}{I_1}
+\]
+Quindi: intensità per 10, livello $+\SI{10}{\deci\bel}$; intensità per 100, $+\SI{20}{\deci\bel}$; intensità per 2, $+10\log_{10} 2 \approx +\SI{3}{\deci\bel}$; intensità divisa per 4, $-10\log_{10} 4 \approx -\SI{6}{\deci\bel}$.
+
+\begin{esempio}
+(a) Durante una conversazione l'intensità del suono è \SI{e-6}{\watt\per\metre\squared}. Quanto vale il livello sonoro? (b) Un ambiente rumoroso ha un livello di \SI{90}{\deci\bel}. Quanto vale l'intensità? (c) In terapia intensiva un ventilatore produce \SI{70}{\deci\bel} al letto del paziente. Che livello si misura se se ne accende un secondo uguale? (d) Di quanti decibel scende il livello prodotto da una sorgente isotropa se ci si allontana al doppio della distanza?
+
+(a) Si dividono le potenze di 10 sottraendo gli esponenti:
+\[
+  \beta = 10 \log_{10}\frac{10^{-6}}{10^{-12}} = 10 \log_{10} 10^{-6-(-12)} = 10 \log_{10} 10^{6} = 10 \cdot 6\,\si{\deci\bel} = \SI{60}{\deci\bel}
+\]
+(b) Dalla forma inversa:
+\[
+  I = I_0 \cdot 10^{\beta/10} = \SI{e-12}{\watt\per\metre\squared} \cdot 10^{90/10} = 10^{-12} \cdot 10^{9}\,\si{\watt\per\metre\squared} = \SI{e-3}{\watt\per\metre\squared}
+\]
+(c) I due ventilatori producono suoni indipendenti, e le loro intensità si sommano: l'intensità raddoppia. Il livello aumenta di
+\[
+  10 \log_{10} 2 \approx 10 \cdot 0{,}3 = \SI{3}{\deci\bel}
+\]
+e passa da \SI{70}{\deci\bel} a circa \SI{73}{\deci\bel}, non a \SI{140}{\deci\bel}.
+
+(d) Raddoppiando la distanza l'intensità diventa un quarto. Il livello cambia di
+\[
+  10 \log_{10}\frac{1}{4} = -10 \log_{10} 4 = -10 \cdot 2\log_{10} 2 \approx -10 \cdot 0{,}6 = \SI{-6}{\deci\bel}
+\]
+\end{esempio}
+
+\begin{attenzione}[i decibel non si sommano]
+Due sorgenti da \SI{70}{\deci\bel} non danno \SI{140}{\deci\bel}: si sommano le intensità, non i livelli, e raddoppiare l'intensità aggiunge solo \SI{3}{\deci\bel}. Al contrario, una differenza di \SI{10}{\deci\bel}, che sembra piccola, vuol dire un'intensità dieci volte più grande.
+\end{attenzione}
+
+\input{ud4/generati/lampo-ud4-decibel}
+
+\begin{applicazione}{l'audiometria e il danno da rumore}
+L'esame audiometrico misura, per varie frequenze, il livello del suono più debole che il paziente riesce a sentire, e lo confronta con quello di un orecchio sano. Una perdita di \SI{40}{\deci\bel} vuol dire che servono suoni $10^{40/10} = 10^{4}$ volte più intensi del normale per essere sentiti. L'esposizione prolungata a livelli sopra gli \SI{85}{\deci\bel} danneggia le cellule ciliate della coclea in modo permanente: per questo la legge impone protezioni a chi lavora in ambienti rumorosi, e nei reparti di terapia intensiva neonatale si raccomanda di restare sotto i \SI{45}{\deci\bel}.
+\end{applicazione}
+
+\begin{applicazione}{lo stetoscopio}
+I toni cardiaci sono deboli e gravi, fra circa 20 e \SI{200}{\hertz}. Il fonendoscopio raccoglie le vibrazioni del torace con una membrana, che trasmette meglio i suoni acuti (soffi, rumori respiratori), o con una campana, che trasmette meglio quelli gravi. Il suono viaggia poi nei tubi fino alle orecchie del medico: dentro un tubo l'onda non si allarga in tutte le direzioni, la sua energia resta concentrata sulla piccola sezione del tubo e l'intensità non cala con l'inverso del quadrato della distanza. Gli auricolari, che chiudono il condotto uditivo, tengono fuori il rumore della stanza.
+\end{applicazione}
+
+\subsection{Gli ultrasuoni e l'ecografia}
+
+L'ecografia usa ultrasuoni di frequenza fra circa 2 e \SI{15}{\mega\hertz}, prodotti da un cristallo \emph{piezoelettrico} che vibra quando gli si applica una tensione elettrica e, al contrario, produce una tensione quando viene fatto vibrare: la stessa sonda emette gli impulsi e ne riceve gli echi.
+
+Ogni volta che l'impulso incontra la superficie di separazione fra due tessuti con proprietà acustiche diverse (densità e velocità del suono), una parte dell'onda si riflette e torna alla sonda come eco. L'ecografo misura il tempo $t$ fra l'emissione e il ritorno dell'eco. In quel tempo l'impulso è andato fino alla struttura ed è tornato indietro, percorrendo due volte la profondità $d$. Con la velocità media dei tessuti molli, $v = \SI{1540}{\metre\per\second}$:
+
+\begin{formula}[Profondità in ecografia]
+d = \frac{v\,t}{2}
+\end{formula}
+
+\begin{esempio}
+L'eco di una struttura torna alla sonda \SI{130}{\micro\second} dopo l'emissione. A che profondità si trova la struttura?
+
+Il tempo in secondi è $t = \SI{130}{\micro\second} = \SI{1,3e-4}{\second}$. La distanza percorsa dall'impulso, andata e ritorno, è
+\[
+  v\,t = \SI{1540}{\metre\per\second} \cdot \SI{1,3e-4}{\second} = 1540 \cdot 1{,}3 \cdot 10^{-4}\,\si{\metre} \approx 2000 \cdot 10^{-4}\,\si{\metre} = \SI{0,20}{\metre}
+\]
+dove $1540 \cdot 1{,}3 = 1540 + 462 = 2002 \approx 2000$. La profondità è la metà: $d = \SI{0,20}{\metre}/2 = \SI{0,10}{\metre} = \SI{10}{\centi\metre}$.
+\end{esempio}
+
+\input{ud4/generati/lampo-ud4-ecografia}
+
+\begin{applicazione}{come si sceglie la frequenza della sonda}
+I dettagli più piccoli che un'ecografia distingue sono dell'ordine della lunghezza d'onda: a \SI{5}{\mega\hertz} $\lambda \approx \SI{0,3}{\milli\metre}$, a \SI{10}{\mega\hertz} la metà. Ma i tessuti assorbono gli ultrasuoni tanto più quanto più la frequenza è alta. Per questo si usano sonde ad alta frequenza (7--15~MHz) per gli organi superficiali, come tiroide, tendini e vasi del collo, e a bassa frequenza (2--5~MHz) per gli organi profondi dell'addome. Fra sonda e pelle si mette un gel: un velo d'aria rifletterebbe quasi tutto il fascio, perché aria e tessuti hanno proprietà acustiche molto diverse. Per lo stesso motivo gli ultrasuoni non attraversano bene le ossa e i polmoni.
+\end{applicazione}
+
+% -------------------------------------------------------------------------
+\section{L'effetto Doppler}
+\label{sec:ud4-doppler}
+
+Quando un'ambulanza con la sirena accesa ci passa accanto, il suono è più acuto mentre si avvicina e diventa più grave quando si allontana. La sirena emette sempre la stessa frequenza: a cambiare è la frequenza che arriva a noi. È l'\textbf{effetto Doppler}: la frequenza percepita cambia quando la sorgente, l'osservatore o tutti e due si muovono l'uno rispetto all'altro.
+
+Un \textbf{fronte d'onda} è l'insieme dei punti del mezzo che si trovano nella stessa fase di oscillazione, per esempio tutti i punti di una stessa compressione. Per una sorgente piccola e ferma i fronti d'onda sono sfere (cerchi, nel disegno) centrate sulla sorgente, e due fronti consecutivi distano una lunghezza d'onda.
+
+\textbf{Sorgente in moto.} Ogni fronte d'onda parte dal punto in cui si trova la sorgente quando lo emette, e da lì si allarga con la velocità dell'onda, che dipende solo dal mezzo. Se la sorgente si muove, emette ogni fronte un po' più avanti del precedente (figura~\ref{fig:ud4-doppler}). Davanti alla sorgente i fronti si addensano: la lunghezza d'onda è più corta, e con $f = v/\lambda$ la frequenza che arriva all'osservatore è più alta. Dietro la sorgente i fronti si diradano: la lunghezza d'onda è più lunga e la frequenza più bassa.
+
+\begin{figure}[h]
+\centering
+\input{ud4/figure/doppler}
+\caption{Una sorgente (punto arancione) si muove verso destra con velocità $v_s$. Ogni cerchio è un fronte d'onda, emesso quando la sorgente si trovava nel suo centro (i puntini blu): i cerchi più grandi sono stati emessi prima. Davanti alla sorgente i fronti sono più vicini, dietro più lontani.}
+\label{fig:ud4-doppler}
+\end{figure}
+
+\textbf{Osservatore in moto.} Se è l'osservatore ad andare verso una sorgente ferma, i fronti d'onda non cambiano, ma lui li incontra più spesso, perché va loro incontro: la frequenza che percepisce è più alta. Se si allontana, li incontra più di rado e la frequenza è più bassa.
+
+In sintesi:
+\begin{itemize}
+  \item se sorgente e osservatore si \emph{avvicinano}, la frequenza percepita è \emph{più alta} di quella emessa;
+  \item se si \emph{allontanano}, è \emph{più bassa};
+  \item lo spostamento di frequenza è tanto più grande quanto più grande è la velocità con cui si avvicinano o si allontanano, rispetto alla velocità dell'onda; se la distanza non cambia, l'effetto non c'è.
+\end{itemize}
+
+\begin{attenzione}[conta la velocità, non la distanza]
+L'effetto Doppler dipende dalla velocità con cui la distanza fra sorgente e osservatore cambia, non dalla distanza. Un'ambulanza che viene dritta verso di noi a velocità costante ha un suono acuto e costante: diventa più forte, non più acuto, man mano che arriva. Se ci passa di lato, il suono si abbassa nel breve tratto in cui ci passa accanto, quando la sua velocità smette di essere diretta verso di noi.
+\end{attenzione}
+
+\input{ud4/generati/lampo-ud4-doppler}
+
+\begin{applicazione}{la flussimetria Doppler}
+L'ecografo Doppler misura la velocità del sangue nei vasi. La sonda invia ultrasuoni di frequenza nota, che vengono riflessi dai globuli rossi in movimento: se il sangue si avvicina alla sonda l'eco torna con una frequenza più alta di quella emessa, se si allontana con una frequenza più bassa. Dalla differenza di frequenza l'apparecchio ricava la velocità e il verso del flusso. Nell'ecocolordoppler il flusso è colorato sull'immagine, per convenzione in rosso se si avvicina alla sonda e in blu se si allontana, che il vaso sia un'arteria o una vena. Si usa per le stenosi delle carotidi, le trombosi venose, le valvole cardiache e il flusso nel cordone ombelicale; con lo stesso principio i rilevatori Doppler fetali fanno sentire il battito del feto.
+\end{applicazione}
+
+\begin{approfondimento}{la formula dell'effetto Doppler}
+Il syllabus chiede solo la descrizione qualitativa; per chi vuole i numeri, se la sorgente si muove con velocità $v_s$ e l'osservatore con velocità $v_o$ lungo la retta che li unisce, in un mezzo in cui l'onda ha velocità $v$, la frequenza percepita è
+\[
+  f' = f\,\frac{v \pm v_o}{v \mp v_s}
+\]
+con i segni in alto quando si avvicinano. Nella flussimetria, per sangue con velocità $v_s$ molto più piccola di quella del suono, che si muove lungo il fascio, lo spostamento di frequenza dell'eco è circa $\Delta f \approx 2 f v_s / v$. Con $f = \SI{2}{\mega\hertz}$ e $v_s = \SI{0,5}{\metre\per\second}$:
+\[
+  \Delta f \approx \frac{2 \cdot \SI{2e6}{\hertz} \cdot \SI{0,5}{\metre\per\second}}{\SI{1540}{\metre\per\second}} = \frac{\num{2e6}}{1540}\,\si{\hertz} \approx \SI{1300}{\hertz}
+\]
+Il quoziente si fa con le potenze di 10: $\num{2e6}/1540 = (2/1{,}54) \cdot 10^{3}$, e $2/1{,}54 \approx 1{,}3$ perché $1{,}54 \cdot 1{,}3 \approx 2{,}0$, come nell'esempio dell'ecografia. Lo spostamento cade nel campo udibile: per questo gli apparecchi Doppler fanno anche \emph{sentire} il flusso del sangue. Se il fascio forma un angolo $\theta$ con la direzione del flusso, conta solo la componente della velocità lungo il fascio, e $\Delta f$ va moltiplicato per $\cos\theta$.
+\end{approfondimento}
+
+\riepilogoformule
