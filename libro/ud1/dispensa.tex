@@ -260,7 +260,7 @@ Immagina di dividere un sistema in due parti uguali, per esempio una sacca di sa
   \item Estensive: massa, volume, energia, quantità di sostanza, numero di cellule. Si sommano quando si mettono insieme due sistemi.
   \item Intensive: temperatura, pressione, densità, concentrazione. Non si sommano.
 \end{itemize}
-Il rapporto fra due grandezze estensive è una grandezza intensiva: la densità è massa diviso volume, la concentrazione è quantità di sostanza diviso volume. Per questo la glicemia misurata su \SI{1}{\milli\litre} di sangue è la stessa misurata su \SI{5}{\milli\litre} dello stesso prelievo.
+Il rapporto fra due grandezze estensive è una grandezza intensiva: la densità è massa diviso volume, la concentrazione è la massa di sostanza disciolta divisa per il volume della soluzione, in \si{\gram\per\litre} (in chimica si usa anche il numero di moli al posto della massa). Per questo la glicemia misurata su \SI{1}{\milli\litre} di sangue è la stessa misurata su \SI{5}{\milli\litre} dello stesso prelievo.
 
 \begin{attenzione}[le grandezze intensive non si sommano]
 Mescolando \SI{1}{\litre} d'acqua a \SI{40}{\celsius} con \SI{1}{\litre} d'acqua a \SI{40}{\celsius} si ottengono \SI{2}{\litre} d'acqua a \SI{40}{\celsius}, non a \SI{80}{\celsius}: il volume, estensivo, si somma; la temperatura, intensiva, no.
@@ -414,6 +414,12 @@ Le prime due formule danno le componenti dal modulo e dall'angolo; le altre due 
 
 Un vettore si scrive spesso con le sue componenti fra parentesi, $\vec a = (a_x, a_y)$, oppure con i \textbf{versori} $\hat\imath$ e $\hat\jmath$, i vettori di modulo 1 diretti come gli assi $x$ e $y$: $\vec a = a_x\,\hat\imath + a_y\,\hat\jmath$. Nello spazio c'è una terza componente $a_z$, lungo l'asse $z$ con il versore $\hat k$, e il modulo è $\sqrt{a_x^{2} + a_y^{2} + a_z^{2}}$. Gli assi si orientano in modo che, con $x$ verso destra e $y$ verso l'alto sul foglio, l'asse $z$ esca dal foglio verso chi legge.
 
+Con le componenti, moltiplicare un vettore per un numero $k$ vuol dire moltiplicare per $k$ ogni componente:
+\[
+  k\vec a = (k a_x, k a_y)
+\]
+Nello spazio si moltiplica anche $a_z$. Per esempio $3 \cdot (1, -2) = (3, -6)$. Vale anche per $k$ negativo: l'opposto $-\vec a = (-a_x, -a_y)$ ha le componenti cambiate di segno.
+
 \begin{esempio}
 (a) Trova le componenti di un vettore di modulo 10 che forma un angolo di \ang{30} con l'asse $x$. (b) Trova modulo e direzione del vettore $\vec b = (3, 4)$.
 
@@ -540,7 +546,7 @@ Il \textbf{prodotto vettoriale} di $\vec a$ e $\vec b$ si scrive $\vec a \times 
 \begin{itemize}
   \item il \textbf{modulo} è $c = ab\sin\theta$, dove $\theta$ è l'angolo fra $\vec a$ e $\vec b$, preso fra \ang{0} e \ang{180}: è l'area del parallelogramma che ha $\vec a$ e $\vec b$ come lati: la base è $a$ e l'altezza è il cateto opposto a $\theta$, cioè $b\sin\theta$;
   \item la \textbf{direzione} è perpendicolare al piano che contiene $\vec a$ e $\vec b$, quindi perpendicolare a entrambi;
-  \item il \textbf{verso} è dato dalla \textbf{regola della mano destra}: si dispongono pollice, indice e medio della mano destra in modo che siano perpendicolari fra loro, come gli spigoli di un cubo che partono da uno stesso vertice; se il pollice indica il verso di $\vec a$ e l'indice quello di $\vec b$, il medio indica il verso di $\vec a \times \vec b$.
+  \item il \textbf{verso} è dato dalla \textbf{regola della mano destra}: si dispongono pollice, indice e medio della mano destra in modo che siano perpendicolari fra loro, come gli spigoli di un cubo che partono da uno stesso vertice; se il pollice indica il verso di $\vec a$ e l'indice quello di $\vec b$, il medio indica il verso di $\vec a \times \vec b$. Se $\vec a$ e $\vec b$ non sono perpendicolari, l'indice, perpendicolare al pollice, punta come la componente di $\vec b$ perpendicolare ad $\vec a$.
 \end{itemize}
 
 \begin{figure}[h]

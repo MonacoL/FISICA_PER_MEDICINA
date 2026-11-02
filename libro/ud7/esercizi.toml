@@ -18,6 +18,8 @@
 #   confronta con il risultato, arrotondato a `cifre` cifre significative. Per la
 #   risposta multipla l'opzione corretta ha `valore`, per il completamento conta
 #   la risposta;
+# - se una parte chiede più di un risultato, `rapido` (LaTeX) è il testo dei
+#   risultati rapidi per quella parte, es. rapido = '''\SI{140}{\metre}; spostamento nullo''';
 # - le costanti sono quelle che lo studente usa a mano.
 
 titolo = "Eserciziario UD7 · Fisica delle radiazioni"
