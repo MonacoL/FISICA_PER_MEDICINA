@@ -100,3 +100,13 @@ Un Quesito d'esame inserito nella Dispensa subito dopo il concetto su cui verte.
 **Richiamo di matematica**:
 Box che ripassa lo strumento matematico che serve in quel punto (potenze di 10, logaritmi, Pitagora, proporzionalità, pendenza e area di un grafico).
 _Avoid_: prerequisito, ripasso
+
+### Revisione
+
+**Revisore**:
+Un lettore indipendente che controlla una Dispensa o un Eserciziario prima del merge, senza aver visto come è stato scritto. Ce ne sono tre: il Revisore di fisica (correttezza e copertura del Syllabus), il Revisore Studente (chiarezza per chi studia da solo) e il Revisore di formato (aderenza al formato della Prova d'esame).
+_Avoid_: correttore, referee
+
+**Rilievo**:
+Un singolo problema segnalato da un Revisore, con posizione nel testo, gravità e correzione proposta.
+_Avoid_: commento, osservazione, issue
