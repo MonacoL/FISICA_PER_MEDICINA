@@ -11,7 +11,7 @@ Argomenti: la UD (`ud7`) e la parte (`dispensa` | `eserciziario`). Se mancano, c
 
 | Parte | Revisori (agente) |
 |---|---|
-| Dispensa | Revisore di fisica (`revisore-fisica`) |
+| Dispensa | Revisore di fisica (`revisore-fisica`), Revisore Studente (`revisore-studente`) |
 | Eserciziario | non ancora disponibile: fermati e dillo |
 
 ## Procedura

@@ -5,7 +5,7 @@ Vale per tutti i Revisori. Il rapporto è il messaggio finale del Revisore: la s
 ## Gravità
 
 - **Bloccante**: errore di fisica o di concetto; risultato numerico sbagliato; formula o unità di misura sbagliata; Quesito con zero o due risposte corrette; voce del Syllabus della UD non coperta. La PR non si unisce finché resta un Bloccante.
-- **Da correggere**: passaggio poco chiaro o saltato; Distrattore debole; numeri di un Quesito non calcolabili a mente; voce del Syllabus coperta solo in parte; violazione delle regole di formato del Completamento. Maiuscola in mezzo alla frase su un nome comune, compresi i termini del glossario ("gli Esempi svolti" invece di "gli esempi svolti"). Chi scrive può respingerlo solo con il motivo.
+- **Da correggere**: passaggio poco chiaro o saltato; esercizio che non si risolve con quello che il testo ha già spiegato; termine o simbolo usato prima di essere definito; Richiamo di matematica mancante; Distrattore debole; numeri di un Quesito non calcolabili a mente; voce del Syllabus coperta solo in parte; violazione delle regole di formato del Completamento; maiuscola in mezzo alla frase su un nome comune, compresi i termini del glossario ("gli Esempi svolti" invece di "gli esempi svolti"). Chi scrive può respingerlo solo con il motivo.
 - **Suggerimento**: stile, ordine dell'esposizione, figure migliorabili.
 
 Nel dubbio fra due gravità, scegli la più alta e spiega il dubbio nel Rilievo.
