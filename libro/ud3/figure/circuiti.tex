@@ -1,0 +1,30 @@
+% Resistenze idrauliche: (a) in serie, (b) in parallelo.
+\begin{tikzpicture}[>=Stealth, font=\small,
+    vaso/.style={draw, thick, fill=formula!15, rounded corners=2pt, minimum width=1.1cm, minimum height=0.45cm}]
+  % (a) serie
+  \draw[very thick, formula] (0,0) -- (0.6,0);
+  \node[vaso] (a1) at (1.3,0) {$R_1$};
+  \draw[very thick, formula] (a1.east) -- ++(0.6,0) node (m) {};
+  \node[vaso, anchor=west] (a2) at (m.center) {$R_2$};
+  \draw[very thick, formula, ->] (a2.east) -- ++(0.7,0) node[right] {$Q$};
+  \draw[->, thick] (-0.6,0) -- (0,0) node[pos=0, left] {$Q$};
+  \draw[decorate, decoration={brace, amplitude=4pt}] (0.75,0.4) -- (1.85,0.4) node[midway, above=4pt] {$\Delta p_1$};
+  \draw[decorate, decoration={brace, amplitude=4pt}] (2.45,0.4) -- (3.55,0.4) node[midway, above=4pt] {$\Delta p_2$};
+  \node at (1.9,-0.9) {(a)};
+
+  % (b) parallelo
+  \begin{scope}[xshift=6.6cm]
+    \draw[->, thick] (-0.6,0) -- (0,0) node[pos=0, left] {$Q$};
+    \draw[very thick, formula] (0,0) -- (0.5,0) -- (0.9,0.6) -- (1.4,0.6);
+    \draw[very thick, formula] (0.5,0) -- (0.9,-0.6) -- (1.4,-0.6);
+    \node[vaso, anchor=west] (b1) at (1.4,0.6) {$R_1$};
+    \node[vaso, anchor=west] (b2) at (1.4,-0.6) {$R_2$};
+    \draw[very thick, formula] (b1.east) -- ++(0.4,0) -- ++(0.4,-0.6) -- ++(0.5,0);
+    \draw[very thick, formula] (b2.east) -- ++(0.4,0) -- ++(0.4,0.6);
+    \draw[->, thick] (4.2,0) -- (4.8,0) node[right] {$Q$};
+    \node[above] at (1.95,0.85) {$Q_1$};
+    \node[below] at (1.95,-0.85) {$Q_2$};
+    \draw[decorate, decoration={brace, amplitude=4pt}] (0.5,1.35) -- (4.2,1.35) node[midway, above=4pt] {stessa $\Delta p$};
+    \node at (2.2,-1.6) {(b)};
+  \end{scope}
+\end{tikzpicture}
