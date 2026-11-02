@@ -1738,9 +1738,9 @@ Una pressione sistolica così bassa non è sostenibile: il controllo della press
 \]
 Il sangue rallenta. Per il teorema di Bernoulli, con i due tratti alla stessa altezza e $\frac{1}{2}\rho = 530$, la pressione cresce di
 \[
-  p_2 - p_1 = \tfrac{1}{2}\rho\,(v_1^2 - v_2^2) = 530 \cdot (0{,}25 - 0{,}0064)\,\si{\pascal} = 530 \cdot 0{,}2436\,\si{\pascal} \approx \SI{129}{\pascal} \approx \SI{1,3e2}{\pascal}
+  p_2 - p_1 = \tfrac{1}{2}\rho\,(v_1^2 - v_2^2) = 530 \cdot (0{,}25 - 0{,}0064)\,\si{\pascal} \approx 530 \cdot 0{,}24\,\si{\pascal} \approx \SI{127}{\pascal} \approx \SI{1,3e2}{\pascal}
 \]
-In millimetri di mercurio è $129/133 \approx \SI{1,0}{\mmHg}$, meno dell'1\% di \SI{120}{\mmHg}. Si può quindi dare la stessa pressione ai due tratti: la tensione nell'aneurisma cresce per il raggio, non per la pressione.'''
+dove $530 \cdot 0{,}24 = 500 \cdot 0{,}24 + 30 \cdot 0{,}24 = 120 + 7{,}2 \approx 127$. In millimetri di mercurio è $127/133 \approx \SI{1,0}{\mmHg}$, meno dell'1\% di \SI{120}{\mmHg}. Si può quindi dare la stessa pressione ai due tratti: la tensione nell'aneurisma cresce per il raggio, non per la pressione.'''
 
 [[problema]]
 id = "ud3-superficie-alveoli"
