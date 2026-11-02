@@ -198,7 +198,9 @@ def lampo_latex(q: dict) -> str:
 
 
 def eserciziario_latex(fonte: dict) -> str:
-    problemi = fonte.get("problema", [])
+    # In ordine di livello, come li numera l'eserciziario: così risultati rapidi e soluzioni
+    # svolte seguono la numerazione. Dentro un livello resta l'ordine della fonte.
+    problemi = sorted(fonte.get("problema", []), key=lambda p: p["livello"])
     esame = [q for q in fonte.get("quesito", []) if not q.get("lampo")]
     lampo = [q for q in fonte.get("quesito", []) if q.get("lampo")]
     out = ["% Generato da esercizi.toml: non modificare qui.", "", r"\section*{Problemi}"]

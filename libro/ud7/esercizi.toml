@@ -68,15 +68,15 @@ dati.f = { valore = "2,5", unita = "GHz" }
 [[problema]]
 id = "ud7-onde-risonanza"
 livello = 1
-testo = '''Un tomografo a risonanza magnetica da \SI{1,5}{\tesla} usa onde radio di frequenza {{f}}. Calcola la loro lunghezza d'onda nel vuoto.'''
-dati.f = { valore = 64, unita = "MHz" }
+testo = '''Un tomografo a risonanza magnetica da \SI{3}{\tesla} usa onde radio di frequenza {{f}}. Calcola la loro lunghezza d'onda nel vuoto.'''
+dati.f = { valore = 128, unita = "MHz" }
 
   [[problema.parte]]
   calcolo = "c / (f * 1e6)"
-  risultato = { valore = 4.7, unita = "m", cifre = 2 }
-  soluzione = '''La frequenza in hertz è $\SI{64}{\mega\hertz} = 64 \cdot \SI{e6}{\hertz} = \SI{6,4e7}{\hertz}$. Dalla relazione $c = \lambda f$:
+  risultato = { valore = 2.3, unita = "m", cifre = 2 }
+  soluzione = '''La frequenza in hertz è $\SI{128}{\mega\hertz} = 128 \cdot \SI{e6}{\hertz} = \SI{1,28e8}{\hertz}$. Dalla relazione $c = \lambda f$:
 \[
-  \lambda = \frac{c}{f} = \frac{\SI{3e8}{\metre\per\second}}{\SI{6,4e7}{\hertz}} = \frac{3}{6{,}4} \cdot 10^{8-7}\,\si{\metre} \approx 0{,}47 \cdot 10\,\si{\metre} = \SI{4,7}{\metre}
+  \lambda = \frac{c}{f} = \frac{\SI{3e8}{\metre\per\second}}{\SI{1,28e8}{\hertz}} = \frac{3}{1{,}28} \cdot 10^{8-8}\,\si{\metre} \approx \SI{2,3}{\metre}
 \]
 Sono onde radio: la lunghezza d'onda è più grande del corpo del paziente.'''
 
@@ -314,14 +314,14 @@ dati.I1 = { valore = "2,0e-3", unita = "W/m^2" }
 dove $(1/2{,}5)^2 = 0{,}4^2 = 0{,}16$.'''
 
   [[problema.parte]]
-  domanda = '''A quale distanza dalla sorgente l'intensità scende a \SI{2,0e-5}{\watt\per\metre\squared}?'''
-  calcolo = "r1 * math.sqrt(I1 / 2.0e-5)"
-  risultato = { valore = 10, unita = "m", cifre = 2 }
-  soluzione = '''L'intensità deve diventare
+  domanda = '''Il personale resta a \SI{2,5}{\metre} dalla sorgente, dietro una parete di piombo che per questi raggi $\gamma$ ha spessore emivalente \SI{3,0}{\milli\metre}. Quale spessore di piombo riduce l'intensità a \SI{2,0e-5}{\watt\per\metre\squared}?'''
+  calcolo = "3.0 * math.log2((I1 * (r1 / 2.5)**2) / 2.0e-5)"
+  risultato = { valore = 12, unita = "mm", cifre = 2 }
+  soluzione = '''Senza parete, a \SI{2,5}{\metre} l'intensità è quella del punto (b), \SI{3,2e-4}{\watt\per\metre\squared}. Il piombo la deve ridurre di un fattore
 \[
-  \frac{I_1}{I_3} = \frac{\SI{2,0e-3}{\watt\per\metre\squared}}{\SI{2,0e-5}{\watt\per\metre\squared}} = 10^{-3-(-5)} = 10^{2} = 100
+  \frac{\SI{3,2e-4}{\watt\per\metre\squared}}{\SI{2,0e-5}{\watt\per\metre\squared}} = 1{,}6 \cdot 10^{-4-(-5)} = 16 = 2^4
 \]
-volte più piccola. Poiché l'intensità va come $1/r^2$, la distanza deve diventare $\sqrt{100} = 10$ volte più grande: $r_3 = 10 \cdot \SI{1,0}{\metre} = \SI{10}{\metre}$. Per questo, durante il trattamento, il personale esce dalla stanza, che ha pareti schermate.'''
+cioè di 4 dimezzamenti: servono 4 spessori emivalenti, $4 \cdot \SI{3,0}{\milli\metre} = \SI{12}{\milli\metre}$ di piombo. Distanza e schermatura si sommano: la distanza riduce l'intensità di \num{6,25} volte, il piombo di altre 16.'''
 
 [[problema]]
 id = "ud7-spettro-saturimetro"
@@ -340,13 +340,14 @@ dati.li = { valore = 940, unita = "nm" }
 \]'''
 
   [[problema.parte]]
-  domanda = '''Calcola il periodo della radiazione infrarossa.'''
-  calcolo = "(li * 1e-9) / c"
-  risultato = { valore = 3.1e-15, unita = "s", cifre = 2 }
-  soluzione = '''In un periodo l'onda avanza di una lunghezza d'onda, quindi $T = \lambda/c$. Con $\lambda = \SI{940}{\nano\metre} = \SI{9,4e-7}{\metre}$:
+  domanda = '''Calcola in elettronvolt l'energia di un fotone del LED rosso. La radiazione dei due LED è ionizzante?'''
+  calcolo = "hc_eVnm / lr"
+  risultato = { valore = 1.9, unita = "eV", cifre = 2 }
+  soluzione = '''Con la formula pratica, $E\,[\si{\electronvolt}] \approx 1240/\lambda\,[\si{\nano\metre}]$:
 \[
-  T = \frac{\lambda}{c} = \frac{\SI{9,4e-7}{\metre}}{\SI{3e8}{\metre\per\second}} = \frac{9{,}4}{3} \cdot 10^{-7-8}\,\si{\second} \approx \SI{3,1e-15}{\second}
-\]'''
+  E_\text{rosso} \approx \frac{1240}{660}\,\si{\electronvolt} \approx \SI{1,9}{\electronvolt}
+\]
+Il fotone infrarosso, con lunghezza d'onda maggiore, ha ancora meno energia: $E_\text{IR} \approx 1240/940\,\si{\electronvolt} \approx \SI{1,3}{\electronvolt}$. Entrambe le energie sono molto sotto i \SI{10}{\electronvolt} che servono per ionizzare: la radiazione dei due LED non è ionizzante.'''
 
   [[problema.parte]]
   domanda = '''Quante volte la frequenza della luce rossa è più grande di quella della radiazione infrarossa? In quale regione dello spettro si trova ciascuna delle due?'''
@@ -452,17 +453,17 @@ dati.E = { valore = 140, unita = "keV" }
   [[problema.parte]]
   domanda = '''Calcola l'energia di un fotone in joule.'''
   calcolo = "E * 1e3 * eV"
-  risultato = { valore = 2.24e-14, unita = "J", cifre = 3 }
+  risultato = { valore = 2.2e-14, unita = "J", cifre = 2 }
   soluzione = '''$\SI{140}{\kilo\electronvolt} = \SI{1,40e5}{\electronvolt}$, e ogni elettronvolt vale \SI{1,6e-19}{\joule}:
 \[
-  E = \num{1,40e5} \cdot \SI{1,6e-19}{\joule} = 1{,}40 \cdot 1{,}6 \cdot 10^{5-19}\,\si{\joule} = 2{,}24 \cdot 10^{-14}\,\si{\joule}
+  E = \num{1,40e5} \cdot \SI{1,6e-19}{\joule} = 1{,}40 \cdot 1{,}6 \cdot 10^{5-19}\,\si{\joule} = 2{,}24 \cdot 10^{-14}\,\si{\joule} \approx \SI{2,2e-14}{\joule}
 \]'''
 
   [[problema.parte]]
   domanda = '''Calcola la frequenza della radiazione.'''
   calcolo = "E * 1e3 * eV / h"
   risultato = { valore = 3.4e19, unita = "Hz", cifre = 2 }
-  soluzione = '''Da $E = hf$, con l'energia del punto (a):
+  soluzione = '''Da $E = hf$, con l'energia del punto (a) prima dell'arrotondamento:
 \[
   f = \frac{E}{h} = \frac{\SI{2,24e-14}{\joule}}{\SI{6,6e-34}{\joule\second}} = \frac{2{,}24}{6{,}6} \cdot 10^{-14-(-34)}\,\si{\hertz} \approx 0{,}34 \cdot 10^{20}\,\si{\hertz} = \SI{3,4e19}{\hertz}
 \]'''
@@ -541,8 +542,8 @@ dati.Eion = { valore = "12,6", unita = "eV" }
   [[problema.parte]]
   domanda = '''Calcola l'energia di un fotone X, in kiloelettronvolt.'''
   calcolo = "hc_eVnm / lamX / 1e3"
-  risultato = { valore = 24.8, unita = "keV", cifre = 3 }
-  soluzione = '''$E \approx 1240/0{,}050\,\si{\electronvolt} = 1240 \cdot 20\,\si{\electronvolt} = \SI{24800}{\electronvolt} = \SI{24,8}{\kilo\electronvolt}$.'''
+  risultato = { valore = 25, unita = "keV", cifre = 2 }
+  soluzione = '''$E \approx 1240/0{,}050\,\si{\electronvolt} = 1240 \cdot 20\,\si{\electronvolt} = \SI{24800}{\electronvolt} \approx \SI{25}{\kilo\electronvolt}$.'''
 
   [[problema.parte]]
   domanda = '''Qual è la massima lunghezza d'onda di un fotone capace di ionizzare l'acqua? Quali delle tre radiazioni sono ionizzanti?'''
@@ -552,7 +553,7 @@ dati.Eion = { valore = "12,6", unita = "eV" }
 \[
   \lambda \leq \frac{1240}{12{,}6}\,\si{\nano\metre} \approx \SI{98}{\nano\metre}
 \]
-È ultravioletto lontano. Solo i raggi X ($\SI{24,8}{\kilo\electronvolt}$, circa 2000 volte la soglia) sono ionizzanti. L'infrarosso (\SI{0,12}{\electronvolt}) scalda soltanto. L'ultravioletto della lampada (\SI{4,9}{\electronvolt}) non ionizza, ma i suoi fotoni bastano a rompere alcuni legami chimici: per questo uccide i batteri danneggiandone il DNA.'''
+A mano: $12{,}6 \cdot 100 = 1260$, poco più di 1240, quindi $\lambda$ è poco meno di \SI{100}{\nano\metre}: $\lambda \approx \SI{98}{\nano\metre}$. È ultravioletto lontano. Solo i raggi X ($\SI{25}{\kilo\electronvolt}$, circa 2000 volte la soglia) sono ionizzanti. L'infrarosso (\SI{0,12}{\electronvolt}) scalda soltanto. L'ultravioletto della lampada (\SI{4,9}{\electronvolt}) non ionizza, ma i suoi fotoni bastano a rompere alcuni legami chimici: per questo uccide i batteri danneggiandone il DNA.'''
 
 [[problema]]
 id = "ud7-fotone-tubo-x"
@@ -662,7 +663,7 @@ Sono raggi $\gamma$: meno di \SI{0,01}{\nano\metre}.'''
 [[problema]]
 id = "ud7-hvl-tessuto"
 livello = 1
-testo = '''Un tessuto ha coefficiente di attenuazione {{mu}} per i raggi X di una radiografia. Calcola lo spessore emivalente.'''
+testo = '''Un tessuto ha coefficiente di attenuazione {{mu}} per i raggi X di una radiografia. Considera il fascio monocromatico. Calcola lo spessore emivalente.'''
 dati.mu = { valore = 0.35, unita = "cm^-1" }
 
   [[problema.parte]]
@@ -694,7 +695,7 @@ dati.x12 = { valore = "0,50", unita = "cm" }
 [[problema]]
 id = "ud7-lb-grembiule"
 livello = 1
-testo = '''Per i raggi X di una radiografia il piombo di un grembiule di protezione ha uno spessore emivalente di {{x12}}. Calcola il coefficiente di attenuazione lineare del piombo, in \si[per-mode=power]{\centi\metre\tothe{-1}}.'''
+testo = '''Per i raggi X di una radiografia il piombo di un grembiule di protezione ha uno spessore emivalente di {{x12}}. Considera il fascio monocromatico. Calcola il coefficiente di attenuazione lineare del piombo, in \si[per-mode=power]{\centi\metre\tothe{-1}}.'''
 dati.x12 = { valore = "0,25", unita = "mm" }
 
   [[problema.parte]]
@@ -803,16 +804,16 @@ dati.p = { valore = 50, unita = "\\percent" }
   domanda = '''La stessa soluzione si mette in una cuvetta con cammino di \SI{2,0}{\centi\metre}. Quale percentuale della luce passa?'''
   calcolo = "100 * 10**(-2 * math.log10(100 / p))"
   risultato = { valore = 25, unita = "\\percent", cifre = 2 }
-  soluzione = '''L'assorbanza è proporzionale al cammino $\ell$: raddoppiando $\ell$ raddoppia, $A = 2 \cdot 0{,}30 = 0{,}60$. Allora
+  soluzione = '''L'assorbanza è proporzionale al cammino $\ell$: raddoppiando $\ell$ raddoppia, $A = 2 \cdot 0{,}30 = 0{,}60$. Poiché $\log_{10} 2 \approx 0{,}30$, vale $10^{0{,}30} \approx 2$, cioè $10^{-0{,}30} \approx 1/2$. Allora
 \[
-  \frac{I}{I_0} = 10^{-0{,}60} = \left(10^{-0{,}30}\right)^2 = \left(\frac12\right)^2 = \frac14
+  \frac{I}{I_0} = 10^{-0{,}60} = \left(10^{-0{,}30}\right)^2 \approx \left(\frac12\right)^2 = \frac14
 \]
 Passa il \SI{25}{\percent} della luce. È lo stesso risultato che si ottiene ragionando a strati: ogni centimetro lascia passare metà della luce che gli arriva.'''
 
 [[problema]]
 id = "ud7-lb-osso"
 livello = 3
-testo = '''In una radiografia del braccio due fasci di raggi X attraversano \SI{12}{\centi\metre} di spessore. Il primo passa solo nei tessuti molli, che hanno spessore emivalente {{xt}}. Il secondo attraversa \SI{9}{\centi\metre} di tessuti molli e \SI{3}{\centi\metre} di osso, che ha spessore emivalente {{xo}}.'''
+testo = '''In una radiografia del braccio due fasci di raggi X attraversano \SI{12}{\centi\metre} di spessore. Il primo passa solo nei tessuti molli, che hanno spessore emivalente {{xt}}. Il secondo attraversa \SI{9}{\centi\metre} di tessuti molli e \SI{3}{\centi\metre} di osso, che ha spessore emivalente {{xo}}. Considera il fascio monocromatico.'''
 dati.xt = { valore = "3,0", unita = "cm" }
 dati.xo = { valore = "1,0", unita = "cm" }
 
@@ -959,8 +960,9 @@ dati.A = { valore = 400, unita = "MBq" }
   risultato = { valore = 1.3e13, cifre = 2 }
   soluzione = '''Dalla relazione $\mathcal{A} = \lambda N$. L'emivita in secondi è $\SI{6,0}{\hour} = 6 \cdot \SI{3600}{\second} = \SI{21600}{\second}$, e l'attività è $\SI{400}{\mega\becquerel} = \SI[per-mode=power]{4,0e8}{\second\tothe{-1}}$:
 \[
-  \lambda = \frac{\ln 2}{T_{1/2}} = \frac{0{,}69}{\SI{2,16e4}{\second}} \approx \SI[per-mode=power]{3,2e-5}{\second\tothe{-1}}
-  \qquad
+  \lambda = \frac{\ln 2}{T_{1/2}} = \frac{0{,}69}{\SI{2,16e4}{\second}} = \frac{0{,}69}{2{,}16} \cdot 10^{-4}\,\si[per-mode=power]{\second\tothe{-1}} \approx 0{,}32 \cdot 10^{-4}\,\si[per-mode=power]{\second\tothe{-1}} = \SI[per-mode=power]{3,2e-5}{\second\tothe{-1}}
+\]
+\[
   N = \frac{\mathcal{A}}{\lambda} = \frac{4{,}0}{3{,}2} \cdot 10^{8-(-5)} = 1{,}25 \cdot 10^{13} \approx \num{1,3e13}
 \]'''
 
@@ -1145,25 +1147,25 @@ id = "ud7-radio-pet"
 livello = 3
 testo = '''Per un esame PET un paziente riceve alle 10:00 una dose di FDG, un radiofarmaco al fluoro-18 (emivita {{T12}}), con attività {{A}}. Il fluoro-18 decade $\beta^+$ e diventa ossigeno-18; il positrone si annichila con un elettrone e produce due fotoni da {{E}} ciascuno. La dose viene prodotta alle 6:20 dello stesso giorno.'''
 dati.T12 = { valore = 110, unita = "minuti" }
-dati.A = { valore = 400, unita = "MBq" }
+dati.A = { valore = 300, unita = "MBq" }
 dati.E = { valore = 511, unita = "keV" }
 
   [[problema.parte]]
   domanda = '''Quale attività deve avere la dose quando viene prodotta?'''
   calcolo = "A * 2**(220 / T12) / 1000"
-  risultato = { valore = 1.6, unita = "GBq", cifre = 2 }
+  risultato = { valore = 1.2, unita = "GBq", cifre = 2 }
   soluzione = '''Dalle 6:20 alle 10:00 passano \SI{3}{\hour} e \SI{40}{minuti}, cioè $180 + 40 = \SI{220}{minuti}$: sono $220/110 = 2$ emivite. In due emivite l'attività si riduce a $1/2^2 = 1/4$, quindi alla produzione serve
 \[
-  \mathcal{A}_0 = 4 \cdot \SI{400}{\mega\becquerel} = \SI{1600}{\mega\becquerel} = \SI{1,6}{\giga\becquerel}
+  \mathcal{A}_0 = 4 \cdot \SI{300}{\mega\becquerel} = \SI{1200}{\mega\becquerel} = \SI{1,2}{\giga\becquerel}
 \]'''
 
   [[problema.parte]]
   domanda = '''Quanti fotoni da \SI{511}{\kilo\electronvolt} al secondo escono dal paziente al momento dell'iniezione, se nessuno viene assorbito?'''
   calcolo = "2 * A * 1e6"
-  risultato = { valore = 8.0e8, unita = "s^-1", cifre = 2 }
-  soluzione = '''L'attività è il numero di decadimenti al secondo: $\SI{400}{\mega\becquerel} = \SI[per-mode=power]{4,0e8}{\second\tothe{-1}}$. Ogni decadimento dà un positrone, e ogni annichilazione due fotoni:
+  risultato = { valore = 6.0e8, unita = "s^-1", cifre = 2 }
+  soluzione = '''L'attività è il numero di decadimenti al secondo: $\SI{300}{\mega\becquerel} = \SI[per-mode=power]{3,0e8}{\second\tothe{-1}}$. Ogni decadimento dà un positrone, e ogni annichilazione due fotoni:
 \[
-  2 \cdot \SI[per-mode=power]{4,0e8}{\second\tothe{-1}} = \SI[per-mode=power]{8,0e8}{\second\tothe{-1}}
+  2 \cdot \SI[per-mode=power]{3,0e8}{\second\tothe{-1}} = \SI[per-mode=power]{6,0e8}{\second\tothe{-1}}
 \]'''
 
   [[problema.parte]]
@@ -1222,10 +1224,16 @@ dati.m = { valore = "5,0", unita = "\\gram" }
 dati.a = { valore = "0,15", unita = "Bq" }
 
   [[problema.parte]]
-  domanda = '''Quanti neutroni ha il carbonio-14? E il carbonio-12, $\nuclide{12}{6}{C}$?'''
+  domanda = '''Quanti neutroni ha il carbonio-14?'''
   calcolo = "14 - 6"
   risultato = { valore = 8, cifre = 1 }
-  soluzione = '''Da $N = A - Z$: il carbonio-14 ha $14 - 6 = 8$ neutroni, il carbonio-12 ne ha $12 - 6 = 6$. Hanno lo stesso numero di protoni, quindi sono isotopi dello stesso elemento, con le stesse proprietà chimiche: per questo un organismo vivo li assorbe insieme. Il carbonio-14 ha troppi neutroni ed è instabile: decade $\beta^-$ in azoto-14.'''
+  soluzione = '''Da $N = A - Z$: il carbonio-14 ha $14 - 6 = 8$ neutroni.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti neutroni ha il carbonio-12, $\nuclide{12}{6}{C}$?'''
+  calcolo = "12 - 6"
+  risultato = { valore = 6, cifre = 1 }
+  soluzione = '''Da $N = A - Z$: il carbonio-12 ha $12 - 6 = 6$ neutroni. I due nuclei hanno lo stesso numero di protoni, quindi sono isotopi dello stesso elemento, con le stesse proprietà chimiche: per questo un organismo vivo li assorbe insieme. Il carbonio-14 ha troppi neutroni ed è instabile: decade $\beta^-$ in azoto-14.'''
 
   [[problema.parte]]
   domanda = '''Da quanti anni è morto l'organismo?'''
@@ -1331,7 +1339,7 @@ dati.n = { valore = "1,41" }
   domanda = '''Quale angolo formano fra loro il raggio riflesso e il raggio rifratto?'''
   calcolo = "180 - 45 - math.degrees(math.asin(sin45 / n))"
   risultato = { valore = 105, unita = "\\degree", cifre = 3 }
-  soluzione = '''Per la legge della riflessione il raggio riflesso forma \ang{45} con la normale, dalla parte dell'aria. Il raggio rifratto forma \ang{30} con la normale, dalla parte del materiale. Le due metà della normale, sopra e sotto la superficie, formano un angolo piatto di \ang{180}, e i due raggi stanno dalla stessa parte della normale. L'angolo fra i due raggi è quindi
+  soluzione = '''Per la legge della riflessione il raggio riflesso forma \ang{45} con la normale, dalla parte dell'aria. Il raggio rifratto forma \ang{30} con la normale, dalla parte del materiale. Le due metà della normale, sopra e sotto la superficie, formano un angolo piatto di \ang{180}, e i due raggi stanno dalla stessa parte della normale (come nella figura della rifrazione nella dispensa: incidente a sinistra della normale, riflesso e rifratto entrambi a destra). L'angolo fra i due raggi è quindi
 \[
   \ang{180} - \ang{45} - \ang{30} = \ang{105}
 \]'''
@@ -1567,10 +1575,10 @@ dati.n = { valore = "1,41" }
 Il raggio si allontana dalla normale, perché passa in un mezzo meno denso. Questa luce esce dalla parete e va persa.'''
 
   [[problema.parte]]
-  domanda = '''Quanto vale l'angolo limite del vetro in aria? Che cosa succede a un raggio che colpisce la parete con angolo di incidenza di \ang{60}?'''
+  domanda = '''Quanto vale l'angolo limite del vetro in aria (vedi l'approfondimento sull'angolo limite nella dispensa)? Che cosa succede a un raggio che colpisce la parete con angolo di incidenza di \ang{60}?'''
   calcolo = "math.degrees(math.asin(1 / n))"
   risultato = { valore = 45, unita = "\\degree", cifre = 2 }
-  soluzione = '''All'angolo limite il raggio rifratto esce radente, $\theta_2 = \ang{90}$:
+  soluzione = '''L'angolo limite $\theta_\ell$ è l'angolo di incidenza per cui il raggio rifratto esce radente, $\theta_2 = \ang{90}$. Dalla legge di Snell, con $\sin\ang{90} = 1$, vale $\sin\theta_\ell = n_2/n_1$:
 \[
   \sin\theta_\ell = \frac{n_2}{n_1} = \frac{1}{1{,}41} \approx 0{,}71
   \qquad\Longrightarrow\qquad
@@ -1739,8 +1747,8 @@ soluzione = '''Ogni fotone ha $E \approx 1240/620 = \SI{2}{\electronvolt} = 2 \c
   testo = '''$2 \cdot 10^{-16}$'''
   commento = '''Divide l'energia del fotone per la potenza invece del contrario: $\num{3,2e-19}/\num{1,6e-3} = \num{2e-16}$. Un numero di fotoni minore di 1 al secondo è già un segnale d'errore.'''
   [[quesito.opzione]]
-  testo = '''$8 \cdot 10^{-4}$'''
-  commento = '''Divide la potenza in watt per l'energia in elettronvolt, senza convertirla in joule: $\num{1,6e-3}/2 = \num{8e-4}$.'''
+  testo = '''$5 \cdot 10^{12}$'''
+  commento = '''Legge il prefisso milli come micro: $\SI{1,6}{\micro\watt} = \SI{1,6e-6}{\watt}$, e $\num{1,6e-6}/\num{3,2e-19} = \num{5e12}$.'''
   [[quesito.opzione]]
   testo = '''$1 \cdot 10^{16}$'''
   commento = '''Usa per il fotone \SI{1}{\electronvolt}, cioè \SI{1,6e-19}{\joule}, dimenticando che ne ha 2: $\num{1,6e-3}/\num{1,6e-19} = \num{e16}$.'''
@@ -1891,13 +1899,13 @@ soluzione = '''A ogni battito arriva al dito un po' di sangue arterioso in più,
   testo = '''Perché a ogni battito l'assorbanza diminuisce e al sensore arriva più luce.'''
   commento = '''Inverte l'effetto: il sangue in più aumenta lo spessore attraversato, quindi l'assorbanza cresce e al sensore arriva meno luce.'''
   [[quesito.opzione]]
-  testo = '''Perché la luce infrarossa diventa ionizzante quando attraversa il sangue arterioso.'''
-  commento = '''Un fotone a \SI{940}{\nano\metre} ha circa $1240/940 \approx \SI{1,3}{\electronvolt}$, molto meno dei \SI{10}{\electronvolt} che servono per ionizzare, e la sua energia non cambia nel sangue.'''
+  testo = '''Perché la parte che pulsa è dovuta al sangue venoso, che porta meno ossigeno.'''
+  commento = '''A ogni battito arriva sangue arterioso; il sangue venoso dà un contributo che non pulsa, ed è proprio quello che lo strumento toglie.'''
 
 [[quesito]]
 id = "ud7-lb-calcestruzzo"
 tipo = "multipla"
-testo = '''La parete di una sala di radiologia deve ridurre l'intensità dei raggi X a circa un millesimo. Per questi raggi lo spessore emivalente del calcestruzzo è {{x12}}. Lo spessore di calcestruzzo necessario è circa'''
+testo = '''La parete di una sala di radiologia deve ridurre l'intensità dei raggi X a circa un millesimo. Per questi raggi lo spessore emivalente del calcestruzzo è {{x12}}. Considera il fascio monocromatico. Lo spessore di calcestruzzo necessario è circa'''
 dati.x12 = { valore = "2,0", unita = "cm" }
 corretta = "B"
 calcolo = "x12 * round(math.log2(1000))"
@@ -1914,7 +1922,7 @@ soluzione = '''$2^{10} = 1024 \approx 1000$: per ridurre l'intensità a un mille
   commento = '''Usa il logaritmo in base 10, $\log_{10} 1000 = 3$, nella legge con l'esponenziale $e$: $x = 3/\mu = 3/(0{,}69/\SI{2,0}{\centi\metre}) \approx 3/\SI[per-mode=power]{0,35}{\centi\metre\tothe{-1}} \approx \SI{9}{\centi\metre}$. Con $e$ serve il logaritmo naturale, $\ln 1000 \approx 6{,}9$.'''
   [[quesito.opzione]]
   testo = '''\SI{4}{\centi\metre}'''
-  commento = '''Pensa che ogni spessore emivalente tolga metà dell'intensità iniziale: due spessori, \SI{4}{\centi\metre}, spegnerebbero tutto il fascio, e un millesimo resterebbe poco prima. Ogni spessore toglie metà di quello che gli arriva.'''
+  commento = '''Tratta l'attenuazione come lineare: se ogni spessore emivalente togliesse metà dell'intensità \emph{iniziale}, dopo due (\SI{4}{\centi\metre}) il fascio sarebbe spento, e un millesimo resterebbe appena prima. Ogni spessore toglie invece metà di quello che gli arriva.'''
   [[quesito.opzione]]
   testo = '''\SI{10}{\metre}'''
   commento = '''Divide il fattore 1000 per 2 invece di chiedersi quante volte si deve dimezzare: $1000/2 = 500$ spessori, $500 \cdot \SI{2,0}{\centi\metre} = \SI{1000}{\centi\metre}$.'''
@@ -1931,7 +1939,7 @@ soluzione = '''$1/32 = 1/2^5$: \SI{1,5}{\milli\metre} sono 5 spessori emivalenti
 [[quesito]]
 id = "ud7-beta"
 tipo = "multipla"
-testo = '''Il fosforo-32, usato in alcune terapie, decade $\beta^-$. Quale nucleo si forma?'''
+testo = '''Il fosforo-32, $\nuclide{32}{15}{P}$, usato in alcune terapie, decade $\beta^-$. Quale nucleo si forma?'''
 corretta = "B"
 soluzione = '''Nel decadimento $\beta^-$ un neutrone diventa protone ed esce un elettrone: il numero di massa resta 32, il numero atomico sale da 15 a 16, che è lo zolfo.'''
 
@@ -2058,7 +2066,7 @@ soluzione = '''La frequenza la fissa la sorgente e non cambia passando da un mez
   commento = '''Moltiplica per $n$ invece di dividere: $\lambda_{\text{mezzo}} = \lambda_0/n$, non $n\lambda_0$.'''
   [[quesito.opzione]]
   testo = '''La velocità aumenta, perché l'acqua è più densa dell'aria.'''
-  commento = '''Ragiona come per il suono. Per la luce un mezzo otticamente più denso, con $n$ più alto, vuol dire velocità più bassa: $v = c/n$.'''
+  commento = '''Pensa che in un mezzo più denso la luce vada più veloce, come succede al suono nei solidi. Per la luce un mezzo otticamente più denso, con $n$ più alto, vuol dire velocità più bassa: $v = c/n$.'''
 
 [[quesito]]
 id = "ud7-ottica-trova-n"
@@ -2205,8 +2213,8 @@ soluzione = '''In ordine di frequenza crescente lo spettro è radio, microonde, 
   testo = '''visibile, ultravioletto, infrarosso, microonde, onde radio'''
   commento = '''Mette l'ultravioletto fra il visibile e l'infrarosso.'''
   [[quesito.opzione]]
-  testo = '''microonde, onde radio, infrarosso, visibile, raggi $\gamma$'''
-  commento = '''Mette le microonde prima delle onde radio e salta da visibile a $\gamma$ nel verso sbagliato.'''
+  testo = '''raggi $\gamma$, ultravioletto, raggi X, visibile, infrarosso'''
+  commento = '''Scambia raggi X e ultravioletto: i raggi X hanno lunghezza d'onda più corta dell'ultravioletto.'''
 
 [[quesito]]
 id = "ud7-fotone"
