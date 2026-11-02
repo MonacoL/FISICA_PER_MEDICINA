@@ -239,7 +239,7 @@ tipo = "multipla"
 lampo = true
 testo = '''Due bolle di sapone, una di raggio \SI{1}{\centi\metre} e una di raggio \SI{2}{\centi\metre}, sono collegate da un tubicino con un rubinetto chiuso. Quando si apre il rubinetto'''
 corretta = "B"
-soluzione = '''Per la legge di Laplace la pressione dentro una bolla supera quella fuori di $\Delta p = 4\gamma/r$: è più grande nella bolla più piccola. Aprendo il rubinetto l'aria va dalla pressione più alta a quella più bassa, cioè dalla bolla piccola a quella grande. Svuotandosi, la bolla piccola diventa ancora più piccola e la sua pressione cresce ancora: si svuota del tutto nella grande. È il motivo per cui gli alveoli polmonari, senza il surfattante, sarebbero instabili.'''
+soluzione = '''Per la legge di Laplace la pressione dentro una bolla supera quella fuori di $\Delta p = 4\gamma/r$: è più grande nella bolla più piccola. Aprendo il rubinetto l'aria va dalla pressione più alta a quella più bassa, cioè dalla bolla piccola a quella grande. Svuotandosi, la bolla piccola diventa ancora più piccola e la sua pressione cresce ancora: si svuota nella grande, fino a ridursi a una piccola calotta sull'imboccatura del tubicino. È il motivo per cui gli alveoli polmonari, senza il surfattante, sarebbero instabili.'''
 
   [[quesito.opzione]]
   testo = '''la bolla grande si svuota nella piccola, perché contiene più aria'''
@@ -247,7 +247,7 @@ soluzione = '''Per la legge di Laplace la pressione dentro una bolla supera quel
   [[quesito.opzione]]
   testo = '''la bolla piccola si svuota nella grande'''
   [[quesito.opzione]]
-  testo = '''l'aria passa finché le due bolle hanno lo stesso raggio'''
+  testo = '''le due bolle diventano uguali, metà dell'aria per ciascuna'''
   commento = '''Due bolle uguali sarebbero in equilibrio, ma è un equilibrio instabile: appena una diventa un po' più piccola la sua pressione cresce e continua a svuotarsi.'''
   [[quesito.opzione]]
   testo = '''non succede nulla, perché le due bolle sono alla stessa pressione'''

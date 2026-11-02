@@ -15,16 +15,16 @@
     \draw[->, attenzione] (0.95,\y) -- (1.45,\y);
     \draw[->, attenzione] (3.25,\y) -- (2.75,\y);
   }
-  \node[attenzione, right] at (2.55,2.45) {$p_1 S$};
+  \node[attenzione, above] at (2.1,2.45) {$p_1 S$};
   \node[attenzione, right] at (2.55,0.25) {$p_2 S$};
   % profondità
-  \draw[|<->|] (3.75,3.0) -- (3.75,2.0) node[midway, right] {$h_1$};
+  \draw[|<->|] (3.75,3.0) -- (3.75,2.0) node[midway, left] {$h_1$};
   \draw[|<->|] (0.45,3.0) -- (0.45,0.8) node[pos=0.3, right] {$h_2$};
-  \node[esempio] at (2.1,1.4) {$\ell$};
   % forze risultanti sul corpo
   \begin{scope}[xshift=5.6cm]
     \fill[esempio!35] (0,0.8) rectangle (1.2,2.0);
     \draw[thick, esempio] (0,0.8) rectangle (1.2,2.0);
+    \draw[|<->|, esempio] (-0.3,0.8) -- (-0.3,2.0) node[midway, left] {$\ell$};
     \fill (0.6,1.4) circle (1.6pt);
     \draw[->, very thick, formula] (0.6,1.4) -- (0.6,3.0) node[above] {$F_A = \rho_\text{f} V g$};
     \draw[->, very thick, attenzione] (0.6,1.4) -- (0.6,0.0) node[below] {$P = \rho_\text{c} V g$};

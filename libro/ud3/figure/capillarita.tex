@@ -8,6 +8,10 @@
   \fill[formula!20] (0.6,0.3) -- (0.6,1.55) .. controls (0.75,1.38) and (1.05,1.38) .. (1.2,1.55) -- (1.2,0.3) -- cycle;
   \draw[thick] (0.6,0.3) -- (0.6,3.2) (1.2,0.3) -- (1.2,3.2);
   \draw[formula, thick] (0.6,1.55) .. controls (0.75,1.38) and (1.05,1.38) .. (1.2,1.55);
+  % angolo di contatto fra la parete e la tangente al menisco
+  \draw (0.6,1.55) -- ++(-48.6:0.45);
+  \draw (0.6,1.30) arc[start angle=-90, end angle=-48.6, radius=0.25];
+  \node[font=\footnotesize] at (0.70,1.12) {$\theta$};
   % tubo sottile
   \fill[formula!20] (1.9,0.3) -- (1.9,2.65) .. controls (1.97,2.55) and (2.13,2.55) .. (2.2,2.65) -- (2.2,0.3) -- cycle;
   \draw[thick] (1.9,0.3) -- (1.9,3.2) (2.2,0.3) -- (2.2,3.2);

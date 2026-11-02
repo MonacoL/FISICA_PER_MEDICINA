@@ -1,0 +1,16 @@
+% Telaio a U con filo mobile: la lamina (due superfici) tira il filo con 2 gamma l.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % lamina di liquido fra telaio e filo
+  \fill[formula!20] (0,0) rectangle (3.0,2.0);
+  % telaio a U
+  \draw[very thick] (4.6,0) -- (0,0) -- (0,2.0) -- (4.6,2.0);
+  % filo mobile
+  \draw[line width=1.6pt, esempio] (3.0,-0.25) -- (3.0,2.25);
+  \node[esempio, above] at (3.0,2.25) {filo mobile};
+  \node[formula] at (1.3,1.5) {lamina};
+  % lunghezza del filo
+  \draw[|<->|] (3.45,0) -- (3.45,2.0) node[midway, right] {$\ell$};
+  % forza della lamina sul filo
+  \draw[->, very thick, attenzione] (3.0,0.7) -- (2.1,0.7)
+    node[left] {$F_\text{filo} = 2\gamma\ell$};
+\end{tikzpicture}
