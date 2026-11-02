@@ -32,12 +32,10 @@ jobs:
           echo "$HOME/.TinyTeX/bin/x86_64-linux" >> "$GITHUB_PATH"
 
       - name: Compila le Unità didattiche e il Libro
-        run: |
-          for sorgente in libro/ud*.tex; do
-            uv run controllo "$(basename "$sorgente" .tex)"
-          done
+        run: uv run controllo $(basename -s .tex libro/ud*.tex)
 
       - name: Test
+        if: always()
         run: uv run pytest -v
 
       - name: Pubblica i PDF

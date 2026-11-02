@@ -1,4 +1,4 @@
-"""Controllo automatico di una Unità didattica: compila la UD singola e il Libro."""
+"""Controllo automatico delle Unità didattiche: compila ogni UD da sola e il Libro."""
 
 import argparse
 import os
@@ -25,10 +25,10 @@ def errori(log: Path) -> list[str]:
     ]
 
 
-def compila(libro: Path, sorgente: str) -> list[str]:
-    """Compila `sorgente` dentro `libro` e restituisce gli errori trovati (vuota se compila)."""
-    if not (libro / sorgente).exists():
-        return [f"{sorgente} non esiste in {libro}"]
+def compila(cartella: Path, sorgente: str) -> list[str]:
+    """Compila `sorgente` dentro `cartella` e restituisce gli errori trovati (vuota se compila)."""
+    if not (cartella / sorgente).exists():
+        return [f"{sorgente} non esiste in {cartella}"]
     esito = subprocess.run(
         [
             "latexmk",
@@ -39,7 +39,7 @@ def compila(libro: Path, sorgente: str) -> list[str]:
             "-file-line-error",
             sorgente,
         ],
-        cwd=libro,
+        cwd=cartella,
         capture_output=True,
         text=True,
         # Righe del log non spezzate a 79 caratteri, così i percorsi restano interi.
@@ -47,28 +47,30 @@ def compila(libro: Path, sorgente: str) -> list[str]:
     )
     if esito.returncode == 0:
         return []
-    log = libro / "build" / Path(sorgente).with_suffix(".log")
+    log = cartella / "build" / Path(sorgente).with_suffix(".log")
     return errori(log) or [f"latexmk è uscito con codice {esito.returncode}"]
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="controllo",
-        description="Compila con latexmk una Unità didattica e il Libro.",
+        description="Compila con latexmk ogni Unità didattica indicata e, una volta, il Libro.",
     )
-    parser.add_argument("ud", help="l'Unità didattica, per esempio ud7")
+    parser.add_argument("ud", nargs="+", help="le Unità didattiche, per esempio ud7")
     parser.add_argument(
-        "--libro",
+        "--cartella",
         type=Path,
         default=RADICE / "libro",
         help="cartella del progetto LaTeX (predefinita: libro/)",
     )
     argomenti = parser.parse_args()
-    ud = argomenti.ud.lower()
+
+    documenti = [(ud.upper(), f"{ud.lower()}.tex") for ud in argomenti.ud]
+    documenti.append(("Libro", "libro.tex"))
 
     riuscito = True
-    for nome, sorgente in ((ud.upper(), f"{ud}.tex"), ("Libro", "libro.tex")):
-        trovati = compila(argomenti.libro, sorgente)
+    for nome, sorgente in documenti:
+        trovati = compila(argomenti.cartella, sorgente)
         if not trovati:
             print(f"{nome}: compila")
             continue

@@ -7,24 +7,20 @@ Ogni test costruisce un piccolo progetto LaTeX con la stessa struttura di `libro
 import subprocess
 from pathlib import Path
 
-import pytest
-
 RADICE = Path(__file__).resolve().parent.parent
 
-UD_VALIDA = r"""\documentclass{article}
-\begin{document}
-\input{ud1/ud1}
-\end{document}
-"""
 
-LIBRO_VALIDO = r"""\documentclass{article}
-\begin{document}
-\input{ud1/ud1}
-\end{document}
-"""
+def documento(*ud: str) -> str:
+    """Un `udN.tex` o un `libro.tex` minimo che include le UD indicate."""
+    corpo = "".join(f"\\input{{{u}/{u}}}\n" for u in ud)
+    return f"\\documentclass{{article}}\n\\begin{{document}}\n{corpo}\\end{{document}}\n"
 
 
-def progetto(cartella: Path, file: dict[str, str]) -> Path:
+def progetto(cartella: Path, **testi: str) -> Path:
+    """Scrive in `cartella` un progetto con una UD per ogni argomento (ud1="testo", ...)."""
+    file = {f"{ud}.tex": documento(ud) for ud in testi}
+    file["libro.tex"] = documento(*testi)
+    file |= {f"{ud}/{ud}.tex": testo for ud, testo in testi.items()}
     for percorso, testo in file.items():
         destinazione = cartella / percorso
         destinazione.parent.mkdir(parents=True, exist_ok=True)
@@ -41,20 +37,10 @@ def controllo(*argomenti: str) -> subprocess.CompletedProcess[str]:
     )
 
 
-@pytest.fixture
-def progetto_valido(tmp_path: Path) -> Path:
-    return progetto(
-        tmp_path,
-        {
-            "ud1.tex": UD_VALIDA,
-            "libro.tex": LIBRO_VALIDO,
-            "ud1/ud1.tex": "Testo della prima Unità didattica.\n",
-        },
-    )
+def test_progetto_valido_compila_ud_e_libro(tmp_path: Path) -> None:
+    valido = progetto(tmp_path, ud1="Testo della prima Unità didattica.\n")
 
-
-def test_progetto_valido_compila_ud_e_libro(progetto_valido: Path) -> None:
-    esito = controllo("ud1", "--libro", str(progetto_valido))
+    esito = controllo("ud1", "--cartella", str(valido))
 
     assert esito.returncode == 0, esito.stdout + esito.stderr
     assert "UD1: compila" in esito.stdout
@@ -62,18 +48,22 @@ def test_progetto_valido_compila_ud_e_libro(progetto_valido: Path) -> None:
 
 
 def test_errore_di_compilazione_fallisce_e_indica_il_file(tmp_path: Path) -> None:
-    rotto = progetto(
-        tmp_path,
-        {
-            "ud1.tex": UD_VALIDA,
-            "libro.tex": LIBRO_VALIDO,
-            "ud1/ud1.tex": "Testo.\n\n\\comandoinesistente\n",
-        },
-    )
+    rotto = progetto(tmp_path, ud1="Testo.\n\n\\comandoinesistente\n")
 
-    esito = controllo("ud1", "--libro", str(rotto))
+    esito = controllo("ud1", "--cartella", str(rotto))
 
     assert esito.returncode != 0
     assert "UD1: non compila" in esito.stdout
     assert "Libro: non compila" in esito.stdout
     assert "ud1/ud1.tex:3" in esito.stdout
+
+
+def test_piu_ud_compilano_tutte_e_il_libro_una_volta(tmp_path: Path) -> None:
+    misto = progetto(tmp_path, ud1="\\comandoinesistente\n", ud2="Testo valido.\n")
+
+    esito = controllo("ud1", "ud2", "--cartella", str(misto))
+
+    assert esito.returncode != 0
+    assert "UD1: non compila" in esito.stdout
+    assert "UD2: compila" in esito.stdout
+    assert esito.stdout.count("Libro:") == 1

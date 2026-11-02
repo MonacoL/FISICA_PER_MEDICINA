@@ -22,10 +22,10 @@ TinyTeX mette i suoi comandi in `~/.local/bin`, che deve essere nel `PATH`. Se m
 
 ## Controllo automatico
 
-Compila con `latexmk` una Unità didattica e il Libro, stampa un rapporto ed esce con un codice diverso da zero se qualcosa non compila:
+Compila con `latexmk` ogni Unità didattica indicata e, una volta, il Libro. Stampa un rapporto ed esce con un codice diverso da zero se qualcosa non compila:
 
 ```sh
-uv run controllo ud7
+uv run controllo ud7          # oppure più UD: uv run controllo ud1 ud7
 uv run pytest
 ```
 
