@@ -1,0 +1,24 @@
+% Condensatore piano: armature di area A a distanza d, campo uniforme; simbolo.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % armature in prospettiva
+  \fill[attenzione!25] (0,0) -- (0,2.4) -- (0.8,3.0) -- (0.8,0.6) -- cycle;
+  \draw[thick] (0,0) -- (0,2.4) -- (0.8,3.0) -- (0.8,0.6) -- cycle;
+  \fill[formula!25] (2.6,0) -- (2.6,2.4) -- (3.4,3.0) -- (3.4,0.6) -- cycle;
+  \draw[thick] (2.6,0) -- (2.6,2.4) -- (3.4,3.0) -- (3.4,0.6) -- cycle;
+  \foreach \y in {0.6,1.2,1.8} \node[attenzione, font=\footnotesize\bfseries] at (0.4,\y+0.2) {$+$};
+  \foreach \y in {0.6,1.2,1.8} \node[formula, font=\footnotesize\bfseries] at (3.0,\y+0.2) {$-$};
+  \foreach \y in {0.7,1.25,1.8,2.35} \draw[->, thick, formula] (0.85,\y) -- (2.55,\y);
+  \node[formula, fill=white, inner sep=1pt] at (1.7,1.5) {$\vec E$};
+  \node[attenzione] at (0.4,3.3) {$+Q$};
+  \node[formula] at (3.0,3.3) {$-Q$};
+  \draw[<->] (0,-0.35) -- (2.6,-0.35) node[midway, below] {$d$};
+  \node[attenzione!70!black, anchor=east] at (-0.1,1.4) {area $A$};
+  % simbolo
+  \begin{scope}[xshift=5.4cm, yshift=1.4cm]
+    \draw[thick] (0,0) -- (0.9,0);
+    \draw[very thick] (0.9,-0.5) -- (0.9,0.5);
+    \draw[very thick] (1.2,-0.5) -- (1.2,0.5);
+    \draw[thick] (1.2,0) -- (2.1,0);
+    \node at (1.05,-0.9) {simbolo};
+  \end{scope}
+\end{tikzpicture}

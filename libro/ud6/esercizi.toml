@@ -1,0 +1,298 @@
+# Esercizi della UD6: fonte unica (ADR 0006). `uv run controllo ud6` ne ricava
+# generati/eserciziario.tex, un generati/lampo-<id>.tex per ogni quesito lampo,
+# la pagina web build/web/ud6.html, e ricalcola ogni risultato.
+#
+# Il formato è descritto in testa a libro/ud7/esercizi.toml.
+# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
+# arrivano con un ticket successivo.
+
+titolo = "Eserciziario UD6 · Elettricità e magnetismo"
+
+[costanti]
+k = 9e9
+e = 1.6e-19
+eps0 = 8.85e-12
+
+# ==================================================================== quesiti lampo, in ordine di dispensa
+
+[[quesito]]
+id = "ud6-coulomb"
+tipo = "completamento"
+lampo = true
+testo = '''Due cariche puntiformi si attraggono con una forza di modulo $F$. Se una delle due cariche raddoppia e la distanza fra loro si dimezza, il modulo della forza diventa $F$ moltiplicato per \completa.'''
+calcolo = "2 / 0.5**2"
+risposta = "8"
+soluzione = '''Per la legge di Coulomb, $F = k\,|q_1 q_2|/r^{2}$: la forza è direttamente proporzionale a ciascuna carica e inversamente proporzionale al \emph{quadrato} della distanza. I due cambiamenti si contano separatamente e poi si moltiplicano:
+\begin{itemize}
+  \item la carica raddoppia: la forza si moltiplica per 2;
+  \item la distanza diventa $r/2$, quindi $r^{2}$ diventa $r^{2}/4$: la forza si moltiplica per 4.
+\end{itemize}
+\[
+  \frac{F'}{F} = \frac{2\,q_1 q_2/(r/2)^{2}}{q_1 q_2/r^{2}} = 2 \cdot \frac{r^{2}}{r^{2}/4} = 2 \cdot 4 = 8
+\]
+Chi scrive 4 dimentica il quadrato della distanza ($2 \cdot 2$); chi scrive 0,5 tratta la forza come proporzionale a $r^{2}$ invece che a $1/r^{2}$ ($2 \cdot 1/4$).'''
+
+[[quesito]]
+id = "ud6-campo"
+tipo = "multipla"
+lampo = true
+testo = '''Due cariche puntiformi, $+q$ e $-q$ con $q = {{q}}$, sono ferme nel vuoto a {{d}} l'una dall'altra. Con $k = \SI{9e9}{\newton\metre\squared\per\coulomb\squared}$, il modulo del campo elettrico nel punto medio del segmento che le unisce è'''
+dati.q = { valore = 4, unita = "\\nano\\coulomb" }
+dati.d = { valore = 20, unita = "cm" }
+corretta = "C"
+calcolo = "2 * k * q * 1e-9 / (d / 2 * 1e-2)**2"
+soluzione = '''Il punto medio dista $r = \SI{10}{\centi\metre} = \SI{0,10}{\metre}$ da ciascuna carica, e le due cariche hanno lo stesso modulo: i due campi hanno lo stesso modulo,
+\[
+  E_1 = E_2 = k\,\frac{q}{r^{2}} = \SI{9e9}{\newton\metre\squared\per\coulomb\squared} \cdot \frac{\SI{4e-9}{\coulomb}}{(\SI{0,10}{\metre})^{2}} = \frac{36}{0{,}01}\,\si{\newton\per\coulomb} = \SI{3600}{\newton\per\coulomb}
+\]
+Il campo di $+q$ punta lontano da $+q$, cioè verso $-q$; il campo di $-q$ punta verso $-q$. Nel punto medio i due campi hanno quindi la stessa direzione e lo stesso verso, e si sommano:
+\[
+  E = E_1 + E_2 = 3600 + 3600 = \SI{7200}{\newton\per\coulomb}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''zero'''
+  commento = '''Pensa che i campi di due cariche opposte si annullino. Si annullerebbero i campi di due cariche \emph{uguali}; qui il campo di $+q$ e quello di $-q$ puntano entrambi verso $-q$. È nullo il potenziale nel punto medio, non il campo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1800}{\newton\per\coulomb}'''
+  commento = '''Usa come distanza i \SI{20}{\centi\metre} fra le cariche invece dei \SI{10}{\centi\metre} fra ciascuna carica e il punto medio: ogni campo viene \SI{900}{\newton\per\coulomb}, quattro volte troppo piccolo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{7200}{\newton\per\coulomb}'''
+  valore = 7200
+  [[quesito.opzione]]
+  testo = '''\SI{3600}{\newton\per\coulomb}'''
+  commento = '''È il campo di una sola carica: manca il contributo dell'altra, che ha lo stesso modulo e lo stesso verso.'''
+  [[quesito.opzione]]
+  testo = '''\SI{720}{\newton\per\coulomb}'''
+  commento = '''Divide per la distanza invece che per il suo quadrato: $2 \cdot 36/0{,}1 = 720$. Il campo di una carica puntiforme va con $1/r^{2}$.'''
+
+[[quesito]]
+id = "ud6-piastre"
+tipo = "multipla"
+lampo = true
+testo = '''Due piastre metalliche parallele distano {{d}} e fra loro c'è una differenza di potenziale di {{V}}. Il modulo del campo elettrico, uniforme, fra le piastre è'''
+dati.d = { valore = 3, unita = "mm" }
+dati.V = { valore = 12, unita = "\\volt" }
+corretta = "A"
+calcolo = "V / (d * 1e-3)"
+soluzione = '''In un campo uniforme la differenza di potenziale è il campo per la distanza, $\Delta V = E\,d$. La distanza va in metri, $d = \SI{3}{\milli\metre} = \SI{3e-3}{\metre}$:
+\[
+  E = \frac{\Delta V}{d} = \frac{\SI{12}{\volt}}{\SI{3e-3}{\metre}} = 4 \cdot 10^{3}\,\si{\volt\per\metre} = \SI{4000}{\volt\per\metre}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{4000}{\volt\per\metre}'''
+  valore = 4000
+  [[quesito.opzione]]
+  testo = '''\SI{4}{\volt\per\metre}'''
+  commento = '''Divide per 3 senza portare i millimetri in metri: $12/3 = 4$ è il campo in volt al millimetro, non al metro.'''
+  [[quesito.opzione]]
+  testo = '''\SI{36}{\volt\per\metre}'''
+  commento = '''Moltiplica la differenza di potenziale per la distanza, e per di più in millimetri. Il campo è $\Delta V/d$: più vicine sono le piastre, più il campo è intenso.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,036}{\volt\per\metre}'''
+  commento = '''Moltiplica la differenza di potenziale per la distanza in metri, $12 \cdot 0{,}003$: il prodotto $\Delta V \cdot d$ non ha le unità di un campo.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,5e-4}{\volt\per\metre}'''
+  commento = '''Rovescia il rapporto, $d/\Delta V = 0{,}003/12$: il risultato non ha nemmeno le unità di un campo.'''
+
+[[quesito]]
+id = "ud6-membrana"
+tipo = "completamento"
+lampo = true
+testo = '''Fra l'interno e l'esterno di un neurone a riposo c'è una differenza di potenziale di {{V}} in modulo. Uno ione calcio $\mathrm{Ca^{2+}}$, di carica $+2e$, attraversa la membrana. La sua energia potenziale elettrica cambia, in modulo, di \completa{} elettronvolt.'''
+dati.V = { valore = 70, unita = "\\milli\\volt" }
+calcolo = "2 * V * 1e-3"
+risposta = "0,14"
+soluzione = '''La variazione di energia potenziale è la carica per la differenza di potenziale, $\Delta U = q\,\Delta V$. Un elettronvolt è l'energia che guadagna o perde la carica $e$ attraversando \SI{1}{\volt}; con la carica in multipli di $e$ e la differenza di potenziale in volt, il prodotto è già in elettronvolt. Qui $q = 2e$ e $\Delta V = \SI{70}{\milli\volt} = \SI{0,070}{\volt}$:
+\[
+  |\Delta U| = 2e \cdot \SI{0,070}{\volt} = \SI{0,14}{\electronvolt}
+\]
+In joule sono $0{,}14 \cdot \SI{1,6e-19}{\joule} \approx \SI{2,2e-20}{\joule}$. Chi scrive 0,07 dimentica che lo ione calcio ha due cariche elementari; chi scrive 140 lascia la differenza di potenziale in millivolt, e trova il risultato in millielettronvolt.'''
+
+[[quesito]]
+id = "ud6-induzione"
+tipo = "multipla"
+lampo = true
+testo = '''Si avvicina una bacchetta carica positivamente a una sfera metallica scarica, sostenuta da un supporto isolante, senza toccarla. Con la bacchetta ancora vicina si collega la sfera a terra con un filo; poi si stacca il filo e solo alla fine si allontana la bacchetta. Alla fine la sfera è'''
+corretta = "E"
+soluzione = '''Nella sfera metallica gli elettroni sono liberi di muoversi. La bacchetta positiva li attira sul lato vicino, e il lato lontano resta positivo: è l'induzione elettrostatica. Collegando la sfera a terra, altri elettroni salgono dalla terra, attirati dalla bacchetta. Quando si stacca il filo questi elettroni in più restano intrappolati sulla sfera, e quando si allontana la bacchetta si distribuiscono su tutta la superficie. La sfera resta carica negativamente: la carica per induzione ha segno opposto a quello della bacchetta.'''
+
+  [[quesito.opzione]]
+  testo = '''scarica, perché la bacchetta non l'ha mai toccata'''
+  commento = '''Varrebbe senza il filo a terra: allora le cariche separate si ricombinerebbero allontanando la bacchetta. Con il filo, invece, la sfera riceve elettroni dalla terra.'''
+  [[quesito.opzione]]
+  testo = '''carica positivamente, come la bacchetta'''
+  commento = '''È quello che succede per contatto, quando la bacchetta cede parte della sua carica. Per induzione la carica ha segno opposto a quello della bacchetta.'''
+  [[quesito.opzione]]
+  testo = '''positiva sul lato lontano e negativa sul lato vicino, con carica totale nulla'''
+  commento = '''Descrive la sfera isolata con la bacchetta vicina, prima del collegamento a terra. Il filo cambia la carica totale, e allontanando la bacchetta la carica si distribuisce su tutta la sfera.'''
+  [[quesito.opzione]]
+  testo = '''carica negativamente finché la bacchetta è vicina, poi di nuovo scarica'''
+  commento = '''Gli elettroni arrivati dalla terra non possono più andarsene, perché il filo è stato staccato prima di allontanare la bacchetta: la carica resta.'''
+  [[quesito.opzione]]
+  testo = '''carica negativamente'''
+
+[[quesito]]
+id = "ud6-joule"
+tipo = "completamento"
+lampo = true
+testo = '''Un resistore da {{R}} è attraversato da una corrente di {{I}}. La potenza che dissipa per effetto Joule, in watt, è \completa.'''
+dati.R = { valore = 20, unita = "\\ohm" }
+dati.I = { valore = 3, unita = "\\ampere" }
+calcolo = "R * I**2"
+risposta = "180"
+soluzione = '''La potenza dissipata è $P = VI$, e con la legge di Ohm, $V = RI$, diventa $P = RI^{2}$:
+\[
+  P = R I^{2} = \SI{20}{\ohm} \cdot (\SI{3}{\ampere})^{2} = 20 \cdot 9\,\si{\watt} = \SI{180}{\watt}
+\]
+Chi scrive 60 ha calcolato $RI = \SI{60}{\volt}$, che è la differenza di potenziale ai capi del resistore, non la potenza.'''
+
+[[quesito]]
+id = "ud6-parallelo"
+tipo = "multipla"
+lampo = true
+testo = '''Due resistori da {{R1}} e da {{R2}} sono collegati in parallelo. La resistenza equivalente è'''
+dati.R1 = { valore = 6, unita = "\\ohm" }
+dati.R2 = { valore = 3, unita = "\\ohm" }
+corretta = "D"
+calcolo = "R1 * R2 / (R1 + R2)"
+soluzione = '''In parallelo si sommano gli inversi delle resistenze:
+\[
+  \frac{1}{R_{\text{eq}}} = \frac{1}{6\,\Omega} + \frac{1}{3\,\Omega} = \frac{1}{6\,\Omega} + \frac{2}{6\,\Omega} = \frac{3}{6\,\Omega} = \frac{1}{2\,\Omega}
+  \quad\Longrightarrow\quad
+  R_{\text{eq}} = \SI{2}{\ohm}
+\]
+Lo stesso con il prodotto diviso la somma: $R_{\text{eq}} = (6 \cdot 3)/(6 + 3) = 18/9 = \SI{2}{\ohm}$. È meno della più piccola delle due, come deve essere in parallelo.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{9}{\ohm}'''
+  commento = '''Somma le resistenze: è la regola del collegamento in serie.'''
+  [[quesito.opzione]]
+  testo = '''\SI{4,5}{\ohm}'''
+  commento = '''Fa la media delle due resistenze. In parallelo la resistenza equivalente è più piccola di ciascuna delle due, non intermedia.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,5}{\ohm}'''
+  commento = '''Si ferma a $1/6 + 1/3 = 0{,}5$ e dimentica di invertire: 0,5 è $1/R_{\text{eq}}$, in $\Omega^{-1}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\ohm}'''
+  valore = 2
+  [[quesito.opzione]]
+  testo = '''\SI{18}{\ohm}'''
+  commento = '''Calcola il prodotto delle resistenze e dimentica di dividerlo per la somma; per di più il prodotto ha le unità di $\Omega^{2}$.'''
+
+[[quesito]]
+id = "ud6-dielettrico"
+tipo = "completamento"
+lampo = true
+testo = '''Un condensatore piano ha nel vuoto una capacità di {{C}}. Si dimezza la distanza fra le armature e si riempie lo spazio fra loro con un dielettrico di costante dielettrica relativa $\varepsilon_r = 3$. La nuova capacità, in picofarad, è \completa.'''
+dati.C = { valore = 10, unita = "\\pico\\farad" }
+calcolo = "C * 2 * 3"
+risposta = "60"
+soluzione = '''La capacità del condensatore piano è $C = \varepsilon_r \varepsilon_0 A/d$: è direttamente proporzionale a $\varepsilon_r$ e inversamente proporzionale alla distanza $d$. Dimezzare $d$ raddoppia la capacità; il dielettrico la moltiplica per 3:
+\[
+  C' = C \cdot 2 \cdot 3 = \SI{10}{\pico\farad} \cdot 6 = \SI{60}{\pico\farad}
+\]
+Chi scrive 15 pensa che la capacità cresca con la distanza ($10 \cdot 3/2$); chi scrive 30 dimentica l'effetto della distanza, chi scrive 20 quello del dielettrico.'''
+
+[[quesito]]
+id = "ud6-defibrillatore"
+tipo = "multipla"
+lampo = true
+testo = '''Il condensatore di un defibrillatore ha una capacità di {{C}} ed è caricato a una differenza di potenziale di {{V}}. L'energia immagazzinata nel condensatore è'''
+dati.C = { valore = 50, unita = "\\micro\\farad" }
+dati.V = { valore = 2000, unita = "\\volt" }
+corretta = "B"
+calcolo = "0.5 * C * 1e-6 * V**2"
+soluzione = '''L'energia di un condensatore carico è $U = \frac12 C V^{2}$, con la capacità in farad, $C = \SI{50}{\micro\farad} = \SI{5e-5}{\farad}$, e $V^{2} = (\num{2e3})^{2} = \num{4e6}\,\si{\volt\squared}$:
+\[
+  U = \frac12 \cdot \SI{5e-5}{\farad} \cdot \num{4e6}\,\si{\volt\squared} = \frac12 \cdot 5 \cdot 4 \cdot 10^{-5+6}\,\si{\joule} = 10 \cdot 10\,\si{\joule} = \SI{100}{\joule}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0,05}{\joule}'''
+  commento = '''Usa $\frac12 CV$ invece di $\frac12 CV^{2}$: $\frac12 \cdot \num{5e-5} \cdot 2000 = 0{,}05$. Il prodotto $CV$ è una carica, non un'energia.'''
+  [[quesito.opzione]]
+  testo = '''\SI{100}{\joule}'''
+  valore = 100
+  [[quesito.opzione]]
+  testo = '''\SI{200}{\joule}'''
+  commento = '''Dimentica il fattore $\frac12$: $CV^{2} = \SI{200}{\joule}$. Il fattore viene dal fatto che, durante la carica, la differenza di potenziale cresce da zero a $V$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,1}{\joule}'''
+  commento = '''Calcola $CV = \SI{0,1}{\coulomb}$, che è la carica sulle armature, e la scrive in joule.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1e8}{\joule}'''
+  commento = '''Lascia la capacità in microfarad, come se valesse \SI{50}{\farad}: $\frac12 \cdot 50 \cdot \num{4e6} = \num{1e8}$, un milione di volte troppo.'''
+
+[[quesito]]
+id = "ud6-lorentz"
+tipo = "multipla"
+lampo = true
+testo = '''Gli assi $x$, $y$, $z$ formano una terna destrorsa ($\hat\imath \times \hat\jmath = \hat k$). Un elettrone si muove nel verso positivo dell'asse $x$ in un campo magnetico uniforme diretto nel verso positivo dell'asse $y$. La forza magnetica sull'elettrone è'''
+corretta = "D"
+soluzione = '''La forza di Lorentz è $\vec F = q\,\vec v \times \vec B$. Con $\vec v$ lungo $+x$ e $\vec B$ lungo $+y$, il prodotto vettoriale $\vec v \times \vec B$ è diretto come $\hat\imath \times \hat\jmath = \hat k$, cioè lungo $+z$ (regola della mano destra: pollice lungo $\vec v$, indice lungo $\vec B$, il medio indica $+z$). La carica dell'elettrone è negativa, $q = -e$, quindi la forza ha verso opposto: lungo $-z$. Il suo modulo non è nullo, perché $\vec v$ e $\vec B$ sono perpendicolari.'''
+
+  [[quesito.opzione]]
+  testo = '''diretta lungo $+z$'''
+  commento = '''È il verso giusto per una carica positiva. L'elettrone ha carica negativa, e la forza ha il verso opposto a quello di $\vec v \times \vec B$.'''
+  [[quesito.opzione]]
+  testo = '''diretta lungo $+x$'''
+  commento = '''Mette la forza lungo la velocità. La forza di Lorentz è sempre perpendicolare alla velocità: cambia la direzione del moto, non il modulo della velocità.'''
+  [[quesito.opzione]]
+  testo = '''diretta lungo $+y$'''
+  commento = '''Mette la forza lungo il campo magnetico, come si fa con il campo elettrico. La forza magnetica è perpendicolare sia a $\vec v$ sia a $\vec B$.'''
+  [[quesito.opzione]]
+  testo = '''diretta lungo $-z$'''
+  [[quesito.opzione]]
+  testo = '''nulla'''
+  commento = '''La forza è nulla quando la velocità è \emph{parallela} al campo, $\sin\theta = 0$. Qui velocità e campo sono perpendicolari, e la forza ha il modulo massimo, $evB$.'''
+
+[[quesito]]
+id = "ud6-raggio"
+tipo = "completamento"
+lampo = true
+testo = '''Un protone percorre una circonferenza di raggio {{r}} in un campo magnetico uniforme perpendicolare alla sua velocità. Se la velocità del protone raddoppia e il campo magnetico triplica, il nuovo raggio, in centimetri, è \completa.'''
+dati.r = { valore = 6, unita = "cm" }
+calcolo = "r * 2 / 3"
+risposta = "4"
+soluzione = '''Il raggio dell'orbita è $r = mv/(qB)$: direttamente proporzionale alla velocità, inversamente proporzionale al campo. La velocità che raddoppia moltiplica il raggio per 2, il campo che triplica lo divide per 3:
+\[
+  r' = r \cdot \frac{2}{3} = \SI{6}{\centi\metre} \cdot \frac23 = \SI{4}{\centi\metre}
+\]
+Chi scrive 9 rovescia le proporzionalità ($6 \cdot 3/2$); chi scrive 36 tratta il raggio come proporzionale sia a $v$ sia a $B$ ($6 \cdot 2 \cdot 3$).'''
+
+[[quesito]]
+id = "ud6-faraday"
+tipo = "multipla"
+lampo = true
+testo = '''Una bobina di {{N}} spire, ciascuna di area {{A}}, è perpendicolare a un campo magnetico uniforme, che cresce da zero a {{B}} in {{t}}. Il modulo della forza elettromotrice media indotta nella bobina è'''
+dati.N = { valore = 100 }
+dati.A = { valore = 10, unita = "\\centi\\metre\\squared" }
+dati.B = { valore = "0,4", unita = "\\tesla" }
+dati.t = { valore = "0,02", unita = "\\second" }
+corretta = "A"
+calcolo = "N * B * A * 1e-4 / t"
+soluzione = '''Per la legge di Faraday-Neumann-Lenz, in modulo $|\mathcal E| = N\,|\Delta\Phi|/\Delta t$. Il campo è perpendicolare alle spire, quindi il flusso in una spira è $\Phi = BA$. L'area va in metri quadrati, $A = \SI{10}{\centi\metre\squared} = 10 \cdot \SI{e-4}{\metre\squared} = \SI{e-3}{\metre\squared}$, e il flusso in una spira passa da zero a
+\[
+  \Phi = BA = \SI{0,4}{\tesla} \cdot \SI{e-3}{\metre\squared} = \SI{4e-4}{\weber}
+\]
+\[
+  |\mathcal E| = N\,\frac{|\Delta\Phi|}{\Delta t} = 100 \cdot \frac{\SI{4e-4}{\weber}}{\SI{0,02}{\second}} = \frac{\SI{4e-2}{\weber}}{\SI{2e-2}{\second}} = \SI{2}{\volt}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{2}{\volt}'''
+  valore = 2
+  [[quesito.opzione]]
+  testo = '''\SI{0,02}{\volt}'''
+  commento = '''Dimentica il numero di spire: è la forza elettromotrice di una spira sola. Le 100 spire sono in serie, e le loro forze elettromotrici si sommano.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2e4}{\volt}'''
+  commento = '''Lascia l'area in centimetri quadrati, $100 \cdot 0{,}4 \cdot 10/0{,}02 = \num{2e4}$: il risultato è diecimila volte troppo grande.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,04}{\volt}'''
+  commento = '''Calcola la variazione di flusso totale, $N\,\Delta\Phi = \SI{0,04}{\weber}$, e dimentica di dividerla per il tempo. Conta la rapidità con cui il flusso cambia.'''
+  [[quesito.opzione]]
+  testo = '''\SI{8e-4}{\volt}'''
+  commento = '''Moltiplica la variazione di flusso per il tempo invece di dividerla: $100 \cdot \num{4e-4} \cdot 0{,}02 = \num{8e-4}$. Una variazione più rapida darebbe una forza elettromotrice più piccola, al contrario di quello che succede.'''

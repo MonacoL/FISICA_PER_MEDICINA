@@ -1,0 +1,27 @@
+% (a) Forza di Lorentz su una carica positiva; (b) orbita circolare in un campo uniforme.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % (a)
+  \begin{scope}
+    \fill[formula!8] (-0.4,-0.3) -- (2.8,-0.3) -- (3.8,0.9) -- (0.6,0.9) -- cycle;
+    \draw[->, very thick, esempio] (0,0) -- (2.4,0) node[below] {$\vec v$};
+    \draw[->, very thick, medica] (0,0) -- (1.0,0.75) node[above left] {$\vec B$};
+    \draw[->, very thick, attenzione] (0,0) -- (0,2.0) node[above] {$\vec F = q\,\vec v \times \vec B$};
+    \draw[attenzione] (0,0.22) -- (0.18,0.22) -- (0.18,0);
+    \fill[attenzione] (0,0) circle (3pt);
+    \node[attenzione, below left] at (0,0) {$+q$};
+    \node at (1.4,-1.2) {(a)};
+  \end{scope}
+  % (b)
+  \begin{scope}[xshift=7.4cm, yshift=0.6cm]
+    \foreach \x in {-2,-1.2,...,2} \foreach \y in {-1.6,-0.8,...,1.7}
+      \node[medica!70, font=\scriptsize] at (\x,\y) {$\otimes$};
+    \draw[very thick, esempio] (0,0) circle (1.25);
+    \draw[->, very thick, esempio] (0,-1.25) -- (1.1,-1.25) node[below] {$\vec v$};
+    \draw[->, very thick, attenzione] (0,-1.25) -- (0,-0.3) node[right] {$\vec F$};
+    \fill[attenzione] (0,-1.25) circle (3pt);
+    \draw[dashed] (0,0) -- (-0.88,0.88) node[midway, above right=-2pt] {$r$};
+    \fill (0,0) circle (1.2pt);
+    \node[medica, anchor=west] at (2.15,1.6) {$\vec B$ entra};
+    \node at (0,-2.4) {(b)};
+  \end{scope}
+\end{tikzpicture}
