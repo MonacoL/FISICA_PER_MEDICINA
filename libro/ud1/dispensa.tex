@@ -1,0 +1,587 @@
+% UD1 — Dispensa
+% Scritta da zero (non esisteva una dispensa UD1). I quesiti lampo vengono da
+% esercizi.toml (ADR 0006): si modificano lì.
+\dispensa
+
+\begin{tcolorbox}[fisbox={formula}{formulaBg},title={Obiettivi dell'unità}]
+Al termine di questa unità sai:
+\begin{itemize}
+  \item scrivere un numero in notazione scientifica e fare a mano prodotti, quozienti e somme con le potenze di 10;
+  \item riconoscere le grandezze fondamentali del Sistema Internazionale e le loro unità, usare i prefissi e controllare le dimensioni di una formula;
+  \item convertire una misura da un'unità a un'altra, anche per aree, volumi, velocità e dosaggi, e stimare l'ordine di grandezza di un risultato;
+  \item distinguere le grandezze estensive da quelle intensive e le grandezze scalari da quelle vettoriali;
+  \item usare seno, coseno e tangente di un angolo per trovare i lati di un triangolo rettangolo, ricordando i valori per \ang{0}, \ang{30}, \ang{45}, \ang{60} e \ang{90};
+  \item scomporre un vettore nelle sue componenti, sommare e sottrarre vettori, calcolare il prodotto scalare e il prodotto vettoriale di due vettori.
+\end{itemize}
+\end{tcolorbox}
+
+La fisica descrive i fenomeni con numeri e misure. Questa unità raccoglie gli strumenti che servono in tutte le altre: come si scrivono numeri molto grandi o molto piccoli, come si misura una grandezza e come si cambia unità, e due strumenti matematici, la trigonometria e i vettori, che servono per le grandezze che hanno una direzione, come lo spostamento e la forza.
+
+% -------------------------------------------------------------------------
+\section{La notazione scientifica}
+\label{sec:ud1-notazione}
+
+In fisica e in medicina si incontrano numeri molto lontani fra loro. Un litro di sangue contiene circa \num{5000000000000} globuli rossi; il diametro di un atomo è circa \SI{0,0000000001}{\metre}. Scritti così, questi numeri sono difficili da leggere e da usare nei conti. La \textbf{notazione scientifica} li scrive come un numero fra 1 e 10 moltiplicato per una potenza di 10:
+
+\begin{formula}[Notazione scientifica]
+N = a \cdot 10^{n} \qquad \text{con } 1 \leq a < 10 \text{ e } n \text{ intero}
+\end{formula}
+
+Il numero $a$ si chiama \textbf{mantissa}, l'intero $n$ \textbf{esponente}. Così i globuli rossi in un litro di sangue sono $5 \cdot 10^{12}$ e il diametro di un atomo è \SI{e-10}{\metre}.
+
+Per scrivere un numero in notazione scientifica si sposta la virgola fino ad avere una sola cifra diversa da zero prima della virgola, e si contano i posti:
+\begin{itemize}
+  \item se la virgola si sposta verso sinistra, l'esponente è positivo e vale il numero di posti: $\num{52000} = 5{,}2 \cdot 10^{4}$ (la virgola si sposta di 4 posti);
+  \item se la virgola si sposta verso destra, l'esponente è negativo: $0{,}00037 = 3{,}7 \cdot 10^{-4}$ (la virgola si sposta di 4 posti, da 0,00037 a 3,7).
+\end{itemize}
+
+\begin{richiamo}{potenze di 10}
+Una potenza di 10 con esponente positivo è un 1 seguito da tanti zeri quanto vale l'esponente: $10^{3} = 1000$. Con esponente negativo è l'inverso: $10^{-3} = 1/10^{3} = 0{,}001$. Inoltre $10^{0} = 1$. Le regole per fare i conti:
+\[
+  10^{a} \cdot 10^{b} = 10^{a+b} \qquad \frac{10^{a}}{10^{b}} = 10^{a-b} \qquad \left(10^{a}\right)^{b} = 10^{a \cdot b} \qquad \sqrt{10^{2a}} = 10^{a}
+\]
+Per esempio $10^{5} \cdot 10^{-8} = 10^{5+(-8)} = 10^{-3}$, $10^{2}/10^{-4} = 10^{2-(-4)} = 10^{6}$, $(10^{-3})^{2} = 10^{-6}$ e $\sqrt{10^{8}} = 10^{4}$.
+\end{richiamo}
+
+\subsection{I conti in notazione scientifica}
+
+Per moltiplicare o dividere due numeri in notazione scientifica si lavora separatamente sulle mantisse e sulle potenze di 10. Alla fine, se la mantissa non è fra 1 e 10, si sposta la virgola e si corregge l'esponente. Per sommare o sottrarre, invece, bisogna prima scrivere i due numeri con lo stesso esponente.
+
+\begin{esempio}
+Calcola, in notazione scientifica: (a) $(3 \cdot 10^{5}) \cdot (4 \cdot 10^{-8})$; (b) $\dfrac{8 \cdot 10^{6}}{2 \cdot 10^{-3}}$; (c) $3 \cdot 10^{4} + 5 \cdot 10^{3}$.
+
+(a) Si moltiplicano le mantisse e si sommano gli esponenti:
+\[
+  (3 \cdot 10^{5}) \cdot (4 \cdot 10^{-8}) = (3 \cdot 4) \cdot 10^{5+(-8)} = 12 \cdot 10^{-3}
+\]
+La mantissa 12 è maggiore di 10. Si scrive $12 = 1{,}2 \cdot 10^{1}$, quindi $12 \cdot 10^{-3} = 1{,}2 \cdot 10^{1} \cdot 10^{-3} = 1{,}2 \cdot 10^{-2}$.
+
+(b) Si dividono le mantisse e si sottraggono gli esponenti:
+\[
+  \frac{8 \cdot 10^{6}}{2 \cdot 10^{-3}} = \frac{8}{2} \cdot 10^{6-(-3)} = 4 \cdot 10^{9}
+\]
+
+(c) Si scrive il secondo numero con esponente 4: $5 \cdot 10^{3} = 0{,}5 \cdot 10^{4}$. Poi si sommano le mantisse:
+\[
+  3 \cdot 10^{4} + 0{,}5 \cdot 10^{4} = (3 + 0{,}5) \cdot 10^{4} = 3{,}5 \cdot 10^{4}
+\]
+\end{esempio}
+
+\begin{attenzione}[gli esponenti si sommano solo nei prodotti]
+Nella somma gli esponenti non si sommano: $10^{3} + 10^{3} = 2 \cdot 10^{3}$, non $10^{6}$. E quando si sposta la virgola della mantissa, l'esponente cambia nel verso opposto: se la mantissa diventa 10 volte più piccola (da 12 a 1,2), l'esponente aumenta di 1 (da $-3$ a $-2$), così che il numero resta lo stesso.
+\end{attenzione}
+
+\input{ud1/generati/lampo-ud1-notazione}
+
+% -------------------------------------------------------------------------
+\section{Grandezze fisiche e unità di misura}
+\label{sec:ud1-grandezze}
+
+\subsection{Grandezze e misure}
+
+Una \textbf{grandezza fisica} è una proprietà di un corpo o di un fenomeno che si può misurare: la lunghezza di un femore, la massa di un paziente, la durata di un battito cardiaco. \textbf{Misurare} una grandezza vuol dire confrontarla con una grandezza dello stesso tipo scelta come riferimento, l'\textbf{unità di misura}, e dire quante volte la contiene. Il risultato di una misura è quindi sempre un numero accompagnato da un'unità:
+\[
+  m = \SI{70}{\kilo\gram} \quad\text{vuol dire}\quad m = 70 \cdot (\SI{1}{\kilo\gram})
+\]
+Una misura senza unità non dice niente: «la massa è 70» potrebbe voler dire \SI{70}{\kilo\gram} o \SI{70}{\gram}.
+
+\subsection{Il Sistema Internazionale}
+
+Il \textbf{Sistema Internazionale} delle unità di misura (SI) sceglie sette \textbf{grandezze fondamentali}, ognuna con la sua unità. Tutte le altre sono \textbf{grandezze derivate}: si ottengono dalle fondamentali con prodotti e quozienti, e così le loro unità.
+
+\begin{center}
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+Grandezza fondamentale & Simbolo & Unità & Simbolo dell'unità \\
+\midrule
+lunghezza & $\ell$, $x$ & metro & \si{\metre} \\
+massa & $m$ & chilogrammo & \si{\kilo\gram} \\
+tempo & $t$ & secondo & \si{\second} \\
+intensità di corrente elettrica & $I$ & ampere & \si{\ampere} \\
+temperatura & $T$ & kelvin & \si{\kelvin} \\
+quantità di sostanza & $n$ & mole & \si{\mole} \\
+intensità luminosa & $I_v$ & candela & \si{\candela} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Alcune grandezze derivate: l'area si misura in \si{\metre\squared}, il volume in \si{\metre\cubed}, la velocità in \si{\metre\per\second}, la densità in \si{\kilo\gram\per\metre\cubed}. Alcune unità derivate hanno un nome proprio: la forza si misura in newton, $\SI{1}{\newton} = \SI{1}{\kilo\gram\metre\per\second\squared}$, l'energia in joule, $\SI{1}{\joule} = \SI{1}{\newton\metre}$, la pressione in pascal, $\SI{1}{\pascal} = \SI{1}{\newton\per\metre\squared}$. Le incontrerai nelle prossime unità.
+
+Per le misure molto grandi o molto piccole si usano i \textbf{prefissi}, che moltiplicano l'unità per una potenza di 10:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{\qquad}lll@{}}
+\toprule
+Prefisso & Simbolo & Fattore & Prefisso & Simbolo & Fattore \\
+\midrule
+giga & G & $10^{9}$ & deci & d & $10^{-1}$ \\
+mega & M & $10^{6}$ & centi & c & $10^{-2}$ \\
+kilo & k & $10^{3}$ & milli & m & $10^{-3}$ \\
+etto & h & $10^{2}$ & micro & $\mu$ & $10^{-6}$ \\
+& & & nano & n & $10^{-9}$ \\
+& & & pico & p & $10^{-12}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Per esempio $\SI{3}{\milli\gram} = 3 \cdot 10^{-3}\,\si{\gram}$ e $\SI{5}{\micro\metre} = 5 \cdot 10^{-6}\,\si{\metre}$. Fa eccezione il chilogrammo: è l'unità del SI ma contiene già il prefisso kilo, quindi i prefissi della massa si applicano al grammo ($\SI{1}{\milli\gram} = \SI{e-3}{\gram} = \SI{e-6}{\kilo\gram}$).
+
+In medicina si usano anche unità che non sono del SI, come il litro per i volumi ($\SI{1}{\litre} = \SI{1}{\deci\metre\cubed}$), l'ora e il minuto per i tempi e il millimetro di mercurio (mmHg) per la pressione del sangue. La temperatura si misura spesso in gradi Celsius, un'unità ammessa dal SI, ma nelle formule della fisica si usa il kelvin. Nei conti conviene portare tutto nelle unità fondamentali del SI.
+
+\subsection{Le dimensioni di una grandezza}
+
+La \textbf{dimensione} di una grandezza dice da quali grandezze fondamentali è fatta, indipendentemente dall'unità scelta. Si scrive fra parentesi quadre, con $[L]$ per la lunghezza, $[M]$ per la massa e $[T]$ per il tempo (attenzione: $[T]$ fra parentesi quadre è la dimensione del tempo, non la temperatura). Una distanza ha dimensione $[L]$, sia che la misuri in metri sia in pollici. Le dimensioni delle grandezze derivate si ottengono dalla loro definizione:
+\begin{gather*}
+  [\text{area}] = [L^{2}] \qquad\qquad
+  [\text{volume}] = [L^{3}]
+  \\
+  [\text{velocità}] = \left[\frac{\text{spazio}}{\text{tempo}}\right] = [L\,T^{-1}] \qquad\qquad
+  [\text{densità}] = \left[\frac{\text{massa}}{\text{volume}}\right] = [M\,L^{-3}]
+\end{gather*}
+Una grandezza che è il rapporto fra due grandezze con la stessa dimensione non ha dimensione: è un \textbf{numero puro} (o grandezza adimensionale), come una percentuale o il rapporto fra due lunghezze.
+
+Le dimensioni servono a controllare una formula. Vale il \textbf{principio di omogeneità}: si possono sommare, sottrarre e uguagliare solo grandezze con la stessa dimensione. Non ha senso sommare una lunghezza e un tempo, così come non ha senso sommare \SI{3}{\metre} e \SI{2}{\second}.
+
+\begin{esempio}
+Un corpo che parte con velocità $v_0$ e ha accelerazione $a$ percorre, nel tempo $t$, lo spazio $s = v_0 t + \frac{1}{2} a t^{2}$ (la vedrai nella UD2). L'accelerazione si misura in \si{\metre\per\second\squared}, quindi ha dimensione $[L\,T^{-2}]$. Controlla che la formula sia omogenea.
+
+Il primo membro, $s$, è una lunghezza: $[L]$. I due termini del secondo membro hanno dimensioni
+\[
+  [v_0 t] = [L\,T^{-1}] \cdot [T] = [L]
+  \qquad\qquad
+  [a t^{2}] = [L\,T^{-2}] \cdot [T^{2}] = [L]
+\]
+Il fattore $\frac{1}{2}$ è un numero puro e non cambia la dimensione. Tutti i termini hanno dimensione $[L]$: la formula è omogenea. Se avessi scritto per sbaglio $s = v_0 t + \frac{1}{2} a t$, il secondo termine avrebbe dimensione $[L\,T^{-1}]$, e l'errore si vedrebbe subito.
+\end{esempio}
+
+\subsection{Le conversioni fra unità di misura}
+
+Per cambiare unità si sostituisce a ogni unità il suo valore nella nuova unità, e si fanno i conti con i numeri. Per esempio, per esprimere \SI{2,5}{\hour} in secondi:
+\[
+  \SI{2,5}{\hour} = 2{,}5 \cdot (\SI{1}{\hour}) = 2{,}5 \cdot (\SI{3600}{\second}) = \SI{9000}{\second}
+\]
+Con le unità composte si fa lo stesso per ogni unità. La velocità di \SI{1}{\kilo\metre\per\hour} in metri al secondo è
+\[
+  \SI{1}{\kilo\metre\per\hour} = \frac{\SI{1000}{\metre}}{\SI{3600}{\second}} = \frac{1}{3{,}6}\,\si{\metre\per\second}
+\]
+quindi da \si{\kilo\metre\per\hour} a \si{\metre\per\second} si divide per 3,6, e da \si{\metre\per\second} a \si{\kilo\metre\per\hour} si moltiplica per 3,6.
+
+Per le aree e i volumi il fattore di conversione va elevato al quadrato o al cubo. Poiché $\SI{1}{\metre} = \SI{100}{\centi\metre} = \SI{e2}{\centi\metre}$:
+\[
+  \SI{1}{\metre\squared} = (\SI{e2}{\centi\metre})^{2} = \SI{e4}{\centi\metre\squared}
+  \qquad\qquad
+  \SI{1}{\metre\cubed} = (\SI{e2}{\centi\metre})^{3} = \SI{e6}{\centi\metre\cubed}
+\]
+Il litro è il volume di un cubo di lato $\SI{1}{\deci\metre} = \SI{10}{\centi\metre}$, quindi $\SI{1}{\litre} = (\SI{10}{\centi\metre})^{3} = \SI{1000}{\centi\metre\cubed}$, e un millilitro è un centimetro cubo. Un metro cubo contiene $10^{6}/10^{3} = 10^{3}$ litri.
+
+La temperatura in kelvin, che si indica con $T$, si ottiene da quella in gradi Celsius, che si indica con la minuscola $t$, aggiungendo \num{273,15}, che nei conti si arrotonda a 273: $T = t + 273$. Questa $t$ non è il tempo: il contesto e l'unità dicono di quale grandezza si parla. La temperatura corporea, \SI{37}{\celsius}, vale $37 + 273 = \SI{310}{\kelvin}$. Una \emph{differenza} di temperatura ha lo stesso valore nelle due scale: salire di \SI{1}{\celsius} vuol dire salire di \SI{1}{\kelvin}.
+
+\begin{formula}[Conversioni da ricordare]
+\SI{1}{\kilo\metre\per\hour} = \frac{1}{3{,}6}\,\si{\metre\per\second}
+\qquad
+\SI{1}{\metre\squared} = \SI{e4}{\centi\metre\squared}
+\qquad
+\SI{1}{\metre\cubed} = \SI{e6}{\centi\metre\cubed} = \SI{e3}{\litre}
+\\
+\SI{1}{\litre} = \SI{1}{\deci\metre\cubed} = \SI{e3}{\centi\metre\cubed}
+\qquad
+\SI{1}{\milli\litre} = \SI{1}{\centi\metre\cubed}
+\qquad
+T\,[\si{\kelvin}] = t\,[\si{\celsius}] + 273
+\end{formula}
+
+\begin{esempio}
+La densità del sangue è circa \SI{1,06}{\gram\per\centi\metre\cubed}. Quanto vale in unità del SI?
+
+Si sostituiscono il grammo e il centimetro cubo con il loro valore nel SI: $\SI{1}{\gram} = \SI{e-3}{\kilo\gram}$ e $\SI{1}{\centi\metre\cubed} = (\SI{e-2}{\metre})^{3} = \SI{e-6}{\metre\cubed}$. Quindi
+\[
+  \SI{1,06}{\gram\per\centi\metre\cubed} = 1{,}06 \cdot \frac{\SI{e-3}{\kilo\gram}}{\SI{e-6}{\metre\cubed}} = 1{,}06 \cdot 10^{-3-(-6)}\,\si{\kilo\gram\per\metre\cubed} = \SI{1,06e3}{\kilo\gram\per\metre\cubed} = \SI{1060}{\kilo\gram\per\metre\cubed}
+\]
+\end{esempio}
+
+\begin{attenzione}[aree e volumi: il fattore va al quadrato o al cubo]
+Un metro è cento centimetri, ma un metro quadrato non è cento centimetri quadrati: è $100^{2} = \num{10000}$ centimetri quadrati. Un metro cubo è un milione di centimetri cubi. È uno degli errori più frequenti nelle conversioni.
+\end{attenzione}
+
+\begin{applicazione}{dosaggi dei farmaci}
+Molti farmaci si dosano in base alla massa del paziente. Un bambino di \SI{20}{\kilo\gram} deve prendere un antipiretico alla dose di \SI{15}{\milli\gram} per chilogrammo. Lo sciroppo contiene \SI{120}{\milli\gram} di principio attivo ogni \SI{5}{\milli\litre}. Quanti millilitri servono?
+
+La dose è $\SI{15}{\milli\gram\per\kilo\gram} \cdot \SI{20}{\kilo\gram} = \SI{300}{\milli\gram}$: i chilogrammi si semplificano. La concentrazione dello sciroppo è $\SI{120}{\milli\gram} / \SI{5}{\milli\litre} = \SI{24}{\milli\gram\per\milli\litre}$. Il volume è
+\[
+  V = \frac{\SI{300}{\milli\gram}}{\SI{24}{\milli\gram\per\milli\litre}} = \frac{300}{24}\,\si{\milli\litre} = \frac{25}{2}\,\si{\milli\litre} = \SI{12,5}{\milli\litre}
+\]
+Le unità aiutano a non sbagliare: dividendo milligrammi per milligrammi al millilitro restano millilitri. Un errore fra milligrammi e microgrammi ($\SI{1}{\milli\gram} = \SI{1000}{\micro\gram}$) sbaglia la dose di un fattore mille.
+\end{applicazione}
+
+\input{ud1/generati/lampo-ud1-conversione}
+
+\subsection{La stima dell'ordine di grandezza}
+
+L'\textbf{ordine di grandezza} di un numero è la potenza di 10 più vicina a quel numero su una scala di potenze di 10, cioè quella da cui differisce per il fattore più piccolo. Per trovarlo si scrive il numero in notazione scientifica, $a \cdot 10^{n}$, e si guarda la mantissa: se $a$ è minore di circa 3 (per la precisione, di $\sqrt{10} \approx 3{,}16$), l'ordine di grandezza è $10^{n}$; se è maggiore, è $10^{n+1}$. Così l'ordine di grandezza di $2 \cdot 10^{4}$ è $10^{4}$, quello di $7 \cdot 10^{4}$ è $10^{5}$. La soglia è $\sqrt{10}$ e non 5 perché sulle potenze di 10 conta il fattore, non la differenza. Per andare da $10^{n}$ a $\sqrt{10} \cdot 10^{n}$ si moltiplica per $\sqrt{10}$, e per andare da $\sqrt{10} \cdot 10^{n}$ a $10^{n+1}$ si moltiplica di nuovo per $\sqrt{10}$ (infatti $\sqrt{10} \cdot \sqrt{10} = 10$). I due passi sono uguali, quindi $\sqrt{10} \cdot 10^{n}$ sta a metà strada. Alcuni libri usano la soglia 5; nei quesiti d'esame i numeri non cadono quasi mai vicino alla soglia.
+
+\textbf{Stimare} l'ordine di grandezza di un risultato vuol dire calcolarlo con numeri arrotondati, in modo da fare il conto a mente. La stima serve per rispondere in fretta e per controllare un conto più preciso: se il risultato esatto ha un ordine di grandezza diverso dalla stima, c'è un errore.
+
+\begin{esempio}
+Il cuore pompa circa \SI{5}{\litre} di sangue al minuto. Qual è l'ordine di grandezza del volume pompato in un giorno?
+
+Un giorno ha $24 \cdot 60 = \num{1440}$ minuti. Arrotondando $1440 \approx 1{,}5 \cdot 10^{3}$:
+\[
+  V \approx \SI{5}{\litre\per\minute} \cdot 1{,}5 \cdot \SI{e3}{\minute} = 7{,}5 \cdot \SI{e3}{\litre}
+\]
+La mantissa 7,5 è maggiore di 3, quindi l'ordine di grandezza è \SI{e4}{\litre}. Il conto esatto, $5 \cdot 1440 = \SI{7200}{\litre}$, conferma la stima.
+\end{esempio}
+
+\begin{applicazione}{gli ordini di grandezza in biologia}
+Le dimensioni tipiche delle strutture biologiche coprono molti ordini di grandezza:
+\begin{center}
+\small
+\begin{tabular}{@{}ll@{\qquad}ll@{}}
+\toprule
+Struttura & Dimensione & Struttura & Dimensione \\
+\midrule
+atomo & \SI{e-10}{\metre} & batterio & \SI{e-6}{\metre} \\
+molecola di DNA (spessore) & \SI{2e-9}{\metre} & globulo rosso (diametro) & \SI{8e-6}{\metre} \\
+proteina & \SI{e-8}{\metre} & capello (spessore) & \SI{e-4}{\metre} \\
+virus & \SI{e-7}{\metre} & corpo umano & \SI{1}{\metre} \\
+\bottomrule
+\end{tabular}
+\end{center}
+Un globulo rosso è circa cento volte più grande di un virus: $\SI{e-5}{\metre} / \SI{e-7}{\metre} = 10^{2}$, dove si è preso per il globulo rosso l'ordine di grandezza \SI{e-5}{\metre}.
+\end{applicazione}
+
+\input{ud1/generati/lampo-ud1-ordine}
+
+\subsection{Grandezze estensive e intensive}
+
+Immagina di dividere un sistema in due parti uguali, per esempio una sacca di sangue in due sacche più piccole. Alcune grandezze si dimezzano: sono le \textbf{grandezze estensive}, che dipendono dalla quantità di materia. Altre restano uguali: sono le \textbf{grandezze intensive}, che descrivono lo stato del sistema in un punto e non dipendono da quanta materia c'è.
+\begin{itemize}
+  \item Estensive: massa, volume, energia, quantità di sostanza, numero di cellule. Si sommano quando si mettono insieme due sistemi.
+  \item Intensive: temperatura, pressione, densità, concentrazione. Non si sommano.
+\end{itemize}
+Il rapporto fra due grandezze estensive è una grandezza intensiva: la densità è massa diviso volume, la concentrazione è quantità di sostanza diviso volume. Per questo la glicemia misurata su \SI{1}{\milli\litre} di sangue è la stessa misurata su \SI{5}{\milli\litre} dello stesso prelievo.
+
+\begin{attenzione}[le grandezze intensive non si sommano]
+Mescolando \SI{1}{\litre} d'acqua a \SI{40}{\celsius} con \SI{1}{\litre} d'acqua a \SI{40}{\celsius} si ottengono \SI{2}{\litre} d'acqua a \SI{40}{\celsius}, non a \SI{80}{\celsius}: il volume, estensivo, si somma; la temperatura, intensiva, no.
+\end{attenzione}
+
+\subsection{Grandezze scalari e vettoriali}
+
+Per alcune grandezze basta un numero con la sua unità: la massa di un paziente (\SI{70}{\kilo\gram}), la temperatura (\SI{37}{\celsius}), la durata di un esame (\SI{20}{\minute}). Sono le \textbf{grandezze scalari}. Altre hanno bisogno anche di una direzione e di un verso: dire che un paziente ha camminato per \SI{100}{\metre} non dice dove è arrivato, se non si sa in quale direzione è andato. Sono le \textbf{grandezze vettoriali}: spostamento, velocità, accelerazione, forza. Si rappresentano con i vettori, che sono l'argomento della sezione~\ref{sec:ud1-vettori}. Prima serve uno strumento matematico per descrivere le direzioni: la trigonometria.
+
+% -------------------------------------------------------------------------
+\section{Le funzioni trigonometriche}
+\label{sec:ud1-trigonometria}
+
+\subsection{Gli angoli: gradi e radianti}
+
+Gli angoli si misurano di solito in \textbf{gradi}: un angolo giro vale \ang{360}, un angolo piatto \ang{180}, un angolo retto \ang{90}. Nel SI l'unità degli angoli è il \textbf{radiante}: l'angolo in radianti è la lunghezza dell'arco di circonferenza che l'angolo vede, divisa per il raggio. Poiché la circonferenza intera è lunga $2\pi r$, un angolo giro vale $2\pi r / r = 2\pi$ radianti:
+\[
+  \ang{360} = 2\pi\ \si{\radian} \qquad \ang{180} = \pi\ \si{\radian} \qquad \ang{90} = \frac{\pi}{2}\ \si{\radian} \qquad \ang{30} = \frac{\pi}{6}\ \si{\radian}
+\]
+Per passare da gradi a radianti si moltiplica per $\pi/\ang{180}$. Il radiante è un rapporto fra due lunghezze, quindi è un numero puro. In questa unità useremo i gradi.
+
+\subsection{Seno, coseno e tangente}
+
+In un triangolo rettangolo il lato opposto all'angolo retto si chiama \textbf{ipotenusa}, gli altri due \textbf{cateti}. Preso uno dei due angoli acuti, $\alpha$, un cateto gli sta di fronte (cateto opposto) e l'altro forma l'angolo insieme all'ipotenusa (cateto adiacente). Le \textbf{funzioni trigonometriche} di $\alpha$ sono i rapporti fra i lati (figura~\ref{fig:ud1-triangolo}):
+\begin{itemize}
+  \item il \textbf{seno} è il cateto opposto diviso l'ipotenusa: $\sin\alpha = a/c$;
+  \item il \textbf{coseno} è il cateto adiacente diviso l'ipotenusa: $\cos\alpha = b/c$;
+  \item la \textbf{tangente} è il cateto opposto diviso il cateto adiacente: $\tan\alpha = a/b$.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\input{ud1/figure/triangolo}
+\caption{Un triangolo rettangolo. Per l'angolo $\alpha$, $a$ è il cateto opposto, $b$ il cateto adiacente e $c$ l'ipotenusa.}
+\label{fig:ud1-triangolo}
+\end{figure}
+
+Questi rapporti dipendono solo dall'angolo, non dalle dimensioni del triangolo: due triangoli rettangoli con lo stesso angolo $\alpha$ sono uno l'ingrandimento dell'altro, e i rapporti fra i lati sono uguali. Seno e coseno sono rapporti fra un cateto e l'ipotenusa, che è il lato più lungo: per un angolo acuto sono numeri fra 0 e 1. Rovesciando le definizioni si trovano i cateti a partire dall'ipotenusa, che è l'uso più frequente in fisica:
+
+\begin{formula}[Funzioni trigonometriche nel triangolo rettangolo]
+\sin\alpha = \frac{a}{c} \qquad \cos\alpha = \frac{b}{c} \qquad \tan\alpha = \frac{a}{b} = \frac{\sin\alpha}{\cos\alpha}
+\\
+a = c \sin\alpha \qquad b = c \cos\alpha \qquad \sin^{2}\alpha + \cos^{2}\alpha = 1
+\end{formula}
+
+\begin{richiamo}{il teorema di Pitagora}
+In un triangolo rettangolo il quadrato dell'ipotenusa è uguale alla somma dei quadrati dei cateti: $c^{2} = a^{2} + b^{2}$, quindi $c = \sqrt{a^{2} + b^{2}}$. Per esempio, con cateti 3 e 4 l'ipotenusa è $\sqrt{9 + 16} = \sqrt{25} = 5$. Due radici da ricordare: $\sqrt 2 \approx 1{,}41$ e $\sqrt 3 \approx 1{,}73$.
+\end{richiamo}
+
+L'ultima formula del box viene da Pitagora. Dividendo $a^{2} + b^{2} = c^{2}$ per $c^{2}$ si ottiene $(a/c)^{2} + (b/c)^{2} = 1$, cioè $\sin^{2}\alpha + \cos^{2}\alpha = 1$ (dove $\sin^{2}\alpha$ vuol dire $(\sin\alpha)^{2}$). Dividendo numeratore e denominatore di $a/b$ per $c$ si ha invece $\tan\alpha = (a/c)/(b/c) = \sin\alpha/\cos\alpha$. Inoltre gli angoli acuti di un triangolo rettangolo sommano a \ang{90}, e il cateto opposto a uno è adiacente all'altro: per questo $\sin\alpha = \cos(\ang{90} - \alpha)$.
+
+\subsection{I valori notevoli}
+
+All'esame non c'è la calcolatrice: seno e coseno si usano solo per pochi angoli, i cui valori si ricavano da due triangoli semplici.
+\begin{itemize}
+  \item \textbf{\ang{45}}: la diagonale divide un quadrato di lato 1 in due triangoli rettangoli con due angoli di \ang{45}. I cateti valgono 1 e l'ipotenusa $\sqrt{1 + 1} = \sqrt 2$, quindi $\sin\ang{45} = \cos\ang{45} = 1/\sqrt 2 = \sqrt 2/2 \approx 0{,}71$.
+  \item \textbf{\ang{30} e \ang{60}}: l'altezza divide un triangolo equilatero di lato 1 in due triangoli rettangoli con angoli di \ang{30} e \ang{60}. L'ipotenusa vale 1, il cateto minore (opposto a \ang{30}) vale $1/2$, e il cateto maggiore, per Pitagora, $\sqrt{1 - 1/4} = \sqrt{3/4} = \sqrt 3/2$. Quindi $\sin\ang{30} = \cos\ang{60} = 1/2$ e $\sin\ang{60} = \cos\ang{30} = \sqrt 3/2 \approx 0{,}87$.
+  \item \textbf{\ang{0} e \ang{90}}: quando l'angolo tende a \ang{0} il cateto opposto si schiaccia a zero e quello adiacente diventa uguale all'ipotenusa, quindi $\sin\ang{0} = 0$ e $\cos\ang{0} = 1$. A \ang{90} è il contrario: $\sin\ang{90} = 1$ e $\cos\ang{90} = 0$.
+\end{itemize}
+
+\begin{formula}[Valori notevoli]
+\renewcommand{\arraystretch}{1.5}
+\begin{array}{@{}lccccc@{}}
+\toprule
+\theta & \ang{0} & \ang{30} & \ang{45} & \ang{60} & \ang{90} \\
+\midrule
+\sin\theta & 0 & \dfrac{1}{2} = 0{,}5 & \dfrac{\sqrt 2}{2} \approx 0{,}71 & \dfrac{\sqrt 3}{2} \approx 0{,}87 & 1 \\ \addlinespace[6pt]
+\cos\theta & 1 & \dfrac{\sqrt 3}{2} \approx 0{,}87 & \dfrac{\sqrt 2}{2} \approx 0{,}71 & \dfrac{1}{2} = 0{,}5 & 0 \\ \addlinespace[6pt]
+\tan\theta & 0 & \dfrac{\sqrt 3}{3} \approx 0{,}58 & 1 & \sqrt 3 \approx 1{,}73 & \text{non definita} \\
+\bottomrule
+\end{array}
+\end{formula}
+
+La tangente è il rapporto fra seno e coseno:
+\[
+  \tan\ang{30} = \frac{1/2}{\sqrt 3/2} = \frac{1}{\sqrt 3} = \frac{\sqrt 3}{3} \approx 0{,}58
+  \qquad
+  \tan\ang{45} = 1
+  \qquad
+  \tan\ang{60} = \frac{\sqrt 3/2}{1/2} = \sqrt 3 \approx 1{,}73
+\]
+Per $\tan\ang{30}$ si moltiplicano numeratore e denominatore di $1/\sqrt 3$ per $\sqrt 3$; $\tan\ang{45} = 1$ perché seno e coseno sono uguali.
+
+Il seno cresce da 0 a 1 quando l'angolo va da \ang{0} a \ang{90}; il coseno fa il contrario, con gli stessi valori in ordine inverso. La tangente a \ang{90} non è definita, perché il coseno vale zero e non si può dividere per zero.
+
+\begin{esempio}
+Un fisioterapista solleva la gamba tesa di un paziente sdraiato. La gamba, lunga \SI{0,80}{\metre} dall'anca al tallone, forma un angolo di \ang{30} con il lettino. A che altezza dal lettino si trova il tallone? A che distanza dall'anca, in orizzontale?
+
+La gamba è l'ipotenusa del triangolo rettangolo; l'altezza è il cateto opposto all'angolo di \ang{30}, la distanza orizzontale il cateto adiacente:
+\[
+  h = c \sin\ang{30} = \SI{0,80}{\metre} \cdot 0{,}5 = \SI{0,40}{\metre}
+  \qquad\qquad
+  d = c \cos\ang{30} \approx \SI{0,80}{\metre} \cdot 0{,}87 \approx \SI{0,70}{\metre}
+\]
+Controllo con Pitagora: $0{,}40^{2} + 0{,}70^{2} = 0{,}16 + 0{,}49 = 0{,}65$, e $0{,}80^{2} = 0{,}64$. I due numeri sono quasi uguali; la piccola differenza viene dall'arrotondamento di $\sqrt 3/2$ a 0,87.
+\end{esempio}
+
+\begin{attenzione}[seno o coseno?]
+Il coseno va con il cateto \emph{adiacente} all'angolo, quello che forma l'angolo insieme all'ipotenusa; il seno con il cateto \emph{opposto}. Non è il nome del cateto (verticale od orizzontale) a decidere, ma la sua posizione rispetto all'angolo dato. Se l'angolo della gamba fosse dato rispetto alla verticale invece che rispetto al lettino, l'altezza si calcolerebbe con il coseno.
+\end{attenzione}
+
+\input{ud1/generati/lampo-ud1-trigonometria}
+
+\subsection{Angoli maggiori di \texorpdfstring{\ang{90}}{90 gradi}}
+
+Nel triangolo rettangolo gli angoli sono acuti. Per i vettori servono anche angoli più grandi, e seno e coseno si definiscono sulla \textbf{circonferenza goniometrica}: una circonferenza di raggio 1 con il centro nell'origine degli assi. Si parte dall'asse $x$ e si ruota in verso antiorario di un angolo $\theta$, fino al punto $P$ della circonferenza: il coseno di $\theta$ è l'ascissa di $P$, il seno la sua ordinata (figura~\ref{fig:ud1-circonferenza}). Per un angolo acuto è la stessa definizione di prima, con l'ipotenusa lunga 1.
+
+\begin{figure}[h]
+\centering
+\input{ud1/figure/circonferenza}
+\caption{La circonferenza goniometrica. Il punto $P$ all'angolo $\theta$ ha coordinate $(\cos\theta, \sin\theta)$. Per $\theta = \ang{120}$, come in figura, il coseno è negativo e il seno positivo. Il punto $P'$, unito a $P$ dalla linea tratteggiata, è all'angolo $\ang{180} - \theta = \ang{60}$: è simmetrico di $P$ rispetto all'asse $y$.}
+\label{fig:ud1-circonferenza}
+\end{figure}
+
+Per un angolo fra \ang{90} e \ang{180} il punto $P$ sta a sinistra dell'asse $y$: il coseno è negativo, il seno resta positivo. I punti agli angoli $\theta$ e $\ang{180} - \theta$ sono simmetrici rispetto all'asse $y$ (in figura, \ang{120} e \ang{60}): hanno la stessa ordinata e ascisse opposte, quindi il seno è uguale e il coseno cambia segno:
+
+\begin{formula}[Angoli supplementari]
+\sin(\ang{180} - \theta) = \sin\theta \qquad \cos(\ang{180} - \theta) = -\cos\theta
+\end{formula}
+
+Per esempio $\cos\ang{120} = -\cos\ang{60} = -1/2$ e $\sin\ang{150} = \sin\ang{30} = 1/2$. Per $\theta = \ang{180}$ il punto $P$ è in $(-1, 0)$: $\cos\ang{180} = -1$ e $\sin\ang{180} = 0$. Ruotando oltre \ang{180} il punto $P$ scende sotto l'asse $x$, e il seno diventa negativo: per esempio a \ang{270} $P$ è in $(0, -1)$, quindi $\cos\ang{270} = 0$ e $\sin\ang{270} = -1$.
+
+% -------------------------------------------------------------------------
+\section{I vettori}
+\label{sec:ud1-vettori}
+
+\subsection{Che cos'è un vettore}
+
+Un \textbf{vettore} è un ente matematico che ha un \textbf{modulo}, una \textbf{direzione} e un \textbf{verso}. Si disegna come una freccia: la lunghezza della freccia rappresenta il modulo, la retta su cui giace la direzione, la punta il verso. Su una stessa direzione (per esempio la verticale) ci sono due versi (in su e in giù). Il vettore si indica con una lettera con la freccia sopra, $\vec a$; il suo modulo, che è un numero positivo o nullo, si indica con $|\vec a|$ o semplicemente con $a$. Il modulo di una grandezza vettoriale ha un'unità di misura: una forza di modulo \SI{10}{\newton}.
+
+Due vettori sono uguali se hanno lo stesso modulo, la stessa direzione e lo stesso verso, anche se sono disegnati in punti diversi. Il vettore $-\vec a$, l'\textbf{opposto} di $\vec a$, ha lo stesso modulo e la stessa direzione, ma verso opposto. Moltiplicare un vettore per un numero $k$ dà un vettore $k\vec a$ con la stessa direzione e modulo $|k|\,a$: il verso resta lo stesso se $k > 0$, si inverte se $k < 0$. Per esempio $2\vec a$ è lungo il doppio di $\vec a$ e ha lo stesso verso.
+
+\subsection{Le componenti di un vettore}
+
+Disegniamo il vettore $\vec a$ in un piano con gli assi cartesiani $x$ e $y$, con la coda nell'origine, e chiamiamo $\theta$ l'angolo che forma con l'asse $x$. Proiettando la punta sugli assi si ottengono le \textbf{componenti cartesiane} del vettore, $a_x$ e $a_y$ (figura~\ref{fig:ud1-componenti}). Il vettore è l'ipotenusa di un triangolo rettangolo che ha le componenti come cateti; $a_x$ è il cateto adiacente a $\theta$, $a_y$ quello opposto.
+
+\begin{figure}[h]
+\centering
+\input{ud1/figure/componenti}
+\caption{Il vettore $\vec a$, di modulo $a$, forma l'angolo $\theta$ con l'asse $x$. Le sue componenti $a_x$ e $a_y$ sono i cateti del triangolo rettangolo che ha $\vec a$ come ipotenusa.}
+\label{fig:ud1-componenti}
+\end{figure}
+
+\begin{formula}[Componenti di un vettore]
+a_x = a \cos\theta \qquad a_y = a \sin\theta
+\\
+a = \sqrt{a_x^{2} + a_y^{2}} \qquad \tan\theta = \frac{a_y}{a_x}
+\end{formula}
+
+Le prime due formule danno le componenti dal modulo e dall'angolo; le altre due fanno il contrario, con Pitagora e con la tangente. La tangente da sola non basta a trovare l'angolo: $(3, 4)$ e $(-3, -4)$ hanno la stessa tangente, ma puntano in versi opposti. Per scegliere l'angolo giusto si guardano i segni di $a_x$ e $a_y$. Se $a_x = 0$ il vettore è verticale e $\theta$ vale \ang{90} o \ang{270}. Le componenti possono essere negative: un vettore che punta verso sinistra ha $a_x < 0$, uno che punta verso il basso ha $a_y < 0$. Con la circonferenza goniometrica le formule valgono per qualunque angolo: per $\theta = \ang{120}$, per esempio, $a_x = a\cos\ang{120} = -a/2$.
+
+Un vettore si scrive spesso con le sue componenti fra parentesi, $\vec a = (a_x, a_y)$, oppure con i \textbf{versori} $\hat\imath$ e $\hat\jmath$, i vettori di modulo 1 diretti come gli assi $x$ e $y$: $\vec a = a_x\,\hat\imath + a_y\,\hat\jmath$. Nello spazio c'è una terza componente $a_z$, lungo l'asse $z$ con il versore $\hat k$, e il modulo è $\sqrt{a_x^{2} + a_y^{2} + a_z^{2}}$. Gli assi si orientano in modo che, con $x$ verso destra e $y$ verso l'alto sul foglio, l'asse $z$ esca dal foglio verso chi legge.
+
+\begin{esempio}
+(a) Trova le componenti di un vettore di modulo 10 che forma un angolo di \ang{30} con l'asse $x$. (b) Trova modulo e direzione del vettore $\vec b = (3, 4)$.
+
+(a) Con le formule delle componenti:
+\[
+  a_x = 10 \cos\ang{30} \approx 10 \cdot 0{,}87 = 8{,}7
+  \qquad\qquad
+  a_y = 10 \sin\ang{30} = 10 \cdot 0{,}5 = 5
+\]
+(b) Il modulo viene da Pitagora, la direzione dalla tangente:
+\[
+  b = \sqrt{3^{2} + 4^{2}} = \sqrt{9 + 16} = \sqrt{25} = 5
+  \qquad\qquad
+  \tan\theta = \frac{4}{3} \approx 1{,}33
+\]
+La tangente vale 1,33: è compresa fra $\tan\ang{45} = 1$ e $\tan\ang{60} \approx 1{,}73$, quindi l'angolo è fra \ang{45} e \ang{60} (con la calcolatrice si trova circa \ang{53}).
+\end{esempio}
+
+\subsection{Somma e differenza di vettori}
+
+Due vettori si sommano in due modi equivalenti (figura~\ref{fig:ud1-somma}):
+\begin{itemize}
+  \item con il metodo \textbf{punta-coda}: si disegna $\vec b$ con la coda sulla punta di $\vec a$; la somma $\vec a + \vec b$ va dalla coda di $\vec a$ alla punta di $\vec b$;
+  \item con la \textbf{regola del parallelogramma}: si disegnano $\vec a$ e $\vec b$ con la coda nello stesso punto e si completa il parallelogramma che hanno come lati; la somma è la diagonale che parte dalla coda comune.
+\end{itemize}
+La \textbf{differenza} $\vec a - \vec b$ è la somma di $\vec a$ con l'opposto di $\vec b$: $\vec a - \vec b = \vec a + (-\vec b)$.
+
+\begin{figure}[h]
+\centering
+\input{ud1/figure/somma}
+\caption{La somma di due vettori con il metodo punta-coda (a) e con la regola del parallelogramma (b) dà lo stesso vettore. La differenza (c) è la somma di $\vec a$ con l'opposto di $\vec b$.}
+\label{fig:ud1-somma}
+\end{figure}
+
+Il disegno serve a capire, ma i conti si fanno con le componenti: la componente $x$ della somma è la somma delle componenti $x$, e lo stesso per $y$.
+
+\begin{formula}[Somma e differenza per componenti]
+\vec c = \vec a + \vec b \quad\Longleftrightarrow\quad c_x = a_x + b_x, \quad c_y = a_y + b_y
+\\
+\vec d = \vec a - \vec b \quad\Longleftrightarrow\quad d_x = a_x - b_x, \quad d_y = a_y - b_y
+\end{formula}
+
+Tre casi particolari, per due vettori di modulo $a$ e $b$:
+\begin{itemize}
+  \item stessa direzione e stesso verso: il modulo della somma è $a + b$;
+  \item stessa direzione e verso opposto: il modulo della somma è la differenza dei moduli, $|a - b|$;
+  \item direzioni perpendicolari: i due vettori sono i cateti di un triangolo rettangolo e la somma è l'ipotenusa, di modulo $\sqrt{a^{2} + b^{2}}$.
+\end{itemize}
+In tutti gli altri casi il modulo della somma è compreso fra $|a - b|$ e $a + b$.
+
+\begin{esempio}
+Dati $\vec a = (3, 1)$ e $\vec b = (1, 2)$, calcola $\vec a + \vec b$, il suo modulo e $\vec a - \vec b$.
+
+Si sommano e si sottraggono le componenti una per una:
+\[
+  \vec a + \vec b = (3 + 1,\ 1 + 2) = (4, 3)
+  \qquad\qquad
+  \vec a - \vec b = (3 - 1,\ 1 - 2) = (2, -1)
+\]
+Il modulo della somma è $\sqrt{4^{2} + 3^{2}} = \sqrt{16 + 9} = \sqrt{25} = 5$. Nota che i moduli di partenza sono $a = \sqrt{9 + 1} = \sqrt{10} \approx 3{,}2$ e $b = \sqrt{1 + 4} = \sqrt 5 \approx 2{,}2$: la loro somma, circa 5,4, è maggiore di 5.
+\end{esempio}
+
+\begin{attenzione}[il modulo della somma non è la somma dei moduli]
+$|\vec a + \vec b| = a + b$ solo se i due vettori hanno la stessa direzione e lo stesso verso. Due forze da \SI{3}{\newton} e \SI{4}{\newton} danno una forza totale di \SI{7}{\newton} se tirano nello stesso verso, di \SI{1}{\newton} se tirano in versi opposti, di \SI{5}{\newton} se sono perpendicolari.
+\end{attenzione}
+
+\begin{applicazione}{la trazione ortopedica}
+Nella trazione di una gamba fratturata, due funi tirano la caviglia con la stessa tensione di \SI{50}{\newton} ciascuna: una forma un angolo di \ang{30} sopra l'asse della gamba, l'altra \ang{30} sotto. Prendiamo l'asse $x$ lungo la gamba. Le componenti lungo la gamba si sommano:
+\[
+  F_x = 50 \cos\ang{30} + 50 \cos\ang{30} \approx 2 \cdot 50 \cdot 0{,}87\,\si{\newton} = \SI{87}{\newton}
+\]
+Le componenti perpendicolari hanno lo stesso modulo, $50 \sin\ang{30} = \SI{25}{\newton}$, ma versi opposti, quindi si annullano: $F_y = 25 - 25 = 0$. La forza totale, \SI{87}{\newton} lungo la gamba, è minore della somma delle due tensioni, \SI{100}{\newton}, perché le funi non tirano nella stessa direzione. In biomeccanica si scompongono così le forze di muscoli e tendini, che raramente tirano lungo l'asse dell'osso.
+\end{applicazione}
+
+\input{ud1/generati/lampo-ud1-somma}
+
+\subsection{Il prodotto scalare}
+
+Il \textbf{prodotto scalare} di due vettori $\vec a$ e $\vec b$, che formano fra loro l'angolo $\theta$, è il \emph{numero}
+\[
+  \vec a \cdot \vec b = a\,b\cos\theta
+\]
+Il risultato è uno scalare, non un vettore: da qui il nome. Poiché $b\cos\theta$ è la componente di $\vec b$ lungo la direzione di $\vec a$, il prodotto scalare è il modulo di $\vec a$ per la parte di $\vec b$ parallela ad $\vec a$. Il segno dipende dall'angolo:
+\begin{itemize}
+  \item vettori paralleli e concordi ($\theta = \ang{0}$): $\vec a \cdot \vec b = ab$, il valore massimo;
+  \item angolo acuto: prodotto positivo; angolo ottuso ($\cos\theta < 0$): prodotto negativo;
+  \item vettori perpendicolari ($\theta = \ang{90}$): $\vec a \cdot \vec b = 0$;
+  \item vettori paralleli e discordi ($\theta = \ang{180}$): $\vec a \cdot \vec b = -ab$.
+\end{itemize}
+Il prodotto scalare non dipende dall'ordine: $\vec a \cdot \vec b = \vec b \cdot \vec a$. Il prodotto scalare di un vettore con sé stesso è il quadrato del modulo, $\vec a \cdot \vec a = a^{2}$. Con le componenti si calcola senza conoscere l'angolo:
+
+\begin{formula}[Prodotto scalare]
+\vec a \cdot \vec b = a\,b\cos\theta = a_x b_x + a_y b_y + a_z b_z
+\end{formula}
+
+Per esempio, con $\vec a = (1, 0)$ lungo l'asse $x$ e $\vec b = (\cos\theta, \sin\theta)$ di modulo 1, la formula con le componenti dà $1 \cdot \cos\theta + 0 \cdot \sin\theta = \cos\theta$, come la definizione.
+
+Nella UD2 il prodotto scalare servirà per il \textbf{lavoro} di una forza: una forza $\vec F$ che sposta il suo punto di applicazione di $\vec s$ compie il lavoro $W = \vec F \cdot \vec s = F s \cos\theta$.
+
+\begin{esempio}
+(a) Due vettori di modulo $a = 6$ e $b = 5$ formano un angolo di \ang{60}. Quanto vale il prodotto scalare? E se l'angolo fosse di \ang{120}? (b) Calcola il prodotto scalare di $\vec a = (3, 1)$ e $\vec b = (1, 2)$ e ricava l'angolo fra i due vettori.
+
+(a) Con la definizione:
+\[
+  \vec a \cdot \vec b = 6 \cdot 5 \cdot \cos\ang{60} = 30 \cdot \frac{1}{2} = 15
+  \qquad\qquad
+  \text{con \ang{120}:}\quad 30 \cdot \cos\ang{120} = 30 \cdot \left(-\frac{1}{2}\right) = -15
+\]
+(b) Con le componenti:
+\[
+  \vec a \cdot \vec b = 3 \cdot 1 + 1 \cdot 2 = 5
+\]
+I moduli sono $a = \sqrt{10}$ e $b = \sqrt 5$, quindi $ab = \sqrt{50} = \sqrt{25 \cdot 2} = 5\sqrt 2$. Dalla definizione:
+\[
+  \cos\theta = \frac{\vec a \cdot \vec b}{ab} = \frac{5}{5\sqrt 2} = \frac{1}{\sqrt 2} = \frac{\sqrt 2}{2}
+  \qquad\Longrightarrow\qquad
+  \theta = \ang{45}
+\]
+\end{esempio}
+
+\subsection{Il prodotto vettoriale}
+
+Il \textbf{prodotto vettoriale} di $\vec a$ e $\vec b$ si scrive $\vec a \times \vec b$ ed è un \emph{vettore} $\vec c$ (figura~\ref{fig:ud1-vettoriale}):
+\begin{itemize}
+  \item il \textbf{modulo} è $c = ab\sin\theta$, dove $\theta$ è l'angolo fra $\vec a$ e $\vec b$, preso fra \ang{0} e \ang{180}: è l'area del parallelogramma che ha $\vec a$ e $\vec b$ come lati: la base è $a$ e l'altezza è il cateto opposto a $\theta$, cioè $b\sin\theta$;
+  \item la \textbf{direzione} è perpendicolare al piano che contiene $\vec a$ e $\vec b$, quindi perpendicolare a entrambi;
+  \item il \textbf{verso} è dato dalla \textbf{regola della mano destra}: si dispongono pollice, indice e medio della mano destra in modo che siano perpendicolari fra loro, come gli spigoli di un cubo che partono da uno stesso vertice; se il pollice indica il verso di $\vec a$ e l'indice quello di $\vec b$, il medio indica il verso di $\vec a \times \vec b$.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\input{ud1/figure/prodotto-vettoriale}
+\caption{Il prodotto vettoriale $\vec c = \vec a \times \vec b$ è perpendicolare al piano di $\vec a$ e $\vec b$, con il verso dato dalla regola della mano destra. Il suo modulo è l'area del parallelogramma che ha $\vec a$ e $\vec b$ come lati. Scambiando i fattori il verso si inverte.}
+\label{fig:ud1-vettoriale}
+\end{figure}
+
+\begin{formula}[Prodotto vettoriale]
+|\vec a \times \vec b| = a\,b\sin\theta
+\qquad\qquad
+\vec b \times \vec a = -\,\vec a \times \vec b
+\end{formula}
+
+Le proprietà principali:
+\begin{itemize}
+  \item il prodotto vettoriale \emph{dipende dall'ordine}: scambiando i fattori il modulo resta uguale e il verso si inverte;
+  \item è nullo se i due vettori sono paralleli ($\theta = \ang{0}$ o \ang{180}, $\sin\theta = 0$); in particolare $\vec a \times \vec a = 0$;
+  \item ha il modulo massimo, $ab$, se i vettori sono perpendicolari ($\sin\ang{90} = 1$);
+  \item per i versori degli assi, con la regola della mano destra: $\hat\imath \times \hat\jmath = \hat k$, $\hat\jmath \times \hat k = \hat\imath$, $\hat k \times \hat\imath = \hat\jmath$.
+\end{itemize}
+Il prodotto vettoriale servirà per il \textbf{momento di una forza} (UD2), che misura quanto una forza fa ruotare un corpo, e per la forza che un campo magnetico esercita su una carica in moto (UD6).
+
+\begin{esempio}
+(a) Due vettori di modulo $a = 5$ e $b = 4$ formano un angolo di \ang{30}. Quanto vale il modulo di $\vec a \times \vec b$? (b) $\vec a = 2\,\hat\imath$ punta lungo l'asse $x$ e $\vec b = 3\,\hat\jmath$ lungo l'asse $y$. Trova $\vec a \times \vec b$ e $\vec b \times \vec a$.
+
+(a) Con la definizione:
+\[
+  |\vec a \times \vec b| = 5 \cdot 4 \cdot \sin\ang{30} = 20 \cdot \frac{1}{2} = 10
+\]
+(b) I vettori sono perpendicolari, quindi il modulo è $ab\sin\ang{90} = 2 \cdot 3 \cdot 1 = 6$. Il prodotto è perpendicolare al piano $xy$, quindi diretto come l'asse $z$. Per il verso: pollice lungo $x$, indice lungo $y$, il medio indica il verso positivo dell'asse $z$. Quindi
+\[
+  \vec a \times \vec b = 6\,\hat k \qquad\qquad \vec b \times \vec a = -6\,\hat k
+\]
+\end{esempio}
+
+\begin{attenzione}[prodotto scalare e prodotto vettoriale]
+Il prodotto scalare è un numero e va con il \emph{coseno}: è massimo per vettori paralleli e nullo per vettori perpendicolari. Il prodotto vettoriale è un vettore e va con il \emph{seno}: è nullo per vettori paralleli e massimo per vettori perpendicolari. E solo il prodotto vettoriale cambia verso se si scambiano i fattori.
+\end{attenzione}
+
+\input{ud1/generati/lampo-ud1-vettoriale}
+
+\riepilogoformule

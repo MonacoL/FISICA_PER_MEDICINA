@@ -1,0 +1,17 @@
+% Un vettore a nel piano, con angolo theta dall'asse x, e le sue componenti.
+% Scala: a = 3,5, theta = 35 gradi: a_x = 2,87, a_y = 2,01
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \draw[->] (-0.3,0) -- (4,0) node[right] {$x$};
+  \draw[->] (0,-0.3) -- (0,2.7) node[above] {$y$};
+  \coordinate (P) at (35:3.5);
+  \draw[dashed, gray] (P) -- (P |- 0,0);
+  \draw[dashed, gray] (P) -- (0,0 |- P);
+  \draw[->, very thick, medica] (0,0) -- (P |- 0,0);
+  \node[medica, below] at (1.43,0) {$a_x = a\cos\theta$};
+  \draw[->, very thick, attenzione] (0,0) -- (0,0 |- P);
+  \node[attenzione, left] at (0,1.0) {$a_y = a\sin\theta$};
+  \draw[->, very thick, formula] (0,0) -- (P) node[above right] {$\vec a$};
+  \node[formula, above left] at (1.4,1.05) {$a$};
+  \draw[esempio, thick] (0.8,0) arc[start angle=0, end angle=35, radius=0.8];
+  \node[esempio] at (17:1.12) {$\theta$};
+\end{tikzpicture}
