@@ -1,0 +1,37 @@
+% (a) Barometro di Torricelli. (b) Manometro a tubo aperto collegato a un recipiente.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % (a) bacinella
+  \fill[richiamo!45] (0,0) rectangle (3,0.6);
+  \draw[very thick] (0,0.9) -- (0,0) -- (3,0) -- (3,0.9);
+  % tubo
+  \fill[white] (1.3,0.2) rectangle (1.7,4.2);
+  \fill[richiamo!45] (1.3,0.2) rectangle (1.7,3.6);
+  \draw[thick] (1.3,0.2) -- (1.3,4.2) -- (1.7,4.2) -- (1.7,0.2);
+  \node[right, align=left, font=\footnotesize] at (1.75,3.95) {vuoto};
+  \draw[dashed, richiamo] (1.7,0.6) -- (2.6,0.6);
+  \draw[dashed, richiamo] (1.7,3.6) -- (2.6,3.6);
+  \draw[|<->|] (2.4,0.6) -- (2.4,3.6) node[midway, right, align=left] {$h \approx$\\\SI{760}{\milli\metre}};
+  \draw[->, thick, attenzione] (0.55,1.5) -- (0.55,0.65) node[pos=0, above] {$p_\text{atm}$};
+  \node at (1.5,-0.45) {(a)};
+
+  % (b) manometro
+  \begin{scope}[xshift=4.6cm]
+    % recipiente con il gas
+    \fill[lampo!20] (0,2.4) rectangle (1.2,3.8);
+    \draw[thick] (0,2.4) rectangle (1.2,3.8);
+    \node at (0.6,3.1) {$p$};
+    % liquido nel tubo a U
+    \fill[formula!30] (1.6,1.2) -- (1.6,0.75) arc[start angle=180, end angle=360, radius=0.75]
+      -- (3.1,2.2) -- (2.8,2.2) -- (2.8,0.75) arc[start angle=360, end angle=180, radius=0.45]
+      -- (1.9,1.2) -- cycle;
+    % pareti
+    \draw[thick] (1.2,2.9) -- (1.6,2.9) -- (1.6,0.75) arc[start angle=180, end angle=360, radius=0.75] -- (3.1,3.4);
+    \draw[thick] (1.2,3.2) -- (1.9,3.2) -- (1.9,0.75) arc[start angle=180, end angle=360, radius=0.45] -- (2.8,3.4);
+    % livelli
+    \draw[dashed, richiamo] (1.9,1.2) -- (3.6,1.2);
+    \draw[dashed, richiamo] (3.1,2.2) -- (3.6,2.2);
+    \draw[|<->|] (3.45,1.2) -- (3.45,2.2) node[midway, right] {$\Delta h$};
+    \draw[->, thick, attenzione] (2.95,4.1) -- (2.95,3.45) node[pos=0, above] {$p_\text{atm}$};
+    \node at (1.9,-0.45) {(b)};
+  \end{scope}
+\end{tikzpicture}
