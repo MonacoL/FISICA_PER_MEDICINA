@@ -26,6 +26,7 @@ jobs:
         run: |
           if [ ! -x ~/.TinyTeX/bin/x86_64-linux/tlmgr ]; then
             wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+            ~/.TinyTeX/bin/x86_64-linux/tlmgr update --self
             ~/.TinyTeX/bin/x86_64-linux/tlmgr install $(cat tex-packages.txt)
           fi
           echo "$HOME/.TinyTeX/bin/x86_64-linux" >> "$GITHUB_PATH"
