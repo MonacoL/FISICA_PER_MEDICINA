@@ -19,3 +19,10 @@ tlmgr install $(cat tex-packages.txt)
 ```
 
 TinyTeX mette i suoi comandi in `~/.local/bin`, che deve essere nel `PATH`. Se manca un pacchetto, `tlmgr search --global --file /nome.sty` dice in quale pacchetto si trova. Ogni nuovo pacchetto va aggiunto a `tex-packages.txt`.
+
+## Licenza
+
+- **Contenuti** (testo delle Dispense, esercizi, soluzioni, figure, cioè i file in `libro/udN/` e i PDF che ne derivano): [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it), testo completo in [`LICENSE`](LICENSE). Si possono copiare e adattare citando l'autore, senza scopi commerciali e con la stessa licenza.
+- **Codice** (la classe `libro/fisica.cls`, la configurazione di compilazione, gli script Python): [MIT](LICENSE-CODE).
+
+© 2026 Luca Monaco
