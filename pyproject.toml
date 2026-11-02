@@ -1,0 +1,9 @@
+[project]
+name = "fisica-per-medicina"
+version = "0.1.0"
+description = "Corso LaTeX di Fisica per il semestre filtro di Medicina"
+requires-python = ">=3.13"
+dependencies = [
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+]

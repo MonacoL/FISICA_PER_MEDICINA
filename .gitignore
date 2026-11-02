@@ -1,2 +1,6 @@
 # PDF di riferimento (non distribuire)
 *.pdf
+
+# Ambiente Python
+.venv/
+__pycache__/
