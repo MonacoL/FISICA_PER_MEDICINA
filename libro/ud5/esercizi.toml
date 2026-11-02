@@ -3,8 +3,6 @@
 # la pagina web build/web/ud5.html, e ricalcola ogni risultato.
 #
 # Il formato è descritto in testa a libro/ud7/esercizi.toml.
-# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
-# arrivano con un ticket successivo.
 
 titolo = "Eserciziario UD5 · Termodinamica"
 
@@ -24,8 +22,6 @@ sigma = 5.7e-08
 L_fus = 334
 g = 10
 
-# ==================================================================== quesiti lampo, in ordine di dispensa
-
 # ==================================================================== problemi
 
 [[problema]]
@@ -37,6 +33,7 @@ dati.t = { valore = "38,5", unita = "\\celsius" }
   [[problema.parte]]
   calcolo = "9/5 * t + 32"
   risultato = { valore = 101.3, cifre = 4 }
+  rapido = '''$101{,}3\,^{\circ}\mathrm{F}$'''
   soluzione = '''Si usa la relazione fra le scale, $t_F = \frac{9}{5}\,t + 32$. Prima si moltiplica per $9/5 = 1{,}8$, poi si aggiunge 32:
 \[
   t_F = 1{,}8 \cdot 38{,}5 + 32 = 69{,}3 + 32 = 101{,}3\,^{\circ}\mathrm{F}
@@ -69,11 +66,15 @@ dati.t = { valore = 27, unita = "\\celsius" }
   [[problema.parte]]
   calcolo = "p * V / (R_atm * (t + 273))"
   risultato = { valore = 0.061, unita = "\\mole", cifre = 2 }
-  soluzione = '''Con la pressione in atmosfere e il volume in litri conviene usare $R \approx \SI{0,082}{\litre\,atm\per\mole\per\kelvin}$. La temperatura va in kelvin: $T = 27 + 273 = \SI{300}{\kelvin}$. Dall'equazione di stato $pV = nRT$:
+  soluzione = '''Con la pressione in atmosfere e il volume in litri conviene usare il valore di $R$ in litri e atmosfere,
+\[
+  R \approx \SI{0,082}{\litre\,atm\per\mole\per\kelvin}
+\]
+La temperatura va in kelvin: $T = 27 + 273 = \SI{300}{\kelvin}$. Dall'equazione di stato $pV = nRT$:
 \[
   n = \frac{pV}{RT} = \frac{\SI{1,0}{atm} \cdot \SI{1,5}{\litre}}{\SI{0,082}{\litre\,atm\per\mole\per\kelvin} \cdot \SI{300}{\kelvin}} = \frac{\SI{1,5}{\litre\,atm}}{\SI{24,6}{\litre\,atm\per\mole}} \approx \SI{0,061}{\mole}
 \]
-dove $0{,}082 \cdot 300 = 24{,}6$ e $1{,}5/24{,}6 \approx 1{,}5/25 = 0{,}06$; il conto preciso dà $0{,}061$.'''
+dove $0{,}082 \cdot 300 = 24{,}6$ e $1{,}5/24{,}6 \approx 1{,}5/25 = 0{,}06$. Poiché $24{,}6$ è un po' meno di 25, il risultato è un po' più di $0{,}06$: infatti $24{,}6 \cdot 0{,}061 \approx 1{,}50$, quindi $n \approx \SI{0,061}{\mole}$.'''
 
 [[problema]]
 id = "ud5-gas-siringa"
@@ -131,9 +132,9 @@ dove $8{,}3 \cdot 300 = 2490$ e $1000/2490 \approx 1000/2500 = 0{,}40$.'''
   domanda = '''Qual è la massa dell'ossigeno nella sacca?'''
   calcolo = "p * V * 1e-3 / (R * (t + 273)) * 32"
   risultato = { valore = 13, unita = "\\gram", cifre = 2 }
-  soluzione = '''Ogni mole ha massa \SI{32}{\gram}. Con le moli del punto (a), $n = \SI{0,402}{\mole}$:
+  soluzione = '''Ogni mole ha massa \SI{32}{\gram}. Con le moli del punto (a), $n \approx \SI{0,40}{\mole}$:
 \[
-  m = n\,M = \SI{0,402}{\mole} \cdot \SI{32}{\gram\per\mole} \approx \SI{12,9}{\gram} \approx \SI{13}{\gram}
+  m = n\,M = \SI{0,40}{\mole} \cdot \SI{32}{\gram\per\mole} = \SI{12,8}{\gram} \approx \SI{13}{\gram}
 \]
 Dieci litri di gas pesano poco più di una decina di grammi: un gas a pressione atmosferica è circa mille volte meno denso dell'acqua.'''
 
@@ -229,27 +230,27 @@ Con l'aumento del punto (a), la sera $t = 37{,}0 + 2{,}5 = \SI{39,5}{\celsius}$,
 id = "ud5-gas-cuffia"
 livello = 2
 testo = '''La cuffia di un tubo endotracheale è un palloncino che si gonfia nella trachea per tenere il tubo in posizione. Contiene {{V}} d'aria alla pressione di circa {{p}} e alla temperatura del corpo, {{t}}.'''
-dati.V = { valore = 10, unita = "\\milli\\litre" }
+dati.V = { valore = "6,0", unita = "\\milli\\litre" }
 dati.p = { valore = "1,0e5", unita = "\\pascal" }
 dati.t = { valore = 37, unita = "\\celsius" }
 
   [[problema.parte]]
   domanda = '''Quante moli d'aria contiene la cuffia?'''
   calcolo = "p * V * 1e-6 / (R * (t + 273))"
-  risultato = { valore = 3.9e-4, unita = "\\mole", cifre = 2 }
-  soluzione = '''Si portano le grandezze nel SI. Un millilitro è \SI{e-3}{\litre}, cioè $\num{e-3} \cdot \SI{e-3}{\metre\cubed} = \SI{e-6}{\metre\cubed}$, quindi $V = \SI{10}{\milli\litre} = \SI{e-5}{\metre\cubed}$. La temperatura è $T = 37 + 273 = \SI{310}{\kelvin}$. Dall'equazione di stato:
+  risultato = { valore = 2.3e-4, unita = "\\mole", cifre = 2 }
+  soluzione = '''Si portano le grandezze nel SI. Un millilitro è \SI{e-3}{\litre}, cioè $\num{e-3} \cdot \SI{e-3}{\metre\cubed} = \SI{e-6}{\metre\cubed}$, quindi $V = \SI{6,0}{\milli\litre} = \SI{6,0e-6}{\metre\cubed}$. La temperatura è $T = 37 + 273 = \SI{310}{\kelvin}$. Dall'equazione di stato:
 \[
-  n = \frac{pV}{RT} = \frac{\SI{1,0e5}{\pascal} \cdot \SI{e-5}{\metre\cubed}}{\SI{8,3}{\joule\per\mole\per\kelvin} \cdot \SI{310}{\kelvin}} = \frac{1{,}0 \cdot 10^{5-5}\,\si{\joule}}{\SI{2573}{\joule\per\mole}} = \frac{\SI{1,0}{\joule}}{\SI{2573}{\joule\per\mole}} \approx \SI{3,9e-4}{\mole}
+  n = \frac{pV}{RT} = \frac{\SI{1,0e5}{\pascal} \cdot \SI{6,0e-6}{\metre\cubed}}{\SI{8,3}{\joule\per\mole\per\kelvin} \cdot \SI{310}{\kelvin}} = \frac{6{,}0 \cdot 10^{5-6}\,\si{\joule}}{\SI{2573}{\joule\per\mole}} = \frac{\SI{0,60}{\joule}}{\SI{2573}{\joule\per\mole}} \approx \SI{2,3e-4}{\mole}
 \]
-dove $1/2573 \approx 0{,}39 \cdot 10^{-3} = \num{3,9e-4}$.'''
+dove $1/2573 \approx 0{,}39 \cdot 10^{-3}$, quindi $0{,}60/2573 \approx 0{,}60 \cdot 0{,}39 \cdot 10^{-3} \approx \num{2,3e-4}$.'''
 
   [[problema.parte]]
   domanda = '''Quante molecole contiene?'''
   calcolo = "p * V * 1e-6 / (R * (t + 273)) * NA"
-  risultato = { valore = 2.3e20, cifre = 2 }
+  risultato = { valore = 1.4e20, cifre = 2 }
   soluzione = '''Una mole contiene $N_A \approx \num{6,0e23}$ molecole. Con le moli del punto (a):
 \[
-  N = n N_A = \num{3,9e-4} \cdot \num{6,0e23} = 3{,}9 \cdot 6{,}0 \cdot 10^{-4+23} \approx 23 \cdot 10^{19} = \num{2,3e20}
+  N = n N_A = \num{2,3e-4} \cdot \num{6,0e23} = 2{,}3 \cdot 6{,}0 \cdot 10^{-4+23} \approx 14 \cdot 10^{19} = \num{1,4e20}
 \]
 Anche in pochi millilitri di gas le molecole sono centinaia di miliardi di miliardi: per questo si descrive il gas con $p$, $V$ e $T$, e non molecola per molecola.'''
 
@@ -288,7 +289,7 @@ Sono 3 ore e 45 minuti. In pratica la bombola dura un po' meno: quando la pressi
 \[
   n = \frac{pV}{RT} = \frac{\SI{1,5e7}{\pascal} \cdot \SI{3,0e-3}{\metre\cubed}}{\SI{8,3}{\joule\per\mole\per\kelvin} \cdot \SI{293}{\kelvin}} = \frac{4{,}5 \cdot 10^{7-3}\,\si{\joule}}{\SI{2432}{\joule\per\mole}} = \frac{\SI{45000}{\joule}}{\SI{2432}{\joule\per\mole}} \approx \SI{18,5}{\mole}
 \]
-dove $8{,}3 \cdot 293 \approx 2432$ e $45000/2432 \approx 18{,}5$. La massa è
+dove $8{,}3 \cdot 293 \approx 2432 \approx 2400$, e $45000/2400 = 450/24 \approx 18{,}75$. Con 2432, un po' più grande di 2400, il risultato è un po' più piccolo, circa \SI{18,5}{\mole} (controllo: $2432 \cdot 18{,}5 \approx 45000$). La massa è
 \[
   m = n\,M = \SI{18,5}{\mole} \cdot \SI{32}{\gram\per\mole} = \SI{592}{\gram} \approx \SI{0,59}{\kilo\gram}
 \]
@@ -371,32 +372,30 @@ Bolle che crescono nei vasi possono bloccare la circolazione: è la malattia da 
 [[problema]]
 id = "ud5-gas-elisoccorso"
 livello = 3
-testo = '''Un paziente intubato viene trasportato in elicottero. A terra la cuffia del tubo endotracheale è stata gonfiata con {{V1}} d'aria alla pressione di {{p1}} e alla temperatura di {{t1}}. In volo la cabina non è pressurizzata: la pressione scende a {{p2}} e la temperatura dell'aria nella cuffia a {{t2}}. Tratta la cuffia come un palloncino che si gonfia liberamente, con l'aria dentro alla pressione della cabina.'''
+testo = '''Un paziente intubato viene trasportato in elicottero. A terra la cuffia del tubo endotracheale è stata gonfiata con {{V1}} d'aria alla pressione di {{p1}}. In volo la cabina non è pressurizzata e la pressione scende a {{p2}}; l'aria della cuffia resta alla temperatura del corpo. Tratta la cuffia come un palloncino che si gonfia liberamente, con l'aria dentro alla pressione della cabina.'''
 dati.V1 = { valore = "8,0", unita = "\\milli\\litre" }
 dati.p1 = { valore = "1,0", unita = "atm" }
-dati.t1 = { valore = 27, unita = "\\celsius" }
 dati.p2 = { valore = "0,80", unita = "atm" }
-dati.t2 = { valore = 7, unita = "\\celsius" }
 
   [[problema.parte]]
   domanda = '''Che volume occupa l'aria della cuffia in volo?'''
-  calcolo = "V1 * (p1 / p2) * (t2 + 273) / (t1 + 273)"
-  risultato = { valore = 9.3, unita = "\\milli\\litre", cifre = 2 }
-  soluzione = '''La quantità d'aria non cambia, quindi $p_1 V_1/T_1 = p_2 V_2/T_2$. Le temperature in kelvin sono $T_1 = 27 + 273 = \SI{300}{\kelvin}$ e $T_2 = 7 + 273 = \SI{280}{\kelvin}$. Ricavando $V_2$:
+  calcolo = "V1 * p1 / p2"
+  risultato = { valore = 10, unita = "\\milli\\litre", cifre = 2 }
+  soluzione = '''La quantità d'aria non cambia e la temperatura resta quella del corpo, perché la cuffia sta dentro la trachea. Vale quindi la legge di Boyle, $p_1 V_1 = p_2 V_2$. Ricavando $V_2$:
 \[
-  V_2 = V_1\,\frac{p_1}{p_2}\,\frac{T_2}{T_1} = \SI{8,0}{\milli\litre} \cdot \frac{1{,}0}{0{,}80} \cdot \frac{280}{300} = \SI{10}{\milli\litre} \cdot \frac{14}{15} \approx \SI{9,3}{\milli\litre}
+  V_2 = V_1\,\frac{p_1}{p_2} = \SI{8,0}{\milli\litre} \cdot \frac{1{,}0}{0{,}80} = \SI{10}{\milli\litre}
 \]
-dove $8{,}0/0{,}80 = 10$ e $140/15 \approx 9{,}3$. I due effetti vanno in versi opposti: la pressione più bassa fa crescere il volume di un quarto ($1/0{,}80 = 1{,}25$), il freddo lo riduce di circa il 7\% ($280/300 \approx 0{,}93$). Vince la pressione.'''
+dove $8{,}0/0{,}80 = 80/8 = 10$. La pressione più bassa fa crescere il volume di un quarto ($1/0{,}80 = 1{,}25$), e la cuffia preme di più sulla parete della trachea.'''
 
   [[problema.parte]]
   domanda = '''Per non comprimere la mucosa della trachea, l'infermiere toglie aria dalla cuffia finché il volume torna a \SI{8,0}{\milli\litre}. Che percentuale dell'aria deve togliere?'''
-  calcolo = "(1 - V1 / (V1 * (p1 / p2) * (t2 + 273) / (t1 + 273))) * 100"
-  risultato = { valore = 14, unita = "\\percent", cifre = 2 }
-  soluzione = '''In volo pressione e temperatura sono fissate dalla cabina. Con $p$ e $T$ fissi, per $pV = nRT$ il numero di moli è proporzionale al volume. Per passare da \SI{9,33}{\milli\litre} a \SI{8,0}{\milli\litre} le moli devono diventare
+  calcolo = "(1 - p2 / p1) * 100"
+  risultato = { valore = 20, unita = "\\percent", cifre = 2 }
+  soluzione = '''In volo la pressione è fissata dalla cabina e la temperatura dal corpo. Con $p$ e $T$ fissi, per $pV = nRT$ il numero di moli è proporzionale al volume. Per passare da \SI{10}{\milli\litre} a \SI{8,0}{\milli\litre} le moli devono diventare
 \[
-  \frac{n_\text{dopo}}{n_\text{prima}} = \frac{V_\text{dopo}}{V_\text{prima}} = \frac{\SI{8,0}{\milli\litre}}{\SI{9,33}{\milli\litre}} \approx 0{,}86
+  \frac{n_\text{dopo}}{n_\text{prima}} = \frac{V_\text{dopo}}{V_\text{prima}} = \frac{\SI{8,0}{\milli\litre}}{\SI{10}{\milli\litre}} = 0{,}80
 \]
-Con le frazioni del punto (a) il conto è esatto: $9{,}33 = 10 \cdot 14/15$, quindi $8{,}0/9{,}33 = 0{,}80 \cdot 15/14 = 12/14 = 6/7 \approx 0{,}86$. Si toglie quindi circa $1 - 0{,}86 = 0{,}14$, cioè il 14\% dell'aria. Per evitare il problema, nei trasporti in quota la cuffia si gonfia spesso con soluzione fisiologica: un liquido non cambia volume con la pressione come un gas.'''
+Si toglie quindi $1 - 0{,}80 = 0{,}20$, cioè il 20\% dell'aria. È lo stesso rapporto fra le pressioni, $0{,}80/1{,}0$: a temperatura costante la cuffia può contenere, allo stesso volume, solo l'80\% delle moli che conteneva a terra. Per evitare il problema, nei trasporti in quota la cuffia si gonfia spesso con soluzione fisiologica: un liquido non cambia volume con la pressione come un gas.'''
 
 [[problema]]
 id = "ud5-temp-termometro-gas"
@@ -429,6 +428,7 @@ In gradi Celsius, $t = 307{,}1 - 273 = \SI{34,1}{\celsius}$. È sotto i \SI{35}{
   domanda = '''Esprimi la temperatura del paziente in gradi Fahrenheit.'''
   calcolo = "9/5 * (273 * 90.0 / p0 - 273) + 32"
   risultato = { valore = 93.4, cifre = 3 }
+  rapido = '''$93{,}4\,^{\circ}\mathrm{F}$'''
   soluzione = '''Dal punto (b) $t = \SI{34,1}{\celsius}$. Con $t_F = \frac{9}{5}\,t + 32$:
 \[
   t_F = 1{,}8 \cdot 34{,}1 + 32 = 61{,}4 + 32 = 93{,}4\,^{\circ}\mathrm{F}
@@ -598,26 +598,26 @@ id = "ud5-cal-corsa"
 livello = 2
 testo = '''Durante una corsa di {{t}} il corpo di un atleta produce calore al ritmo di {{P}}. Il calore latente di evaporazione del sudore è circa \SI{2400}{\kilo\joule\per\kilo\gram}.'''
 dati.t = { valore = 30, unita = "\\minute" }
-dati.P = { valore = 800, unita = "W" }
+dati.P = { valore = 600, unita = "W" }
 
   [[problema.parte]]
   domanda = '''Quanto calore produce il corpo durante la corsa?'''
   calcolo = "P * t * 60 / 1000"
-  risultato = { valore = 1.4e3, unita = "\\kilo\\joule", cifre = 2 }
+  risultato = { valore = 1.1e3, unita = "\\kilo\\joule", cifre = 2 }
   soluzione = '''La potenza è energia diviso tempo, quindi $Q = P\,\Delta t$. Il tempo in secondi è $30 \cdot \SI{60}{\second} = \SI{1800}{\second}$:
 \[
-  Q = \SI{800}{\joule\per\second} \cdot \SI{1800}{\second} = \SI{1440000}{\joule} = \SI{1440}{\kilo\joule} \approx \SI{1,4e3}{\kilo\joule}
+  Q = \SI{600}{\joule\per\second} \cdot \SI{1800}{\second} = \SI{1080000}{\joule} = \SI{1080}{\kilo\joule} \approx \SI{1,1e3}{\kilo\joule}
 \]'''
 
   [[problema.parte]]
   domanda = '''Quanto sudore deve evaporare per smaltire tutto questo calore?'''
   calcolo = "P * t * 60 / 1000 / L_sudore"
-  risultato = { valore = 0.60, unita = "\\kilo\\gram", cifre = 2 }
+  risultato = { valore = 0.45, unita = "\\kilo\\gram", cifre = 2 }
   soluzione = '''Ogni chilogrammo di sudore che evapora toglie al corpo \SI{2400}{\kilo\joule}. Da $Q = mL$:
 \[
-  m = \frac{Q}{L} = \frac{\SI{1440}{\kilo\joule}}{\SI{2400}{\kilo\joule\per\kilo\gram}} = \frac{144}{240}\,\si{\kilo\gram} = \SI{0,60}{\kilo\gram}
+  m = \frac{Q}{L} = \frac{\SI{1080}{\kilo\joule}}{\SI{2400}{\kilo\joule\per\kilo\gram}} = \frac{108}{240}\,\si{\kilo\gram} = \SI{0,45}{\kilo\gram}
 \]
-Sono circa \SI{0,6}{\litre} in mezz'ora, e solo se il sudore evapora tutto: quello che gocciola via non raffredda.'''
+Sono quasi mezzo litro in mezz'ora, e solo se il sudore evapora tutto: quello che gocciola via non raffredda.'''
 
 [[problema]]
 id = "ud5-cal-vasca"
@@ -650,27 +650,27 @@ Controllo con la media pesata: $(40 \cdot 55 + 24 \cdot 15)/(40 + 24) = (2200 + 
 id = "ud5-cal-ipotermia"
 livello = 3
 testo = '''Un escursionista di {{m}} viene soccorso in montagna con una temperatura corporea di \SI{33}{\celsius}: è in ipotermia. Il calore specifico medio del corpo umano è circa \SI{3,5}{\kilo\joule\per\kilo\gram\per\kelvin}.'''
-dati.m = { valore = 60, unita = "\\kilo\\gram" }
+dati.m = { valore = 70, unita = "\\kilo\\gram" }
 
   [[problema.parte]]
   domanda = '''Quanto calore serve per riportare il suo corpo a \SI{37}{\celsius}?'''
   calcolo = "m * c_corpo * (37 - 33)"
-  risultato = { valore = 840, unita = "\\kilo\\joule", cifre = 2 }
+  risultato = { valore = 980, unita = "\\kilo\\joule", cifre = 2 }
   soluzione = '''La temperatura deve salire di $\Delta T = 37 - 33 = \SI{4}{\kelvin}$:
 \[
-  Q = m\,c\,\Delta T = \SI{60}{\kilo\gram} \cdot \SI{3,5}{\kilo\joule\per\kilo\gram\per\kelvin} \cdot \SI{4}{\kelvin} = 210 \cdot 4\,\si{\kilo\joule} = \SI{840}{\kilo\joule}
+  Q = m\,c\,\Delta T = \SI{70}{\kilo\gram} \cdot \SI{3,5}{\kilo\joule\per\kilo\gram\per\kelvin} \cdot \SI{4}{\kelvin} = 245 \cdot 4\,\si{\kilo\joule} = \SI{980}{\kilo\joule}
 \]'''
 
   [[problema.parte]]
   domanda = '''Avvolto in una coperta isotermica, l'escursionista non perde più calore. Con i brividi il suo corpo produce \SI{300}{\watt}. Quanto tempo serve per tornare a \SI{37}{\celsius}?'''
   calcolo = "m * c_corpo * (37 - 33) * 1000 / 300"
-  risultato = { valore = 2.8e3, unita = "s", cifre = 2 }
-  rapido = '''\SI{2,8e3}{\second}, circa \SI{47}{\minute}'''
+  risultato = { valore = 3.3e3, unita = "s", cifre = 2 }
+  rapido = '''\SI{3,3e3}{\second}, circa \SI{54}{\minute}'''
   soluzione = '''Il corpo riceve \SI{300}{\joule} al secondo. Da $P = Q/\Delta t$:
 \[
-  \Delta t = \frac{Q}{P} = \frac{\SI{840000}{\joule}}{\SI{300}{\joule\per\second}} = \SI{2800}{\second}
+  \Delta t = \frac{Q}{P} = \frac{\SI{980000}{\joule}}{\SI{300}{\joule\per\second}} \approx \SI{3267}{\second} \approx \SI{3,3e3}{\second}
 \]
-che sono $2800/60 \approx \SI{47}{\minute}$. Qui $\Delta t$ è un intervallo di tempo. Senza i brividi, con i \SI{100}{\watt} prodotti a riposo, servirebbe il triplo del tempo.'''
+che sono $3267/60 \approx \SI{54}{\minute}$. Qui $\Delta t$ è un intervallo di tempo. Senza i brividi, con i \SI{100}{\watt} prodotti a riposo, servirebbe il triplo del tempo.'''
 
   [[problema.parte]]
   domanda = '''Gli si fa bere mezzo litro di tè a \SI{50}{\celsius}, che nel corpo si raffredda fino a \SI{37}{\celsius}. Quanto calore porta il tè, e che frazione è del calore che serve?'''
@@ -681,7 +681,7 @@ che sono $2800/60 \approx \SI{47}{\minute}$. Qui $\Delta t$ è un intervallo di 
 \[
   Q_{\text{tè}} = \SI{0,5}{\kilo\gram} \cdot \SI{4,2}{\kilo\joule\per\kilo\gram\per\kelvin} \cdot \SI{13}{\kelvin} = 2{,}1 \cdot 13\,\si{\kilo\joule} = \SI{27,3}{\kilo\joule} \approx \SI{27}{\kilo\joule}
 \]
-La frazione è $27/840 \approx 0{,}03$, cioè circa il 3\%. La bevanda calda aiuta poco come fonte di calore: servono soprattutto l'isolamento e il calore prodotto dal corpo.'''
+La frazione è $27/980 \approx 0{,}028$, cioè circa il 3\%. La bevanda calda aiuta poco come fonte di calore: servono soprattutto l'isolamento e il calore prodotto dal corpo.'''
 
 [[problema]]
 id = "ud5-cal-curva"
@@ -795,12 +795,12 @@ Basta poco più di mezzo bicchiere d'acqua, purché evapori: l'acqua che cola vi
   domanda = '''In alternativa si usano borse del ghiaccio, ognuna con \SI{0,20}{\kilo\gram} di ghiaccio a \SI{0}{\celsius}. Quanto calore assorbe una borsa mentre il ghiaccio fonde tutto? Quante borse servirebbero?'''
   calcolo = "0.20 * Lf"
   risultato = { valore = 67, unita = "\\kilo\\joule", cifre = 2 }
-  rapido = '''circa \SI{67}{\kilo\joule}; circa due borse'''
+  rapido = '''circa \SI{67}{\kilo\joule}; 2,1 borse, cioè 3 borse'''
   soluzione = '''Il ghiaccio fonde a \SI{0}{\celsius} e assorbe il calore latente di fusione:
 \[
   Q_{\text{borsa}} = m\,L_f = \SI{0,20}{\kilo\gram} \cdot \SI{334}{\kilo\joule\per\kilo\gram} = \SI{66,8}{\kilo\joule} \approx \SI{67}{\kilo\joule}
 \]
-Il numero di borse è $140/66{,}8 \approx 2{,}1$: circa due borse. Ma \SI{58}{\gram} d'acqua che evapora fanno lo stesso effetto di \SI{400}{\gram} di ghiaccio che fonde, perché il calore latente di evaporazione è circa sette volte quello di fusione ($2400/334 \approx 7$).'''
+Il numero di borse è $140/66{,}8 \approx 2{,}1$: due borse (\SI{133,6}{\kilo\joule}) non bastano del tutto, e per togliere tutti i \SI{140}{\kilo\joule} ne serve una terza, che fonde solo in piccola parte. Ma \SI{58}{\gram} d'acqua che evapora fanno lo stesso effetto di \SI{400}{\gram} di ghiaccio che fonde, perché il calore latente di evaporazione è circa sette volte quello di fusione ($2400/334 \approx 7$).'''
 
 [[problema]]
 id = "ud5-cal-barretta"
@@ -884,7 +884,10 @@ dati.e = { valore = "0,90" }
   risultato = { valore = 510, unita = "W", cifre = 2 }
   soluzione = '''La temperatura va in kelvin: $T = 727 + 273 = \SI{1000}{\kelvin} = \SI{e3}{\kelvin}$, quindi $T^{4} = 10^{3 \cdot 4} = \SI{e12}{\kelvin\tothe{4}}$. Con la legge di Stefan-Boltzmann:
 \[
-  P = e\,\sigma A T^{4} = 0{,}90 \cdot \SI{5,7e-8}{\watt\per\metre\squared\per\kelvin\tothe{4}} \cdot \SI{1,0e-2}{\metre\squared} \cdot \SI{e12}{\kelvin\tothe{4}} = 0{,}90 \cdot 5{,}7 \cdot 10^{-8-2+12}\,\si{\watt} = 5{,}13 \cdot 10^{2}\,\si{\watt} \approx \SI{5,1e2}{\watt}
+  \begin{aligned}
+  P &= e\,\sigma A T^{4} = 0{,}90 \cdot \SI{5,7e-8}{\watt\per\metre\squared\per\kelvin\tothe{4}} \cdot \SI{1,0e-2}{\metre\squared} \cdot \SI{e12}{\kelvin\tothe{4}} \\
+  &= 0{,}90 \cdot 5{,}7 \cdot 10^{-8-2+12}\,\si{\watt} = 5{,}13 \cdot 10^{2}\,\si{\watt} \approx \SI{5,1e2}{\watt}
+  \end{aligned}
 \]
 con $0{,}90 \cdot 5{,}7 = 5{,}13$. Usare i gradi Celsius, $727^{4}$ invece di $1000^{4}$, darebbe una potenza circa tre volte e mezzo più piccola.'''
 
@@ -1056,7 +1059,7 @@ dati.I = { valore = 462, unita = "W/m^2" }
 \[
   T^{4} = \frac{P/A}{\sigma} = \frac{\SI{462}{\watt\per\metre\squared}}{\SI{5,7e-8}{\watt\per\metre\squared\per\kelvin\tothe{4}}} = \frac{462}{5{,}7} \cdot 10^{8}\,\si{\kelvin\tothe{4}} \approx 81 \cdot 10^{8}\,\si{\kelvin\tothe{4}}
 \]
-($5{,}7 \cdot 81 = 461{,}7$). La radice quarta si fa a pezzi: $81 = 3^{4}$ e $10^{8} = (10^{2})^{4}$, quindi
+($5{,}7 \cdot 81 = 461{,}7$). La radice di un prodotto è il prodotto delle radici, $\sqrt[4]{ab} = \sqrt[4]{a} \cdot \sqrt[4]{b}$, quindi la radice quarta si fa a pezzi: $81 = 3^{4}$ e $10^{8} = (10^{2})^{4}$, e allora
 \[
   T = 3 \cdot 10^{2}\,\si{\kelvin} = \SI{300}{\kelvin} = (300 - 273)\,\si{\celsius} = \SI{27}{\celsius}
 \]'''
@@ -1066,11 +1069,11 @@ dati.I = { valore = 462, unita = "W/m^2" }
   calcolo = "(I / (0.50 * sigma))**0.25"
   risultato = { valore = 357, unita = "\\kelvin", cifre = 3 }
   rapido = '''circa \SI{357}{\kelvin}, cioè \SI{84}{\celsius}'''
-  soluzione = '''Con $e = 0{,}50$ la stessa intensità richiede un $T^{4}$ doppio: $T^{4} = (P/A)/(e\sigma) = 2 \cdot 81 \cdot 10^{8}\,\si{\kelvin\tothe{4}}$. La temperatura è quella di prima per la radice quarta di 2:
+  soluzione = '''Con $e = 0{,}50$ la stessa intensità richiede un $T^{4}$ doppio: $T^{4} = (P/A)/(e\sigma) = 2 \cdot 81 \cdot 10^{8}\,\si{\kelvin\tothe{4}}$. La temperatura è quella di prima per la radice quarta di 2. La radice quarta è la radice quadrata della radice quadrata, perché $\bigl(\sqrt{\sqrt{x}}\bigr)^{4} = \bigl((\sqrt{\sqrt{x}})^{2}\bigr)^{2} = (\sqrt{x})^{2} = x$; quindi $\sqrt[4]{2} = \sqrt{\sqrt{2}} \approx \sqrt{1{,}41}$. Per trovare $\sqrt{1{,}41}$ si va per tentativi: $1{,}2^{2} = 1{,}44$ è un po' troppo, $1{,}19^{2} \approx 1{,}416$ va bene, quindi $\sqrt{1{,}41} \approx 1{,}19$. In tutto:
 \[
   T = \SI{300}{\kelvin} \cdot \sqrt[4]{2} = \SI{300}{\kelvin} \cdot \sqrt{\sqrt{2}} \approx \SI{300}{\kelvin} \cdot \sqrt{1{,}41} \approx \SI{300}{\kelvin} \cdot 1{,}19 = \SI{357}{\kelvin}
 \]
-($1{,}19^{2} \approx 1{,}42$). Sono circa $357 - 273 = \SI{84}{\celsius}$. Un termometro tarato per la pelle, con $e = 1$, segnerebbe \SI{27}{\celsius} su un vassoio che scotta: sulle superfici lucide, che emettono poco, sbaglia per difetto.'''
+Sono circa $357 - 273 = \SI{84}{\celsius}$. Un termometro tarato per la pelle, con $e = 1$, segnerebbe \SI{27}{\celsius} su un vassoio che scotta: sulle superfici lucide, che emettono poco, sbaglia per difetto.'''
 
 [[problema]]
 id = "ud5-trasm-incubatrice"
@@ -1084,7 +1087,10 @@ dati.A = { valore = "0,20", unita = "\\metre\\squared" }
   risultato = { valore = 13, unita = "W", cifre = 2 }
   soluzione = '''In kelvin: $T = 37 + 273 = \SI{310}{\kelvin}$ e $T_{\text{amb}} = 27 + 273 = \SI{300}{\kelvin}$. Si scompone la differenza delle quarte potenze:
 \[
-  T^{4} - T_{\text{amb}}^{4} = (T - T_{\text{amb}})(T + T_{\text{amb}})(T^{2} + T_{\text{amb}}^{2}) = 10 \cdot 610 \cdot (\num{96100} + \num{90000})\,\si{\kelvin\tothe{4}} = \num{6,1e3} \cdot \num{1,861e5}\,\si{\kelvin\tothe{4}} \approx \num{1,135e9}\,\si{\kelvin\tothe{4}}
+  \begin{aligned}
+  T^{4} - T_{\text{amb}}^{4} &= (T - T_{\text{amb}})(T + T_{\text{amb}})(T^{2} + T_{\text{amb}}^{2}) = 10 \cdot 610 \cdot (\num{96100} + \num{90000})\,\si{\kelvin\tothe{4}} \\
+  &= \num{6,1e3} \cdot \num{1,861e5}\,\si{\kelvin\tothe{4}} \approx \num{1,135e9}\,\si{\kelvin\tothe{4}}
+  \end{aligned}
 \]
 con $6{,}1 \cdot 1{,}861 \approx 11{,}35$, cioè $\num{11,35e8} = \num{1,135e9}$. Poi, con $\sigma A = \num{5,7e-8} \cdot 0{,}20 = \SI{1,14e-8}{\watt\per\kelvin\tothe{4}}$:
 \[
@@ -1214,13 +1220,29 @@ dove $10^{-8} \cdot 10^{9} = 10$ e quindi $\num{8,76e9} \cdot 10^{-8} = 87{,}6$.
   rapido = '''circa \SI{13}{\watt\per\metre\squared} in più, il 2,6\% circa'''
   soluzione = '''Ora $T_1 = \SI{308}{\kelvin}$, $308^{2} = \num{94864}$. Si scompone la differenza:
 \[
-  T_1^{4} - T^{4} = (308 - 306)(308 + 306)(\num{94864} + \num{93636})\,\si{\kelvin\tothe{4}} = 2 \cdot 614 \cdot \num{188500}\,\si{\kelvin\tothe{4}} = 1228 \cdot \num{1,885e5}\,\si{\kelvin\tothe{4}} \approx \num{2,31e8}\,\si{\kelvin\tothe{4}}
+  \begin{aligned}
+  T_1^{4} - T^{4} &= (308 - 306)(308 + 306)(\num{94864} + \num{93636})\,\si{\kelvin\tothe{4}} = 2 \cdot 614 \cdot \num{188500}\,\si{\kelvin\tothe{4}} \\
+  &= 1228 \cdot \num{1,885e5}\,\si{\kelvin\tothe{4}} \approx \num{2,31e8}\,\si{\kelvin\tothe{4}}
+  \end{aligned}
 \]
 ($1{,}228 \cdot 1{,}885 \approx 2{,}31$). La differenza di intensità è
 \[
   \sigma\,(T_1^{4} - T^{4}) = \num{5,7e-8} \cdot \num{2,31e8}\,\si{\watt\per\metre\squared} = 5{,}7 \cdot 2{,}31\,\si{\watt\per\metre\squared} \approx \SI{13}{\watt\per\metre\squared}
 \]
-In percentuale: $13/500 = 0{,}026$, circa il $2{,}6\%$. Due gradi su 306 kelvin sono lo $0{,}65\%$, e la quarta potenza moltiplica la variazione relativa per circa 4. La termocamera deve distinguere differenze di intensità di pochi percento.'''
+In percentuale: $13/500 = 0{,}026$, circa il $2{,}6\%$. La termocamera deve distinguere differenze di intensità di pochi percento.
+
+Una strada più rapida: se $T$ cresce di poco, di una frazione $x$, $T^{4}$ cresce di circa $4x$, perché $(1 + x)^{4} = 1 + 4x + {}$(termini con $x^{2}$, $x^{3}$, $x^{4}$, trascurabili se $x$ è piccolo). Qui $x = 2/306 \approx 0{,}0065$, quindi l'intensità cresce di circa $4 \cdot 0{,}65\% = 2{,}6\%$, cioè $0{,}026 \cdot 500 \approx \SI{13}{\watt\per\metre\squared}$.'''
+
+  [[problema.parte]]
+  domanda = '''L'aria è a \SI{23}{\celsius} e il coefficiente di convezione è \SI{5}{\watt\per\metre\squared\per\kelvin}. Di quanto cresce, per metro quadrato, la potenza persa per convezione sopra l'articolazione infiammata? Confrontala con l'aumento per irraggiamento.'''
+  calcolo = "5 * (35 - 33)"
+  risultato = { valore = 10, unita = "W/m^2", cifre = 2 }
+  rapido = '''\SI{10}{\watt\per\metre\squared} in più, dello stesso ordine dei \SI{13}{\watt\per\metre\squared} per irraggiamento'''
+  soluzione = '''Per metro quadrato la potenza persa per convezione è $h\,(T_\text{pelle} - T_\text{aria})$. Sulla pelle sana vale $5 \cdot (33 - 23) = \SI{50}{\watt\per\metre\squared}$, sopra l'infiammazione $5 \cdot (35 - 23) = \SI{60}{\watt\per\metre\squared}$. L'aumento è
+\[
+  \Delta\!\left(\frac{P}{A}\right) = h\,\Delta T = \SI{5}{\watt\per\metre\squared\per\kelvin} \cdot \SI{2}{\kelvin} = \SI{10}{\watt\per\metre\squared}
+\]
+È dello stesso ordine dell'aumento per irraggiamento del punto (b), \SI{13}{\watt\per\metre\squared}: la zona infiammata perde di più in tutti e due i modi. La termocamera però vede solo la radiazione, e la convezione dell'aria intorno non entra nella misura.'''
 
 [[problema]]
 id = "ud5-trasm-cuffia"
@@ -1240,25 +1262,25 @@ dati.A = { valore = "0,12", unita = "\\metre\\squared" }
 Quasi quanto tutta la potenza prodotta a riposo.'''
 
   [[problema.parte]]
-  domanda = '''Con una cuffia di lana (\SI{0,04}{\watt\per\metre\per\kelvin}) spessa \SI{4,0}{\milli\metre}, la faccia interna è a \SI{34}{\celsius} e quella esterna a \SI{0}{\celsius}. Quanto calore attraversa la cuffia?'''
-  calcolo = "0.04 * A * (34 - 0) / 4.0e-3"
-  risultato = { valore = 41, unita = "W", cifre = 2 }
-  soluzione = '''Con la legge di Fourier, $\Delta T = \SI{34}{\kelvin}$ e $d = \SI{4,0e-3}{\metre}$:
+  domanda = '''Con una cuffia di lana (\SI{0,04}{\watt\per\metre\per\kelvin}) spessa \SI{8,0}{\milli\metre}, la faccia interna è a \SI{34}{\celsius} e quella esterna a \SI{2}{\celsius}. Quanto calore attraversa la cuffia?'''
+  calcolo = "0.04 * A * (34 - 2) / 8.0e-3"
+  risultato = { valore = 19, unita = "W", cifre = 2 }
+  soluzione = '''Con la legge di Fourier, $\Delta T = 34 - 2 = \SI{32}{\kelvin}$ e $d = \SI{8,0e-3}{\metre}$:
 \[
-  P_{\text{cuffia}} = \SI{0,04}{\watt\per\metre\per\kelvin} \cdot \SI{0,12}{\metre\squared} \cdot \frac{\SI{34}{\kelvin}}{\SI{4,0e-3}{\metre}} = \num{4,8e-3} \cdot 8{,}5 \cdot 10^{3}\,\si{\watt} = 4{,}8 \cdot 8{,}5\,\si{\watt} \approx \SI{41}{\watt}
+  P_{\text{cuffia}} = \SI{0,04}{\watt\per\metre\per\kelvin} \cdot \SI{0,12}{\metre\squared} \cdot \frac{\SI{32}{\kelvin}}{\SI{8,0e-3}{\metre}} = \num{4,8e-3} \cdot \num{4,0e3}\,\si{\watt} = 4{,}8 \cdot 4{,}0\,\si{\watt} = \SI{19,2}{\watt} \approx \SI{19}{\watt}
 \]
-con $0{,}04 \cdot 0{,}12 = \num{4,8e-3}$ e $34/4{,}0 = 8{,}5$. La faccia esterna della cuffia è più calda dell'aria: è da lì che il calore passa poi all'aria per convezione, con una differenza di temperatura più piccola.'''
+con $0{,}04 \cdot 0{,}12 = \num{4,8e-3}$ e $32/\num{8,0e-3} = \num{4,0e3}$. La faccia esterna della cuffia è più calda dell'aria: è da lì che il calore passa poi all'aria per convezione, con una differenza di temperatura più piccola. Controllo: per convezione dalla faccia esterna all'aria passano $20 \cdot 0{,}12 \cdot (2 - (-6)) = 2{,}4 \cdot 8\,\si{\watt} = \SI{19,2}{\watt}$, la stessa potenza, come deve essere a regime.'''
 
   [[problema.parte]]
   domanda = '''Quanta energia risparmia il paziente con la cuffia in una passeggiata di \SI{2,0}{\hour}? Dalla in kilojoule e in chilocalorie.'''
-  calcolo = "(h * A * (34 - (-6)) - 0.04 * A * (34 - 0) / 4.0e-3) * 2.0 * 3600 / 1e3"
-  risultato = { valore = 4.0e2, unita = "\\kilo\\joule", cifre = 2 }
-  rapido = '''circa \SI{4,0e2}{\kilo\joule}, cioè circa \SI{94}{\kilo\calorie}'''
-  soluzione = '''La cuffia riduce la perdita da \SI{96}{\watt} a \SI{41}{\watt}: si risparmiano $96 - 41 = \SI{55}{\watt}$. In due ore, $2{,}0 \cdot 3600 = \SI{7200}{\second}$:
+  calcolo = "(h * A * (34 - (-6)) - 0.04 * A * (34 - 2) / 8.0e-3) * 2.0 * 3600 / 1e3"
+  risultato = { valore = 5.5e2, unita = "\\kilo\\joule", cifre = 2 }
+  rapido = '''circa \SI{5,5e2}{\kilo\joule}, cioè circa \SI{130}{\kilo\calorie}'''
+  soluzione = '''La cuffia riduce la perdita da \SI{96}{\watt} a \SI{19,2}{\watt}: si risparmiano $96 - 19{,}2 = \SI{76,8}{\watt}$. In due ore, $2{,}0 \cdot 3600 = \SI{7200}{\second}$:
 \[
-  Q = \SI{55}{\watt} \cdot \SI{7200}{\second} = \SI{396000}{\joule} \approx \SI{4,0e2}{\kilo\joule}
+  Q = \SI{76,8}{\watt} \cdot \SI{7200}{\second} \approx \SI{5,5e5}{\joule} = \SI{5,5e2}{\kilo\joule}
 \]
-In chilocalorie, con $\SI{1}{\kilo\calorie} \approx \SI{4,2}{\kilo\joule}$: $396/4{,}2 \approx \SI{94}{\kilo\calorie}$. È più o meno l'energia di una banana, che il corpo dovrebbe altrimenti bruciare solo per scaldare la testa.'''
+dove $76{,}8 \cdot 7200 = \num{552960}$. In chilocalorie, con $\SI{1}{\kilo\calorie} \approx \SI{4,2}{\kilo\joule}$: $553/4{,}2 \approx \SI{130}{\kilo\calorie}$. È più o meno l'energia di una banana e mezza, che il corpo dovrebbe altrimenti bruciare solo per scaldare la testa.'''
 
 [[problema]]
 id = "ud5-primo-isobara-cilindro"
@@ -1296,51 +1318,44 @@ L'energia interna aumenta: il gas riceve \SI{300}{\joule} come lavoro e ne resti
 [[problema]]
 id = "ud5-secondo-rendimento-motore"
 livello = 1
-testo = '''Il motore di un'ambulanza, in ogni ciclo, compie un lavoro di {{W}} e cede all'ambiente {{Qf}} di calore. Calcola il rendimento del motore.'''
+testo = '''Il motore di un'ambulanza, in ogni ciclo, assorbe {{Qc}} di calore dalla combustione e compie un lavoro di {{W}}. Calcola il rendimento del motore.'''
+dati.Qc = { valore = 3000, unita = "J" }
 dati.W = { valore = 900, unita = "J" }
-dati.Qf = { valore = 2100, unita = "J" }
 
   [[problema.parte]]
-  calcolo = "W / (W + Qf)"
+  calcolo = "W / Qc"
   risultato = { valore = 0.30, cifre = 2 }
-  soluzione = '''Il rendimento è il lavoro diviso per il calore \emph{assorbito} dalla sorgente calda, che non è dato. Lo dà il primo principio applicato al ciclo, $W = Q_c - |Q_f|$:
-\[
-  Q_c = W + |Q_f| = \SI{900}{\joule} + \SI{2100}{\joule} = \SI{3000}{\joule}
-\]
+  soluzione = '''Il rendimento è il lavoro diviso per il calore \emph{assorbito} dalla sorgente calda:
 \[
   \eta = \frac{W}{Q_c} = \frac{\SI{900}{\joule}}{\SI{3000}{\joule}} = \frac{3}{10} = 0{,}30 = 30\%
 \]
-Attenzione a non dividere per il calore ceduto: $900/2100 \approx 0{,}43$ non è il rendimento.'''
+Attenzione a non dividere per il calore ceduto all'ambiente, $3000 - 900 = \SI{2100}{\joule}$: $900/2100 \approx 0{,}43$ non è il rendimento.'''
 
 [[problema]]
 id = "ud5-primo-isocora-bombola"
 livello = 1
-testo = '''Una bombola rigida contiene {{n}} di ossigeno, che si può trattare come un gas perfetto biatomico. La bombola, lasciata all'aperto, si raffredda da \SI{27}{\celsius} a \SI{-3}{\celsius}. Calcola il calore scambiato dal gas.'''
-dati.n = { valore = "2,0", unita = "\\mole" }
+testo = '''Una bombola rigida contiene {{n}} di ossigeno, che si può trattare come un gas perfetto biatomico. La bombola, lasciata all'aperto, si raffredda da \SI{27}{\celsius} a \SI{7}{\celsius}. Calcola il calore scambiato dal gas.'''
+dati.n = { valore = "4,0", unita = "\\mole" }
 
   [[problema.parte]]
-  calcolo = "n * 2.5 * R * (-30)"
-  risultato = { valore = -1.2e3, unita = "J", cifre = 2 }
-  soluzione = '''La bombola è rigida: il volume non cambia, il gas non compie lavoro ($W = 0$) e tutto il calore scambiato va in energia interna, $Q = \Delta U = n\,c_V\,\Delta T$. Per un gas biatomico $c_V = \frac52 R$. La variazione di temperatura è $\Delta T = -3 - 27 = \SI{-30}{\celsius} = \SI{-30}{\kelvin}$:
+  calcolo = "n * 2.5 * R * (-20)"
+  risultato = { valore = -1.7e3, unita = "J", cifre = 2 }
+  soluzione = '''La bombola è rigida: il volume non cambia, il gas non compie lavoro ($W = 0$) e tutto il calore scambiato va in energia interna, $Q = \Delta U = n\,c_V\,\Delta T$. Per un gas biatomico $c_V = \frac52 R$. La variazione di temperatura è $\Delta T = 7 - 27 = \SI{-20}{\celsius} = \SI{-20}{\kelvin}$:
 \[
-  Q = n\,c_V\,\Delta T = 2{,}0 \cdot \tfrac52 \cdot 8{,}3 \cdot (-30)\,\si{\joule} = -5 \cdot 8{,}3 \cdot 30\,\si{\joule} = \SI{-1245}{\joule} \approx \SI{-1,2e3}{\joule}
+  Q = n\,c_V\,\Delta T = 4{,}0 \cdot \tfrac52 \cdot 8{,}3 \cdot (-20)\,\si{\joule} = -10 \cdot 8{,}3 \cdot 20\,\si{\joule} = -10 \cdot 166\,\si{\joule} = \SI{-1660}{\joule} \approx \SI{-1,7e3}{\joule}
 \]
-Il segno meno dice che il gas \emph{cede} circa \SI{1,2}{\kilo\joule} all'aria esterna.'''
+Il segno meno dice che il gas \emph{cede} circa \SI{1,7}{\kilo\joule} all'aria esterna.'''
 
 [[problema]]
 id = "ud5-secondo-entropia-vapore"
 livello = 1
-testo = '''In una pentola a \SI{100}{\celsius} evaporano {{m}} d'acqua. Il calore latente di vaporizzazione dell'acqua a \SI{100}{\celsius} è \SI{2260}{\kilo\joule\per\kilo\gram}. Calcola di quanto aumenta l'entropia dell'acqua.'''
-dati.m = { valore = "0,50", unita = "\\kilo\\gram" }
+testo = '''In una pentola a \SI{100}{\celsius} l'acqua che evapora assorbe {{Q}} di calore. Calcola di quanto aumenta la sua entropia.'''
+dati.Q = { valore = "1,13e6", unita = "\\joule" }
 
   [[problema.parte]]
-  calcolo = "m * 2260e3 / 373"
+  calcolo = "Q / 373"
   risultato = { valore = 3.0e3, unita = "\\joule\\per\\kelvin", cifre = 2 }
-  soluzione = '''L'acqua evapora a temperatura costante, $T = 100 + 273 = \SI{373}{\kelvin}$, assorbendo il calore
-\[
-  Q = m L_v = \SI{0,50}{\kilo\gram} \cdot \SI{2260}{\kilo\joule\per\kilo\gram} = \SI{1130}{\kilo\joule} = \SI{1,13e6}{\joule}
-\]
-Quindi
+  soluzione = '''L'acqua evapora a temperatura costante, $T = 100 + 273 = \SI{373}{\kelvin}$. Per un calore scambiato a temperatura costante:
 \[
   \Delta S = \frac{Q}{T} = \frac{\SI{1,13e6}{\joule}}{\SI{373}{\kelvin}} = \frac{1130}{373} \cdot 10^{3}\,\si{\joule\per\kelvin} \approx 3{,}0 \cdot 10^{3}\,\si{\joule\per\kelvin}
 \]
@@ -1478,7 +1493,17 @@ dati.Tf = { valore = 300, unita = "\\kelvin" }
 cioè $500 - 273 = \SI{227}{\celsius}$.'''
 
   [[problema.parte]]
-  domanda = '''In ogni ciclo la macchina assorbe \SI{1500}{\joule} dalla sorgente calda. Quanto lavoro compie e quanto calore cede alla sorgente fredda?'''
+  domanda = '''Si alza di \SI{100}{\kelvin} la temperatura della sorgente calda, lasciando la stessa sorgente fredda. Quanto diventa il rendimento?'''
+  calcolo = "1 - Tf / (Tf / (1 - 0.40) + 100)"
+  risultato = { valore = 0.50, cifre = 2 }
+  soluzione = '''Dal punto (a) la sorgente calda era a \SI{500}{\kelvin}; ora è a $500 + 100 = \SI{600}{\kelvin}$. Con il rendimento di Carnot:
+\[
+  \eta' = 1 - \frac{T_f}{T_c'} = 1 - \frac{\SI{300}{\kelvin}}{\SI{600}{\kelvin}} = 1 - 0{,}50 = 0{,}50 = 50\%
+\]
+Il rendimento cresce perché le due sorgenti sono più lontane in temperatura.'''
+
+  [[problema.parte]]
+  domanda = '''Si torna alla macchina di partenza, con il rendimento del 40\%. In ogni ciclo assorbe \SI{1500}{\joule} dalla sorgente calda. Quanto lavoro compie e quanto calore cede alla sorgente fredda?'''
   calcolo = "0.40 * 1500"
   risultato = { valore = 600, unita = "J", cifre = 2 }
   rapido = '''$W = \SI{600}{\joule}$; $|Q_f| = \SI{900}{\joule}$'''
@@ -1613,6 +1638,7 @@ Quello che non diventa lavoro va all'acqua: $P_f = P_c - P = 1000 - 300 = \SI{70
   domanda = '''Di quanto aumenta ogni secondo l'entropia totale delle due sorgenti?'''
   calcolo = "-(P / 0.30) * 1e3 / 600 + (P / 0.30 - P) * 1e3 / 300"
   risultato = { valore = 6.7e2, unita = "\\joule\\per\\kelvin", cifre = 2 }
+  rapido = '''circa \SI{6,7e2}{\joule\per\kelvin} ogni secondo'''
   soluzione = '''Il fluido del motore lavora in ciclo, e la sua entropia non cambia. In un secondo la sorgente calda cede \SI{1,0e6}{\joule} a \SI{600}{\kelvin} e l'acqua riceve \SI{7,0e5}{\joule} a \SI{300}{\kelvin} (punto (b)):
 \[
   \Delta S_\text{calda} = \frac{\SI{-1,0e6}{\joule}}{\SI{600}{\kelvin}} \approx \SI{-1667}{\joule\per\kelvin}
@@ -1628,40 +1654,41 @@ ogni secondo. Un motore di Carnot, con il 50\%, cederebbe solo \SI{500}{\kilo\wa
 id = "ud5-secondo-ghiaccio"
 livello = 3
 testo = '''Sul ginocchio di un calciatore infortunato si mette una borsa con {{m}} di ghiaccio a \SI{0}{\celsius}, che fonde tutto prendendo calore dalla gamba. Considera solo la fusione e tratta il corpo come una sorgente a \SI{37}{\celsius}. Il calore latente di fusione del ghiaccio è \SI{334}{\kilo\joule\per\kilo\gram}.'''
-dati.m = { valore = "0,20", unita = "\\kilo\\gram" }
+dati.m = { valore = "0,30", unita = "\\kilo\\gram" }
 
   [[problema.parte]]
   domanda = '''Quanto calore prende il ghiaccio dal corpo?'''
   calcolo = "m * 334"
-  risultato = { valore = 67, unita = "\\kilo\\joule", cifre = 2 }
+  risultato = { valore = 100, unita = "\\kilo\\joule", cifre = 3 }
   soluzione = '''Durante la fusione la temperatura del ghiaccio resta a \SI{0}{\celsius}, e il calore è
 \[
-  Q = m L_f = \SI{0,20}{\kilo\gram} \cdot \SI{334}{\kilo\joule\per\kilo\gram} = \SI{66,8}{\kilo\joule} \approx \SI{67}{\kilo\joule}
+  Q = m L_f = \SI{0,30}{\kilo\gram} \cdot \SI{334}{\kilo\joule\per\kilo\gram} = \SI{100,2}{\kilo\joule} \approx \SI{100}{\kilo\joule}
 \]'''
 
   [[problema.parte]]
   domanda = '''Di quanto aumenta l'entropia del ghiaccio?'''
   calcolo = "m * 334e3 / 273"
-  risultato = { valore = 2.4e2, unita = "\\joule\\per\\kelvin", cifre = 2 }
+  risultato = { valore = 367, unita = "\\joule\\per\\kelvin", cifre = 3 }
   soluzione = '''Il ghiaccio assorbe il calore del punto (a) a temperatura costante, $T = 0 + 273 = \SI{273}{\kelvin}$:
 \[
-  \Delta S_\text{ghiaccio} = \frac{Q}{T} = \frac{\SI{66800}{\joule}}{\SI{273}{\kelvin}} \approx \SI{245}{\joule\per\kelvin} \approx \SI{2,4e2}{\joule\per\kelvin}
+  \Delta S_\text{ghiaccio} = \frac{Q}{T} = \frac{\SI{100200}{\joule}}{\SI{273}{\kelvin}} \approx \SI{367}{\joule\per\kelvin}
 \]
-dove $273 \cdot 245 = \num{66885}$, appena più di \num{66800}.'''
+dove $273 \cdot 367 = \num{100191}$, appena meno di \num{100200}.'''
 
   [[problema.parte]]
   domanda = '''Come varia l'entropia del corpo? E quella totale di ghiaccio e corpo?'''
   calcolo = "m * 334e3 / 273 - m * 334e3 / 310"
-  risultato = { valore = 29, unita = "\\joule\\per\\kelvin", cifre = 2 }
-  rapido = '''corpo \SI{-2,2e2}{\joule\per\kelvin}; totale \SI{+29}{\joule\per\kelvin}'''
+  risultato = { valore = 44, unita = "\\joule\\per\\kelvin", cifre = 2 }
+  rapido = '''corpo \SI{-323}{\joule\per\kelvin}; totale circa \SI{+44}{\joule\per\kelvin} (la differenza va fatta con tre cifre)'''
   soluzione = '''Il corpo cede lo stesso calore alla temperatura $T = 37 + 273 = \SI{310}{\kelvin}$:
 \[
-  \Delta S_\text{corpo} = \frac{\SI{-66800}{\joule}}{\SI{310}{\kelvin}} \approx \SI{-215}{\joule\per\kelvin} \approx \SI{-2,2e2}{\joule\per\kelvin}
+  \Delta S_\text{corpo} = \frac{\SI{-100200}{\joule}}{\SI{310}{\kelvin}} \approx \SI{-323}{\joule\per\kelvin}
 \]
-dove $310 \cdot 215 = \num{66650}$. Sommando con il punto (b), con una cifra decimale in più per non perdere la differenza ($66800/273 \approx 244{,}7$ e $66800/310 \approx 215{,}5$):
+dove $310 \cdot 323 = \num{100130}$. Sommando con il punto (b), con tre cifre per non perdere la differenza:
 \[
-  \Delta S_\text{tot} \approx -215{,}5 + 244{,}7 \approx \SI{29}{\joule\per\kelvin}
-\] L'entropia del corpo diminuisce, quella del ghiaccio aumenta di più, perché riceve lo stesso calore a una temperatura più bassa: il passaggio di calore dalla gamba al ghiaccio è spontaneo.'''
+  \Delta S_\text{tot} \approx -323 + 367 = \SI{44}{\joule\per\kelvin}
+\]
+Con una cifra decimale in più ($100200/273 \approx 367{,}0$ e $100200/310 \approx 323{,}2$) si trova $43{,}8$, sempre circa \SI{44}{\joule\per\kelvin}. L'entropia del corpo diminuisce, quella del ghiaccio aumenta di più, perché riceve lo stesso calore a una temperatura più bassa: il passaggio di calore dalla gamba al ghiaccio è spontaneo.'''
 
 [[problema]]
 id = "ud5-secondo-espansione-libera"
@@ -1753,8 +1780,8 @@ soluzione = '''Una differenza di temperatura vale lo stesso in kelvin e in gradi
   testo = '''circa $2{,}8\,^{\circ}\mathrm{F}$'''
   commento = '''Usa il fattore rovesciato, $5 \cdot 5/9 \approx 2{,}8$: è la conversione da gradi Fahrenheit a gradi Celsius.'''
   [[quesito.opzione]]
-  testo = '''$278\,^{\circ}\mathrm{F}$'''
-  commento = '''Aggiunge 273, come per passare da una temperatura in gradi Celsius a una in kelvin: per una differenza non va fatto, e comunque non porta ai gradi Fahrenheit.'''
+  testo = '''$-15\,^{\circ}\mathrm{F}$'''
+  commento = '''Applica la formula inversa, quella da Fahrenheit a Celsius, e per di più con il 32: $\frac59\,(5 - 32) = -15$. Per passare da una differenza in kelvin a una in gradi Fahrenheit si moltiplica per $9/5$ e basta.'''
   [[quesito.opzione]]
   testo = '''$9\,^{\circ}\mathrm{F}$'''
   valore = 9
@@ -1789,7 +1816,7 @@ soluzione = '''Dall'equazione di stato, con $n$ fisso, $V = nRT/p$: il volume è
 [[quesito]]
 id = "ud5-gas-moli-litri"
 tipo = "multipla"
-testo = '''Un recipiente di {{V}} contiene un gas perfetto alla pressione di {{p}} e alla temperatura di {{t}}. Il numero di moli del gas è circa'''
+testo = '''Un recipiente di {{V}} contiene un gas perfetto alla pressione di {{p}} e alla temperatura di {{t}}. Il numero di moli del gas è circa ($R \approx \SI{0,082}{\litre\,atm\per\mole\per\kelvin}$)'''
 dati.V = { valore = "24,6", unita = "\\litre" }
 dati.p = { valore = "1,0", unita = "atm" }
 dati.t = { valore = 27, unita = "\\celsius" }
@@ -1868,14 +1895,14 @@ soluzione = '''A temperatura costante vale la legge di Boyle, $p_1 V_1 = p_2 V_2
 [[quesito]]
 id = "ud5-gas-sacca-douglas"
 tipo = "completamento"
-testo = '''Per misurare il consumo di ossigeno si raccoglie l'aria espirata da un paziente in una grande sacca. La sacca contiene \SI{1,0}{\mole} d'aria alla temperatura di \SI{27}{\celsius} e occupa \SI{25}{\litre}. Trattando l'aria come un gas perfetto, la sua pressione vale \completa\ \si{\kilo\pascal}.'''
-calcolo = "1.0 * R * (27 + 273) / 25e-3 / 1000"
-risposta = "99,6"
-soluzione = '''Si lavora nel SI: $T = 27 + 273 = \SI{300}{\kelvin}$ e $V = \SI{25}{\litre} = \SI{2,5e-2}{\metre\cubed}$. Dall'equazione di stato
+testo = '''Per misurare il consumo di ossigeno si raccoglie l'aria espirata da un paziente in una grande sacca. La sacca contiene \SI{1,0}{\mole} d'aria alla temperatura di \SI{37}{\celsius} e occupa \SI{25,8}{\litre}. Trattando l'aria come un gas perfetto, la sua pressione vale \completa\ \si{\kilo\pascal} ($R \approx \SI{8,3}{\joule\per\mole\per\kelvin}$).'''
+calcolo = "round(1.0 * R * (37 + 273) / 25.8e-3 / 1000, 1)"
+risposta = "99,7"
+soluzione = '''Si lavora nel SI: $T = 37 + 273 = \SI{310}{\kelvin}$ e $V = \SI{25,8}{\litre} = \SI{2,58e-2}{\metre\cubed}$. Dall'equazione di stato
 \[
-  p = \frac{nRT}{V} = \frac{\SI{1,0}{\mole} \cdot \SI{8,3}{\joule\per\mole\per\kelvin} \cdot \SI{300}{\kelvin}}{\SI{2,5e-2}{\metre\cubed}} = \frac{2490}{2{,}5} \cdot 10^{2}\,\si{\pascal} = 996 \cdot 10^{2}\,\si{\pascal} = \SI{99600}{\pascal} = \SI{99,6}{\kilo\pascal}
+  p = \frac{nRT}{V} = \frac{\SI{1,0}{\mole} \cdot \SI{8,3}{\joule\per\mole\per\kelvin} \cdot \SI{310}{\kelvin}}{\SI{2,58e-2}{\metre\cubed}} = \frac{2573}{2{,}58} \cdot 10^{2}\,\si{\pascal} \approx 997 \cdot 10^{2}\,\si{\pascal} = \SI{99,7}{\kilo\pascal}
 \]
-È circa la pressione atmosferica, come deve essere per una sacca morbida in cui il paziente ha soffiato. Chi trova circa \SI{9,0}{\kilo\pascal} ha usato la temperatura in gradi Celsius: $8{,}3 \cdot 27/0{,}025 \approx \SI{8960}{\pascal}$.'''
+dove $8{,}3 \cdot 310 = 2573$ e $2{,}58 \cdot 997 \approx 2572$. È circa la pressione atmosferica, come deve essere per una sacca morbida in cui il paziente ha soffiato. Chi trova circa \SI{12}{\kilo\pascal} ha usato la temperatura in gradi Celsius: $8{,}3 \cdot 37/0{,}0258 \approx \SI{11900}{\pascal}$.'''
 
 [[quesito]]
 id = "ud5-cal-elio"
@@ -1971,8 +1998,8 @@ soluzione = '''Prima si controlla se il ghiaccio fonde tutto. Per fonderlo servo
   testo = '''solo acqua, a \SI{10}{\celsius}'''
   commento = '''Fa la media semplice di 0 e 20, senza pesare le masse e senza il calore latente di fusione.'''
   [[quesito.opzione]]
-  testo = '''acqua e ghiaccio a \SI{0}{\celsius}: fondono solo circa \SI{12}{\gram} di ghiaccio'''
-  commento = '''Usa il calore latente in kilojoule per chilogrammo, 334, con i calori in calorie: $4000/334 \approx 12$. In calorie il calore latente di fusione è \SI{80}{\calorie\per\gram}.'''
+  testo = '''acqua e ghiaccio a \SI{0}{\celsius}: fondono solo \SI{25}{\gram} di ghiaccio'''
+  commento = '''Fa raffreddare l'acqua solo di \SI{10}{\celsius}, fino alla media fra 0 e 20: $200 \cdot 1 \cdot 10 = \SI{2000}{\calorie}$ fondono $2000/80 = \SI{25}{\gram}$. L'acqua invece può raffreddarsi fino a \SI{0}{\celsius} e cedere \SI{4000}{\calorie}.'''
   [[quesito.opzione]]
   testo = '''solo acqua, a \SI{32}{\celsius}'''
   commento = '''Mette il calore di fusione dalla parte sbagliata del bilancio, $200\,(20 - T) + 4000 = 50\,T$, che dà $T = 32$: una temperatura più alta di quella di tutti e due i corpi, impossibile.'''
@@ -2070,7 +2097,7 @@ soluzione = '''Per la legge di Fourier, $P = kA\,\Delta T/d$, la potenza è dire
   commento = '''Tiene conto dell'area ma dimentica lo spessore, che è raddoppiato.'''
   [[quesito.opzione]]
   testo = '''diventa i $3/4$'''
-  commento = '''Tratta la potenza come inversamente proporzionale al quadrato dello spessore, $3/2^{2}$, come nella legge dell'inverso del quadrato. Nella legge di Fourier lo spessore compare alla prima potenza.'''
+  commento = '''Tratta la potenza come inversamente proporzionale al quadrato dello spessore, $3/2^{2}$. Nella legge di Fourier lo spessore compare alla prima potenza: raddoppiarlo dimezza la potenza.'''
 
 [[quesito]]
 id = "ud5-trasm-estate"
@@ -2117,31 +2144,31 @@ soluzione = '''Ogni corpo emette radiazione elettromagnetica per il solo fatto d
   testo = '''sulla radiazione infrarossa emessa dal timpano, la cui potenza dipende dalla quarta potenza della temperatura assoluta'''
 
 [[quesito]]
-id = "ud5-trasm-acqua-aria"
+id = "ud5-trasm-muscolo-grasso"
 tipo = "multipla"
-testo = '''La conducibilità termica dell'acqua è \SI{0,6}{\watt\per\metre\per\kelvin}, quella dell'aria ferma \SI{0,025}{\watt\per\metre\per\kelvin}. A parità di spessore, area e differenza di temperatura, la potenza che attraversa per conduzione uno strato d'acqua ferma, rispetto a uno strato d'aria ferma, è'''
+testo = '''La conducibilità termica del tessuto muscolare è \SI{0,5}{\watt\per\metre\per\kelvin}, quella del grasso \SI{0,2}{\watt\per\metre\per\kelvin}. A parità di spessore, area e differenza di temperatura, la potenza che attraversa per conduzione uno strato di muscolo, rispetto a uno strato di grasso, è'''
 corretta = "D"
-calcolo = "0.6 / 0.025"
+calcolo = "0.5 / 0.2"
 soluzione = '''Nella legge di Fourier, $P = kA\,\Delta T/d$, se $A$, $\Delta T$ e $d$ sono gli stessi la potenza è proporzionale a $k$:
 \[
-  \frac{P_{\text{acqua}}}{P_{\text{aria}}} = \frac{0{,}6}{0{,}025} = \frac{600}{25} = 24
+  \frac{P_{\text{muscolo}}}{P_{\text{grasso}}} = \frac{0{,}5}{0{,}2} = \frac{5}{2} = 2{,}5
 \]
-Per questo in acqua fredda l'ipotermia arriva molto più in fretta che in aria alla stessa temperatura.'''
+Per questo lo strato di grasso sotto la pelle protegge dal freddo: a parità di spessore lascia passare meno della metà del calore che passerebbe attraverso il muscolo.'''
 
   [[quesito.opzione]]
-  testo = '''$1/24$ di quella nell'aria'''
-  commento = '''Rovescia il rapporto, $0{,}025/0{,}6$: conduce di più il materiale con $k$ più grande, l'acqua.'''
+  testo = '''0,4 volte quella nel grasso'''
+  commento = '''Rovescia il rapporto, $0{,}2/0{,}5 = 0{,}4$: conduce di più il materiale con $k$ più grande, il muscolo.'''
   [[quesito.opzione]]
-  testo = '''2,4 volte quella nell'aria'''
-  commento = '''Sbaglia la virgola: $0{,}6/0{,}25 = 2{,}4$. La conducibilità dell'aria è $0{,}025$, non $0{,}25$.'''
+  testo = '''25 volte quella nel grasso'''
+  commento = '''Sbaglia la virgola: $0{,}5/0{,}02 = 25$. La conducibilità del grasso è $0{,}2$, non $0{,}02$.'''
   [[quesito.opzione]]
-  testo = '''4,2 volte quella nell'aria'''
-  commento = '''Confonde la conducibilità termica con il calore specifico: $4{,}2/1{,}0$ è il rapporto fra i calori specifici di acqua e aria, che dice quanto si scaldano, non quanto calore lasciano passare.'''
+  testo = '''più grande di 0,3 volte quella nel grasso'''
+  commento = '''Fa la differenza delle conducibilità, $0{,}5 - 0{,}2 = 0{,}3$, invece del rapporto: la potenza è proporzionale a $k$, quindi si confrontano i $k$ dividendo.'''
   [[quesito.opzione]]
-  testo = '''24 volte quella nell'aria'''
-  valore = 24
+  testo = '''2,5 volte quella nel grasso'''
+  valore = 2.5
   [[quesito.opzione]]
-  testo = '''uguale a quella nell'aria'''
+  testo = '''uguale a quella nel grasso'''
   commento = '''Pensa che, a parità di temperature, il calore che passa sia lo stesso: la legge di Fourier dice che dipende anche dal materiale, attraverso $k$.'''
 
 [[quesito]]
@@ -2188,7 +2215,7 @@ Chi scrive 3 tratta la potenza come proporzionale a $T$. Con i gradi Celsius il 
 [[quesito]]
 id = "ud5-trasm-convezione"
 tipo = "completamento"
-testo = '''Un paziente svestito, con una superficie corporea di {{A}}, è sdraiato in una stanza con l'aria ferma a \SI{23}{\celsius}. La sua pelle è a \SI{33}{\celsius} e il coefficiente di convezione naturale è {{h}}. La potenza che perde per convezione vale \completa\ W.'''
+testo = '''Un paziente svestito, con una superficie corporea di {{A}}, è sdraiato in una stanza con l'aria ferma a \SI{23}{\celsius}. La sua pelle è a \SI{33}{\celsius} e il coefficiente di convezione naturale è {{h}}. La potenza che perde per convezione vale \completa\ \si{\watt}.'''
 dati.A = { valore = "1,5", unita = "\\metre\\squared" }
 dati.h = { valore = 4, unita = "\\watt\\per\\metre\\squared\\per\\kelvin" }
 calcolo = "h * A * (33 - 23)"
@@ -2395,16 +2422,16 @@ id = "ud5-boyle"
 tipo = "completamento"
 lampo = true
 testo = '''Una bombola di ossigeno da {{V}} contiene il gas alla pressione di {{p1}}. A temperatura costante, il volume che lo stesso gas occupa alla pressione di {{p2}}, in litri, è \completa.'''
-dati.V = { valore = 10, unita = "\\litre" }
+dati.V = { valore = 5, unita = "\\litre" }
 dati.p1 = { valore = 200, unita = "bar" }
 dati.p2 = { valore = 1, unita = "bar" }
 calcolo = "V * p1 / p2"
-risposta = "2000"
+risposta = "1000"
 soluzione = '''A temperatura costante vale la legge di Boyle, $p_1 V_1 = p_2 V_2$: la pressione diventa 200 volte più piccola, quindi il volume diventa 200 volte più grande:
 \[
-  V_2 = V_1\,\frac{p_1}{p_2} = \SI{10}{\litre} \cdot \frac{\SI{200}{bar}}{\SI{1}{bar}} = \SI{2000}{\litre}
+  V_2 = V_1\,\frac{p_1}{p_2} = \SI{5}{\litre} \cdot \frac{\SI{200}{bar}}{\SI{1}{bar}} = \SI{1000}{\litre}
 \]
-Chi scrive 0,05 ha usato il rapporto rovesciato, $10 \cdot 1/200$, come se pressione e volume fossero direttamente proporzionali.'''
+Chi scrive 0,025 ha usato il rapporto rovesciato, $5 \cdot 1/200$, come se pressione e volume fossero direttamente proporzionali.'''
 
 [[quesito]]
 id = "ud5-calore"
@@ -2457,8 +2484,8 @@ Il calore è preso dal corpo, che si raffredda: è il principio della sudorazion
   testo = '''\SI{2400}{\kilo\joule}'''
   commento = '''Dimentica la massa: \SI{2400}{\kilo\joule} è il calore che toglie l'evaporazione di un chilogrammo intero.'''
   [[quesito.opzione]]
-  testo = '''\SI{210}{\kilo\joule}'''
-  commento = '''Usa $Q = mc\,\Delta T$, come se il sudore andasse scaldato di \SI{100}{\celsius}: $0{,}5 \cdot 4{,}2 \cdot 100 = 210$. Nell'evaporazione la temperatura non cambia, e il calore è $mL$.'''
+  testo = '''\SI{167}{\kilo\joule}'''
+  commento = '''Usa il calore latente di fusione, \SI{334}{\kilo\joule\per\kilo\gram}: $0{,}5 \cdot 334 = 167$. Il sudore evapora, non fonde, e il calore latente è quello dato nel testo.'''
   [[quesito.opzione]]
   testo = '''\SI{1,2e6}{\kilo\joule}'''
   commento = '''Mette la massa in grammi, 500, con il calore latente riferito al chilogrammo: il risultato è mille volte troppo grande.'''
@@ -2552,7 +2579,7 @@ soluzione = '''Il primo principio dice $Q = \Delta U + W$. Tutto il calore diven
 id = "ud5-carnot"
 tipo = "completamento"
 lampo = true
-testo = '''Una macchina termica lavora fra una sorgente calda a \SI{127}{\celsius} e una sorgente fredda a \SI{27}{\celsius}. Il rendimento massimo che può avere, espresso in percentuale, è \completa.'''
+testo = '''Una macchina termica lavora fra una sorgente calda a \SI{127}{\celsius} e una sorgente fredda a \SI{27}{\celsius}. Il rendimento massimo che può avere è \completa\,\%.'''
 calcolo = "(1 - (27 + 273) / (127 + 273)) * 100"
 risposta = "25"
 soluzione = '''Il rendimento massimo è quello di Carnot, con le temperature in kelvin: $T_c = 127 + 273 = \SI{400}{\kelvin}$ e $T_f = 27 + 273 = \SI{300}{\kelvin}$.
