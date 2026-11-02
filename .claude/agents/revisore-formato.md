@@ -18,6 +18,7 @@ Il prompt ti dà l'unità didattica e i percorsi di:
 - `rilievi.md`: gravità e formato del rapporto, da seguire alla lettera.
 
 Lavora in sola lettura su questi file. Per i conti puoi usare Bash (`uv run python -c ...`), scrivendo eventuali file temporanei in `/tmp`.
+Se il prompt indica il secondo giro, segui la sezione «Secondo giro» di `rilievi.md` al posto della procedura qui sotto.
 
 ## Procedura
 

@@ -1,6 +1,6 @@
 ---
 name: revisione-ud
-description: Revisione di una unità didattica prima del merge (ADR 0005). Controllo automatico, poi i revisori indipendenti, poi i rapporti pubblicati nella PR. Da usare alla fine di un ticket di scrittura di una dispensa o di un eserciziario, o quando si chiede di rivedere una UD. Argomenti: UD e parte, es. "ud7 dispensa".
+description: Revisione di una unità didattica prima del merge (ADR 0005). Controllo automatico, revisori indipendenti con i rapporti nella PR, poi risposte, correzioni, secondo giro e checklist. Da usare alla fine di un ticket di scrittura di una dispensa o di un eserciziario, o quando si chiede di rivedere una UD. Argomenti: UD e parte, es. "ud7 dispensa".
 ---
 
 # Revisione di una unità didattica
@@ -28,7 +28,8 @@ Argomenti: la UD (`ud7`) e la parte (`dispensa` | `eserciziario`). Se mancano, c
    - al revisore di formato, anche `docs/research/regole-esame-semestre-filtro.md`.
 
    Il revisore è indipendente: il prompt non riassume la conversazione, non spiega le scelte di scrittura e non anticipa i problemi noti.
-4. **Pubblicazione.** Per ogni rapporto: salvalo in un file temporaneo e pubblicalo così com'è con `gh pr comment <numero> --body-file <file>`, un commento per revisore. Se un rapporto non segue il formato di `rilievi.md` (manca la gravità o la posizione di un rilievo), rilancia quel revisore una volta indicando che cosa manca.
+4. **Pubblicazione.** Questo è il giro 1. Per ogni rapporto: salvalo in un file temporaneo e pubblicalo così com'è con `gh pr comment <numero> --body-file <file>`, un commento per revisore. Se un rapporto non segue il formato di `rilievi.md` (manca la gravità o la posizione di un rilievo), rilancia quel revisore una volta indicando che cosa manca.
 5. **Esito.** Riporta il link di ogni commento e il conteggio dei rilievi per gravità. Se c'è un bloccante, la PR non si unisce: dillo.
+6. **Correzione.** Rispondi ai rilievi, correggi, fai il secondo giro e compila la checklist seguendo `correzione.md`, nella stessa cartella di questa skill.
 
-Fatto quando ogni revisore della tabella ha il suo commento nella PR.
+Fatto quando il passo 6 è chiuso secondo il criterio di `correzione.md`.
