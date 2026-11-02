@@ -163,7 +163,7 @@ def controlla(fonte: dict, nome: str) -> tuple[list[str], list[str]]:
 
 
 def opzioni_latex(q: dict) -> str:
-    opzioni = [o["testo"] for o in q["opzione"]]
+    opzioni = [riempi(o["testo"], q.get("dati", {})) for o in q["opzione"]]
     if max(len(o) for o in opzioni) < 25:
         return r"\opzioni" + "".join(f"{{{o}}}" for o in opzioni)
     righe = "\n".join(rf"  \item {o}" for o in opzioni)
@@ -198,7 +198,9 @@ def lampo_latex(q: dict) -> str:
 
 
 def eserciziario_latex(fonte: dict) -> str:
-    problemi = fonte.get("problema", [])
+    # In ordine di livello, come li numera l'eserciziario: così risultati rapidi e soluzioni
+    # svolte seguono la numerazione. Dentro un livello resta l'ordine della fonte.
+    problemi = sorted(fonte.get("problema", []), key=lambda p: p["livello"])
     esame = [q for q in fonte.get("quesito", []) if not q.get("lampo")]
     lampo = [q for q in fonte.get("quesito", []) if q.get("lampo")]
     out = ["% Generato da esercizi.toml: non modificare qui.", "", r"\section*{Problemi}"]
@@ -207,7 +209,7 @@ def eserciziario_latex(fonte: dict) -> str:
         for p in (p for p in problemi if p["livello"] == livello):
             out += ["", rf"\problema\label{{pb:{p['id']}}}", riempi(p["testo"], p.get("dati", {}))]
             if len(p["parte"]) > 1:
-                out += ["", *(x + "\n" for x in parti([parte["domanda"] for parte in p["parte"]]))]
+                out += ["", *(x + "\n" for x in parti([riempi(parte["domanda"], p.get("dati", {})) for parte in p["parte"]]))]
     out += ["", r"\section*{Quesiti d'esame}"]
     for q in esame:
         out += ["", rf"\quesito\label{{qe:{q['id']}}}", testo_quesito(q)]
@@ -264,7 +266,7 @@ def esercizi_web(fonte: dict) -> list[dict]:
             "testo": latex_a_html(riempi(p["testo"], p.get("dati", {}))),
             "parti": [
                 {
-                    "domanda": latex_a_html(x.get("domanda", "")),
+                    "domanda": latex_a_html(riempi(x.get("domanda", ""), p.get("dati", {}))),
                     "risultato": latex_a_html(risultato_latex(x["risultato"])),
                     "soluzione": latex_a_html(x["soluzione"]),
                 }
@@ -280,7 +282,7 @@ def esercizi_web(fonte: dict) -> list[dict]:
         }
         if q["tipo"] == "multipla":
             voce["opzioni"] = [
-                {"testo": latex_a_html(o["testo"]), "commento": latex_a_html(o.get("commento", ""))}
+                {"testo": latex_a_html(riempi(o["testo"], q.get("dati", {}))), "commento": latex_a_html(o.get("commento", ""))}
                 for o in q["opzione"]
             ]
             voce["corretta"] = LETTERE.index(q["corretta"])
