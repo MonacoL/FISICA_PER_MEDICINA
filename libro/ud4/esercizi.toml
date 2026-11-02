@@ -3,10 +3,2447 @@
 # la pagina web build/web/ud4.html, e ricalcola ogni risultato.
 #
 # Il formato è descritto in testa a libro/ud7/esercizi.toml.
-# Per ora ci sono solo i quesiti lampo della dispensa: problemi e quesiti d'esame
-# arriveranno con il ticket dell'eserciziario UD4.
 
 titolo = "Eserciziario UD4 · Onde meccaniche"
+
+
+[costanti]
+v_tessuti = 1540
+I0 = 1e-12
+v_aria = 340
+v_tessuto = 1540
+
+# ==================================================================== problemi
+
+[[problema]]
+id = "ud4-osc-soprano"
+livello = 1
+testo = '''Le corde vocali di una soprano che canta un La acuto vibrano a {{f}}. Calcola il periodo e la pulsazione della vibrazione.'''
+dati.f = { valore = 880, unita = "Hz" }
+
+  [[problema.parte]]
+  calcolo = "1 / f"
+  risultato = { valore = 1.1e-3, unita = "s", cifre = 2 }
+  rapido = '''$T \approx \SI{1,1}{\milli\second}$; $\omega \approx \SI{5,5e3}{\radian\per\second}$'''
+  soluzione = '''Il periodo è l'inverso della frequenza:
+\[
+  T = \frac{1}{f} = \frac{1}{\SI{880}{\hertz}} = \frac{1}{8{,}8 \cdot 10^{2}}\,\si{\second} \approx 0{,}114 \cdot 10^{-2}\,\si{\second} = \SI{1,14e-3}{\second} \approx \SI{1,1}{\milli\second}
+\]
+perché $8{,}8 \cdot 0{,}114 \approx 1{,}0$. La pulsazione è $2\pi$ volte la frequenza, con $2\pi \approx 6{,}28$:
+\[
+  \omega = 2\pi f = 6{,}28 \cdot \SI{880}{\hertz} \approx \SI{5526}{\radian\per\second} \approx \SI{5,5e3}{\radian\per\second}
+\]'''
+
+[[problema]]
+id = "ud4-osc-pulsazione"
+livello = 1
+testo = '''In un laboratorio di biomeccanica una massa di {{m}} è attaccata a una molla di costante {{k}} e oscilla su un piano orizzontale senza attrito. Calcola la pulsazione dell'oscillazione.'''
+dati.m = { valore = "0,25", unita = "\\kilo\\gram" }
+dati.k = { valore = 64, unita = "\\newton\\per\\metre" }
+
+  [[problema.parte]]
+  calcolo = "math.sqrt(k / m)"
+  risultato = { valore = 16, unita = "\\radian\\per\\second", cifre = 2 }
+  soluzione = '''La pulsazione dell'oscillatore armonico dipende solo dalla costante della molla e dalla massa:
+\[
+  \omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{\SI{64}{\newton\per\metre}}{\SI{0,25}{\kilo\gram}}} = \sqrt{256}\,\si{\radian\per\second} = \SI{16}{\radian\per\second}
+\]
+Dividere per $0{,}25$ vuol dire moltiplicare per 4: $64 \cdot 4 = 256 = 16^2$.'''
+
+[[problema]]
+id = "ud4-osc-energia"
+livello = 1
+testo = '''Una massa attaccata a una molla di costante {{k}} oscilla senza attriti con ampiezza {{A}}. Calcola l'energia dell'oscillatore.'''
+dati.k = { valore = 400, unita = "\\newton\\per\\metre" }
+dati.A = { valore = "5,0", unita = "cm" }
+
+  [[problema.parte]]
+  calcolo = "0.5 * k * (A / 100)**2"
+  risultato = { valore = 0.50, unita = "J", cifre = 2 }
+  soluzione = '''L'ampiezza in metri è $A = \SI{5,0}{\centi\metre} = \SI{5,0e-2}{\metre}$. L'energia dell'oscillatore è
+\[
+  E = \frac{1}{2} k A^2 = \frac{1}{2} \cdot \SI{400}{\newton\per\metre} \cdot (\SI{5,0e-2}{\metre})^2 = 200 \cdot 25 \cdot 10^{-4}\,\si{\joule} = 5000 \cdot 10^{-4}\,\si{\joule} = \SI{0,50}{\joule}
+\]'''
+
+[[problema]]
+id = "ud4-onda-osso"
+livello = 1
+testo = '''Un ultrasuono di frequenza {{f}} ha, in un osso compatto, lunghezza d'onda {{lam}}. Calcola la velocità del suono nell'osso.'''
+dati.f = { valore = "1,0", unita = "MHz" }
+dati.lam = { valore = "4,0", unita = "mm" }
+
+  [[problema.parte]]
+  calcolo = "lam * 1e-3 * f * 1e6"
+  risultato = { valore = 4.0e3, unita = "m/s", cifre = 2 }
+  soluzione = '''In unità del SI la lunghezza d'onda è $\lambda = \SI{4,0e-3}{\metre}$ e la frequenza $f = \SI{1,0e6}{\hertz}$. Dalla relazione fondamentale delle onde:
+\[
+  v = \lambda f = \SI{4,0e-3}{\metre} \cdot \SI{1,0e6}{\hertz} = 4{,}0 \cdot 10^{-3+6}\,\si{\metre\per\second} = \SI{4,0e3}{\metre\per\second}
+\]
+È il valore più alto della tabella della dispensa per l'osso compatto: il suono vi viaggia più di due volte e mezzo più veloce che nei tessuti molli.'''
+
+[[problema]]
+id = "ud4-onda-numero"
+livello = 1
+testo = '''Un suono si propaga in aria con lunghezza d'onda {{lam}}. Calcola il suo numero d'onda.'''
+dati.lam = { valore = "0,50", unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "2 * math.pi / lam"
+  risultato = { valore = 12.6, unita = "\\radian\\per\\metre", cifre = 3 }
+  soluzione = '''Il numero d'onda è $k = 2\pi/\lambda$, con $2\pi \approx 6{,}28$:
+\[
+  k = \frac{2\pi}{\lambda} = \frac{6{,}28}{\SI{0,50}{\metre}} = 6{,}28 \cdot 2\,\si{\radian\per\metre} \approx \SI{12,6}{\radian\per\metre}
+\]
+Dividere per $0{,}50$ vuol dire moltiplicare per 2. Il numero d'onda dice di quanti radianti cresce la fase per ogni metro: qui $4\pi$.'''
+
+[[problema]]
+id = "ud4-osc-astronauta"
+livello = 2
+testo = '''In orbita le bilance non funzionano. Per misurare la massa di un astronauta si usa allora una sedia attaccata a una molla di costante {{k}}: l'astronauta si siede e la sedia oscilla con periodo {{T}}. Trascura la massa della sedia.'''
+dati.k = { valore = 2000, unita = "\\newton\\per\\metre" }
+dati.T = { valore = "1,2", unita = "s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la pulsazione dell'oscillazione?'''
+  calcolo = "2 * math.pi / T"
+  risultato = { valore = 5.2, unita = "\\radian\\per\\second", cifre = 2 }
+  soluzione = '''La pulsazione si ricava dal periodo, con $2\pi \approx 6{,}28$:
+\[
+  \omega = \frac{2\pi}{T} = \frac{6{,}28}{\SI{1,2}{\second}} \approx \SI{5,23}{\radian\per\second} \approx \SI{5,2}{\radian\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la massa dell'astronauta?'''
+  calcolo = "k / (2 * math.pi / T)**2"
+  risultato = { valore = 73, unita = "\\kilo\\gram", cifre = 2 }
+  soluzione = '''Da $\omega = \sqrt{k/m}$, elevando al quadrato, $\omega^2 = k/m$, quindi $m = k/\omega^2$. Con la pulsazione del punto (a), $\omega^2 = 5{,}23^2 \approx 27{,}4$ (infatti $5^2 = 25$ e $5{,}23^2 = 25 + 2 \cdot 5 \cdot 0{,}23 + 0{,}23^2 \approx 25 + 2{,}3 + 0{,}05$):
+\[
+  m = \frac{k}{\omega^2} = \frac{\SI{2000}{\newton\per\metre}}{\SI{27,4}{\per\second\squared}}
+\]
+La divisione si fa per tentativi: $27{,}4 \cdot 70 = 1918$; mancano $2000 - 1918 = 82$, e $82/27{,}4 \approx 3$ (perché $27{,}4 \cdot 3 = 82{,}2$). Quindi $m \approx 70 + 3 = \SI{73}{\kilo\gram}$. Controllo: $27{,}4 \cdot 73 = 2000{,}2$. Il metodo funziona anche senza peso, perché il periodo dipende dalla massa e non dalla gravità.'''
+
+[[problema]]
+id = "ud4-onda-grasso-muscolo"
+livello = 2
+testo = '''Un fascio ecografico di frequenza {{f}} attraversa uno strato di grasso, dove il suono viaggia a {{vg}}, e poi entra in un muscolo, dove viaggia a {{vm}}.'''
+dati.f = { valore = "5,0", unita = "MHz" }
+dati.vg = { valore = 1450, unita = "m/s" }
+dati.vm = { valore = 1580, unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la lunghezza d'onda nel grasso?'''
+  calcolo = "vg / (f * 1e6) * 1e3"
+  risultato = { valore = 0.29, unita = "mm", cifre = 2 }
+  soluzione = '''La frequenza in hertz è $\SI{5,0}{\mega\hertz} = \SI{5,0e6}{\hertz}$. Dalla relazione $v = \lambda f$:
+\[
+  \lambda_\text{g} = \frac{v_\text{g}}{f} = \frac{\SI{1450}{\metre\per\second}}{\SI{5,0e6}{\hertz}} = \frac{1450}{5{,}0} \cdot 10^{-6}\,\si{\metre} = 290 \cdot 10^{-6}\,\si{\metre} = \SI{0,29}{\milli\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto valgono frequenza e lunghezza d'onda nel muscolo?'''
+  calcolo = "vm / (f * 1e6) * 1e3"
+  risultato = { valore = 0.32, unita = "mm", cifre = 2 }
+  rapido = '''$f = \SI{5,0}{\mega\hertz}$; $\lambda_\text{m} \approx \SI{0,32}{\milli\metre}$'''
+  soluzione = '''Passando da un mezzo all'altro la frequenza resta quella della sorgente, \SI{5,0}{\mega\hertz}; cambia la velocità, e con lei la lunghezza d'onda. A frequenza fissata $\lambda$ è proporzionale a $v$, quindi si può partire dal risultato del punto (a):
+\[
+  \lambda_\text{m} = \lambda_\text{g} \cdot \frac{v_\text{m}}{v_\text{g}} = \SI{0,29}{\milli\metre} \cdot \frac{1580}{1450} \approx \SI{0,29}{\milli\metre} \cdot 1{,}09 \approx \SI{0,32}{\milli\metre}
+\]
+Il conto diretto dà lo stesso: $\lambda_\text{m} = (\SI{1580}{\metre\per\second})/(\SI{5,0e6}{\hertz}) = 316 \cdot 10^{-6}\,\si{\metre} \approx \SI{0,32}{\milli\metre}$.'''
+
+[[problema]]
+id = "ud4-onda-scrivi-equazione"
+livello = 2
+testo = '''Su una corda si propaga, verso le $x$ negative, un'onda armonica di ampiezza {{A}}, frequenza {{f}} e velocità {{v}}. Scrivi l'equazione nella forma $y(x,t) = A\sin(kx \pm \omega t)$.'''
+dati.A = { valore = "2,0", unita = "mm" }
+dati.f = { valore = 50, unita = "Hz" }
+dati.v = { valore = 10, unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la lunghezza d'onda e la pulsazione.'''
+  calcolo = "v / f"
+  risultato = { valore = 0.20, unita = "m", cifre = 2 }
+  rapido = '''$\lambda = \SI{0,20}{\metre}$; $\omega \approx \SI{314}{\radian\per\second}$'''
+  soluzione = '''Dalla relazione $v = \lambda f$:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{10}{\metre\per\second}}{\SI{50}{\hertz}} = \SI{0,20}{\metre}
+\]
+La pulsazione, con $2\pi \approx 6{,}28$, è $\omega = 2\pi f = 6{,}28 \cdot \SI{50}{\hertz} = \SI{314}{\radian\per\second}$.'''
+
+  [[problema.parte]]
+  domanda = '''Calcola il numero d'onda e scrivi l'equazione dell'onda.'''
+  calcolo = "2 * math.pi / (v / f)"
+  risultato = { valore = 31.4, unita = "\\radian\\per\\metre", cifre = 3 }
+  rapido = '''$k \approx \SI{31,4}{\radian\per\metre}$; $y = 0{,}0020\,\sin(31{,}4\,x + 314\,t)$ (SI)'''
+  soluzione = '''Con la lunghezza d'onda del punto (a):
+\[
+  k = \frac{2\pi}{\lambda} = \frac{6{,}28}{\SI{0,20}{\metre}} = \SI{31,4}{\radian\per\metre}
+\]
+L'onda va verso le $x$ negative, quindi davanti a $\omega t$ c'è il segno più. Con l'ampiezza in metri, $A = \SI{2,0e-3}{\metre} = \SI{0,0020}{\metre}$, in unità del SI:
+\[
+  y(x,t) = 0{,}0020\,\sin(31{,}4\,x + 314\,t)
+\]
+Controllo: $\omega/k = 314/31{,}4 = \SI{10}{\metre\per\second}$, la velocità data.'''
+
+[[problema]]
+id = "ud4-onda-molla-corda"
+livello = 2
+testo = '''L'estremo di una corda tesa è legato a una massa di {{m}}, attaccata a una molla di costante {{k}}. La massa oscilla su e giù con moto armonico, e sulla corda parte un'onda che viaggia a {{v}}. Trascura l'effetto della corda sul moto della massa.'''
+dati.m = { valore = "0,20", unita = "\\kilo\\gram" }
+dati.k = { valore = 320, unita = "\\newton\\per\\metre" }
+dati.v = { valore = 12, unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Calcola pulsazione e frequenza dell'oscillazione della massa.'''
+  calcolo = "math.sqrt(k / m) / (2 * math.pi)"
+  risultato = { valore = 6.4, unita = "Hz", cifre = 2 }
+  rapido = '''$\omega = \SI{40}{\radian\per\second}$; $f \approx \SI{6,4}{\hertz}$'''
+  soluzione = '''La pulsazione dell'oscillatore è
+\[
+  \omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{\SI{320}{\newton\per\metre}}{\SI{0,20}{\kilo\gram}}} = \sqrt{1600}\,\si{\radian\per\second} = \SI{40}{\radian\per\second}
+\]
+La frequenza, con $2\pi \approx 6{,}28$:
+\[
+  f = \frac{\omega}{2\pi} = \frac{\SI{40}{\radian\per\second}}{6{,}28} \approx \SI{6,4}{\hertz}
+\]
+(infatti $6{,}28 \cdot 6{,}4 \approx 40$).'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la lunghezza d'onda dell'onda sulla corda?'''
+  calcolo = "v / (math.sqrt(k / m) / (2 * math.pi))"
+  risultato = { valore = 1.9, unita = "m", cifre = 2 }
+  soluzione = '''Ogni punto della corda oscilla con la frequenza della sorgente, cioè della massa: $f \approx \SI{6,4}{\hertz}$. Da $v = \lambda f$, con $f = \omega/(2\pi)$:
+\[
+  \lambda = \frac{v}{f} = \frac{2\pi v}{\omega} = \frac{6{,}28 \cdot \SI{12}{\metre\per\second}}{\SI{40}{\radian\per\second}} = \frac{75{,}4}{40}\,\si{\metre} \approx \SI{1,9}{\metre}
+\]'''
+
+[[problema]]
+id = "ud4-onda-piscina"
+livello = 2
+testo = '''In una vasca per la riabilitazione in acqua, un tappo galleggiante compie {{n}} oscillazioni complete in {{t}} al passaggio di un'onda. La distanza fra due creste consecutive è {{lam}}.'''
+dati.n = { valore = 12 }
+dati.t = { valore = 30, unita = "s" }
+dati.lam = { valore = "1,5", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la frequenza dell'onda?'''
+  calcolo = "n / t"
+  risultato = { valore = 0.40, unita = "Hz", cifre = 2 }
+  soluzione = '''Il tappo oscilla con la frequenza dell'onda. La frequenza è il numero di oscillazioni diviso per il tempo:
+\[
+  f = \frac{12}{\SI{30}{\second}} = \SI{0,40}{\hertz}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità si propaga l'onda?'''
+  calcolo = "lam * n / t"
+  risultato = { valore = 0.60, unita = "m/s", cifre = 2 }
+  soluzione = '''La distanza fra due creste è la lunghezza d'onda. Con la frequenza del punto (a):
+\[
+  v = \lambda f = \SI{1,5}{\metre} \cdot \SI{0,40}{\hertz} = \SI{0,60}{\metre\per\second}
+\]
+Il tappo invece non avanza: sale e scende restando dove si trova, perché l'onda trasporta energia, non materia.'''
+
+[[problema]]
+id = "ud4-osc-tremore"
+livello = 3
+testo = '''Il tremore a riposo della malattia di Parkinson ha di solito una frequenza fra 4 e \SI{6}{\hertz}. Un accelerometro sul dito indice di un paziente registra un'oscillazione che si può trattare come un moto armonico di frequenza {{f}} e ampiezza {{A}}. Si comincia a contare il tempo quando il dito si trova nella posizione estrema $x = +A$.'''
+dati.f = { valore = "5,0", unita = "Hz" }
+dati.A = { valore = "1,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Calcola il periodo e la pulsazione del moto.'''
+  calcolo = "2 * math.pi * f"
+  risultato = { valore = 31.4, unita = "\\radian\\per\\second", cifre = 3 }
+  rapido = '''$T = \SI{0,20}{\second}$; $\omega \approx \SI{31,4}{\radian\per\second}$'''
+  soluzione = '''Il periodo è l'inverso della frequenza:
+\[
+  T = \frac{1}{f} = \frac{1}{\SI{5,0}{\hertz}} = \SI{0,20}{\second}
+\]
+La pulsazione, con $2\pi \approx 6{,}28$:
+\[
+  \omega = 2\pi f = 6{,}28 \cdot \SI{5,0}{\hertz} = \SI{31,4}{\radian\per\second}
+\]
+Il valore esatto è $\omega = 10\pi\ \si{\radian\per\second}$: conviene tenerlo così per i punti successivi.'''
+
+  [[problema.parte]]
+  domanda = '''Dove si trova la punta del dito all'istante $t = \SI{0,10}{\second}$?'''
+  calcolo = "A * math.cos(2 * math.pi * f * 0.10)"
+  risultato = { valore = -1.0, unita = "cm", cifre = 2 }
+  soluzione = '''La posizione è $x(t) = A\cos(\omega t)$. All'istante $t = \SI{0,10}{\second}$ l'angolo vale
+\[
+  \omega t = 10\pi\ \si{\radian\per\second} \cdot \SI{0,10}{\second} = \pi\ \si{\radian}
+\]
+cioè \ang{180}, e $\cos\pi = -1$:
+\[
+  x = A\cos\pi = \SI{1,0}{\centi\metre} \cdot (-1) = \SI{-1,0}{\centi\metre}
+\]
+Il dito è nella posizione estrema opposta. Torna con il ragionamento diretto: \SI{0,10}{\second} è mezzo periodo, il tempo per andare da $+A$ a $-A$.'''
+
+  [[problema.parte]]
+  domanda = '''E all'istante $t = \SI{0,025}{\second}$?'''
+  calcolo = "A * math.cos(2 * math.pi * f * 0.025)"
+  risultato = { valore = 0.71, unita = "cm", cifre = 2 }
+  soluzione = '''L'angolo vale
+\[
+  \omega t = 10\pi\ \si{\radian\per\second} \cdot \SI{0,025}{\second} = 0{,}25\,\pi\ \si{\radian} = \frac{\pi}{4}\ \si{\radian}
+\]
+cioè \ang{45}, e $\cos\ang{45} \approx 0{,}71$:
+\[
+  x = A\cos\frac{\pi}{4} = \SI{1,0}{\centi\metre} \cdot 0{,}71 = \SI{0,71}{\centi\metre}
+\]
+Attenzione: \SI{0,025}{\second} è metà del tempo che il dito impiega ad arrivare al centro (un quarto di periodo, \SI{0,050}{\second}), ma il dito non ha fatto metà della strada. Il moto armonico è più lento vicino agli estremi: in questo tempo il dito si è spostato di soli $1{,}0 - 0{,}71 = \SI{0,29}{\centi\metre}$ da $+A$.'''
+
+[[problema]]
+id = "ud4-osc-taratura"
+livello = 3
+testo = '''Per tarare un sensore di movimento usato in riabilitazione, si fa oscillare su un piano orizzontale senza attrito una massa di {{m}}, attaccata a una molla di costante {{k}}. La massa viene spostata di {{A}} dalla posizione di equilibrio e lasciata andare. L'energia cinetica di un corpo di massa $m$ che si muove con velocità $v$ è $\frac{1}{2} m v^2$ (UD2).'''
+dati.m = { valore = "0,20", unita = "\\kilo\\gram" }
+dati.k = { valore = 80, unita = "\\newton\\per\\metre" }
+dati.A = { valore = "3,0", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Calcola il periodo dell'oscillazione.'''
+  calcolo = "2 * math.pi * math.sqrt(m / k)"
+  risultato = { valore = 0.31, unita = "s", cifre = 2 }
+  soluzione = '''La pulsazione è
+\[
+  \omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{\SI{80}{\newton\per\metre}}{\SI{0,20}{\kilo\gram}}} = \sqrt{400}\,\si{\radian\per\second} = \SI{20}{\radian\per\second}
+\]
+e il periodo, con $2\pi \approx 6{,}28$:
+\[
+  T = \frac{2\pi}{\omega} = \frac{6{,}28}{\SI{20}{\radian\per\second}} \approx \SI{0,31}{\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Calcola l'energia dell'oscillatore.'''
+  calcolo = "0.5 * k * (A / 100)**2"
+  risultato = { valore = 3.6e-2, unita = "J", cifre = 2 }
+  soluzione = '''La massa parte ferma da $x = A$: l'ampiezza è lo spostamento iniziale, $A = \SI{3,0e-2}{\metre}$. L'energia è
+\[
+  E = \frac{1}{2} k A^2 = \frac{1}{2} \cdot \SI{80}{\newton\per\metre} \cdot (\SI{3,0e-2}{\metre})^2 = 40 \cdot 9{,}0 \cdot 10^{-4}\,\si{\joule} = 360 \cdot 10^{-4}\,\si{\joule} = \SI{3,6e-2}{\joule}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Con che velocità la massa passa per la posizione di equilibrio?'''
+  calcolo = "math.sqrt(2 * 0.5 * k * (A / 100)**2 / m)"
+  risultato = { valore = 0.60, unita = "m/s", cifre = 2 }
+  soluzione = '''Nella posizione di equilibrio la molla è a riposo e tutta l'energia è cinetica: $\frac{1}{2} m v^2 = E$. Quindi, con l'energia del punto (b):
+\[
+  v = \sqrt{\frac{2E}{m}} = \sqrt{\frac{2 \cdot \SI{3,6e-2}{\joule}}{\SI{0,20}{\kilo\gram}}} = \sqrt{\frac{0{,}072}{0{,}20}}\,\si{\metre\per\second} = \sqrt{0{,}36}\,\si{\metre\per\second} = \SI{0,60}{\metre\per\second}
+\]
+È la velocità massima: agli estremi la massa è ferma.'''
+
+  [[problema.parte]]
+  domanda = '''Si ripete la prova spostando la massa di \SI{6,0}{\centi\metre}. Come cambiano l'energia e il periodo?'''
+  calcolo = "0.5 * k * (2 * A / 100)**2"
+  risultato = { valore = 0.14, unita = "J", cifre = 2 }
+  rapido = '''$E \approx \SI{0,14}{\joule}$, quattro volte più grande; il periodo non cambia'''
+  soluzione = '''L'ampiezza raddoppia. L'energia è proporzionale al quadrato dell'ampiezza, quindi si moltiplica per $2^2 = 4$:
+\[
+  E' = 4E = 4 \cdot \SI{3,6e-2}{\joule} = \SI{0,144}{\joule} \approx \SI{0,14}{\joule}
+\]
+Il periodo invece resta \SI{0,31}{\second}: dipende solo da $m$ e $k$, non dall'ampiezza. Con un'ampiezza doppia la massa percorre un cammino doppio nello stesso tempo, perché va più veloce.'''
+
+[[problema]]
+id = "ud4-onda-sfigmica"
+livello = 3
+testo = '''A ogni battito il cuore produce un'onda di pressione, l'onda sfigmica, che si propaga lungo le arterie. Per misurarne la velocità si registra il polso alla carotide e alla femorale, che lungo il percorso delle arterie distano {{d}}: il polso arriva alla femorale {{dt}} dopo che alla carotide. Il paziente ha una frequenza cardiaca di {{n}} battiti al minuto.'''
+dati.d = { valore = "0,56", unita = "m" }
+dati.dt = { valore = 80, unita = "\\milli\\second" }
+dati.n = { valore = 72 }
+
+  [[problema.parte]]
+  domanda = '''Calcola la velocità dell'onda sfigmica.'''
+  calcolo = "d / (dt * 1e-3)"
+  risultato = { valore = 7.0, unita = "m/s", cifre = 2 }
+  soluzione = '''La velocità di propagazione è la distanza percorsa dall'onda divisa per il tempo impiegato. Il ritardo in secondi è $\SI{80}{\milli\second} = \SI{80e-3}{\second} = \SI{0,080}{\second}$:
+\[
+  v = \frac{d}{\Delta t} = \frac{\SI{0,56}{\metre}}{\SI{0,080}{\second}} = \frac{560}{80}\,\si{\metre\per\second} = \SI{7,0}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la lunghezza d'onda dell'onda sfigmica?'''
+  calcolo = "d / (dt * 1e-3) / (n / 60)"
+  risultato = { valore = 5.8, unita = "m", cifre = 2 }
+  soluzione = '''La sorgente è il cuore: la frequenza dell'onda è quella cardiaca. Un minuto è \SI{60}{\second}:
+\[
+  f = \frac{72}{\SI{60}{\second}} = \SI{1,2}{\hertz}
+\]
+Con la velocità del punto (a):
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{7,0}{\metre\per\second}}{\SI{1,2}{\hertz}} = \frac{70}{12}\,\si{\metre} \approx \SI{5,8}{\metre}
+\]
+perché $12 \cdot 5{,}8 = 69{,}6 \approx 70$. È molto più del percorso fra cuore e femorale: lungo le arterie del corpo c'è, in ogni istante, solo una piccola parte di una lunghezza d'onda.'''
+
+  [[problema.parte]]
+  domanda = '''In un paziente anziano, con le arterie più rigide, l'onda viaggia a \SI{14}{\metre\per\second}. Con la stessa distanza e la stessa frequenza cardiaca, quanto valgono il ritardo fra carotide e femorale e la lunghezza d'onda?'''
+  calcolo = "d / 14 * 1e3"
+  risultato = { valore = 40, unita = "\\milli\\second", cifre = 2 }
+  rapido = '''$\Delta t = \SI{40}{\milli\second}$; $\lambda \approx \SI{12}{\metre}$'''
+  soluzione = '''Il ritardo è il tempo che l'onda impiega a percorrere la stessa distanza:
+\[
+  \Delta t = \frac{d}{v} = \frac{\SI{0,56}{\metre}}{\SI{14}{\metre\per\second}} = \SI{0,040}{\second} = \SI{40}{\milli\second}
+\]
+perché $14 \cdot 0{,}04 = 0{,}56$. La frequenza resta \SI{1,2}{\hertz}, perché la fissa il cuore; cambia la velocità, e con lei la lunghezza d'onda:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{14}{\metre\per\second}}{\SI{1,2}{\hertz}} = \frac{140}{12}\,\si{\metre} \approx \SI{11,7}{\metre} \approx \SI{12}{\metre}
+\]
+In clinica una velocità sopra circa \SI{10}{\metre\per\second} è considerata un segno di rigidità delle arterie.'''
+
+[[problema]]
+id = "ud4-onda-risoluzione"
+livello = 3
+testo = '''In un'ecografia il dettaglio più piccolo che si riesce a distinguere è circa uguale alla lunghezza d'onda degli ultrasuoni. Si vuole distinguere, nei tessuti molli, una struttura di {{s}}. La velocità del suono nei tessuti molli è \SI{1540}{\metre\per\second}.'''
+dati.s = { valore = "0,20", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Quale frequenza minima deve avere la sonda?'''
+  calcolo = "v_tessuti / (s * 1e-3) / 1e6"
+  risultato = { valore = 7.7, unita = "MHz", cifre = 2 }
+  soluzione = '''La lunghezza d'onda deve essere al massimo $\lambda = \SI{0,20}{\milli\metre} = \SI{2,0e-4}{\metre}$. A velocità fissata, una lunghezza d'onda più piccola vuol dire una frequenza più grande, quindi la frequenza minima è quella che dà proprio \SI{0,20}{\milli\metre}:
+\[
+  f = \frac{v}{\lambda} = \frac{\SI{1540}{\metre\per\second}}{\SI{2,0e-4}{\metre}} = \frac{1540}{2{,}0} \cdot 10^{4}\,\si{\hertz} = 770 \cdot 10^{4}\,\si{\hertz} = \SI{7,7e6}{\hertz} = \SI{7,7}{\mega\hertz}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Si usa una sonda da \SI{10}{\mega\hertz}. Quanto valgono la lunghezza d'onda nei tessuti molli e il periodo degli ultrasuoni?'''
+  calcolo = "v_tessuti / 10e6 * 1e3"
+  risultato = { valore = 0.15, unita = "mm", cifre = 2 }
+  rapido = '''$\lambda \approx \SI{0,15}{\milli\metre}$; $T = \SI{0,10}{\micro\second}$'''
+  soluzione = '''La frequenza è $\SI{10}{\mega\hertz} = \SI{e7}{\hertz}$:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{1540}{\metre\per\second}}{\SI{e7}{\hertz}} = 1540 \cdot 10^{-7}\,\si{\metre} = \SI{1,54e-4}{\metre} \approx \SI{0,15}{\milli\metre}
+\]
+È meno di \SI{0,20}{\milli\metre}: la struttura si distingue, come ci si aspetta da una frequenza più alta della minima del punto (a). Il periodo è
+\[
+  T = \frac{1}{f} = \frac{1}{\SI{e7}{\hertz}} = \SI{e-7}{\second} = \SI{0,10}{\micro\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Il fascio della stessa sonda raggiunge un osso compatto, dove il suono viaggia a circa \SI{4000}{\metre\per\second}. Quanto vale lì la lunghezza d'onda?'''
+  calcolo = "4000 / 10e6 * 1e3"
+  risultato = { valore = 0.40, unita = "mm", cifre = 2 }
+  soluzione = '''Nell'osso la frequenza resta \SI{10}{\mega\hertz}, quella della sonda; cambia la velocità:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{4000}{\metre\per\second}}{\SI{e7}{\hertz}} = 4000 \cdot 10^{-7}\,\si{\metre} = \SI{4,0e-4}{\metre} = \SI{0,40}{\milli\metre}
+\]
+La lunghezza d'onda è più del doppio che nei tessuti molli: il calcolo si fa sempre con la velocità del mezzo in cui l'onda si trova.'''
+
+[[problema]]
+id = "ud4-onda-equazione-corda"
+livello = 3
+testo = '''Su una corda viaggia verso le $x$ positive un'onda armonica di ampiezza {{A}}, lunghezza d'onda {{lam}} e velocità {{v}}. La sua equazione è della forma $y(x,t) = A\sin(kx - \omega t)$.'''
+dati.A = { valore = "4,0", unita = "mm" }
+dati.lam = { valore = "0,80", unita = "m" }
+dati.v = { valore = 20, unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Calcola numero d'onda, frequenza e pulsazione.'''
+  calcolo = "2 * math.pi / lam"
+  risultato = { valore = 7.85, unita = "\\radian\\per\\metre", cifre = 3 }
+  rapido = '''$k \approx \SI{7,85}{\radian\per\metre}$; $f = \SI{25}{\hertz}$; $\omega \approx \SI{157}{\radian\per\second}$'''
+  soluzione = '''Con $2\pi \approx 6{,}28$:
+\[
+  k = \frac{2\pi}{\lambda} = \frac{6{,}28}{\SI{0,80}{\metre}} = \SI{7,85}{\radian\per\metre}
+  \qquad
+  f = \frac{v}{\lambda} = \frac{\SI{20}{\metre\per\second}}{\SI{0,80}{\metre}} = \SI{25}{\hertz}
+\]
+\[
+  \omega = 2\pi f = 6{,}28 \cdot \SI{25}{\hertz} = \SI{157}{\radian\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Scrivi l'equazione dell'onda e calcola il periodo.'''
+  calcolo = "lam / v"
+  risultato = { valore = 0.040, unita = "s", cifre = 2 }
+  rapido = '''$y = 0{,}0040\,\sin(7{,}85\,x - 157\,t)$ (SI); $T = \SI{0,040}{\second}$'''
+  soluzione = '''Con $A = \SI{4,0e-3}{\metre} = \SI{0,0040}{\metre}$ e i valori del punto (a), in unità del SI:
+\[
+  y(x,t) = 0{,}0040\,\sin(7{,}85\,x - 157\,t)
+\]
+Il segno meno davanti a $\omega t$ dice che l'onda va verso le $x$ positive. Il periodo è $T = 1/f = 1/(\SI{25}{\hertz}) = \SI{0,040}{\second}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale lo spostamento del punto della corda in $x = \SI{0,20}{\metre}$ all'istante $t = 0$?'''
+  calcolo = "A * math.sin(2 * math.pi / lam * 0.20)"
+  risultato = { valore = 4.0, unita = "mm", cifre = 2 }
+  soluzione = '''A $t = 0$ l'argomento del seno è
+\[
+  kx = \frac{2\pi}{\lambda}\,x = \frac{2\pi}{\SI{0,80}{\metre}} \cdot \SI{0,20}{\metre} = \frac{2\pi}{4} = \frac{\pi}{2}\ \si{\radian}
+\]
+cioè \ang{90}, e $\sin\ang{90} = 1$: lo spostamento è $y = A = \SI{4,0}{\milli\metre}$. Il punto si trova su una cresta: $x = \SI{0,20}{\metre}$ è un quarto di lunghezza d'onda, dove la sinusoide ha il massimo.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale lo spostamento dello stesso punto all'istante $t = \SI{0,0050}{\second}$?'''
+  calcolo = "A * math.sin(2 * math.pi / lam * 0.20 - 2 * math.pi * v / lam * 0.0050)"
+  risultato = { valore = 2.8, unita = "mm", cifre = 2 }
+  soluzione = '''L'istante $t = \SI{0,0050}{\second}$ è un ottavo del periodo, $\SI{0,040}{\second}/8$. In un periodo $\omega t$ cresce di $2\pi$, quindi qui $\omega t = 2\pi/8 = \pi/4$ (con i numeri: $157 \cdot 0{,}0050 = 0{,}785 \approx 3{,}14/4$). L'argomento del seno è
+\[
+  kx - \omega t = \frac{\pi}{2} - \frac{\pi}{4} = \frac{\pi}{4}\ \si{\radian}
+\]
+cioè \ang{45}, e $\sin\ang{45} \approx 0{,}71$:
+\[
+  y = A\sin\frac{\pi}{4} = \SI{4,0}{\milli\metre} \cdot 0{,}71 \approx \SI{2,8}{\milli\metre}
+\]
+La cresta si è spostata verso le $x$ positive, e il punto sta scendendo verso la posizione di equilibrio.'''
+
+[[problema]]
+id = "ud4-vel-chitarra"
+livello = 1
+testo = '''Una corda di chitarra ha densità lineare {{mu}} ed è tesa con una forza di {{F}}. Calcola la velocità delle onde trasversali sulla corda.'''
+dati.mu = { valore = "1,0", unita = "\\gram\\per\\metre" }
+dati.F = { valore = 90, unita = "\\newton" }
+
+  [[problema.parte]]
+  calcolo = "math.sqrt(F / (mu * 1e-3))"
+  risultato = { valore = 300, unita = "m/s", cifre = 2 }
+  soluzione = '''La densità lineare in unità del SI è $\mu = \SI{1,0}{\gram\per\metre} = \SI{1,0e-3}{\kilo\gram\per\metre}$. Dalla formula della velocità su una corda:
+\[
+  v = \sqrt{\frac{F}{\mu}} = \sqrt{\frac{\SI{90}{\newton}}{\SI{1,0e-3}{\kilo\gram\per\metre}}} = \sqrt{90 \cdot 10^{0-(-3)}}\,\si{\metre\per\second} = \sqrt{9{,}0 \cdot 10^{4}}\,\si{\metre\per\second} = 3{,}0 \cdot 10^{2}\,\si{\metre\per\second} = \SI{300}{\metre\per\second}
+\]
+La radice di $10^{4}$ è $10^{2}$, quella di 9 è 3. Prima di fare la radice conviene sempre scrivere il numero con un esponente pari.'''
+
+[[problema]]
+id = "ud4-vel-plasma"
+livello = 1
+testo = '''Il plasma sanguigno ha modulo di compressibilità di circa {{B}} e densità di circa {{rho}}. Stima la velocità del suono nel plasma.'''
+dati.B = { valore = "2,3e9", unita = "\\pascal" }
+dati.rho = { valore = 1025, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+
+  [[problema.parte]]
+  calcolo = "math.sqrt(B / rho)"
+  risultato = { valore = 1.5e3, unita = "m/s", cifre = 2 }
+  soluzione = '''Il suono è un'onda longitudinale e nel fluido la sua velocità è $v = \sqrt{B/\rho}$. La densità è $\SI{1025}{\kilo\gram\per\metre\cubed} = \SI{1,025e3}{\kilo\gram\per\metre\cubed}$, quindi
+\[
+  \frac{B}{\rho} = \frac{\SI{2,3e9}{\pascal}}{\SI{1,025e3}{\kilo\gram\per\metre\cubed}} = \frac{2{,}3}{1{,}025} \cdot 10^{9-3}\,\si{\metre\squared\per\second\squared} \approx 2{,}24 \cdot 10^{6}\,\si{\metre\squared\per\second\squared}
+\]
+Dividere per un numero poco più grande di 1 è come moltiplicare per uno poco più piccolo di 1: $2{,}3/1{,}025 \approx 2{,}3 \cdot (1 - 0{,}025) = 2{,}3 - 0{,}06 \approx 2{,}24$. La radice:
+\[
+  v = \sqrt{2{,}24 \cdot 10^{6}}\,\si{\metre\per\second} = \sqrt{2{,}24} \cdot 10^{3}\,\si{\metre\per\second} \approx \SI{1,5e3}{\metre\per\second}
+\]
+perché $1{,}5^2 = 2{,}25$. È quasi la velocità in acqua: il plasma è fatto soprattutto di acqua.'''
+
+[[problema]]
+id = "ud4-vel-osso"
+livello = 1
+testo = '''Nell'osso compatto il suono viaggia a {{v}}. Quanto vale la lunghezza d'onda di un ultrasuono di frequenza {{f}}?'''
+dati.v = { valore = 3600, unita = "m/s" }
+dati.f = { valore = "2,0", unita = "MHz" }
+
+  [[problema.parte]]
+  calcolo = "v / (f * 1e6) * 1e3"
+  risultato = { valore = 1.8, unita = "mm", cifre = 2 }
+  soluzione = '''In unità del SI la frequenza è $f = \SI{2,0}{\mega\hertz} = \SI{2,0e6}{\hertz}$. Dalla relazione $v = \lambda f$:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{3600}{\metre\per\second}}{\SI{2,0e6}{\hertz}} = \frac{3600}{2{,}0} \cdot 10^{-6}\,\si{\metre} = 1800 \cdot 10^{-6}\,\si{\metre} = \SI{1,8e-3}{\metre} = \SI{1,8}{\milli\metre}
+\]
+Nei tessuti molli, alla stessa frequenza, sarebbe $1540/(\num{2,0e6})\,\si{\metre} = \SI{0,77}{\milli\metre}$: a frequenza fissata la lunghezza d'onda è proporzionale alla velocità del mezzo.'''
+
+[[problema]]
+id = "ud4-vel-polso"
+livello = 1
+testo = '''Due sensori registrano l'onda sfigmica sulla carotide e sull'arteria radiale, al polso, che lungo le arterie distano {{d}}. L'onda arriva al polso {{t}} dopo essere passata dalla carotide. Calcola la velocità dell'onda sfigmica.'''
+dati.d = { valore = "0,72", unita = "m" }
+dati.t = { valore = 80, unita = "\\milli\\second" }
+
+  [[problema.parte]]
+  calcolo = "d / (t * 1e-3)"
+  risultato = { valore = 9.0, unita = "m/s", cifre = 2 }
+  soluzione = '''Il ritardo in secondi è $t = \SI{80}{\milli\second} = \SI{0,080}{\second}$. La velocità è la distanza percorsa divisa per il tempo:
+\[
+  v = \frac{d}{t} = \frac{\SI{0,72}{\metre}}{\SI{0,080}{\second}} = \frac{72}{8{,}0}\,\si{\metre\per\second} = \SI{9,0}{\metre\per\second}
+\]
+È la velocità con cui corre la deformazione della parete, circa dieci volte quella del sangue.'''
+
+[[problema]]
+id = "ud4-interf-ampiezze"
+livello = 1
+testo = '''Su una corda si incontrano due onde con la stessa frequenza, di ampiezza {{A1}} e {{A2}}. Quanto vale l'ampiezza risultante se le due onde arrivano in fase? E se arrivano in opposizione di fase?'''
+dati.A1 = { valore = "3,0", unita = "mm" }
+dati.A2 = { valore = "2,0", unita = "mm" }
+
+  [[problema.parte]]
+  calcolo = "A1 + A2"
+  risultato = { valore = 5.0, unita = "mm", cifre = 2 }
+  rapido = '''\SI{5,0}{\milli\metre} in fase; \SI{1,0}{\milli\metre} in opposizione di fase'''
+  soluzione = '''Per il principio di sovrapposizione gli spostamenti delle due onde si sommano. In fase le creste arrivano insieme alle creste, e l'interferenza è costruttiva:
+\[
+  A = A_1 + A_2 = \SI{3,0}{\milli\metre} + \SI{2,0}{\milli\metre} = \SI{5,0}{\milli\metre}
+\]
+In opposizione di fase le creste di un'onda arrivano con gli avvallamenti dell'altra, e l'interferenza è distruttiva:
+\[
+  A = |A_1 - A_2| = |\SI{3,0}{\milli\metre} - \SI{2,0}{\milli\metre}| = \SI{1,0}{\milli\metre}
+\]
+L'onda non si annulla del tutto, perché le due ampiezze sono diverse.'''
+
+[[problema]]
+id = "ud4-vel-lunghezza"
+livello = 2
+testo = '''Una corda di densità lineare {{mu}} è tesa con una forza di {{F}}. Un vibratore attaccato a un'estremità la fa oscillare alla frequenza di {{f}}.'''
+dati.mu = { valore = "1,0", unita = "\\gram\\per\\metre" }
+dati.F = { valore = 40, unita = "\\newton" }
+dati.f = { valore = 500, unita = "Hz" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità si propagano le onde sulla corda?'''
+  calcolo = "math.sqrt(F / (mu * 1e-3))"
+  risultato = { valore = 200, unita = "m/s", cifre = 2 }
+  soluzione = '''Con $\mu = \SI{1,0}{\gram\per\metre} = \SI{1,0e-3}{\kilo\gram\per\metre}$:
+\[
+  v = \sqrt{\frac{F}{\mu}} = \sqrt{\frac{\SI{40}{\newton}}{\SI{1,0e-3}{\kilo\gram\per\metre}}} = \sqrt{40 \cdot 10^{3}}\,\si{\metre\per\second} = \sqrt{4{,}0 \cdot 10^{4}}\,\si{\metre\per\second} = 2{,}0 \cdot 10^{2}\,\si{\metre\per\second} = \SI{200}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la lunghezza d'onda?'''
+  calcolo = "math.sqrt(F / (mu * 1e-3)) / f"
+  risultato = { valore = 0.40, unita = "m", cifre = 2 }
+  soluzione = '''La frequenza è quella del vibratore, la velocità quella del punto (a). Da $v = \lambda f$:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{200}{\metre\per\second}}{\SI{500}{\hertz}} = \frac{2}{5}\,\si{\metre} = \SI{0,40}{\metre}
+\]'''
+
+[[problema]]
+id = "ud4-vel-tensione"
+livello = 2
+testo = '''Su una corda di densità lineare {{mu}} si propaga un'onda di frequenza {{f}} e lunghezza d'onda {{lam}}.'''
+dati.mu = { valore = "5,0", unita = "\\gram\\per\\metre" }
+dati.f = { valore = 200, unita = "Hz" }
+dati.lam = { valore = "0,50", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità si propaga l'onda?'''
+  calcolo = "lam * f"
+  risultato = { valore = 100, unita = "m/s", cifre = 2 }
+  soluzione = '''Dalla relazione fra velocità, lunghezza d'onda e frequenza:
+\[
+  v = \lambda f = \SI{0,50}{\metre} \cdot \SI{200}{\hertz} = \SI{100}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Con che forza è tesa la corda?'''
+  calcolo = "(mu * 1e-3) * (lam * f)**2"
+  risultato = { valore = 50, unita = "\\newton", cifre = 2 }
+  soluzione = '''Si ricava la tensione da $v = \sqrt{F/\mu}$: elevando al quadrato $v^2 = F/\mu$, quindi $F = \mu v^2$. Con $\mu = \SI{5,0}{\gram\per\metre} = \SI{5,0e-3}{\kilo\gram\per\metre}$ e la velocità del punto (a):
+\[
+  F = \mu v^2 = \SI{5,0e-3}{\kilo\gram\per\metre} \cdot (\SI{100}{\metre\per\second})^2 = 5{,}0 \cdot 10^{-3} \cdot 10^{4}\,\si{\newton} = 5{,}0 \cdot 10^{-3+4}\,\si{\newton} = \SI{50}{\newton}
+\]
+Le unità tornano: $\si{\kilo\gram\per\metre} \cdot \si{\metre\squared\per\second\squared} = \si{\kilo\gram\metre\per\second\squared} = \si{\newton}$.'''
+
+[[problema]]
+id = "ud4-vel-raddoppio"
+livello = 2
+testo = '''Su una corda un vibratore produce un'onda di lunghezza d'onda {{lam}}. Si sostituisce la corda con una di densità lineare dimezzata, e la si tende con una forza doppia. Il vibratore resta lo stesso, con la stessa frequenza.'''
+dati.lam = { valore = "0,30", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Di che fattore cambia la velocità delle onde?'''
+  calcolo = "math.sqrt(2 / 0.5)"
+  risultato = { valore = 2.0, cifre = 2 }
+  soluzione = '''Nella nuova corda la tensione è $F' = 2F$ e la densità lineare è $\mu' = \mu/2$. Quindi
+\[
+  v' = \sqrt{\frac{F'}{\mu'}} = \sqrt{\frac{2F}{\mu/2}} = \sqrt{4\,\frac{F}{\mu}} = \sqrt{4} \cdot \sqrt{\frac{F}{\mu}} = 2v
+\]
+I due cambiamenti vanno nello stesso verso: una tensione maggiore e un'inerzia minore rendono entrambe l'onda più veloce. La velocità raddoppia.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la nuova lunghezza d'onda?'''
+  calcolo = "lam * math.sqrt(2 / 0.5)"
+  risultato = { valore = 0.60, unita = "m", cifre = 2 }
+  soluzione = '''La frequenza è fissata dal vibratore e non cambia. Da $\lambda = v/f$, con $v' = 2v$ dal punto (a):
+\[
+  \lambda' = \frac{v'}{f} = \frac{2v}{f} = 2\lambda = 2 \cdot \SI{0,30}{\metre} = \SI{0,60}{\metre}
+\]'''
+
+[[problema]]
+id = "ud4-interf-altoparlanti"
+livello = 2
+testo = '''Due altoparlanti collegati allo stesso amplificatore emettono in fase un suono di frequenza {{f}}, in aria, dove il suono viaggia a {{v}}. Un ascoltatore si trova a {{r1}} da un altoparlante e a {{r2}} dall'altro.'''
+dati.f = { valore = 850, unita = "Hz" }
+dati.v = { valore = 340, unita = "m/s" }
+dati.r1 = { valore = "4,0", unita = "m" }
+dati.r2 = { valore = "5,2", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la lunghezza d'onda del suono?'''
+  calcolo = "v / f"
+  risultato = { valore = 0.40, unita = "m", cifre = 2 }
+  soluzione = '''Da $v = \lambda f$:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{340}{\metre\per\second}}{\SI{850}{\hertz}} = \frac{34}{85}\,\si{\metre} = \SI{0,40}{\metre}
+\]
+perché $85 \cdot 0{,}4 = 34$.'''
+
+  [[problema.parte]]
+  domanda = '''A quante lunghezze d'onda corrisponde la differenza di cammino? Nel punto dell'ascoltatore l'interferenza è costruttiva o distruttiva?'''
+  calcolo = "(r2 - r1) / (v / f)"
+  risultato = { valore = 3.0, cifre = 2 }
+  rapido = '''3 lunghezze d'onda; costruttiva'''
+  soluzione = '''La differenza di cammino è $\Delta r = \SI{5,2}{\metre} - \SI{4,0}{\metre} = \SI{1,2}{\metre}$. Con la lunghezza d'onda del punto (a):
+\[
+  \frac{\Delta r}{\lambda} = \frac{\SI{1,2}{\metre}}{\SI{0,40}{\metre}} = 3
+\]
+È un numero intero di lunghezze d'onda ($n = 3$): le due onde arrivano in fase e l'interferenza è costruttiva. L'ascoltatore sente il suono rinforzato.'''
+
+[[problema]]
+id = "ud4-interf-impulsi"
+livello = 2
+testo = '''Una corda lunga, di densità lineare {{mu}}, è tesa con una forza di {{F}}. Dalle due estremità partono nello stesso istante due impulsi, uno verso l'altro: il primo è una gobba alta {{h1}} verso l'alto, il secondo una gobba di {{h2}} verso il basso. All'inizio i due impulsi distano {{d}}.'''
+dati.mu = { valore = 10, unita = "\\gram\\per\\metre" }
+dati.F = { valore = 25, unita = "\\newton" }
+dati.h1 = { valore = "3,0", unita = "cm" }
+dati.h2 = { valore = "1,0", unita = "cm" }
+dati.d = { valore = "5,0", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Con che velocità si muovono gli impulsi?'''
+  calcolo = "math.sqrt(F / (mu * 1e-3))"
+  risultato = { valore = 50, unita = "m/s", cifre = 2 }
+  soluzione = '''I due impulsi viaggiano sulla stessa corda, quindi con la stessa velocità. Con $\mu = \SI{10}{\gram\per\metre} = \SI{1,0e-2}{\kilo\gram\per\metre}$:
+\[
+  v = \sqrt{\frac{F}{\mu}} = \sqrt{\frac{\SI{25}{\newton}}{\SI{1,0e-2}{\kilo\gram\per\metre}}} = \sqrt{25 \cdot 10^{2}}\,\si{\metre\per\second} = 5 \cdot 10\,\si{\metre\per\second} = \SI{50}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Dopo quanto tempo i due impulsi si sovrappongono? Quanto vale lo spostamento della corda nel punto in cui i due picchi coincidono?'''
+  calcolo = "d / (2 * math.sqrt(F / (mu * 1e-3)))"
+  risultato = { valore = 0.050, unita = "s", cifre = 2 }
+  rapido = '''\SI{0,050}{\second}; spostamento \SI{2,0}{\centi\metre} verso l'alto'''
+  soluzione = '''Gli impulsi si vengono incontro con la stessa velocità, quindi si incontrano a metà strada: ciascuno percorre $d/2 = \SI{2,5}{\metre}$. Con la velocità del punto (a):
+\[
+  t = \frac{d/2}{v} = \frac{\SI{2,5}{\metre}}{\SI{50}{\metre\per\second}} = \SI{0,050}{\second}
+\]
+Quando i due picchi coincidono, per il principio di sovrapposizione gli spostamenti si sommano con il loro segno, positivo verso l'alto:
+\[
+  y = y_1 + y_2 = \SI{3,0}{\centi\metre} + (\SI{-1,0}{\centi\metre}) = \SI{2,0}{\centi\metre}
+\]
+Lo spostamento è di \SI{2,0}{\centi\metre} verso l'alto. Dopo l'incontro i due impulsi proseguono ciascuno per la sua strada, con la forma che avevano prima.'''
+
+[[problema]]
+id = "ud4-vel-sfigmica"
+livello = 3
+testo = '''La velocità dell'onda sfigmica fra carotide e femorale si usa come indice della rigidità delle arterie: è proporzionale alla radice quadrata della rigidità della parete, come sulla corda è proporzionale alla radice della tensione. In un paziente giovane e sano la distanza fra i due punti di misura, lungo le arterie, è {{d}}, e l'onda impiega {{t1}} a percorrerla.'''
+dati.d = { valore = "0,50", unita = "m" }
+dati.t1 = { valore = 100, unita = "\\milli\\second" }
+dati.t2 = { valore = 50, unita = "\\milli\\second" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la velocità dell'onda sfigmica?'''
+  calcolo = "d / (t1 * 1e-3)"
+  risultato = { valore = 5.0, unita = "m/s", cifre = 2 }
+  soluzione = '''Con $t = \SI{100}{\milli\second} = \SI{0,100}{\second}$:
+\[
+  v = \frac{d}{t} = \frac{\SI{0,50}{\metre}}{\SI{0,100}{\second}} = \SI{5,0}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''In un secondo paziente la parete è 2,25 volte più rigida che nel giovane. Quanto impiega l'onda a percorrere lo stesso tratto?'''
+  calcolo = "d / (math.sqrt(2.25) * d / (t1 * 1e-3)) * 1e3"
+  risultato = { valore = 67, unita = "\\milli\\second", cifre = 2 }
+  soluzione = '''La velocità è proporzionale alla radice della rigidità, quindi cresce del fattore $\sqrt{2{,}25} = 1{,}5$ (perché $1{,}5^2 = 2{,}25$). Con la velocità del punto (a):
+\[
+  v' = 1{,}5 \cdot \SI{5,0}{\metre\per\second} = \SI{7,5}{\metre\per\second}
+\]
+Il tempo per percorrere lo stesso tratto è
+\[
+  t' = \frac{d}{v'} = \frac{\SI{0,50}{\metre}}{\SI{7,5}{\metre\per\second}} = \frac{1{,}0}{15}\,\si{\second} \approx \SI{0,067}{\second} = \SI{67}{\milli\second}
+\]
+Lo stesso si ottiene dividendo per 1,5 il tempo del giovane: $100/1{,}5 \approx 67$. Una parete più rigida accorcia il tempo di percorrenza.'''
+
+  [[problema.parte]]
+  domanda = '''In un paziente anziano con arteriosclerosi, sullo stesso tratto, l'onda impiega {{t2}}. Di che fattore è più rigida la sua arteria rispetto a quella del giovane?'''
+  calcolo = "((d / (t2 * 1e-3)) / (d / (t1 * 1e-3)))**2"
+  risultato = { valore = 4.0, cifre = 2 }
+  soluzione = '''Nel paziente anziano la velocità è
+\[
+  v'' = \frac{\SI{0,50}{\metre}}{\SI{0,050}{\second}} = \SI{10}{\metre\per\second}
+\]
+il doppio di quella del giovane. Se la velocità è proporzionale alla radice della rigidità, la rigidità è proporzionale al quadrato della velocità:
+\[
+  \frac{\text{rigidità}''}{\text{rigidità}} = \left(\frac{v''}{v}\right)^{2} = \left(\frac{\SI{10}{\metre\per\second}}{\SI{5,0}{\metre\per\second}}\right)^{2} = 2^2 = 4
+\]
+L'arteria è circa quattro volte più rigida: per raddoppiare la velocità dell'onda la rigidità deve quadruplicare.'''
+
+[[problema]]
+id = "ud4-interf-trasduttori"
+livello = 3
+testo = '''Una sonda ecografica contiene molti piccoli elementi che emettono ultrasuoni. Due di essi emettono in fase a {{f}} nel tessuto molle, dove il suono viaggia a {{v}}. Un punto del tessuto dista {{r1}} dal primo elemento e {{r2}} dal secondo.'''
+dati.f = { valore = "2,0", unita = "MHz" }
+dati.v = { valore = 1540, unita = "m/s" }
+dati.r1 = { valore = "5,000", unita = "cm" }
+dati.r2 = { valore = "5,077", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la lunghezza d'onda degli ultrasuoni nel tessuto.'''
+  calcolo = "v / (f * 1e6) * 1e3"
+  risultato = { valore = 0.77, unita = "mm", cifre = 2 }
+  soluzione = '''Con $f = \SI{2,0}{\mega\hertz} = \SI{2,0e6}{\hertz}$:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{1540}{\metre\per\second}}{\SI{2,0e6}{\hertz}} = 770 \cdot 10^{-6}\,\si{\metre} = 0{,}77 \cdot 10^{-3}\,\si{\metre} = \SI{0,77}{\milli\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''A quante lunghezze d'onda corrisponde la differenza di cammino? L'interferenza nel punto è costruttiva o distruttiva?'''
+  calcolo = "(r2 - r1) * 10 / (v / (f * 1e6) * 1e3)"
+  risultato = { valore = 1.0, cifre = 2 }
+  rapido = '''una lunghezza d'onda; costruttiva'''
+  soluzione = '''La differenza di cammino è
+\[
+  \Delta r = \SI{5,077}{\centi\metre} - \SI{5,000}{\centi\metre} = \SI{0,077}{\centi\metre} = \SI{0,77}{\milli\metre}
+\]
+Con la lunghezza d'onda del punto (a), $\Delta r/\lambda = 0{,}77/0{,}77 = 1$: un numero intero di lunghezze d'onda ($n = 1$). Le due onde arrivano in fase e l'interferenza è costruttiva.'''
+
+  [[problema.parte]]
+  domanda = '''Di quanto dovrebbe cambiare, al minimo, la differenza di cammino per avere nel punto interferenza distruttiva?'''
+  calcolo = "v / (f * 1e6) / 2 * 1e3"
+  risultato = { valore = 0.385, unita = "mm", cifre = 3 }
+  soluzione = '''Per passare da un numero intero di lunghezze d'onda al più vicino numero intero più mezzo, la differenza di cammino deve cambiare di mezza lunghezza d'onda, in più o in meno ($1{,}5\lambda$ oppure $0{,}5\lambda$):
+\[
+  \frac{\lambda}{2} = \frac{\SI{0,770}{\milli\metre}}{2} = \SI{0,385}{\milli\metre}
+\]
+Bastano pochi decimi di millimetro per passare da un punto di interferenza costruttiva a uno di interferenza distruttiva. Le sonde sfruttano questo fatto: regolando il ritardo fra un elemento e l'altro decidono in quali punti le onde si rinforzano, e così orientano e focalizzano il fascio.'''
+
+[[problema]]
+id = "ud4-interf-risonanza"
+livello = 3
+testo = '''Durante un esame di risonanza magnetica il rumore del tomografo, nell'orecchio del paziente, è dominato da un tono di frequenza {{f}} e ha un livello di intensità sonora di {{L}}. Il paziente indossa cuffie a cancellazione attiva, che emettono un'onda con la stessa frequenza in opposizione di fase.'''
+dati.f = { valore = 1000, unita = "Hz" }
+dati.L = { valore = 110, unita = "\\deci\\bel" }
+
+  [[problema.parte]]
+  domanda = '''Di quanto tempo, al minimo, l'onda delle cuffie deve essere in ritardo rispetto al rumore, perché le due onde siano in opposizione di fase?'''
+  calcolo = "1 / (2 * f) * 1e3"
+  risultato = { valore = 0.50, unita = "\\milli\\second", cifre = 2 }
+  soluzione = '''Due onde sono in opposizione di fase quando una è in ritardo di mezza oscillazione sull'altra, cioè di mezzo periodo. Il periodo è
+\[
+  T = \frac{1}{f} = \frac{1}{\SI{1000}{\hertz}} = \SI{e-3}{\second} = \SI{1,0}{\milli\second}
+\]
+e il ritardo minimo è $T/2 = \SI{0,50}{\milli\second}$. In questo tempo il suono in aria percorre $\SI{340}{\metre\per\second} \cdot \SI{5,0e-4}{\second} = \SI{0,17}{\metre}$, mezza lunghezza d'onda.'''
+
+  [[problema.parte]]
+  domanda = '''L'onda delle cuffie ha un'ampiezza pari al 90\% di quella del rumore. Di che fattore si riduce l'intensità del suono nell'orecchio?'''
+  calcolo = "1 / (1 - 0.90)**2"
+  risultato = { valore = 100, cifre = 2 }
+  rapido = '''intensità divisa per 100 (diventa 0,010 di quella del rumore)'''
+  soluzione = '''In opposizione di fase l'ampiezza risultante è la differenza delle ampiezze:
+\[
+  A = A_\text{rumore} - 0{,}90\,A_\text{rumore} = 0{,}10\,A_\text{rumore}
+\]
+L'intensità è proporzionale al quadrato dell'ampiezza, quindi
+\[
+  \frac{I}{I_\text{rumore}} = \left(\frac{A}{A_\text{rumore}}\right)^{2} = (0{,}10)^2 = 0{,}010
+\]
+L'intensità si riduce di un fattore 100: diventa un centesimo di quella del rumore. L'energia del rumore non sparisce: nei punti in cui la cancellazione non funziona, lontano dall'orecchio, le onde si sommano.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il livello di intensità sonora con le cuffie?'''
+  calcolo = "L + 10 * math.log10((1 - 0.90)**2)"
+  risultato = { valore = 90, unita = "\\deci\\bel", cifre = 2 }
+  soluzione = '''Dividere l'intensità per 100 vuol dire togliere al livello
+\[
+  10 \log_{10} 100 = 10 \log_{10} 10^{2} = 10 \cdot 2\,\si{\deci\bel} = \SI{20}{\deci\bel}
+\]
+Quindi il livello diventa $\SI{110}{\deci\bel} - \SI{20}{\deci\bel} = \SI{90}{\deci\bel}$. È ancora molto, perché le cuffie cancellano bene solo il tono dominante: per questo in risonanza magnetica si usano anche tappi o cuffie passive.'''
+
+[[problema]]
+id = "ud4-vel-corde-vocali"
+livello = 3
+testo = '''Le corde vocali si possono modellare come una corda fissa agli estremi. Per una corda di lunghezza $L$ fissa agli estremi la frequenza più bassa con cui può vibrare, la fondamentale, è quella per cui sulla corda sta mezza lunghezza d'onda: $\lambda_1 = 2L$, quindi $f_1 = v/(2L)$, dove $v$ è la velocità delle onde trasversali. In un uomo le corde vocali sono lunghe circa {{L}} e la fondamentale della voce è {{f1}}.'''
+dati.L = { valore = "1,6", unita = "cm" }
+dati.f1 = { valore = 120, unita = "Hz" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la velocità delle onde trasversali sulle corde vocali.'''
+  calcolo = "2 * (L * 1e-2) * f1"
+  risultato = { valore = 3.8, unita = "m/s", cifre = 2 }
+  soluzione = '''La lunghezza d'onda della fondamentale è $\lambda_1 = 2L = 2 \cdot \SI{1,6}{\centi\metre} = \SI{3,2}{\centi\metre} = \SI{0,032}{\metre}$. Da $v = \lambda f$:
+\[
+  v = \lambda_1 f_1 = \SI{0,032}{\metre} \cdot \SI{120}{\hertz} = 3{,}2 \cdot 1{,}2 \cdot 10^{-2+2}\,\si{\metre\per\second} = 3{,}84\,\si{\metre\per\second} \approx \SI{3,8}{\metre\per\second}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Per emettere una nota più acuta i muscoli della laringe aumentano la tensione delle corde vocali del 44\%, senza cambiarne lunghezza e densità lineare. Quale frequenza fondamentale si ottiene?'''
+  calcolo = "f1 * math.sqrt(1.44)"
+  risultato = { valore = 144, unita = "Hz", cifre = 3 }
+  soluzione = '''Aumentare la tensione del 44\% vuol dire moltiplicarla per 1,44. Da $v = \sqrt{F/\mu}$, con $\mu$ invariata:
+\[
+  v' = \sqrt{\frac{1{,}44\,F}{\mu}} = \sqrt{1{,}44} \cdot v = 1{,}2\,v
+\]
+perché $1{,}2^2 = 1{,}44$. La lunghezza non cambia, quindi neanche $\lambda_1 = 2L$, e la frequenza $f_1 = v/(2L)$ cresce dello stesso fattore della velocità:
+\[
+  f_1' = 1{,}2\, f_1 = 1{,}2 \cdot \SI{120}{\hertz} = \SI{144}{\hertz}
+\]
+Con il 44\% di tensione in più la frequenza cresce solo del 20\%, per la radice quadrata.'''
+
+[[problema]]
+id = "ud4-vel-sangue"
+livello = 3
+testo = '''Il sangue ha densità {{rho}}, e il suono vi si propaga a {{v}}.'''
+dati.rho = { valore = 1060, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+dati.v = { valore = 1570, unita = "m/s" }
+dati.D = { valore = "2,5", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il modulo di compressibilità del sangue?'''
+  calcolo = "rho * v**2"
+  risultato = { valore = 2.6e9, unita = "\\pascal", cifre = 2 }
+  soluzione = '''Da $v = \sqrt{B/\rho}$, elevando al quadrato, $v^2 = B/\rho$, quindi $B = \rho v^2$. Il quadrato della velocità è
+\[
+  v^2 = (\SI{1,57e3}{\metre\per\second})^2 = 1{,}57^2 \cdot 10^{6}\,\si{\metre\squared\per\second\squared} \approx 2{,}46 \cdot 10^{6}\,\si{\metre\squared\per\second\squared}
+\]
+perché $1{,}57^2 = 1{,}57 + 0{,}57 \cdot 1{,}57 = 1{,}57 + 0{,}89 = 2{,}46$, dove $0{,}57 \cdot 1{,}57 = 0{,}57 + 0{,}57 \cdot 0{,}57 \approx 0{,}57 + 0{,}32 = 0{,}89$. Quindi
+\[
+  B = \rho v^2 = \SI{1,06e3}{\kilo\gram\per\metre\cubed} \cdot 2{,}46 \cdot 10^{6}\,\si{\metre\squared\per\second\squared} = 1{,}06 \cdot 2{,}46 \cdot 10^{3+6}\,\si{\pascal} \approx \SI{2,6e9}{\pascal}
+\]
+con $1{,}06 \cdot 2{,}46 = 2{,}46 + 0{,}15 = 2{,}61$. È un valore vicino a quello dell'acqua.'''
+
+  [[problema.parte]]
+  domanda = '''Quale aumento di pressione servirebbe per ridurre il volume di un campione di sangue dell'1\%? Confrontalo con la pressione atmosferica, \SI{1,0e5}{\pascal}.'''
+  calcolo = "rho * v**2 / 100"
+  risultato = { valore = 2.6e7, unita = "\\pascal", cifre = 2 }
+  rapido = '''\SI{2,6e7}{\pascal}, circa 260 volte la pressione atmosferica'''
+  soluzione = '''Dalla definizione $B = \Delta p/(\Delta V/V)$, con $\Delta V/V = 1/100$:
+\[
+  \Delta p = B \cdot \frac{\Delta V}{V} = \frac{\SI{2,6e9}{\pascal}}{100} = \SI{2,6e7}{\pascal}
+\]
+Rispetto alla pressione atmosferica:
+\[
+  \frac{\SI{2,6e7}{\pascal}}{\SI{1,0e5}{\pascal}} = 2{,}6 \cdot 10^{7-5} = 260
+\]
+Servirebbero circa 260 atmosfere per comprimere il sangue di un solo centesimo: per questo nella UD3 i liquidi si trattano come incomprimibili.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto tempo impiega un impulso ultrasonoro ad attraversare un'aorta di diametro {{D}} piena di sangue?'''
+  calcolo = "(D * 1e-2) / v * 1e6"
+  risultato = { valore = 16, unita = "\\micro\\second", cifre = 2 }
+  soluzione = '''Con $D = \SI{2,5}{\centi\metre} = \SI{2,5e-2}{\metre}$:
+\[
+  t = \frac{D}{v} = \frac{\SI{2,5e-2}{\metre}}{\SI{1,57e3}{\metre\per\second}} = \frac{2{,}5}{1{,}57} \cdot 10^{-2-3}\,\si{\second} \approx 1{,}6 \cdot 10^{-5}\,\si{\second} = \SI{16}{\micro\second}
+\]
+perché $1{,}57 \cdot 1{,}6 \approx 2{,}5$. Sono tempi di questo ordine quelli che misura un ecografo.'''
+
+[[problema]]
+id = "ud4-int-sonda"
+livello = 1
+testo = '''Una sonda per la terapia a ultrasuoni eroga una potenza di {{P}}, distribuita in modo uniforme sulla sua superficie di {{S}}. Calcola l'intensità degli ultrasuoni sotto la sonda.'''
+dati.P = { valore = "2,0", unita = "W" }
+dati.S = { valore = "4,0", unita = "\\centi\\metre\\squared" }
+
+  [[problema.parte]]
+  calcolo = "P / (S * 1e-4)"
+  risultato = { valore = 5.0e3, unita = "W/m^2", cifre = 2 }
+  soluzione = '''Un centimetro quadrato è $(\SI{e-2}{\metre})^2 = \SI{e-4}{\metre\squared}$, quindi la superficie è $S = \SI{4,0e-4}{\metre\squared}$. L'intensità è la potenza divisa per la superficie:
+\[
+  I = \frac{P}{S} = \frac{\SI{2,0}{\watt}}{\SI{4,0e-4}{\metre\squared}} = \frac{2{,}0}{4{,}0} \cdot 10^{0-(-4)}\,\si{\watt\per\metre\squared} = 0{,}50 \cdot 10^{4}\,\si{\watt\per\metre\squared} = \SI{5,0e3}{\watt\per\metre\squared}
+\]
+In fisioterapia l'intensità si dà spesso in watt al centimetro quadrato: $\SI{2,0}{\watt}/\SI{4,0}{\centi\metre\squared} = \SI{0,50}{\watt\per\centi\metre\squared}$, lo stesso valore.'''
+
+[[problema]]
+id = "ud4-int-sala"
+livello = 1
+testo = '''Un piccolo altoparlante per gli annunci in una sala d'attesa emette una potenza sonora di {{P}} allo stesso modo in tutte le direzioni. Calcola l'intensità del suono a {{r}} dall'altoparlante.'''
+dati.P = { valore = "2,0", unita = "mW" }
+dati.r = { valore = "5,0", unita = "m" }
+
+  [[problema.parte]]
+  calcolo = "(P * 1e-3) / (4 * math.pi * r**2)"
+  risultato = { valore = 6.4e-6, unita = "W/m^2", cifre = 2 }
+  soluzione = '''La sorgente è isotropa: a \SI{5,0}{\metre} la potenza si distribuisce su una sfera di raggio $r = \SI{5,0}{\metre}$, di superficie
+\[
+  4\pi r^2 = 4 \cdot 3{,}14 \cdot (\SI{5,0}{\metre})^2 = 4 \cdot 3{,}14 \cdot \SI{25}{\metre\squared} = 100 \cdot 3{,}14\,\si{\metre\squared} = \SI{314}{\metre\squared}
+\]
+La potenza è $\SI{2,0}{\milli\watt} = \SI{2,0e-3}{\watt}$, quindi
+\[
+  I = \frac{P}{4\pi r^2} = \frac{\SI{2,0e-3}{\watt}}{\SI{3,14e2}{\metre\squared}} = \frac{2{,}0}{3{,}14} \cdot 10^{-3-2}\,\si{\watt\per\metre\squared} \approx 0{,}64 \cdot 10^{-5}\,\si{\watt\per\metre\squared} = \SI{6,4e-6}{\watt\per\metre\squared}
+\]
+perché $3{,}14 \cdot 0{,}64 \approx 2{,}0$.'''
+
+[[problema]]
+id = "ud4-int-triplo"
+livello = 1
+testo = '''In un ecografo si triplica l'ampiezza dell'onda emessa dalla sonda, senza cambiare la frequenza. Di che fattore cambia l'intensità degli ultrasuoni nel tessuto?'''
+
+  [[problema.parte]]
+  calcolo = "3**2"
+  risultato = { valore = 9, cifre = 1 }
+  soluzione = '''L'intensità è proporzionale al quadrato della frequenza e al quadrato dell'ampiezza, $I \propto f^2 A^2$. La frequenza non cambia e il mezzo è lo stesso, quindi conta solo l'ampiezza:
+\[
+  \frac{I'}{I} = \left(\frac{A'}{A}\right)^{2} = \left(\frac{3A}{A}\right)^{2} = 3^2 = 9
+\]
+L'intensità diventa 9 volte più grande, non 3.'''
+
+[[problema]]
+id = "ud4-int-quattro"
+livello = 1
+testo = '''A {{r1}} da una sorgente sonora piccola, che emette allo stesso modo in tutte le direzioni, l'intensità è {{I1}}. Calcola l'intensità a {{r2}} dalla sorgente.'''
+dati.r1 = { valore = "1,0", unita = "m" }
+dati.r2 = { valore = "4,0", unita = "m" }
+dati.I1 = { valore = "8,0e-3", unita = "W/m^2" }
+
+  [[problema.parte]]
+  calcolo = "I1 * (r1 / r2)**2"
+  risultato = { valore = 5.0e-4, unita = "W/m^2", cifre = 2 }
+  soluzione = '''Per la legge dell'inverso del quadrato, con una distanza 4 volte più grande l'intensità si divide per $4^2 = 16$:
+\[
+  I_2 = I_1 \left(\frac{r_1}{r_2}\right)^{2} = \SI{8,0e-3}{\watt\per\metre\squared} \cdot \left(\frac{1{,}0}{4{,}0}\right)^{2} = \frac{\SI{8,0e-3}{\watt\per\metre\squared}}{16} = 0{,}50 \cdot 10^{-3}\,\si{\watt\per\metre\squared} = \SI{5,0e-4}{\watt\per\metre\squared}
+\]'''
+
+[[problema]]
+id = "ud4-int-timpano"
+livello = 1
+testo = '''Chi ascolta musica ad alto volume riceve sull'orecchio un suono di intensità {{I}}. La membrana del timpano ha una superficie di circa {{S}}. Calcola la potenza sonora che arriva sul timpano.'''
+dati.I = { valore = "1,0e-4", unita = "W/m^2" }
+dati.S = { valore = "0,55", unita = "\\centi\\metre\\squared" }
+
+  [[problema.parte]]
+  calcolo = "I * S * 1e-4"
+  risultato = { valore = 5.5e-9, unita = "W", cifre = 2 }
+  soluzione = '''Dalla definizione $I = P/S$ si ricava la potenza, $P = I S$. La superficie in metri quadrati è $\SI{0,55}{\centi\metre\squared} = 0{,}55 \cdot \SI{e-4}{\metre\squared} = \SI{5,5e-5}{\metre\squared}$. Quindi
+\[
+  P = I S = \SI{1,0e-4}{\watt\per\metre\squared} \cdot \SI{5,5e-5}{\metre\squared} = 5{,}5 \cdot 10^{-4+(-5)}\,\si{\watt} = \SI{5,5e-9}{\watt}
+\]
+Pochi miliardesimi di watt: l'orecchio è un rivelatore molto sensibile.'''
+
+[[problema]]
+id = "ud4-int-rapporti"
+livello = 2
+testo = '''Su una corda tesa viaggia un'onda armonica di ampiezza {{A1}}, che trasporta una potenza di {{P}}.'''
+dati.P = { valore = "0,20", unita = "W" }
+dati.A1 = { valore = "2,0", unita = "mm" }
+dati.A2 = { valore = "3,0", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Sulla stessa corda e alla stessa frequenza si porta l'ampiezza a {{A2}}. Quanto vale la nuova potenza?'''
+  calcolo = "P * (A2 / A1)**2"
+  risultato = { valore = 0.45, unita = "W", cifre = 2 }
+  soluzione = '''La potenza è proporzionale al quadrato dell'ampiezza; la corda, e quindi la velocità dell'onda, e la frequenza non cambiano. Il rapporto delle ampiezze è $3{,}0/2{,}0 = 1{,}5$, quindi
+\[
+  P' = P \left(\frac{A_2}{A_1}\right)^{2} = \SI{0,20}{\watt} \cdot 1{,}5^2 = \SI{0,20}{\watt} \cdot 2{,}25 = \SI{0,45}{\watt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Con l'ampiezza di \SI{3,0}{\milli\metre} si raddoppia anche la frequenza. Quanto vale ora la potenza?'''
+  calcolo = "P * (A2 / A1)**2 * 2**2"
+  risultato = { valore = 1.8, unita = "W", cifre = 2 }
+  soluzione = '''La potenza è proporzionale anche al quadrato della frequenza. Raddoppiando la frequenza si moltiplica per $2^2 = 4$ la potenza del punto (a):
+\[
+  P'' = P' \cdot 2^2 = \SI{0,45}{\watt} \cdot 4 = \SI{1,8}{\watt}
+\]
+In tutto la potenza è diventata $2{,}25 \cdot 4 = 9$ volte quella iniziale.'''
+
+[[problema]]
+id = "ud4-int-allarme"
+livello = 2
+testo = '''Il cicalino d'allarme di un monitor emette una potenza sonora di {{P}}, allo stesso modo in tutte le direzioni.'''
+dati.P = { valore = "2,5", unita = "mW" }
+dati.r1 = { valore = "1,0", unita = "m" }
+dati.I2 = { valore = "8,0e-6", unita = "W/m^2" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità del suono a {{r1}} dal monitor?'''
+  calcolo = "(P * 1e-3) / (4 * math.pi * r1**2)"
+  risultato = { valore = 2.0e-4, unita = "W/m^2", cifre = 2 }
+  soluzione = '''A \SI{1,0}{\metre} la potenza si distribuisce su una sfera di superficie $4\pi r^2 = 4 \cdot 3{,}14 \cdot (\SI{1,0}{\metre})^2 \approx \SI{12,6}{\metre\squared}$. La potenza è $\SI{2,5}{\milli\watt} = \SI{2,5e-3}{\watt}$, quindi
+\[
+  I_1 = \frac{P}{4\pi r^2} = \frac{\SI{2,5e-3}{\watt}}{\SI{12,6}{\metre\squared}} = \frac{2{,}5}{12{,}6} \cdot 10^{-3}\,\si{\watt\per\metre\squared} \approx 0{,}20 \cdot 10^{-3}\,\si{\watt\per\metre\squared} = \SI{2,0e-4}{\watt\per\metre\squared}
+\]
+perché $12{,}6 \cdot 0{,}2 = 2{,}52 \approx 2{,}5$.'''
+
+  [[problema.parte]]
+  domanda = '''Un'infermiera si allontana dal monitor fino al punto in cui l'intensità è {{I2}}. A che distanza si trova?'''
+  calcolo = "r1 * math.sqrt((P * 1e-3) / (4 * math.pi * r1**2) / I2)"
+  risultato = { valore = 5.0, unita = "m", cifre = 2 }
+  soluzione = '''Il rapporto fra le due intensità è
+\[
+  \frac{I_1}{I_2} = \frac{\SI{2,0e-4}{\watt\per\metre\squared}}{\SI{8,0e-6}{\watt\per\metre\squared}} = \frac{2{,}0}{8{,}0} \cdot 10^{-4-(-6)} = 0{,}25 \cdot 10^{2} = 25
+\]
+Per la legge dell'inverso del quadrato $I_1/I_2 = (r_2/r_1)^2$, quindi $(r_2/r_1)^2 = 25$ e $r_2/r_1 = \sqrt{25} = 5$:
+\[
+  r_2 = 5\, r_1 = 5 \cdot \SI{1,0}{\metre} = \SI{5,0}{\metre}
+\]'''
+
+[[problema]]
+id = "ud4-int-terzo"
+livello = 2
+testo = '''Una sorgente sonora piccola emette allo stesso modo in tutte le direzioni, a frequenza fissata. A {{r1}} dalla sorgente l'onda ha ampiezza $A$. Ci si allontana fino al punto in cui l'ampiezza è $A/3$.'''
+dati.r1 = { valore = "3,0", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il rapporto fra l'intensità nel nuovo punto e quella a {{r1}}?'''
+  calcolo = "(1 / 3)**2"
+  risultato = { valore = 0.11, cifre = 2 }
+  soluzione = '''A frequenza fissata l'intensità è proporzionale al quadrato dell'ampiezza:
+\[
+  \frac{I_2}{I_1} = \left(\frac{A/3}{A}\right)^{2} = \left(\frac{1}{3}\right)^{2} = \frac{1}{9} \approx 0{,}11
+\]'''
+
+  [[problema.parte]]
+  domanda = '''A che distanza dalla sorgente si trova il nuovo punto?'''
+  calcolo = "r1 * math.sqrt(9)"
+  risultato = { valore = 9.0, unita = "m", cifre = 2 }
+  soluzione = '''Per la legge dell'inverso del quadrato $I_2/I_1 = (r_1/r_2)^2$. Dal punto (a) $(r_1/r_2)^2 = 1/9$, quindi $r_1/r_2 = 1/3$ e
+\[
+  r_2 = 3\, r_1 = 3 \cdot \SI{3,0}{\metre} = \SI{9,0}{\metre}
+\]
+L'ampiezza diminuisce come $1/r$: a distanza tripla è un terzo. L'intensità diminuisce come $1/r^2$: a distanza tripla è un nono.'''
+
+[[problema]]
+id = "ud4-int-seduta"
+livello = 2
+testo = '''In una seduta di fisioterapia si trattano i tessuti intorno al gomito con ultrasuoni di intensità {{I}}. La testina della sonda ha una superficie di {{S}}.'''
+dati.I = { valore = "1,5e4", unita = "W/m^2" }
+dati.S = { valore = "4,0", unita = "\\centi\\metre\\squared" }
+dati.t = { valore = "5,0", unita = "\\minute" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la potenza erogata dalla sonda?'''
+  calcolo = "I * S * 1e-4"
+  risultato = { valore = 6.0, unita = "W", cifre = 2 }
+  soluzione = '''La superficie è $\SI{4,0}{\centi\metre\squared} = \SI{4,0e-4}{\metre\squared}$. Da $I = P/S$:
+\[
+  P = I S = \SI{1,5e4}{\watt\per\metre\squared} \cdot \SI{4,0e-4}{\metre\squared} = 1{,}5 \cdot 4{,}0 \cdot 10^{4-4}\,\si{\watt} = \SI{6,0}{\watt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Il trattamento dura {{t}}. Quanta energia viene erogata in tutto?'''
+  calcolo = "I * S * 1e-4 * t * 60"
+  risultato = { valore = 1.8e3, unita = "J", cifre = 2 }
+  soluzione = '''La potenza è l'energia erogata in un secondo, quindi l'energia è la potenza per il tempo, $E = P t$ (UD2). Il tempo in secondi è $t = 5{,}0 \cdot \SI{60}{\second} = \SI{300}{\second}$:
+\[
+  E = P t = \SI{6,0}{\watt} \cdot \SI{300}{\second} = \SI{1800}{\joule} = \SI{1,8e3}{\joule}
+\]'''
+
+[[problema]]
+id = "ud4-int-annunci"
+livello = 2
+testo = '''Nel sistema di annunci di un pronto soccorso ci sono due altoparlanti diversi, montati uno accanto all'altro, che si possono trattare come sorgenti isotrope: il primo emette una potenza sonora di {{PA}}, il secondo di {{PB}}. La soglia di udibilità è $I_0 = \SI{e-12}{\watt\per\metre\squared}$; usa $\log_{10} 2 \approx 0{,}3$.'''
+dati.PA = { valore = 10, unita = "mW" }
+dati.PB = { valore = 40, unita = "mW" }
+dati.r = { valore = "1,0", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità a {{r}} dal primo altoparlante?'''
+  calcolo = "(PA * 1e-3) / (4 * math.pi * r**2)"
+  risultato = { valore = 8.0e-4, unita = "W/m^2", cifre = 2 }
+  soluzione = '''La superficie della sfera di raggio \SI{1,0}{\metre} è $4\pi r^2 = 4 \cdot 3{,}14 \cdot \SI{1,0}{\metre\squared} \approx \SI{12,6}{\metre\squared}$, e la potenza è $\SI{10}{\milli\watt} = \SI{1,0e-2}{\watt}$:
+\[
+  I_A = \frac{P_A}{4\pi r^2} = \frac{\SI{1,0e-2}{\watt}}{\SI{12,6}{\metre\squared}} = \frac{1{,}0}{12{,}6} \cdot 10^{-2}\,\si{\watt\per\metre\squared} \approx 0{,}080 \cdot 10^{-2}\,\si{\watt\per\metre\squared} = \SI{8,0e-4}{\watt\per\metre\squared}
+\]
+perché $12{,}6 \cdot 0{,}08 \approx 1{,}0$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il livello sonoro a {{r}} dal primo altoparlante?'''
+  calcolo = "10 * math.log10((PA * 1e-3) / (4 * math.pi * r**2) / I0)"
+  risultato = { valore = 89, unita = "\\deci\\bel", cifre = 2 }
+  soluzione = '''Con l'intensità del punto (a):
+\[
+  \beta = 10 \log_{10}\frac{\SI{8,0e-4}{\watt\per\metre\squared}}{\SI{e-12}{\watt\per\metre\squared}} = 10 \log_{10}\left(8 \cdot 10^{-4-(-12)}\right) = 10\,(\log_{10} 8 + 8)
+\]
+Con $\log_{10} 8 = \log_{10} 2^3 = 3\log_{10} 2 \approx 0{,}9$:
+\[
+  \beta \approx 10 \cdot (0{,}9 + 8)\,\si{\deci\bel} = \SI{89}{\deci\bel}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Si accende anche il secondo altoparlante, insieme al primo. Quanto vale ora il livello sonoro allo stesso punto, a {{r}} da tutti e due?'''
+  calcolo = "10 * math.log10(((PA + PB) * 1e-3) / (4 * math.pi * r**2) / I0)"
+  risultato = { valore = 96, unita = "\\deci\\bel", cifre = 2 }
+  soluzione = '''Alla stessa distanza l'intensità è proporzionale alla potenza: il secondo altoparlante, quattro volte più potente, dà $I_B = 4 I_A$. I due suoni sono indipendenti e si sommano le intensità:
+\[
+  I = I_A + I_B = 5\,I_A = 5 \cdot \SI{8,0e-4}{\watt\per\metre\squared} = \SI{4,0e-3}{\watt\per\metre\squared}
+\]
+Un'intensità 5 volte più grande aggiunge al livello del punto (b) $10\log_{10} 5 = 10\,(1 - \log_{10} 2) \approx 10 \cdot 0{,}7 = \SI{7}{\deci\bel}$:
+\[
+  \beta' \approx \SI{89}{\deci\bel} + \SI{7}{\deci\bel} = \SI{96}{\deci\bel}
+\]
+Il conto diretto dà lo stesso: $10\log_{10}(4 \cdot 10^{9}) = 10\,(0{,}6 + 9) = \SI{96}{\deci\bel}$. Si sommano le intensità, non i livelli: quintuplicare l'intensità aggiunge solo \SI{7}{\deci\bel}.'''
+
+[[problema]]
+id = "ud4-int-hifu"
+livello = 3
+testo = '''Negli ultrasuoni focalizzati ad alta intensità (HIFU) un trasduttore concentra il fascio in una piccola zona all'interno del corpo, dove il calore distrugge il tessuto, per esempio un fibroma dell'utero. Il trasduttore eroga {{P}} da una superficie di {{S1}}, e tutta la potenza arriva su una zona focale di {{S2}}.'''
+dati.P = { valore = 50, unita = "W" }
+dati.S1 = { valore = 20, unita = "\\centi\\metre\\squared" }
+dati.S2 = { valore = "2,0", unita = "\\milli\\metre\\squared" }
+dati.D = { valore = "1,0e8", unita = "\\joule\\per\\metre\\squared" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità sulla superficie del trasduttore?'''
+  calcolo = "P / (S1 * 1e-4)"
+  risultato = { valore = 2.5e4, unita = "W/m^2", cifre = 2 }
+  soluzione = '''La superficie è $\SI{20}{\centi\metre\squared} = 20 \cdot \SI{e-4}{\metre\squared} = \SI{2,0e-3}{\metre\squared}$:
+\[
+  I_1 = \frac{P}{S_1} = \frac{\SI{50}{\watt}}{\SI{2,0e-3}{\metre\squared}} = \frac{50}{2{,}0} \cdot 10^{3}\,\si{\watt\per\metre\squared} = 25 \cdot 10^{3}\,\si{\watt\per\metre\squared} = \SI{2,5e4}{\watt\per\metre\squared}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità nella zona focale? Di che fattore è più grande di quella sul trasduttore?'''
+  calcolo = "P / (S2 * 1e-6)"
+  risultato = { valore = 2.5e7, unita = "W/m^2", cifre = 2 }
+  rapido = '''\SI{2,5e7}{\watt\per\metre\squared}; 1000 volte più grande'''
+  soluzione = '''Un millimetro quadrato è $(\SI{e-3}{\metre})^2 = \SI{e-6}{\metre\squared}$, quindi $S_2 = \SI{2,0e-6}{\metre\squared}$. La potenza è la stessa:
+\[
+  I_2 = \frac{P}{S_2} = \frac{\SI{50}{\watt}}{\SI{2,0e-6}{\metre\squared}} = 25 \cdot 10^{6}\,\si{\watt\per\metre\squared} = \SI{2,5e7}{\watt\per\metre\squared}
+\]
+A parità di potenza l'intensità è inversamente proporzionale alla superficie. Il fattore è
+\[
+  \frac{I_2}{I_1} = \frac{S_1}{S_2} = \frac{\SI{2,0e-3}{\metre\squared}}{\SI{2,0e-6}{\metre\squared}} = 10^{-3-(-6)} = 10^{3} = 1000
+\]
+Sulla pelle, dove il fascio è largo, l'intensità è mille volte più bassa che nel fuoco.'''
+
+  [[problema.parte]]
+  domanda = '''Il tessuto del fibroma si distrugge quando riceve circa {{D}}. Quanto deve durare l'esposizione? Quanta energia per metro quadrato riceve nello stesso tempo la pelle sopra il trasduttore?'''
+  calcolo = "D / (P / (S2 * 1e-6))"
+  risultato = { valore = 4.0, unita = "s", cifre = 2 }
+  rapido = '''\SI{4,0}{\second}; la pelle riceve \SI{1,0e5}{\joule\per\metre\squared}, mille volte meno'''
+  soluzione = '''L'intensità è l'energia che arriva in un secondo su un metro quadrato. Nel fuoco, con l'intensità del punto (b), il tessuto riceve \SI{2,5e7}{\joule\per\metre\squared} ogni secondo; per arrivare a \SI{1,0e8}{\joule\per\metre\squared} serve il tempo
+\[
+  t = \frac{\SI{1,0e8}{\joule\per\metre\squared}}{\SI{2,5e7}{\watt\per\metre\squared}} = \frac{1{,}0}{2{,}5} \cdot 10^{8-7}\,\si{\second} = 0{,}40 \cdot 10\,\si{\second} = \SI{4,0}{\second}
+\]
+Nello stesso tempo la pelle, con l'intensità del punto (a), riceve
+\[
+  \SI{2,5e4}{\watt\per\metre\squared} \cdot \SI{4,0}{\second} = \SI{1,0e5}{\joule\per\metre\squared}
+\]
+mille volte meno del fuoco, come il rapporto delle intensità: il tessuto si distrugge solo nella zona da trattare, mentre la pelle resta quasi fredda.'''
+
+[[problema]]
+id = "ud4-int-testina"
+livello = 3
+testo = '''Un fisioterapista usa una sonda per ultrasuoni con una testina di {{S}}, che può lavorare a {{f1}} o a {{f2}}. Imposta una potenza di {{P}}. Nei tessuti molli il suono viaggia a {{v}}.'''
+dati.S = { valore = "5,0", unita = "\\centi\\metre\\squared" }
+dati.P = { valore = "4,0", unita = "W" }
+dati.f1 = { valore = 1, unita = "MHz" }
+dati.f2 = { valore = 3, unita = "MHz" }
+dati.v = { valore = 1540, unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità sotto la testina, in \si{\watt\per\metre\squared} e in \si{\watt\per\centi\metre\squared}?'''
+  calcolo = "P / (S * 1e-4)"
+  risultato = { valore = 8.0e3, unita = "W/m^2", cifre = 2 }
+  rapido = '''\SI{8,0e3}{\watt\per\metre\squared} $= \SI{0,80}{\watt\per\centi\metre\squared}$'''
+  soluzione = '''La superficie è $\SI{5,0}{\centi\metre\squared} = \SI{5,0e-4}{\metre\squared}$:
+\[
+  I = \frac{P}{S} = \frac{\SI{4,0}{\watt}}{\SI{5,0e-4}{\metre\squared}} = \frac{4{,}0}{5{,}0} \cdot 10^{4}\,\si{\watt\per\metre\squared} = 0{,}80 \cdot 10^{4}\,\si{\watt\per\metre\squared} = \SI{8,0e3}{\watt\per\metre\squared}
+\]
+In watt al centimetro quadrato: $\SI{4,0}{\watt}/\SI{5,0}{\centi\metre\squared} = \SI{0,80}{\watt\per\centi\metre\squared}$. Infatti $\SI{1}{\watt\per\centi\metre\squared} = \SI{1}{\watt}/\SI{e-4}{\metre\squared} = \SI{e4}{\watt\per\metre\squared}$.'''
+
+  [[problema.parte]]
+  domanda = '''Il fisioterapista passa da \SI{1}{\mega\hertz} a \SI{3}{\mega\hertz} e vuole la stessa intensità. Per quale fattore va moltiplicata l'ampiezza dell'onda?'''
+  calcolo = "f1 / f2"
+  risultato = { valore = 0.33, cifre = 2 }
+  soluzione = '''L'intensità è proporzionale a $f^2 A^2$, cioè al quadrato del prodotto $fA$. Perché resti la stessa, il prodotto $fA$ deve restare lo stesso: $f_1 A_1 = f_2 A_2$. Quindi
+\[
+  \frac{A_2}{A_1} = \frac{f_1}{f_2} = \frac{\SI{1}{\mega\hertz}}{\SI{3}{\mega\hertz}} = \frac{1}{3} \approx 0{,}33
+\]
+Controllo: $(f_2/f_1)^2 (A_2/A_1)^2 = 3^2 \cdot (1/3)^2 = 9 \cdot 1/9 = 1$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la lunghezza d'onda nei tessuti a \SI{3}{\mega\hertz}? Per un tendine superficiale conviene \SI{1}{\mega\hertz} o \SI{3}{\mega\hertz}?'''
+  calcolo = "v / (f2 * 1e6) * 1e3"
+  risultato = { valore = 0.51, unita = "mm", cifre = 2 }
+  rapido = '''\SI{0,51}{\milli\metre}; \SI{3}{\mega\hertz}, perché è assorbita di più e scalda vicino alla superficie'''
+  soluzione = '''Da $v = \lambda f$, con $f = \SI{3e6}{\hertz}$:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{1540}{\metre\per\second}}{\SI{3e6}{\hertz}} = \frac{1540}{3} \cdot 10^{-6}\,\si{\metre} \approx 513 \cdot 10^{-6}\,\si{\metre} = 0{,}513 \cdot 10^{-3}\,\si{\metre} \approx \SI{0,51}{\milli\metre}
+\]
+I tessuti assorbono gli ultrasuoni tanto più quanto più la frequenza è alta. A \SI{3}{\mega\hertz} l'energia viene ceduta nei primi centimetri, e scalda il tendine superficiale; a \SI{1}{\mega\hertz} il fascio arriva più in profondità, e si usa per i muscoli profondi. Per un tendine superficiale conviene \SI{3}{\mega\hertz}. In terapia non si cerca un'immagine, quindi la lunghezza d'onda non decide la scelta: conta dove viene assorbita l'energia, che nel tessuto diventa calore.'''
+
+[[problema]]
+id = "ud4-int-corda"
+livello = 3
+testo = '''Una corda di densità lineare {{mu}} è tesa con una forza {{F}}. Vi si propaga un'onda armonica di frequenza {{f}} e ampiezza {{A}}. Usa $\pi^2 \approx 9{,}86$.'''
+dati.mu = { valore = "4,0", unita = "\\gram\\per\\metre" }
+dati.F = { valore = 40, unita = "\\newton" }
+dati.f = { valore = 50, unita = "Hz" }
+dati.A = { valore = "4,0", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Calcola la velocità dell'onda e la potenza trasportata.'''
+  calcolo = "0.5 * (mu * 1e-3) * (2 * math.pi * f)**2 * (A * 1e-3)**2 * math.sqrt(F / (mu * 1e-3))"
+  risultato = { valore = 0.32, unita = "W", cifre = 2 }
+  rapido = '''$v = \SI{100}{\metre\per\second}$; $P \approx \SI{0,32}{\watt}$'''
+  soluzione = '''La densità lineare è $\mu = \SI{4,0}{\gram\per\metre} = \SI{4,0e-3}{\kilo\gram\per\metre}$. La velocità dell'onda è
+\[
+  v = \sqrt{\frac{F}{\mu}} = \sqrt{\frac{\SI{40}{\newton}}{\SI{4,0e-3}{\kilo\gram\per\metre}}} = \sqrt{10 \cdot 10^{3}}\,\si{\metre\per\second} = \sqrt{10^{4}}\,\si{\metre\per\second} = \SI{100}{\metre\per\second}
+\]
+La pulsazione è $\omega = 2\pi f = 2\pi \cdot \SI{50}{\hertz} = 100\pi\,\si{\radian\per\second}$, quindi $\omega^2 = 10^{4}\pi^2 \approx 9{,}86 \cdot 10^{4}\,\si{\radian\squared\per\second\squared}$. L'ampiezza è $A = \SI{4,0e-3}{\metre}$, e $A^2 = \SI{16e-6}{\metre\squared} = \SI{1,6e-5}{\metre\squared}$. La potenza:
+\[
+  P = \frac{1}{2}\,\mu\,\omega^2 A^2 v = \frac{1}{2} \cdot \num{4,0e-3} \cdot \num{9,86e4} \cdot \num{1,6e-5} \cdot 100\,\si{\watt}
+\]
+A pezzi: $\frac{1}{2} \cdot \num{4,0e-3} = \num{2,0e-3}$; $\num{2,0e-3} \cdot \num{9,86e4} = 19{,}7 \cdot 10^{-3+4} = 197$; $197 \cdot \num{1,6e-5} \approx 315 \cdot 10^{-5} = \num{3,15e-3}$; per 100 fa $P \approx \SI{0,32}{\watt}$.'''
+
+  [[problema.parte]]
+  domanda = '''Alla stessa frequenza e sulla stessa corda, quale ampiezza servirebbe per trasportare una potenza 4 volte più grande?'''
+  calcolo = "A * math.sqrt(4)"
+  risultato = { valore = 8.0, unita = "mm", cifre = 2 }
+  soluzione = '''La potenza è proporzionale ad $A^2$, quindi l'ampiezza è proporzionale alla radice della potenza. Per una potenza 4 volte più grande l'ampiezza deve diventare $\sqrt{4} = 2$ volte più grande:
+\[
+  A' = 2A = 2 \cdot \SI{4,0}{\milli\metre} = \SI{8,0}{\milli\metre}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Si torna all'ampiezza di \SI{4,0}{\milli\metre} e si quadruplica la tensione della corda, senza cambiare la frequenza. Quanto vale ora la potenza?'''
+  calcolo = "2 * 0.5 * (mu * 1e-3) * (2 * math.pi * f)**2 * (A * 1e-3)**2 * math.sqrt(F / (mu * 1e-3))"
+  risultato = { valore = 0.63, unita = "W", cifre = 2 }
+  soluzione = '''Con la tensione quadruplicata la velocità diventa $\sqrt{4} = 2$ volte più grande:
+\[
+  v' = \sqrt{\frac{4F}{\mu}} = 2v = \SI{200}{\metre\per\second}
+\]
+Nella formula $P = \frac{1}{2}\mu\,\omega^2 A^2 v$ cambia solo $v$: $\mu$, $\omega$ e $A$ restano gli stessi. La potenza è proporzionale a $v$ e raddoppia:
+\[
+  P' = 2P \approx 2 \cdot \SI{0,315}{\watt} \approx \SI{0,63}{\watt}
+\]
+Raddoppia la potenza, non quadruplica: la tensione entra sotto radice nella velocità.'''
+
+[[problema]]
+id = "ud4-int-neonatale"
+livello = 3
+testo = '''In una terapia intensiva neonatale un monitor, che si può trattare come una sorgente sonora isotropa, è a {{r1}} da un'incubatrice. Lì il suono del monitor ha intensità {{I1}}. Per le incubatrici si raccomanda di non superare \SI{45}{\deci\bel}. La soglia di udibilità è $I_0 = \SI{e-12}{\watt\per\metre\squared}$.'''
+dati.r1 = { valore = "2,0", unita = "m" }
+dati.r2 = { valore = 20, unita = "m" }
+dati.I1 = { valore = "1,0e-6", unita = "W/m^2" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la potenza sonora emessa dal monitor?'''
+  calcolo = "I1 * 4 * math.pi * r1**2"
+  risultato = { valore = 5.0e-5, unita = "W", cifre = 2 }
+  soluzione = '''Da $I = P/(4\pi r^2)$ si ricava $P = I \cdot 4\pi r^2$. La superficie della sfera di raggio \SI{2,0}{\metre} è $4\pi r^2 = 4 \cdot 3{,}14 \cdot \SI{4,0}{\metre\squared} = 16 \cdot 3{,}14\,\si{\metre\squared} \approx \SI{50}{\metre\squared}$:
+\[
+  P = I_1 \cdot 4\pi r_1^2 = \SI{1,0e-6}{\watt\per\metre\squared} \cdot \SI{50}{\metre\squared} = \SI{50e-6}{\watt} = \SI{5,0e-5}{\watt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il livello sonoro all'incubatrice? Rispetta la raccomandazione?'''
+  calcolo = "10 * math.log10(I1 / I0)"
+  risultato = { valore = 60, unita = "\\deci\\bel", cifre = 2 }
+  rapido = '''\SI{60}{\deci\bel}; no, supera di \SI{15}{\deci\bel} il limite'''
+  soluzione = '''Dalla definizione del livello di intensità sonora:
+\[
+  \beta = 10 \log_{10}\frac{I_1}{I_0} = 10 \log_{10}\frac{10^{-6}}{10^{-12}} = 10 \log_{10} 10^{-6-(-12)} = 10 \cdot 6\,\si{\deci\bel} = \SI{60}{\deci\bel}
+\]
+È \SI{15}{\deci\bel} sopra il limite raccomandato: troppo.'''
+
+  [[problema.parte]]
+  domanda = '''Gli allarmi sonori vengono spostati sulla centrale di monitoraggio del reparto, a {{r2}} dall'incubatrice, con lo stesso volume. Quanto valgono ora l'intensità e il livello sonoro all'incubatrice? Di che fattore si riduce l'ampiezza dell'onda?'''
+  calcolo = "10 * math.log10(I1 * (r1 / r2)**2 / I0)"
+  risultato = { valore = 40, unita = "\\deci\\bel", cifre = 2 }
+  rapido = '''\SI{1,0e-8}{\watt\per\metre\squared}; \SI{40}{\deci\bel}, sotto il limite; ampiezza divisa per 10'''
+  soluzione = '''La distanza diventa $20/2{,}0 = 10$ volte più grande, quindi l'intensità si divide per $10^2 = 100$:
+\[
+  I_2 = I_1 \left(\frac{r_1}{r_2}\right)^{2} = \frac{\SI{1,0e-6}{\watt\per\metre\squared}}{100} = \SI{1,0e-8}{\watt\per\metre\squared}
+\]
+Il livello si ottiene più in fretta dalla differenza: dividere l'intensità per 100 toglie $10\log_{10} 100 = \SI{20}{\deci\bel}$, quindi
+\[
+  \beta_2 = \SI{60}{\deci\bel} - \SI{20}{\deci\bel} = \SI{40}{\deci\bel}
+\]
+sotto il limite raccomandato. A frequenza fissata l'ampiezza va come la radice dell'intensità: con un'intensità 100 volte più piccola l'ampiezza è $\sqrt{100} = 10$ volte più piccola. Per questo nei reparti neonatali gli allarmi si fanno suonare lontano dalle incubatrici.'''
+
+[[problema]]
+id = "ud4-int-pulsata"
+livello = 3
+testo = '''Nella terapia a ultrasuoni in modalità pulsata la sonda emette impulsi da {{tau}} ogni {{T}}: per il resto del tempo è spenta, e i tessuti si scaldano meno. Durante ogni impulso l'intensità sotto la testina, di superficie {{S}}, è {{I}}.'''
+dati.tau = { valore = "2,0", unita = "\\milli\\second" }
+dati.T = { valore = 10, unita = "\\milli\\second" }
+dati.S = { valore = "4,0", unita = "\\centi\\metre\\squared" }
+dati.I = { valore = "2,0e4", unita = "W/m^2" }
+dati.E = { valore = 960, unita = "J" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la potenza della sonda durante un impulso?'''
+  calcolo = "I * S * 1e-4"
+  risultato = { valore = 8.0, unita = "W", cifre = 2 }
+  soluzione = '''La superficie è $\SI{4,0}{\centi\metre\squared} = \SI{4,0e-4}{\metre\squared}$. Da $I = P/S$:
+\[
+  P = I S = \SI{2,0e4}{\watt\per\metre\squared} \cdot \SI{4,0e-4}{\metre\squared} = 2{,}0 \cdot 4{,}0 \cdot 10^{4-4}\,\si{\watt} = \SI{8,0}{\watt}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale la potenza media, cioè l'energia erogata in un secondo, tenendo conto delle pause?'''
+  calcolo = "I * S * 1e-4 * tau / T"
+  risultato = { valore = 1.6, unita = "W", cifre = 2 }
+  soluzione = '''In ogni impulso, che dura $\tau = \SI{2,0}{\milli\second}$, la sonda eroga l'energia
+\[
+  E_1 = P\,\tau = \SI{8,0}{\watt} \cdot \SI{2,0e-3}{\second} = \SI{1,6e-2}{\joule}
+\]
+e un impulso parte ogni $T = \SI{10}{\milli\second} = \SI{1,0e-2}{\second}$ (qui $T$ è il tempo fra due impulsi, non il periodo degli ultrasuoni). La potenza media è l'energia di un ciclo divisa per la durata del ciclo:
+\[
+  P_\text{media} = \frac{E_1}{T} = \frac{\SI{1,6e-2}{\joule}}{\SI{1,0e-2}{\second}} = \SI{1,6}{\watt}
+\]
+La sonda è accesa per $2/10 = 20\%$ del tempo, e la potenza media è il 20\% di quella dell'impulso: $0{,}20 \cdot \SI{8,0}{\watt} = \SI{1,6}{\watt}$.'''
+
+  [[problema.parte]]
+  domanda = '''Il protocollo prevede di erogare in tutto {{E}}. Quanti minuti deve durare il trattamento?'''
+  calcolo = "E / (I * S * 1e-4 * tau / T) / 60"
+  risultato = { valore = 10, unita = "\\minute", cifre = 2 }
+  soluzione = '''Per il conto dell'energia totale conta la potenza media del punto (b). Da $E = P_\text{media}\, t$:
+\[
+  t = \frac{E}{P_\text{media}} = \frac{\SI{960}{\joule}}{\SI{1,6}{\watt}} = \SI{600}{\second} = \frac{600}{60}\,\si{\minute} = \SI{10}{\minute}
+\]
+dove $960/1{,}6 = 9600/16 = 600$. Con la potenza dell'impulso, \SI{8,0}{\watt}, si troverebbero \SI{120}{\second}: un tempo cinque volte troppo corto, perché la sonda per l'80\% del tempo è spenta.'''
+
+[[problema]]
+id = "ud4-suono-tessuto"
+livello = 1
+testo = '''Un impulso ultrasonoro attraversa {{d}} di tessuto molle, dove il suono viaggia a \SI{1540}{\metre\per\second}. Quanto tempo impiega?'''
+dati.d = { valore = 10, unita = "cm" }
+
+  [[problema.parte]]
+  calcolo = "d * 1e-2 / v_tessuto"
+  risultato = { valore = 6.5e-5, unita = "s", cifre = 2 }
+  soluzione = '''La distanza in metri è $\SI{10}{\centi\metre} = \SI{0,10}{\metre} = \SI{e-1}{\metre}$, e la velocità è $\SI{1540}{\metre\per\second} = \SI{1,54e3}{\metre\per\second}$. Il tempo è la distanza divisa per la velocità:
+\[
+  t = \frac{d}{v} = \frac{\SI{e-1}{\metre}}{\SI{1,54e3}{\metre\per\second}} = \frac{1}{1{,}54} \cdot 10^{-1-3}\,\si{\second} \approx 0{,}65 \cdot 10^{-4}\,\si{\second} = \SI{6,5e-5}{\second}
+\]
+Il quoziente $1/1{,}54 \approx 0{,}65$ si controlla moltiplicando: $1{,}54 \cdot 0{,}65 = 1{,}001$. Sono \SI{65}{\micro\second}: per questo un ecografo può raccogliere migliaia di echi al secondo.'''
+
+[[problema]]
+id = "ud4-suono-osso"
+livello = 1
+testo = '''Un impulso ultrasonoro attraversa {{d}} di osso corticale, dove il suono viaggia a {{v}}. Quanto tempo impiega?'''
+dati.d = { valore = "6,0", unita = "mm" }
+dati.v = { valore = 3000, unita = "m/s" }
+
+  [[problema.parte]]
+  calcolo = "d * 1e-3 / v * 1e6"
+  risultato = { valore = 2.0, unita = "\\micro\\second", cifre = 2 }
+  soluzione = '''Lo spessore in metri è $\SI{6,0}{\milli\metre} = \SI{6,0e-3}{\metre}$, e la velocità è $\SI{3000}{\metre\per\second} = \SI{3,0e3}{\metre\per\second}$. Il tempo è la distanza divisa per la velocità:
+\[
+  t = \frac{d}{v} = \frac{\SI{6,0e-3}{\metre}}{\SI{3,0e3}{\metre\per\second}} = \frac{6{,}0}{3{,}0} \cdot 10^{-3-3}\,\si{\second} = \SI{2,0e-6}{\second} = \SI{2,0}{\micro\second}
+\]
+Nei tessuti molli lo stesso spessore richiederebbe circa il doppio, $6{,}0 \cdot 10^{-3}/1540\,\si{\second} \approx \SI{3,9}{\micro\second}$: nell'osso il suono è molto più veloce.'''
+
+[[problema]]
+id = "ud4-db-concerto"
+livello = 1
+testo = '''Sotto il palco di un concerto l'intensità del suono è {{I}}. Calcola il livello di intensità sonora.'''
+dati.I = { valore = "0,10", unita = "W/m^2" }
+
+  [[problema.parte]]
+  calcolo = "10 * math.log10(I / I0)"
+  risultato = { valore = 110, unita = "\\deci\\bel", cifre = 3 }
+  soluzione = '''L'intensità in potenza di 10 è $\SI{0,10}{\watt\per\metre\squared} = \SI{e-1}{\watt\per\metre\squared}$. Dalla definizione, con $I_0 = \SI{e-12}{\watt\per\metre\squared}$:
+\[
+  \beta = 10 \log_{10}\frac{I}{I_0} = 10 \log_{10}\frac{10^{-1}}{10^{-12}} = 10 \log_{10} 10^{-1-(-12)} = 10 \log_{10} 10^{11} = 10 \cdot 11\,\si{\deci\bel} = \SI{110}{\deci\bel}
+\]
+Sono solo \SI{10}{\deci\bel} sotto la soglia del dolore, e ben oltre gli \SI{85}{\deci\bel} che a lungo andare danneggiano la coclea.'''
+
+[[problema]]
+id = "ud4-db-sala-macchine"
+livello = 1
+testo = '''Nella sala macchine di un ospedale, accanto ai gruppi elettrogeni, il livello sonoro è {{b}}. Quanto vale l'intensità del suono?'''
+dati.b = { valore = 105, unita = "\\deci\\bel" }
+
+  [[problema.parte]]
+  calcolo = "I0 * 10**(b / 10)"
+  risultato = { valore = 3.2e-2, unita = "W/m^2", cifre = 2 }
+  soluzione = '''Dalla forma inversa della definizione, $I = I_0 \cdot 10^{\beta/10}$, con $\beta/10 = 105/10 = 10{,}5$. Si spezza l'esponente in una parte intera e mezza: $10^{10{,}5} = 10^{10} \cdot 10^{0{,}5}$, e $10^{0{,}5} = \sqrt{10} \approx 3{,}2$. Quindi
+\[
+  I = \SI{e-12}{\watt\per\metre\squared} \cdot 10^{10} \cdot 10^{0{,}5} \approx 3{,}2 \cdot 10^{-12+10}\,\si{\watt\per\metre\squared} = \SI{3,2e-2}{\watt\per\metre\squared}
+\]
+È cento volte l'intensità del limite per l'esposizione al lavoro (\SI{85}{\deci\bel}, circa \SI{3e-4}{\watt\per\metre\squared}): chi entra nella sala deve portare le cuffie.'''
+
+[[problema]]
+id = "ud4-eco-profondita"
+livello = 1
+testo = '''In un'ecografia dell'addome l'eco della parete posteriore della colecisti torna alla sonda {{t}} dopo l'emissione dell'impulso. Con la velocità media dei tessuti molli, \SI{1540}{\metre\per\second}, a che profondità si trova la parete?'''
+dati.t = { valore = 65, unita = "\\micro\\second" }
+
+  [[problema.parte]]
+  calcolo = "v_tessuto * t * 1e-6 / 2 * 100"
+  risultato = { valore = 5.0, unita = "cm", cifre = 2 }
+  soluzione = '''Il tempo in secondi è $t = \SI{65}{\micro\second} = \SI{6,5e-5}{\second}$. In questo tempo l'impulso va alla parete e torna: percorre $2d$. La distanza percorsa è
+\[
+  v\,t = \SI{1540}{\metre\per\second} \cdot \SI{6,5e-5}{\second} = 1540 \cdot 65 \cdot 10^{-6}\,\si{\metre} = 100\,100 \cdot 10^{-6}\,\si{\metre} \approx \SI{0,100}{\metre}
+\]
+dove $1540 \cdot 65 = 1540 \cdot 60 + 1540 \cdot 5 = 92\,400 + 7700 = 100\,100$. La profondità è la metà:
+\[
+  d = \frac{v\,t}{2} = \frac{\SI{0,100}{\metre}}{2} = \SI{0,050}{\metre} = \SI{5,0}{\centi\metre}
+\]'''
+
+[[problema]]
+id = "ud4-db-altoparlante"
+livello = 2
+testo = '''A {{r1}} da un altoparlante, che si può trattare come una sorgente piccola e isotropa, l'intensità del suono è {{I1}}. Un ascoltatore si sposta a {{r2}} dall'altoparlante.'''
+dati.r1 = { valore = "1,0", unita = "m" }
+dati.I1 = { valore = "1,0e-2", unita = "W/m^2" }
+dati.r2 = { valore = "5,0", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità nella nuova posizione?'''
+  calcolo = "I1 * (r1 / r2)**2"
+  risultato = { valore = 4.0e-4, unita = "W/m^2", cifre = 2 }
+  soluzione = '''La distanza diventa cinque volte più grande. Per la legge dell'inverso del quadrato l'intensità si divide per $5^2 = 25$:
+\[
+  I_2 = I_1 \left(\frac{r_1}{r_2}\right)^{2} = \SI{1,0e-2}{\watt\per\metre\squared} \cdot \frac{1}{25} = 0{,}04 \cdot 10^{-2}\,\si{\watt\per\metre\squared} = \SI{4,0e-4}{\watt\per\metre\squared}
+\]
+perché $1/25 = 4/100 = 0{,}04$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il livello sonoro nella nuova posizione?'''
+  calcolo = "10 * math.log10(I1 * (r1 / r2)**2 / I0)"
+  risultato = { valore = 86, unita = "\\deci\\bel", cifre = 2 }
+  soluzione = '''Con l'intensità del punto (a):
+\[
+  \beta = 10 \log_{10}\frac{\SI{4,0e-4}{\watt\per\metre\squared}}{\SI{e-12}{\watt\per\metre\squared}} = 10 \log_{10}\left(4 \cdot 10^{-4-(-12)}\right) = 10 \log_{10}\left(4 \cdot 10^{8}\right)
+\]
+Per la regola del prodotto, $\log_{10}(4 \cdot 10^{8}) = \log_{10} 4 + 8 \approx 0{,}6 + 8 = 8{,}6$, quindi $\beta \approx 10 \cdot 8{,}6\,\si{\deci\bel} = \SI{86}{\deci\bel}$. A \SI{1,0}{\metre} il livello era $10 \log_{10} 10^{10} = \SI{100}{\deci\bel}$: allontanarsi di cinque volte toglie solo \SI{14}{\deci\bel}.'''
+
+[[problema]]
+id = "ud4-db-pompe"
+livello = 2
+testo = '''Al letto di un paziente in terapia intensiva lavorano quattro pompe per infusione uguali. Ognuna, da sola, produce al letto un livello sonoro di {{b}}.'''
+dati.b = { valore = 50, unita = "\\deci\\bel" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità del suono di una sola pompa?'''
+  calcolo = "I0 * 10**(b / 10)"
+  risultato = { valore = 1.0e-7, unita = "W/m^2", cifre = 2 }
+  soluzione = '''Dalla forma inversa della definizione:
+\[
+  I_1 = I_0 \cdot 10^{\beta/10} = \SI{e-12}{\watt\per\metre\squared} \cdot 10^{50/10} = 10^{-12+5}\,\si{\watt\per\metre\squared} = \SI{1,0e-7}{\watt\per\metre\squared}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale il livello sonoro con tutte e quattro le pompe accese?'''
+  calcolo = "10 * math.log10(4 * I0 * 10**(b / 10) / I0)"
+  risultato = { valore = 56, unita = "\\deci\\bel", cifre = 2 }
+  soluzione = '''Le pompe producono suoni indipendenti: si sommano le intensità, non i livelli. L'intensità totale è $I = 4 I_1 = \SI{4,0e-7}{\watt\per\metre\squared}$, e
+\[
+  \beta = 10 \log_{10}\frac{4 \cdot 10^{-7}}{10^{-12}} = 10 \log_{10}\left(4 \cdot 10^{5}\right) = 10\,(\log_{10} 4 + 5) \approx 10\,(0{,}6 + 5)\,\si{\deci\bel} = \SI{56}{\deci\bel}
+\]
+Si arriva allo stesso risultato con le differenze di livello: intensità per 4 vuol dire $+10\log_{10} 4 \approx +\SI{6}{\deci\bel}$, da 50 a \SI{56}{\deci\bel}. Non \SI{200}{\deci\bel}, che sarebbe la somma dei quattro livelli.'''
+
+[[problema]]
+id = "ud4-eco-dettaglio"
+livello = 2
+testo = '''In un'ecografia dei tendini della mano si vogliono distinguere strutture di {{s}}. Si assume che il dettaglio più piccolo visibile sia pari alla lunghezza d'onda, e che nei tessuti il suono viaggi a \SI{1540}{\metre\per\second}.'''
+dati.s = { valore = "0,14", unita = "mm" }
+
+  [[problema.parte]]
+  domanda = '''Qual è la frequenza minima della sonda?'''
+  calcolo = "v_tessuto / (s * 1e-3) / 1e6"
+  risultato = { valore = 11, unita = "MHz", cifre = 2 }
+  soluzione = '''Serve una lunghezza d'onda non più grande di $\SI{0,14}{\milli\metre} = \SI{1,4e-4}{\metre}$. Da $v = \lambda f$, a $\lambda$ più piccola corrisponde $f$ più grande, quindi la frequenza minima è quella che dà proprio $\lambda = \SI{1,4e-4}{\metre}$:
+\[
+  f = \frac{v}{\lambda} = \frac{\SI{1540}{\metre\per\second}}{\SI{1,4e-4}{\metre}} = \frac{1540}{1{,}4} \cdot 10^{4}\,\si{\hertz} = 1100 \cdot 10^{4}\,\si{\hertz} = \SI{1,1e7}{\hertz} = \SI{11}{\mega\hertz}
+\]
+perché $1{,}4 \cdot 1100 = 1540$.'''
+
+  [[problema.parte]]
+  domanda = '''L'ambulatorio ha una sonda da \SI{7,5}{\mega\hertz} e una da \SI{15}{\mega\hertz}. Quale si usa? Quanto vale la sua lunghezza d'onda nei tessuti?'''
+  calcolo = "v_tessuto / 15e6 * 1e3"
+  risultato = { valore = 0.10, unita = "mm", cifre = 2 }
+  rapido = '''la sonda da \SI{15}{\mega\hertz}; $\lambda \approx \SI{0,10}{\milli\metre}$'''
+  soluzione = '''Serve una frequenza di almeno \SI{11}{\mega\hertz}: va bene solo la sonda da \SI{15}{\mega\hertz}. La sua lunghezza d'onda è
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{1540}{\metre\per\second}}{\SI{1,5e7}{\hertz}} = \frac{1540}{1{,}5} \cdot 10^{-7}\,\si{\metre} \approx 1030 \cdot 10^{-7}\,\si{\metre} \approx \SI{1,0e-4}{\metre} = \SI{0,10}{\milli\metre}
+\]
+più piccola di \SI{0,14}{\milli\metre}, come serve. Con la sonda da \SI{7,5}{\mega\hertz} la lunghezza d'onda sarebbe il doppio, circa \SI{0,21}{\milli\metre}, troppo grande. I tendini della mano sono sotto la pelle, quindi l'assorbimento maggiore dell'alta frequenza non è un problema.'''
+
+[[problema]]
+id = "ud4-eco-ripetizione"
+livello = 2
+testo = '''Un ecografo per l'addome deve ricevere tutti gli echi fino a una profondità di {{d}} prima di inviare l'impulso successivo. Nei tessuti il suono viaggia a \SI{1540}{\metre\per\second}.'''
+dati.d = { valore = "15,4", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quanto tempo deve aspettare, al minimo, fra un impulso e il successivo?'''
+  calcolo = "2 * d * 1e-2 / v_tessuto"
+  risultato = { valore = 2.0e-4, unita = "s", cifre = 2 }
+  soluzione = '''L'eco più lontano viene da \SI{15,4}{\centi\metre} $= \SI{0,154}{\metre}$: l'impulso deve andare fin lì e tornare, cioè percorrere $2d = \SI{0,308}{\metre}$. Da $d = vt/2$:
+\[
+  t = \frac{2d}{v} = \frac{\SI{0,308}{\metre}}{\SI{1540}{\metre\per\second}} = \frac{\num{3,08e-1}}{\num{1,54e3}}\,\si{\second} = 2{,}0 \cdot 10^{-1-3}\,\si{\second} = \SI{2,0e-4}{\second}
+\]
+perché $3{,}08 = 2 \cdot 1{,}54$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti impulsi al secondo può inviare, al massimo?'''
+  calcolo = "v_tessuto / (2 * d * 1e-2)"
+  risultato = { valore = 5.0e3, unita = "Hz", cifre = 2 }
+  soluzione = '''Un impulso ogni \SI{2,0e-4}{\second} al massimo: il numero di impulsi al secondo è l'inverso di questo tempo,
+\[
+  f = \frac{1}{t} = \frac{1}{\SI{2,0e-4}{\second}} = 0{,}5 \cdot 10^{4}\,\si{\hertz} = \SI{5,0e3}{\hertz}
+\]
+Cinquemila impulsi al secondo. Se si vuole guardare più in profondità bisogna aspettare di più, e gli impulsi al secondo diminuiscono.'''
+
+[[problema]]
+id = "ud4-db-audiometria"
+livello = 2
+testo = '''All'esame audiometrico un lavoratore esposto per anni al rumore ha, alla frequenza di \SI{4}{\kilo\hertz}, una soglia uditiva di {{b}}, mentre un orecchio sano ha soglia \SI{0}{\deci\bel}. Assumi che la soglia di un orecchio sano a \SI{4}{\kilo\hertz} sia $I_0 = \SI{e-12}{\watt\per\metre\squared}$.'''
+dati.b = { valore = 45, unita = "\\deci\\bel" }
+
+  [[problema.parte]]
+  domanda = '''Di che fattore deve essere più intenso del normale un suono a quella frequenza perché il lavoratore lo senta?'''
+  calcolo = "10**(b / 10)"
+  risultato = { valore = 3.2e4, cifre = 2 }
+  soluzione = '''Una differenza di livello di \SI{45}{\deci\bel} corrisponde a un rapporto di intensità $10^{45/10} = 10^{4{,}5}$. Si spezza l'esponente: $10^{4{,}5} = 10^{4} \cdot 10^{0{,}5} = 10^{4} \cdot \sqrt{10} \approx 3{,}2 \cdot 10^{4}$. Il suono deve essere circa \num{32000} volte più intenso.'''
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità del suono più debole che il lavoratore riesce a sentire a quella frequenza?'''
+  calcolo = "I0 * 10**(b / 10)"
+  risultato = { valore = 3.2e-8, unita = "W/m^2", cifre = 2 }
+  soluzione = '''La soglia di un orecchio sano, per ipotesi, è $I_0 = \SI{e-12}{\watt\per\metre\squared}$. Moltiplicando per il fattore del punto (a):
+\[
+  I = I_0 \cdot 10^{4{,}5} \approx \SI{e-12}{\watt\per\metre\squared} \cdot \num{3,2e4} = 3{,}2 \cdot 10^{-12+4}\,\si{\watt\per\metre\squared} = \SI{3,2e-8}{\watt\per\metre\squared}
+\]
+Il calo dell'udito intorno a \SI{4}{\kilo\hertz} è tipico del danno da rumore: le cellule ciliate della coclea, una volta distrutte, non si riformano.'''
+
+[[problema]]
+id = "ud4-db-allarme"
+livello = 3
+testo = '''L'allarme di un monitor in un reparto, che si può trattare come una sorgente piccola e isotropa, produce un livello sonoro di {{b}} a {{r}} di distanza.'''
+dati.b = { valore = 80, unita = "\\deci\\bel" }
+dati.r = { valore = "2,0", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità del suono a \SI{2,0}{\metre}?'''
+  calcolo = "I0 * 10**(b / 10)"
+  risultato = { valore = 1.0e-4, unita = "W/m^2", cifre = 2 }
+  soluzione = '''Dalla forma inversa della definizione:
+\[
+  I = I_0 \cdot 10^{\beta/10} = \SI{e-12}{\watt\per\metre\squared} \cdot 10^{80/10} = 10^{-12+8}\,\si{\watt\per\metre\squared} = \SI{1,0e-4}{\watt\per\metre\squared}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Quale potenza sonora emette l'allarme?'''
+  calcolo = "4 * math.pi * r**2 * I0 * 10**(b / 10)"
+  risultato = { valore = 5.0e-3, unita = "W", cifre = 2 }
+  soluzione = '''A \SI{2,0}{\metre} tutta la potenza attraversa una sfera di raggio $r = \SI{2,0}{\metre}$, di superficie $4\pi r^2 = 4 \cdot 3{,}14 \cdot \SI{4,0}{\metre\squared} \approx \SI{50}{\metre\squared}$. Da $I = P/(4\pi r^2)$:
+\[
+  P = 4\pi r^2 I \approx \SI{50}{\metre\squared} \cdot \SI{1,0e-4}{\watt\per\metre\squared} = 50 \cdot 10^{-4}\,\si{\watt} = \SI{5,0e-3}{\watt}
+\]
+Cinque milliwatt bastano per un suono più forte di una strada trafficata.'''
+
+  [[problema.parte]]
+  domanda = '''A che distanza dall'allarme il livello scende a \SI{60}{\deci\bel}?'''
+  calcolo = "r * math.sqrt(10**((b - 60) / 10))"
+  risultato = { valore = 20, unita = "m", cifre = 2 }
+  soluzione = '''Il livello deve scendere di $80 - 60 = \SI{20}{\deci\bel}$: l'intensità si deve dividere per $10^{20/10} = 10^{2} = 100$. Per la legge dell'inverso del quadrato $I_2/I_1 = (r_1/r_2)^2$, quindi
+\[
+  \left(\frac{r_2}{r_1}\right)^{2} = 100
+  \qquad\Longrightarrow\qquad
+  \frac{r_2}{r_1} = \sqrt{100} = 10
+\]
+e $r_2 = 10 \cdot \SI{2,0}{\metre} = \SI{20}{\metre}$. In una corsia vera pareti e soffitto riflettono il suono, e il livello cala meno di così.'''
+
+[[problema]]
+id = "ud4-db-neonatale"
+livello = 3
+testo = '''Nei reparti di terapia intensiva neonatale si raccomanda che il livello sonoro all'incubatrice resti sotto i \SI{45}{\deci\bel}. Un monitor, che si può trattare come una sorgente piccola e isotropa, produce {{b}} all'incubatrice, che dista {{r1}}.'''
+dati.b = { valore = 65, unita = "\\deci\\bel" }
+dati.r1 = { valore = "2,0", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale l'intensità del suono del monitor all'incubatrice?'''
+  calcolo = "I0 * 10**(b / 10)"
+  risultato = { valore = 3.2e-6, unita = "W/m^2", cifre = 2 }
+  soluzione = '''Dalla forma inversa della definizione, con $\beta/10 = 6{,}5$:
+\[
+  I = I_0 \cdot 10^{6{,}5} = \SI{e-12}{\watt\per\metre\squared} \cdot 10^{6} \cdot 10^{0{,}5} \approx 3{,}2 \cdot 10^{-12+6}\,\si{\watt\per\metre\squared} = \SI{3,2e-6}{\watt\per\metre\squared}
+\]
+perché $10^{0{,}5} = \sqrt{10} \approx 3{,}2$.'''
+
+  [[problema.parte]]
+  domanda = '''Il monitor viene spostato a \SI{4,0}{\metre} dall'incubatrice. Che livello si misura ora all'incubatrice?'''
+  calcolo = "b + 10 * math.log10((r1 / 4.0)**2)"
+  risultato = { valore = 59, unita = "\\deci\\bel", cifre = 2 }
+  soluzione = '''La distanza raddoppia, e l'intensità diventa un quarto. Il livello cambia di
+\[
+  \Delta\beta = 10 \log_{10}\frac{1}{4} = -10 \cdot 2 \log_{10} 2 \approx -10 \cdot 0{,}6\,\si{\deci\bel} = \SI{-6}{\deci\bel}
+\]
+e passa da \SI{65}{\deci\bel} a circa \SI{59}{\deci\bel}: ancora troppo.'''
+
+  [[problema.parte]]
+  domanda = '''Di quanti decibel va abbassato il volume dell'allarme, con il monitor a \SI{4,0}{\metre}, per rispettare il limite? Di che fattore si riduce così l'intensità?'''
+  calcolo = "b + 10 * math.log10((r1 / 4.0)**2) - 45"
+  risultato = { valore = 14, unita = "\\deci\\bel", cifre = 2 }
+  rapido = '''\SI{14}{\deci\bel}; intensità divisa per circa 25'''
+  soluzione = '''Il livello deve scendere da \SI{59}{\deci\bel} a \SI{45}{\deci\bel}: $59 - 45 = \SI{14}{\deci\bel}$. L'intensità si divide per $10^{14/10} = 10^{1{,}4}$. Si scrive $1{,}4 = 2 - 0{,}6$ e si usa $10^{0{,}6} \approx 4$ (perché $\log_{10} 4 \approx 0{,}6$):
+\[
+  10^{1{,}4} = \frac{10^{2}}{10^{0{,}6}} \approx \frac{100}{4} = 25
+\]
+L'allontanamento da solo non basta. Con la sola distanza, partendo da \SI{4,0}{\metre}, l'intensità andrebbe divisa per 25, quindi la distanza moltiplicata per $\sqrt{25} = 5$: il monitor andrebbe messo a \SI{20}{\metre}, fuori dalla stanza.'''
+
+[[problema]]
+id = "ud4-db-trapano"
+livello = 3
+testo = '''Un trapano ortopedico produce {{b}} all'orecchio del chirurgo, che si trova a {{r}} dalla punta. Si tratta il trapano come una sorgente piccola e isotropa.'''
+dati.b = { valore = 95, unita = "\\deci\\bel" }
+dati.r = { valore = "0,50", unita = "m" }
+
+  [[problema.parte]]
+  domanda = '''A che distanza minima dovrebbe stare l'orecchio per non superare \SI{85}{\deci\bel}?'''
+  calcolo = "r * math.sqrt(10**((b - 85) / 10))"
+  risultato = { valore = 1.6, unita = "m", cifre = 2 }
+  soluzione = '''Il livello deve scendere di $95 - 85 = \SI{10}{\deci\bel}$: l'intensità si deve dividere per $10^{10/10} = 10$. Per la legge dell'inverso del quadrato:
+\[
+  \left(\frac{r_2}{r_1}\right)^{2} = 10
+  \qquad\Longrightarrow\qquad
+  r_2 = r_1 \sqrt{10} \approx \SI{0,50}{\metre} \cdot 3{,}2 = \SI{1,6}{\metre}
+\]
+Il chirurgo non può operare a più di un metro e mezzo dal campo operatorio: la distanza non è una soluzione.'''
+
+  [[problema.parte]]
+  domanda = '''Quanta potenza sonora arriva sul timpano, di area \SI{0,50}{\centi\metre\squared}, a \SI{0,50}{\metre} dal trapano?'''
+  calcolo = "I0 * 10**(b / 10) * 0.50e-4"
+  risultato = { valore = 1.6e-7, unita = "W", cifre = 2 }
+  soluzione = '''L'intensità all'orecchio viene dalla forma inversa, con $\beta/10 = 9{,}5$:
+\[
+  I = I_0 \cdot 10^{9{,}5} = \SI{e-12}{\watt\per\metre\squared} \cdot 10^{9} \cdot \sqrt{10} \approx \SI{3,2e-3}{\watt\per\metre\squared}
+\]
+L'area del timpano è $\SI{0,50}{\centi\metre\squared} = 0{,}50 \cdot (\SI{e-2}{\metre})^2 = \SI{5,0e-5}{\metre\squared}$. Da $I = P/S$:
+\[
+  P = I\,S = \SI{3,2e-3}{\watt\per\metre\squared} \cdot \SI{5,0e-5}{\metre\squared} = 16 \cdot 10^{-3-5}\,\si{\watt} = \SI{1,6e-7}{\watt}
+\]
+Una potenza piccolissima, che però alla lunga danneggia la coclea: l'orecchio è sensibile a potenze minime.'''
+
+  [[problema.parte]]
+  domanda = '''Il chirurgo porta degli inserti auricolari che attenuano il suono di \SI{25}{\deci\bel}. Che livello arriva al suo timpano? Di che fattore si riduce l'intensità?'''
+  calcolo = "b - 25"
+  risultato = { valore = 70, unita = "\\deci\\bel", cifre = 2 }
+  rapido = '''\SI{70}{\deci\bel}; intensità divisa per circa 320'''
+  soluzione = '''Un'attenuazione in decibel si sottrae dal livello: $95 - 25 = \SI{70}{\deci\bel}$, sotto il limite di \SI{85}{\deci\bel}. L'intensità si divide per
+\[
+  10^{25/10} = 10^{2{,}5} = 10^{2} \cdot \sqrt{10} \approx 100 \cdot 3{,}2 = 320
+\]'''
+
+[[problema]]
+id = "ud4-eco-strati"
+livello = 3
+testo = '''In un paziente obeso il fascio di un ecografo attraversa uno strato di grasso spesso {{s}}, in cui il suono viaggia a {{vg}}, e poi entra in un muscolo, in cui viaggia a {{vm}}. L'eco di una struttura dentro il muscolo torna alla sonda {{t}} dopo l'emissione dell'impulso.'''
+dati.s = { valore = "2,9", unita = "cm" }
+dati.vg = { valore = 1450, unita = "m/s" }
+dati.vm = { valore = 1580, unita = "m/s" }
+dati.t = { valore = 80, unita = "\\micro\\second" }
+
+  [[problema.parte]]
+  domanda = '''Quanto tempo passa l'impulso nel grasso, fra andata e ritorno?'''
+  calcolo = "2 * s * 1e-2 / vg"
+  risultato = { valore = 4.0e-5, unita = "s", cifre = 2 }
+  soluzione = '''L'impulso attraversa il grasso due volte, all'andata e al ritorno: percorre $2 \cdot \SI{2,9}{\centi\metre} = \SI{5,8}{\centi\metre} = \SI{0,058}{\metre}$ alla velocità del grasso. Quindi
+\[
+  t_g = \frac{\SI{0,058}{\metre}}{\SI{1450}{\metre\per\second}} = \frac{\num{5,8e-2}}{\num{1,45e3}}\,\si{\second} = 4{,}0 \cdot 10^{-2-3}\,\si{\second} = \SI{4,0e-5}{\second}
+\]
+perché $5{,}8 = 4 \cdot 1{,}45$. Sono \SI{40}{\micro\second}.'''
+
+  [[problema.parte]]
+  domanda = '''A che profondità si trova davvero la struttura?'''
+  calcolo = "s + vm * (t * 1e-6 - 2 * s * 1e-2 / vg) / 2 * 100"
+  risultato = { valore = 6.1, unita = "cm", cifre = 2 }
+  soluzione = '''Degli \SI{80}{\micro\second} totali, $80 - 40 = \SI{40}{\micro\second}$ sono passati nel muscolo, fra andata e ritorno. Il tratto di muscolo fra il grasso e la struttura è
+\[
+  d_m = \frac{v_m\,t_m}{2} = \frac{\SI{1580}{\metre\per\second} \cdot \SI{4,0e-5}{\second}}{2} = 1580 \cdot 2{,}0 \cdot 10^{-5}\,\si{\metre} = \SI{3,16e-2}{\metre} \approx \SI{3,16}{\centi\metre}
+\]
+La profondità vera è la somma dei due tratti: $\SI{2,9}{\centi\metre} + \SI{3,16}{\centi\metre} = \SI{6,06}{\centi\metre} \approx \SI{6,1}{\centi\metre}$.'''
+
+  [[problema.parte]]
+  domanda = '''L'ecografo calcola la profondità con la velocità media dei tessuti molli, \SI{1540}{\metre\per\second}, ovunque. Che profondità mostra sullo schermo? Di quanto sbaglia?'''
+  calcolo = "1540 * t * 1e-6 / 2 * 100"
+  risultato = { valore = 6.2, unita = "cm", cifre = 2 }
+  rapido = '''\SI{6,2}{\centi\metre}; circa \SI{1}{\milli\metre} in più'''
+  soluzione = '''Con un'unica velocità di \SI{1540}{\metre\per\second} e $t = \SI{8,0e-5}{\second}$:
+\[
+  d = \frac{v\,t}{2} = \frac{\SI{1540}{\metre\per\second} \cdot \SI{8,0e-5}{\second}}{2} = 1540 \cdot 4{,}0 \cdot 10^{-5}\,\si{\metre} = \SI{6,16e-2}{\metre} \approx \SI{6,2}{\centi\metre}
+\]
+Lo schermo mostra la struttura $6{,}16 - 6{,}06 = \SI{0,10}{\centi\metre} = \SI{1}{\milli\metre}$ più in profondità di dove è davvero. Nel grasso il suono è più lento di \SI{1540}{\metre\per\second}: lì l'ecografo sovrastima il tratto di circa \SI{1,8}{\milli\metre} ($\SI{1540}{\metre\per\second} \cdot \SI{20}{\micro\second} = \SI{3,08}{\centi\metre}$ invece di \SI{2,9}{\centi\metre}). Nel muscolo è più veloce, e il tratto viene sottostimato di circa \SI{0,8}{\milli\metre} (\SI{3,08}{\centi\metre} invece di \SI{3,16}{\centi\metre}). Prevale il grasso, e la struttura appare \SI{1}{\milli\metre} più in profondità. In un paziente con uno strato di grasso più spesso l'errore cresce.'''
+
+[[problema]]
+id = "ud4-doppler-carotide"
+livello = 3
+testo = '''Un ecocolordoppler studia il flusso del sangue in una carotide con ultrasuoni di frequenza {{f}}. Se il sangue si muove lungo il fascio con velocità $v_s$, molto più piccola della velocità del suono nei tessuti $v = \SI{1540}{\metre\per\second}$, l'eco riflessa dai globuli rossi torna con uno spostamento di frequenza
+\[
+  \Delta f \approx \frac{2 f v_s}{v}
+\]
+Nel tratto sano della carotide il sangue si avvicina alla sonda con una velocità di {{vs}}.'''
+dati.f = { valore = "4,0", unita = "MHz" }
+dati.vs = { valore = "0,77", unita = "m/s" }
+
+  [[problema.parte]]
+  domanda = '''Quanto vale lo spostamento di frequenza nel tratto sano?'''
+  calcolo = "2 * f * 1e6 * vs / v_tessuto"
+  risultato = { valore = 4.0e3, unita = "Hz", cifre = 2 }
+  soluzione = '''Con $f = \SI{4,0e6}{\hertz}$:
+\[
+  \Delta f \approx \frac{2 \cdot \SI{4,0e6}{\hertz} \cdot \SI{0,77}{\metre\per\second}}{\SI{1540}{\metre\per\second}} = \frac{6{,}16 \cdot 10^{6}}{1{,}54 \cdot 10^{3}}\,\si{\hertz} = 4{,}0 \cdot 10^{6-3}\,\si{\hertz} = \SI{4,0e3}{\hertz}
+\]
+dove $2 \cdot 4 \cdot 0{,}77 = 8 \cdot 0{,}77 = 6{,}16 = 4 \cdot 1{,}54$.'''
+
+  [[problema.parte]]
+  domanda = '''L'eco torna con una frequenza più alta o più bassa di quella emessa? Quanto vale? Di che colore appare il flusso sull'immagine?'''
+  calcolo = "f * 1e6 + 2 * f * 1e6 * vs / v_tessuto"
+  risultato = { valore = 4.004e6, unita = "Hz", cifre = 4 }
+  rapido = '''più alta, \SI{4,004}{\mega\hertz}; rosso'''
+  soluzione = '''Il sangue si avvicina alla sonda: per l'effetto Doppler la frequenza dell'eco è più alta di quella emessa,
+\[
+  f' = f + \Delta f = \SI{4000000}{\hertz} + \SI{4000}{\hertz} = \SI{4004000}{\hertz} = \SI{4,004}{\mega\hertz}
+\]
+Per convenzione un flusso che si avvicina alla sonda è colorato in rosso. Dalla formula, $\Delta f/f = 2 v_s/v = 2 \cdot 0{,}77/1540 = 2/2000 = 1/1000$: lo spostamento è un millesimo della frequenza emessa.'''
+
+  [[problema.parte]]
+  domanda = '''In un tratto ristretto da una placca (una stenosi) l'apparecchio misura uno spostamento di \SI{8,0}{\kilo\hertz}. Quanto vale la velocità del sangue nella stenosi? Lo spostamento si può sentire?'''
+  calcolo = "8.0e3 * v_tessuto / (2 * f * 1e6)"
+  risultato = { valore = 1.5, unita = "m/s", cifre = 2 }
+  rapido = '''\SI{1,5}{\metre\per\second}; sì, è nel campo udibile'''
+  soluzione = '''Lo spostamento di frequenza è proporzionale alla velocità del sangue: è raddoppiato, da \SI{4,0}{\kilo\hertz} a \SI{8,0}{\kilo\hertz}, quindi anche la velocità è raddoppiata, $v_s = 2 \cdot \SI{0,77}{\metre\per\second} = \SI{1,54}{\metre\per\second} \approx \SI{1,5}{\metre\per\second}$. Lo stesso valore viene ricavando $v_s$ dalla formula:
+\[
+  v_s = \frac{\Delta f\,v}{2 f} = \frac{\SI{8,0e3}{\hertz} \cdot \SI{1540}{\metre\per\second}}{2 \cdot \SI{4,0e6}{\hertz}} = \frac{1540}{1000}\,\si{\metre\per\second} \approx \SI{1,5}{\metre\per\second}
+\]
+Nella stenosi il sangue accelera, come l'acqua in un tubo che si stringe (UD3). \SI{8}{\kilo\hertz} sta fra \SI{20}{\hertz} e \SI{20}{\kilo\hertz}: l'apparecchio può far sentire il flusso come un suono, più acuto nel tratto ristretto.'''
+
+# ==================================================================== quesiti d'esame
+
+[[quesito]]
+id = "ud4-onda-sangue"
+tipo = "multipla"
+testo = '''Un fascio di ultrasuoni attraversa un vaso pieno di sangue. Al passaggio dell'onda le particelle del sangue'''
+corretta = "C"
+soluzione = '''Il sangue è un liquido, e nei fluidi si propagano solo onde longitudinali: un fluido resiste alla compressione, ma non allo scorrimento di uno strato sull'altro. Le particelle oscillano avanti e indietro lungo la direzione di propagazione, formando compressioni e rarefazioni, e restano intorno alla loro posizione.'''
+
+  [[quesito.opzione]]
+  testo = '''oscillano perpendicolari alla direzione di propagazione'''
+  commento = '''Descrive un'onda trasversale: un liquido non la trasmette, perché non resiste a uno scorrimento laterale.'''
+  [[quesito.opzione]]
+  testo = '''avanzano insieme all'onda, a circa \SI{1570}{\metre\per\second}'''
+  commento = '''Confonde la velocità dell'onda con quella delle particelle: l'onda trasporta energia, non materia, e il sangue non viene spinto avanti dal suono.'''
+  [[quesito.opzione]]
+  testo = '''oscillano avanti e indietro lungo la direzione di propagazione'''
+  [[quesito.opzione]]
+  testo = '''oscillano sia lungo la direzione di propagazione sia perpendicolari a essa'''
+  commento = '''Vale per i solidi, dove si propagano onde di tutti e due i tipi; in un liquido c'è solo l'oscillazione longitudinale.'''
+  [[quesito.opzione]]
+  testo = '''restano ferme, perché si propaga solo l'energia'''
+  commento = '''Porta troppo in là l'idea giusta che l'onda non trasporta materia: l'energia si propaga proprio perché ogni particella oscilla e spinge le vicine.'''
+
+[[quesito]]
+id = "ud4-osc-periodo-molla"
+tipo = "multipla"
+testo = '''In un oscillatore armonico si raddoppia la massa e si sostituisce la molla con una quattro volte più rigida. Il periodo di oscillazione'''
+corretta = "E"
+calcolo = "math.sqrt(2 / 4)"
+soluzione = '''Il periodo è $T = 2\pi\sqrt{m/k}$. Con massa $2m$ e costante $4k$:
+\[
+  T' = 2\pi\sqrt{\frac{2m}{4k}} = \sqrt{\frac{1}{2}} \cdot 2\pi\sqrt{\frac{m}{k}} = \frac{T}{\sqrt{2}} \approx \frac{T}{1{,}41} \approx 0{,}71\,T
+\]
+La massa più grande allunga il periodo, la molla più rigida lo accorcia di più.'''
+
+  [[quesito.opzione]]
+  testo = '''raddoppia'''
+  commento = '''Guarda solo la massa e dimentica la radice, come se fosse $T \propto m$; la molla più rigida invece accorcia il periodo.'''
+  [[quesito.opzione]]
+  testo = '''si dimezza'''
+  commento = '''Calcola bene il rapporto $m/k$, che diventa $2/4 = 1/2$, ma dimentica la radice quadrata.'''
+  [[quesito.opzione]]
+  testo = '''resta lo stesso'''
+  commento = '''Pensa che i due cambiamenti si compensino. Vanno in versi opposti, ma con fattori diversi: la massa raddoppia, la rigidità quadruplica.'''
+  [[quesito.opzione]]
+  testo = '''diventa circa 1,4 volte più grande'''
+  commento = '''Usa $\sqrt{k/m}$ come se fosse il periodo: $\sqrt{4/2} = \sqrt{2} \approx 1{,}4$. È la pulsazione che aumenta di questo fattore; il periodo, che è $2\pi/\omega$, diminuisce.'''
+  [[quesito.opzione]]
+  testo = '''diventa circa 0,71 volte quello iniziale'''
+  valore = 0.7071067811865476
+
+[[quesito]]
+id = "ud4-onda-equazione-verso"
+tipo = "multipla"
+testo = '''Un'onda su una corda è descritta, in unità del SI, da $y(x,t) = 0{,}010\,\sin(0{,}50\,x + 4{,}0\,t)$. L'onda si propaga'''
+corretta = "A"
+calcolo = "4.0 / 0.50"
+soluzione = '''Si confronta con $y = A\sin(kx + \omega t)$: $k = \SI{0,50}{\radian\per\metre}$ e $\omega = \SI{4,0}{\radian\per\second}$. La velocità è
+\[
+  v = \frac{\omega}{k} = \frac{\SI{4,0}{\radian\per\second}}{\SI{0,50}{\radian\per\metre}} = \SI{8,0}{\metre\per\second}
+\]
+Davanti a $\omega t$ c'è il segno più: l'onda va verso le $x$ negative.'''
+
+  [[quesito.opzione]]
+  testo = '''a \SI{8,0}{\metre\per\second}, verso le $x$ negative'''
+  valore = 8.0
+  [[quesito.opzione]]
+  testo = '''a \SI{8,0}{\metre\per\second}, verso le $x$ positive'''
+  commento = '''La velocità è giusta, ma il verso no: con il segno più davanti a $\omega t$ l'onda va verso le $x$ negative.'''
+  [[quesito.opzione]]
+  testo = '''a \SI{2,0}{\metre\per\second}, verso le $x$ negative'''
+  commento = '''Moltiplica invece di dividere: $\omega k = 4{,}0 \cdot 0{,}50 = 2{,}0$, che non è una velocità.'''
+  [[quesito.opzione]]
+  testo = '''a \SI{0,125}{\metre\per\second}, verso le $x$ negative'''
+  commento = '''Rovescia il rapporto: $k/\omega = 0{,}50/4{,}0 = 0{,}125$. La velocità è $\omega/k$.'''
+  [[quesito.opzione]]
+  testo = '''a circa \SI{50}{\metre\per\second}, verso le $x$ negative'''
+  commento = '''Ricava bene $\lambda = 2\pi/k \approx \SI{12,6}{\metre}$, ma prende la pulsazione come frequenza: $12{,}6 \cdot 4{,}0 \approx 50$. La frequenza è $\omega/(2\pi)$.'''
+
+[[quesito]]
+id = "ud4-osc-energia-molla"
+tipo = "multipla"
+testo = '''Una massa attaccata a una molla di costante {{k}} oscilla senza attriti con ampiezza {{A}}. L'energia dell'oscillatore vale'''
+dati.k = { valore = 200, unita = "\\newton\\per\\metre" }
+dati.A = { valore = 10, unita = "cm" }
+corretta = "D"
+calcolo = "0.5 * k * (A / 100)**2"
+soluzione = '''L'ampiezza in metri è $A = \SI{0,10}{\metre}$. L'energia è
+\[
+  E = \frac{1}{2} k A^2 = \frac{1}{2} \cdot \SI{200}{\newton\per\metre} \cdot (\SI{0,10}{\metre})^2 = 100 \cdot 0{,}010\,\si{\joule} = \SI{1,0}{\joule}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{10}{\joule}'''
+  commento = '''Dimentica il quadrato dell'ampiezza: $\frac{1}{2} \cdot 200 \cdot 0{,}10 = 10$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{2,0}{\joule}'''
+  commento = '''Dimentica il fattore $\frac{1}{2}$: $200 \cdot 0{,}010 = 2{,}0$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,0e4}{\joule}'''
+  commento = '''Lascia l'ampiezza in centimetri: $\frac{1}{2} \cdot 200 \cdot 10^2 = \num{1,0e4}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,0}{\joule}'''
+  valore = 1.0
+  [[quesito.opzione]]
+  testo = '''\SI{20}{\joule}'''
+  commento = '''Calcola $kA = 200 \cdot 0{,}10 = 20$: è la forza massima della molla in newton (legge di Hooke), non un'energia.'''
+
+[[quesito]]
+id = "ud4-onda-tessuto-osso"
+tipo = "multipla"
+testo = '''Un fascio di ultrasuoni passa dai tessuti molli, dove viaggia a \SI{1540}{\metre\per\second}, a un osso compatto, dove viaggia a circa \SI{3100}{\metre\per\second}. Nell'osso, rispetto ai tessuti molli,'''
+corretta = "B"
+soluzione = '''La frequenza è fissata dalla sorgente, la sonda, e non cambia passando da un mezzo all'altro. Cambia la velocità, che quasi raddoppia ($3100/1540 \approx 2$). Da $\lambda = v/f$, a frequenza fissata la lunghezza d'onda è proporzionale alla velocità: anche lei circa raddoppia.'''
+
+  [[quesito.opzione]]
+  testo = '''la frequenza resta la stessa e la lunghezza d'onda circa si dimezza'''
+  commento = '''Rovescia la proporzionalità: con $\lambda = v/f$ una velocità più grande dà una lunghezza d'onda più grande.'''
+  [[quesito.opzione]]
+  testo = '''la frequenza resta la stessa e la lunghezza d'onda circa raddoppia'''
+  [[quesito.opzione]]
+  testo = '''la lunghezza d'onda resta la stessa e la frequenza circa raddoppia'''
+  commento = '''Tiene fissa la grandezza sbagliata: è la frequenza a restare quella della sonda, mentre la lunghezza d'onda si adatta al mezzo.'''
+  [[quesito.opzione]]
+  testo = '''la frequenza e la lunghezza d'onda circa raddoppiano tutte e due'''
+  commento = '''Se raddoppiassero tutte e due, la velocità $v = \lambda f$ diventerebbe quattro volte più grande, non due.'''
+  [[quesito.opzione]]
+  testo = '''la frequenza e la lunghezza d'onda restano le stesse'''
+  commento = '''Se non cambiassero, non cambierebbe nemmeno $v = \lambda f$: ma la velocità nell'osso è circa doppia.'''
+
+[[quesito]]
+id = "ud4-onda-periodo-sonda"
+tipo = "completamento"
+testo = '''Una sonda per ecografia cardiaca lavora a {{f}}. Il periodo degli ultrasuoni vale \completa\ \si{\micro\second}.'''
+dati.f = { valore = "2,0", unita = "MHz" }
+calcolo = "1 / (f * 1e6) * 1e6"
+risposta = "0,5"
+soluzione = '''La frequenza in hertz è $\SI{2,0}{\mega\hertz} = \SI{2,0e6}{\hertz}$. Il periodo è l'inverso:
+\[
+  T = \frac{1}{f} = \frac{1}{\SI{2,0e6}{\hertz}} = 0{,}5 \cdot 10^{-6}\,\si{\second} = \SI{0,5}{\micro\second}
+\]
+Chi scrive 2 confonde il periodo con la frequenza in megahertz.'''
+
+[[quesito]]
+id = "ud4-osc-pulsazione-molla"
+tipo = "completamento"
+testo = '''Una massa di {{m}} è attaccata a una molla di costante {{k}}. La pulsazione dell'oscillazione vale \completa\ \si{\radian\per\second}.'''
+dati.m = { valore = "0,20", unita = "\\kilo\\gram" }
+dati.k = { valore = 180, unita = "\\newton\\per\\metre" }
+calcolo = "math.sqrt(k / m)"
+risposta = "30"
+soluzione = '''La pulsazione dell'oscillatore armonico è
+\[
+  \omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{\SI{180}{\newton\per\metre}}{\SI{0,20}{\kilo\gram}}} = \sqrt{900}\,\si{\radian\per\second} = \SI{30}{\radian\per\second}
+\]
+Dividere per $0{,}20$ vuol dire moltiplicare per 5: $180 \cdot 5 = 900$. Chi rovescia il rapporto trova $\sqrt{m/k} = 1/30$, che ha le dimensioni di un tempo.'''
+
+[[quesito]]
+id = "ud4-onda-lettura-lambda"
+tipo = "completamento"
+testo = '''Un'onda su una corda è descritta, in unità del SI, da $y(x,t) = 0{,}030\,\sin(\pi x - 20\pi t)$. La lunghezza d'onda vale \completa\ \si{\metre}.'''
+calcolo = "2 * math.pi / math.pi"
+risposta = "2"
+soluzione = '''Si confronta con $y = A\sin(kx - \omega t)$: il numero d'onda è $k = \pi\ \si{\radian\per\metre}$. Quindi
+\[
+  \lambda = \frac{2\pi}{k} = \frac{2\pi}{\pi\ \si{\radian\per\metre}} = \SI{2}{\metre}
+\]
+Il numero che moltiplica $t$ serve per la frequenza, non per la lunghezza d'onda: $f = \omega/(2\pi) = 20\pi/(2\pi) = \SI{10}{\hertz}$.'''
+
+[[quesito]]
+id = "ud4-vel-acqua-aria"
+tipo = "multipla"
+testo = '''Il suono viaggia in acqua circa quattro volte più veloce che in aria, anche se l'acqua è circa 800 volte più densa. Il motivo è che'''
+corretta = "D"
+soluzione = '''Nei fluidi la velocità del suono è $v = \sqrt{B/\rho}$: la densità sta al denominatore e da sola renderebbe l'acqua più lenta. Ma l'acqua è molto meno comprimibile dell'aria: $B_\text{acqua}/B_\text{aria} \approx \num{2,2e9}/\num{1,4e5} \approx \num{1,6e4}$, mentre il rapporto delle densità è circa 800. Il rapporto $B/\rho$ in acqua è quindi circa $\num{16000}/800 \approx 20$ volte quello dell'aria, e la velocità circa $\sqrt{20} \approx 4{,}5$ volte più grande.'''
+
+  [[quesito.opzione]]
+  testo = '''un mezzo più denso trasmette il suono più velocemente'''
+  commento = '''Rovescia il ruolo della densità: è l'inerzia del mezzo, e sta al denominatore di $v = \sqrt{B/\rho}$. A parità di rigidità, un mezzo più denso è più lento.'''
+  [[quesito.opzione]]
+  testo = '''in acqua il suono ha una frequenza più alta'''
+  commento = '''La frequenza è fissata dalla sorgente e non cambia passando da un mezzo all'altro; la velocità dipende dal mezzo.'''
+  [[quesito.opzione]]
+  testo = '''in acqua il suono è un'onda trasversale, in aria longitudinale'''
+  commento = '''Nei fluidi, liquidi e gas, si propagano solo onde longitudinali: un fluido non resiste allo scorrimento di uno strato sull'altro.'''
+  [[quesito.opzione]]
+  testo = '''l'acqua è molto meno comprimibile dell'aria'''
+  [[quesito.opzione]]
+  testo = '''in acqua le onde sonore hanno un'ampiezza maggiore'''
+  commento = '''La velocità di propagazione dipende dalle proprietà del mezzo, rigidità e densità, non dall'ampiezza dell'onda.'''
+
+[[quesito]]
+id = "ud4-interf-sonda"
+tipo = "multipla"
+testo = '''Due elementi di una sonda ecografica emettono in fase ultrasuoni che nel tessuto hanno lunghezza d'onda {{lam}}. In quale di questi punti del tessuto, indicati dalla differenza fra le loro distanze dai due elementi, l'interferenza è distruttiva?'''
+dati.lam = { valore = "0,30", unita = "mm" }
+corretta = "E"
+calcolo = "1.5 * lam"
+soluzione = '''Con due sorgenti in fase l'interferenza è distruttiva quando la differenza di cammino è un numero intero di lunghezze d'onda più mezza: $\Delta r = (n + \frac{1}{2})\lambda$. Con $\lambda = \SI{0,30}{\milli\metre}$ i valori possibili sono \SI{0,15}{\milli\metre}, \SI{0,45}{\milli\metre}, \SI{0,75}{\milli\metre}, … Fra le opzioni c'è solo $\SI{0,45}{\milli\metre} = 1{,}5\lambda$.'''
+
+  [[quesito.opzione]]
+  testo = '''differenza di cammino \SI{0,30}{\milli\metre}'''
+  commento = '''È esattamente una lunghezza d'onda: le onde arrivano in fase e l'interferenza è costruttiva.'''
+  [[quesito.opzione]]
+  testo = '''differenza di cammino \SI{0,60}{\milli\metre}'''
+  commento = '''Sono due lunghezze d'onda, un numero intero: interferenza costruttiva.'''
+  [[quesito.opzione]]
+  testo = '''differenza di cammino \SI{0,075}{\milli\metre}'''
+  commento = '''È un quarto di lunghezza d'onda: le onde non sono né in fase né in opposizione di fase, e l'ampiezza risultante sta fra i due casi.'''
+  [[quesito.opzione]]
+  testo = '''differenza di cammino \SI{0,90}{\milli\metre}'''
+  commento = '''Pensa che un numero dispari di lunghezze d'onda (qui 3) dia interferenza distruttiva. Un numero intero di lunghezze d'onda, pari o dispari, dà sempre interferenza costruttiva; ci vuole la mezza lunghezza d'onda in più.'''
+  [[quesito.opzione]]
+  testo = '''differenza di cammino \SI{0,45}{\milli\metre}'''
+  valore = 0.45
+
+[[quesito]]
+id = "ud4-interf-opposizione"
+tipo = "multipla"
+testo = '''Su una corda due onde con la stessa frequenza, di ampiezza {{A1}} e {{A2}}, arrivano in uno stesso punto in opposizione di fase. L'ampiezza dell'oscillazione risultante in quel punto è'''
+dati.A1 = { valore = "5,0", unita = "mm" }
+dati.A2 = { valore = "3,0", unita = "mm" }
+corretta = "A"
+calcolo = "A1 - A2"
+soluzione = '''In opposizione di fase le creste di un'onda arrivano insieme agli avvallamenti dell'altra, e gli spostamenti si sottraggono:
+\[
+  A = |A_1 - A_2| = \SI{5,0}{\milli\metre} - \SI{3,0}{\milli\metre} = \SI{2,0}{\milli\metre}
+\]
+L'interferenza è distruttiva, ma l'onda si annulla del tutto solo se le due ampiezze sono uguali.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{2,0}{\milli\metre}'''
+  valore = 2.0
+  [[quesito.opzione]]
+  testo = '''\SI{8,0}{\milli\metre}'''
+  commento = '''Somma le ampiezze come se le onde arrivassero in fase: è il caso dell'interferenza costruttiva.'''
+  [[quesito.opzione]]
+  testo = '''zero'''
+  commento = '''Pensa che l'interferenza distruttiva annulli sempre l'onda: succede solo se le due ampiezze sono uguali.'''
+  [[quesito.opzione]]
+  testo = '''\SI{4,0}{\milli\metre}'''
+  commento = '''Fa la media delle due ampiezze, $(5{,}0 + 3{,}0)/2 = 4{,}0$: la sovrapposizione somma gli spostamenti, non ne fa la media.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5,8}{\milli\metre}'''
+  commento = '''Somma le ampiezze come due vettori perpendicolari (UD1), $\sqrt{5{,}0^2 + 3{,}0^2} = \sqrt{34} \approx 5{,}8$: gli spostamenti delle due onde sono lungo la stessa retta e si sommano con il loro segno.'''
+
+[[quesito]]
+id = "ud4-vel-arteriosclerosi"
+tipo = "multipla"
+testo = '''In un paziente anziano con arteriosclerosi le pareti delle arterie sono più rigide che in un giovane sano. Rispetto a quella del giovane, la velocità dell'onda sfigmica nel paziente anziano è'''
+corretta = "C"
+soluzione = '''L'onda sfigmica è la dilatazione della parete dell'arteria che corre lungo il vaso. Come ogni onda meccanica è tanto più veloce quanto più il mezzo è rigido, come su una corda più tesa: nelle arterie rigide l'onda è più veloce. Per questo la sua velocità si misura come indice di rischio cardiovascolare.'''
+
+  [[quesito.opzione]]
+  testo = '''minore, perché un'arteria rigida si dilata meno e l'onda fa più fatica a propagarsi'''
+  commento = '''Rovescia il ruolo della rigidità: un mezzo più rigido richiama indietro più in fretta la parte spostata, e l'onda è più veloce, come sulla corda più tesa.'''
+  [[quesito.opzione]]
+  testo = '''la stessa, perché la velocità dell'onda dipende solo dalla frequenza del battito cardiaco'''
+  commento = '''La frequenza è fissata dalla sorgente, il cuore; la velocità dipende dal mezzo, cioè dalla parete dell'arteria.'''
+  [[quesito.opzione]]
+  testo = '''maggiore, perché in un'arteria più rigida la deformazione della parete si propaga più in fretta'''
+  [[quesito.opzione]]
+  testo = '''maggiore, perché nelle arterie ristrette il sangue scorre più veloce'''
+  commento = '''Confonde la velocità dell'onda con quella del sangue: l'onda sfigmica è la deformazione della parete, e viaggia molto più veloce del sangue, che nell'aorta non supera circa \SI{1}{\metre\per\second}.'''
+  [[quesito.opzione]]
+  testo = '''minore, perché il sangue di un anziano è più denso e ha più inerzia'''
+  commento = '''Con l'età la densità del sangue non cambia in modo apprezzabile; cambia la rigidità della parete, ed è lei a rendere l'onda più veloce.'''
+
+[[quesito]]
+id = "ud4-vel-fisiologica"
+tipo = "completamento"
+testo = '''La soluzione fisiologica ha modulo di compressibilità di circa {{B}} e densità di circa {{rho}}. La velocità del suono nella soluzione fisiologica vale \completa\ \si{\metre\per\second}.'''
+dati.B = { valore = "2,25e9", unita = "\\pascal" }
+dati.rho = { valore = 1000, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+calcolo = "math.sqrt(B / rho)"
+risposta = "1500"
+soluzione = '''Dalla formula della velocità del suono in un fluido:
+\[
+  v = \sqrt{\frac{B}{\rho}} = \sqrt{\frac{\SI{2,25e9}{\pascal}}{\SI{e3}{\kilo\gram\per\metre\cubed}}} = \sqrt{2{,}25 \cdot 10^{9-3}}\,\si{\metre\per\second} = \sqrt{2{,}25} \cdot 10^{3}\,\si{\metre\per\second} = \SI{1500}{\metre\per\second}
+\]
+perché $1{,}5^2 = 2{,}25$. Chi scrive 2250000 ha dimenticato la radice quadrata.'''
+
+[[quesito]]
+id = "ud4-interf-frequenza"
+tipo = "completamento"
+testo = '''Due altoparlanti collegati allo stesso amplificatore emettono in fase lo stesso suono. Un ascoltatore si trova {{dr}} più lontano da un altoparlante che dall'altro. Con la velocità del suono in aria di {{v}}, la frequenza più bassa per cui nel punto dell'ascoltatore l'interferenza è distruttiva vale \completa\ Hz.'''
+dati.dr = { valore = "0,85", unita = "m" }
+dati.v = { valore = 340, unita = "m/s" }
+calcolo = "v / (2 * dr)"
+risposta = "200"
+soluzione = '''L'interferenza è distruttiva se $\Delta r = (n + \frac{1}{2})\lambda$. La frequenza più bassa corrisponde alla lunghezza d'onda più grande, cioè a $n = 0$: $\Delta r = \lambda/2$, quindi $\lambda = 2\Delta r = 2 \cdot \SI{0,85}{\metre} = \SI{1,7}{\metre}$. Da $v = \lambda f$:
+\[
+  f = \frac{v}{\lambda} = \frac{\SI{340}{\metre\per\second}}{\SI{1,7}{\metre}} = \SI{200}{\hertz}
+\]
+Chi scrive 400 ha posto $\Delta r = \lambda$, che dà interferenza costruttiva.'''
+
+[[quesito]]
+id = "ud4-int-q-sonda"
+tipo = "multipla"
+testo = '''Una sonda per ultrasuoni eroga una potenza di {{P}} in modo uniforme su una superficie di {{S}}. L'intensità sotto la sonda è'''
+dati.P = { valore = "0,60", unita = "W" }
+dati.S = { valore = "2,0", unita = "\\centi\\metre\\squared" }
+corretta = "E"
+calcolo = "P / (S * 1e-4)"
+soluzione = '''La superficie in metri quadrati è $\SI{2,0}{\centi\metre\squared} = 2{,}0 \cdot (\SI{e-2}{\metre})^2 = \SI{2,0e-4}{\metre\squared}$. L'intensità è la potenza divisa per la superficie:
+\[
+  I = \frac{P}{S} = \frac{\SI{0,60}{\watt}}{\SI{2,0e-4}{\metre\squared}} = 0{,}30 \cdot 10^{4}\,\si{\watt\per\metre\squared} = \SI{3,0e3}{\watt\per\metre\squared}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0,30}{\watt\per\metre\squared}'''
+  commento = '''Divide $0{,}60$ per $2{,}0$ senza convertire i centimetri quadrati: \SI{0,30}{\watt\per\centi\metre\squared} è giusto, ma non è in \si{\watt\per\metre\squared}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{30}{\watt\per\metre\squared}'''
+  commento = '''Converte i centimetri quadrati come centimetri, $\SI{1}{\centi\metre\squared} = \SI{e-2}{\metre\squared}$: $0{,}60/\num{2,0e-2} = 30$. Il fattore va elevato al quadrato, $(\num{e-2})^2 = \num{e-4}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3,3e-4}{\watt\per\metre\squared}'''
+  commento = '''Rovescia la formula: $S/P = \num{2,0e-4}/0{,}60 \approx \num{3,3e-4}$, che si misura in \si{\metre\squared\per\watt}.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3,0e5}{\watt\per\metre\squared}'''
+  commento = '''Confonde i centimetri quadrati con i millimetri quadrati, $\SI{1}{\milli\metre\squared} = \SI{e-6}{\metre\squared}$: $0{,}60/\num{2,0e-6} = \num{3,0e5}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{3,0e3}{\watt\per\metre\squared}'''
+  valore = 3000
+
+[[quesito]]
+id = "ud4-int-q-fa"
+tipo = "multipla"
+testo = '''Un'onda sonora si propaga in un mezzo. Senza cambiare mezzo, se ne raddoppia la frequenza e se ne triplica l'ampiezza. L'intensità'''
+corretta = "A"
+calcolo = "2**2 * 3**2"
+soluzione = '''L'intensità è proporzionale al quadrato della frequenza e al quadrato dell'ampiezza, $I \propto f^2 A^2$:
+\[
+  \frac{I'}{I} = \left(\frac{f'}{f}\right)^{2} \left(\frac{A'}{A}\right)^{2} = 2^2 \cdot 3^2 = 4 \cdot 9 = 36
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''diventa 36 volte più grande'''
+  valore = 36
+  [[quesito.opzione]]
+  testo = '''diventa 6 volte più grande'''
+  commento = '''Dimentica i quadrati: $2 \cdot 3 = 6$. L'intensità va come $f^2$ e come $A^2$.'''
+  [[quesito.opzione]]
+  testo = '''diventa 18 volte più grande'''
+  commento = '''Eleva al quadrato solo l'ampiezza: $2 \cdot 3^2 = 18$. Anche la frequenza conta al quadrato.'''
+  [[quesito.opzione]]
+  testo = '''diventa 12 volte più grande'''
+  commento = '''Eleva al quadrato solo la frequenza: $2^2 \cdot 3 = 12$. Anche l'ampiezza conta al quadrato.'''
+  [[quesito.opzione]]
+  testo = '''diventa 9 volte più grande'''
+  commento = '''Tiene conto solo dell'ampiezza, $3^2 = 9$, come se la frequenza non contasse. A parità di ampiezza, un punto che oscilla più in fretta trasporta più energia.'''
+
+[[quesito]]
+id = "ud4-int-q-nono"
+tipo = "multipla"
+testo = '''Una sorgente sonora piccola emette allo stesso modo in tutte le direzioni. A {{r1}} l'intensità del suono è {{I1}}. A {{r2}} l'intensità è'''
+dati.r1 = { valore = "2,0", unita = "m" }
+dati.r2 = { valore = "6,0", unita = "m" }
+dati.I1 = { valore = "9,0e-4", unita = "W/m^2" }
+corretta = "C"
+calcolo = "I1 * (r1 / r2)**2"
+soluzione = '''La distanza diventa $6{,}0/2{,}0 = 3$ volte più grande. Per la legge dell'inverso del quadrato l'intensità si divide per $3^2 = 9$:
+\[
+  I_2 = I_1 \left(\frac{r_1}{r_2}\right)^{2} = \frac{\SI{9,0e-4}{\watt\per\metre\squared}}{9} = \SI{1,0e-4}{\watt\per\metre\squared}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{3,0e-4}{\watt\per\metre\squared}'''
+  commento = '''Divide per il rapporto delle distanze, 3, senza elevarlo al quadrato: è come scende l'ampiezza, non l'intensità.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5,6e-5}{\watt\per\metre\squared}'''
+  commento = '''Eleva al quadrato la differenza delle distanze invece del rapporto: $(6{,}0 - 2{,}0)^2 = 16$, e $\num{9,0e-4}/16 \approx \num{5,6e-5}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,0e-4}{\watt\per\metre\squared}'''
+  valore = 1e-4
+  [[quesito.opzione]]
+  testo = '''\SI{2,7e-3}{\watt\per\metre\squared}'''
+  commento = '''Moltiplica per il rapporto delle distanze: $\num{9,0e-4} \cdot 3 = \num{2,7e-3}$. Allontanandosi l'intensità diminuisce, e diminuisce con il quadrato.'''
+  [[quesito.opzione]]
+  testo = '''\SI{8,1e-3}{\watt\per\metre\squared}'''
+  commento = '''Usa il quadrato giusto ma rovescia il rapporto: $\num{9,0e-4} \cdot 9 = \num{8,1e-3}$. Lontano dalla sorgente l'energia si distribuisce su una sfera più grande, e l'intensità cala.'''
+
+[[quesito]]
+id = "ud4-int-q-ampiezza"
+tipo = "multipla"
+testo = '''Ci si allontana da una sorgente sonora piccola e isotropa, in un mezzo che non assorbe l'onda, fino al doppio della distanza. La frequenza non cambia. L'ampiezza dell'onda'''
+corretta = "B"
+calcolo = "math.sqrt(1 / 2**2)"
+soluzione = '''Per la legge dell'inverso del quadrato, a distanza doppia l'intensità diventa $1/2^2 = 1/4$. A frequenza fissata l'intensità è proporzionale al quadrato dell'ampiezza, quindi l'ampiezza è proporzionale alla radice dell'intensità:
+\[
+  \frac{A_2}{A_1} = \sqrt{\frac{I_2}{I_1}} = \sqrt{\frac{1}{4}} = \frac{1}{2}
+\]
+L'ampiezza diminuisce come $1/r$: si dimezza.'''
+
+  [[quesito.opzione]]
+  testo = '''diventa un quarto'''
+  commento = '''Confonde l'ampiezza con l'intensità: è l'intensità che diventa un quarto.'''
+  [[quesito.opzione]]
+  testo = '''si dimezza'''
+  valore = 0.5
+  [[quesito.opzione]]
+  testo = '''resta la stessa, perché il mezzo non assorbe energia'''
+  commento = '''L'energia totale si conserva, ma si distribuisce su una sfera di superficie quattro volte più grande: su ogni metro quadrato ne arriva un quarto, e l'ampiezza cala.'''
+  [[quesito.opzione]]
+  testo = '''si riduce di un fattore $\sqrt{2} \approx 1{,}4$'''
+  commento = '''Fa diminuire l'intensità come $1/r$ invece che come $1/r^2$: l'intensità si dimezzerebbe e l'ampiezza si ridurrebbe di $\sqrt{2}$.'''
+  [[quesito.opzione]]
+  testo = '''diventa un sedicesimo'''
+  commento = '''Eleva al quadrato invece di estrarre la radice: $(1/4)^2 = 1/16$. Dall'intensità all'ampiezza si passa con la radice quadrata.'''
+
+[[quesito]]
+id = "ud4-int-q-sirena"
+tipo = "multipla"
+testo = '''La sirena di un'ambulanza si può trattare come una sorgente sonora isotropa. A {{r}} dalla sirena l'intensità del suono è {{I}}. La potenza sonora emessa dalla sirena è circa'''
+dati.r = { valore = 10, unita = "m" }
+dati.I = { valore = "1,0e-3", unita = "W/m^2" }
+corretta = "D"
+calcolo = "I * 4 * math.pi * r**2"
+soluzione = '''La potenza si distribuisce su una sfera di raggio $r = \SI{10}{\metre}$, quindi $P = I \cdot 4\pi r^2$. La superficie della sfera è $4\pi r^2 = 4 \cdot 3{,}14 \cdot \SI{100}{\metre\squared} \approx \SI{1,3e3}{\metre\squared}$:
+\[
+  P = I \cdot 4\pi r^2 = \SI{1,0e-3}{\watt\per\metre\squared} \cdot \SI{1,26e3}{\metre\squared} \approx \SI{1,3}{\watt}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{0,10}{\watt}'''
+  commento = '''Moltiplica l'intensità per $r^2$ e dimentica $4\pi$: $\num{1,0e-3} \cdot 100 = 0{,}10$. $r^2$ non è la superficie della sfera.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,0e-5}{\watt}'''
+  commento = '''Divide l'intensità per $r^2$ invece di moltiplicarla per la superficie: $\num{1,0e-3}/100 = \num{1,0e-5}$. Da $I = P/S$ viene $P = I S$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{0,13}{\watt}'''
+  commento = '''Usa $4\pi r$ invece di $4\pi r^2$: $12{,}6 \cdot 10 \cdot \num{1,0e-3} \approx 0{,}13$. La superficie della sfera va con il quadrato del raggio.'''
+  [[quesito.opzione]]
+  testo = '''\SI{1,3}{\watt}'''
+  valore = 1.2566370614359172
+  [[quesito.opzione]]
+  testo = '''\SI{0,31}{\watt}'''
+  commento = '''Usa l'area del cerchio, $\pi r^2 \approx \SI{314}{\metre\squared}$, invece della superficie della sfera, $4\pi r^2$: il risultato è quattro volte troppo piccolo.'''
+
+[[quesito]]
+id = "ud4-int-q-potenza"
+tipo = "completamento"
+testo = '''Una sonda per fisioterapia produce ultrasuoni di intensità {{I}} su una testina di {{S}}. La potenza erogata vale \completa\ W.'''
+dati.I = { valore = "1,2e4", unita = "W/m^2" }
+dati.S = { valore = "2,5", unita = "\\centi\\metre\\squared" }
+calcolo = "I * S * 1e-4"
+risposta = "3"
+soluzione = '''La superficie è $\SI{2,5}{\centi\metre\squared} = \SI{2,5e-4}{\metre\squared}$. Da $I = P/S$:
+\[
+  P = I S = \SI{1,2e4}{\watt\per\metre\squared} \cdot \SI{2,5e-4}{\metre\squared} = 1{,}2 \cdot 2{,}5 \cdot 10^{4-4}\,\si{\watt} = \SI{3}{\watt}
+\]
+Chi scrive 30000 ha moltiplicato per 2,5 senza convertire i centimetri quadrati; chi scrive 4800 ha diviso l'intensità per la superficie.'''
+
+[[quesito]]
+id = "ud4-int-q-rapporto"
+tipo = "completamento"
+testo = '''Due onde sonore viaggiano nello stesso mezzo. La seconda ha frequenza tripla e ampiezza dimezzata rispetto alla prima. Il rapporto fra l'intensità della seconda e quella della prima vale \completa.'''
+calcolo = "3**2 * (1 / 2)**2"
+risposta = "2,25"
+soluzione = '''L'intensità è proporzionale a $f^2 A^2$:
+\[
+  \frac{I_2}{I_1} = \left(\frac{f_2}{f_1}\right)^{2} \left(\frac{A_2}{A_1}\right)^{2} = 3^2 \cdot \left(\frac{1}{2}\right)^{2} = \frac{9}{4} = 2{,}25
+\]
+Si può scrivere anche la frazione ridotta, 9/4. Chi scrive 1,5 ha dimenticato i quadrati ($3 \cdot 1/2$); chi scrive 9 non ha tenuto conto dell'ampiezza.'''
+
+[[quesito]]
+id = "ud4-db-dieci-sorgenti"
+tipo = "multipla"
+testo = '''In un laboratorio di analisi funzionano dieci centrifughe uguali. Ognuna, da sola, produce al centro della stanza un livello sonoro di \SI{60}{\deci\bel}. Con tutte e dieci accese, il livello al centro della stanza è'''
+corretta = "A"
+calcolo = "60 + 10 * math.log10(10)"
+soluzione = '''Le centrifughe producono suoni indipendenti: si sommano le intensità. Dieci sorgenti uguali danno un'intensità dieci volte più grande, e il livello cambia di
+\[
+  \Delta\beta = 10 \log_{10} 10 = \SI{10}{\deci\bel}
+\]
+Il livello passa da \SI{60}{\deci\bel} a \SI{70}{\deci\bel}.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{70}{\deci\bel}'''
+  valore = 70
+  [[quesito.opzione]]
+  testo = '''\SI{600}{\deci\bel}'''
+  commento = '''Somma i livelli, $10 \cdot 60 = 600$: si sommano le intensità, non i decibel. Un livello di \SI{600}{\deci\bel} non esiste in natura.'''
+  [[quesito.opzione]]
+  testo = '''\SI{63}{\deci\bel}'''
+  commento = '''Aggiunge \SI{3}{\deci\bel}, che è l'aumento per un'intensità doppia: qui l'intensità è dieci volte più grande.'''
+  [[quesito.opzione]]
+  testo = '''\SI{60}{\deci\bel}'''
+  commento = '''Pensa che sorgenti uguali non cambino il livello. Ogni centrifuga aggiunge la sua intensità, e l'intensità totale è dieci volte quella di una.'''
+  [[quesito.opzione]]
+  testo = '''\SI{80}{\deci\bel}'''
+  commento = '''Aggiunge \SI{20}{\deci\bel}, che corrispondono a un'intensità cento volte più grande, non dieci: $10\log_{10} 100 = 20$.'''
+
+[[quesito]]
+id = "ud4-db-rapporto"
+tipo = "multipla"
+testo = '''Una conversazione normale ha un livello sonoro di \SI{60}{\deci\bel}, un sussurro di \SI{30}{\deci\bel}. Il rapporto fra l'intensità della conversazione e quella del sussurro è'''
+corretta = "C"
+calcolo = "10**((60 - 30) / 10)"
+soluzione = '''La differenza di livello è $60 - 30 = \SI{30}{\deci\bel}$. Da $\beta_2 - \beta_1 = 10\log_{10}(I_2/I_1)$:
+\[
+  \log_{10}\frac{I_2}{I_1} = \frac{30}{10} = 3
+  \qquad\Longrightarrow\qquad
+  \frac{I_2}{I_1} = 10^{3} = 1000
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''30'''
+  commento = '''Si ferma alla differenza dei livelli, che sono decibel, non un rapporto di intensità.'''
+  [[quesito.opzione]]
+  testo = '''2'''
+  commento = '''Divide i due livelli, $60/30 = 2$: i decibel contano le potenze di 10, e il loro rapporto non ha significato.'''
+  [[quesito.opzione]]
+  testo = '''1000'''
+  valore = 1000
+  [[quesito.opzione]]
+  testo = '''3'''
+  commento = '''Calcola la differenza in bel, $30/10 = 3$, ma non risale al rapporto: 3 è il logaritmo del rapporto, il rapporto è $10^{3}$.'''
+  [[quesito.opzione]]
+  testo = '''$10^{30}$'''
+  commento = '''Usa come esponente la differenza in decibel, dimenticando di dividerla per 10: sarebbe un rapporto più grande di quello fra il dolore e la soglia di udibilità, che è $10^{12}$.'''
+
+[[quesito]]
+id = "ud4-eco-sonda-tiroide"
+tipo = "multipla"
+testo = '''Per un'ecografia della tiroide, che si trova a pochi centimetri sotto la pelle, conviene usare'''
+corretta = "B"
+soluzione = '''I dettagli più piccoli che l'ecografia distingue sono dell'ordine della lunghezza d'onda, $\lambda = v/f$: a frequenza più alta corrisponde una lunghezza d'onda più corta e un'immagine più dettagliata. Il prezzo è un assorbimento maggiore nei tessuti, che limita la profondità raggiungibile. Per un organo superficiale come la tiroide l'assorbimento non è un problema, e si usa una sonda ad alta frequenza (7--15~MHz): a \SI{12}{\mega\hertz} $\lambda = 1540/(\num{1,2e7})\,\si{\metre} \approx \SI{0,13}{\milli\metre}$.'''
+
+  [[quesito.opzione]]
+  testo = '''una sonda da \SI{3}{\mega\hertz}, perché gli ultrasuoni a bassa frequenza penetrano più in profondità'''
+  commento = '''La penetrazione serve per gli organi profondi dell'addome. Per la tiroide, a pochi centimetri, conta il dettaglio, e a \SI{3}{\mega\hertz} la lunghezza d'onda è circa \SI{0,5}{\milli\metre}, quattro volte più grande che a \SI{12}{\mega\hertz}.'''
+  [[quesito.opzione]]
+  testo = '''una sonda da \SI{12}{\mega\hertz}, perché la lunghezza d'onda più corta mostra dettagli più piccoli e a pochi centimetri l'assorbimento non è un problema'''
+  [[quesito.opzione]]
+  testo = '''una sonda da \SI{12}{\mega\hertz}, perché gli ultrasuoni a frequenza più alta viaggiano più veloci nei tessuti'''
+  commento = '''La scelta è giusta, il motivo no: la velocità del suono dipende dal mezzo, non dalla frequenza. In un tessuto molle è circa \SI{1540}{\metre\per\second} a qualunque frequenza.'''
+  [[quesito.opzione]]
+  testo = '''una sonda da \SI{3}{\mega\hertz}, perché a bassa frequenza la lunghezza d'onda è più corta e l'immagine più nitida'''
+  commento = '''Rovescia la relazione $\lambda = v/f$: a frequenza più bassa la lunghezza d'onda è più lunga, e i dettagli piccoli si perdono.'''
+  [[quesito.opzione]]
+  testo = '''una sonda da \SI{20}{\kilo\hertz}, appena sopra il limite dell'udito, perché i tessuti la assorbono pochissimo'''
+  commento = '''A \SI{20}{\kilo\hertz} la lunghezza d'onda nei tessuti è $1540/\num{2e4} \approx \SI{0,077}{\metre} = \SI{7,7}{\centi\metre}$, più grande della tiroide stessa: non si vedrebbe nessun dettaglio. L'ecografia usa frequenze fra 2 e \SI{15}{\mega\hertz}.'''
+
+[[quesito]]
+id = "ud4-db-audiometro"
+tipo = "multipla"
+testo = '''Durante un esame audiometrico si fa sentire al paziente un tono di \SI{40}{\deci\bel}. Con la soglia di udibilità $I_0 = \SI{e-12}{\watt\per\metre\squared}$, l'intensità del tono è'''
+corretta = "D"
+calcolo = "I0 * 10**(40 / 10)"
+soluzione = '''Dalla forma inversa della definizione:
+\[
+  I = I_0 \cdot 10^{\beta/10} = \SI{e-12}{\watt\per\metre\squared} \cdot 10^{40/10} = 10^{-12+4}\,\si{\watt\per\metre\squared} = \SI{e-8}{\watt\per\metre\squared}
+\]'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{4e-11}{\watt\per\metre\squared}'''
+  commento = '''Moltiplica la soglia per il livello, $40 \cdot 10^{-12}$: i decibel non sono un fattore moltiplicativo, ma dicono quante potenze di 10 (in decimi) separano $I$ da $I_0$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{e28}{\watt\per\metre\squared}'''
+  commento = '''Dimentica di dividere il livello per 10: $10^{-12} \cdot 10^{40} = 10^{28}$, un'intensità assurda.'''
+  [[quesito.opzione]]
+  testo = '''\SI{e-16}{\watt\per\metre\squared}'''
+  commento = '''Divide la soglia per $10^{4}$ invece di moltiplicarla: $10^{-12-4} = 10^{-16}$. Un livello positivo vuol dire un'intensità più grande della soglia.'''
+  [[quesito.opzione]]
+  testo = '''\SI{e-8}{\watt\per\metre\squared}'''
+  valore = 1e-8
+  [[quesito.opzione]]
+  testo = '''\SI{e4}{\watt\per\metre\squared}'''
+  commento = '''Calcola solo $10^{40/10} = 10^{4}$, che è il rapporto $I/I_0$: va ancora moltiplicato per $I_0$.'''
+
+[[quesito]]
+id = "ud4-db-dieci-metri"
+tipo = "completamento"
+testo = '''Il cicalino di un allarme antincendio, che si può trattare come una sorgente piccola e isotropa, produce {{b}} a {{r1}} di distanza. A {{r2}} di distanza il livello sonoro vale \completa\ \si{\deci\bel}.'''
+dati.b = { valore = 90, unita = "\\deci\\bel" }
+dati.r1 = { valore = 1, unita = "m" }
+dati.r2 = { valore = 10, unita = "m" }
+calcolo = "b + 10 * math.log10((r1 / r2)**2)"
+risposta = "70"
+soluzione = '''La distanza diventa dieci volte più grande: l'intensità si divide per $10^2 = 100$. Il livello cambia di
+\[
+  \Delta\beta = 10 \log_{10}\frac{1}{100} = 10 \cdot (-2)\,\si{\deci\bel} = \SI{-20}{\deci\bel}
+\]
+e passa da \SI{90}{\deci\bel} a \SI{70}{\deci\bel}. Chi scrive 80 ha diviso l'intensità per 10, dimenticando il quadrato della legge dell'inverso del quadrato; chi scrive 9 ha diviso il livello per la distanza, ma è l'intensità a scendere con la distanza, non i decibel.'''
+
+[[quesito]]
+id = "ud4-eco-tempo"
+tipo = "completamento"
+testo = '''In un'ecografia del collo un linfonodo si trova a {{d}} di profondità. Con una velocità del suono nei tessuti di \SI{1540}{\metre\per\second}, la sua eco torna alla sonda \completa\ \si{\micro\second} dopo l'emissione dell'impulso.'''
+dati.d = { valore = "3,08", unita = "cm" }
+calcolo = "2 * d * 1e-2 / v_tessuto * 1e6"
+risposta = "40"
+soluzione = '''L'impulso va al linfonodo e torna: percorre $2d = 2 \cdot \SI{3,08}{\centi\metre} = \SI{6,16}{\centi\metre} = \SI{6,16e-2}{\metre}$. Da $d = vt/2$:
+\[
+  t = \frac{2d}{v} = \frac{\SI{6,16e-2}{\metre}}{\SI{1,54e3}{\metre\per\second}} = 4 \cdot 10^{-2-3}\,\si{\second} = \SI{4e-5}{\second} = \SI{40}{\micro\second}
+\]
+perché $6{,}16 = 4 \cdot 1{,}54$. Chi scrive 20 ha dimenticato il ritorno dell'eco.'''
+
+[[quesito]]
+id = "ud4-suono-acuto"
+tipo = "completamento"
+testo = '''Il suono più acuto che un ragazzo riesce a sentire ha una frequenza di circa \SI{20}{\kilo\hertz}. Nell'aria, dove il suono viaggia a \SI{340}{\metre\per\second}, la sua lunghezza d'onda vale \completa\ \si{\centi\metre}.'''
+calcolo = "v_aria / 20e3 * 100"
+risposta = "1,7"
+soluzione = '''La frequenza in hertz è $\SI{20}{\kilo\hertz} = \SI{2e4}{\hertz}$. Da $v = \lambda f$:
+\[
+  \lambda = \frac{v}{f} = \frac{\SI{340}{\metre\per\second}}{\SI{2e4}{\hertz}} = 170 \cdot 10^{-4}\,\si{\metre} = \SI{1,7e-2}{\metre} = \SI{1,7}{\centi\metre}
+\]
+Chi scrive 0,017 ha dato il risultato in metri; chi scrive 17, in millimetri. Il suono più grave udibile, a \SI{20}{\hertz}, ha invece $\lambda = 340/20 = \SI{17}{\metre}$.'''
+
+[[quesito]]
+id = "ud4-doppler-osservatore"
+tipo = "multipla"
+testo = '''Un osservatore corre verso una sorgente sonora ferma. Rispetto alla frequenza emessa, la frequenza che percepisce è'''
+corretta = "B"
+soluzione = '''È l'effetto Doppler con l'osservatore in moto. La sorgente è ferma, quindi i fronti d'onda e la lunghezza d'onda nell'aria non cambiano. Ma l'osservatore va incontro ai fronti d'onda e ne incontra di più ogni secondo: la frequenza che percepisce è più alta di quella emessa. Se si allontanasse, ne incontrerebbe di meno e la frequenza sarebbe più bassa.'''
+
+  [[quesito.opzione]]
+  testo = '''uguale, perché la sorgente è ferma e i fronti d'onda non cambiano'''
+  commento = '''I fronti d'onda non cambiano davvero, ma l'osservatore che corre li incontra più spesso: l'effetto Doppler c'è anche quando si muove solo l'osservatore.'''
+  [[quesito.opzione]]
+  testo = '''più alta, perché l'osservatore incontra più fronti d'onda ogni secondo'''
+  [[quesito.opzione]]
+  testo = '''più alta, perché davanti all'osservatore la lunghezza d'onda si accorcia'''
+  commento = '''La conclusione è giusta, il motivo no: la lunghezza d'onda si accorcia davanti a una sorgente in moto. Qui la sorgente è ferma e la lunghezza d'onda resta la stessa; cambia il ritmo con cui l'osservatore incontra i fronti.'''
+  [[quesito.opzione]]
+  testo = '''più bassa, perché l'osservatore va contro il verso di propagazione dell'onda'''
+  commento = '''Rovescia l'effetto: andare incontro all'onda vuol dire incontrare più fronti al secondo, e la frequenza percepita sale.'''
+  [[quesito.opzione]]
+  testo = '''più alta, ma solo quando l'osservatore arriva vicino alla sorgente'''
+  commento = '''L'effetto Doppler dipende dalla velocità con cui la distanza cambia, non dalla distanza: la frequenza è più alta già da lontano, finché l'osservatore corre verso la sorgente.'''
+
+[[quesito]]
+id = "ud4-doppler-vena"
+tipo = "multipla"
+testo = '''In un ecocolordoppler del collo il sangue di una vena giugulare scorre allontanandosi dalla sonda. Rispetto alla frequenza emessa dalla sonda, l'eco riflessa dai globuli rossi torna con una frequenza'''
+corretta = "E"
+soluzione = '''I globuli rossi che riflettono gli ultrasuoni si allontanano dalla sonda: per l'effetto Doppler l'eco torna con una frequenza più bassa di quella emessa. Per convenzione un flusso che si allontana dalla sonda è colorato in blu, uno che si avvicina in rosso, che il vaso sia un'arteria o una vena.'''
+
+  [[quesito.opzione]]
+  testo = '''più alta, e il flusso appare in rosso'''
+  commento = '''Descrive un flusso che si avvicina alla sonda. Qui il sangue si allontana: la frequenza dell'eco scende, e il colore è il blu.'''
+  [[quesito.opzione]]
+  testo = '''più alta, e il flusso appare in blu'''
+  commento = '''Il colore è giusto, la frequenza no: il blu indica proprio un flusso che si allontana, cioè un'eco con frequenza più bassa di quella emessa.'''
+  [[quesito.opzione]]
+  testo = '''uguale, e il flusso appare in blu perché il vaso è una vena'''
+  commento = '''Il colore non dice se il vaso è un'arteria o una vena, ma il verso del flusso rispetto alla sonda. E la frequenza cambia, perché i globuli rossi che riflettono l'onda sono in moto.'''
+  [[quesito.opzione]]
+  testo = '''più bassa, e il flusso appare in rosso'''
+  commento = '''La frequenza è giusta, il colore no: per convenzione il rosso indica un flusso che si avvicina alla sonda, il blu uno che si allontana.'''
+  [[quesito.opzione]]
+  testo = '''più bassa, e il flusso appare in blu'''
 
 # ==================================================================== quesiti lampo, in ordine di dispensa
 
@@ -117,8 +2554,8 @@ La differenza di cammino è un numero intero di lunghezze d'onda più mezza: le 
   testo = '''costruttiva, perché la differenza di cammino è \SI{3}{\metre}, un numero intero di metri'''
   commento = '''La differenza di cammino va confrontata con la lunghezza d'onda, non con il metro: \SI{3}{\metre} sono 1,5 lunghezze d'onda.'''
   [[quesito.opzione]]
-  testo = '''distruttiva, perché basta una differenza di cammino qualsiasi per avere interferenza distruttiva'''
-  commento = '''Se la differenza di cammino fosse un numero intero di lunghezze d'onda, per esempio \SI{4}{\metre}, l'interferenza sarebbe costruttiva.'''
+  testo = '''distruttiva, perché la differenza di cammino è più grande della lunghezza d'onda'''
+  commento = '''Una differenza di cammino più grande di $\lambda$ può dare qualunque tipo di interferenza: con \SI{4}{\metre}, due lunghezze d'onda, sarebbe costruttiva. Conta quante lunghezze d'onda ci stanno, non se $\Delta r$ supera $\lambda$.'''
   [[quesito.opzione]]
   testo = '''distruttiva, perché la differenza di cammino è una volta e mezza la lunghezza d'onda'''
   valore = 1.5

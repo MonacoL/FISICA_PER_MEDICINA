@@ -1,0 +1,32 @@
+% Ciclo di Carnot nel piano pV per un gas monoatomico (gamma = 5/3), unità arbitrarie, nR = 1.
+% A (1; 1) -> B (2; 0,5) isoterma a T_c = 1; B -> C adiabatica fino a T_f = 0,6:
+% V_C = 2 (1/0,6)^1,5 = 4,303; C -> D isoterma a T_f: V_D = 2,152; D -> A adiabatica.
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.68\linewidth, height=5.6cm,
+  axis lines=left, xmin=0, xmax=4.9, ymin=0, ymax=1.2,
+  xlabel={volume $V$}, ylabel={pressione $p$},
+  xtick=\empty, ytick=\empty,
+  label style={font=\small},
+  clip=false,
+]
+  \fill[medica!20]
+    plot[domain=1:2, samples=40] (\x, {1/\x})
+    -- plot[domain=2:4.303, samples=40] (\x, {0.5*(2/\x)^(5/3)})
+    -- plot[domain=4.303:2.152, samples=40] (\x, {0.6/\x})
+    -- plot[domain=2.152:1, samples=40] (\x, {0.2788*(2.152/\x)^(5/3)})
+    -- cycle;
+  \addplot[attenzione, very thick, domain=1:2, samples=40, -{Stealth}] {1/x};
+  \addplot[esempio, very thick, domain=2:4.303, samples=40, -{Stealth}] {0.5*(2/x)^(5/3)};
+  \addplot[formula, very thick, domain=4.303:2.152, samples=40, -{Stealth}] {0.6/x};
+  \addplot[esempio, very thick, domain=2.152:1, samples=40, -{Stealth}] {0.2788*(2.152/x)^(5/3)};
+  \fill (axis cs:1,1) circle (1.8pt) node[above right, font=\small] {$A$};
+  \fill (axis cs:2,0.5) circle (1.8pt) node[above right, font=\small] {$B$};
+  \fill (axis cs:4.303,0.1394) circle (1.8pt) node[above right, font=\small] {$C$};
+  \fill (axis cs:2.152,0.2788) circle (1.8pt) node[below left, font=\small] {$D$};
+  \node[attenzione, font=\scriptsize, anchor=south west] at (axis cs:1.5,0.68) {isoterma $T_c$: assorbe $Q_c$};
+  \node[formula, font=\scriptsize, anchor=north] at (axis cs:3.2,0.16) {isoterma $T_f$: cede $|Q_f|$};
+  \node[esempio, font=\scriptsize, anchor=south west] at (axis cs:3.0,0.27) {adiabatica};
+  \node[esempio, font=\scriptsize, anchor=east] at (axis cs:1.3,0.5) {adiabatica};
+\end{axis}
+\end{tikzpicture}
