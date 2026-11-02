@@ -277,7 +277,7 @@ dati.r = { valore = "0,24", unita = "\\nano\\metre" }
   domanda = '''Quanto vale la forza di attrazione fra i due ioni nel vuoto?'''
   calcolo = "k * e**2 / (r * 1e-9)**2"
   risultato = { valore = 4.0e-9, unita = "\\newton", cifre = 2 }
-  soluzione = '''Con la legge di Coulomb, $e^{2} = (\SI{1,6e-19}{\coulomb})^{2} = \SI{2,56e-38}{\coulomb\squared}$ e $r^{2} = (\SI{2,4e-10}{\metre})^{2} = \SI{5,76e-20}{\metre\squared}$:
+  soluzione = '''Nel SI la distanza è $r = \SI{0,24}{\nano\metre} = 0{,}24 \cdot \SI{e-9}{\metre} = \SI{2,4e-10}{\metre}$. Con la legge di Coulomb, $e^{2} = (\SI{1,6e-19}{\coulomb})^{2} = \SI{2,56e-38}{\coulomb\squared}$ e $r^{2} = (\SI{2,4e-10}{\metre})^{2} = \SI{5,76e-20}{\metre\squared}$:
 \[
   F_0 = k\,\frac{e^{2}}{r^{2}} = \frac{\num{9e9} \cdot \num{2,56e-38}}{\num{5,76e-20}}\,\si{\newton} = \frac{\num{2,304e-28}}{\num{5,76e-20}}\,\si{\newton} = 0{,}40 \cdot 10^{-28-(-20)}\,\si{\newton} = \SI{4,0e-9}{\newton}
 \]
@@ -470,7 +470,7 @@ Da $K = \frac12 m_p v^{2}$:
 \[
   v = \sqrt{\frac{2K}{m_p}} = \sqrt{\frac{\SI{9,6e-17}{\joule}}{\SI{1,67e-27}{\kilo\gram}}} = \sqrt{\num{5,75e10}}\,\si{\metre\per\second} \approx \SI{2,4e5}{\metre\per\second}
 \]
-dove $9{,}6/1{,}67 \approx 5{,}75$, $10^{-17-(-27)} = 10^{10}$ e $\sqrt{5{,}75} \approx 2{,}4$, perché $2{,}4^{2} = 5{,}76$.'''
+dove $9{,}6/1{,}67 \approx 5{,}75$, $10^{-17-(-27)} = 10^{10}$ e $\sqrt{5{,}75} \approx 2{,}4$, perché $2{,}4^{2} = 5{,}76$. La potenza di 10 è $\sqrt{10^{10}} = 10^{5}$, perché la radice dimezza l'esponente.'''
 
   [[problema.parte]]
   domanda = '''Un elettrone viene lasciato fermo in $B$. Si muove da solo verso $A$ o si allontana da $A$? Con che velocità arriva in $A$?'''
@@ -481,7 +481,9 @@ dove $9{,}6/1{,}67 \approx 5{,}75$, $10^{-17-(-27)} = 10^{10}$ e $\sqrt{5{,}75} 
 \[
   v = \sqrt{\frac{2K}{m_e}} = \sqrt{\frac{\SI{9,6e-17}{\joule}}{\SI{9,1e-31}{\kilo\gram}}} = \sqrt{\num{1,05e14}}\,\si{\metre\per\second} \approx \SI{1,0e7}{\metre\per\second}
 \]
-dove $9{,}6/9{,}1 \approx 1{,}05$, $10^{-17-(-31)} = 10^{14}$ e $\sqrt{1{,}05} \approx 1{,}0$. Stessa energia, ma l'elettrone è circa 1800 volte più leggero, e va circa $\sqrt{1800} \approx 42$ volte più veloce (infatti $42^2 = 1764$).'''
+dove $9{,}6/9{,}1 \approx 1{,}05$, $10^{-17-(-31)} = 10^{14}$ $\sqrt{1{,}05} \approx 1{,}0$ e $\sqrt{10^{14}} = 10^{7}$.
+
+Stessa energia, ma da $v = \sqrt{2K/m}$ la velocità va come $1/\sqrt{m}$. L'elettrone è circa 1800 volte più leggero, e quindi va circa $\sqrt{1800} \approx 42$ volte più veloce (infatti $42^2 = 1764$).'''
 
 [[problema]]
 id = "ud6-elettrostatica-alfa"
@@ -886,7 +888,7 @@ La potenza è l'energia per unità di tempo:
   risultato = { valore = 0.35, unita = "\\kilo\\watt\\hour", cifre = 2 }
   soluzione = '''L'energia è la potenza per il tempo. Con la potenza in chilowatt, $P = \SI{0,700}{\kilo\watt}$, e il tempo in ore, $\Delta t = \SI{0,5}{\hour}$, il risultato è già in chilowattora:
 \[
-  E = P\,\Delta t = \SI{0,700}{\kilo\watt} \cdot \SI{0,5}{\hour} = \SI{0,35}{\kilo\watt\hour}
+  W = P\,\Delta t = \SI{0,700}{\kilo\watt} \cdot \SI{0,5}{\hour} = \SI{0,35}{\kilo\watt\hour}
 \]
 In joule sono $0{,}35 \cdot \SI{3,6e6}{\joule} = \SI{1,26e6}{\joule}$; lo stesso numero viene da $\SI{700}{\watt} \cdot \SI{1800}{\second}$.'''
 
@@ -932,8 +934,9 @@ dati.A2 = { valore = 20, unita = "\\centi\\metre\\squared" }
   rapido = '''\SI{75}{\milli\volt}; \SI{0,50}{\milli\ampere} nel tessuto magro, \SI{0,020}{\milli\ampere} nel tessuto adiposo'''
   soluzione = '''Per la prima legge di Ohm, con la resistenza del punto (b) e $I = \SI{0,52e-3}{\ampere}$:
 \[
-  V = R_{\text{eq}}\,I = \frac{3750}{26}\,\si{\ohm} \cdot \SI{0,52e-3}{\ampere} = 3750 \cdot 0{,}02 \cdot 10^{-3}\,\si{\volt} = \SI{75e-3}{\volt} = \SI{75}{\milli\volt}
+  V = R_{\text{eq}}\,I = \frac{3750}{26}\,\si{\ohm} \cdot \SI{0,52e-3}{\ampere} = 3750 \cdot \frac{\num{0,52e-3}}{26}\,\si{\volt} = 3750 \cdot \num{0,02e-3}\,\si{\volt} = \SI{75e-3}{\volt} = \SI{75}{\milli\volt}
 \]
+perché $0{,}52/26 = 0{,}02$ e $3750 \cdot 0{,}02 = 75$.
 Questa differenza di potenziale è la stessa ai capi dei due tessuti, che sono in parallelo:
 \[
   I_1 = \frac{\SI{0,075}{\volt}}{\SI{150}{\ohm}} = \SI{5,0e-4}{\ampere} = \SI{0,50}{\milli\ampere}
@@ -945,14 +948,19 @@ La somma è $0{,}50 + 0{,}020 = \SI{0,52}{\milli\ampere}$. Quasi tutta la corren
 [[problema]]
 id = "ud6-corrente-sicurezza"
 livello = 3
-testo = '''Per una corrente che attraversa il corpo, la soglia di fibrillazione è circa \SI{100}{\milli\ampere} se la corrente entra ed esce dalla pelle (macroshock), circa \SI{100}{\micro\ampere} se arriva direttamente al cuore (microshock); sotto circa \SI{1}{\milli\ampere} la corrente non si sente. La resistenza del corpo fra le due mani bagnate è circa {{Rb}}.'''
-dati.Rb = { valore = "1,0", unita = "\\kilo\\ohm" }
+testo = '''Per una corrente che attraversa il corpo, la soglia di fibrillazione è circa \SI{100}{\milli\ampere} se la corrente entra ed esce dalla pelle (macroshock), circa \SI{100}{\micro\ampere} se arriva direttamente al cuore (microshock); sotto circa \SI{1}{\milli\ampere} la corrente non si sente. Fra le due mani bagnate la corrente attraversa la pelle di una mano (circa {{Rp}}), l'interno del corpo (circa {{Ri}}) e la pelle dell'altra mano (ancora circa {{Rp}}).'''
+dati.Rp = { valore = 400, unita = "\\ohm" }
+dati.Ri = { valore = 200, unita = "\\ohm" }
 
   [[problema.parte]]
   domanda = '''Con le mani bagnate, quale differenza di potenziale basta per raggiungere la soglia di fibrillazione nel macroshock?'''
-  calcolo = "Rb * 1e3 * 100e-3"
+  calcolo = "(2 * Rp + Ri) * 100e-3"
   risultato = { valore = 100, unita = "\\volt", cifre = 2 }
-  soluzione = '''Per la prima legge di Ohm, con $R = \SI{1,0e3}{\ohm}$ e $I = \SI{100}{\milli\ampere} = \SI{0,100}{\ampere}$:
+  soluzione = '''I tre tratti sono attraversati uno dopo l'altro dalla stessa corrente: sono in serie, e le loro resistenze si sommano,
+\[
+  R = (400 + 200 + 400)\,\si{\ohm} = \SI{1000}{\ohm} = \SI{1,0e3}{\ohm}
+\]
+Per la prima legge di Ohm, con questa resistenza e $I = \SI{100}{\milli\ampere} = \SI{0,100}{\ampere}$:
 \[
   V = R\,I = \SI{1,0e3}{\ohm} \cdot \SI{0,100}{\ampere} = \SI{100}{\volt}
 \]
@@ -960,10 +968,10 @@ La tensione di rete, \SI{230}{\volt}, è più del doppio.'''
 
   [[problema.parte]]
   domanda = '''Per un guasto, la carcassa metallica di un apparecchio accanto al letto si trova a \SI{0,30}{\volt} rispetto a terra. Un infermiere con le mani bagnate tocca con una mano la carcassa e con l'altra il letto, collegato a terra. Quale corrente lo attraversa? La sente?'''
-  calcolo = "0.30 / (Rb * 1e3) * 1e3"
+  calcolo = "0.30 / (2 * Rp + Ri) * 1e3"
   risultato = { valore = 0.30, unita = "\\milli\\ampere", cifre = 2 }
   rapido = '''\SI{0,30}{\milli\ampere}: non la sente'''
-  soluzione = '''La corrente va da una mano all'altra, attraverso la resistenza di \SI{1,0}{\kilo\ohm}:
+  soluzione = '''La corrente va da una mano all'altra, attraverso la resistenza in serie del punto (a), \SI{1,0}{\kilo\ohm}:
 \[
   I = \frac{V}{R} = \frac{\SI{0,30}{\volt}}{\SI{1,0e3}{\ohm}} = \SI{3,0e-4}{\ampere} = \SI{0,30}{\milli\ampere}
 \]
@@ -1595,7 +1603,7 @@ dati.B = { valore = "1,5", unita = "\\tesla" }
 \[
   r = \frac{m_e v}{eB} = \frac{\SI{9,1e-31}{\kilo\gram} \cdot \SI{2,0e6}{\metre\per\second}}{\SI{1,6e-19}{\coulomb} \cdot \SI{1,5}{\tesla}} = \frac{\num{18,2e-25}}{\num{2,4e-19}}\,\si{\metre} = \frac{18{,}2}{2{,}4} \cdot 10^{-25-(-19)}\,\si{\metre} \approx \SI{7,6e-6}{\metre}
 \]
-con $9{,}1 \cdot 2{,}0 = 18{,}2$, $1{,}6 \cdot 1{,}5 = 2{,}4$ e $18{,}2/2{,}4 \approx 7{,}6$: pochi micrometri, meno del diametro di un globulo rosso.'''
+con $9{,}1 \cdot 2{,}0 = 18{,}2$, $1{,}6 \cdot 1{,}5 = 2{,}4$ e $18{,}2/2{,}4 \approx 7{,}6$: pochi micrometri, circa quanto il diametro di un globulo rosso.'''
 
   [[problema.parte]]
   domanda = '''Calcola il tempo che l'elettrone impiega a percorrere un giro. Dipende dalla sua velocità?'''
@@ -1782,7 +1790,7 @@ dati.R = { valore = "2,0", unita = "\\ohm" }
 \[
   P = R\,I^2 = \SI{2,0}{\ohm} \cdot (\SI{0,20}{\ampere})^2 = 2{,}0 \cdot 0{,}040\,\si{\watt} = \SI{8,0e-2}{\watt}
 \]
-Concentrata nel piccolo tratto di pelle in cui il cavo tocca il paziente, e ripetuta a ogni impulso per tutto l'esame, può scaldare la pelle fino a causare un'ustione. Un cavo steso dritto non racchiude un'area: il flusso che lo attraversa è in pratica nullo, e così la fem indotta. Per questo in risonanza i cavi non si avvolgono ad anello.'''
+È poco: gli impulsi dei gradienti scaldano appena il cavo. Ma il tomografo produce anche un campo a radiofrequenza, che a \SI{1,5}{\tesla} oscilla circa 64 milioni di volte al secondo e cambia molto più in fretta dei gradienti. Per la stessa legge di Faraday-Neumann-Lenz, anche se è più debole, induce nell'anello forze elettromotrici molto più grandi. Concentrata nel piccolo tratto di pelle in cui il cavo tocca il paziente, la potenza che ne viene può causare un'ustione. Un cavo steso dritto non racchiude un'area: il flusso che lo attraversa è in pratica nullo, e così la fem indotta. Per questo in risonanza i cavi non si avvolgono ad anello.'''
 
 [[problema]]
 id = "ud6-magnetismo-flussimetro"
@@ -1941,11 +1949,11 @@ soluzione = '''Il lavoro della forza elettrica è $W = -\Delta U = -q\,\Delta V$
   [[quesito.opzione]]
   testo = '''zero'''
   [[quesito.opzione]]
-  testo = '''\SI{1,0e-5}{\joule}'''
-  commento = '''Moltiplica $qV$ per la distanza: $\num{2,0e-4} \cdot 0{,}050 = \num{1,0e-5}$. Il prodotto non ha nemmeno le unità di un lavoro, e la distanza percorsa non conta.'''
+  testo = '''\SI{200}{\joule}'''
+  commento = '''Calcola $qV$ lasciando la carica in microcoulomb, $2{,}0 \cdot 100 = 200$, e per di più è l'energia potenziale, non il lavoro. Il lavoro dipende dalla \emph{differenza} di potenziale, che qui è zero.'''
   [[quesito.opzione]]
-  testo = '''\SI{4,0e-3}{\joule}'''
-  commento = '''Divide $qV$ per la distanza: $\num{2,0e-4}/0{,}050 = \num{4,0e-3}$. È come trattare $V/s$ come un campo lungo lo spostamento; ma lungo una superficie equipotenziale il campo non ha componenti, perché è perpendicolare alla superficie.'''
+  testo = '''non si può calcolare senza conoscere l'intensità del campo elettrico'''
+  commento = '''Pensa al lavoro come $W = qEs$ e cerca il campo. Ma il lavoro della forza elettrica è $W = -q\,\Delta V$, e lungo una superficie equipotenziale $\Delta V = 0$ qualunque sia il campo: il campo è perpendicolare allo spostamento.'''
   [[quesito.opzione]]
   testo = '''\SI{-2,0e-4}{\joule}'''
   commento = '''Usa $W = -qV$, con il potenziale al posto della differenza di potenziale. Vale $W = -q\,\Delta V$, e $\Delta V = 0$.'''
@@ -2001,16 +2009,29 @@ soluzione = '''Nel dielettrico la forza è $F = \frac{1}{\varepsilon_r}\,k\,|q_1
 Chi scrive 0,8 dimentica il quadrato della distanza ($2/2{,}5$); chi scrive 10 moltiplica per $\varepsilon_r$ invece di dividere ($4 \cdot 2{,}5$).'''
 
 [[quesito]]
-id = "ud6-elettrostatica-lavoro-campo"
+id = "ud6-elettrostatica-contatto"
 tipo = "completamento"
-testo = '''Una carica di \SI{+3,0}{\micro\coulomb} si sposta di \SI{4,0}{\centi\metre} nel verso di un campo elettrico uniforme di \SI{5,0e3}{\newton\per\coulomb}. Il lavoro compiuto dalla forza elettrica vale \completa\ \si{\milli\joule}.'''
-calcolo = "3.0e-6 * 5.0e3 * 0.040 * 1e3"
-risposta = "0,6"
-soluzione = '''La carica è positiva e si sposta nel verso del campo, cioè nel verso della forza: il lavoro è positivo, $W = qEd$. Con $q = \SI{3,0e-6}{\coulomb}$ e $d = \SI{0,040}{\metre}$:
+testo = '''Due sferette metalliche identiche, con cariche di $+\SI{6,0}{\nano\coulomb}$ e \SI{-2,0}{\nano\coulomb}, sono ferme nel vuoto a \SI{3,0}{\centi\metre} di distanza. Si mettono a contatto e poi si riportano a \SI{3,0}{\centi\metre}. Con $k = \SI{9e9}{\newton\metre\squared\per\coulomb\squared}$, la forza fra le sferette vale ora \completa\ \si{\micro\newton}.'''
+calcolo = "k * (2.0e-9)**2 / 0.030**2 * 1e6"
+risposta = "40"
+soluzione = '''La carica si conserva: durante il contatto gli elettroni passano da una sferetta all'altra, ma la carica totale resta
 \[
-  W = qEd = \SI{3,0e-6}{\coulomb} \cdot \SI{5,0e3}{\newton\per\coulomb} \cdot \SI{0,040}{\metre} = 15 \cdot 10^{-3} \cdot 0{,}040\,\si{\joule} = \SI{6,0e-4}{\joule} = \SI{0,6}{\milli\joule}
+  Q = +\SI{6,0}{\nano\coulomb} + (\SI{-2,0}{\nano\coulomb}) = +\SI{4,0}{\nano\coulomb}
 \]
-Chi scrive 60 lascia la distanza in centimetri: $15 \cdot 10^{-3} \cdot 4{,}0 = \SI{0,060}{\joule} = \SI{60}{\milli\joule}$; chi scrive 0,0006 dà il risultato in joule invece che in millijoule.'''
+Le sferette sono identiche, e nessuna delle due è privilegiata: la carica totale si divide a metà, $+\SI{2,0}{\nano\coulomb}$ ciascuna. Con $q = \SI{2,0e-9}{\coulomb}$ e $r = \SI{3,0e-2}{\metre}$:
+\[
+  F = k\,\frac{q^{2}}{r^{2}} = \SI{9e9}{\newton\metre\squared\per\coulomb\squared} \cdot \frac{(\SI{2,0e-9}{\coulomb})^{2}}{(\SI{3,0e-2}{\metre})^{2}} = 9 \cdot 10^{9} \cdot \frac{4{,}0 \cdot 10^{-18}}{9{,}0 \cdot 10^{-4}}\,\si{\newton}
+\]
+\[
+  F = 4{,}0 \cdot 10^{9-18+4}\,\si{\newton} = \SI{4,0e-5}{\newton} = \SI{40}{\micro\newton}
+\]
+dove il 9 del numeratore si semplifica con il 9,0 del denominatore.
+Ora la forza è repulsiva, perché le due cariche hanno lo stesso segno. Prima del contatto era attrattiva e valeva
+\[
+  F_0 = 9 \cdot 10^{9} \cdot \frac{\num{6,0e-9} \cdot \num{2,0e-9}}{\num{9,0e-4}}\,\si{\newton} = 9 \cdot 10^{9} \cdot \frac{\num{12e-18}}{\num{9,0e-4}}\,\si{\newton} = \SI{1,2e-4}{\newton} = \SI{120}{\micro\newton}
+\]
+
+Chi scrive 120 dà la forza prima del contatto. Chi scrive 160 somma i moduli delle cariche, $6{,}0 + 2{,}0 = \SI{8,0}{\nano\coulomb}$, e le dà \SI{4,0}{\nano\coulomb} ciascuna: ma la carica che si conserva è la somma con il segno. Chi scrive 1,2 dimentica il quadrato della distanza.'''
 
 [[quesito]]
 id = "ud6-corrente-fili"
@@ -2050,7 +2071,7 @@ corretta = "D"
 calcolo = "P / 1000 * t / 60 * n"
 soluzione = '''Conviene la potenza in chilowatt e il tempo in ore: il prodotto è già in chilowattora. La potenza è $P = \SI{150}{\watt} = \SI{0,15}{\kilo\watt}$; il tempo di funzionamento è $30 \cdot \SI{20}{\minute} = \SI{600}{\minute} = \SI{10}{\hour}$. Quindi
 \[
-  E = P\,\Delta t = \SI{0,15}{\kilo\watt} \cdot \SI{10}{\hour} = \SI{1,5}{\kilo\watt\hour}
+  W = P\,\Delta t = \SI{0,15}{\kilo\watt} \cdot \SI{10}{\hour} = \SI{1,5}{\kilo\watt\hour}
 \]'''
 
   [[quesito.opzione]]
@@ -2130,7 +2151,7 @@ id = "ud6-corrente-microshock"
 tipo = "multipla"
 testo = '''Un paziente ha un catetere cardiaco collegato a un apparecchio elettrico. Rispetto a una persona che tocca lo stesso apparecchio con le mani, quale affermazione è corretta?'''
 corretta = "E"
-soluzione = '''Gli effetti dipendono dalla corrente che attraversa il cuore. Quando la corrente entra ed esce dalla pelle, la pelle aggiunge una grande resistenza e solo una piccola parte della corrente attraversa il cuore: per la fibrillazione servono circa \SI{100}{\milli\ampere}. Il catetere porta invece la corrente direttamente nel cuore, saltando la resistenza della pelle: bastano circa \SI{100}{\micro\ampere}, mille volte meno. È il microshock, e lo può provocare una differenza di potenziale di pochi decimi di volt, che con le mani nessuno sentirebbe.'''
+soluzione = '''Gli effetti dipendono dalla corrente che attraversa il cuore. Quando la corrente entra ed esce dalla pelle, si distribuisce in tutto il torace e solo una piccola parte attraversa il cuore: per la fibrillazione servono circa \SI{100}{\milli\ampere}. Il catetere porta invece la corrente direttamente nel cuore, e tutta la corrente passa di lì: bastano circa \SI{100}{\micro\ampere}, mille volte meno. È il microshock. In più il percorso salta la resistenza della pelle: con circa \SI{1}{\kilo\ohm} di resistenza interna, quella corrente la produce una differenza di potenziale di $V = RI = \num{1e3} \cdot \num{1e-4}\,\si{\volt} = \SI{0,1}{\volt}$, che con le mani nessuno sentirebbe.'''
 
   [[quesito.opzione]]
   testo = '''il pericolo è lo stesso, perché la differenza di potenziale dell'apparecchio è la stessa'''
@@ -2349,7 +2370,9 @@ id = "ud6-magnetismo-verso-indotta"
 tipo = "multipla"
 testo = '''Una spira circolare conduttrice giace nel piano del foglio, in un campo magnetico uniforme che entra nel foglio. L'intensità del campo diminuisce. Per chi guarda il foglio, la corrente indotta nella spira circola'''
 corretta = "C"
-soluzione = '''Il flusso attraverso la spira diminuisce. Per la legge di Lenz la corrente indotta produce un campo che si oppone alla diminuzione, cioè che cerca di mantenere il flusso: dentro la spira il suo campo entra nel foglio, come quello esterno. Per la regola della mano destra, con le dita che seguono la corrente e il pollice lungo il campo che essa produce dentro la spira, un pollice che entra nel foglio vuole una corrente in senso orario.'''
+soluzione = '''Il flusso attraverso la spira diminuisce. Per la legge di Lenz la corrente indotta produce un campo che si oppone alla diminuzione, cioè che cerca di mantenere il flusso: dentro la spira il suo campo entra nel foglio, come quello esterno.
+
+Per trovare il verso della corrente si applica la regola del filo (pollice lungo la corrente, dita intorno al filo) a un tratto della spira. Nel tratto in alto una corrente oraria va verso destra. Con il pollice verso destra, le dita che si chiudono intorno al filo entrano nel foglio sotto il filo, cioè dentro la spira. Lo stesso vale per ogni tratto: una corrente oraria produce dentro la spira un campo che entra nel foglio. Quindi la corrente indotta circola in senso orario.'''
 
   [[quesito.opzione]]
   testo = '''in senso antiorario, perché il campo della corrente indotta è sempre opposto al campo esterno'''
@@ -2361,10 +2384,10 @@ soluzione = '''Il flusso attraverso la spira diminuisce. Per la legge di Lenz la
   testo = '''in senso orario, e il suo campo dentro la spira entra nel foglio'''
   [[quesito.opzione]]
   testo = '''in senso orario, e il suo campo dentro la spira esce dal foglio'''
-  commento = '''Il verso della corrente è giusto, ma la regola della mano destra è applicata al contrario: una corrente in senso orario produce dentro la spira un campo che entra nel foglio. Un campo che esce dal foglio, poi, si opporrebbe al campo esterno, mentre qui deve sostenerlo.'''
+  commento = '''Il verso della corrente è giusto, ma il campo no: applicando la regola del filo a un tratto della spira si vede che una corrente in senso orario produce dentro la spira un campo che entra nel foglio. Un campo che esce dal foglio, poi, si opporrebbe al campo esterno, mentre qui deve sostenerlo.'''
   [[quesito.opzione]]
   testo = '''in senso antiorario, e il suo campo dentro la spira entra nel foglio'''
-  commento = '''Il campo indotto è quello giusto, concorde con il campo esterno che diminuisce, ma la regola della mano destra è applicata al contrario: un campo che entra nel foglio vuole una corrente oraria.'''
+  commento = '''Il campo indotto è quello giusto, concorde con il campo esterno che diminuisce, ma il verso della corrente no: applicando la regola del filo a un tratto della spira si vede che una corrente antioraria produce dentro la spira un campo che esce dal foglio. Per un campo che entra nel foglio serve una corrente oraria.'''
 
 [[quesito]]
 id = "ud6-magnetismo-ciclotrone-raddoppio"
@@ -2452,7 +2475,7 @@ Abbastanza per depolarizzare i neuroni dell'anello.'''
 id = "ud6-magnetismo-corrente-solenoide"
 tipo = "completamento"
 testo = '''Un solenoide da laboratorio ha {{n}} spire per metro di lunghezza. Con $\mu_0 = 4\pi \cdot \SI{e-7}{\tesla\metre\per\ampere}$, per produrre al suo interno un campo di $4\pi \cdot \SI{e-3}{\tesla}$ serve una corrente di \completa\ \si{\ampere}.'''
-dati.n = { valore = 2000, unita = "\\per\\metre" }
+dati.n = { valore = 2000 }
 calcolo = "4 * math.pi * 1e-3 / (4 * math.pi * 1e-7 * n)"
 risposta = "5"
 soluzione = '''Dal campo del solenoide, $B = \mu_0 n I$, si ricava $I = B/(\mu_0 n)$. Il fattore $4\pi$ si semplifica:
@@ -2562,8 +2585,8 @@ soluzione = '''In un campo uniforme la differenza di potenziale è il campo per 
   testo = '''\SI{36}{\volt\per\metre}'''
   commento = '''Moltiplica la differenza di potenziale per la distanza, e per di più in millimetri. Il campo è $\Delta V/d$: più vicine sono le piastre, più il campo è intenso.'''
   [[quesito.opzione]]
-  testo = '''\SI{0,036}{\volt\per\metre}'''
-  commento = '''Moltiplica la differenza di potenziale per la distanza in metri, $12 \cdot 0{,}003$: il prodotto $\Delta V \cdot d$ non ha le unità di un campo.'''
+  testo = '''\SI{4e-3}{\volt\per\metre}'''
+  commento = '''Converte i millimetri al contrario: moltiplica $12/3 = 4$ per $10^{-3}$ invece di dividere, $4 \cdot 10^{-3}$. Ma dividere per $\num{3e-3}$ moltiplica per $10^{3}$: un campo fra piastre vicine pochi millimetri è grande, non minuscolo.'''
   [[quesito.opzione]]
   testo = '''\SI{2,5e-4}{\volt\per\metre}'''
   commento = '''Rovescia il rapporto, $d/\Delta V = 0{,}003/12$: il risultato non ha nemmeno le unità di un campo.'''
