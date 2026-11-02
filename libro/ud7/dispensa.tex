@@ -1,0 +1,214 @@
+% UD7 — Dispensa
+% PROTOTIPO del template: per ora contiene solo le due parti che mancavano
+% ai PDF UD7 (Lambert-Beer e radioattività). Le sezioni esistenti (onde EM,
+% spettro, fotone, ottica) si riscrivono nel ticket "UD7 Radiazioni: Dispensa".
+\dispensa
+
+\begin{tcolorbox}[fisbox={formula}{formulaBg},title={Obiettivi dell'unità}]
+Al termine di questa parte sai:
+\begin{itemize}
+  \item calcolare quanta radiazione attraversa uno strato di materiale con la legge di Lambert-Beer e lo spessore emivalente;
+  \item descrivere un nucleo instabile e i decadimenti $\alpha$, $\beta$ e $\gamma$, scrivendo il nucleo figlio;
+  \item usare la legge del decadimento radioattivo, l'attività e l'emivita.
+\end{itemize}
+\end{tcolorbox}
+
+% -------------------------------------------------------------------------
+\section{Assorbimento della radiazione: la legge di Lambert-Beer}
+\label{sec:ud7-lambert-beer}
+
+Quando un fascio di radiazione attraversa un materiale, una parte dei fotoni viene assorbita o deviata, e il fascio che esce è meno intenso di quello che entra. Succede alla luce in una soluzione colorata, ai raggi X nel corpo del paziente, ai raggi $\gamma$ in una parete di piombo.
+
+\subsection{Ogni strato toglie la stessa frazione}
+
+Immagina il materiale diviso in tanti strati sottili uguali. Ogni strato non toglie una quantità fissa di intensità, ma una \textbf{frazione fissa} di quella che gli arriva. Se il primo centimetro lascia passare metà della radiazione, il secondo centimetro lascia passare metà di quella metà, cioè un quarto del totale, e così via. Una diminuzione di questo tipo si descrive con una funzione \textbf{esponenziale}:
+
+\begin{formula}[Legge di Lambert-Beer]
+I(x) = I_0 \, e^{-\mu x}
+\end{formula}
+
+$I_0$ è l'intensità che entra, $I(x)$ quella che esce dopo uno spessore $x$, e $\mu$ è il \textbf{coefficiente di attenuazione lineare}, che si misura in \si[per-mode=power]{\metre\tothe{-1}} (o, più spesso, in \si[per-mode=power]{\centi\metre\tothe{-1}}). Il prodotto $\mu x$ è un numero puro. Il coefficiente $\mu$ dipende dal materiale e dall'energia dei fotoni: per i raggi X il piombo e l'osso hanno $\mu$ molto più grande dei tessuti molli.
+
+\begin{richiamo}{esponenziali e logaritmi}
+Il numero di Nepero vale $e \approx 2{,}72$. Il logaritmo naturale è l'operazione inversa dell'esponenziale: $\ln(e^{a}) = a$ e $e^{\ln b} = b$. I valori da ricordare:
+\[
+  \ln 2 \approx 0{,}69 \qquad \ln 10 \approx 2{,}3 \qquad e^{-1} \approx 0{,}37 \qquad \log_{10} 2 \approx 0{,}30
+\]
+Proprietà che servono di continuo: $e^{a}\,e^{b} = e^{a+b}$, quindi $(e^{-a})^n = e^{-na}$; e $\log_{10}(10^n) = n$. Per stimare le potenze di 2 senza calcolatrice: $2^{10} = 1024 \approx 10^3$.
+\end{richiamo}
+
+\subsection{Lo spessore emivalente}
+
+L'esponenziale è scomodo da calcolare a mano. Conviene allora usare lo \textbf{spessore emivalente} $x_{1/2}$: lo spessore che dimezza l'intensità. Ponendo $I = I_0/2$ nella legge di Lambert-Beer si ottiene $e^{-\mu x_{1/2}} = 1/2$, cioè $\mu x_{1/2} = \ln 2$:
+
+\begin{formula}[Spessore emivalente]
+x_{1/2} = \frac{\ln 2}{\mu} \approx \frac{0{,}69}{\mu}
+\qquad\qquad
+I = \frac{I_0}{2^n} \quad \text{dopo } n = \frac{x}{x_{1/2}} \text{ spessori emivalenti}
+\end{formula}
+
+Con lo spessore emivalente i conti diventano potenze di 2: uno spessore emivalente lascia passare $1/2$, due lasciano passare $1/4$, tre $1/8$, dieci circa un millesimo.
+
+\begin{figure}[h]
+\centering
+\input{ud7/figure/lambert-beer}
+\caption{Intensità trasmessa in funzione dello spessore. A ogni spessore emivalente $x_{1/2}$ l'intensità si dimezza: la curva non arriva mai a zero.}
+\label{fig:ud7-lambert-beer}
+\end{figure}
+
+\begin{esempio}
+Per i raggi X di una radiografia, il tessuto molle ha uno spessore emivalente di circa \SI{3}{\centi\metre}. Quale frazione dell'intensità attraversa un addome di \SI{24}{\centi\metre}? Quanto vale $\mu$?
+
+Lo spessore contiene $n = \SI{24}{\centi\metre} / \SI{3}{\centi\metre} = 8$ spessori emivalenti, quindi
+\[
+  \frac{I}{I_0} = \frac{1}{2^8} = \frac{1}{256} \approx 0{,}004 = 0{,}4\,\%
+\]
+Il coefficiente di attenuazione è
+\[
+  \mu = \frac{\ln 2}{x_{1/2}} = \frac{0{,}69}{\SI{3}{\centi\metre}} = \SI[per-mode=power]{0,23}{\centi\metre\tothe{-1}}
+\]
+\end{esempio}
+
+\begin{attenzione}[l'attenuazione non è lineare]
+Raddoppiare lo spessore \emph{non} dimezza l'intensità trasmessa: la eleva al quadrato. Se uno strato lascia passare $1/4$, due strati uguali lasciano passare $1/16$, non $1/8$. E non confondere l'attenuazione con la legge dell'inverso del quadrato: quella dipende dalla distanza dalla sorgente anche nel vuoto, l'attenuazione dipende dal materiale attraversato.
+\end{attenzione}
+
+\begin{quesitolampo}{ql:ud7-hvl}
+Dopo \SI{2}{\centi\metre} di un certo materiale l'intensità di un fascio è ridotta a $1/4$ di quella iniziale. A quale frazione è ridotta dopo \SI{5}{\centi\metre}?
+\opzioni{$1/10$}{$1/16$}{$1/25$}{$1/32$}{circa $1/6$}
+\end{quesitolampo}
+
+\subsection{Assorbanza e concentrazione}
+
+In chimica e in laboratorio la stessa legge si scrive con i logaritmi in base 10. Si definisce l'\textbf{assorbanza} $A$ di un campione, e per una soluzione diluita l'assorbanza è proporzionale alla concentrazione $c$ della sostanza che assorbe e al cammino $\ell$ della luce nella cuvetta:
+
+\begin{formula}[Assorbanza (legge di Beer)]
+A = \log_{10} \frac{I_0}{I} = \varepsilon \, c \, \ell
+\end{formula}
+
+$\varepsilon$ è il \textbf{coefficiente di assorbimento molare}, caratteristico della sostanza e della lunghezza d'onda. Un'assorbanza $A = 1$ vuol dire che passa un decimo della luce, $A = 2$ un centesimo. Misurando l'assorbanza si ricava la concentrazione: è il principio dello spettrofotometro.
+
+\begin{applicazione}{il saturimetro}
+Il saturimetro da dito misura quanta parte dell'emoglobina è legata all'ossigeno. Un LED rosso (circa \SI{660}{\nano\metre}) e uno infrarosso (circa \SI{940}{\nano\metre}) illuminano il polpastrello, e un sensore misura la luce trasmessa. L'emoglobina ossigenata e quella non ossigenata assorbono in modo diverso alle due lunghezze d'onda; dal rapporto delle due assorbanze, applicando la legge di Lambert-Beer, lo strumento ricava la saturazione.
+\end{applicazione}
+
+\begin{approfondimento}{da dove viene l'esponenziale}
+Uno strato sottilissimo di spessore $\mathrm{d}x$ toglie una frazione $\mu\,\mathrm{d}x$ dell'intensità che lo raggiunge: $\mathrm{d}I = -\mu I\,\mathrm{d}x$. La variazione di $I$ è proporzionale a $I$ stessa, e l'unica funzione con questa proprietà è l'esponenziale. Integrando:
+\[
+  \int_{I_0}^{I} \frac{\mathrm{d}I}{I} = -\mu \int_0^x \mathrm{d}x
+  \quad\Longrightarrow\quad
+  \ln\frac{I}{I_0} = -\mu x
+  \quad\Longrightarrow\quad
+  I = I_0\,e^{-\mu x}
+\]
+La stessa equazione, con il tempo al posto dello spessore, descrive il decadimento radioattivo della prossima sezione.
+\end{approfondimento}
+
+% -------------------------------------------------------------------------
+\section{Radioattività e decadimenti radioattivi}
+\label{sec:ud7-radioattivita}
+
+\subsection{Nuclei e isotopi}
+
+Il nucleo di un atomo contiene $Z$ protoni e $N$ neutroni. $Z$ è il \textbf{numero atomico} e decide di quale elemento si tratta; $A = Z + N$ è il \textbf{numero di massa}. Un nucleo si indica con il simbolo dell'elemento, $A$ in alto e $Z$ in basso: per esempio $\nuclide{12}{6}{C}$ è il carbonio con 6 protoni e 6 neutroni.
+
+Nuclei con lo stesso $Z$ e diverso $N$ sono \textbf{isotopi} dello stesso elemento: hanno le stesse proprietà chimiche ma massa diversa. Il carbonio ha, tra gli altri, gli isotopi $\nuclide{12}{6}{C}$ e $\nuclide{14}{6}{C}$.
+
+Un nucleo è \textbf{instabile} quando ha troppi neutroni o troppi protoni rispetto ai nuclei stabili, oppure quando è troppo pesante. Prima o poi si trasforma spontaneamente in un nucleo più stabile emettendo radiazione: questo è il \textbf{decadimento radioattivo}. Gli isotopi con nucleo instabile si chiamano \textbf{isotopi radioattivi} o radioisotopi.
+
+\subsection{I tipi di decadimento}
+
+In ogni decadimento si conservano il numero di massa totale e la carica totale: la somma dei numeri in alto e la somma dei numeri in basso devono tornare uguali prima e dopo.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}l X c c l@{}}
+\toprule
+Decadimento & Che cosa viene emesso & $\Delta A$ & $\Delta Z$ & Si ferma con \\
+\midrule
+$\alpha$ & un nucleo di elio $\nuclide{4}{2}{He}$ (2 protoni e 2 neutroni) & $-4$ & $-2$ & un foglio di carta, la pelle \\
+$\beta^-$ & un elettrone (e un antineutrino): un neutrone diventa protone & $0$ & $+1$ & pochi mm di alluminio \\
+$\beta^+$ & un positrone (e un neutrino): un protone diventa neutrone & $0$ & $-1$ & pochi mm di alluminio \\
+$\gamma$ & un fotone di alta energia da un nucleo eccitato & $0$ & $0$ & cm di piombo, m di cemento \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Alcuni esempi:
+\[
+  \nuclide{226}{88}{Ra} \to \nuclide{222}{86}{Rn} + \nuclide{4}{2}{He}
+  \qquad
+  \nuclide{14}{6}{C} \to \nuclide{14}{7}{N} + e^- + \bar\nu
+  \qquad
+  \nuclide{18}{9}{F} \to \nuclide{18}{8}{O} + e^+ + \nu
+\]
+I raggi $\gamma$, come i raggi X, non hanno carica e non si fermano in un punto preciso: la loro intensità diminuisce secondo la legge di Lambert-Beer, ed è per questo che serve uno spessore di piombo tanto maggiore.
+
+\begin{attenzione}[il decadimento $\alpha$ toglie 4 al numero di massa]
+La particella $\alpha$ contiene 4 nucleoni, di cui 2 protoni: il numero di massa scende di 4 e il numero atomico di 2. Un errore frequente è togliere 2 a entrambi. Nei decadimenti $\beta$, invece, il numero di massa non cambia.
+\end{attenzione}
+
+\begin{quesitolampo}{ql:ud7-alfa}
+Il nucleo $\nuclide{238}{92}{U}$ decade emettendo una particella $\alpha$. Il nucleo che si forma ha numero di massa \completa.
+\end{quesitolampo}
+
+\subsection{La legge del decadimento e l'emivita}
+
+Non si può prevedere quando decadrà un singolo nucleo: si sa solo che ogni nucleo ha la stessa probabilità di decadere in ogni secondo, e che questa probabilità non dipende da quanto tempo è già passato. Ne segue che in ogni intervallo di tempo decade la stessa \emph{frazione} dei nuclei presenti. È la stessa situazione dell'assorbimento: il numero $N$ di nuclei non ancora decaduti diminuisce in modo esponenziale.
+
+La costante $\lambda$, che si misura in \si[per-mode=power]{\second\tothe{-1}}, è la \textbf{costante di decadimento}. L'\textbf{attività} $\mathcal{A}$ è il numero di decadimenti al secondo e si misura in becquerel: $\SI{1}{\becquerel} = 1$ decadimento al secondo. L'\textbf{emivita} $T_{1/2}$ è il tempo in cui metà dei nuclei decade.
+
+\begin{formula}[Decadimento radioattivo]
+N(t) = N_0\, e^{-\lambda t}
+\qquad\qquad
+\mathcal{A} = \lambda N
+\qquad\qquad
+T_{1/2} = \frac{\ln 2}{\lambda}
+\\
+N = \frac{N_0}{2^n}, \quad \mathcal{A} = \frac{\mathcal{A}_0}{2^n} \quad \text{dopo } n = \frac{t}{T_{1/2}} \text{ emivite}
+\end{formula}
+
+L'attività è proporzionale a $N$, quindi diminuisce con la stessa emivita dei nuclei.
+
+\begin{figure}[h]
+\centering
+\input{ud7/figure/decadimento}
+\caption{Numero di nuclei non ancora decaduti in funzione del tempo. Dopo ogni emivita ne resta la metà.}
+\label{fig:ud7-decadimento}
+\end{figure}
+
+\begin{esempio}
+Per curare l'ipertiroidismo si somministra iodio-131, con emivita di \SI{8}{giorni}. Una capsula ha attività \SI{3,2}{\giga\becquerel}. Quanto vale l'attività dopo \SI{24}{giorni}? Quanti nuclei di iodio-131 contiene all'inizio?
+
+\SI{24}{giorni} sono $n = 24/8 = 3$ emivite:
+\[
+  \mathcal{A} = \frac{\SI{3,2}{\giga\becquerel}}{2^3} = \SI{0,4}{\giga\becquerel} = \SI{400}{\mega\becquerel}
+\]
+Per il numero di nuclei serve $\lambda$, con l'emivita in secondi ($\SI{1}{giorno} = \SI{86400}{\second}$):
+\[
+  \lambda = \frac{\ln 2}{T_{1/2}} = \frac{0{,}69}{8 \cdot \SI{86400}{\second}} \approx \SI[per-mode=power]{1,0e-6}{\second\tothe{-1}}
+  \qquad
+  N_0 = \frac{\mathcal{A}_0}{\lambda} = \frac{\SI[per-mode=power]{3,2e9}{\second\tothe{-1}}}{\SI[per-mode=power]{1,0e-6}{\second\tothe{-1}}} = \num{3,2e15}
+\]
+\end{esempio}
+
+\begin{attenzione}[dopo due emivite non è finito tutto]
+Dopo un'emivita resta metà dei nuclei, ma dopo due emivite ne resta un quarto, non zero: ogni emivita dimezza quello che c'è, non toglie la stessa quantità. Per ridurre l'attività a meno di un millesimo servono circa 10 emivite.
+\end{attenzione}
+
+\begin{quesitolampo}{ql:ud7-emivita}
+L'attività di un campione radioattivo scende da \SI{800}{\kilo\becquerel} a \SI{100}{\kilo\becquerel} in \SI{15}{giorni}. Quanto vale l'emivita?
+\opzioni{\SI{1,9}{giorni}}{\SI{5}{giorni}}{\SI{7,5}{giorni}}{\SI{15}{giorni}}{\SI{120}{giorni}}
+\end{quesitolampo}
+
+\begin{applicazione}{medicina nucleare}
+In una \textbf{scintigrafia} si somministra al paziente un radiofarmaco con tecnezio-99m, che emette fotoni $\gamma$ da \SI{140}{\kilo\electronvolt}: abbastanza penetranti da uscire dal corpo ed essere raccolti da una gamma camera. La sua emivita, circa \SI{6}{ore}, è abbastanza lunga per fare l'esame e abbastanza corta da limitare la dose al paziente.
+
+Nella \textbf{PET} si usano emettitori $\beta^+$ come il fluoro-18 (emivita circa \SI{110}{minuti}). Il positrone emesso incontra quasi subito un elettrone: si annichilano e producono due fotoni da \SI{511}{\kilo\electronvolt} in direzioni opposte. Rivelando le coppie di fotoni lo strumento ricostruisce dove si trova il radiofarmaco.
+\end{applicazione}
+
+\begin{approfondimento}{la datazione con il carbonio-14}
+Finché un organismo è vivo, scambia carbonio con l'ambiente e il rapporto fra $\nuclide{14}{6}{C}$ e $\nuclide{12}{6}{C}$ nei suoi tessuti resta quello dell'atmosfera. Dopo la morte lo scambio si ferma e il carbonio-14 decade con emivita di circa \num{5730} anni. Se in un reperto la frazione di carbonio-14 è $1/4$ di quella di un organismo vivo, sono passate due emivite: circa \num{11500} anni.
+\end{approfondimento}
+
+\riepilogoformule

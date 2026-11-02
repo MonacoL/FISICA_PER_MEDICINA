@@ -7,3 +7,6 @@ __pycache__/
 
 # Worktree degli agenti
 .claude/
+
+# Compilazione LaTeX
+libro/build/
