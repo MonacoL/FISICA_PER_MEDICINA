@@ -210,6 +210,10 @@ def compila(cartella: Path, sorgente: str) -> Esito:
         cwd=cartella,
         capture_output=True,
         text=True,
+        # L'output di latexmk può contenere byte non UTF-8 (pdfTeX spezza le righe a metà
+        # di un carattere): non deve far cadere il controllo.
+        encoding="utf-8",
+        errors="replace",
         # Righe del log non spezzate a 79 caratteri, così i percorsi restano interi.
         env={**os.environ, "max_print_line": "10000"},
     )

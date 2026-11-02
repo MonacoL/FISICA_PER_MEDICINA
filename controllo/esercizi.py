@@ -220,7 +220,8 @@ def eserciziario_latex(fonte: dict) -> str:
             if len(p["parte"]) > 1:
                 out += ["", *(x + "\n" for x in parti([riempi(parte["domanda"], p.get("dati", {})) for parte in p["parte"]]))]
     if esame:
-        out += ["", r"\section*{Quesiti d'esame}"]
+        # Il titolo non resta da solo in fondo a una pagina.
+        out += ["", r"\needspace{10\baselineskip}", r"\section*{Quesiti d'esame}"]
     for q in esame:
         # Testo e opzioni sulla stessa pagina, come all'esame.
         out += ["", r"\needspace{8\baselineskip}", rf"\quesito\label{{qe:{q['id']}}}", testo_quesito(q)]
