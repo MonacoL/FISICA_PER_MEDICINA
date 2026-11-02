@@ -134,6 +134,21 @@ soluzione = '''Nella sfera metallica gli elettroni sono liberi di muoversi. La b
   testo = '''carica negativamente'''
 
 [[quesito]]
+id = "ud6-joule"
+tipo = "completamento"
+lampo = true
+testo = '''Un resistore da {{R}} è attraversato da una corrente di {{I}}. La potenza che dissipa per effetto Joule, in watt, è \completa.'''
+dati.R = { valore = 20, unita = "\\ohm" }
+dati.I = { valore = 3, unita = "\\ampere" }
+calcolo = "R * I**2"
+risposta = "180"
+soluzione = '''La potenza dissipata è $P = VI$, e con la legge di Ohm, $V = RI$, diventa $P = RI^{2}$:
+\[
+  P = R I^{2} = \SI{20}{\ohm} \cdot (\SI{3}{\ampere})^{2} = 20 \cdot 9\,\si{\watt} = \SI{180}{\watt}
+\]
+Chi scrive 60 ha calcolato $RI = \SI{60}{\volt}$, che è la differenza di potenziale ai capi del resistore, non la potenza.'''
+
+[[quesito]]
 id = "ud6-parallelo"
 tipo = "multipla"
 lampo = true
@@ -165,21 +180,6 @@ Lo stesso con il prodotto diviso la somma: $R_{\text{eq}} = (6 \cdot 3)/(6 + 3) 
   [[quesito.opzione]]
   testo = '''\SI{18}{\ohm}'''
   commento = '''Calcola il prodotto delle resistenze e dimentica di dividerlo per la somma; per di più il prodotto ha le unità di $\Omega^{2}$.'''
-
-[[quesito]]
-id = "ud6-joule"
-tipo = "completamento"
-lampo = true
-testo = '''Un resistore da {{R}} è attraversato da una corrente di {{I}}. La potenza che dissipa per effetto Joule, in watt, è \completa.'''
-dati.R = { valore = 20, unita = "\\ohm" }
-dati.I = { valore = 3, unita = "\\ampere" }
-calcolo = "R * I**2"
-risposta = "180"
-soluzione = '''La potenza dissipata è $P = VI$, e con la legge di Ohm, $V = RI$, diventa $P = RI^{2}$:
-\[
-  P = R I^{2} = \SI{20}{\ohm} \cdot (\SI{3}{\ampere})^{2} = 20 \cdot 9\,\si{\watt} = \SI{180}{\watt}
-\]
-Chi scrive 60 ha calcolato $RI = \SI{60}{\volt}$, che è la differenza di potenziale ai capi del resistore, non la potenza.'''
 
 [[quesito]]
 id = "ud6-dielettrico"

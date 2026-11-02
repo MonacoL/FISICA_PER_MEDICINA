@@ -18,7 +18,7 @@ Al termine di questa unità sai:
 \end{itemize}
 \end{tcolorbox}
 
-Il corpo umano è una macchina elettrica. Ogni cellula tiene una differenza di potenziale ai capi della sua membrana; i neuroni la usano per trasmettere segnali, il cuore per coordinare la contrazione delle sue fibre. L'elettrocardiogramma e l'elettroencefalogramma registrano queste differenze di potenziale sulla pelle; il defibrillatore rimette in ordine il cuore con una scarica di corrente; la risonanza magnetica forma immagini con un campo magnetico migliaia di volte più intenso di quello terrestre. Questa unità costruisce le leggi che servono per capire tutto questo.
+Il corpo umano è una macchina elettrica. Ogni cellula tiene una differenza di potenziale ai capi della sua membrana; i neuroni la usano per trasmettere segnali, il cuore per coordinare la contrazione delle sue fibre. L'elettrocardiogramma e l'elettroencefalogramma registrano queste differenze di potenziale sulla pelle; il defibrillatore rimette in ordine il cuore con una scarica di corrente; la risonanza magnetica forma immagini con un campo magnetico decine di migliaia di volte più intenso di quello terrestre. Questa unità costruisce le leggi che servono per capire tutto questo.
 
 Servono alcuni strumenti della UD1: la notazione scientifica, i vettori e la loro somma, il teorema di Pitagora, il seno e il coseno, il prodotto vettoriale con la regola della mano destra. Servono anche alcune grandezze della meccanica (UD2), che si richiamano in una riga quando servono: la forza e la seconda legge della dinamica, $F = ma$; il lavoro; l'energia cinetica e l'energia potenziale; la potenza; il moto circolare uniforme. Dalla UD5 servono il calore e la sua misura.
 
@@ -77,7 +77,7 @@ F = k\,\frac{|q_1\,q_2|}{r^{2}}
 \qquad\qquad
 k = \frac{1}{4\pi\varepsilon_0} \approx \SI{9e9}{\newton\metre\squared\per\coulomb\squared}
 \end{formula}
-dove $r$ è la distanza fra le cariche. La costante di Coulomb $k$ si scrive anche con la \textbf{costante dielettrica del vuoto} $\varepsilon_0 \approx \SI{8,85e-12}{\coulomb\squared\per\newton\per\metre\squared}$ (la stessa unità si scrive \si{\farad\per\metre}, come si vedrà con i condensatori): $1/(4\pi \cdot \num{8,85e-12}) \approx \num{9e9}$. La legge vale nel vuoto, e quasi senza differenze nell'aria; in un materiale isolante la forza è più debole (sezione~\ref{sec:ud6-materia}). Vale anche per due sfere cariche, con $r$ uguale alla distanza fra i centri.
+dove $r$ è la distanza fra le cariche. La costante di Coulomb $k$ si scrive anche con la \textbf{costante dielettrica del vuoto} $\varepsilon_0 \approx \SI{8,85e-12}{\coulomb\squared\per\newton\per\metre\squared}$ (la stessa unità si scrive \si{\farad\per\metre}, come si vedrà con i condensatori): $1/(4\pi \cdot \num{8,85e-12}) \approx \num{9e9}$. La legge vale nel vuoto, e quasi senza differenze nell'aria; in un materiale isolante la forza è più debole (sezione~\ref{sec:ud6-materia}). Vale anche per due sfere con la carica distribuita in modo uniforme, con $r$ uguale alla distanza fra i centri. Per due sfere conduttrici vale bene se sono lontane rispetto ai loro raggi: se sono vicine, ciascuna sposta le cariche dell'altra (sezione~\ref{sec:ud6-materia}).
 
 Le due cariche si esercitano forze uguali e opposte, come vuole il principio di azione e reazione (UD2): la carica piccola attira la grande con la stessa forza con cui la grande attira la piccola.
 
@@ -183,14 +183,14 @@ diretto verso l'alto a destra, a \ang{45} dall'orizzontale. Sommare i moduli, $2
 
 Due piastre metalliche piane e parallele, grandi rispetto alla loro distanza e con cariche uguali e opposte, producono fra loro un \textbf{campo uniforme}: lo stesso in modulo, direzione e verso in ogni punto. Le linee di forza sono parallele ed equidistanti, e vanno dalla piastra positiva alla negativa (figura~\ref{fig:ud6-piastre}a). È il campo dentro un condensatore piano (sezione~\ref{sec:ud6-condensatori}), e quasi quello dentro una membrana cellulare.
 
-In un campo uniforme una carica $q$ di massa $m$ risente della forza costante $\vec F = q\vec E$. Per la seconda legge della dinamica (UD2) si muove con l'accelerazione costante $a = |q|E/m$. Se parte da ferma, si muove di moto uniformemente accelerato lungo le linee di forza: dopo il tempo $t$ ha velocità $v = at$ e ha percorso $s = \frac12 at^{2}$ (UD2). Una carica positiva accelera nel verso del campo, una negativa nel verso opposto. Se invece entra fra le piastre con velocità perpendicolare al campo, si comporta come un sasso lanciato in orizzontale: si muove di moto uniforme nella direzione iniziale e accelera nella direzione del campo, e la traiettoria è un arco di parabola (figura~\ref{fig:ud6-piastre}b). In quasi tutti i problemi il peso delle particelle cariche è trascurabile rispetto alla forza elettrica, come mostra l'esempio.
-
 \begin{figure}[h]
 \centering
 \input{ud6/figure/piastre}
 \caption{(a) Fra due piastre parallele con cariche opposte il campo è uniforme: linee di forza parallele ed equidistanti, dalla piastra positiva alla negativa. (b) Un elettrone che entra con velocità $\vec v_0$ perpendicolare al campo è deviato verso la piastra positiva lungo un arco di parabola.}
 \label{fig:ud6-piastre}
 \end{figure}
+
+In un campo uniforme una carica $q$ di massa $m$ risente della forza costante $\vec F = q\vec E$. Per la seconda legge della dinamica (UD2) si muove con l'accelerazione costante $a = |q|E/m$. Se parte da ferma, si muove di moto uniformemente accelerato lungo le linee di forza: dopo il tempo $t$ ha velocità $v = at$ e ha percorso $s = \frac12 at^{2}$ (UD2). Una carica positiva accelera nel verso del campo, una negativa nel verso opposto. Se invece entra fra le piastre con velocità perpendicolare al campo, si comporta come un sasso lanciato in orizzontale: si muove di moto uniforme nella direzione iniziale e accelera nella direzione del campo, e la traiettoria è un arco di parabola (figura~\ref{fig:ud6-piastre}b). In quasi tutti i problemi il peso delle particelle cariche è trascurabile rispetto alla forza elettrica, come mostra l'esempio.
 
 \begin{esempio}
 Un protone parte da fermo in un campo elettrico uniforme di \SI{1,0e4}{\newton\per\coulomb}. Calcola (a) la forza elettrica e l'accelerazione, confrontando la forza con il peso; (b) la velocità e lo spazio percorso dopo \SI{1,0e-7}{\second}.
@@ -276,7 +276,7 @@ In questa unità $V$ è il potenziale (o la differenza di potenziale), $v$ minus
 \begin{esempio}
 Due cariche puntiformi, \SI{+4}{\nano\coulomb} e \SI{-4}{\nano\coulomb}, distano \SI{20}{\centi\metre}. (a) Quanto vale il potenziale nel punto medio $M$? (b) E nel punto $P$ del segmento che sta a \SI{5}{\centi\metre} dalla carica positiva? (c) Come cambia l'energia potenziale di una carica di \SI{+1}{\nano\coulomb} che va da $P$ a $M$?
 
-Per entrambe le cariche $k\,|q| = \num{9e9} \cdot \num{4e-9}\,\si{\volt\metre} = \SI{36}{\volt\metre}$.
+Per entrambe le cariche $k\,|q| = \num{9e9} \cdot \num{4e-9}\,\si{\newton\metre\squared\per\coulomb} = \SI{36}{\volt\metre}$. L'unità torna perché $\si{\newton\metre} = \si{\joule}$ e $\si{\joule\per\coulomb} = \si{\volt}$: $\si{\newton\metre\squared\per\coulomb} = (\si{\newton\metre}/\si{\coulomb}) \cdot \si{\metre} = \si{\volt\metre}$. Diviso per una distanza in metri, dà volt.
 
 (a) $M$ dista \SI{0,10}{\metre} da tutte e due, e i due potenziali hanno segni opposti:
 \[
@@ -301,7 +301,7 @@ E = \frac{\Delta V}{d}
 \qquad\qquad
 \SI{1}{\volt\per\metre} = \SI{1}{\newton\per\coulomb}
 \end{formula}
-dove $\Delta V$ è, in modulo, la differenza di potenziale fra due punti a distanza $d$ lungo il campo. Il campo punta sempre dai potenziali più alti verso quelli più bassi. Le superfici in cui il potenziale ha lo stesso valore si chiamano \textbf{superfici equipotenziali} e sono perpendicolari alle linee di forza: fra due piastre sono piani paralleli alle piastre, intorno a una carica puntiforme sono sfere. Spostarsi su una superficie equipotenziale non costa lavoro. Le due unità del campo si equivalgono: $\si{\volt\per\metre} = \si{\joule\per\coulomb\per\metre} = \si{\newton\metre\per\coulomb\per\metre} = \si{\newton\per\coulomb}$.
+dove $\Delta V$ è, in modulo, la differenza di potenziale fra due punti a distanza $d$ lungo il campo. Il campo punta sempre dai potenziali più alti verso quelli più bassi: fra le piastre della figura~\ref{fig:ud6-piastre}a, la piastra positiva è quella a potenziale più alto. Le superfici in cui il potenziale ha lo stesso valore si chiamano \textbf{superfici equipotenziali} e sono perpendicolari alle linee di forza: fra due piastre sono piani paralleli alle piastre, intorno a una carica puntiforme sono sfere. Spostarsi su una superficie equipotenziale non costa lavoro. Le due unità del campo si equivalgono: $\si{\volt\per\metre} = \si{\joule\per\coulomb\per\metre} = \si{\newton\metre\per\coulomb\per\metre} = \si{\newton\per\coulomb}$.
 
 \input{ud6/generati/lampo-ud6-piastre}
 
@@ -484,7 +484,7 @@ e il tempo è $\Delta t = Q/P = \num{336000}/2000\,\si{\second} = \SI{168}{\seco
 \begin{applicazione}{l'elettrobisturi}
 L'elettrobisturi taglia e coagula i tessuti con l'effetto Joule. Una corrente alternata, cioè una corrente che inverte il suo verso molte volte al secondo (sezione~\ref{sec:ud6-induzione}), ad alta frequenza, fra circa \SI{300}{\kilo\hertz} e qualche megahertz, entra nel corpo dalla punta sottile dello strumento ed esce da una piastra larga, la piastra di ritorno, appoggiata sulla pelle del paziente. L'alta frequenza non eccita nervi e muscoli, che rispondono solo alle correnti lente.
 
-Perché il tessuto si scalda solo sotto la punta? Un piccolo cilindro di tessuto, lungo $L$ e di sezione $A$, ha resistenza $\rho L/A$ e dissipa $P = RI^{2} = \rho L I^{2}/A$; diviso il volume $AL$, la potenza per unità di volume è $\rho\,(I/A)^{2}$, e va con il quadrato della corrente per unità di area. La stessa corrente passa per una punta di circa \SI{1}{\milli\metre\squared} e per una piastra di circa \SI{100}{\centi\metre\squared} $= \SI{e4}{\milli\metre\squared}$: sotto la punta la corrente per unità di area è $10^{4}$ volte più grande, e la potenza per unità di volume $(10^{4})^{2} = 10^{8}$ volte più grande. Il tessuto vicino alla punta vaporizza, quello sotto la piastra si scalda appena; se la piastra si stacca in parte, la corrente si concentra e il paziente rischia un'ustione proprio lì.
+Perché il tessuto si scalda solo sotto la punta? Un piccolo cilindro di tessuto, lungo $L$ e di sezione $A$, ha resistenza $\rho L/A$ e dissipa $P = RI^{2} = \rho L I^{2}/A$; diviso il volume $AL$, la potenza per unità di volume è $\rho\,(I/A)^{2}$, e va con il quadrato della corrente per unità di area. La stessa corrente passa per una punta di circa \SI{1}{\milli\metre\squared} e per una piastra di circa \SI{100}{\centi\metre\squared}. Poiché $\SI{1}{\centi\metre} = \SI{10}{\milli\metre}$, $\SI{1}{\centi\metre\squared} = 10 \cdot 10\,\si{\milli\metre\squared} = \SI{100}{\milli\metre\squared}$, e la piastra misura $100 \cdot \SI{100}{\milli\metre\squared} = \SI{e4}{\milli\metre\squared}$. Sotto la punta la corrente per unità di area è $10^{4}$ volte più grande, e la potenza per unità di volume $(10^{4})^{2} = 10^{8}$ volte più grande. Il tessuto vicino alla punta vaporizza, quello sotto la piastra si scalda appena; se la piastra si stacca in parte, la corrente si concentra e il paziente rischia un'ustione proprio lì.
 \end{applicazione}
 
 \subsection{Resistenze in serie e in parallelo}
@@ -594,7 +594,16 @@ Inserendo un dielettrico la capacità diventa $\varepsilon_r$ volte più grande,
 
 \subsection{L'energia di un condensatore}
 
-Per caricare un condensatore il generatore deve portare la carica da un'armatura all'altra contro la differenza di potenziale, e il lavoro che compie resta immagazzinato come energia potenziale elettrica. All'inizio le armature sono scariche e la differenza di potenziale è zero; man mano che la carica $q$ cresce da 0 a $Q$, la differenza di potenziale $q/C$ cresce in proporzione da 0 a $V$. Il lavoro per portare un po' di carica $\Delta q$ è $V\,\Delta q$, cioè l'area di un rettangolino sotto la retta nel grafico della differenza di potenziale in funzione della carica; sommando tutti i rettangolini si ottiene l'area del triangolo di base $Q$ e altezza $V$, cioè $\frac12 QV$: la metà del rettangolo $QV$ che si avrebbe se la differenza di potenziale valesse $V$ fin dall'inizio (l'area di un triangolo è metà base per altezza).
+Per caricare un condensatore il generatore deve portare la carica da un'armatura all'altra contro la differenza di potenziale, e il lavoro che compie resta immagazzinato come energia potenziale elettrica. All'inizio le armature sono scariche e la differenza di potenziale è zero; man mano che la carica $q$ cresce da 0 a $Q$, la differenza di potenziale $q/C$ cresce in proporzione da 0 al valore finale $V$ (figura~\ref{fig:ud6-energia-condensatore}). Quando sulle armature c'è già la carica $q$, la differenza di potenziale è $q/C$. Il lavoro per portare un altro po' di carica $\Delta q$ è allora $(q/C)\,\Delta q$: l'area di un rettangolino di base $\Delta q$ e altezza $q/C$, sotto la retta del grafico. Sommando tutti i rettangolini, da $q = 0$ a $q = Q$, si ottiene l'area del triangolo di base $Q$ e altezza $V$, cioè $\frac12 QV$ (l'area di un triangolo è metà base per altezza). È la metà del rettangolo $QV$ che si avrebbe se la differenza di potenziale valesse $V$ fin dall'inizio.
+
+\par\medskip
+\noindent\begin{minipage}{\linewidth}
+\centering
+\input{ud6/figure/energia-condensatore}
+\captionof{figure}{Carica di un condensatore. La differenza di potenziale $q/C$ cresce in proporzione alla carica $q$. Portare la carica $\Delta q$ costa il lavoro $(q/C)\,\Delta q$, l'area del rettangolino. La somma dei rettangolini è l'area del triangolo, $\frac12 QV$: l'energia immagazzinata.}
+\label{fig:ud6-energia-condensatore}
+\end{minipage}
+\medskip
 
 \begin{formula}[Energia di un condensatore carico]
 U = \frac12\,Q\,V = \frac12\,C\,V^{2} = \frac{Q^{2}}{2C}
@@ -645,7 +654,7 @@ Quanti ioni servono per tenere la membrana a \SI{70}{\milli\volt}? Per ogni metr
 \[
   n = \frac{\SI{7e-16}{\coulomb}}{\SI{1,6e-19}{\coulomb}} \approx \num{4,4e3}
 \]
-Un micrometro cubo di citoplasma ($\SI{e-15}{\litre}$), con il potassio a circa \SI{0,14}{\mole\per\litre}, contiene invece $0{,}14 \cdot 10^{-15} \cdot \num{6e23} \approx \num{8,4e7}$ ioni potassio. Per caricare la membrana basta spostare pochissimi ioni, e le concentrazioni restano in pratica le stesse.
+Un micrometro cubo di citoplasma ha il volume $(\SI{e-6}{\metre})^{3} = \SI{e-18}{\metre\cubed}$; poiché $\SI{1}{\metre\cubed} = \SI{e3}{\litre}$, sono $\num{e-18} \cdot \SI{e3}{\litre} = \SI{e-15}{\litre}$. Con il potassio a circa \SI{0,14}{\mole\per\litre} contiene $\num{0,14e-15}$ moli di potassio, e ogni mole ha $N_A \approx \num{6e23}$ ioni (UD5): in tutto $0{,}14 \cdot 10^{-15} \cdot \num{6e23} \approx \num{8,4e7}$ ioni potassio. Per caricare la membrana basta spostare pochissimi ioni, e le concentrazioni restano in pratica le stesse.
 \end{applicazione}
 
 % -------------------------------------------------------------------------
@@ -660,10 +669,10 @@ Intorno a un magnete c'è un \textbf{campo magnetico} $\vec B$, un vettore che i
 
 \subsection{Le correnti producono campi magnetici: l'esperimento di Oersted}
 
-Nel 1820 Hans Christian Oersted notò che l'ago di una bussola posta vicino a un filo si girava quando nel filo passava corrente, e tornava nella sua posizione quando la corrente cessava. Era la prima prova di un legame fra elettricità e magnetismo: \emph{una corrente elettrica produce un campo magnetico}. Oggi sappiamo che è l'unica origine del campo magnetico: anche i magneti devono il loro campo a correnti microscopiche, gli elettroni che ruotano negli atomi.
+Nel 1820 Hans Christian Oersted notò che l'ago di una bussola posta vicino a un filo si girava quando nel filo passava corrente, e tornava nella sua posizione quando la corrente cessava. Era la prima prova di un legame fra elettricità e magnetismo: \emph{una corrente elettrica produce un campo magnetico}. Nei magneti, invece, le correnti non si vedono. Il loro campo viene dagli elettroni degli atomi, che si comportano come minuscoli magneti: in parte per il loro moto intorno al nucleo, soprattutto per una proprietà intrinseca dell'elettrone, lo spin. In questa unità le sorgenti del campo magnetico sono le correnti.
 
-Le linee del campo di un filo rettilineo percorso dalla corrente $I$ sono circonferenze con centro sul filo, in piani perpendicolari al filo (figura~\ref{fig:ud6-filo}). Il verso si trova con la \textbf{regola della mano destra}: se il pollice della mano destra indica il verso della corrente, le altre dita, chiudendosi intorno al filo, indicano il verso delle linee di campo. Il modulo del campo è direttamente proporzionale alla corrente e inversamente proporzionale alla distanza $r$ dal filo (\textbf{legge di Biot-Savart}):
-\begin{formula}[Campo magnetico di un filo rettilineo]
+Le linee del campo di un filo rettilineo percorso dalla corrente $I$ sono circonferenze con centro sul filo, in piani perpendicolari al filo (figura~\ref{fig:ud6-filo}). Il verso si trova con la \textbf{regola della mano destra}: se il pollice della mano destra indica il verso della corrente, le altre dita, chiudendosi intorno al filo, indicano il verso delle linee di campo. Il modulo del campo di un filo rettilineo molto lungo, a distanze $r$ piccole rispetto alla sua lunghezza, è direttamente proporzionale alla corrente e inversamente proporzionale alla distanza dal filo (\textbf{legge di Biot-Savart}):
+\begin{formula}[Campo magnetico di un filo rettilineo lungo]
 B = \frac{\mu_0}{2\pi}\,\frac{I}{r}
 \qquad\qquad
 \mu_0 = 4\pi \cdot \SI{e-7}{\tesla\metre\per\ampere}

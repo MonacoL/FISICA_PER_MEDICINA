@@ -1,0 +1,24 @@
+% Energia di un condensatore: differenza di potenziale q/C in funzione della carica q,
+% retta da (0; 0) a (Q; V). Unità arbitrarie: Q = 4, V = 3, quindi q/C = 0,75 q.
+% Rettangolino di base Delta q = 0,3 fra q = 2,2 e q = 2,5, altezza 0,75 * 2,2 = 1,65.
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.62\linewidth, height=5.4cm,
+  axis lines=left, xmin=0, xmax=4.9, ymin=0, ymax=3.7,
+  xlabel={carica $q$}, ylabel={differenza di potenziale},
+  xtick={4}, xticklabels={$Q$},
+  ytick={3}, yticklabels={$V$},
+  label style={font=\small},
+  clip=false,
+]
+  \fill[medica!20] (axis cs:0,0) -- (axis cs:4,3) -- (axis cs:4,0) -- cycle;
+  \fill[attenzione!45] (axis cs:2.2,0) rectangle (axis cs:2.5,1.65);
+  \draw[attenzione, thick] (axis cs:2.2,0) rectangle (axis cs:2.5,1.65);
+  \addplot[formula, very thick, domain=0:4] {0.75*x};
+  \draw[dashed] (axis cs:0,3) -- (axis cs:4,3) -- (axis cs:4,0);
+  \node[formula, font=\small, anchor=south east] at (axis cs:2.9,2.2) {$q/C$};
+  \draw[<->, attenzione] (axis cs:2.2,-0.3) -- (axis cs:2.5,-0.3);
+  \node[attenzione, font=\small, anchor=north] at (axis cs:2.35,-0.3) {$\Delta q$};
+  \node[medica!70!black, font=\small] at (axis cs:3.25,0.85) {$\tfrac12 QV$};
+\end{axis}
+\end{tikzpicture}
