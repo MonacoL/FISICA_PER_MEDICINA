@@ -147,7 +147,7 @@ soluzione = '''Per il secondo principio la forza risultante è la massa per l'ac
 \[
   F = ma = \SI{60}{\kilo\gram} \cdot \SI{5}{\metre\per\second\squared} = \SI{300}{\newton}
 \]
-È la forza di attrito con cui la pista spinge in avanti i piedi del velocista, in risposta alla spinta all'indietro dei piedi sulla pista (terzo principio).'''
+Quale corpo eserciti questa forza lo vedremo con il terzo principio e con l'attrito.'''
 
   [[quesito.opzione]]
   testo = '''\SI{12}{\newton}'''
@@ -160,10 +160,10 @@ soluzione = '''Per il secondo principio la forza risultante è la massa per l'ac
   valore = 300
   [[quesito.opzione]]
   testo = '''\SI{900}{\newton}'''
-  commento = '''Somma alla forza orizzontale, \SI{300}{\newton}, il peso del velocista, \SI{600}{\newton}. Il peso è verticale, ed è bilanciato dalla forza normale della pista: non entra nella risultante orizzontale.'''
+  commento = '''Somma alla forza orizzontale, \SI{300}{\newton}, anche $mg = 60 \cdot 10 = \SI{600}{\newton}$. Ma $mg$ è la forza che darebbe al velocista l'accelerazione di gravità, che è verticale: non conta nella risultante orizzontale, che è $ma$.'''
   [[quesito.opzione]]
   testo = '''\SI{600}{\newton}'''
-  commento = '''È il peso del velocista, $mg$ con $g = \SI{10}{\metre\per\second\squared}$: una forza verticale, che non è la causa dell'accelerazione orizzontale.'''
+  commento = '''È $mg = 60 \cdot 10 = \SI{600}{\newton}$, con $g = \SI{10}{\metre\per\second\squared}$: la forza che darebbe l'accelerazione di gravità, che è verticale. Non può dare un'accelerazione orizzontale. La risultante orizzontale è $ma$.'''
 
 [[quesito]]
 id = "ud2-hooke"

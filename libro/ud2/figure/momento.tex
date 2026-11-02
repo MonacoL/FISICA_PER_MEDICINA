@@ -13,6 +13,8 @@
   % forza in A a 60 gradi dall'asta
   \draw[->, attenzione, very thick] (A) -- ++(60:2.2) node[right] {$\vec F$};
   \draw (A) ++(0.55,0) arc (0:60:0.55); \node at ($(A)+(30:0.8)$) {$\theta$};
+  % lo stesso angolo dentro il triangolo, opposto al vertice
+  \draw[medica] (A) ++(-0.55,0) arc (180:240:0.55); \node[medica] at ($(A)+(210:0.8)$) {$\theta$};
   % retta d'azione
   \draw[dashed, attenzione!70] ($(A)+(240:2.6)$) -- ($(A)+(60:2.9)$);
   % braccio: perpendicolare da O alla retta d'azione

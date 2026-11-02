@@ -14,14 +14,14 @@
     % secante
     \addplot[attenzione, thick, domain=0.9:5.3] {1.4625 + 2.0*(x-1.5)};
     % tangente in t1: pendenza 0.5*1.5+0.5 = 1.25
-    \addplot[medica, thick, dashed, domain=0.2:3.8] {1.4625 + 1.25*(x-1.5)};
+    \addplot[medica, thick, dashed, domain=0.2:5.4] {1.4625 + 1.25*(x-1.5)};
     \draw[dotted] (axis cs:1.5,0) -- (axis cs:1.5,1.4625) -- (axis cs:0,1.4625);
     \draw[dotted] (axis cs:4.5,0) -- (axis cs:4.5,7.4625) -- (axis cs:0,7.4625);
     \fill (axis cs:1.5,1.4625) circle (1.6pt);
     \fill (axis cs:4.5,7.4625) circle (1.6pt);
-    \draw[<->, richiamo] (axis cs:1.5,0.75) -- (axis cs:4.5,0.75) node[midway, below] {$\Delta t$};
-    \draw[<->, richiamo] (axis cs:5.0,1.4625) -- (axis cs:5.0,7.4625) node[midway, right] {$\Delta x$};
+    \draw[<->, richiamo] (axis cs:1.5,1.4625) -- (axis cs:4.5,1.4625) node[midway, below] {$\Delta t$};
+    \draw[<->, richiamo] (axis cs:4.5,1.4625) -- (axis cs:4.5,7.4625) node[midway, right] {$\Delta x$};
     \node[attenzione, anchor=west, align=left] at (axis cs:5.5,9.6) {secante:\\$v_m = \Delta x/\Delta t$};
-    \node[medica, anchor=west, align=left] at (axis cs:2.9,2.1) {tangente in $t_1$:\\velocità istantanea};
+    \node[medica, anchor=west, align=left] at (axis cs:5.45,6.34) {tangente in $t_1$:\\velocità istantanea};
   \end{axis}
 \end{tikzpicture}
