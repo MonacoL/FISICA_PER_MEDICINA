@@ -29,7 +29,7 @@ Un'onda elettromagnetica è fatta di un campo elettrico $\vec E$ e di un campo m
   \item entrambi sono perpendicolari alla direzione in cui l'onda avanza: l'onda elettromagnetica è un'onda \textbf{trasversale};
   \item oscillano insieme: raggiungono il massimo e lo zero negli stessi punti e negli stessi istanti.
 \end{itemize}
-Un campo elettrico che varia genera un campo magnetico che varia, e viceversa: i due campi si sostengono a vicenda, ed è per questo che l'onda non ha bisogno di un mezzo. Le onde elettromagnetiche nascono da cariche elettriche accelerate: gli elettroni che oscillano in un'antenna, gli elettroni che cambiano livello in un atomo, i nuclei che perdono energia.
+Un campo elettrico che varia genera un campo magnetico che varia, e viceversa: i due campi si sostengono a vicenda, ed è per questo che l'onda non ha bisogno di un mezzo. Le onde elettromagnetiche sono emesse da cariche elettriche accelerate, come gli elettroni che oscillano in un'antenna, e da atomi e nuclei che passano da un livello di energia più alto a uno più basso.
 
 \begin{figure}[h]
 \centering
@@ -46,7 +46,7 @@ Un campo elettrico che varia genera un campo magnetico che varia, e viceversa: i
   \item La \textbf{frequenza} $f$ è il numero di oscillazioni al secondo, $f = 1/T$. Si misura in hertz: $\SI{1}{\hertz} = \SI[per-mode=power]{1}{\second\tothe{-1}}$.
   \item La \textbf{velocità di propagazione}: in un periodo l'onda avanza di una lunghezza d'onda, quindi $v = \lambda/T = \lambda f$. Nel vuoto tutte le onde elettromagnetiche hanno la stessa velocità, la velocità della luce $c \approx \SI{3e8}{\metre\per\second}$.
   \item L'\textbf{ampiezza} è il valore massimo dei campi: $E_0$ per il campo elettrico, $B_0$ per quello magnetico.
-  \item L'\textbf{intensità} $I$ è l'energia che attraversa in un secondo una superficie di \SI{1}{\metre\squared} perpendicolare alla propagazione, cioè la potenza per unità di superficie. Si misura in \si{\watt\per\metre\squared}, ed è proporzionale al quadrato dell'ampiezza.
+  \item L'\textbf{intensità} $I$ è l'energia che attraversa in un secondo una superficie di \SI{1}{\metre\squared} perpendicolare alla propagazione, cioè la potenza $P$ divisa per l'area $A$ della superficie: $I = P/A$. Si misura in \si{\watt\per\metre\squared}, ed è proporzionale al quadrato dell'ampiezza: $I \propto E_0^2$, dove il simbolo $\propto$ si legge «è proporzionale a».
 \end{itemize}
 
 \begin{formula}[Onde elettromagnetiche]
@@ -106,7 +106,7 @@ Le onde elettromagnetiche coprono un intervallo enorme di frequenze. Lo spettro 
 \begin{figure}[h]
 \centering
 \input{ud7/figure/spettro}
-\caption{Lo spettro elettromagnetico. Da sinistra a destra crescono frequenza ed energia del fotone e diminuisce la lunghezza d'onda.}
+\caption{Lo spettro elettromagnetico. Da sinistra a destra crescono frequenza ed energia del fotone e diminuisce la lunghezza d'onda. Il fotone, l'elettronvolt (eV) e la soglia di ionizzazione sono spiegati nella sezione~\ref{sec:ud7-fotone}.}
 \label{fig:ud7-spettro}
 \end{figure}
 
@@ -160,7 +160,7 @@ h \approx \SI{6,6e-34}{\joule\second}
 
 $h$ è la \textbf{costante di Planck}. Più alta è la frequenza, più energia porta ogni fotone: un fotone di raggi X ha molta più energia di un fotone di luce visibile.
 
-L'energia di un fotone, in joule, è un numero molto piccolo. Per questo si usa l'\textbf{elettronvolt}: \SI{1}{\electronvolt} è l'energia che acquista un elettrone accelerato da una differenza di potenziale di \SI{1}{\volt}, e vale circa \SI{1,6e-19}{\joule}. Con i suoi multipli: $\SI{1}{\kilo\electronvolt} = \SI{e3}{\electronvolt}$, $\SI{1}{\mega\electronvolt} = \SI{e6}{\electronvolt}$. Per i conti a mente conviene una formula pratica, che viene da $hc \approx \SI{1240}{\electronvolt\nano\metre}$:
+L'energia di un fotone, in joule, è un numero molto piccolo. Per questo si usa l'\textbf{elettronvolt}: \SI{1}{\electronvolt} è l'energia che acquista un elettrone accelerato da una differenza di potenziale di \SI{1}{\volt}, e vale circa \SI{1,6e-19}{\joule}. Con i suoi multipli: $\SI{1}{\kilo\electronvolt} = \SI{e3}{\electronvolt}$, $\SI{1}{\mega\electronvolt} = \SI{e6}{\electronvolt}$. Per i conti a mente conviene una formula pratica. Il prodotto $hc$ vale $\SI{6,6e-34}{\joule\second} \cdot \SI{3e8}{\metre\per\second} \approx \SI{2e-25}{\joule\metre}$; diviso per \SI{1,6e-19}{\joule} (un elettronvolt) dà circa \SI{1,24e-6}{\electronvolt\metre}, e poiché $\SI{1}{\metre} = \SI{e9}{\nano\metre}$, $hc \approx \SI{1240}{\electronvolt\nano\metre}$. Quindi:
 
 \begin{formula}[Energia del fotone: formula pratica]
 E\,[\si{\electronvolt}] \approx \frac{1240}{\lambda\,[\si{\nano\metre}]}
@@ -177,7 +177,10 @@ Con la formula pratica:
   \qquad\Longrightarrow\qquad
   E \approx 2{,}5 \cdot \SI{1,6e-19}{\joule} = \SI{4e-19}{\joule}
 \]
-Lo stesso risultato viene da $E = hc/\lambda = (\SI{6,6e-34}{\joule\second} \cdot \SI{3e8}{\metre\per\second}) / \SI{5e-7}{\metre} \approx \SI{4e-19}{\joule}$.
+Lo stesso risultato viene da $E = hc/\lambda$:
+\[
+  E = \frac{\SI{6,6e-34}{\joule\second} \cdot \SI{3e8}{\metre\per\second}}{\SI{5e-7}{\metre}} = \frac{6{,}6 \cdot 3}{5} \cdot 10^{-34+8-(-7)}\,\si{\joule} \approx \frac{20}{5} \cdot 10^{-19}\,\si{\joule} = \SI{4e-19}{\joule}
+\]
 
 Il laser emette $\SI{1}{\milli\watt} = \SI{e-3}{\joule}$ al secondo. Il numero di fotoni al secondo è l'energia al secondo divisa per l'energia di un fotone:
 \[
@@ -200,7 +203,7 @@ Quello che decide l'effetto di una radiazione su un atomo o su una molecola è l
 \end{itemize}
 
 \begin{attenzione}[un fascio intenso non diventa ionizzante]
-Un forno a microonde emette moltissimi fotoni, ma ciascuno ha un'energia di circa $\SI{e-5}{\electronvolt}$, un milione di volte meno di quella che serve per ionizzare. Aumentare il numero di fotoni non serve: per ionizzare una molecola serve un \emph{singolo} fotone abbastanza energetico. Le microonde possono però scaldare, e ustionare, i tessuti.
+Un forno a microonde emette moltissimi fotoni, ma con $\lambda \approx \SI{12}{\centi\metre} = \SI{1,2e8}{\nano\metre}$ ciascuno ha un'energia di circa $1240/(\num{1,2e8}) \approx \SI{e-5}{\electronvolt}$, un milione di volte meno di quella che serve per ionizzare. Aumentare il numero di fotoni non serve: per ionizzare una molecola serve un \emph{singolo} fotone abbastanza energetico. Le microonde possono però scaldare, e ustionare, i tessuti.
 \end{attenzione}
 
 \begin{quesitolampo}{ql:ud7-ionizzanti}
@@ -250,7 +253,7 @@ x_{1/2} = \frac{\ln 2}{\mu} \approx \frac{0{,}69}{\mu}
 I = \frac{I_0}{2^n} \quad \text{dopo } n = \frac{x}{x_{1/2}} \text{ spessori emivalenti}
 \end{formula}
 
-Con lo spessore emivalente i conti diventano potenze di 2: uno spessore emivalente lascia passare $1/2$, due lasciano passare $1/4$, tre $1/8$, dieci circa un millesimo.
+Se lo spessore è $x = n\,x_{1/2}$, allora $e^{-\mu x} = (e^{-\mu x_{1/2}})^n = (1/2)^n$. Con lo spessore emivalente i conti diventano potenze di 2: uno spessore emivalente lascia passare $1/2$, due lasciano passare $1/4$, tre $1/8$, dieci circa un millesimo.
 
 \begin{figure}[h]
 \centering
@@ -283,13 +286,13 @@ Dopo \SI{2}{\centi\metre} di un certo materiale l'intensità di un fascio è rid
 
 \subsection{Assorbanza e concentrazione}
 
-In chimica e in laboratorio la stessa legge si scrive con i logaritmi in base 10. Si definisce l'\textbf{assorbanza} $A$ di un campione. Per una soluzione diluita, illuminata con luce monocromatica, l'assorbanza è proporzionale alla concentrazione $c$ della sostanza che assorbe e al cammino $\ell$ della luce nella cuvetta:
+In chimica e in laboratorio la stessa legge si scrive con i logaritmi in base 10. Si definisce \textbf{assorbanza} di un campione il numero $A = \log_{10}(I_0/I)$, cioè $I/I_0 = 10^{-A}$. Per una soluzione diluita, illuminata con luce monocromatica, l'assorbanza è proporzionale alla concentrazione $c$ della sostanza che assorbe (qui $c$ non è la velocità della luce) e al cammino $\ell$ della luce nella cuvetta:
 
 \begin{formula}[Assorbanza (legge di Beer)]
 A = \log_{10} \frac{I_0}{I} = \varepsilon \, c \, \ell
 \end{formula}
 
-$\varepsilon$ è il \textbf{coefficiente di assorbimento molare}, caratteristico della sostanza e della lunghezza d'onda. Con $c$ in \si{\mole\per\litre} e $\ell$ in \si{\centi\metre}, $\varepsilon$ si misura in \si{\litre\per\mole\per\centi\metre}, e il prodotto $\varepsilon c \ell$ è un numero puro, come deve essere un logaritmo. Un'assorbanza $A = 1$ vuol dire che passa un decimo della luce, $A = 2$ un centesimo. Misurando l'assorbanza si ricava la concentrazione: è il principio dello spettrofotometro.
+$\varepsilon$ è il \textbf{coefficiente di assorbimento molare}, caratteristico della sostanza e della lunghezza d'onda. Con $c$ in \si{\mole\per\litre} e $\ell$ in \si{\centi\metre}, $\varepsilon$ si misura in \si{\litre\per\mole\per\centi\metre}, e il prodotto $\varepsilon c \ell$ è un numero puro, come deve essere un logaritmo. Con $A = 1$ si ha $I/I_0 = 10^{-1}$: passa un decimo della luce; con $A = 2$, $I/I_0 = 10^{-2}$: un centesimo. Misurando l'assorbanza si ricava la concentrazione: è il principio dello spettrofotometro.
 
 \begin{applicazione}{il saturimetro}
 Il saturimetro da dito misura quanta parte dell'emoglobina è legata all'ossigeno. Un LED rosso (circa \SI{660}{\nano\metre}) e uno infrarosso (circa \SI{940}{\nano\metre}) illuminano il polpastrello, e un sensore misura la luce trasmessa. L'emoglobina ossigenata e quella non ossigenata assorbono in modo diverso alle due lunghezze d'onda. A ogni battito il sangue arterioso aumenta un poco lo spessore attraversato, e l'assorbanza cresce: lo strumento usa solo questa parte che pulsa, così toglie il contributo costante di pelle, tessuti e sangue venoso. Dal rapporto fra le variazioni di assorbanza alle due lunghezze d'onda ricava la saturazione.
@@ -327,17 +330,17 @@ In ogni decadimento si conservano il numero di massa totale e la carica totale: 
 \small
 \begin{tabularx}{\linewidth}{@{}l X c c l@{}}
 \toprule
-Decadimento & Che cosa viene emesso & $\Delta A$ & $\Delta Z$ & Si attenua con \\
+Decadimento & Che cosa viene emesso & $\Delta A$ & $\Delta Z$ & Schermatura \\
 \midrule
-$\alpha$ & un nucleo di elio $\nuclide{4}{2}{He}$ (2 protoni e 2 neutroni) & $-4$ & $-2$ & un foglio di carta, la pelle \\
-$\beta^-$ & un elettrone (e un antineutrino): un neutrone diventa protone & $0$ & $+1$ & pochi mm di alluminio \\
-$\beta^+$ & un positrone (e un neutrino): un protone diventa neutrone & $0$ & $-1$ & pochi mm di alluminio \\
-$\gamma$ & un fotone di alta energia da un nucleo eccitato & $0$ & $0$ & cm di piombo, m di cemento \\
+$\alpha$ & un nucleo di elio $\nuclide{4}{2}{He}$ (2 protoni e 2 neutroni) & $-4$ & $-2$ & si ferma con un foglio di carta, la pelle \\
+$\beta^-$ & un elettrone (e un antineutrino): un neutrone diventa protone & $0$ & $+1$ & si ferma con pochi mm di alluminio \\
+$\beta^+$ & un positrone (e un neutrino): un protone diventa neutrone & $0$ & $-1$ & si ferma con pochi mm di alluminio \\
+$\gamma$ & un fotone di alta energia da un nucleo eccitato & $0$ & $0$ & non si ferma: si attenua con cm di piombo \\
 \bottomrule
 \end{tabularx}
 \end{center}
 
-Il \textbf{positrone} $e^+$ è l'antiparticella dell'elettrone: ha la stessa massa e carica $+1$. Il \textbf{neutrino} $\nu$ e l'\textbf{antineutrino} $\bar\nu$ sono particelle senza carica e quasi senza massa, che attraversano la materia quasi senza interagire: nel bilancio hanno $A = 0$ e $Z = 0$. Un nucleo è \textbf{eccitato} quando ha energia in eccesso, che cede emettendo un fotone $\gamma$ senza cambiare né $A$ né $Z$. Nel bilancio elettrone e positrone si scrivono $\nuclide{0}{-1}{e}$ e $\nuclide{0}{+1}{e}$: non contengono nucleoni e hanno carica $-1$ e $+1$. Alcuni esempi:
+Il \textbf{positrone} $e^+$ è l'antiparticella dell'elettrone: ha la stessa massa e carica $+1$, misurata in unità della carica del protone. Il \textbf{neutrino} $\nu$ e l'\textbf{antineutrino} $\bar\nu$ sono particelle senza carica e quasi senza massa, che attraversano la materia quasi senza interagire: nel bilancio hanno $A = 0$ e $Z = 0$. Un nucleo è \textbf{eccitato} quando ha energia in eccesso, che cede emettendo un fotone $\gamma$ senza cambiare né $A$ né $Z$. Nel bilancio elettrone e positrone si scrivono $\nuclide{0}{-1}{e}$ e $\nuclide{0}{+1}{e}$: non contengono nucleoni e hanno carica $-1$ e $+1$. Alcuni esempi:
 \[
   \nuclide{226}{88}{Ra} \to \nuclide{222}{86}{Rn} + \nuclide{4}{2}{He}
   \qquad
@@ -361,7 +364,7 @@ Il nucleo $\nuclide{238}{92}{U}$ decade emettendo una particella $\alpha$. Il nu
 
 Non si può prevedere quando decadrà un singolo nucleo: si sa solo che ogni nucleo ha la stessa probabilità di decadere nell'unità di tempo, e che questa probabilità non dipende da quanto tempo è già passato. Ne segue che in ogni intervallo di tempo decade la stessa \emph{frazione} dei nuclei presenti. È la stessa situazione dell'assorbimento: il numero $N$ di nuclei non ancora decaduti diminuisce in modo esponenziale. (Qui $N$ non è più il numero di neutroni, ma il numero di nuclei.)
 
-La probabilità di decadere per unità di tempo è la \textbf{costante di decadimento} $\lambda$, che si misura in \si[per-mode=power]{\second\tothe{-1}}. Quando $\lambda$ è piccola, come per quasi tutti i radioisotopi usati in medicina, $\lambda \cdot \SI{1}{\second}$ è la probabilità che un nucleo decada in un secondo. Se ci sono $N$ nuclei, in un secondo ne decadono in media $\lambda N$. Questo numero è l'\textbf{attività} $\mathcal{A}$, cioè il numero di decadimenti al secondo. L'attività si misura in becquerel: $\SI{1}{\becquerel} = 1$ decadimento al secondo $= \SI[per-mode=power]{1}{\second\tothe{-1}}$. L'\textbf{emivita} $T_{1/2}$ è il tempo in cui metà dei nuclei decade. Si ricava come lo spessore emivalente: ponendo $N = N_0/2$ si ottiene $\lambda T_{1/2} = \ln 2$.
+La probabilità di decadere per unità di tempo è la \textbf{costante di decadimento} $\lambda$, che si misura in \si[per-mode=power]{\second\tothe{-1}}. Attenzione: qui $\lambda$ non è la lunghezza d'onda, ma la costante di decadimento. Quando $\lambda$ è piccola, come per quasi tutti i radioisotopi usati in medicina, $\lambda \cdot \SI{1}{\second}$ è la probabilità che un nucleo decada in un secondo. Se ci sono $N$ nuclei, in un secondo ne decadono in media $\lambda N$. Questo numero è l'\textbf{attività} $\mathcal{A}$, cioè il numero di decadimenti al secondo. L'attività si misura in becquerel: $\SI{1}{\becquerel} = 1$ decadimento al secondo $= \SI[per-mode=power]{1}{\second\tothe{-1}}$. L'\textbf{emivita} $T_{1/2}$ è il tempo in cui metà dei nuclei decade. Si ricava come lo spessore emivalente: ponendo $N = N_0/2$ si ottiene $\lambda T_{1/2} = \ln 2$.
 
 \begin{formula}[Decadimento radioattivo]
 N(t) = N_0\, e^{-\lambda t}
@@ -383,7 +386,7 @@ L'attività è proporzionale a $N$, quindi diminuisce con la stessa emivita dei 
 \end{figure}
 
 \begin{esempio}
-Per curare l'ipertiroidismo si somministra iodio-131, con emivita di \SI{8}{giorni}. Una capsula ha attività \SI{3,2}{\giga\becquerel}. Quanto vale l'attività dopo \SI{24}{giorni}? Quanti nuclei di iodio-131 contiene all'inizio?
+Dopo l'asportazione di un tumore della tiroide si somministra iodio-131, con emivita di \SI{8}{giorni}, per distruggere il tessuto tiroideo rimasto. Una capsula ha attività \SI{3,2}{\giga\becquerel}. Quanto vale l'attività dopo \SI{24}{giorni}? Quanti nuclei di iodio-131 contiene all'inizio?
 
 In \SI{24}{giorni} ci sono $n = \SI{24}{giorni} / \SI{8}{giorni} = 3$ emivite, quindi
 \[
@@ -409,7 +412,7 @@ L'attività di un campione radioattivo scende da \SI{800}{\kilo\becquerel} a \SI
 \end{quesitolampo}
 
 \begin{applicazione}{medicina nucleare}
-In una \textbf{scintigrafia} si somministra al paziente un radiofarmaco con tecnezio-99m, che emette fotoni $\gamma$ da \SI{140}{\kilo\electronvolt}. La «m» sta per metastabile: il nucleo resta eccitato per un po' e poi emette il $\gamma$. Quei fotoni sono abbastanza penetranti da uscire dal corpo ed essere raccolti da una gamma camera. L'emivita, circa \SI{6}{ore}, è abbastanza lunga per fare l'esame e abbastanza corta da limitare la \textbf{dose}, cioè l'energia della radiazione assorbita dai tessuti del paziente.
+In una \textbf{scintigrafia} si somministra al paziente un radiofarmaco con tecnezio-99m, che emette fotoni $\gamma$ da \SI{140}{\kilo\electronvolt}. La «m» sta per metastabile: il nucleo resta eccitato per un po' e poi emette il $\gamma$. Quei fotoni sono abbastanza penetranti da uscire dal corpo ed essere raccolti da una gamma camera. L'emivita, circa \SI{6}{ore}, è abbastanza lunga per fare l'esame e abbastanza corta da limitare la \textbf{dose}, cioè l'energia della radiazione assorbita da ogni chilogrammo di tessuto del paziente. La dose si misura in gray: $\SI{1}{Gy} = \SI{1}{\joule\per\kilo\gram}$.
 
 Nella \textbf{PET} si usano emettitori $\beta^+$ come il fluoro-18 (emivita circa \SI{110}{minuti}). Il positrone emesso incontra quasi subito un elettrone e i due si \textbf{annichilano}: scompaiono entrambi, e la loro massa diventa l'energia di due fotoni da \SI{511}{\kilo\electronvolt} che partono in direzioni opposte. Rivelando le coppie di fotoni lo strumento ricostruisce dove si trova il radiofarmaco.
 \end{applicazione}
@@ -493,25 +496,25 @@ Un raggio di luce passa dall'aria ($n_1 = 1$) in un materiale trasparente con $n
 
 Dalla legge di Snell:
 \[
-  \sin\theta_2 = \frac{n_1}{n_2} \sin\theta_1 = \frac{1}{1{,}41} \cdot 0{,}71 \approx 0{,}5
+  \sin\theta_2 = \frac{n_1}{n_2} \sin\theta_1 = \frac{1}{\sqrt 2} \cdot \frac{\sqrt 2}{2} = \frac{1}{2} = 0{,}5
   \qquad\Longrightarrow\qquad
   \theta_2 = \ang{30}
 \]
 Il raggio si avvicina alla normale, perché passa in un mezzo più denso. La velocità nel materiale è
 \[
-  v = \frac{c}{n} = \frac{\SI{3e8}{\metre\per\second}}{1{,}41} \approx \SI{2,1e8}{\metre\per\second}
+  v = \frac{c}{\sqrt 2} = \frac{\sqrt 2}{2}\,c \approx 0{,}71 \cdot \SI{3e8}{\metre\per\second} \approx \SI{2,1e8}{\metre\per\second}
 \]
 \end{esempio}
 
 \begin{approfondimento}{angolo limite, riflessione totale ed endoscopia}
-Se la luce passa da un mezzo più denso a uno meno denso ($n_1 > n_2$), il raggio rifratto si allontana dalla normale. C'è un angolo di incidenza, l'\textbf{angolo limite} $\theta_\ell$, per cui il raggio rifratto esce radente alla superficie ($\theta_2 = \ang{90}$): dalla legge di Snell, $\sin\theta_\ell = n_2/n_1$. Per angoli di incidenza più grandi il raggio rifratto non c'è più e tutta la luce viene riflessa: è la \textbf{riflessione totale}. Per il vetro in aria, $\sin\theta_\ell = 1/1{,}5 \approx 0{,}67$, cioè $\theta_\ell \approx \ang{42}$.
+Se la luce passa da un mezzo più denso a uno meno denso ($n_1 > n_2$), il raggio rifratto si allontana dalla normale. C'è un angolo di incidenza, l'\textbf{angolo limite} $\theta_\ell$, per cui il raggio rifratto esce radente alla superficie ($\theta_2 = \ang{90}$): dalla legge di Snell, $\sin\theta_\ell = n_2/n_1$. Per angoli di incidenza più grandi il raggio rifratto non c'è più e tutta la luce viene riflessa: è la \textbf{riflessione totale}. Per il vetro in aria, $\sin\theta_\ell = 1/1{,}5 \approx 0{,}67$: poco meno di $\sin\ang{45} \approx 0{,}71$, quindi l'angolo limite è poco meno di \ang{45} (circa \ang{42}).
 
 Una fibra ottica ha un nucleo con indice $n_1$ circondato da un rivestimento con indice $n_2 < n_1$. La luce che colpisce la parete con un angolo maggiore dell'angolo limite resta intrappolata e percorre la fibra anche quando questa è curva. Fasci di migliaia di fibre portano luce e immagini negli endoscopi (gastroscopia, colonscopia, artroscopia).
 \end{approfondimento}
 
 \subsection{Le lenti convergenti sottili}
 
-Una lente è un corpo trasparente limitato da due superfici curve; è \textbf{sottile} quando il suo spessore è piccolo rispetto alle distanze in gioco. Una lente \textbf{convergente}, più spessa al centro che ai bordi, fa passare per un punto, il \textbf{fuoco} $F$, i raggi che arrivano paralleli all'asse ottico. La distanza fra il centro della lente e il fuoco è la \textbf{distanza focale} $f$. Ogni lente ha due fuochi, $F$ e $F'$, alla stessa distanza dalle due parti della lente.
+Una lente è un corpo trasparente limitato da due superfici curve; è \textbf{sottile} quando il suo spessore è piccolo rispetto alle distanze in gioco. Una lente \textbf{convergente}, più spessa al centro che ai bordi, fa passare per un punto dietro la lente, il \textbf{fuoco} $F'$, i raggi che arrivano paralleli all'asse ottico. La distanza fra il centro della lente e il fuoco è la \textbf{distanza focale} $f$. Ogni lente ha due fuochi alla stessa distanza $f$: $F$ davanti alla lente, dalla parte da cui arriva la luce, e $F'$ dietro.
 
 Quanto una lente devia i raggi si misura con il \textbf{potere diottrico} $D = 1/f$. Con $f$ in metri, $D$ si misura in diottrie (D): una lente con $f = \SI{50}{\centi\metre} = \SI{0,5}{\metre}$ ha $D = \SI{2}{D}$. Più corta è la focale, più alto è il potere diottrico.
 
