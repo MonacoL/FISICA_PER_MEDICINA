@@ -31,12 +31,14 @@ Compila con `latexmk` ogni unità didattica indicata e, una volta, il libro, e c
 
 Gli overfull hbox oltre 5pt compaiono nel rapporto come avviso, senza far fallire il comando.
 
+Prima di compilare, il comando legge la fonte degli esercizi di ogni UD (`libro/udN/esercizi.toml`, ADR 0006). Ne genera `libro/udN/generati/` (eserciziario e quesiti lampo, non versionati) e la pagina web `libro/build/web/udN.html`. Intanto ricalcola ogni risultato e controlla il formato dei quesiti. Un risultato che non torna, o un quesito fuori dalle regole, fa fallire il comando. Per compilare a mano con `latexmk` serve quindi aver lanciato prima `uv run controllo`. Il formato della fonte è descritto in testa a `libro/ud7/esercizi.toml`.
+
 ```sh
 uv run controllo ud7          # oppure più UD: uv run controllo ud1 ud7
 uv run pytest
 ```
 
-La stessa cosa gira in CI su ogni PR (`.github/workflows/controllo.yml`), che pubblica i PDF come artifact `pdf`.
+La stessa cosa gira in CI su ogni PR (`.github/workflows/controllo.yml`), che pubblica i PDF come artifact `pdf` e le pagine web come artifact `web`.
 
 ## Licenza
 

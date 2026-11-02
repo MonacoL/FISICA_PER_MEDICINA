@@ -11,3 +11,6 @@ __pycache__/
 
 # Compilazione LaTeX
 libro/build/
+
+# File generati da esercizi.toml (uv run controllo)
+libro/*/generati/

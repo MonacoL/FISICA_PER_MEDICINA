@@ -1,0 +1,311 @@
+# Esercizi della UD7: fonte unica (ADR 0006). `uv run controllo ud7` ne ricava
+# generati/eserciziario.tex, un generati/lampo-<id>.tex per ogni quesito lampo,
+# la pagina web build/web/ud7.html, e ricalcola ogni risultato.
+#
+# Il formato:
+# - [[problema]]: id, livello (1, 2, 3), testo, dati; una o più [[problema.parte]]
+#   con domanda (se le parti sono più di una), calcolo, risultato, soluzione;
+# - [[quesito]]: id, tipo ("multipla" | "completamento"), testo, soluzione.
+#   Per la risposta multipla: corretta (A-E) e cinque [[quesito.opzione]] con testo;
+#   ogni distrattore ha il suo commento. Per il completamento: risposta, scritta
+#   secondo le regole ufficiali (virgola, al massimo 16 caratteri).
+#   lampo = true: il testo va nella dispensa (\input{ud7/generati/lampo-<id>}),
+#   la soluzione svolta nell'eserciziario;
+# - testo, soluzione e commenti sono LaTeX, in stringhe letterali '''...''';
+# - {{nome}} nel testo inserisce un dato di `dati`, con virgola e unità. Per tenere
+#   le cifre significative il valore si scrive come stringa: valore = "0,50";
+# - calcolo è un'espressione Python sui dati e sulle costanti; il controllo la
+#   confronta con il risultato, arrotondato a `cifre` cifre significative. Per la
+#   risposta multipla l'opzione corretta ha `valore`, per il completamento conta
+#   la risposta;
+# - le costanti sono quelle che lo studente usa a mano.
+
+titolo = "Eserciziario UD7 · Fisica delle radiazioni"
+
+[costanti]
+ln2 = 0.69
+ln10 = 2.3
+c = 3e8
+h = 6.6e-34
+eV = 1.6e-19
+hc_eVnm = 1240
+
+# ==================================================================== problemi
+
+[[problema]]
+id = "ud7-hvl-tessuto"
+livello = 1
+testo = '''Un tessuto ha coefficiente di attenuazione {{mu}} per i raggi X di una radiografia. Calcola lo spessore emivalente.'''
+dati.mu = { valore = 0.35, unita = "cm^-1" }
+
+  [[problema.parte]]
+  calcolo = "ln2 / mu"
+  risultato = { valore = 2.0, unita = "cm", cifre = 2 }
+  soluzione = '''Lo spessore emivalente è quello per cui $e^{-\mu x} = 1/2$:
+\[
+  x_{1/2} = \frac{\ln 2}{\mu} = \frac{0{,}69}{\SI[per-mode=power]{0,35}{\centi\metre\tothe{-1}}} \approx \SI{2,0}{\centi\metre}
+\]'''
+
+[[problema]]
+id = "ud7-piombo"
+livello = 2
+testo = '''Per certi raggi $\gamma$ lo spessore emivalente del piombo è {{x12}}.'''
+dati.x12 = { valore = "0,50", unita = "cm" }
+
+  [[problema.parte]]
+  domanda = '''Quale spessore riduce l'intensità a $1/16$?'''
+  calcolo = "4 * x12"
+  risultato = { valore = 2.0, unita = "cm", cifre = 2 }
+  soluzione = '''$1/16 = 1/2^4$: servono 4 spessori emivalenti, cioè $4 \cdot \SI{0,50}{\centi\metre} = \SI{2,0}{\centi\metre}$.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti centimetri di piombo bisogna aggiungere a quello spessore perché passi meno dell'\SI{1}{\percent}, in numero intero di spessori emivalenti?'''
+  calcolo = "7 * x12 - 4 * x12"
+  risultato = { valore = 1.5, unita = "cm", cifre = 2 }
+  soluzione = '''L'intensità deve scendere sotto $1/100$. Con 6 spessori emivalenti passa $1/2^6 = 1/64$, ancora più dell'\SI{1}{\percent}; con 7 passa $1/2^7 = 1/128$, meno dell'\SI{1}{\percent}. Servono 7 spessori emivalenti in tutto, cioè $7 \cdot \SI{0,50}{\centi\metre} = \SI{3,5}{\centi\metre}$: ai \SI{2,0}{\centi\metre} del punto (a) se ne aggiungono $\SI{3,5}{\centi\metre} - \SI{2,0}{\centi\metre} = \SI{1,5}{\centi\metre}$.'''
+
+[[problema]]
+id = "ud7-tecnezio"
+livello = 3
+testo = '''Per una scintigrafia un paziente deve ricevere alle 14:00 un radiofarmaco al tecnezio-99m (emivita {{T12}}) con attività {{A}}. La dose viene preparata alle 8:00 dello stesso giorno.'''
+dati.T12 = { valore = "6,0", unita = "h" }
+dati.A = { valore = 400, unita = "MBq" }
+
+  [[problema.parte]]
+  domanda = '''Quale attività deve avere alla preparazione?'''
+  calcolo = "A * 2**(6 / T12)"
+  risultato = { valore = 800, unita = "MBq", cifre = 2 }
+  soluzione = '''Dalle 8:00 alle 14:00 passano \SI{6}{\hour}, cioè un'emivita: l'attività si dimezza. Alla preparazione serve il doppio, \SI{800}{\mega\becquerel}.'''
+
+  [[problema.parte]]
+  domanda = '''Quanti nuclei di tecnezio-99m riceve il paziente?'''
+  calcolo = "(A * 1e6) / (ln2 / (T12 * 3600))"
+  risultato = { valore = 1.3e13, cifre = 2 }
+  soluzione = '''Dalla relazione $\mathcal{A} = \lambda N$. L'emivita in secondi è $\SI{6,0}{\hour} = 6 \cdot \SI{3600}{\second} = \SI{21600}{\second}$, e l'attività è $\SI{400}{\mega\becquerel} = \SI[per-mode=power]{4,0e8}{\second\tothe{-1}}$:
+\[
+  \lambda = \frac{\ln 2}{T_{1/2}} = \frac{0{,}69}{\SI{2,16e4}{\second}} \approx \SI[per-mode=power]{3,2e-5}{\second\tothe{-1}}
+  \qquad
+  N = \frac{\mathcal{A}}{\lambda} = \frac{4{,}0}{3{,}2} \cdot 10^{8-(-5)} = 1{,}25 \cdot 10^{13} \approx \num{1,3e13}
+\]'''
+
+  [[problema.parte]]
+  domanda = '''Trascurando l'eliminazione biologica, quale attività resta nel paziente 24 ore dopo la somministrazione?'''
+  calcolo = "A / 2**(24 / T12)"
+  risultato = { valore = 25, unita = "MBq", cifre = 2 }
+  soluzione = '''\SI{24}{\hour} sono $24/6 = 4$ emivite: $\SI{400}{\mega\becquerel} / 2^4 = \SI{400}{\mega\becquerel} / 16 = \SI{25}{\mega\becquerel}$. In realtà l'attività sarà ancora più bassa, perché una parte del radiofarmaco viene eliminata con le urine.'''
+
+# ============================================================= quesiti d'esame
+
+[[quesito]]
+id = "ud7-beta"
+tipo = "multipla"
+testo = '''Il fosforo-32, usato in alcune terapie, decade $\beta^-$. Quale nucleo si forma?'''
+corretta = "B"
+soluzione = '''Nel decadimento $\beta^-$ un neutrone diventa protone ed esce un elettrone: il numero di massa resta 32, il numero atomico sale da 15 a 16, che è lo zolfo.'''
+
+  [[quesito.opzione]]
+  testo = '''$\nuclide{32}{14}{Si}$'''
+  commento = '''$Z$ diminuisce di 1: è il decadimento $\beta^+$, non $\beta^-$.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{32}{16}{S}$'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{31}{15}{P}$'''
+  commento = '''Toglie un neutrone al nucleo: nessun decadimento $\beta$ cambia il numero di massa.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{28}{13}{Al}$'''
+  commento = '''$A - 4$ e $Z - 2$: è il decadimento $\alpha$.'''
+  [[quesito.opzione]]
+  testo = '''$\nuclide{32}{15}{P}$'''
+  commento = '''Il nucleo resta lo stesso: succede solo nel decadimento $\gamma$.'''
+
+[[quesito]]
+id = "ud7-assorbanza"
+tipo = "completamento"
+testo = '''Una soluzione lascia passare il {{p}} della luce che la colpisce. La sua assorbanza vale \completa.'''
+dati.p = { valore = 10, unita = "\\percent" }
+calcolo = "math.log10(100 / p)"
+risposta = "1"
+soluzione = '''Se passa il \SI{10}{\percent}, $I_0/I = 10$ e $A = \log_{10} 10 = 1$.'''
+
+# ============================================== quesiti lampo, in ordine di dispensa
+
+[[quesito]]
+id = "ud7-lambda"
+tipo = "multipla"
+lampo = true
+testo = '''Due onde elettromagnetiche si propagano nel vuoto, e la seconda ha frequenza doppia della prima. La lunghezza d'onda della seconda, rispetto a quella della prima, è'''
+corretta = "A"
+soluzione = '''Nel vuoto tutte le onde elettromagnetiche hanno la stessa velocità $c = \lambda f$. Se $f$ raddoppia e $c$ resta uguale, $\lambda$ si dimezza.'''
+
+  [[quesito.opzione]]
+  testo = '''la metà'''
+  [[quesito.opzione]]
+  testo = '''un quarto'''
+  commento = '''Tratta $\lambda$ come inversamente proporzionale al quadrato della frequenza.'''
+  [[quesito.opzione]]
+  testo = '''uguale'''
+  commento = '''Confonde la lunghezza d'onda con la velocità, che nel vuoto è la stessa per tutte le onde.'''
+  [[quesito.opzione]]
+  testo = '''il doppio'''
+  commento = '''Tratta $\lambda$ come direttamente proporzionale a $f$.'''
+  [[quesito.opzione]]
+  testo = '''quattro volte'''
+  commento = '''Sbaglia due volte: proporzionalità diretta e al quadrato.'''
+
+[[quesito]]
+id = "ud7-spettro"
+tipo = "multipla"
+lampo = true
+testo = '''Quale sequenza è in ordine di lunghezza d'onda crescente?'''
+corretta = "C"
+soluzione = '''In ordine di frequenza crescente lo spettro è radio, microonde, infrarosso, visibile, ultravioletto, X, $\gamma$; la lunghezza d'onda cresce nell'ordine opposto: $\gamma$, X, visibile, infrarosso, microonde.'''
+
+  [[quesito.opzione]]
+  testo = '''raggi X, ultravioletto, raggi $\gamma$, visibile, onde radio'''
+  commento = '''Mette i raggi $\gamma$ fra l'ultravioletto e il visibile.'''
+  [[quesito.opzione]]
+  testo = '''onde radio, infrarosso, visibile, ultravioletto, raggi X'''
+  commento = '''È l'ordine di lunghezza d'onda \emph{decrescente}: scambia frequenza e lunghezza d'onda.'''
+  [[quesito.opzione]]
+  testo = '''raggi $\gamma$, raggi X, visibile, infrarosso, microonde'''
+  [[quesito.opzione]]
+  testo = '''visibile, ultravioletto, infrarosso, microonde, onde radio'''
+  commento = '''Mette l'ultravioletto fra il visibile e l'infrarosso.'''
+  [[quesito.opzione]]
+  testo = '''microonde, onde radio, infrarosso, visibile, raggi $\gamma$'''
+  commento = '''Mette le microonde prima delle onde radio e salta da visibile a $\gamma$ nel verso sbagliato.'''
+
+[[quesito]]
+id = "ud7-fotone"
+tipo = "completamento"
+lampo = true
+testo = '''Un fotone di luce rossa ha lunghezza d'onda di {{lam}}. La sua energia, in elettronvolt, vale circa \completa.'''
+dati.lam = { valore = 620, unita = "nm" }
+calcolo = "hc_eVnm / lam"
+risposta = "2"
+soluzione = '''Con la formula pratica $E \approx 1240/\lambda = 1240/620 = \SI{2}{\electronvolt}$.'''
+
+[[quesito]]
+id = "ud7-ionizzanti"
+tipo = "multipla"
+lampo = true
+testo = '''Quale affermazione è corretta?'''
+corretta = "E"
+soluzione = '''Una radiazione è ionizzante se il singolo fotone ha un'energia maggiore dell'energia di ionizzazione, circa \SI{10}{\electronvolt}. Un fotone di microonde ha circa \SI{e-5}{\electronvolt}, troppo poco, anche se i fotoni sono moltissimi.'''
+
+  [[quesito.opzione]]
+  testo = '''Una radiazione diventa ionizzante quando la sua intensità è abbastanza alta.'''
+  commento = '''Confonde l'intensità del fascio con l'energia del singolo fotone.'''
+  [[quesito.opzione]]
+  testo = '''Le onde radio sono ionizzanti perché hanno una lunghezza d'onda molto lunga.'''
+  commento = '''Una lunghezza d'onda lunga vuol dire fotoni di energia \emph{bassa}.'''
+  [[quesito.opzione]]
+  testo = '''La luce visibile è ionizzante, perché viene assorbita dalla retina.'''
+  commento = '''Essere assorbita non vuol dire ionizzare: i fotoni visibili hanno circa \SIrange{2}{3}{\electronvolt}.'''
+  [[quesito.opzione]]
+  testo = '''I raggi X non sono ionizzanti, perché non hanno carica elettrica.'''
+  commento = '''I raggi X sono ionizzanti anche se non hanno carica: conta l'energia del fotone.'''
+  [[quesito.opzione]]
+  testo = '''Le microonde non sono ionizzanti, perché ogni fotone ha troppo poca energia.'''
+
+[[quesito]]
+id = "ud7-hvl"
+tipo = "multipla"
+lampo = true
+testo = '''Dopo {{x}} di un certo materiale l'intensità di un fascio è ridotta a $1/4$ di quella iniziale. A quale frazione è ridotta dopo {{x2}}?'''
+dati.x = { valore = 2, unita = "cm" }
+dati.x2 = { valore = 5, unita = "cm" }
+corretta = "D"
+calcolo = "2**(-x2 / (x / 2))"
+soluzione = '''Ridurre a $1/4 = 1/2^2$ vuol dire attraversare 2 spessori emivalenti, quindi $x_{1/2} = \SI{1}{\centi\metre}$. \SI{5}{\centi\metre} sono 5 spessori emivalenti: $I/I_0 = 1/2^5 = 1/32$.'''
+
+  [[quesito.opzione]]
+  testo = '''$1/10$'''
+  commento = '''Tratta l'attenuazione come una proporzione: «$1/4$ in \SI{2}{\centi\metre}, quindi $1/10$ in \SI{5}{\centi\metre}». L'attenuazione è esponenziale, non lineare.'''
+  [[quesito.opzione]]
+  testo = '''$1/16$'''
+  commento = '''È la frazione dopo \SI{4}{\centi\metre}: manca l'ultimo centimetro.'''
+  [[quesito.opzione]]
+  testo = '''$1/25$'''
+  commento = '''Applica la legge dell'inverso del quadrato, che dipende dalla distanza dalla sorgente, non dal materiale.'''
+  [[quesito.opzione]]
+  testo = '''$1/32$'''
+  valore = 0.03125
+  [[quesito.opzione]]
+  testo = '''circa $1/6$'''
+  commento = '''Scambia $1/4$ con $1/2$ e prende \SI{2}{\centi\metre} come spessore emivalente: $1/2^{2,5} \approx 1/6$.'''
+
+[[quesito]]
+id = "ud7-alfa"
+tipo = "completamento"
+lampo = true
+testo = '''Il nucleo $\nuclide{238}{92}{U}$ decade emettendo una particella $\alpha$. Il nucleo che si forma ha numero di massa \completa.'''
+calcolo = "238 - 4"
+risposta = "234"
+soluzione = '''La particella $\alpha$ porta via 4 nucleoni: $A = 238 - 4 = 234$. Il numero atomico scende da 92 a 90 (torio):
+$\nuclide{238}{92}{U} \to \nuclide{234}{90}{Th} + \nuclide{4}{2}{He}$.'''
+
+[[quesito]]
+id = "ud7-emivita"
+tipo = "multipla"
+lampo = true
+testo = '''L'attività di un campione radioattivo scende da {{A0}} a {{A}} in {{t}}. Quanto vale l'emivita?'''
+dati.A0 = { valore = 800, unita = "kBq" }
+dati.A = { valore = 100, unita = "kBq" }
+dati.t = { valore = 15, unita = "giorni" }
+corretta = "B"
+calcolo = "t / math.log2(A0 / A)"
+soluzione = '''Da 800 a \SI{100}{\kilo\becquerel} l'attività si riduce di un fattore $8 = 2^3$: sono passate 3 emivite. $T_{1/2} = \SI{15}{giorni}/3 = \SI{5}{giorni}$.'''
+
+  [[quesito.opzione]]
+  testo = '''\SI{1,9}{giorni}'''
+  commento = '''Divide il tempo per il fattore di riduzione, 8, invece che per il numero di emivite, 3.'''
+  [[quesito.opzione]]
+  testo = '''\SI{5}{giorni}'''
+  valore = 5
+  [[quesito.opzione]]
+  testo = '''\SI{7,5}{giorni}'''
+  commento = '''Conta due dimezzamenti invece di tre, come se il fattore fosse $4 = 2^2$: $\SI{15}{giorni}/2 = \SI{7,5}{giorni}$.'''
+  [[quesito.opzione]]
+  testo = '''\SI{15}{giorni}'''
+  commento = '''Considera tutto l'intervallo come una sola emivita: in un'emivita l'attività si dimezza soltanto.'''
+  [[quesito.opzione]]
+  testo = '''\SI{120}{giorni}'''
+  commento = '''Moltiplica invece di dividere: $15 \cdot 8 = 120$.'''
+
+[[quesito]]
+id = "ud7-indice"
+tipo = "completamento"
+lampo = true
+testo = '''Nel vuoto una luce gialla ha lunghezza d'onda di {{lam}}. In un vetro con indice di rifrazione $n = 1{,}5$ la sua lunghezza d'onda, in nanometri, è \completa.'''
+dati.lam = { valore = 600, unita = "nm" }
+calcolo = "lam / 1.5"
+risposta = "400"
+soluzione = '''Passando nel vetro la frequenza non cambia e la velocità diventa $c/n$, quindi anche la lunghezza d'onda si divide per $n$: $\lambda = \SI{600}{\nano\metre}/1{,}5 = \SI{400}{\nano\metre}$.'''
+
+[[quesito]]
+id = "ud7-lente"
+tipo = "multipla"
+lampo = true
+testo = '''Un oggetto si trova a {{p}} da una lente convergente con distanza focale di {{f}}. L'immagine è'''
+dati.p = { valore = 20, unita = "cm" }
+dati.f = { valore = 10, unita = "cm" }
+corretta = "C"
+calcolo = "1 / (1/f - 1/p)"
+soluzione = '''L'oggetto è a $p = 2f$. Dalla legge dei punti coniugati $1/q = 1/10 - 1/20 = 1/20$, quindi $q = \SI{20}{\centi\metre}$: l'immagine è reale, oltre la lente. L'ingrandimento è $m = -q/p = -1$: capovolta e alta come l'oggetto.'''
+
+  [[quesito.opzione]]
+  testo = '''virtuale e diritta, a \SI{20}{\centi\metre} davanti alla lente'''
+  commento = '''L'immagine è virtuale solo se l'oggetto è fra la lente e il fuoco.'''
+  [[quesito.opzione]]
+  testo = '''reale e capovolta, a \SI{10}{\centi\metre} oltre la lente, alta la metà dell'oggetto'''
+  commento = '''Mette l'immagine nel fuoco, come se l'oggetto fosse molto lontano.'''
+  [[quesito.opzione]]
+  testo = '''reale e capovolta, a \SI{20}{\centi\metre} oltre la lente, alta come l'oggetto'''
+  valore = 20
+  [[quesito.opzione]]
+  testo = '''reale e diritta, a \SI{20}{\centi\metre} oltre la lente, alta il doppio dell'oggetto'''
+  commento = '''Con una sola lente convergente un'immagine reale è sempre capovolta, e qui $|m| = 1$.'''
+  [[quesito.opzione]]
+  testo = '''virtuale e capovolta, all'infinito'''
+  commento = '''L'immagine va all'infinito solo quando l'oggetto è nel fuoco.'''

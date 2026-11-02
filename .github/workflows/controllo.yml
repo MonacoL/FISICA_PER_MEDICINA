@@ -45,3 +45,11 @@ jobs:
           name: pdf
           path: libro/build/*.pdf
           if-no-files-found: warn
+
+      - name: Pubblica le pagine web degli esercizi
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: libro/build/web/*.html
+          if-no-files-found: warn

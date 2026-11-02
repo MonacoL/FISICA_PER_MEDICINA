@@ -1,6 +1,7 @@
 % UD7 — Dispensa
 % Riscrive nel template la dispensa UD7 esistente (onde EM, spettro, fotone,
-% ottica: ADR 0003) e aggiunge Lambert-Beer e radioattività.
+% ottica: ADR 0003) e aggiunge Lambert-Beer e radioattività. I quesiti lampo
+% vengono da esercizi.toml (ADR 0006): si modificano lì.
 \dispensa
 
 \begin{tcolorbox}[fisbox={formula}{formulaBg},title={Obiettivi dell'unità}]
@@ -76,10 +77,7 @@ La frequenza in hertz è $\SI{100}{\mega\hertz} = 100 \cdot \SI{e6}{\hertz} = \S
 \]
 \end{esempio}
 
-\begin{quesitolampo}{ql:ud7-lambda}
-Due onde elettromagnetiche si propagano nel vuoto, e la seconda ha frequenza doppia della prima. La lunghezza d'onda della seconda, rispetto a quella della prima, è
-\opzioni{la metà}{un quarto}{uguale}{il doppio}{quattro volte}
-\end{quesitolampo}
+\input{ud7/generati/lampo-ud7-lambda}
 
 \subsection{Intensità e distanza: la legge dell'inverso del quadrato}
 
@@ -133,16 +131,7 @@ I confini fra le regioni non sono netti. Raggi X e raggi $\gamma$, per esempio, 
 L'ordine delle regioni è una domanda classica. Basta ricordarne uno: radio, microonde, infrarosso, visibile, ultravioletto, X, $\gamma$ è l'ordine di frequenza crescente, e quindi di lunghezza d'onda \emph{decrescente}. Nel visibile, il rosso ha la lunghezza d'onda più lunga e il violetto la più corta.
 \end{attenzione}
 
-\begin{quesitolampo}{ql:ud7-spettro}
-Quale sequenza è in ordine di lunghezza d'onda crescente?
-\begin{opzionilunghe}
-  \item raggi X, ultravioletto, raggi $\gamma$, visibile, onde radio
-  \item onde radio, infrarosso, visibile, ultravioletto, raggi X
-  \item raggi $\gamma$, raggi X, visibile, infrarosso, microonde
-  \item visibile, ultravioletto, infrarosso, microonde, onde radio
-  \item microonde, onde radio, infrarosso, visibile, raggi $\gamma$
-\end{opzionilunghe}
-\end{quesitolampo}
+\input{ud7/generati/lampo-ud7-spettro}
 
 % -------------------------------------------------------------------------
 \section{Il fotone e le radiazioni ionizzanti}
@@ -188,9 +177,7 @@ Il laser emette $\SI{1}{\milli\watt} = \SI{e-3}{\joule}$ al secondo. Il numero d
 \]
 \end{esempio}
 
-\begin{quesitolampo}{ql:ud7-fotone}
-Un fotone di luce rossa ha lunghezza d'onda di \SI{620}{\nano\metre}. La sua energia, in elettronvolt, vale circa \completa.
-\end{quesitolampo}
+\input{ud7/generati/lampo-ud7-fotone}
 
 \subsection{Radiazioni ionizzanti e non ionizzanti}
 
@@ -206,16 +193,7 @@ Quello che decide l'effetto di una radiazione su un atomo o su una molecola è l
 Un forno a microonde emette moltissimi fotoni, ma con $\lambda \approx \SI{12}{\centi\metre} = \SI{1,2e8}{\nano\metre}$ ciascuno ha un'energia di circa $1240/(\num{1,2e8}) \approx \SI{e-5}{\electronvolt}$, un milione di volte meno di quella che serve per ionizzare. Aumentare il numero di fotoni non serve: per ionizzare una molecola serve un \emph{singolo} fotone abbastanza energetico. Le microonde possono però scaldare, e ustionare, i tessuti.
 \end{attenzione}
 
-\begin{quesitolampo}{ql:ud7-ionizzanti}
-Quale affermazione è corretta?
-\begin{opzionilunghe}
-  \item Una radiazione diventa ionizzante quando la sua intensità è abbastanza alta.
-  \item Le onde radio sono ionizzanti perché hanno una lunghezza d'onda molto lunga.
-  \item La luce visibile è ionizzante, perché viene assorbita dalla retina.
-  \item I raggi X non sono ionizzanti, perché non hanno carica elettrica.
-  \item Le microonde non sono ionizzanti, perché ogni fotone ha troppo poca energia.
-\end{opzionilunghe}
-\end{quesitolampo}
+\input{ud7/generati/lampo-ud7-ionizzanti}
 
 % -------------------------------------------------------------------------
 \section{Assorbimento della radiazione: la legge di Lambert-Beer}
@@ -279,10 +257,7 @@ Il coefficiente di attenuazione è
 Raddoppiare lo spessore \emph{non} dimezza la frazione trasmessa $I/I_0$: la eleva al quadrato. Se uno strato lascia passare $1/4$, due strati uguali lasciano passare $1/16$, non $1/8$. E non confondere l'attenuazione con la legge dell'inverso del quadrato (sezione~\ref{sec:ud7-onde-em}): quella dipende dalla distanza dalla sorgente, anche nel vuoto; l'attenuazione dipende dal materiale attraversato.
 \end{attenzione}
 
-\begin{quesitolampo}{ql:ud7-hvl}
-Dopo \SI{2}{\centi\metre} di un certo materiale l'intensità di un fascio è ridotta a $1/4$ di quella iniziale. A quale frazione è ridotta dopo \SI{5}{\centi\metre}?
-\opzioni{$1/10$}{$1/16$}{$1/25$}{$1/32$}{circa $1/6$}
-\end{quesitolampo}
+\input{ud7/generati/lampo-ud7-hvl}
 
 \subsection{Assorbanza e concentrazione}
 
@@ -356,9 +331,7 @@ I raggi $\gamma$, come i raggi X, non hanno carica e interagiscono poco con la m
 La particella $\alpha$ contiene 4 nucleoni, di cui 2 protoni: il numero di massa scende di 4 e il numero atomico di 2. Un errore frequente è togliere 2 a entrambi. Nei decadimenti $\beta$, invece, il numero di massa non cambia.
 \end{attenzione}
 
-\begin{quesitolampo}{ql:ud7-alfa}
-Il nucleo $\nuclide{238}{92}{U}$ decade emettendo una particella $\alpha$. Il nucleo che si forma ha numero di massa \completa.
-\end{quesitolampo}
+\input{ud7/generati/lampo-ud7-alfa}
 
 \subsection{La legge del decadimento e l'emivita}
 
@@ -406,10 +379,7 @@ L'attività iniziale in unità SI è $\SI{3,2}{\giga\becquerel} = \SI{3,2e9}{\be
 Dopo un'emivita resta metà dei nuclei, ma dopo due emivite ne resta un quarto, non zero: ogni emivita dimezza quello che c'è, non toglie la stessa quantità. Per ridurre l'attività a meno di un millesimo servono circa 10 emivite.
 \end{attenzione}
 
-\begin{quesitolampo}{ql:ud7-emivita}
-L'attività di un campione radioattivo scende da \SI{800}{\kilo\becquerel} a \SI{100}{\kilo\becquerel} in \SI{15}{giorni}. Quanto vale l'emivita?
-\opzioni{\SI{1,9}{giorni}}{\SI{5}{giorni}}{\SI{7,5}{giorni}}{\SI{15}{giorni}}{\SI{120}{giorni}}
-\end{quesitolampo}
+\input{ud7/generati/lampo-ud7-emivita}
 
 \begin{applicazione}{medicina nucleare}
 In una \textbf{scintigrafia} si somministra al paziente un radiofarmaco con tecnezio-99m, che emette fotoni $\gamma$ da \SI{140}{\kilo\electronvolt}. La «m» sta per metastabile: il nucleo resta eccitato per un po' e poi emette il $\gamma$. Quei fotoni sono abbastanza penetranti da uscire dal corpo ed essere raccolti da una gamma camera. L'emivita, circa \SI{6}{ore}, è abbastanza lunga per fare l'esame e abbastanza corta da limitare la \textbf{dose}, cioè l'energia della radiazione assorbita da ogni chilogrammo di tessuto del paziente. La dose si misura in gray: $\SI{1}{Gy} = \SI{1}{\joule\per\kilo\gram}$.
@@ -455,9 +425,7 @@ alcol etilico & 1,36 & diamante & 2,42 \\
 \end{tabular}
 \end{center}
 
-\begin{quesitolampo}{ql:ud7-indice}
-Nel vuoto una luce gialla ha lunghezza d'onda di \SI{600}{\nano\metre}. In un vetro con indice di rifrazione $n = 1{,}5$ la sua lunghezza d'onda, in nanometri, è \completa.
-\end{quesitolampo}
+\input{ud7/generati/lampo-ud7-indice}
 
 \subsection{Le leggi della riflessione e della rifrazione}
 
@@ -587,16 +555,7 @@ L'immagine è reale ($q > 0$), a \SI{15}{\centi\metre} oltre la lente, capovolta
 Nella legge dei punti coniugati $p$, $q$ e $f$ possono stare in qualsiasi unità, purché sia la stessa per tutti. Nel potere diottrico, invece, $f$ va in metri: una lente con $f = \SI{20}{\centi\metre}$ ha $D = 1/\SI{0,2}{\metre} = \SI{5}{D}$, non $1/20$.
 \end{attenzione}
 
-\begin{quesitolampo}{ql:ud7-lente}
-Un oggetto si trova a \SI{20}{\centi\metre} da una lente convergente con distanza focale di \SI{10}{\centi\metre}. L'immagine è
-\begin{opzionilunghe}
-  \item virtuale e diritta, a \SI{20}{\centi\metre} davanti alla lente
-  \item reale e capovolta, a \SI{10}{\centi\metre} oltre la lente, alta la metà dell'oggetto
-  \item reale e capovolta, a \SI{20}{\centi\metre} oltre la lente, alta come l'oggetto
-  \item reale e diritta, a \SI{20}{\centi\metre} oltre la lente, alta il doppio dell'oggetto
-  \item virtuale e capovolta, all'infinito
-\end{opzionilunghe}
-\end{quesitolampo}
+\input{ud7/generati/lampo-ud7-lente}
 
 \begin{applicazione}{l'occhio e la correzione con le lenti}
 Cornea e cristallino formano insieme un sistema convergente di circa \SI{60}{D}, che forma sulla retina un'immagine reale, capovolta e rimpicciolita; la cornea dà circa due terzi del potere diottrico. La distanza fra cristallino e retina è fissa: per mettere a fuoco oggetti a distanze diverse il cristallino cambia curvatura, e quindi potere diottrico. È l'\textbf{accomodazione}. Il punto più vicino che l'occhio vede nitido è il \textbf{punto prossimo}, a circa \SI{25}{\centi\metre} in un adulto giovane.

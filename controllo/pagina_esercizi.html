@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><!--TITOLO--></title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    macros: {
+      SI: ['#2\\,\\mathrm{#3}', 3, ''], num: ['#1', 1],
+      centi: 'c', metre: 'm', second: 's', hour: 'h', mega: 'M', giga: 'G', kilo: 'k', milli: 'm', nano: 'n',
+      joule: 'J', watt: 'W', hertz: 'Hz', electronvolt: 'eV', per: '/', squared: '^2', ang: ['#1^\\circ', 1],
+      becquerel: 'Bq', percent: '\\%', tothe: ['^{#1}', 1],
+      nuclide: ['{}^{#1}_{#2}\\mathrm{#3}', 3]
+    }
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js" defer></script>
+<style>
+  :root { --testo: #1c2430; --tenue: #5b6573; --linea: #d9dee5; --sfondo: #f7f8fa; --carta: #fff;
+          --accento: #1F4E79; --giusto: #2E6B30; --giustoBg: #e6f0e3; --errato: #A61B1B; --erratoBg: #fbe5e3; }
+  @media (prefers-color-scheme: dark) {
+    :root { --testo: #e5e9ef; --tenue: #9aa4b2; --linea: #2c3440; --sfondo: #12161c; --carta: #1a2028;
+            --accento: #7fb0e0; --giusto: #8fd18f; --giustoBg: #1f3322; --errato: #f09a9a; --erratoBg: #3a1f1f; }
+  }
+  body { margin: 0; background: var(--sfondo); color: var(--testo); font: 17px/1.55 Georgia, serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  .nota { font: 14px/1.5 system-ui, sans-serif; color: var(--tenue); border-left: 3px solid var(--accento); padding: 4px 12px; }
+  h1 { font-size: 26px; margin: 8px 0 4px; }
+  .es { background: var(--carta); border: 1px solid var(--linea); border-radius: 6px; padding: 16px 18px; margin: 18px 0; }
+  .titolo { font: 600 13px system-ui, sans-serif; text-transform: uppercase; letter-spacing: .04em; color: var(--accento); }
+  .opz { display: block; width: 100%; text-align: left; font: inherit; color: inherit; background: none;
+         border: 1px solid var(--linea); border-radius: 4px; padding: 6px 10px; margin: 6px 0; cursor: pointer; }
+  .opz.giusta { background: var(--giustoBg); border-color: var(--giusto); }
+  .opz.sbagliata { background: var(--erratoBg); border-color: var(--errato); }
+  .commento { font-size: 15px; color: var(--tenue); margin: 2px 0 8px 12px; }
+  button.azione { font: 14px system-ui, sans-serif; border: 1px solid var(--accento); color: var(--accento);
+                  background: none; border-radius: 4px; padding: 4px 10px; margin: 8px 8px 0 0; cursor: pointer; }
+  .nascosto { display: none; }
+  .soluzione { border-top: 1px dashed var(--linea); margin-top: 10px; padding-top: 8px; }
+  input { font: inherit; padding: 4px 8px; width: 9em; border: 1px solid var(--linea); border-radius: 4px; background: var(--carta); color: inherit; }
+  .esito { font: 14px system-ui, sans-serif; margin-left: 8px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="nota">Generata da <code>esercizi.toml</code>, la stessa fonte dell'eserciziario in PDF.</p>
+  <h1><!--TITOLO--></h1>
+  <div id="esercizi"></div>
+</main>
+<script>
+const ESERCIZI = /*ESERCIZI*/[];
+const LETTERE = 'ABCDE';
+const box = document.getElementById('esercizi');
+
+function el(tag, cls, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html !== undefined) e.innerHTML = html; return e; }
+function interruttore(etichetta, contenuto) {
+  const b = el('button', 'azione', etichetta);
+  b.onclick = () => { contenuto.classList.toggle('nascosto'); if (window.MathJax?.typeset) MathJax.typeset([contenuto]); };
+  return b;
+}
+function normalizza(s) { return s.trim().replace(/\s+/g, '').toUpperCase(); }
+
+ESERCIZI.forEach(es => {
+  const c = el('section', 'es');
+  c.append(el('div', 'titolo', es.titolo), el('p', '', es.testo));
+  if (es.tipo === 'problema') {
+    es.parti.forEach((p, i) => {
+      if (p.domanda) c.append(el('p', '', `(${String.fromCharCode(97 + i)}) ${p.domanda}`));
+    });
+    const ris = el('div', 'soluzione nascosto', es.parti.map((p, i) => (es.parti.length > 1 ? `(${String.fromCharCode(97 + i)}) ` : '') + p.risultato).join('<br>'));
+    const sol = el('div', 'soluzione nascosto', es.parti.map((p, i) => (es.parti.length > 1 ? `(${String.fromCharCode(97 + i)}) ` : '') + p.soluzione).join('<br><br>'));
+    c.append(interruttore('Risultato', ris), interruttore('Soluzione svolta', sol), ris, sol);
+  } else if (es.tipo === 'multipla') {
+    es.opzioni.forEach((o, j) => {
+      const b = el('button', 'opz', `<b>${LETTERE[j]})</b> ${o.testo}`);
+      const nota = el('div', 'commento nascosto', j === es.corretta ? 'Risposta corretta.' : o.commento);
+      b.onclick = () => { b.classList.add(j === es.corretta ? 'giusta' : 'sbagliata'); nota.classList.remove('nascosto'); MathJax?.typeset?.([nota]); };
+      c.append(b, nota);
+    });
+    const sol = el('div', 'soluzione nascosto', es.soluzione);
+    c.append(interruttore('Soluzione svolta', sol), sol);
+  } else {
+    const inp = el('input'); inp.placeholder = 'risposta';
+    const esito = el('span', 'esito');
+    const prova = el('button', 'azione', 'Controlla');
+    prova.onclick = () => { const ok = normalizza(inp.value) === normalizza(es.risposta); esito.textContent = ok ? 'Giusto.' : 'Non è la risposta attesa.'; esito.style.color = ok ? 'var(--giusto)' : 'var(--errato)'; };
+    const sol = el('div', 'soluzione nascosto', `<b>Risposta: ${es.risposta}.</b> ${es.soluzione}`);
+    c.append(inp, prova, esito, el('br'), interruttore('Soluzione svolta', sol), sol);
+  }
+  box.append(c);
+});
+</script>
+</body>
+</html>
