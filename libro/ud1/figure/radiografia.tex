@@ -1,0 +1,41 @@
+% Radiografia obliqua (problema ud1-trig-radiografia): fuoco F, raggio centrale lungo D
+% a 30 gradi dalla verticale, altezza H del fuoco, distanza d sul rivelatore; un calcolo
+% all'altezza h e la sua ombra spostata di x, con un raggio parallelo al raggio centrale.
+% Scala del triangolo grande: 1 cm = 20 cm (D = 5, H = 4,33, d = 2,5); il calcolo non è in scala.
+\begin{tikzpicture}[>=Stealth, font=\small, scale=0.85]
+  % paziente
+  \fill[gray!12, rounded corners=6pt] (1.2,0.05) rectangle (6.2,2.4);
+  \node[gray, anchor=north east] at (6.2,2.4) {paziente};
+  % rivelatore
+  \fill[gray!45] (-1,-0.15) rectangle (6.5,0);
+  \node[right] at (6.5,-0.075) {rivelatore};
+  % fuoco e verticale
+  \coordinate (F) at (0,4.33);
+  \coordinate (P) at (0,0);
+  \coordinate (O) at (2.5,0);
+  \draw[dashed, gray] (F) -- (P);
+  \draw (0,0.25) -- (0.25,0.25) -- (0.25,0);
+  \node[left] at (0,2.17) {$H$};
+  \fill (F) circle (2pt);
+  \node[left] at (F) {fuoco};
+  % raggio centrale
+  \draw[->, very thick, formula] (F) -- (O);
+  \node[formula, right] at (1.4,2.4) {$D = \SI{100}{\centi\metre}$};
+  \draw[esempio, thick] (F) ++(-90:0.9) arc[start angle=-90, end angle=-60, radius=0.9];
+  \path (F) ++(-76:1.9) node[esempio] {\ang{30}};
+  % distanza d
+  \draw[<->] (0,-0.45) -- (2.5,-0.45);
+  \node[below] at (1.25,-0.45) {$d$};
+  % calcolo e la sua ombra
+  \coordinate (C) at (4.6,1.3);
+  \coordinate (Q) at (4.6,0);
+  \coordinate (S) at (5.35,0);
+  \draw[dashed, gray] (C) -- (Q);
+  \node[left] at (4.6,0.65) {$h$};
+  \draw[->, thick, medica] (3.6,3.03) -- (S);
+  \fill[attenzione] (C) circle (2.5pt);
+  \node[attenzione, right] at (4.75,1.4) {calcolo};
+  \fill[attenzione] (S) circle (1.5pt);
+  \draw[<->] (4.6,-0.45) -- (5.35,-0.45);
+  \node[below] at (4.975,-0.45) {$x$};
+\end{tikzpicture}

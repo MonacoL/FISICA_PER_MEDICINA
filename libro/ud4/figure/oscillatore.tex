@@ -1,0 +1,31 @@
+% Oscillatore armonico: massa attaccata a una molla e grafico della posizione
+% x(t) = A cos(omega t), con ampiezza A e periodo T.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % parete
+  \fill[richiamo!30] (-0.3,-0.3) rectangle (0,1.2);
+  \draw[thick] (0,-0.3) -- (0,1.2);
+  \draw[thick] (-0.3,-0.3) -- (4.6,-0.3);
+  % molla a zig-zag fino al blocco (posizione di equilibrio in x = 3)
+  \draw[thick] (0,0.45) -- (0.3,0.45)
+    \foreach \k in {1,...,8} { -- ({0.3+0.25*\k-0.125}, {0.45+0.22*(-1)^\k}) } -- (2.3,0.45) -- (2.6,0.45);
+  \filldraw[fill=esempio!40, draw=esempio, thick] (2.6,-0.3) rectangle (3.4,0.6);
+  \node at (3,0.15) {$m$};
+  \node[above] at (1.4,0.75) {$k$};
+  % posizioni
+  \foreach \x/\t in {2.0/-A, 3.0/0, 4.0/A} {
+    \draw[dashed, richiamo] (\x,-0.3) -- (\x,-0.75);
+    \node[below] at (\x,-0.7) {$\t$};
+  }
+  \draw[->] (3,-1.25) -- (4.3,-1.25) node[right] {$x$};
+  % grafico x(t)
+  \begin{scope}[xshift=6cm, yshift=0.3cm]
+    \draw[->] (0,0) -- (5.6,0) node[right] {$t$};
+    \draw[->] (0,-1.2) -- (0,1.4) node[above] {$x$};
+    \draw[formula, very thick, domain=0:5.2, samples=120] plot (\x, {0.9*cos(\x*180)});
+    \draw[dashed, richiamo] (0,0.9) -- (4,0.9);
+    \node[left] at (0,0.9) {$A$};
+    \node[left] at (0,-0.9) {$-A$};
+    \draw[dashed, richiamo] (0,-0.9) -- (1,-0.9);
+    \draw[|<->|] (0,1.2) -- (2,1.2) node[midway, above] {$T$};
+  \end{scope}
+\end{tikzpicture}

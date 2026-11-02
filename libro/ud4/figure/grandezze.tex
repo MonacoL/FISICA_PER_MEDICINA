@@ -1,0 +1,21 @@
+% Le grandezze di un'onda armonica: a sinistra l'istantanea (y in funzione di x
+% a t fissato) con lunghezza d'onda e ampiezza; a destra lo spostamento di un
+% punto in funzione del tempo, con il periodo.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % istantanea
+  \draw[->] (0,0) -- (6.2,0) node[right] {$x$};
+  \draw[->] (0,-1.3) -- (0,1.5) node[above] {$y$};
+  \draw[formula, very thick, domain=0:5.8, samples=120] plot (\x, {0.9*sin(\x*144)});
+  \draw[|<->|] (0.625,1.2) -- (3.125,1.2) node[midway, above] {$\lambda$};
+  \draw[<->] (0.625,0) -- (0.625,0.9) node[midway, right] {$A$};
+  \node[anchor=north west] at (0,-1.4) {(a) l'onda a un istante fissato};
+  % moto di un punto nel tempo
+  \begin{scope}[xshift=7.8cm]
+    \draw[->] (0,0) -- (6.2,0) node[right] {$t$};
+    \draw[->] (0,-1.3) -- (0,1.5) node[above] {$y$};
+    \draw[esempio, very thick, domain=0:5.8, samples=120] plot (\x, {-0.9*sin(\x*144)});
+    \draw[|<->|] (1.875,1.2) -- (4.375,1.2) node[midway, above] {$T$};
+    \draw[<->] (1.875,0) -- (1.875,0.9) node[midway, right] {$A$};
+    \node[anchor=north west] at (0,-1.4) {(b) un punto del mezzo nel tempo};
+  \end{scope}
+\end{tikzpicture}

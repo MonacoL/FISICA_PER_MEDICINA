@@ -61,12 +61,14 @@ def valore(d: dict) -> float:
     return float(v.replace(",", ".")) if isinstance(v, str) else float(v)
 
 
-def numero(v: float, cifre: int) -> str:
-    """`v` con `cifre` cifre significative, virgola decimale, notazione siunitx (1,3e13) se serve."""
+def numero(v: float, cifre: int, soglia: int = 5) -> str:
+    """`v` con `cifre` cifre significative, virgola decimale, notazione siunitx (1,3e13) se
+    l'esponente arriva a `soglia` o scende sotto -3 (sotto -2 se la soglia è più bassa)."""
     if v == 0:
         return "0"
     e = math.floor(math.log10(abs(v)))
-    if e >= 5 or e < -3:
+    basso = -3 if soglia >= 5 else -2
+    if e >= soglia or e < basso:
         return f"{v / 10**e:.{cifre - 1}f}".replace(".", ",") + f"e{e}"
     return f"{v:.{max(cifre - 1 - e, 0)}f}".replace(".", ",")
 
@@ -89,7 +91,9 @@ def dato_latex(d: dict) -> str:
 
 
 def risultato_latex(r: dict) -> str:
-    return grandezza(numero(float(r["valore"]), r["cifre"]), r.get("unita"))
+    # Per i risultati, notazione scientifica già da 10^3 e da 10^-3: è la forma delle soluzioni
+    # svolte, e 1700 sembrerebbe avere 4 cifre significative.
+    return grandezza(numero(float(r["valore"]), r["cifre"], soglia=3), r.get("unita"))
 
 
 def riempi(testo: str, dati: dict) -> str:
@@ -218,16 +222,19 @@ def eserciziario_latex(fonte: dict) -> str:
     if esame:
         out += ["", r"\section*{Quesiti d'esame}"]
     for q in esame:
-        out += ["", rf"\quesito\label{{qe:{q['id']}}}", testo_quesito(q)]
+        # Testo e opzioni sulla stessa pagina, come all'esame.
+        out += ["", r"\needspace{8\baselineskip}", rf"\quesito\label{{qe:{q['id']}}}", testo_quesito(q)]
 
     righe = []
     for p in problemi:
-        risultati = [risultato_latex(parte["risultato"]) for parte in p["parte"]]
+        # `rapido` sostituisce il risultato formattato quando la parte chiede più cose
+        # (es. «140 m; spostamento nullo»); il controllo usa comunque `risultato`.
+        risultati = [parte.get("rapido") or risultato_latex(parte["risultato"]) for parte in p["parte"]]
         valori = risultati[0] if len(risultati) == 1 else "; ".join(parti(risultati))
         righe.append(rf"Problema~\ref{{pb:{p['id']}}} & {valori} \\")
     righe += [rf"Quesito~\ref{{qe:{q['id']}}} & {risposta_breve(q)} \\" for q in esame]
     righe += [rf"Quesito lampo~\ref{{ql:{q['id']}}} & {risposta_breve(q)} \\" for q in lampo]
-    out += ["", r"\section*{Risultati rapidi}", "", r"\begin{longtable}{@{}ll@{}}",
+    out += ["", r"\section*{Risultati rapidi}", "", r"\begin{longtable}{@{}l>{\raggedright\arraybackslash}p{0.72\linewidth}@{}}",
             r"\toprule", r"Esercizio & Risultato \\", r"\midrule", r"\endhead", *righe,
             r"\bottomrule", r"\end{longtable}"]
 
