@@ -1,0 +1,21 @@
+% Ago da biopsia (quesito ud1-trig-biopsia): l'ago lungo L = 10 cm, a 60 gradi dalla
+% pelle, è l'ipotenusa; la distanza d lungo la pelle è il cateto adiacente.
+% Scala: 1 cm = 0,4 cm (L = 4, d = 2, profondità 3,46).
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \fill[medica!10] (-1.2,0) rectangle (4,-3.8);
+  \draw[thick] (-1.2,0) -- (4,0);
+  \node[above] at (3.3,0) {pelle};
+  \coordinate (E) at (0,0);
+  \coordinate (P) at (-60:4);
+  \coordinate (S) at (P |- E);
+  \draw[dashed, gray] (S) -- (P);
+  \draw (S) ++(-0.25,0) -- ++(0,-0.25) -- ++(0.25,0);
+  \draw[line width=1.6pt, formula] (E) -- (P);
+  \node[formula, left] at ($(E)!0.55!(P)$) {$L = \SI{10}{\centi\metre}$};
+  \draw[esempio, thick] (0.8,0) arc[start angle=0, end angle=-60, radius=0.8];
+  \node[esempio] at (-30:1.2) {\ang{60}};
+  \draw[<->, attenzione] (0,0.35) -- (2,0.35);
+  \node[attenzione, above] at (1,0.35) {$d = L\cos\ang{60}$};
+  \node[right, align=left] at (2,-1.73) {profondità\\$L\sin\ang{60}$};
+  \fill (E) circle (1.5pt);
+\end{tikzpicture}

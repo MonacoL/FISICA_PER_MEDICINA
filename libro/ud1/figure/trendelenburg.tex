@@ -1,0 +1,21 @@
+% Lettino in posizione di Trendelenburg (problema ud1-trig-trendelenburg): il piano
+% lungo L è l'ipotenusa, il dislivello h il cateto opposto all'angolo alpha.
+% Scala: 1 m = 2,8 cm (L = 5,04, h = 2,52, alpha = 30 gradi).
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \coordinate (T) at (0,0);
+  \coordinate (P) at (30:5.04);
+  \coordinate (Q) at (P |- T);
+  \fill[formula!10] (T) -- (Q) -- (P) -- cycle;
+  \draw[dashed, gray] (T) -- (Q);
+  \draw[dashed, gray] (Q) -- (P);
+  \draw (Q) ++(-0.25,0) -- ++(0,0.25) -- ++(0.25,0);
+  \draw[line width=2.5pt, formula] (T) -- (P);
+  \node[formula, above left] at ($(T)!0.5!(P)$) {$L = \SI{1,80}{\metre}$};
+  \node[left] at (T) {testa};
+  \node[above] at (P) {piedi};
+  \draw[<->] ($(Q)+(0.4,0)$) -- ($(P)+(0.4,0)$);
+  \node[right] at ($(Q)!0.5!(P)+(0.4,0)$) {$h = \SI{0,90}{\metre}$};
+  \draw[esempio, thick] (1.1,0) arc[start angle=0, end angle=30, radius=1.1];
+  \node[esempio] at (15:1.45) {$\alpha$};
+  \node[gray, below] at ($(T)!0.5!(Q)$) {orizzontale};
+\end{tikzpicture}

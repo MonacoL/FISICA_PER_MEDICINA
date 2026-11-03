@@ -1,0 +1,17 @@
+% Forza di 6,0 N a 120 gradi dall'asse x (quesito ud1-vett-componenti-ottuso):
+% componente x negativa, -3,0 N, e componente y positiva, circa 5,2 N.
+% Scala: 1 N = 0,5 cm (F = 3, F_x = -1,5, F_y = 2,6).
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \draw[->] (-2.6,0) -- (1.6,0) node[right] {$x$};
+  \draw[->] (0,-0.4) -- (0,3.2) node[above] {$y$};
+  \coordinate (F) at (120:3);
+  \draw[dashed, gray] (F) -- (F |- 0,0);
+  \draw[dashed, gray] (F) -- (0,0 |- F);
+  \draw[->, very thick, medica] (0,0) -- (F |- 0,0);
+  \node[medica, below left] at (-0.3,0) {$F_x = -\SI{3,0}{\newton}$};
+  \draw[->, very thick, attenzione] (0,0) -- (0,0 |- F);
+  \node[attenzione, right] at (0,2.0) {$F_y \approx \SI{5,2}{\newton}$};
+  \draw[->, very thick, formula] (0,0) -- (F) node[above left] {$\vec F$};
+  \draw[esempio, thick] (0.6,0) arc[start angle=0, end angle=120, radius=0.6];
+  \node[esempio] at (60:0.95) {\ang{120}};
+\end{tikzpicture}

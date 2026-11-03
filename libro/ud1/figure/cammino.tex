@@ -1,0 +1,24 @@
+% Marcatori di anca H, ginocchio K e caviglia A (problema ud1-vett-cammino), con la
+% coscia u da K ad H, la gamba v da K ad A e l'angolo theta = 135 gradi fra le due.
+% Scala: 10 cm = 0,6 cm (H = (1,2; 5,4), K = (1,2; 3), A = (3; 1,2)).
+\begin{tikzpicture}[>=Stealth, font=\small, x=0.06cm, y=0.06cm]
+  \draw[->] (-5,0) -- (75,0) node[right] {$x$ (\si{\centi\metre})};
+  \draw[->] (0,-5) -- (0,105) node[above] {$y$ (\si{\centi\metre})};
+  \foreach \t in {20,40,60} \draw (\t,1.5) -- (\t,-1.5) node[below] {\t};
+  \foreach \t in {20,50,90} \draw (1.5,\t) -- (-1.5,\t) node[left] {\t};
+  \coordinate (H) at (20,90);
+  \coordinate (K) at (20,50);
+  \coordinate (A) at (50,20);
+  \draw[dashed, gray] (K) -- (50,50) -- (A);
+  \node[gray, below] at (42,50) {30};
+  \node[gray, right] at (50,35) {$-30$};
+  \draw[->, very thick, formula] (K) -- (H);
+  \node[formula, left] at (20,72) {$\vec u$};
+  \draw[->, very thick, medica] (K) -- (A);
+  \node[medica, below left] at (35,35) {$\vec v$};
+  \draw[esempio, thick] (20,62) arc[start angle=90, end angle=-45, radius=12];
+  \node[esempio] at ($(K)+(40:19)$) {$\theta$};
+  \fill (H) circle (1.5pt) node[right] {$H$};
+  \fill (K) circle (1.5pt) node[left] {$K$};
+  \fill (A) circle (1.5pt) node[right] {$A$};
+\end{tikzpicture}

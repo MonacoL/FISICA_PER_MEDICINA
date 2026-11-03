@@ -1,0 +1,25 @@
+% Volo dell'elisoccorso (problema ud1-vett-elisoccorso): 20 km verso est, poi 20 km
+% verso nord-est; lo spostamento totale R ha componenti 34 km e 14 km.
+% Scala: 5 km = 1 cm (d_1 = 4, d_2 = 4, R = (6,83; 2,83)).
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \draw[->] (-0.4,0) -- (7.6,0) node[right] {$x$ (est)};
+  \draw[->] (0,-0.4) -- (0,3.5) node[above] {$y$ (nord)};
+  \coordinate (A) at (4,0);
+  \coordinate (I) at (6.83,2.83);
+  \draw[dashed, gray] (I) -- (I |- 0,0);
+  \draw[->, very thick, formula] (0,0) -- (A);
+  \node[formula, below] at (2,0) {$d_1 = \SI{20}{\kilo\metre}$};
+  \draw[->, very thick, medica] (A) -- (I);
+  \path (A) -- (I) node[medica, pos=0.55, below, sloped] {$d_2 = \SI{20}{\kilo\metre}$};
+  \draw[thick, medica] (4.7,0) arc[start angle=0, end angle=45, radius=0.7];
+  \node[medica] at ($(A)+(22:1.05)$) {\ang{45}};
+  \draw[->, very thick, esempio] (0,0) -- (I);
+  \path (0,0) -- (I) node[esempio, midway, above, sloped] {$R \approx \SI{37}{\kilo\metre}$};
+  \draw[thick, esempio] (1.6,0) arc[start angle=0, end angle=22.5, radius=1.6];
+  \node[esempio] at (11:1.95) {$\theta$};
+  \draw[<->] (0,-0.8) -- (6.83,-0.8);
+  \node[below] at (3.415,-0.8) {$R_x \approx \SI{34}{\kilo\metre}$};
+  \node[right] at (6.83,1.4) {$R_y \approx \SI{14}{\kilo\metre}$};
+  \fill (0,0) circle (1.5pt) node[above left] {base};
+  \fill[attenzione] (I) circle (2pt) node[above, attenzione] {incidente};
+\end{tikzpicture}

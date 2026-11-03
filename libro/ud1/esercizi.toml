@@ -488,7 +488,11 @@ dati.h = { valore = "0,90", unita = "m" }
   [[problema.parte]]
   calcolo = "math.degrees(math.asin(h / L))"
   risultato = { valore = 30, unita = "\\degree", cifre = 2 }
-  soluzione = '''Il piano del lettino è l'ipotenusa, il dislivello è il cateto opposto all'angolo cercato. Il loro rapporto è il seno dell'angolo:
+  soluzione = '''Il piano del lettino è l'ipotenusa, il dislivello è il cateto opposto all'angolo cercato (in figura):
+\begin{center}
+\input{ud1/figure/trendelenburg}
+\end{center}
+Il loro rapporto è il seno dell'angolo:
 \[
   \sin\alpha = \frac{h}{L} = \frac{\SI{0,90}{\metre}}{\SI{1,80}{\metre}} = \frac{1}{2} = 0{,}5
 \]
@@ -504,7 +508,11 @@ dati.F = { valore = 40, unita = "\\newton" }
   domanda = '''Quanto vale la componente orizzontale della forza?'''
   calcolo = "F * cos30"
   risultato = { valore = 35, unita = "\\newton", cifre = 2 }
-  soluzione = '''La forza è l'ipotenusa del triangolo rettangolo che ha le componenti come cateti. La componente orizzontale è il cateto adiacente all'angolo di \ang{30}, che è misurato rispetto all'orizzontale:
+  soluzione = '''La forza è l'ipotenusa del triangolo rettangolo che ha le componenti come cateti, come in figura:
+\begin{center}
+\input{ud1/figure/carrozzina}
+\end{center}
+La componente orizzontale è il cateto adiacente all'angolo di \ang{30}, che è misurato rispetto all'orizzontale:
 \[
   F_x = F \cos\ang{30} \approx \SI{40}{\newton} \cdot 0{,}87 = \SI{34,8}{\newton} \approx \SI{35}{\newton}
 \]'''
@@ -641,6 +649,10 @@ dati.F2 = { valore = "1,0", unita = "\\newton" }
   \qquad\qquad
   R_y = 0 + \SI{0,87}{\newton} = \SI{0,87}{\newton}
 \]
+In figura, la somma con la regola del parallelogramma e le sue componenti:
+\begin{center}
+\input{ud1/figure/ortodonzia}
+\end{center}
 Il modulo viene da Pitagora:
 \[
   R = \sqrt{R_x^2 + R_y^2} = \sqrt{2{,}0^2 + 0{,}87^2}\,\si{\newton} \approx \sqrt{4{,}0 + 0{,}75}\,\si{\newton} = \sqrt{4{,}75}\,\si{\newton} \approx \SI{2,2}{\newton}
@@ -727,7 +739,11 @@ Le componenti dello spostamento totale sono le somme delle componenti:
   R_x = \SI{20}{\kilo\metre} + \SI{14,2}{\kilo\metre} = \SI{34,2}{\kilo\metre} \approx \SI{34}{\kilo\metre}
   \qquad\qquad
   R_y = 0 + \SI{14,2}{\kilo\metre} \approx \SI{14}{\kilo\metre}
-\]'''
+\]
+In figura, i due tratti, lo spostamento totale e le sue componenti:
+\begin{center}
+\input{ud1/figure/elisoccorso}
+\end{center}'''
 
   [[problema.parte]]
   domanda = '''A che distanza dalla base si trova il luogo dell'incidente? Confrontala con la strada percorsa.'''
@@ -764,13 +780,16 @@ dati.F = { valore = 1200, unita = "\\newton" }
 \[
   R = 2F\cos\ang{60} = 2 \cdot \SI{1200}{\newton} \cdot 0{,}5 = \SI{1200}{\newton}
 \]
-A \ang{120} la somma di due forze uguali ha lo stesso modulo di ciascuna.'''
+A \ang{120} la somma di due forze uguali ha lo stesso modulo di ciascuna. In figura, a sinistra, questo caso; a destra quello del punto (b):
+\begin{center}
+\input{ud1/figure/rotula}
+\end{center}'''
 
   [[problema.parte]]
   domanda = '''Piegando di più il ginocchio, l'angolo fra le forze scende a \ang{90}. Quanto vale ora il modulo della somma?'''
   calcolo = "2 * F * cos45"
   risultato = { valore = 1.7e3, unita = "\\newton", cifre = 2 }
-  soluzione = '''Ognuna delle due forze forma ora \ang{45} con la bisettrice. Come nel punto (a):
+  soluzione = '''Ognuna delle due forze forma ora \ang{45} con la bisettrice (nella figura del punto (a), a destra). Come nel punto (a):
 \[
   R = 2F\cos\ang{45} \approx 2 \cdot \SI{1200}{\newton} \cdot 0{,}71 = \SI{1704}{\newton} \approx \SI{1,7e3}{\newton}
 \]
@@ -887,6 +906,10 @@ testo = '''In un laboratorio di analisi del cammino una telecamera riprende di l
 \[
   \vec v = (x_A - x_K,\ y_A - y_K) = (50 - 20,\ 20 - 50) = (30, -30)
 \]
+In figura, i tre marcatori e i due vettori:
+\begin{center}
+\input{ud1/figure/cammino}
+\end{center}
 La lunghezza della gamba è il modulo di $\vec v$:
 \[
   v = \sqrt{30^2 + (-30)^2}\,\si{\centi\metre} = \sqrt{2 \cdot 900}\,\si{\centi\metre} = 30\sqrt 2\,\si{\centi\metre} \approx 30 \cdot 1{,}41\,\si{\centi\metre} = \SI{42,3}{\centi\metre} \approx \SI{42}{\centi\metre}
@@ -1295,7 +1318,10 @@ testo = '''Un ago da biopsia lungo {{L}} viene inserito in linea retta per tutta
 dati.L = { valore = 10, unita = "cm" }
 corretta = "A"
 calcolo = "L * cos60"
-soluzione = '''L'ago è l'ipotenusa di un triangolo rettangolo. La distanza lungo la pelle è il cateto che forma l'angolo di \ang{60} insieme all'ago, cioè il cateto adiacente:
+soluzione = '''L'ago è l'ipotenusa di un triangolo rettangolo. La distanza lungo la pelle è il cateto che forma l'angolo di \ang{60} insieme all'ago, cioè il cateto adiacente (in figura):
+\begin{center}
+\input{ud1/figure/biopsia}
+\end{center}
 \[
   d = L\cos\ang{60} = \SI{10}{\centi\metre} \cdot \frac{1}{2} = \SI{5}{\centi\metre}
 \]
@@ -1489,7 +1515,10 @@ soluzione = '''Con la circonferenza goniometrica le formule delle componenti val
   \qquad\qquad
   F_y = F\sin\ang{120} \approx 6{,}0 \cdot 0{,}87 \approx 5{,}2
 \]
-La forza punta verso sinistra e verso l'alto.'''
+La forza punta verso sinistra e verso l'alto, come in figura:
+\begin{center}
+\input{ud1/figure/forza-120}
+\end{center}'''
 
   [[quesito.opzione]]
   testo = '''$(3{,}0;\ 5{,}2)$'''
