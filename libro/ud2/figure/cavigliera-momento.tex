@@ -1,0 +1,34 @@
+% Gamba sollevata con la cavigliera zavorrata (problema ud2-rigido-cavigliera):
+% la gamba forma 60 gradi con la verticale; il vettore r va dal ginocchio alla
+% cavigliera, il peso F è verticale, e l'angolo fra r e F è 60 gradi. Il braccio
+% del peso è la distanza orizzontale fra il ginocchio e la retta d'azione,
+% b = r sin 60.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \def\r{3.2}
+  \coordinate (G) at (0,0);
+  \coordinate (C) at ({\r*sin(60)},{-\r*cos(60)});
+  % lettino e coscia
+  \fill[richiamo!20] (-2.4,-0.25) rectangle (-0.15,-0.9);
+  \draw[thick] (-2.4,-0.25) -- (-0.15,-0.25) -- (-0.15,-0.9);
+  \filldraw[fill=esempio!20, draw=esempio, thick, rounded corners=3pt] (-2.3,-0.22) rectangle (0,0.22);
+  % gamba
+  \draw[esempio!25, line width=9pt, line cap=round] (G) -- (C);
+  \draw[->, formula, very thick] (G) -- (C) node[midway, above right] {$\vec r$};
+  \fill[richiamo!70] (G) circle (0.17);
+  \fill (G) circle (1.5pt);
+  \node[above] at (0,0.22) {ginocchio};
+  % angolo con la verticale nel ginocchio
+  \draw[dotted] (G) -- (0,-2.0);
+  \draw (0,-0.8) arc (-90:-30:0.8);
+  \node at (-60:1.05) {\ang{60}};
+  % cavigliera e peso
+  \filldraw[fill=richiamo!60, draw=black] ($(C)+(-0.18,-0.18)$) rectangle ($(C)+(0.18,0.18)$);
+  \draw[->, attenzione, very thick] (C) -- ++(0,-1.4) node[right] {$\vec F$};
+  % prolungamento di r e angolo fra r e F
+  \draw[dotted] (C) -- ++(-30:1.0);
+  \draw ($(C)+(0,-0.6)$) arc (-90:-30:0.6);
+  \node at ($(C)+(-60:0.85)$) {\ang{60}};
+  % braccio
+  \draw[dashed, attenzione!70] (C) -- ++(0,2.65);
+  \draw[|<->|, richiamo] (0,1.05) -- ({\r*sin(60)},1.05) node[midway, above] {$b = r\sin\ang{60}$};
+\end{tikzpicture}

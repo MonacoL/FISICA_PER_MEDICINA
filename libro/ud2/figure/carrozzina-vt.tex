@@ -1,0 +1,22 @@
+% Grafico velocità-tempo della carrozzina elettrica (problema
+% ud2-cinematica-carrozzina): accelera da 0 a 2,0 m/s in 4,0 s, poi va a
+% velocità costante per altri 16 s. Le due aree sotto il grafico sono gli
+% spostamenti dei due tratti: il triangolo, 4,0 m, e il rettangolo, 32 m.
+\begin{tikzpicture}[>=Stealth, font=\small, x=0.42cm, y=1.0cm]
+  % aree
+  \fill[esempio!25] (0,0) -- (4,2) -- (4,0) -- cycle;
+  \fill[formula!15] (4,0) rectangle (20,2);
+  % assi
+  \draw[->] (0,0) -- (22,0) node[below] {$t$ (\si{\second})};
+  \draw[->] (0,0) -- (0,2.7) node[left] {$v$ (\si{\metre\per\second})};
+  % grafico
+  \draw[formula, very thick] (0,0) -- (4,2) -- (20,2);
+  \draw[dashed] (4,0) -- (4,2);
+  \draw[dashed] (20,0) -- (20,2);
+  % tacche
+  \foreach \t in {0,4,20} \node[below] at (\t,0) {$\num{\t}$};
+  \node[left] at (0,2) {$2{,}0$};
+  % aree
+  \node[formula] at (12,1.35) {$\Delta x_2 = \SI{2,0}{\metre\per\second} \cdot \SI{16}{\second} = \SI{32}{\metre}$};
+  \draw[esempio, thin] (3.0,0.55) -- (6.0,0.45) node[right] {$\Delta x_1 = \frac12 \cdot \SI{4,0}{\second} \cdot \SI{2,0}{\metre\per\second} = \SI{4,0}{\metre}$};
+\end{tikzpicture}

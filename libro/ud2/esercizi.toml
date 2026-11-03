@@ -14,8 +14,6 @@ sin45 = 0.71
 G = 6.67e-11
 sin60 = 0.87
 
-# ==================================================================== quesiti lampo, in ordine di dispensa
-
 # ==================================================================== problemi
 
 [[problema]]
@@ -68,21 +66,16 @@ Poco più di mezzo secondo: per questo è difficile riprendere al volo un oggett
 [[problema]]
 id = "ud2-cinematica-turbina"
 livello = 1
-testo = '''La fresa di una turbina odontoiatrica gira a \num{300000} giri al minuto. Calcola la frequenza di rotazione, in hertz, e il periodo.'''
+testo = '''La fresa di una turbina odontoiatrica gira a \num{300000} giri al minuto. Calcola la frequenza di rotazione, in hertz.'''
 
   [[problema.parte]]
-  calcolo = "60 / 300000"
-  risultato = { valore = 2.0e-4, unita = "s", cifre = 2 }
-  rapido = '''$f = \SI{5,0e3}{\hertz}$; $T = \SI{2,0e-4}{\second}$'''
+  calcolo = "300000 / 60"
+  risultato = { valore = 5.0e3, unita = "Hz", cifre = 2 }
   soluzione = '''In un minuto ci sono \SI{60}{\second}, quindi i giri al secondo sono
 \[
   f = \frac{\num{300000}}{\SI{60}{\second}} = \SI{5000}{\hertz} = \SI{5,0e3}{\hertz}
 \]
-Il periodo è l'inverso della frequenza:
-\[
-  T = \frac{1}{f} = \frac{1}{\SI{5e3}{\hertz}} = \frac{1}{5} \cdot 10^{-3}\,\si{\second} = 0{,}2 \cdot 10^{-3}\,\si{\second} = \SI{2,0e-4}{\second}
-\]
-Due decimi di millesimo di secondo per ogni giro.'''
+Cinquemila giri ogni secondo.'''
 
 [[problema]]
 id = "ud2-cinematica-carrello"
@@ -113,7 +106,11 @@ dati.t2 = { valore = 16, unita = "s" }
   domanda = '''Quanta strada percorre nei primi {{t1}}?'''
   calcolo = "0.5 * t1 * v"
   risultato = { valore = 4.0, unita = "m", cifre = 2 }
-  soluzione = '''Nel grafico velocità-tempo il primo tratto è una retta che sale da 0 a \SI{2,0}{\metre\per\second} in \SI{4,0}{\second}. Lo spostamento è l'area sotto il grafico, un triangolo di base \SI{4,0}{\second} e altezza \SI{2,0}{\metre\per\second}:
+  soluzione = '''Nel grafico velocità-tempo, in figura, il primo tratto è una retta che sale da 0 a \SI{2,0}{\metre\per\second} in \SI{4,0}{\second}.
+\begin{center}
+\input{ud2/figure/carrozzina-vt}
+\end{center}
+Lo spostamento è l'area sotto il grafico, un triangolo di base \SI{4,0}{\second} e altezza \SI{2,0}{\metre\per\second}:
 \[
   \Delta x_1 = \frac{\SI{4,0}{\second} \cdot \SI{2,0}{\metre\per\second}}{2} = \SI{4,0}{\metre}
 \]
@@ -207,7 +204,7 @@ dati.v = { valore = "2,5", unita = "m/s" }
 [[problema]]
 id = "ud2-cinematica-pilota"
 livello = 2
-testo = '''Nella centrifuga umana usata per addestrare i piloti, la cabina con il pilota percorre una circonferenza di raggio {{r}} di moto circolare uniforme, e compie un giro ogni {{T}}.'''
+testo = '''Nella centrifuga umana usata per addestrare i piloti, la cabina con il pilota percorre una circonferenza di raggio {{r}} di moto circolare uniforme, e compie un giro ogni {{T}}. Usa $\pi \approx 3{,}14$ e $g = \SI{10}{\metre\per\second\squared}$.'''
 dati.r = { valore = "8,0", unita = "m" }
 dati.T = { valore = "4,0", unita = "s" }
 
@@ -221,7 +218,7 @@ dati.T = { valore = "4,0", unita = "s" }
 \]'''
 
   [[problema.parte]]
-  domanda = '''Quanto vale l'accelerazione centripeta del pilota? Esprimila anche in multipli di $g = \SI{10}{\metre\per\second\squared}$.'''
+  domanda = '''Quanto vale l'accelerazione centripeta del pilota? Esprimila anche in multipli di $g$.'''
   calcolo = "(2 * math.pi * r / T)**2 / r"
   risultato = { valore = 20, unita = "\\metre\\per\\second\\squared", cifre = 2 }
   rapido = '''$a_c \approx \SI{20}{\metre\per\second\squared}$, circa $2\,g$'''
@@ -862,7 +859,11 @@ dati.m = { valore = "5,0", unita = "\\kilo\\gram" }
   calcolo = "0.40 * m * g * sin60"
   risultato = { valore = 17, unita = "\\newton", cifre = 2 }
   rapido = '''$\approx\SI{17}{\newton}$; no, scivola'''
-  soluzione = '''Il peso è $F_p = mg = \SI{50}{\newton}$. Con gli assi parallelo e perpendicolare allo scivolo, il peso ha componente lungo lo scivolo $mg\sin\ang{30} = 50 \cdot 0{,}5 = \SI{25}{\newton}$ e componente perpendicolare $mg\cos\ang{30} = 50 \cdot 0{,}87 = \SI{43,5}{\newton}$. In direzione perpendicolare il pacco non si muove, quindi $F_N = \SI{43,5}{\newton}$. L'attrito statico massimo è
+  soluzione = '''Il peso è $F_p = mg = \SI{50}{\newton}$. Con gli assi parallelo e perpendicolare allo scivolo, il peso ha componente lungo lo scivolo $mg\sin\ang{30} = 50 \cdot 0{,}5 = \SI{25}{\newton}$ e componente perpendicolare $mg\cos\ang{30} = 50 \cdot 0{,}87 = \SI{43,5}{\newton}$, come in figura.
+\begin{center}
+\input{ud2/figure/scivolo-forze}
+\end{center}
+In direzione perpendicolare il pacco non si muove, quindi $F_N = \SI{43,5}{\newton}$. L'attrito statico massimo è
 \[
   F_{s,\max} = \mu_s F_N = 0{,}40 \cdot \SI{43,5}{\newton} = \SI{17,4}{\newton} \approx \SI{17}{\newton}
 \]
@@ -999,7 +1000,10 @@ diretto all'indietro, contro il moto.'''
   domanda = '''Con quale accelerazione si muovono il blocco e il pesetto?'''
   calcolo = "(m2 * g - 0.20 * m1 * g) / (m1 + m2)"
   risultato = { valore = 0.40, unita = "\\metre\\per\\second\\squared", cifre = 2 }
-  soluzione = '''La fune è inestensibile, quindi i due corpi hanno accelerazioni dello stesso modulo $a$: il blocco verso la carrucola, il pesetto verso il basso. Si scrive il secondo principio per ciascun corpo, prendendo come verso positivo quello del moto.
+  soluzione = '''La fune è inestensibile, quindi i due corpi hanno accelerazioni dello stesso modulo $a$: il blocco verso la carrucola, il pesetto verso il basso. Si scrive il secondo principio per ciascun corpo, prendendo come verso positivo quello del moto (in figura le forze che compaiono nelle equazioni).
+\begin{center}
+\input{ud2/figure/tavolo-carrucola}
+\end{center}
 \begin{itemize}
   \item Blocco, in orizzontale: la tensione tira avanti, l'attrito indietro: $F_T - F_d = m_1 a$.
   \item Pesetto, in verticale: il peso tira giù, la tensione su: $m_2 g - F_T = m_2 a$.
@@ -1058,7 +1062,7 @@ Anche il cavo orizzontale tira più del peso della lampada, anche se non la regg
 \[
   F_{T1} = \frac{F_p}{\cos\ang{30}} = \frac{\SI{120}{\newton}}{0{,}87} \approx \SI{138}{\newton} \approx \SI{1,4e2}{\newton}
 \]
-perché $0{,}87 \cdot 138 \approx 120$. In orizzontale: $F_{T2} = F_{T1}\sin\ang{30} \approx 138 \cdot 0{,}5 = \SI{69}{\newton}$. Con il cavo più vicino alla verticale tutte e due le tensioni calano: il cavo inclinato si avvicina al peso della lampada, quello orizzontale a zero.'''
+perché $120/0{,}87 = \num{12000}/87$, e $87 \cdot 140 = \num{12180}$ è poco più di \num{12000}: il quoziente è poco meno di 140, circa 138 (controllo: $0{,}87 \cdot 138 \approx 120$). In orizzontale: $F_{T2} = F_{T1}\sin\ang{30} \approx 138 \cdot 0{,}5 = \SI{69}{\newton}$. Con il cavo più vicino alla verticale tutte e due le tensioni calano: il cavo inclinato si avvicina al peso della lampada, quello orizzontale a zero.'''
 
 [[problema]]
 id = "ud2-dinamica-centrifuga"
@@ -1353,7 +1357,7 @@ La massa si semplifica: non serve conoscerla.'''
   \quad\Longrightarrow\quad
   v^2 = v_0^2 - 2g\,\frac{h}{2} = \SI{36}{\metre\squared\per\second\squared} - 2 \cdot 10 \cdot \SI{0,90}{\metre\squared\per\second\squared} = \SI{18}{\metre\squared\per\second\squared}
 \]
-e $v = \sqrt{18} \approx \SI{4,2}{\metre\per\second}$. Non è metà della velocità iniziale, \SI{3,0}{\metre\per\second}: metà dell'energia cinetica corrisponde a una velocità divisa per $\sqrt{2}$, cioè $6{,}0/1{,}41 \approx 4{,}2$.'''
+e $v = \sqrt{18} = \sqrt{9 \cdot 2} = 3\sqrt{2} \approx 3 \cdot 1{,}41 \approx \SI{4,2}{\metre\per\second}$. Non è metà della velocità iniziale, \SI{3,0}{\metre\per\second}: metà dell'energia cinetica corrisponde a una velocità divisa per $\sqrt{2}$, cioè $6{,}0/1{,}41 \approx 4{,}2$.'''
 
 [[problema]]
 id = "ud2-energia-materasso"
@@ -1428,7 +1432,7 @@ Gli attriti sono opposti allo spostamento lungo tutta la rampa, e il loro lavoro
   \quad\Longrightarrow\quad
   v = \SI{2,4}{\metre\per\second}
 \]
-Si può dire lo stesso con l'energia meccanica: il lavoro degli attriti, \SI{-300}{\joule}, è la variazione dell'energia meccanica, che passa da \SI{588}{\joule} di energia potenziale (con lo zero in fondo) a \SI{288}{\joule} di energia cinetica.'''
+perché $2{,}4^2 = 5{,}76$ (infatti $24^2 = 576$). Si può dire lo stesso con l'energia meccanica: il lavoro degli attriti, \SI{-300}{\joule}, è la variazione dell'energia meccanica, che passa da \SI{588}{\joule} di energia potenziale (con lo zero in fondo) a \SI{288}{\joule} di energia cinetica.'''
 
   [[problema.parte]]
   domanda = '''Per farla scendere invece a velocità costante, fin dalla partenza, con che forza parallela alla rampa la deve trattenere l'accompagnatore?'''
@@ -1495,7 +1499,10 @@ dati.theta = { valore = 60, unita = "\\degree" }
   domanda = '''Di quanto si trova più in alto il bambino, alla partenza, rispetto al punto più basso della traiettoria?'''
   calcolo = "L * (1 - 0.5)"
   risultato = { valore = 1.25, unita = "m", cifre = 3 }
-  soluzione = '''Con le corde inclinate di $\theta$ sulla verticale, il bambino si trova a una distanza $L\cos\theta$ sotto il punto di aggancio; nel punto più basso si trova a una distanza $L$. Il dislivello è la differenza:
+  soluzione = '''Con le corde inclinate di $\theta$ sulla verticale, il bambino si trova a una distanza $L\cos\theta$ sotto il punto di aggancio; nel punto più basso si trova a una distanza $L$. Il dislivello è la differenza, come in figura:
+\begin{center}
+\input{ud2/figure/altalena-dislivello}
+\end{center}
 \[
   h = L - L\cos\theta = L(1 - \cos\ang{60}) = \SI{2,5}{\metre} \cdot (1 - 0{,}5) = \SI{1,25}{\metre}
 \]'''
@@ -1515,7 +1522,7 @@ dati.theta = { valore = 60, unita = "\\degree" }
   domanda = '''Quanto vale, nel punto più basso, la tensione complessiva delle corde?'''
   calcolo = "m * g + m * 2 * g * L * (1 - 0.5) / L"
   risultato = { valore = 500, unita = "\\newton", cifre = 2 }
-  soluzione = '''Il moto non è uniforme, perché la velocità cambia modulo. Ma in ogni moto circolare la componente dell'accelerazione diretta verso il centro vale $v^2/r$, con la velocità di quell'istante. Nel punto più basso le due forze sono verticali, la risultante non ha componente lungo la tangente, e tutta l'accelerazione è centripeta. Il bambino percorre un arco di circonferenza di raggio $L$, quindi la risultante delle forze è la forza centripeta $mv^2/L$, diretta verso l'alto, verso il punto di aggancio. La tensione è verso l'alto, il peso verso il basso:
+  soluzione = '''Il moto non è uniforme, perché la velocità cambia modulo. Ma, come dice la dispensa nella sottosezione sul moto circolare uniforme, in ogni moto circolare la componente dell'accelerazione diretta verso il centro vale $v^2/r$, con la velocità di quell'istante. Nel punto più basso le due forze sono verticali, la risultante non ha componente lungo la tangente, e tutta l'accelerazione è centripeta. Il bambino percorre un arco di circonferenza di raggio $L$, quindi la risultante delle forze è la forza centripeta $mv^2/L$, diretta verso l'alto, verso il punto di aggancio. La tensione è verso l'alto, il peso verso il basso:
 \[
   F_T - mg = \frac{mv^2}{L}
   \quad\Longrightarrow\quad
@@ -1732,7 +1739,11 @@ dati.r = { valore = "0,40", unita = "m" }
   [[problema.parte]]
   calcolo = "r * F * sin60"
   risultato = { valore = 17, unita = "\\newton\\metre", cifre = 2 }
-  soluzione = '''Il vettore $\vec r$ va dal ginocchio alla cavigliera, lungo la gamba; il peso $\vec F$ è verticale, verso il basso. La gamba forma \ang{60} con la verticale, quindi l'angolo fra $\vec r$ e $\vec F$ è $\theta = \ang{60}$:
+  soluzione = '''Il vettore $\vec r$ va dal ginocchio alla cavigliera, lungo la gamba; il peso $\vec F$ è verticale, verso il basso. La gamba forma \ang{60} con la verticale, quindi l'angolo fra $\vec r$ e $\vec F$ è $\theta = \ang{60}$ (in figura, con il braccio $b = r\sin\theta$).
+\begin{center}
+\input{ud2/figure/cavigliera-momento}
+\end{center}
+Il momento è
 \[
   \tau = rF\sin\theta = \SI{0,40}{\metre} \cdot \SI{50}{\newton} \cdot \sin\ang{60} = \SI{20}{\newton\metre} \cdot 0{,}87 \approx \SI{17}{\newton\metre}
 \]
@@ -2067,7 +2078,10 @@ dati.xd = { valore = 15, unita = "cm" }
   domanda = '''Quanta forza fa il deltoide?'''
   calcolo = "(Fb * xb + Fm * xm) / (xd * sin30)"
   risultato = { valore = 300, unita = "\\newton", cifre = 2 }
-  soluzione = '''Si calcolano i momenti rispetto alla spalla, così la forza dell'articolazione, che non si conosce, ha momento zero. Il braccio del deltoide è la distanza fra la spalla e la retta d'azione della sua forza: nel triangolo rettangolo che ha per ipotenusa il tratto di omero lungo \SI{15}{\centi\metre}, è il cateto opposto all'angolo di \ang{30}:
+  soluzione = '''Si calcolano i momenti rispetto alla spalla, così la forza dell'articolazione, che non si conosce, ha momento zero. Il braccio del deltoide è la distanza fra la spalla e la retta d'azione della sua forza: nel triangolo rettangolo che ha per ipotenusa il tratto di omero lungo \SI{15}{\centi\metre}, è il cateto opposto all'angolo di \ang{30} (in figura):
+\begin{center}
+\input{ud2/figure/deltoide-braccio}
+\end{center}
 \[
   b_d = \SI{15}{\centi\metre} \cdot \sin\ang{30} = \SI{15}{\centi\metre} \cdot 0{,}5 = \SI{7,5}{\centi\metre}
 \]
@@ -2808,8 +2822,8 @@ Il centro di massa è a \SI{60}{\centi\metre} dalla zavorra leggera e a \SI{20}{
   testo = '''\SI{40}{\centi\metre}'''
   commento = '''È il punto di mezzo della sbarra, la media aritmetica delle posizioni: vale solo per masse uguali.'''
   [[quesito.opzione]]
-  testo = '''\SI{120}{\centi\metre}'''
-  commento = '''Divide per la differenza delle masse invece che per la somma, $480/4$. Il risultato cade fuori dalla sbarra, mentre il centro di massa sta sempre fra le due zavorre.'''
+  testo = '''\SI{53}{\centi\metre}'''
+  commento = '''Divide la sbarra in 3 parti, come il rapporto delle masse $6/2 = 3$, e ne prende due: $80 \cdot 2/3 \approx 53$. Le distanze dal centro di massa stanno nel rapporto $1 : 3$, quindi le parti sono $1 + 3 = 4$, e la distanza dalla zavorra leggera è $3/4 \cdot 80 = \SI{60}{\centi\metre}$.'''
   [[quesito.opzione]]
   testo = '''\SI{27}{\centi\metre}'''
   commento = '''Divide la lunghezza per il rapporto delle masse, $80/3$. Le distanze dal centro di massa stanno nel rapporto $1 : 3$, quindi la sbarra va divisa in $1 + 3 = 4$ parti, e la distanza dalla zavorra leggera è $3/4$ della lunghezza.'''
@@ -2822,7 +2836,11 @@ dati.r = { valore = 20, unita = "cm" }
 dati.F = { valore = 50, unita = "\\newton" }
 corretta = "B"
 calcolo = "r / 100 * F * sin30"
-soluzione = '''Il braccio della manovella in metri è $r = \SI{0,20}{\metre}$, e l'angolo fra $\vec r$, lungo la manovella, e la forza è \ang{30}:
+soluzione = '''Il braccio della manovella in metri è $r = \SI{0,20}{\metre}$, e l'angolo fra $\vec r$, lungo la manovella, e la forza è \ang{30}. In figura, $b = r\sin\ang{30}$ è la distanza fra il perno e la retta d'azione della forza.
+\begin{center}
+\input{ud2/figure/manovella-braccio}
+\end{center}
+Il momento è
 \[
   \tau = rF\sin\theta = \SI{0,20}{\metre} \cdot \SI{50}{\newton} \cdot \sin\ang{30} = \SI{10}{\newton\metre} \cdot 0{,}5 = \SI{5}{\newton\metre}
 \]
@@ -2841,8 +2859,8 @@ Spingendo perpendicolarmente alla manovella l'infermiera otterrebbe il doppio, \
   testo = '''\SI{500}{\newton\metre}'''
   commento = '''Lascia il braccio in centimetri, $20 \cdot 50 \cdot 0{,}5 = 500$: il momento in \si{\newton\metre} vuole la distanza in metri.'''
   [[quesito.opzione]]
-  testo = '''\SI{250}{\newton\metre}'''
-  commento = '''Divide la forza per la distanza, $50/0{,}20$, e ignora l'angolo: il momento è il \emph{prodotto} della forza per il braccio, e $F/r$ non ha nemmeno le unità di un momento.'''
+  testo = '''\SI{20}{\newton\metre}'''
+  commento = '''Divide per $\sin\ang{30}$ invece di moltiplicare, $0{,}20 \cdot 50/0{,}5 = 20$: è come prendere per braccio un segmento di \SI{0,40}{\metre}, più lungo della manovella. Il braccio è la distanza fra il perno e la retta d'azione della forza, $b = r\sin\theta = \SI{0,10}{\metre}$, più corto della manovella.'''
 
 [[quesito]]
 id = "ud2-rigido-punta"
