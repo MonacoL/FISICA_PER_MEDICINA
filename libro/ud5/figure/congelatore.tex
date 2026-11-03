@@ -1,0 +1,12 @@
+% Bilancio del congelatore da laboratorio (problema ud5-secondo-congelatore):
+% prende Q_f = 3,0 kJ dall'interno a 250 K, riceve il lavoro W = 1,0 kJ,
+% cede Q_stanza = Q_f + W = 4,0 kJ alla stanza a 300 K.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \node[draw, thick, fill=attenzione!15, minimum width=5.4cm, minimum height=0.9cm] (S) at (0,3) {stanza, \SI{27}{\celsius} = \SI{300}{\kelvin}};
+  \node[draw, thick, fill=formula!15, minimum width=5.4cm, minimum height=0.9cm] (I) at (0,-1) {interno, \SI{-23}{\celsius} = \SI{250}{\kelvin}};
+  \node[draw, very thick, circle, fill=richiamoBg, minimum size=1.7cm, align=center] (M) at (0,1) {conge-\\latore};
+  \draw[->, line width=1.5pt, formula] (I.north) -- (M.south) node[midway, right] {$Q_f = \SI{3,0}{\kilo\joule}$};
+  \draw[->, line width=2.5pt, attenzione] (M.north) -- (S.south) node[midway, right] {$Q_\text{stanza} = Q_f + W = \SI{4,0}{\kilo\joule}$};
+  \draw[->, line width=1pt, medica] (-3.0,1) -- (M.west) node[midway, above] {$W = \SI{1,0}{\kilo\joule}$};
+  \node[medica, left, align=right] at (-3.0,1) {lavoro\\elettrico};
+\end{tikzpicture}

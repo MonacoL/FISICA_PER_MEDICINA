@@ -1,0 +1,23 @@
+% Temperatura in funzione del tempo per 0,50 kg di ghiaccio da -10 °C ad acqua a 20 °C,
+% con la piastra da 500 W (problema ud5-cal-curva). Tempi: Q1 = 10,5 kJ in 21 s,
+% fusione Q2 = 167 kJ in 334 s (da 21 a 355 s), acqua Q3 = 42 kJ in 84 s (da 355 a 439 s).
+\begin{tikzpicture}[>=Stealth]
+\begin{axis}[
+  width=0.85\linewidth, height=5.0cm,
+  axis lines=left, xmin=0, xmax=480, ymin=-15, ymax=27,
+  xlabel={tempo $t$ (\si{\second})}, ylabel={temperatura (\si{\celsius})},
+  xtick={0,100,200,300,400}, ytick={-10,0,10,20},
+  tick label style={font=\small}, label style={font=\small},
+  clip=false,
+]
+  \addplot[attenzione, very thick] coordinates {(0,-10) (21,0) (355,0) (439,20)};
+  \draw[dashed, gray] (axis cs:21,0) -- (axis cs:21,4);
+  \draw[dashed, gray] (axis cs:355,0) -- (axis cs:355,4);
+  \draw[<->, formula] (axis cs:21,4) -- (axis cs:355,4) node[midway, above, font=\scriptsize] {fusione: $\Delta t_2 = \SI{334}{\second}$, temperatura ferma};
+  \node[font=\scriptsize, anchor=west] (g) at (axis cs:60,-9) {ghiaccio: \SI{21}{\second}};
+  \draw[->, thin, gray] (g.west) -- (axis cs:12,-4.5);
+  \node[font=\scriptsize, anchor=east] at (axis cs:390,13) {acqua: \SI{84}{\second}};
+  \draw[dashed, gray] (axis cs:439,-15) -- (axis cs:439,20);
+  \node[font=\scriptsize, anchor=south west] at (axis cs:441,-15) {\SI{439}{\second}};
+\end{axis}
+\end{tikzpicture}

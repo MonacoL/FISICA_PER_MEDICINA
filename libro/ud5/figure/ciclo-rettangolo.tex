@@ -1,0 +1,37 @@
+% Ciclo rettangolare ABCDA nel piano pV (problema ud5-secondo-ciclo-rettangolo):
+% A (2,0 L; 3,0e5 Pa), B (6,0 L; 3,0e5 Pa), C (6,0 L; 1,0e5 Pa), D (2,0 L; 1,0e5 Pa),
+% percorso in senso orario. In rosso i tratti in cui il gas assorbe calore (DA e AB),
+% in blu quelli in cui lo cede (BC e CD). L'area del rettangolo è il lavoro, 800 J.
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.68\linewidth, height=5.4cm,
+  axis lines=left, xmin=0, xmax=7.4, ymin=0, ymax=3.9,
+  xlabel={volume $V$ (\si{\litre})}, ylabel={pressione $p$ (\SI{e5}{\pascal})},
+  xtick={2,6}, ytick={1,3},
+  tick label style={font=\small}, label style={font=\small},
+  clip=false,
+]
+  \fill[medica!20] (axis cs:2,1) rectangle (axis cs:6,3);
+  \node[medica!70!black, font=\small, align=center] at (axis cs:4,2) {$W = \Delta p\,\Delta V$\\$= \SI{800}{\joule}$};
+  \draw[dashed, gray] (axis cs:0,3) -- (axis cs:2,3);
+  \draw[dashed, gray] (axis cs:0,1) -- (axis cs:2,1);
+  \draw[dashed, gray] (axis cs:2,0) -- (axis cs:2,1);
+  \draw[dashed, gray] (axis cs:6,0) -- (axis cs:6,1);
+  \draw[attenzione, very thick, -{Stealth}] (axis cs:2,3) -- (axis cs:4.1,3);
+  \draw[attenzione, very thick] (axis cs:4,3) -- (axis cs:6,3);
+  \draw[formula, very thick, -{Stealth}] (axis cs:6,3) -- (axis cs:6,1.9);
+  \draw[formula, very thick] (axis cs:6,2) -- (axis cs:6,1);
+  \draw[formula, very thick, -{Stealth}] (axis cs:6,1) -- (axis cs:3.9,1);
+  \draw[formula, very thick] (axis cs:4,1) -- (axis cs:2,1);
+  \draw[attenzione, very thick, -{Stealth}] (axis cs:2,1) -- (axis cs:2,2.1);
+  \draw[attenzione, very thick] (axis cs:2,2) -- (axis cs:2,3);
+  \fill (axis cs:2,3) circle (1.8pt) node[above left, font=\small] {$A$};
+  \fill (axis cs:6,3) circle (1.8pt) node[above right, font=\small] {$B$};
+  \fill (axis cs:6,1) circle (1.8pt) node[below right, font=\small] {$C$};
+  \fill (axis cs:2,1) circle (1.8pt) node[below left, font=\small] {$D$};
+  \node[attenzione, font=\scriptsize, anchor=south] at (axis cs:4,3.05) {assorbe calore};
+  \node[formula, font=\scriptsize, anchor=north] at (axis cs:4,0.95) {cede calore};
+  \node[font=\scriptsize, anchor=west] at (axis cs:6.15,2.7) {$T$ massima};
+  \node[font=\scriptsize, anchor=east] at (axis cs:1.9,1.3) {$T$ minima};
+\end{axis}
+\end{tikzpicture}

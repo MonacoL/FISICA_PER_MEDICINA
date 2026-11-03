@@ -725,7 +725,10 @@ cioè poco più di \SI{7}{\minute}.'''
 \[
   \Delta t_2 = \frac{Q_2}{P} = \frac{\SI{167000}{\joule}}{\SI{500}{\joule\per\second}} = \SI{334}{\second} \approx \SI{330}{\second}
 \]
-Più di cinque minuti su poco più di sette la temperatura non cambia, anche se la piastra continua a dare calore.'''
+Più di cinque minuti su poco più di sette la temperatura non cambia, anche se la piastra continua a dare calore: in figura è il lungo tratto orizzontale.
+\begin{center}
+\input{ud5/figure/curva-ghiaccio}
+\end{center}'''
 
 [[problema]]
 id = "ud5-cal-metallo"
@@ -1135,7 +1138,11 @@ dati.m = { valore = 70, unita = "\\kilo\\gram" }
   domanda = '''Quanto vale la potenza che il sub perde attraverso la muta?'''
   calcolo = "k * A * (30 - 10) / (d * 1e-3)"
   risultato = { valore = 400, unita = "W", cifre = 2 }
-  soluzione = '''Con la legge di Fourier, $\Delta T = 30 - 10 = \SI{20}{\kelvin}$ e $d = \SI{5,0e-3}{\metre}$:
+  soluzione = '''Il calore attraversa lo spessore della muta, dalla pelle all'acqua (in figura).
+\begin{center}
+\input{ud5/figure/muta}
+\end{center}
+Con la legge di Fourier, $\Delta T = 30 - 10 = \SI{20}{\kelvin}$ e $d = \SI{5,0e-3}{\metre}$:
 \[
   P = k A\,\frac{\Delta T}{d} = \SI{0,05}{\watt\per\metre\per\kelvin} \cdot \SI{2,0}{\metre\squared} \cdot \frac{\SI{20}{\kelvin}}{\SI{5,0e-3}{\metre}} = 0{,}10 \cdot 4{,}0 \cdot 10^{3}\,\si{\watt} = \SI{400}{\watt}
 \]
@@ -1297,7 +1304,10 @@ dati.V2 = { valore = "5,0", unita = "\\litre" }
 \[
   W = p\,\Delta V = \SI{2,0e5}{\pascal} \cdot \SI{2,0e-3}{\metre\cubed} = 4{,}0 \cdot 10^{5+(-3)}\,\si{\joule} = 4{,}0 \cdot 10^{2}\,\si{\joule} = \SI{400}{\joule}
 \]
-Il lavoro è positivo perché il gas si espande: cede energia all'ambiente spingendo il pistone.'''
+Il lavoro è positivo perché il gas si espande: cede energia all'ambiente spingendo il pistone. In figura è l'area del rettangolo sotto l'isobara.
+\begin{center}
+\input{ud5/figure/isobara-cilindro}
+\end{center}'''
 
 [[problema]]
 id = "ud5-primo-compressione"
@@ -1309,7 +1319,11 @@ dati.Qced = { valore = 120, unita = "J" }
   [[problema.parte]]
   calcolo = "(-Qced) - (-L)"
   risultato = { valore = 180, unita = "J", cifre = 2 }
-  soluzione = '''Prima si fissano i segni. Il gas cede calore, quindi $Q = \SI{-120}{\joule}$. Il lavoro è fatto \emph{sul} gas, che viene compresso, quindi il lavoro compiuto dal gas è negativo: $W = \SI{-300}{\joule}$. Dal primo principio:
+  soluzione = '''Prima si fissano i segni (in figura). Il gas cede calore, quindi $Q = \SI{-120}{\joule}$. Il lavoro è fatto \emph{sul} gas, che viene compresso, quindi il lavoro compiuto dal gas è negativo: $W = \SI{-300}{\joule}$.
+\begin{center}
+\input{ud5/figure/compressione-segni}
+\end{center}
+Dal primo principio:
 \[
   \Delta U = Q - W = \SI{-120}{\joule} - (\SI{-300}{\joule}) = -120 + 300\,\si{\joule} = \SI{180}{\joule}
 \]
@@ -1458,7 +1472,11 @@ dati.W = { valore = "1,0", unita = "\\kilo\\joule" }
   soluzione = '''Il fluido del congelatore lavora in ciclo, quindi non accumula energia: tutta l'energia che entra (il calore preso dall'interno e il lavoro elettrico) esce come calore verso la stanza:
 \[
   Q_\text{stanza} = Q_f + W = \SI{3,0}{\kilo\joule} + \SI{1,0}{\kilo\joule} = \SI{4,0}{\kilo\joule}
-\]'''
+\]
+In figura, il bilancio dei flussi di energia.
+\begin{center}
+\input{ud5/figure/congelatore}
+\end{center}'''
 
   [[problema.parte]]
   domanda = '''Come varia l'entropia totale dell'interno del congelatore e della stanza?'''
@@ -1580,7 +1598,10 @@ dati.Qc = { valore = 3600, unita = "J" }
 \[
   W = 1200 - 400 = \SI{800}{\joule}
 \]
-È l'area del rettangolo racchiuso dal ciclo, $\Delta p \cdot \Delta V = \SI{2,0e5}{\pascal} \cdot \SI{4,0e-3}{\metre\cubed} = \SI{800}{\joule}$, positiva perché il ciclo è percorso in senso orario.'''
+È l'area del rettangolo racchiuso dal ciclo (in figura), $\Delta p \cdot \Delta V = \SI{2,0e5}{\pascal} \cdot \SI{4,0e-3}{\metre\cubed} = \SI{800}{\joule}$, positiva perché il ciclo è percorso in senso orario.
+\begin{center}
+\input{ud5/figure/ciclo-rettangolo}
+\end{center}'''
 
   [[problema.parte]]
   domanda = '''Quanto calore cede il gas in un ciclo? Qual è il rendimento del ciclo?'''
@@ -2232,7 +2253,11 @@ tipo = "multipla"
 testo = '''Un gas perfetto percorre un ciclo a forma di triangolo nel piano $pV$. Parte dallo stato $C$ (\SI{1}{\litre}, \SI{3e5}{\pascal}) e arriva lungo un segmento di retta allo stato $B$ (\SI{4}{\litre}, \SI{1e5}{\pascal}); poi viene compresso a pressione costante fino allo stato $A$ (\SI{1}{\litre}, \SI{1e5}{\pascal}); infine torna in $C$ a volume costante. Il lavoro compiuto dal gas in un ciclo è'''
 corretta = "A"
 calcolo = "0.5 * (3e5 - 1e5) * (4 - 1) * 1e-3"
-soluzione = '''In un ciclo il lavoro totale è l'area racchiusa nel piano $pV$, positiva se il ciclo è percorso in senso orario. Qui il gas si espande ad alta pressione (da $C$ a $B$) e si comprime a bassa pressione (da $B$ ad $A$): il senso è orario. Il ciclo è un triangolo rettangolo con cateti $\Delta V = \SI{3}{\litre} = \SI{3e-3}{\metre\cubed}$ e $\Delta p = \SI{2e5}{\pascal}$:
+soluzione = '''In un ciclo il lavoro totale è l'area racchiusa nel piano $pV$, positiva se il ciclo è percorso in senso orario. Qui il gas si espande ad alta pressione (da $C$ a $B$) e si comprime a bassa pressione (da $B$ ad $A$): il senso è orario.
+\begin{center}
+\input{ud5/figure/ciclo-triangolo}
+\end{center}
+Il ciclo è un triangolo rettangolo (in figura) con cateti $\Delta V = \SI{3}{\litre} = \SI{3e-3}{\metre\cubed}$ e $\Delta p = \SI{2e5}{\pascal}$:
 \[
   W = \frac12\,\Delta p\,\Delta V = \frac12 \cdot \SI{2e5}{\pascal} \cdot \SI{3e-3}{\metre\cubed} = \frac12 \cdot 6 \cdot 10^{5-3}\,\si{\joule} = \SI{300}{\joule}
 \]'''

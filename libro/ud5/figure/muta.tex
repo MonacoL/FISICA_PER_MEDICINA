@@ -1,0 +1,21 @@
+% Conduzione attraverso la muta di neoprene (problema ud5-trasm-muta):
+% spessore d = 5,0 mm, faccia interna a 30 °C (pelle), esterna a 10 °C (acqua);
+% la temperatura scende in modo lineare nello spessore, il calore va dalla pelle all'acqua.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % pelle, muta, acqua
+  \fill[esempio!20] (-2.6,0) rectangle (0,3);
+  \fill[richiamo!30] (0,0) rectangle (1.6,3);
+  \fill[formula!15] (1.6,0) rectangle (4.2,3);
+  \draw[thick] (0,0) -- (0,3) (1.6,0) -- (1.6,3);
+  \node[esempio!70!black, align=center] at (-1.3,2.45) {pelle\\\SI{30}{\celsius}};
+  \node at (0.8,2.7) {neoprene};
+  \node[formula, align=center] at (2.9,2.45) {acqua\\\SI{10}{\celsius}};
+  % profilo di temperatura nella muta
+  \draw[attenzione, very thick] (-0.7,1.9) -- (0,1.9) -- (1.6,0.7) -- (2.3,0.7);
+  \node[attenzione, font=\scriptsize, anchor=west] at (1.7,1.85) {$\Delta T = \SI{20}{\kelvin}$};
+  % flusso di calore
+  \draw[->, very thick, attenzione] (-2.1,1.25) -- (3.8,1.25);
+  \node[attenzione, font=\scriptsize, anchor=north] at (-1.3,1.15) {calore};
+  % spessore
+  \draw[<->] (0,-0.3) -- (1.6,-0.3) node[midway, below] {$d = \SI{5,0}{\milli\metre}$};
+\end{tikzpicture}

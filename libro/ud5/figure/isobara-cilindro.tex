@@ -1,0 +1,22 @@
+% Espansione a pressione costante nel piano pV (problema ud5-primo-isobara-cilindro):
+% p = 2,0e5 Pa, V da 3,0 L a 5,0 L. L'area del rettangolo sotto l'isobara è il lavoro, 400 J.
+\begin{tikzpicture}[>=Stealth]
+\begin{axis}[
+  width=0.6\linewidth, height=4.6cm,
+  axis lines=left, xmin=0, xmax=6.3, ymin=0, ymax=3.0,
+  xlabel={volume $V$ (\si{\litre})}, ylabel={pressione $p$ (\SI{e5}{\pascal})},
+  xtick={3,5}, ytick={2},
+  tick label style={font=\small}, label style={font=\small},
+  clip=false,
+]
+  \fill[formula!20] (axis cs:3,0) rectangle (axis cs:5,2);
+  \draw[dashed, gray] (axis cs:0,2) -- (axis cs:3,2);
+  \draw[dashed] (axis cs:3,0) -- (axis cs:3,2);
+  \draw[dashed] (axis cs:5,0) -- (axis cs:5,2);
+  \draw[formula, very thick, -{Stealth}] (axis cs:3,2) -- (axis cs:5,2);
+  \fill (axis cs:3,2) circle (1.8pt);
+  \fill (axis cs:5,2) circle (1.8pt);
+  \node[font=\small, align=center] at (axis cs:4,1) {$W = p\,\Delta V$\\$= \SI{400}{\joule}$};
+  \draw[<->, esempio] (axis cs:3,2.45) -- (axis cs:5,2.45) node[midway, above, font=\scriptsize] {$\Delta V = \SI{2,0}{\litre}$};
+\end{axis}
+\end{tikzpicture}
