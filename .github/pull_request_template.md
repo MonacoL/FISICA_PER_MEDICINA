@@ -2,14 +2,14 @@
 
 ## Unità didattica
 
-UD: <udN> · parte: <dispensa | eserciziario> · ticket: #<n>
+UD: <udN>, parte: <dispensa | eserciziario>, ticket: #<n>
 
 ## Revisione (ADR 0005)
 
 - [ ] Controllo automatico passato (`uv run controllo <udN>` e CI verde)
-- [ ] Revisore di fisica: <n> accolti, <n> respinti · [rapporto](<link>)
-- [ ] Revisore studente: <n> accolti, <n> respinti · [rapporto](<link>)
-- [ ] Revisore di formato (solo eserciziario): <n> accolti, <n> respinti · [rapporto](<link>)
+- [ ] Revisore di fisica: <n> accolti, <n> respinti, [rapporto](<link>)
+- [ ] Revisore studente: <n> accolti, <n> respinti, [rapporto](<link>)
+- [ ] Revisore di formato (solo eserciziario): <n> accolti, <n> respinti, [rapporto](<link>)
 - [ ] Nessun rilievo bloccante aperto
 
 ### Rilievi respinti

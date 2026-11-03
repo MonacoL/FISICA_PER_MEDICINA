@@ -121,6 +121,16 @@ def test_segnaposto_rimasto_fallisce_e_indica_file_e_marcatore(
     assert f"ud1/ud1.tex:3: segnaposto rimasto: {marcatore}" in esito.stdout
 
 
+@pytest.mark.parametrize(("riga", "separatore"), [("UD1 — dispensa", "—"), ("Livello 1 · formule", "·")])
+def test_separatore_da_testo_generato_fallisce(tmp_path: Path, riga: str, separatore: str) -> None:
+    rotto = progetto(tmp_path, ud1="Testo.\n" + riga + "\n")
+
+    esito = controllo("ud1", "--cartella", str(rotto))
+
+    assert esito.returncode != 0
+    assert f"ud1/ud1.tex:2: separatore da togliere: {separatore}" in esito.stdout
+
+
 def test_pacchetto_assente_dalla_lista_fallisce_e_indica_file_e_pacchetto(tmp_path: Path) -> None:
     rotto = progetto(tmp_path / "libro", preambolo="\\usepackage{booktabs}\n", ud1="Testo.\n")
     lista = tmp_path / "tex-packages.txt"

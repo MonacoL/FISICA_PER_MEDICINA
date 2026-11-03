@@ -131,17 +131,40 @@ def test_figura_nel_testo_diventa_un_rimando_nella_pagina_web() -> None:
     assert 'La figura è nel <a href="fisica-per-medicina.pdf" download>libro in PDF</a>.' in html
 
 
+
+def test_unita_di_siunitx_diventano_latex_per_mathjax() -> None:
+    from controllo.esercizi import latex_a_html
+
+    html = latex_a_html(
+        r"Servono \SI{250}{\micro\litre} di \si{\mole\per\litre}, a \SI{1,5e-3}{\kilo\metre\per\second\squared}, "
+        r"con $c = \SI{4186}{\joule\per\kilo\gram\per\kelvin}$, \ang{30} e \SI[per-mode=power]{2}{\metre\per\second}."
+    )
+    assert r"\(250\,\mu\mathrm{L}\)" in html
+    assert r"\(\mathrm{mol}/\mathrm{L}\)" in html
+    assert r"\(1{,}5 \cdot 10^{-3}\,\mathrm{k}\mathrm{m}/\mathrm{s}^{2}\)" in html
+    assert r"$c = 4186\,\mathrm{J}/(\mathrm{k}\mathrm{g}\,\mathrm{K})$" in html
+    assert r"\(30^{\circ}\)" in html and r"\mathrm{m}\,\mathrm{s}^{-1}" in html
+
+
+def test_latex_che_la_pagina_web_non_sa_mostrare_ferma_il_controllo() -> None:
+    import pytest
+
+    from controllo.esercizi import latex_a_html
+
+    with pytest.raises(ValueError, match="ref"):
+        latex_a_html(r"Vedi la sezione~\ref{sec:ud4-suono}.")
+
 def test_indice_collega_le_pagine_con_le_simulazioni_in_fondo(tmp_path: Path) -> None:
     from controllo.esercizi import indice_web
 
-    for cartella, titolo in [("simulazioni", "Simulazioni"), ("ud2", "Eserciziario UD2"), ("ud1", "Eserciziario UD1")]:
+    for cartella, titolo in [("simulazioni", "Simulazioni"), ("ud2", "Meccanica"), ("ud1", "Metodi")]:
         (tmp_path / cartella).mkdir()
         (tmp_path / cartella / "esercizi.toml").write_text(f'titolo = "{titolo}"\n', encoding="utf-8")
 
     html = indice_web(tmp_path)
     collegamenti = [html.index(f'href="{nome}.html"') for nome in ("ud1", "ud2", "simulazioni")]
     assert collegamenti == sorted(collegamenti)
-    assert "Eserciziario UD1" in html and "<!--VOCI-->" not in html
+    assert "<span>Eserciziario UD1</span>Metodi" in html and "<!--VOCI-->" not in html
 
 
 def simulazioni(tolti: int = 0) -> dict:

@@ -4,7 +4,7 @@
 #
 # Il formato è descritto in testa a libro/ud7/esercizi.toml.
 
-titolo = "Eserciziario UD4 · Onde meccaniche"
+titolo = "Onde meccaniche"
 
 
 [costanti]
@@ -2586,7 +2586,7 @@ soluzione = '''Dalla definizione del livello di intensità sonora:
 \[
   \beta = 10 \log_{10}\frac{I}{I_0} = 10 \log_{10}\frac{10^{-5}}{10^{-12}} = 10 \log_{10} 10^{-5-(-12)} = 10 \log_{10} 10^{7} = 10 \cdot 7\,\si{\deci\bel} = \SI{70}{\deci\bel}
 \]
-È il rumore di una strada trafficata: troppo, per una corsia (sezione~\ref{sec:ud4-suono}).'''
+È il rumore di una strada trafficata: troppo, per una corsia (sezione «Il suono»).'''
 
   [[quesito.opzione]]
   testo = '''\SI{-50}{\deci\bel}'''

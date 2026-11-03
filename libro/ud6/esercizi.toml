@@ -4,7 +4,7 @@
 #
 # Il formato è descritto in testa a libro/ud7/esercizi.toml.
 
-titolo = "Eserciziario UD6 · Elettricità e magnetismo"
+titolo = "Elettricità e magnetismo"
 
 [costanti]
 k = 9e9

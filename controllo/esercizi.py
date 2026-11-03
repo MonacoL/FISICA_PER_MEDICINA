@@ -42,9 +42,9 @@ UNITA = {
 }
 
 NOMI_LIVELLO = {
-    1: "Applicazione diretta delle formule",
-    2: "Problemi a due passaggi",
-    3: "Problemi di media difficoltà",
+    1: "applicazione diretta delle formule",
+    2: "problemi a due passaggi",
+    3: "problemi di media difficoltà",
 }
 
 # Risposte a completamento: virgola decimale, al massimo 16 caratteri (ADR 0004).
@@ -358,6 +358,167 @@ def simulazioni_latex(fonte: dict) -> str:
 PDF_WEB = "fisica-per-medicina.pdf"
 
 
+# Le macro di siunitx usate nelle fonti, riscritte in LaTeX che MathJax conosce,
+# con le stesse scelte di \sisetup in fisica.cls: virgola decimale, \cdot prima
+# della potenza di 10, \, fra le unità, «/» per \per, cifre a gruppi di tre da 5 in su.
+PREFISSI = {
+    "pico": "p", "nano": "n", "micro": r"\mu ", "milli": "m", "centi": "c", "deci": "d",
+    "kilo": "k", "mega": "M", "giga": "G",
+}
+UNITA = {
+    "metre": "m", "second": "s", "gram": "g", "kelvin": "K", "mole": "mol", "ampere": "A",
+    "newton": "N", "joule": "J", "watt": "W", "pascal": "Pa", "hertz": "Hz", "volt": "V",
+    "coulomb": "C", "farad": "F", "ohm": r"\Omega", "tesla": "T", "weber": "Wb",
+    "becquerel": "Bq", "litre": "L", "hour": "h", "minute": "min", "electronvolt": "eV",
+    "calorie": "cal", "bel": "B", "radian": "rad", "mmHg": "mmHg",
+    "celsius": r"{}^{\circ}\mathrm{C}", "degree": r"{}^{\circ}", "percent": r"\%",
+}
+POTENZE = {"squared": "2", "cubed": "3"}
+
+
+def argomento(testo: str, i: int) -> tuple[str, int]:
+    """Il gruppo fra graffe che comincia in `testo[i]`, e la posizione dopo la graffa chiusa."""
+    if testo[i] != "{":
+        raise ValueError(f"manca una graffa dopo {testo[max(0, i - 20):i]!r}")
+    livello = 0
+    for j in range(i, len(testo)):
+        livello += {"{": 1, "}": -1}.get(testo[j], 0)
+        if livello == 0:
+            return testo[i + 1 : j], j + 1
+    raise ValueError(f"graffa non chiusa in {testo[i:i + 30]!r}")
+
+
+def a_gruppi(cifre: str, da_sinistra: bool) -> str:
+    if len(cifre) < 5:
+        return cifre
+    if not da_sinistra:
+        cifre = cifre[::-1]
+    gruppi = [cifre[k : k + 3] for k in range(0, len(cifre), 3)]
+    if not da_sinistra:
+        gruppi = [g[::-1] for g in reversed(gruppi)]
+    return r"\,".join(gruppi)
+
+
+def numero_tex(numero: str) -> str:
+    r"""\num{1,5e-3} → 1{,}5 \cdot 10^{-3}."""
+    numero = numero.replace(" ", "").replace(".", ",")
+    mantissa, _, esponente = numero.lower().partition("e")
+    segno = mantissa[0] if mantissa[:1] in "+-" and mantissa else ""
+    intera, _, decimale = mantissa[len(segno) :].partition(",")
+    tex = segno + a_gruppi(intera, False) + ("{,}" + a_gruppi(decimale, True) if decimale else "")
+    if esponente:
+        potenza = f"10^{{{int(esponente)}}}"
+        tex = f"{tex} \\cdot {potenza}" if tex not in ("", "1") or intera == "" else f"1 \\cdot {potenza}"
+    return tex
+
+
+def unita_tex(unita: str, per_potenza: bool = False) -> str:
+    r"""\si{\kilo\metre\per\second\squared} → \mathrm{km}/\mathrm{s}^{2}."""
+    numeratore: list[str] = []
+    denominatore: list[str] = []
+    ultima = numeratore
+    i, prefisso, per = 0, "", False
+    while i < len(unita):
+        if unita[i].isspace():
+            i += 1
+            continue
+        if unita[i] != "\\":  # un simbolo scritto per esteso, come \si{bar}
+            fine = i
+            while fine < len(unita) and not unita[fine].isspace() and unita[fine] != "\\":
+                fine += 1
+            ultima = denominatore if per else numeratore
+            ultima.append(rf"\mathrm{{{unita[i:fine]}}}")
+            i, per = fine, False
+            continue
+        if not unita[i + 1 : i + 2].isalpha():  # uno spazio scritto a mano, come in cm\,H_2O
+            i += 2
+            continue
+        nome = re.match(r"\\([A-Za-z]+)", unita[i:]).group(1)
+        i += len(nome) + 1
+        if nome in PREFISSI:
+            prefisso += PREFISSI[nome]
+        elif nome in UNITA:
+            simbolo = UNITA[nome]
+            if not simbolo.startswith(("\\", "{")):
+                simbolo = rf"\mathrm{{{simbolo}}}"
+            if prefisso.startswith(r"\mu"):
+                voce = r"\mu" + simbolo
+            elif prefisso:
+                voce = rf"\mathrm{{{prefisso}}}" + simbolo
+            else:
+                voce = simbolo
+            ultima = denominatore if per else numeratore
+            ultima.append(voce)
+            prefisso, per = "", False
+        elif nome in POTENZE:
+            ultima[-1] += f"^{{{POTENZE[nome]}}}"
+        elif nome == "tothe":
+            esponente, i = argomento(unita, i)
+            ultima[-1] += f"^{{{esponente}}}"
+        elif nome == "per":
+            per = True
+        else:
+            raise ValueError(f"unità di siunitx che la pagina web non conosce: \\{nome}")
+    if per_potenza:
+        negative = []
+        for d in denominatore:
+            base, _, esponente = d.partition("^{")
+            negative.append(f"{base}^{{-{esponente[:-1] or 1}}}" if esponente else f"{d}^{{-1}}")
+        return r"\,".join(numeratore + negative)
+    tex = r"\,".join(numeratore) or "1"
+    if len(denominatore) == 1:
+        tex += "/" + denominatore[0]
+    elif denominatore:
+        tex += "/(" + r"\,".join(denominatore) + ")"
+    return tex
+
+
+SIUNITX = re.compile(r"\\(SIrange|SI|si|num|ang)\b(\[[^\]]*\])?")
+
+
+def siunitx_tex(testo: str) -> tuple[str, list[tuple[int, int]]]:
+    """Riscrive le macro di siunitx di `testo`; restituisce il testo e gli intervalli riscritti."""
+    out, intervalli, i = [], [], 0
+    for m in SIUNITX.finditer(testo):
+        if m.start() < i:
+            continue
+        out.append(testo[i : m.start()])
+        macro, opzioni, j = m.group(1), m.group(2) or "", m.end()
+        per_potenza = "per-mode=power" in opzioni.replace(" ", "")
+        if macro == "SI":
+            numero, j = argomento(testo, j)
+            unita, j = argomento(testo, j)
+            u = unita_tex(unita, per_potenza)
+            tex = numero_tex(numero) + ("" if u == UNITA["degree"] else r"\,") + u
+        elif macro == "SIrange":
+            da, j = argomento(testo, j)
+            a, j = argomento(testo, j)
+            unita, j = argomento(testo, j)
+            tex = numero_tex(da) + r"\text{–}" + numero_tex(a) + r"\," + unita_tex(unita, per_potenza)
+        elif macro == "si":
+            unita, j = argomento(testo, j)
+            tex = unita_tex(unita, per_potenza)
+        elif macro == "num":
+            numero, j = argomento(testo, j)
+            tex = numero_tex(numero)
+        else:
+            gradi, j = argomento(testo, j)
+            tex = numero_tex(gradi) + r"^{\circ}"
+        inizio = sum(len(x) for x in out)
+        out.append(tex)
+        intervalli.append((inizio, inizio + len(tex)))
+        i = j
+    out.append(testo[i:])
+    return "".join(out), intervalli
+
+
+# Le formule (anche gather*, align*, cases) le mostra MathJax; questi no.
+NON_WEB = re.compile(
+    r"\\(?:ref|eqref|cref|label|cite|input|includegraphics)\b"
+    r"|\\begin\{(?:enumerate|description|center|figure|table|tabular|minipage|tikzpicture)\}"
+)
+
+
 def latex_a_html(testo: str) -> str:
     testo = html.escape(testo, quote=False)
     testo = re.sub(r"\\textbf\{([^}]*)\}", r"<b>\1</b>", testo)
@@ -369,57 +530,111 @@ def latex_a_html(testo: str) -> str:
         '<p><em>(La figura è nel <a href="' + PDF_WEB + '" download>libro in PDF</a>.)</em></p>',
         testo,
     )
+    testo = re.sub(r"\\begin\{itemize\}", "<ul>", testo)
+    testo = re.sub(r"\\end\{itemize\}", "</ul>", testo)
+    testo = re.sub(r"\\item\b\s*", "<li>", testo)
+    # Quello che la pagina non sa mostrare ferma il controllo, invece di arrivare grezzo allo studente.
+    grezzo = NON_WEB.search(testo)
+    if grezzo:
+        raise ValueError(f"la pagina web non sa mostrare {grezzo.group(0)!r}: riscrivi il testo nella fonte")
+    # Le macro di siunitx diventano LaTeX per MathJax; fuori dalle formule vanno fra \( \).
     pezzi = re.split(r"(\$[^$]*\$|\\\[.*?\\\])", testo, flags=re.S)
-    for i in range(0, len(pezzi), 2):
-        pezzi[i] = re.sub(
-            r"(\\(?:SI|num|ang)(?:\[[^]]*\])?\{[^}]*\}(?:\{[^}]*\})?)", r"\\(\1\\)", pezzi[i]
-        )
+    for i, pezzo in enumerate(pezzi):
+        riscritto, intervalli = siunitx_tex(pezzo)
+        if i % 2 == 0:
+            for inizio, fine in reversed(intervalli):
+                riscritto = riscritto[:inizio] + "\\(" + riscritto[inizio:fine] + "\\)" + riscritto[fine:]
+        pezzi[i] = riscritto
     return "".join(pezzi)
 
 
-def esercizi_web(fonte: dict) -> list[dict]:
-    voci = []
-    for p in fonte.get("problema", []):
-        voci.append({
-            "tipo": "problema",
-            "titolo": f"Problema · livello {p['livello']}",
-            "testo": latex_a_html(riempi(p["testo"], p.get("dati", {}))),
-            "parti": [
-                {
-                    "domanda": latex_a_html(riempi(x.get("domanda", ""), p.get("dati", {}))),
-                    "risultato": latex_a_html(risultato_latex(x["risultato"])),
-                    "soluzione": latex_a_html(x["soluzione"]),
-                }
-                for x in p["parte"]
-            ],
-        })
-    for q in fonte.get("quesito", []):
-        voce = {
-            "tipo": q["tipo"],
-            "titolo": "Quesito lampo" if q.get("lampo") else "Quesito d'esame",
-            "testo": latex_a_html(riempi(q["testo"], q.get("dati", {}))),
-            "soluzione": latex_a_html(q["soluzione"]),
-        }
-        if q["tipo"] == "multipla":
-            voce["opzioni"] = [
-                {"testo": latex_a_html(riempi(o["testo"], q.get("dati", {}))), "commento": latex_a_html(o.get("commento", ""))}
-                for o in q["opzione"]
-            ]
-            voce["corretta"] = LETTERE.index(q["corretta"])
+def problema_web(p: dict, numero: int) -> dict:
+    dati = p.get("dati", {})
+    return {
+        "tipo": "problema",
+        "titolo": f"Problema {numero}",
+        "testo": latex_a_html(riempi(p["testo"], dati)),
+        "parti": [
+            {
+                "domanda": latex_a_html(riempi(x.get("domanda", ""), dati)),
+                "risultato": latex_a_html(risultato_latex(x["risultato"])),
+                "soluzione": latex_a_html(x["soluzione"]),
+            }
+            for x in p["parte"]
+        ],
+    }
+
+
+def quesito_web(q: dict, titolo: str) -> dict:
+    dati = q.get("dati", {})
+    voce = {
+        "tipo": q["tipo"],
+        "titolo": titolo,
+        "testo": latex_a_html(riempi(q["testo"], dati)),
+        "soluzione": latex_a_html(q["soluzione"]),
+    }
+    if q["tipo"] == "multipla":
+        voce["opzioni"] = [
+            {"testo": latex_a_html(riempi(o["testo"], dati)), "commento": latex_a_html(o.get("commento", ""))}
+            for o in q["opzione"]
+        ]
+        voce["corretta"] = LETTERE.index(q["corretta"])
+    else:
+        voce["risposta"] = q["risposta"]
+    return voce
+
+
+def esercizi_web(fonte: dict, dispensa: str = "") -> list[dict]:
+    """Gli esercizi della pagina web a gruppi, con la numerazione del PDF: per una UD i tre
+    livelli di problemi, i quesiti d'esame e i quesiti lampo; per le simulazioni, una prova per gruppo."""
+    quesiti = fonte.get("quesito", [])
+    if any("simulazione" in q for q in quesiti):
+        prove = sorted({q["simulazione"] for q in quesiti})
+        return [
+            {"titolo": f"Simulazione {s}", "esercizi": [quesito_web(q, f"Quesito {n}") for n, q in enumerate(prova(fonte, s), 1)]}
+            for s in prove
+        ]
+    gruppi = []
+    problemi = sorted(fonte.get("problema", []), key=lambda p: p["livello"])
+    numero = {id(p): n for n, p in enumerate(problemi, 1)}
+    for livello in (1, 2, 3):
+        del_livello = [p for p in problemi if p["livello"] == livello]
+        if del_livello:
+            gruppi.append({
+                "titolo": f"Livello {livello}: {NOMI_LIVELLO[livello]}",
+                "esercizi": [problema_web(p, numero[id(p)]) for p in del_livello],
+            })
+    esame = [q for q in quesiti if not q.get("lampo")]
+    if esame:
+        gruppi.append({"titolo": "Quesiti d'esame", "esercizi": [quesito_web(q, f"Quesito {n}") for n, q in enumerate(esame, 1)]})
+    lampo = [q for q in quesiti if q.get("lampo")]
+    if lampo:
+        # Nel PDF i quesiti lampo sono numerati nell'ordine in cui la dispensa li include.
+        posto = {q["id"]: dispensa.find(f"lampo-{q['id']}") for q in lampo}
+        if all(x >= 0 for x in posto.values()):
+            lampo = sorted(lampo, key=lambda q: posto[q["id"]])
+            titoli = [f"Quesito lampo {n}" for n in range(1, len(lampo) + 1)]
         else:
-            voce["risposta"] = q["risposta"]
-        voci.append(voce)
-    return voci
+            titoli = ["Quesito lampo"] * len(lampo)
+        gruppi.append({"titolo": "Quesiti lampo", "esercizi": [quesito_web(q, t) for q, t in zip(lampo, titoli)]})
+    return gruppi
 
 
 PAGINA = Path(__file__).with_name("pagina_esercizi.html")
 
 
-def pagina_web(fonte: dict, titolo: str) -> str:
-    dati = json.dumps(esercizi_web(fonte), ensure_ascii=False).replace("</", "<\\/")
-    return PAGINA.read_text(encoding="utf-8").replace("<!--TITOLO-->", html.escape(titolo)).replace(
-        "/*ESERCIZI*/[]", dati
-    )
+def occhiello(ud: str) -> str:
+    """L'etichetta sopra il titolo: «Eserciziario UD3»; niente per le simulazioni, che hanno già il titolo."""
+    return "" if ud == "simulazioni" else f"Eserciziario {ud.upper()}"
+
+
+def pagina_web(fonte: dict, ud: str, dispensa: str = "") -> str:
+    dati = json.dumps(esercizi_web(fonte, dispensa), ensure_ascii=False).replace("</", "<\\/")
+    titolo = html.escape(fonte.get("titolo", ""), quote=False)
+    pagina = PAGINA.read_text(encoding="utf-8")
+    pagina = pagina.replace("<title><!--TITOLO--></title>", f"<title>{occhiello(ud) or titolo}</title>")
+    pagina = pagina.replace("<!--OCCHIELLO-->", occhiello(ud)).replace("<!--TITOLO-->", titolo)
+    return pagina.replace("/*ESERCIZI*/[]", dati)
 
 
 INDICE = Path(__file__).with_name("indice_esercizi.html")
@@ -431,8 +646,9 @@ def indice_web(cartella: Path) -> str:
     voci = []
     for fonte in fonti:
         ud = fonte.parent.name
-        titolo = tomllib.loads(fonte.read_text(encoding="utf-8")).get("titolo", f"Eserciziario {ud.upper()}")
-        voci.append(f'<li><a href="{ud}.html">{html.escape(titolo, quote=False)}</a></li>')
+        titolo = html.escape(tomllib.loads(fonte.read_text(encoding="utf-8")).get("titolo", ""), quote=False)
+        etichetta = f"<span>{occhiello(ud)}</span>" if occhiello(ud) else ""
+        voci.append(f'<li><a href="{ud}.html">{etichetta}{titolo}</a></li>')
     return INDICE.read_text(encoding="utf-8").replace("<!--VOCI-->", "\n".join(voci))
 
 
@@ -468,7 +684,11 @@ def genera(cartella: Path, ud: str) -> tuple[list[str], list[str]]:
             (generati / f"lampo-{q['id']}.tex").write_text(lampo_latex(q), encoding="utf-8")
     web = cartella / "build" / "web"
     web.mkdir(parents=True, exist_ok=True)
-    titolo = fonte.get("titolo", f"Eserciziario {ud.upper()}")
-    (web / f"{ud}.html").write_text(pagina_web(fonte, titolo), encoding="utf-8")
+    try:
+        dispensa = cartella / ud / "dispensa.tex"
+        testo_dispensa = dispensa.read_text(encoding="utf-8") if dispensa.exists() else ""
+        (web / f"{ud}.html").write_text(pagina_web(fonte, ud, testo_dispensa), encoding="utf-8")
+    except ValueError as e:
+        errori.append(f"{nome}: pagina web: {e}")
     (web / "index.html").write_text(indice_web(cartella), encoding="utf-8")
     return errori, avvisi

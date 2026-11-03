@@ -4,7 +4,7 @@
 #
 # Il formato è descritto in testa a libro/ud7/esercizi.toml.
 
-titolo = "Eserciziario UD5 · Termodinamica"
+titolo = "Termodinamica"
 
 [costanti]
 R = 8.3

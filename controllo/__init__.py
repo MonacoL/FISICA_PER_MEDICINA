@@ -137,6 +137,20 @@ def segnaposti(cartella: Path) -> list[str]:
     ]
 
 
+# Separatori da testo generato (anti-pattern AI): il trattino lungo e il punto medio.
+# Il punto della moltiplicazione si scrive \cdot dentro una formula.
+SEPARATORE = re.compile(r"—|·|\\textemdash\b|\\textperiodcentered\b")
+
+
+def separatori(cartella: Path) -> list[str]:
+    """I trattini lunghi e i punti medi nei sorgenti del libro e delle pagine web."""
+    return [
+        f"{posizione}: separatore da togliere: {trovato.group()}"
+        for posizione, riga in righe(cartella, ".tex", ".cls", ".toml")
+        for trovato in SEPARATORE.finditer(riga)
+    ]
+
+
 # Un overfull hbox più largo di così si vede nel margine: va nel rapporto come avviso.
 SOGLIA_OVERFULL_PT = 5.0
 
@@ -264,7 +278,7 @@ def main() -> None:
         rapporto(f"Esercizi {ud.upper()}: {stato}", errori_esercizi, avvisi_esercizi)
         riuscito = riuscito and not errori_esercizi
 
-    problemi = segnaposti(argomenti.cartella) + pacchetti_assenti(
+    problemi = segnaposti(argomenti.cartella) + separatori(argomenti.cartella) + pacchetti_assenti(
         argomenti.cartella, argomenti.pacchetti
     )
     rapporto(f"Sorgenti: {'da sistemare' if problemi else 'puliti'}", problemi, [])
