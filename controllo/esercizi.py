@@ -528,9 +528,23 @@ def svg_figura(percorso: str) -> str:
     return percorso.replace("/figure/", "-").replace("/", "-") + ".svg"
 
 
+def stringhe(valore) -> list[str]:
+    """Tutte le stringhe di un valore TOML letto, a qualsiasi profondità."""
+    if isinstance(valore, str):
+        return [valore]
+    if isinstance(valore, dict):
+        valore = list(valore.values())
+    return [s for v in valore for s in stringhe(v)] if isinstance(valore, list) else []
+
+
 def figure_usate(cartella: Path) -> list[str]:
-    """Le figure che le fonti degli esercizi includono, ognuna una volta."""
-    return sorted({p for f in cartella.glob("*/esercizi.toml") for p in FIGURA.findall(f.read_text(encoding="utf-8"))})
+    """Le figure che i testi delle fonti degli esercizi includono (non i commenti), ognuna una volta."""
+    return sorted({
+        p
+        for f in cartella.glob("*/esercizi.toml")
+        for testo in stringhe(tomllib.loads(f.read_text(encoding="utf-8")))
+        for p in FIGURA.findall(testo)
+    })
 
 
 def latex_a_html(testo: str) -> str:
