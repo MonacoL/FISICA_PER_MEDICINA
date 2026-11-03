@@ -1,0 +1,25 @@
+% Profilo parabolico della velocità nel tubo della circolazione extracorporea, con
+% v_max sull'asse, v a 4,0 mm dall'asse e la velocità media (ud3-viscosi-profilo).
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \fill[formula!10] (0,-1.6) rectangle (5.4,1.6);
+  \draw[very thick] (0,-1.6) -- (5.4,-1.6) (0,1.6) -- (5.4,1.6);
+  \draw[dashed, richiamo] (0,0) -- (5.4,0);
+  \draw (0.8,-1.6) -- (0.8,1.6);
+  % profilo
+  \foreach \y in {-1.4,-1.0,-0.5,0.5,1.0} {
+    \draw[->, formula] (0.8,\y) -- ({0.8+4*(1-(\y/1.6)^2)},\y);
+  }
+  \draw[esempio, thick, domain=-1.6:1.6, samples=40] plot ({0.8+4*(1-(\x/1.6)^2)}, \x);
+  \draw[->, very thick, formula] (0.8,0) -- (4.8,0);
+  \node[right, formula] at (5.4,0) {$v_\text{max} = \SI{0,50}{\metre\per\second}$};
+  % velocità a 4,0 mm dall'asse
+  \draw[->, very thick, attenzione] (0.8,1.28) -- (2.24,1.28);
+  \draw[attenzione] (1.9,1.36) -- (2.3,1.95) node[above, attenzione] {$v = \SI{0,18}{\metre\per\second}$};
+  % velocità media
+  \draw[dotted, very thick, lampo] (2.8,-1.6) -- (2.8,1.6);
+  \node[below, lampo] at (2.8,-1.6) {$v_\text{media} = v_\text{max}/2 = \SI{0,25}{\metre\per\second}$};
+  % quote
+  \draw[|<->|] (-0.3,0) -- (-0.3,1.28) node[midway, left] {$x = \SI{4,0}{\milli\metre}$};
+  \draw[|<->|] (-0.3,0) -- (-0.3,-1.6) node[midway, left] {$r = \SI{5,0}{\milli\metre}$};
+  \draw[dotted] (-0.3,1.28) -- (0.8,1.28);
+\end{tikzpicture}

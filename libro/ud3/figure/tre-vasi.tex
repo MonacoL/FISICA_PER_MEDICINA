@@ -1,0 +1,24 @@
+% Tre vasi uguali di resistenza R: due in parallelo (R/2), in serie con il terzo;
+% resistenza equivalente 3R/2 (ud3-viscosi-tre-vasi).
+\begin{tikzpicture}[>=Stealth, font=\small,
+    vaso/.style={draw, thick, fill=formula!15, rounded corners=2pt, minimum width=1.1cm, minimum height=0.45cm}]
+  \draw[->, thick] (-0.6,0) -- (0,0) node[pos=0, left] {$Q$};
+  % coppia in parallelo
+  \draw[very thick, formula] (0,0) -- (0.5,0) -- (0.9,0.6) -- (1.4,0.6);
+  \draw[very thick, formula] (0.5,0) -- (0.9,-0.6) -- (1.4,-0.6);
+  \node[vaso, anchor=west] (b1) at (1.4,0.6) {$R$};
+  \node[vaso, anchor=west] (b2) at (1.4,-0.6) {$R$};
+  \draw[very thick, formula] (b1.east) -- ++(0.4,0) -- ++(0.4,-0.6) -- ++(0.5,0) coordinate (m);
+  \draw[very thick, formula] (b2.east) -- ++(0.4,0) -- ++(0.4,0.6);
+  % terzo vaso in serie
+  \node[vaso, anchor=west] (c) at (m) {$R$};
+  \draw[very thick, formula] (c.east) -- ++(0.5,0);
+  \draw[->, thick] ($(c.east)+(0.5,0)$) -- ++(0.6,0) node[right] {$Q$};
+  % graffe
+  \draw[decorate, decoration={brace, amplitude=4pt}] (0.5,1.0) -- (3.3,1.0)
+    node[midway, above=4pt] {in parallelo: $R/2$};
+  \draw[decorate, decoration={brace, amplitude=4pt}] ($(c.west)+(0,0.4)$) -- ($(c.east)+(0,0.4)$)
+    node[midway, above=4pt] {$R$};
+  \draw[decorate, decoration={brace, amplitude=5pt, mirror}] (0.5,-1.1) -- ($(c.east)+(0,-1.1)$)
+    node[midway, below=5pt] {in serie: $R_\text{eq} = R/2 + R = 3R/2$};
+\end{tikzpicture}

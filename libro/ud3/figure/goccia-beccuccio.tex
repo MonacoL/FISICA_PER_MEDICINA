@@ -1,0 +1,29 @@
+% Goccia appesa al beccuccio del gocciolatore: la tensione superficiale tira verso
+% l'alto lungo il bordo, lungo 2 pi r; la goccia si stacca quando il peso arriva a
+% 2 pi r gamma (ud3-superficie-deflussore).
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % beccuccio
+  \fill[richiamo!35] (-1.0,1.2) rectangle (-0.8,3.0);
+  \fill[richiamo!35] (0.8,1.2) rectangle (1.0,3.0);
+  \fill[formula!15] (-0.8,1.2) rectangle (0.8,3.0);
+  \draw[thick] (-1.0,3.0) -- (-1.0,1.2) -- (-0.8,1.2) -- (-0.8,3.0);
+  \draw[thick] (1.0,3.0) -- (1.0,1.2) -- (0.8,1.2) -- (0.8,3.0);
+  % goccia
+  \fill[formula!15] (-0.8,1.2) .. controls (-0.9,0.6) and (-1.5,0.1) .. (-1.5,-0.6)
+    arc[start angle=180, end angle=360, radius=1.5] .. controls (1.5,0.1) and (0.9,0.6) .. (0.8,1.2) -- cycle;
+  \draw[thick, formula] (-0.8,1.2) .. controls (-0.9,0.6) and (-1.5,0.1) .. (-1.5,-0.6)
+    arc[start angle=180, end angle=360, radius=1.5] .. controls (1.5,0.1) and (0.9,0.6) .. (0.8,1.2);
+  % forze di tensione superficiale sul bordo
+  \draw[->, very thick, lampo] (-0.8,1.2) -- (-0.8,2.3);
+  \draw[->, very thick, lampo] (0.8,1.2) -- (0.8,2.3);
+  \node[lampo, left] at (-1.0,2.1) {$\gamma$};
+  \node[lampo, right] at (1.0,2.1) {$\gamma$};
+  % peso
+  \fill (0,-0.6) circle (1.6pt);
+  \draw[->, very thick, attenzione] (0,-0.6) -- (0,-2.6) node[right] {$mg$};
+  % raggio del beccuccio
+  \draw[|<->|] (0,3.3) -- (0.8,3.3) node[midway, above] {$r = \SI{1,0}{\milli\metre}$};
+  \draw[dashed, richiamo] (0,3.0) -- (0,1.3);
+  % equilibrio
+  \node[align=left, right] at (2.0,0.4) {bordo lungo $2\pi r$\\[2pt]si stacca quando\\$mg = 2\pi r\gamma$};
+\end{tikzpicture}

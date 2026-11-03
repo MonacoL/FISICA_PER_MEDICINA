@@ -1,0 +1,22 @@
+% Due bolle di sapone collegate da un tubicino con un rubinetto: nella piccola la
+% pressione di curvatura 4 gamma / r è maggiore, e l'aria passa nella grande (ud3-laplace).
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % tubicino
+  \draw[thick] (-0.12,0.45) -- (-0.12,-0.12) -- (5.12,-0.12) -- (5.12,0.25);
+  \draw[thick] (0.12,0.45) -- (0.12,0.12) -- (4.88,0.12) -- (4.88,0.25);
+  % rubinetto
+  \fill[white] (2.3,-0.12) rectangle (2.7,0.12);
+  \draw[thick, fill=richiamo!40] (2.3,-0.25) -- (2.7,0.25) -- (2.7,-0.25) -- (2.3,0.25) -- cycle;
+  \node[below] at (2.5,-0.3) {rubinetto};
+  % bolle
+  \fill[lampo!20] (0,0.95) circle (0.5);
+  \draw[thick, lampo] (0,0.95) circle (0.5);
+  \fill[lampo!20] (5,1.23) circle (1.0);
+  \draw[thick, lampo] (5,1.23) circle (1.0);
+  \draw[->] (0,0.95) -- ++(45:0.5);
+  \draw[->] (5,1.23) -- ++(45:1.0);
+  \node[left, align=right] at (-0.6,0.95) {$r_1 = \SI{1}{\centi\metre}$\\$\Delta p_1 = 4\gamma/r_1$};
+  \node[right, align=left] at (6.1,1.23) {$r_2 = \SI{2}{\centi\metre}$\\$\Delta p_2 = 4\gamma/r_2$};
+  % verso dell'aria
+  \draw[->, very thick, attenzione] (1.0,0.55) -- (4.0,0.55) node[midway, above] {aria: $\Delta p_1 = 2\,\Delta p_2$};
+\end{tikzpicture}
