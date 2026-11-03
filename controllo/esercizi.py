@@ -418,6 +418,20 @@ def pagina_web(fonte: dict, titolo: str) -> str:
     )
 
 
+INDICE = Path(__file__).with_name("indice_esercizi.html")
+
+
+def indice_web(cartella: Path) -> str:
+    """La pagina indice: un collegamento per ogni fonte degli esercizi, le UD in ordine e le simulazioni in fondo."""
+    fonti = sorted(cartella.glob("*/esercizi.toml"), key=lambda f: (f.parent.name == "simulazioni", f.parent.name))
+    voci = []
+    for fonte in fonti:
+        ud = fonte.parent.name
+        titolo = tomllib.loads(fonte.read_text(encoding="utf-8")).get("titolo", f"Eserciziario {ud.upper()}")
+        voci.append(f'<li><a href="{ud}.html">{html.escape(titolo, quote=False)}</a></li>')
+    return INDICE.read_text(encoding="utf-8").replace("<!--VOCI-->", "\n".join(voci))
+
+
 # --------------------------------------------------------------------------
 
 
@@ -426,7 +440,7 @@ def genera(cartella: Path, ud: str) -> tuple[list[str], list[str]]:
 
     LaTeX in `ud/generati/` (eserciziario.tex e un lampo-<id>.tex per quesito lampo;
     simulazioni.tex per la cartella `simulazioni`),
-    pagina web in `build/web/<ud>.html`.
+    pagina web in `build/web/<ud>.html`, con l'indice di tutte in `build/web/index.html`.
     """
     sorgente = cartella / ud / "esercizi.toml"
     nome = f"{ud}/esercizi.toml"
@@ -452,4 +466,5 @@ def genera(cartella: Path, ud: str) -> tuple[list[str], list[str]]:
     web.mkdir(parents=True, exist_ok=True)
     titolo = fonte.get("titolo", f"Eserciziario {ud.upper()}")
     (web / f"{ud}.html").write_text(pagina_web(fonte, titolo), encoding="utf-8")
+    (web / "index.html").write_text(indice_web(cartella), encoding="utf-8")
     return errori, avvisi

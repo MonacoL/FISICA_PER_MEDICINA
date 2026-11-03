@@ -131,6 +131,19 @@ def test_figura_nel_testo_diventa_un_rimando_nella_pagina_web() -> None:
     assert "La figura è nel libro in PDF." in html
 
 
+def test_indice_collega_le_pagine_con_le_simulazioni_in_fondo(tmp_path: Path) -> None:
+    from controllo.esercizi import indice_web
+
+    for cartella, titolo in [("simulazioni", "Simulazioni"), ("ud2", "Eserciziario UD2"), ("ud1", "Eserciziario UD1")]:
+        (tmp_path / cartella).mkdir()
+        (tmp_path / cartella / "esercizi.toml").write_text(f'titolo = "{titolo}"\n', encoding="utf-8")
+
+    html = indice_web(tmp_path)
+    collegamenti = [html.index(f'href="{nome}.html"') for nome in ("ud1", "ud2", "simulazioni")]
+    assert collegamenti == sorted(collegamenti)
+    assert "Eserciziario UD1" in html and "<!--VOCI-->" not in html
+
+
 def simulazioni(tolti: int = 0) -> dict:
     """Tre prove nel formato ufficiale, divise fra le UD come QUOTE_UD; `tolti` quesiti in meno nella prima."""
     from controllo.esercizi import QUOTE_UD
