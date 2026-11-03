@@ -113,7 +113,11 @@ dati.t2 = { valore = 16, unita = "s" }
   domanda = '''Quanta strada percorre nei primi {{t1}}?'''
   calcolo = "0.5 * t1 * v"
   risultato = { valore = 4.0, unita = "m", cifre = 2 }
-  soluzione = '''Nel grafico velocità-tempo il primo tratto è una retta che sale da 0 a \SI{2,0}{\metre\per\second} in \SI{4,0}{\second}. Lo spostamento è l'area sotto il grafico, un triangolo di base \SI{4,0}{\second} e altezza \SI{2,0}{\metre\per\second}:
+  soluzione = '''Nel grafico velocità-tempo, in figura, il primo tratto è una retta che sale da 0 a \SI{2,0}{\metre\per\second} in \SI{4,0}{\second}.
+\begin{center}
+\input{ud2/figure/carrozzina-vt}
+\end{center}
+Lo spostamento è l'area sotto il grafico, un triangolo di base \SI{4,0}{\second} e altezza \SI{2,0}{\metre\per\second}:
 \[
   \Delta x_1 = \frac{\SI{4,0}{\second} \cdot \SI{2,0}{\metre\per\second}}{2} = \SI{4,0}{\metre}
 \]
@@ -862,7 +866,11 @@ dati.m = { valore = "5,0", unita = "\\kilo\\gram" }
   calcolo = "0.40 * m * g * sin60"
   risultato = { valore = 17, unita = "\\newton", cifre = 2 }
   rapido = '''$\approx\SI{17}{\newton}$; no, scivola'''
-  soluzione = '''Il peso è $F_p = mg = \SI{50}{\newton}$. Con gli assi parallelo e perpendicolare allo scivolo, il peso ha componente lungo lo scivolo $mg\sin\ang{30} = 50 \cdot 0{,}5 = \SI{25}{\newton}$ e componente perpendicolare $mg\cos\ang{30} = 50 \cdot 0{,}87 = \SI{43,5}{\newton}$. In direzione perpendicolare il pacco non si muove, quindi $F_N = \SI{43,5}{\newton}$. L'attrito statico massimo è
+  soluzione = '''Il peso è $F_p = mg = \SI{50}{\newton}$. Con gli assi parallelo e perpendicolare allo scivolo, il peso ha componente lungo lo scivolo $mg\sin\ang{30} = 50 \cdot 0{,}5 = \SI{25}{\newton}$ e componente perpendicolare $mg\cos\ang{30} = 50 \cdot 0{,}87 = \SI{43,5}{\newton}$, come in figura.
+\begin{center}
+\input{ud2/figure/scivolo-forze}
+\end{center}
+In direzione perpendicolare il pacco non si muove, quindi $F_N = \SI{43,5}{\newton}$. L'attrito statico massimo è
 \[
   F_{s,\max} = \mu_s F_N = 0{,}40 \cdot \SI{43,5}{\newton} = \SI{17,4}{\newton} \approx \SI{17}{\newton}
 \]
@@ -999,7 +1007,10 @@ diretto all'indietro, contro il moto.'''
   domanda = '''Con quale accelerazione si muovono il blocco e il pesetto?'''
   calcolo = "(m2 * g - 0.20 * m1 * g) / (m1 + m2)"
   risultato = { valore = 0.40, unita = "\\metre\\per\\second\\squared", cifre = 2 }
-  soluzione = '''La fune è inestensibile, quindi i due corpi hanno accelerazioni dello stesso modulo $a$: il blocco verso la carrucola, il pesetto verso il basso. Si scrive il secondo principio per ciascun corpo, prendendo come verso positivo quello del moto.
+  soluzione = '''La fune è inestensibile, quindi i due corpi hanno accelerazioni dello stesso modulo $a$: il blocco verso la carrucola, il pesetto verso il basso. Si scrive il secondo principio per ciascun corpo, prendendo come verso positivo quello del moto (in figura le forze che compaiono nelle equazioni).
+\begin{center}
+\input{ud2/figure/tavolo-carrucola}
+\end{center}
 \begin{itemize}
   \item Blocco, in orizzontale: la tensione tira avanti, l'attrito indietro: $F_T - F_d = m_1 a$.
   \item Pesetto, in verticale: il peso tira giù, la tensione su: $m_2 g - F_T = m_2 a$.
@@ -1495,7 +1506,10 @@ dati.theta = { valore = 60, unita = "\\degree" }
   domanda = '''Di quanto si trova più in alto il bambino, alla partenza, rispetto al punto più basso della traiettoria?'''
   calcolo = "L * (1 - 0.5)"
   risultato = { valore = 1.25, unita = "m", cifre = 3 }
-  soluzione = '''Con le corde inclinate di $\theta$ sulla verticale, il bambino si trova a una distanza $L\cos\theta$ sotto il punto di aggancio; nel punto più basso si trova a una distanza $L$. Il dislivello è la differenza:
+  soluzione = '''Con le corde inclinate di $\theta$ sulla verticale, il bambino si trova a una distanza $L\cos\theta$ sotto il punto di aggancio; nel punto più basso si trova a una distanza $L$. Il dislivello è la differenza, come in figura:
+\begin{center}
+\input{ud2/figure/altalena-dislivello}
+\end{center}
 \[
   h = L - L\cos\theta = L(1 - \cos\ang{60}) = \SI{2,5}{\metre} \cdot (1 - 0{,}5) = \SI{1,25}{\metre}
 \]'''
@@ -1732,7 +1746,11 @@ dati.r = { valore = "0,40", unita = "m" }
   [[problema.parte]]
   calcolo = "r * F * sin60"
   risultato = { valore = 17, unita = "\\newton\\metre", cifre = 2 }
-  soluzione = '''Il vettore $\vec r$ va dal ginocchio alla cavigliera, lungo la gamba; il peso $\vec F$ è verticale, verso il basso. La gamba forma \ang{60} con la verticale, quindi l'angolo fra $\vec r$ e $\vec F$ è $\theta = \ang{60}$:
+  soluzione = '''Il vettore $\vec r$ va dal ginocchio alla cavigliera, lungo la gamba; il peso $\vec F$ è verticale, verso il basso. La gamba forma \ang{60} con la verticale, quindi l'angolo fra $\vec r$ e $\vec F$ è $\theta = \ang{60}$ (in figura, con il braccio $b = r\sin\theta$).
+\begin{center}
+\input{ud2/figure/cavigliera-momento}
+\end{center}
+Il momento è
 \[
   \tau = rF\sin\theta = \SI{0,40}{\metre} \cdot \SI{50}{\newton} \cdot \sin\ang{60} = \SI{20}{\newton\metre} \cdot 0{,}87 \approx \SI{17}{\newton\metre}
 \]
@@ -2067,7 +2085,10 @@ dati.xd = { valore = 15, unita = "cm" }
   domanda = '''Quanta forza fa il deltoide?'''
   calcolo = "(Fb * xb + Fm * xm) / (xd * sin30)"
   risultato = { valore = 300, unita = "\\newton", cifre = 2 }
-  soluzione = '''Si calcolano i momenti rispetto alla spalla, così la forza dell'articolazione, che non si conosce, ha momento zero. Il braccio del deltoide è la distanza fra la spalla e la retta d'azione della sua forza: nel triangolo rettangolo che ha per ipotenusa il tratto di omero lungo \SI{15}{\centi\metre}, è il cateto opposto all'angolo di \ang{30}:
+  soluzione = '''Si calcolano i momenti rispetto alla spalla, così la forza dell'articolazione, che non si conosce, ha momento zero. Il braccio del deltoide è la distanza fra la spalla e la retta d'azione della sua forza: nel triangolo rettangolo che ha per ipotenusa il tratto di omero lungo \SI{15}{\centi\metre}, è il cateto opposto all'angolo di \ang{30} (in figura):
+\begin{center}
+\input{ud2/figure/deltoide-braccio}
+\end{center}
 \[
   b_d = \SI{15}{\centi\metre} \cdot \sin\ang{30} = \SI{15}{\centi\metre} \cdot 0{,}5 = \SI{7,5}{\centi\metre}
 \]
@@ -2822,7 +2843,11 @@ dati.r = { valore = 20, unita = "cm" }
 dati.F = { valore = 50, unita = "\\newton" }
 corretta = "B"
 calcolo = "r / 100 * F * sin30"
-soluzione = '''Il braccio della manovella in metri è $r = \SI{0,20}{\metre}$, e l'angolo fra $\vec r$, lungo la manovella, e la forza è \ang{30}:
+soluzione = '''Il braccio della manovella in metri è $r = \SI{0,20}{\metre}$, e l'angolo fra $\vec r$, lungo la manovella, e la forza è \ang{30}. In figura, $b = r\sin\ang{30}$ è la distanza fra il perno e la retta d'azione della forza.
+\begin{center}
+\input{ud2/figure/manovella-braccio}
+\end{center}
+Il momento è
 \[
   \tau = rF\sin\theta = \SI{0,20}{\metre} \cdot \SI{50}{\newton} \cdot \sin\ang{30} = \SI{10}{\newton\metre} \cdot 0{,}5 = \SI{5}{\newton\metre}
 \]

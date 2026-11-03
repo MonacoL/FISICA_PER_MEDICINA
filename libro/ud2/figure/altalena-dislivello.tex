@@ -1,0 +1,32 @@
+% Altalena tirata indietro di 60 gradi (problema ud2-energia-altalena): il
+% bambino, alla partenza, sta L cos 60 sotto il punto di aggancio; nel punto
+% più basso sta L sotto. Il dislivello è h = L - L cos 60 = 1,25 m.
+\begin{tikzpicture}[>=Stealth, font=\small, scale=1.1]
+  \def\L{2.5}
+  \coordinate (O) at (0,0);
+  \coordinate (A) at ({-\L*sin(60)},{-\L*cos(60)});
+  \coordinate (B) at (0,-\L);
+  % sostegno
+  \fill[richiamo!25] (-3.5,0) rectangle (0.8,0.12);
+  \draw[thick] (-3.5,0) -- (0.8,0);
+  % traiettoria
+  \draw[richiamo, dashed] (A) arc (210:300:\L);
+  % corde
+  \draw[thick] (O) -- (A) node[midway, above left] {$L$};
+  \draw[dotted, thick] (O) -- (B);
+  \node[right] at (0,{-\L/2-0.3}) {$L$};
+  \fill (O) circle (1.3pt);
+  \draw (0,-0.6) arc (-90:-150:0.6);
+  \node at (-120:0.85) {\ang{60}};
+  % bambino alla partenza e nel punto più basso
+  \fill[esempio] (A) circle (0.12);
+  \filldraw[fill=white, draw=esempio, thick] (B) circle (0.12);
+  \node[esempio, below] at ($(B)+(0,-0.12)$) {punto più basso};
+  % L cos 60 e dislivello
+  \draw[dashed] (A) -- (0,{-\L*cos(60)});
+  \draw[dashed] (-3.5,{-\L}) -- (B);
+  \draw[dashed] (-3.5,{-\L*cos(60)}) -- (A);
+  \draw[|<->|, formula] (-3.5,0) -- (-3.5,{-\L*cos(60)}) node[midway, left] {$L\cos\ang{60}$};
+  \draw[|<->|, formula] (-3.5,{-\L*cos(60)}) -- (-3.5,{-\L}) node[midway, left] {$h$};
+  \node[esempio, above left] at (A) {partenza};
+\end{tikzpicture}

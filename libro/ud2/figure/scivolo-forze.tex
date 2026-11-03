@@ -1,0 +1,28 @@
+% Diagramma di corpo libero del pacco sullo scivolo inclinato di 30 gradi
+% (problema ud2-dinamica-scivolo): il peso F_p = mg, verticale, con le componenti
+% F_p sin 30 lungo lo scivolo e F_p cos 30 perpendicolare; la forza normale F_N,
+% che bilancia F_p cos 30; l'attrito, lungo lo scivolo verso l'alto.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \def\a{30}
+  \fill[richiamo!20] (0,0) -- (6.5,0) -- (6.5,{6.5*tan(\a)}) -- cycle;
+  \draw[thick] (0,0) -- (6.5,0) -- (6.5,{6.5*tan(\a)}) -- cycle;
+  \draw (1.1,0) arc (0:\a:1.1); \node at (1.4,0.32) {\ang{30}};
+  % pacco sullo scivolo
+  \begin{scope}[shift={(4.0,{4.0*tan(\a)})}, rotate=\a]
+    \filldraw[fill=esempio!20, draw=esempio, thick] (-0.45,0) rectangle (0.45,0.6);
+    \coordinate (C) at (0,0.3);
+  \end{scope}
+  \fill (C) circle (1.4pt);
+  % peso
+  \draw[->, attenzione, very thick] (C) -- ++(0,-2.4) coordinate (Pp) node[below] {$\vec F_p$};
+  % componenti del peso
+  \draw[->, attenzione!70, thick, dashed] (C) -- ++({180+\a}:1.2) coordinate (Ppar);
+  \node[attenzione, left, xshift=-2pt] at (Ppar) {$F_p\sin\ang{30}$};
+  \draw[->, attenzione!70, thick, dashed] (C) -- ++({\a-90}:2.078) coordinate (Pperp);
+  \node[attenzione, right] at (Pperp) {$F_p\cos\ang{30}$};
+  \draw[dotted] (Ppar) -- (Pp) -- (Pperp);
+  % forza normale
+  \draw[->, formula, very thick] (C) -- ++({\a+90}:2.078) node[above] {$\vec F_N$};
+  % attrito, verso l'alto lungo lo scivolo
+  \draw[->, medica, very thick] (C) -- ++(\a:1.3) node[above, yshift=2pt] {attrito};
+\end{tikzpicture}

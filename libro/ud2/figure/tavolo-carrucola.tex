@@ -1,0 +1,34 @@
+% Blocco sul tavolo legato, attraverso una carrucola sul bordo, a un pesetto
+% appeso (problema ud2-dinamica-tavolo). Sul blocco: la tensione F_T in avanti
+% e l'attrito dinamico F_d all'indietro (peso e forza normale si bilanciano e
+% non sono disegnati). Sul pesetto: la tensione F_T verso l'alto e il peso
+% m_2 g verso il basso. Le frecce a indicano il verso del moto, che si prende
+% come positivo per ciascun corpo.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % tavolo
+  \fill[richiamo!20] (-0.5,-0.6) rectangle (5.0,0);
+  \draw[thick] (-0.5,0) -- (5.0,0) -- (5.0,-0.6);
+  % carrucola sul bordo
+  \coordinate (P) at (5.25,0.55);
+  \draw[thick] (5.0,0) -- (P);
+  \filldraw[fill=richiamo!25, draw=black, thick] (P) circle (0.3);
+  \fill (P) circle (1.2pt);
+  % blocco
+  \filldraw[fill=esempio!20, draw=esempio, thick] (1.0,0) rectangle (2.4,0.9);
+  \node[esempio] at (1.7,0.45) {$m_1$};
+  % fune
+  \draw[thick] (2.4,0.85) -- (5.25,0.85);
+  \draw[thick] (5.55,0.55) -- (5.55,-1.4);
+  % pesetto
+  \filldraw[fill=esempio!20, draw=esempio, thick] (5.25,-1.4) rectangle (5.85,-2.0);
+  \node[esempio] at (5.55,-1.7) {$m_2$};
+  % forze sul blocco
+  \draw[->, formula, very thick] (2.4,0.45) -- (3.7,0.45) node[right] {$\vec F_T$};
+  \draw[->, medica, very thick] (1.0,0.45) -- (0.0,0.45) node[above] {$\vec F_d$};
+  % forze sul pesetto
+  \draw[->, formula, very thick] (5.85,-1.45) -- (5.85,-0.6) node[right] {$\vec F_T$};
+  \draw[->, attenzione, very thick] (5.55,-2.0) -- (5.55,-3.0) node[right] {$m_2\vec g$};
+  % versi del moto
+  \draw[->, black!60, thick] (1.0,1.25) -- (2.4,1.25) node[right] {$a$};
+  \draw[->, black!60, thick] (4.85,-1.4) -- (4.85,-2.4) node[left] {$a$};
+\end{tikzpicture}
