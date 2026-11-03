@@ -32,6 +32,10 @@ jobs:
           fi
           echo "$HOME/.TinyTeX/bin/x86_64-linux" >> "$GITHUB_PATH"
 
+      # pdftocairo converte in SVG le figure delle pagine web.
+      - name: Installa poppler-utils
+        run: command -v pdftocairo || (sudo apt-get update && sudo apt-get install -y poppler-utils)
+
       - name: Controlla le Unità didattiche e il Libro
         run: uv run controllo $(basename -s .tex libro/ud*.tex)
 
@@ -45,6 +49,14 @@ jobs:
         with:
           name: pdf
           path: libro/build/*.pdf
+          if-no-files-found: warn
+
+      - name: Pubblica i log di LaTeX
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: log
+          path: libro/build/*.log
           if-no-files-found: warn
 
       - name: Pubblica le pagine web degli esercizi

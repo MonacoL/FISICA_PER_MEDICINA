@@ -7,6 +7,7 @@ Le scelte, provate sul prototipo del ticket #3 (branch `prototipo-3-fonte-eserci
 - **TOML** invece di YAML: la libreria standard di Python lo legge, e le stringhe letterali `'''…'''` lasciano intatto il LaTeX. Il prezzo è una sintassi un po' verbosa per le parti dei problemi (`[[problema.parte]]`).
 - **I dati come segnaposto** (`{{mu}}`) nel testo, con il valore una volta sola in `dati`: testo e calcolo non possono divergere.
 - **Il testo dei quesiti lampo** sta nella fonte degli esercizi, non nella dispensa, che lo include con `\input`.
+- **Le figure** di un testo o di una soluzione si scrivono nella fonte come `\begin{center}\input{udN/figure/nome}\end{center}`, con il disegno TikZ in un file a parte. Il PDF le include com'è; per la pagina web `uv run controllo` le compila da sole (pacchetto `preview`, una per pagina) e le converte in SVG con `pdftocairo`. Fino al ticket #71 la pagina web mostrava al loro posto un rimando al PDF.
 - **Costanti arrotondate** come le usa lo studente (ln 2 = 0,69): il ricalcolo controlla il conto del libro, non quello della calcolatrice.
 
 I file generati non sono versionati: li ricrea `uv run controllo` prima di compilare.

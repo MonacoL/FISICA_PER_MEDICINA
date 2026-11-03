@@ -123,12 +123,12 @@ def test_opzione_corretta_diversa_dal_conto_fallisce(tmp_path: Path) -> None:
     assert "ql:ud1-lampo: il conto dà 6, che non è l'opzione D" in esito.stdout
 
 
-def test_figura_nel_testo_diventa_un_rimando_nella_pagina_web() -> None:
+def test_figura_nel_testo_diventa_un_svg_nella_pagina_web() -> None:
     from controllo.esercizi import latex_a_html
 
     html = latex_a_html("Prima.\n\\begin{center}\n\\input{ud2/figure/trazione}\n\\end{center}\nDopo.")
     assert "\\input" not in html and "\\begin{center}" not in html
-    assert 'La figura è nel <a href="fisica-per-medicina.pdf" download>libro in PDF</a>.' in html
+    assert '<img class="figura" src="figure/ud2-trazione.svg" alt="">' in html
 
 
 
