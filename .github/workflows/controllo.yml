@@ -51,6 +51,14 @@ jobs:
           path: libro/build/*.pdf
           if-no-files-found: warn
 
+      - name: Pubblica i log di LaTeX
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: log
+          path: libro/build/*.log
+          if-no-files-found: warn
+
       - name: Pubblica le pagine web degli esercizi
         if: always()
         uses: actions/upload-artifact@v4
