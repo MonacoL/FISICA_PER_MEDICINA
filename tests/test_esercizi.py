@@ -128,7 +128,7 @@ def test_figura_nel_testo_diventa_un_rimando_nella_pagina_web() -> None:
 
     html = latex_a_html("Prima.\n\\begin{center}\n\\input{ud2/figure/trazione}\n\\end{center}\nDopo.")
     assert "\\input" not in html and "\\begin{center}" not in html
-    assert "La figura è nel libro in PDF." in html
+    assert 'La figura è nel <a href="fisica-per-medicina.pdf" download>libro in PDF</a>.' in html
 
 
 def test_indice_collega_le_pagine_con_le_simulazioni_in_fondo(tmp_path: Path) -> None:

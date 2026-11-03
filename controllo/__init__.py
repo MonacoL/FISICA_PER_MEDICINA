@@ -5,12 +5,13 @@ pacchetti, segnaposto e overfull hbox."""
 import argparse
 import os
 import re
+import shutil
 import subprocess
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from controllo.esercizi import genera
+from controllo.esercizi import PDF_WEB, genera
 
 RADICE = Path(__file__).resolve().parent.parent
 
@@ -273,4 +274,9 @@ def main() -> None:
         stato = "compila" if esito.compila else "non compila"
         rapporto(f"{nome}: {stato}", esito.errori, esito.avvisi)
         riuscito = riuscito and not esito.errori
+    # Il libro va accanto alle pagine web, che lo collegano per scaricarlo.
+    libro = argomenti.cartella / "build" / "libro.pdf"
+    web = argomenti.cartella / "build" / "web"
+    if libro.exists() and web.exists():
+        shutil.copyfile(libro, web / PDF_WEB)
     sys.exit(0 if riuscito else 1)
