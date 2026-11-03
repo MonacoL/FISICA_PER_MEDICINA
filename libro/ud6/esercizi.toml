@@ -264,8 +264,9 @@ dati.r = { valore = "6,0", unita = "cm" }
   risultato = { valore = 40, unita = "m/s", cifre = 2 }
   soluzione = '''Agisce solo la forza elettrica, e l'energia si conserva. Lontanissimo l'energia potenziale è zero: tutta l'energia potenziale iniziale è diventata energia cinetica, $\frac12 mv^{2} = U$. Con $m = \SI{1,5e-3}{\kilo\gram}$ e $U$ del punto precedente:
 \[
-  v = \sqrt{\frac{2U}{m}} = \sqrt{\frac{2 \cdot \SI{1,2}{\joule}}{\SI{1,5e-3}{\kilo\gram}}} = \sqrt{\frac{2{,}4}{1{,}5} \cdot 10^{3}}\,\si{\metre\per\second} = \sqrt{1600}\,\si{\metre\per\second} = \SI{40}{\metre\per\second}
-\]'''
+  v = \sqrt{\frac{2U}{m}} = \sqrt{\frac{2 \cdot \SI{1,2}{\joule}}{\SI{1,5e-3}{\kilo\gram}}} = \sqrt{\frac{2{,}4}{1{,}5} \cdot 10^{3}}\,\si{\metre\per\second} = \sqrt{1{,}6 \cdot 10^{3}}\,\si{\metre\per\second} = \sqrt{1600}\,\si{\metre\per\second} = \SI{40}{\metre\per\second}
+\]
+dove $2{,}4/1{,}5 = 1{,}6$ e $1/10^{-3} = 10^{3}$; poiché $40^2 = 1600$, la radice è 40.'''
 
 [[problema]]
 id = "ud6-elettrostatica-acqua"
@@ -284,14 +285,14 @@ dati.r = { valore = "0,24", unita = "\\nano\\metre" }
 dove $9 \cdot 2{,}56 = 23{,}04$ e $2{,}304/5{,}76 = 0{,}40$.'''
 
   [[problema.parte]]
-  domanda = '''Quanto vale la forza se i due ioni sono in acqua, con costante dielettrica relativa $\varepsilon_r = 80$?'''
+  domanda = '''Quanto vale la forza se si tratta l'acqua come un dielettrico uniforme, con costante dielettrica relativa $\varepsilon_r = 80$?'''
   calcolo = "k * e**2 / (r * 1e-9)**2 / 80"
   risultato = { valore = 5.0e-11, unita = "\\newton", cifre = 2 }
   soluzione = '''Nel dielettrico la forza è quella nel vuoto divisa per $\varepsilon_r$:
 \[
   F = \frac{F_0}{\varepsilon_r} = \frac{\SI{4,0e-9}{\newton}}{80} = 0{,}050 \cdot 10^{-9}\,\si{\newton} = \SI{5,0e-11}{\newton}
 \]
-L'attrazione è ottanta volte più debole: per questo l'acqua scioglie il sale da cucina, e l'agitazione termica basta a separare gli ioni.'''
+L'attrazione è ottanta volte più debole. È una stima: la formula vale per cariche separate da molte molecole del dielettrico, e a \SI{0,24}{\nano\metre} fra i due ioni non c'è posto per una molecola d'acqua. Il ragionamento vale però quando le molecole d'acqua si infilano fra gli ioni e li allontanano: da lì in poi l'attrazione è circa ottanta volte più debole che nel vuoto, e l'agitazione termica basta a separarli. Per questo l'acqua scioglie il sale da cucina.'''
 
 [[problema]]
 id = "ud6-elettrostatica-tre-cariche"
@@ -484,7 +485,7 @@ dove $9{,}6/1{,}67 \approx 5{,}75$, $10^{-17-(-27)} = 10^{10}$ e $\sqrt{5{,}75} 
 \[
   v = \sqrt{\frac{2K}{m_e}} = \sqrt{\frac{\SI{9,6e-17}{\joule}}{\SI{9,1e-31}{\kilo\gram}}} = \sqrt{\num{1,05e14}}\,\si{\metre\per\second} \approx \SI{1,0e7}{\metre\per\second}
 \]
-dove $9{,}6/9{,}1 \approx 1{,}05$, $10^{-17-(-31)} = 10^{14}$ $\sqrt{1{,}05} \approx 1{,}0$ e $\sqrt{10^{14}} = 10^{7}$.
+dove $9{,}6/9{,}1 \approx 1{,}05$, $10^{-17-(-31)} = 10^{14}$, $\sqrt{1{,}05} \approx 1{,}0$ e $\sqrt{10^{14}} = 10^{7}$.
 
 Stessa energia, ma da $v = \sqrt{2K/m}$ la velocità va come $1/\sqrt{m}$. L'elettrone è circa 1800 volte più leggero, e quindi va circa $\sqrt{1800} \approx 42$ volte più veloce (infatti $42^2 = 1764$).'''
 
@@ -1409,6 +1410,7 @@ dati.r = { valore = "2,0", unita = "cm" }
   [[problema.parte]]
   calcolo = "mu0su2pi * I / (r * 1e-2)"
   risultato = { valore = 1.5e-4, unita = "\\tesla", cifre = 2 }
+  rapido = '''\SI{1,5e-4}{\tesla}, tre volte il campo terrestre'''
   soluzione = '''La distanza in metri è $r = \SI{2,0}{\centi\metre} = \SI{2,0e-2}{\metre}$. Per il campo di un filo rettilineo lungo:
 \[
   B = \frac{\mu_0}{2\pi}\,\frac{I}{r} = \SI{2e-7}{\tesla\metre\per\ampere} \cdot \frac{\SI{15}{\ampere}}{\SI{2,0e-2}{\metre}} = 2 \cdot \frac{15}{2{,}0} \cdot 10^{-7-(-2)}\,\si{\tesla} = 15 \cdot 10^{-5}\,\si{\tesla} = \SI{1,5e-4}{\tesla}
@@ -1601,7 +1603,7 @@ Le linee del campo sono circonferenze intorno al primo cavo: nel punto in cui pa
 \[
   F = I\,L\,B = \SI{10}{\ampere} \cdot \SI{2,0}{\metre} \cdot \SI{4,0e-4}{\tesla} = 80 \cdot 10^{-4}\,\si{\newton} = \SI{8,0e-3}{\newton}
 \]
-Con le correnti nello stesso verso i due cavi si attraggono: in figura le correnti escono dal foglio, il campo del primo cavo nel punto del secondo punta verso l'alto, e la regola della mano destra dà sul secondo cavo una forza diretta verso il primo.
+Con le correnti nello stesso verso i due cavi si attraggono: in figura le correnti escono dal foglio, il campo del primo cavo nel punto del secondo punta verso l'alto, e la regola della mano destra per la forza (pollice lungo la corrente del secondo cavo, fuori dal foglio; indice lungo $\vec B_1$, verso l'alto) dà con il medio una forza sul secondo cavo diretta verso il primo.
 \begin{center}
 \input{ud6/figure/fili-paralleli}
 \end{center}
@@ -1865,7 +1867,7 @@ soluzione = '''La carica è quantizzata: ogni carica è un multiplo intero della
   \frac{\num{-4,8e-19}}{\num{1,6e-19}} = -3 \qquad \frac{\num{3,2e-19}}{\num{1,6e-19}} = 2 \qquad \frac{\num{8,0e-20}}{\num{1,6e-19}} = 0{,}5
 \]
 \[
-  \frac{\num{1,6e-18}}{\num{1,6e-19}} = 10 \qquad \frac{\num{-1,6e-19}}{\num{1,6e-19}} = -1
+  \frac{\num{1,6e-18}}{\num{1,6e-19}} = 10 \qquad \frac{\num{6,4e-19}}{\num{1,6e-19}} = 4
 \]
 Solo \SI{8,0e-20}{\coulomb} non è un multiplo intero di $e$: sarebbe mezza carica elementare.'''
 
@@ -1881,8 +1883,8 @@ Solo \SI{8,0e-20}{\coulomb} non è un multiplo intero di $e$: sarebbe mezza cari
   testo = '''\SI{1,6e-18}{\coulomb}'''
   commento = '''È $10e$: con l'esponente $-18$ invece di $-19$ il valore è dieci volte $e$, non un decimo. Dieci elettroni in difetto.'''
   [[quesito.opzione]]
-  testo = '''\SI{-1,6e-19}{\coulomb}'''
-  commento = '''È $-e$, la carica di un elettrone: un corpo con un solo elettrone in eccesso, per esempio uno ione negativo.'''
+  testo = '''\SI{6,4e-19}{\coulomb}'''
+  commento = '''È $4e$, perché $6{,}4/1{,}6 = 4$: un corpo con quattro elettroni in difetto. Chi lo sceglie sbaglia la divisione, oppure non la fa e giudica a occhio che 6,4 non sia un multiplo di 1,6.'''
 
 [[quesito]]
 id = "ud6-elettrostatica-linee"
@@ -1905,34 +1907,6 @@ soluzione = '''Le linee di forza partono dalle cariche positive e finiscono sull
   commento = '''Le linee del campo elettrico partono dalle cariche positive e finiscono su quelle negative, non girano intorno alle cariche. Le linee chiuse intorno a qualcosa sono quelle del campo magnetico di un filo percorso da corrente.'''
   [[quesito.opzione]]
   testo = '''partono dalla carica positiva e finiscono sulla carica negativa'''
-
-[[quesito]]
-id = "ud6-elettrostatica-raggi-x"
-tipo = "multipla"
-testo = '''In un tubo a raggi X un elettrone parte da fermo ed è accelerato da una differenza di potenziale di {{V}}. Con $e = \SI{1,6e-19}{\coulomb}$, l'energia cinetica con cui arriva sull'anodo è'''
-dati.V = { valore = 80, unita = "\\kilo\\volt" }
-corretta = "A"
-calcolo = "V * 1e3 * e"
-soluzione = '''Partendo da fermo, l'elettrone guadagna l'energia cinetica $K = e\,\Delta V$: \SI{80}{\kilo\electronvolt}. In joule, con $\Delta V = \SI{8e4}{\volt}$:
-\[
-  K = e\,\Delta V = \SI{1,6e-19}{\coulomb} \cdot \SI{8e4}{\volt} = 12{,}8 \cdot 10^{-19+4}\,\si{\joule} = \SI{1,28e-14}{\joule}
-\]'''
-
-  [[quesito.opzione]]
-  testo = '''\SI{1,28e-14}{\joule}'''
-  valore = 1.28e-14
-  [[quesito.opzione]]
-  testo = '''\SI{8e4}{\joule}'''
-  commento = '''Confonde l'elettronvolt con il joule: l'energia è \SI{8e4}{\electronvolt}, e ogni elettronvolt vale solo \SI{1,6e-19}{\joule}.'''
-  [[quesito.opzione]]
-  testo = '''\SI{5e23}{\joule}'''
-  commento = '''Divide per la carica elementare invece di moltiplicare: $\num{8e4}/\num{1,6e-19} = \num{5e23}$. Per passare da elettronvolt a joule si moltiplica per \num{1,6e-19}.'''
-  [[quesito.opzione]]
-  testo = '''\SI{1,28e-17}{\joule}'''
-  commento = '''Lascia la differenza di potenziale in kilovolt, $80 \cdot \num{1,6e-19} = \num{1,28e-17}$: il risultato è mille volte troppo piccolo.'''
-  [[quesito.opzione]]
-  testo = '''\SI{6,4e-15}{\joule}'''
-  commento = '''Aggiunge un fattore $\frac12$, come nell'energia di un condensatore: $\frac12 \cdot \num{1,28e-14} = \num{6,4e-15}$. Una carica che attraversa la differenza di potenziale $\Delta V$ guadagna tutta l'energia $e\,\Delta V$.'''
 
 [[quesito]]
 id = "ud6-elettrostatica-piastre-moto"
@@ -2004,9 +1978,53 @@ soluzione = '''In un conduttore in equilibrio la carica in eccesso sta sulla sup
   testo = '''è nullo'''
 
 [[quesito]]
+id = "ud6-elettrostatica-induzione-dito"
+tipo = "multipla"
+testo = '''Si avvicina una bacchetta carica negativamente a una sfera metallica scarica, sostenuta da un supporto isolante, senza toccarla. Con la bacchetta ancora vicina si tocca la sfera con un dito: il corpo umano è un conduttore, e collega la sfera a terra. Poi si toglie il dito e solo alla fine si allontana la bacchetta. Alla fine la sfera è'''
+corretta = "A"
+soluzione = '''Nella sfera metallica gli elettroni sono liberi di muoversi. La bacchetta negativa li respinge sul lato lontano, e il lato vicino resta positivo: è l'induzione elettrostatica. Toccando la sfera con il dito, la si collega a terra, e gli elettroni respinti dalla bacchetta scendono a terra attraverso il corpo. Quando si toglie il dito non possono più tornare, e quando si allontana la bacchetta il difetto di elettroni si distribuisce su tutta la superficie. La sfera resta carica positivamente: la carica per induzione ha segno opposto a quello della bacchetta.'''
+
+  [[quesito.opzione]]
+  testo = '''carica positivamente'''
+  [[quesito.opzione]]
+  testo = '''carica negativamente, come la bacchetta'''
+  commento = '''È quello che succede per contatto, quando la bacchetta cede parte della sua carica. Qui la bacchetta non tocca la sfera, e per induzione la carica ha segno opposto: gli elettroni respinti se ne vanno attraverso il dito.'''
+  [[quesito.opzione]]
+  testo = '''scarica, perché la bacchetta non l'ha mai toccata'''
+  commento = '''Varrebbe senza il dito: allora gli elettroni respinti tornerebbero al loro posto allontanando la bacchetta. Con il dito, invece, una parte degli elettroni della sfera scende a terra.'''
+  [[quesito.opzione]]
+  testo = '''carica positivamente finché la bacchetta è vicina, poi di nuovo scarica'''
+  commento = '''Gli elettroni scesi a terra non possono più tornare, perché il dito è stato tolto prima di allontanare la bacchetta: il difetto di elettroni resta.'''
+  [[quesito.opzione]]
+  testo = '''negativa sul lato lontano e positiva sul lato vicino, con carica totale nulla'''
+  commento = '''Descrive la sfera isolata con la bacchetta vicina, prima di toccarla con il dito. Il dito cambia la carica totale, e allontanando la bacchetta la carica si distribuisce su tutta la sfera.'''
+
+[[quesito]]
+id = "ud6-elettrostatica-pettine"
+tipo = "multipla"
+testo = '''Un pettine di plastica strofinato attira pezzetti di carta neutri, senza toccarli. La carta è un isolante. Il pettine attira la carta perché'''
+corretta = "B"
+soluzione = '''Nella carta, un isolante, non ci sono cariche libere, ma le molecole si polarizzano: il campo del pettine sposta un poco le loro cariche, o orienta quelle che sono già dipoli, e ogni molecola mostra al pettine il suo lato di segno opposto. Quel lato è più vicino al pettine del lato di segno uguale, e la forza di Coulomb diminuisce con la distanza: l'attrazione sul lato vicino è più forte della repulsione sul lato lontano, e la carta, pur restando neutra, è attratta.'''
+
+  [[quesito.opzione]]
+  testo = '''la carta ha elettroni liberi come un metallo, che il pettine sposta sul lato lontano'''
+  commento = '''È l'induzione elettrostatica, che vale per i conduttori. La carta è un isolante: le sue cariche restano legate alle molecole e possono solo spostarsi un poco, dentro ogni molecola.'''
+  [[quesito.opzione]]
+  testo = '''le molecole della carta si polarizzano e mostrano al pettine il lato di segno opposto, più vicino del lato di segno uguale'''
+  [[quesito.opzione]]
+  testo = '''il pettine cede carica alla carta a distanza, senza toccarla'''
+  commento = '''Il pettine e la carta sono separati dall'aria, un isolante, e la carica non passa. La carta resta neutra, e l'attrazione c'è lo stesso.'''
+  [[quesito.opzione]]
+  testo = '''la carta ha una carica di segno opposto a quella del pettine'''
+  commento = '''Il testo dice che la carta è neutra. Due corpi con cariche opposte si attraggono, ma qui il punto è che anche un corpo neutro è attratto da un corpo carico.'''
+  [[quesito.opzione]]
+  testo = '''la forza fra pettine e carta è magnetica'''
+  commento = '''Il campo magnetico lo producono le cariche in moto, cioè le correnti. Qui le cariche sono ferme, e la forza è elettrica.'''
+
+[[quesito]]
 id = "ud6-elettrostatica-tensione"
 tipo = "completamento"
-testo = '''Un elettrone parte da fermo e, attraversando una differenza di potenziale, acquista un'energia cinetica di \SI{3,2e-16}{\joule}. Con $e = \SI{1,6e-19}{\coulomb}$, la differenza di potenziale vale \completa\ \si{\volt}.'''
+testo = '''Un elettrone parte da fermo e, attraversando una differenza di potenziale, acquista un'energia cinetica di \SI{3,2e-16}{\joule}. Con $e = \SI{1,6e-19}{\coulomb}$, la differenza di potenziale vale \completa~\si{\volt}.'''
 calcolo = "3.2e-16 / e"
 risposta = "2000"
 soluzione = '''Partendo da fermo l'elettrone guadagna l'energia cinetica $K = e\,\Delta V$, quindi
@@ -2034,7 +2052,7 @@ Chi scrive 0,8 dimentica il quadrato della distanza ($2/2{,}5$); chi scrive 10 m
 [[quesito]]
 id = "ud6-elettrostatica-contatto"
 tipo = "completamento"
-testo = '''Due sferette metalliche identiche, con cariche di $+\SI{6,0}{\nano\coulomb}$ e \SI{-2,0}{\nano\coulomb}, sono ferme nel vuoto a \SI{3,0}{\centi\metre} di distanza. Si mettono a contatto e poi si riportano a \SI{3,0}{\centi\metre}. Con $k = \SI{9e9}{\newton\metre\squared\per\coulomb\squared}$, la forza fra le sferette vale ora \completa\ \si{\micro\newton}.'''
+testo = '''Due sferette metalliche identiche, con cariche di $+\SI{6,0}{\nano\coulomb}$ e \SI{-2,0}{\nano\coulomb}, sono ferme nel vuoto a \SI{3,0}{\centi\metre} di distanza. Si mettono a contatto e poi si riportano a \SI{3,0}{\centi\metre}. Con $k = \SI{9e9}{\newton\metre\squared\per\coulomb\squared}$, la forza fra le sferette vale ora \completa~\si{\micro\newton}.'''
 calcolo = "k * (2.0e-9)**2 / 0.030**2 * 1e6"
 risposta = "40"
 soluzione = '''La carica si conserva: durante il contatto gli elettroni passano da una sferetta all'altra, ma la carica totale resta
@@ -2114,34 +2132,6 @@ soluzione = '''Conviene la potenza in chilowatt e il tempo in ore: il prodotto �
   commento = '''Calcola bene l'energia in joule, $150 \cdot \SI{36000}{\second} = \SI{5,4e6}{\joule}$, ma la scrive in chilowattora. Un chilowattora vale \SI{3,6e6}{\joule}.'''
 
 [[quesito]]
-id = "ud6-corrente-tre"
-tipo = "multipla"
-testo = '''Due resistori da {{R}} sono collegati in parallelo, e il gruppo è collegato in serie a un terzo resistore, anch'esso da {{R}}. La resistenza equivalente dei tre resistori è'''
-dati.R = { valore = 6, unita = "\\ohm" }
-corretta = "B"
-calcolo = "R / 2 + R"
-soluzione = '''Prima il parallelo: due resistori uguali in parallelo valgono metà di uno, $6/2 = \SI{3}{\ohm}$. Poi la serie con il terzo:
-\[
-  R_{\text{eq}} = \SI{3}{\ohm} + \SI{6}{\ohm} = \SI{9}{\ohm}
-\]'''
-
-  [[quesito.opzione]]
-  testo = '''\SI{18}{\ohm}'''
-  commento = '''Mette tutti e tre i resistori in serie: $6 + 6 + 6 = 18$.'''
-  [[quesito.opzione]]
-  testo = '''\SI{9}{\ohm}'''
-  valore = 9
-  [[quesito.opzione]]
-  testo = '''\SI{4}{\ohm}'''
-  commento = '''Scambia serie e parallelo: due resistori in serie, \SI{12}{\ohm}, in parallelo con il terzo, $(12 \cdot 6)/(12 + 6) = 72/18 = 4$.'''
-  [[quesito.opzione]]
-  testo = '''\SI{2}{\ohm}'''
-  commento = '''Mette tutti e tre i resistori in parallelo: tre resistori uguali in parallelo valgono un terzo di uno, $6/3 = 2$.'''
-  [[quesito.opzione]]
-  testo = '''\SI{3}{\ohm}'''
-  commento = '''È la resistenza del solo parallelo: manca il terzo resistore, che è in serie e si somma.'''
-
-[[quesito]]
 id = "ud6-corrente-elettroni"
 tipo = "multipla"
 testo = '''Un elettrostimolatore fa passare negli elettrodi una corrente di {{I}}. Con $e = \SI{1,6e-19}{\coulomb}$, il numero di elettroni che attraversano ogni secondo una sezione del filo è circa'''
@@ -2174,7 +2164,7 @@ id = "ud6-corrente-microshock"
 tipo = "multipla"
 testo = '''Un paziente ha un catetere cardiaco collegato a un apparecchio elettrico. Rispetto a una persona che tocca lo stesso apparecchio con le mani, quale affermazione è corretta?'''
 corretta = "E"
-soluzione = '''Gli effetti dipendono dalla corrente che attraversa il cuore. Quando la corrente entra ed esce dalla pelle, si distribuisce in tutto il torace e solo una piccola parte attraversa il cuore: per la fibrillazione servono circa \SI{100}{\milli\ampere}. Il catetere porta invece la corrente direttamente nel cuore, e tutta la corrente passa di lì: bastano circa \SI{100}{\micro\ampere}, mille volte meno. È il microshock. In più il percorso salta la resistenza della pelle: con circa \SI{1}{\kilo\ohm} di resistenza interna, quella corrente la produce una differenza di potenziale di $V = RI = \num{1e3} \cdot \num{1e-4}\,\si{\volt} = \SI{0,1}{\volt}$, che con le mani nessuno sentirebbe.'''
+soluzione = '''Gli effetti dipendono dalla corrente che attraversa il cuore. Quando la corrente entra ed esce dalla pelle, si distribuisce in tutto il torace e solo una piccola parte attraversa il cuore: per la fibrillazione servono circa \SI{100}{\milli\ampere}. Il catetere porta invece la corrente direttamente nel cuore, e tutta la corrente passa di lì: bastano circa \SI{100}{\micro\ampere}, mille volte meno. È il microshock. In più il percorso salta la resistenza della pelle: con qualche centinaio di ohm, per esempio \SI{500}{\ohm} come nel problema sulla sicurezza elettrica, quella corrente la produce una differenza di potenziale di $V = RI = 500 \cdot \num{1e-4}\,\si{\volt} = \SI{0,05}{\volt}$, che con le mani nessuno sentirebbe.'''
 
   [[quesito.opzione]]
   testo = '''il pericolo è lo stesso, perché la differenza di potenziale dell'apparecchio è la stessa'''
@@ -2183,7 +2173,7 @@ soluzione = '''Gli effetti dipendono dalla corrente che attraversa il cuore. Qua
   testo = '''il pericolo è maggiore perché il catetere aumenta la resistenza del percorso della corrente'''
   commento = '''Con una resistenza più grande la corrente sarebbe più piccola, e il pericolo minore. Il catetere fa il contrario: salta la resistenza della pelle.'''
   [[quesito.opzione]]
-  testo = '''una differenza di potenziale di pochi decimi di volt non è pericolosa, perché nessuno la sente toccando l'apparecchio con le mani'''
+  testo = '''una differenza di potenziale di pochi centesimi di volt non è pericolosa, perché nessuno la sente toccando l'apparecchio con le mani'''
   commento = '''Con le mani la pelle limita la corrente a valori che non si sentono; attraverso il catetere la stessa differenza di potenziale basta a superare la soglia del microshock, circa \SI{100}{\micro\ampere}.'''
   [[quesito.opzione]]
   testo = '''la pelle protegge comunque il cuore, perché ha una resistenza di circa \SI{100}{\kilo\ohm}'''
@@ -2303,8 +2293,8 @@ tre volte la carica di prima, \SI{18}{\nano\coulomb}: la carica in più la porta
   testo = '''\SI{54}{\nano\coulomb}'''
   valore = 54
   [[quesito.opzione]]
-  testo = '''\SI{162}{\nano\coulomb}'''
-  commento = '''Moltiplica per $\varepsilon_r$ due volte, $18 \cdot 3 \cdot 3 = 162$, come se crescessero sia la capacità sia la differenza di potenziale. Il generatore collegato tiene $V$ fissa a \SI{9,0}{\volt}.'''
+  testo = '''\SI{45}{\nano\coulomb}'''
+  commento = '''Somma la costante dielettrica alla capacità, $2{,}0 + 3{,}0 = 5{,}0$, e trova $5{,}0 \cdot 9{,}0 = 45$. Il dielettrico \emph{moltiplica} la capacità per $\varepsilon_r$: $C' = 3{,}0 \cdot \SI{2,0}{\nano\farad} = \SI{6,0}{\nano\farad}$.'''
 
 [[quesito]]
 id = "ud6-condensatori-energia-parallelo"
@@ -2339,7 +2329,7 @@ soluzione = '''In parallelo le capacità si sommano: $C_\text{eq} = 2 + 3 = \SI{
 [[quesito]]
 id = "ud6-condensatori-energia-carica"
 tipo = "completamento"
-testo = '''Un condensatore da {{C}} porta su ciascuna armatura una carica di {{Q}}. L'energia immagazzinata nel condensatore vale \completa\ \si{\micro\joule}.'''
+testo = '''Un condensatore da {{C}} porta su ciascuna armatura una carica di {{Q}}. L'energia immagazzinata nel condensatore vale \completa~\si{\micro\joule}.'''
 dati.C = { valore = 4, unita = "\\micro\\farad" }
 dati.Q = { valore = 20, unita = "\\micro\\coulomb" }
 calcolo = "(Q * 1e-6)**2 / (2 * C * 1e-6) * 1e6"
@@ -2353,7 +2343,7 @@ Lo stesso con $V = Q/C = 20/4 = \SI{5}{\volt}$ e $U = \frac12 QV = \frac12 \cdot
 [[quesito]]
 id = "ud6-condensatori-uguali"
 tipo = "completamento"
-testo = '''Due condensatori uguali, collegati in parallelo, hanno una capacità equivalente di {{Cp}}. Collegati in serie, gli stessi due condensatori hanno una capacità equivalente di \completa\ \si{\micro\farad}.'''
+testo = '''Due condensatori uguali, collegati in parallelo, hanno una capacità equivalente di {{Cp}}. Collegati in serie, gli stessi due condensatori hanno una capacità equivalente di \completa~\si{\micro\farad}.'''
 dati.Cp = { valore = 8, unita = "\\micro\\farad" }
 calcolo = "(Cp / 2) / 2"
 risposta = "2"
@@ -2500,7 +2490,7 @@ Abbastanza per depolarizzare i neuroni dell'anello.'''
 [[quesito]]
 id = "ud6-magnetismo-corrente-solenoide"
 tipo = "completamento"
-testo = '''Un solenoide da laboratorio ha {{n}} spire per metro di lunghezza. Con $\mu_0 = 4\pi \cdot \SI{e-7}{\tesla\metre\per\ampere}$, per produrre al suo interno un campo di $4\pi \cdot \SI{e-3}{\tesla}$ serve una corrente di \completa\ \si{\ampere}.'''
+testo = '''Un solenoide da laboratorio ha {{n}} spire per metro di lunghezza. Con $\mu_0 = 4\pi \cdot \SI{e-7}{\tesla\metre\per\ampere}$, per produrre al suo interno un campo di $4\pi \cdot \SI{e-3}{\tesla}$ serve una corrente di \completa~\si{\ampere}.'''
 dati.n = { valore = 2000 }
 calcolo = "4 * math.pi * 1e-3 / (4 * math.pi * 1e-7 * n)"
 risposta = "5"
@@ -2513,7 +2503,7 @@ Chi scrive $2 \cdot 10^{7}$ moltiplica per $n$ invece di dividere ($10^4 \cdot 2
 [[quesito]]
 id = "ud6-magnetismo-alternatore"
 tipo = "completamento"
-testo = '''Un alternatore produce la corrente alternata della rete elettrica, a {{f}}: la sua bobina compie 50 giri al secondo in un campo magnetico. La forza elettromotrice indotta nella bobina cambia verso \completa\ volte al secondo.'''
+testo = '''Un alternatore produce la corrente alternata della rete elettrica, a {{f}}: la sua bobina compie 50 giri al secondo in un campo magnetico. La forza elettromotrice indotta nella bobina cambia verso \completa~volte al secondo.'''
 dati.f = { valore = 50, unita = "Hz" }
 calcolo = "2 * f"
 risposta = "100"
@@ -2522,7 +2512,7 @@ soluzione = '''Mentre la bobina ruota, il flusso attraverso di essa aumenta e di
 [[quesito]]
 id = "ud6-magnetismo-corrente-spira"
 tipo = "completamento"
-testo = '''Il flusso del campo magnetico attraverso una spira di resistenza {{R}} diminuisce in modo uniforme di {{dPhi}} in {{t}}. La corrente indotta nella spira vale \completa\ \si{\ampere}.'''
+testo = '''Il flusso del campo magnetico attraverso una spira di resistenza {{R}} diminuisce in modo uniforme di {{dPhi}} in {{t}}. La corrente indotta nella spira vale \completa~\si{\ampere}.'''
 dati.R = { valore = "0,50", unita = "\\ohm" }
 dati.dPhi = { valore = "3,0e-3", unita = "\\weber" }
 dati.t = { valore = "2,0", unita = "\\milli\\second" }
