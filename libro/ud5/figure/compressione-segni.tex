@@ -1,0 +1,13 @@
+% Segni nel primo principio per il gas compresso (problema ud5-primo-compressione):
+% l'ambiente compie sul gas 300 J (W = -300 J), il gas cede 120 J di calore (Q = -120 J),
+% l'energia interna aumenta di 180 J.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \node[draw, very thick, fill=esempio!15, minimum width=2.4cm, minimum height=1.5cm] (G) at (0,0) {gas};
+  \draw[->, line width=2.5pt, medica] (-4.0,0) -- (G.west);
+  \node[medica, align=center, above] at (-2.6,0.1) {lavoro fatto\\sul gas: \SI{300}{\joule}};
+  \node[medica, below] at (-2.6,-0.1) {$W = \SI{-300}{\joule}$};
+  \draw[->, line width=1.5pt, attenzione] (G.east) -- (4.0,0);
+  \node[attenzione, align=center, above] at (2.6,0.1) {calore ceduto\\dal gas: \SI{120}{\joule}};
+  \node[attenzione, below] at (2.6,-0.1) {$Q = \SI{-120}{\joule}$};
+  \node at (0,-1.35) {$\Delta U = Q - W = -120 - (-300) = \SI{+180}{\joule}$};
+\end{tikzpicture}

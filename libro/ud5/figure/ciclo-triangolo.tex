@@ -1,0 +1,33 @@
+% Ciclo triangolare nel piano pV (quesito ud5-primo-ciclo-triangolo):
+% C (1 L; 3e5 Pa) -> B (4 L; 1e5 Pa) lungo una retta, B -> A (1 L; 1e5 Pa) isobara,
+% A -> C isocora; senso orario. L'area del triangolo, (1/2) Δp ΔV, è il lavoro, 300 J.
+\begin{tikzpicture}[>=Stealth]
+\begin{axis}[
+  width=0.62\linewidth, height=5.0cm,
+  axis lines=left, xmin=0, xmax=5.2, ymin=0, ymax=3.7,
+  xlabel={volume $V$ (\si{\litre})}, ylabel={pressione $p$ (\SI{e5}{\pascal})},
+  xtick={1,4}, ytick={1,3},
+  tick label style={font=\small}, label style={font=\small},
+  clip=false,
+]
+  \fill[medica!20] (axis cs:1,3) -- (axis cs:4,1) -- (axis cs:1,1) -- cycle;
+  \node[medica!70!black, font=\small] at (axis cs:1.8,1.55) {$W$};
+  \draw[dashed, gray] (axis cs:0,3) -- (axis cs:1,3);
+  \draw[dashed, gray] (axis cs:0,1) -- (axis cs:1,1);
+  \draw[dashed, gray] (axis cs:1,0) -- (axis cs:1,1);
+  \draw[dashed, gray] (axis cs:4,0) -- (axis cs:4,1);
+  \draw[formula, very thick, -{Stealth}] (axis cs:1,3) -- (axis cs:2.6,1.933);
+  \draw[formula, very thick] (axis cs:2.5,2) -- (axis cs:4,1);
+  \draw[formula, very thick, -{Stealth}] (axis cs:4,1) -- (axis cs:2.4,1);
+  \draw[formula, very thick] (axis cs:2.5,1) -- (axis cs:1,1);
+  \draw[formula, very thick, -{Stealth}] (axis cs:1,1) -- (axis cs:1,2.1);
+  \draw[formula, very thick] (axis cs:1,2) -- (axis cs:1,3);
+  \fill (axis cs:1,3) circle (1.8pt) node[above right, font=\small] {$C$};
+  \fill (axis cs:4,1) circle (1.8pt) node[above right, font=\small] {$B$};
+  \fill (axis cs:1,1) circle (1.8pt) node[below left, font=\small] {$A$};
+  \draw[<->, esempio] (axis cs:1,0.5) -- (axis cs:4,0.5) node[midway, below, font=\scriptsize] {$\Delta V = \SI{3}{\litre}$};
+  \draw[dashed, gray] (axis cs:1,3) -- (axis cs:4.6,3);
+  \draw[<->, esempio] (axis cs:4.5,1) -- (axis cs:4.5,3) node[midway, right, font=\scriptsize] {$\Delta p = \SI{2e5}{\pascal}$};
+  \node[font=\scriptsize, anchor=west] at (axis cs:2.2,2.65) {senso orario: $W > 0$};
+\end{axis}
+\end{tikzpicture}
