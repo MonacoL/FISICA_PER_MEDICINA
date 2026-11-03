@@ -106,7 +106,7 @@ dati.V = { valore = 480, unita = "\\milli\\litre" }
 dati.t = { valore = "4,0", unita = "h" }
 
   [[problema.parte]]
-  domanda = '''Quanti millilitri al minuto devono scendere?'''
+  domanda = '''Quanti millilitri al minuto devono scendere? Questa grandezza, il volume diviso il tempo, si chiama portata.'''
   calcolo = "V / (t * 60)"
   risultato = { valore = 2.0, unita = "\\milli\\litre\\per\\minute", cifre = 2 }
   soluzione = '''Il tempo in minuti è $\SI{4,0}{\hour} = 4{,}0 \cdot \SI{60}{\minute} = \SI{240}{\minute}$. La portata è il volume diviso il tempo:
@@ -177,9 +177,9 @@ dati.l = { valore = 20, unita = "\\micro\\metre" }
   rapido = '''\num{9e12}, ordine di grandezza $10^{13}$'''
   soluzione = '''Il volume del corpo in metri cubi è $\SI{70}{\litre} = 70 \cdot \SI{e-3}{\metre\cubed} = \SI{7e-2}{\metre\cubed}$, perché un litro è un millesimo di metro cubo. Il numero di cellule è il volume del corpo diviso per il volume di una cellula del punto (a):
 \[
-  N = \frac{\SI{7e-2}{\metre\cubed}}{\SI{8e-15}{\metre\cubed}} = \frac{7}{8} \cdot 10^{-2-(-15)} = 0{,}875 \cdot 10^{13} \approx \num{9e12}
+  N = \frac{\SI{7e-2}{\metre\cubed}}{\SI{8e-15}{\metre\cubed}} = \frac{7}{8} \cdot 10^{-2-(-15)} = 0{,}875 \cdot 10^{13} = 8{,}75 \cdot 10^{12} \approx \num{9e12}
 \]
-In notazione scientifica $N \approx 9 \cdot 10^{12}$: la mantissa 9 è maggiore di 3, quindi l'ordine di grandezza è $10^{13}$, una decina di migliaia di miliardi di cellule.'''
+La mantissa 0,875 è minore di 1: si sposta la virgola di un posto a destra, e l'esponente scende di 1. In notazione scientifica $N \approx 9 \cdot 10^{12}$: la mantissa 9 è maggiore di 3, quindi l'ordine di grandezza è $10^{13}$, una decina di migliaia di miliardi di cellule.'''
 
 [[problema]]
 id = "ud1-notazione-glucosio"
@@ -447,6 +447,7 @@ dove $2{,}5 \cdot 2{,}8 = 7{,}0$.'''
   domanda = '''Qual è l'ordine di grandezza di questo numero?'''
   calcolo = "10**round(math.log10(V * 1e6 * n * h))"
   risultato = { valore = 1e22, cifre = 1 }
+  rapido = '''$10^{22}$'''
   soluzione = '''Il numero del punto (b) è $7{,}0 \cdot 10^{21}$. La mantissa 7,0 è maggiore di 3, quindi l'ordine di grandezza è $10^{21+1} = 10^{22}$. Chi guarda solo l'esponente e risponde $10^{21}$ sbaglia di un fattore 10: $7 \cdot 10^{21}$ è più vicino a $10^{22}$ che a $10^{21}$.'''
 
   [[problema.parte]]
@@ -488,7 +489,11 @@ dati.h = { valore = "0,90", unita = "m" }
   [[problema.parte]]
   calcolo = "math.degrees(math.asin(h / L))"
   risultato = { valore = 30, unita = "\\degree", cifre = 2 }
-  soluzione = '''Il piano del lettino è l'ipotenusa, il dislivello è il cateto opposto all'angolo cercato. Il loro rapporto è il seno dell'angolo:
+  soluzione = '''Il piano del lettino è l'ipotenusa, il dislivello è il cateto opposto all'angolo cercato (in figura):
+\begin{center}
+\input{ud1/figure/trendelenburg}
+\end{center}
+Il loro rapporto è il seno dell'angolo:
 \[
   \sin\alpha = \frac{h}{L} = \frac{\SI{0,90}{\metre}}{\SI{1,80}{\metre}} = \frac{1}{2} = 0{,}5
 \]
@@ -504,7 +509,11 @@ dati.F = { valore = 40, unita = "\\newton" }
   domanda = '''Quanto vale la componente orizzontale della forza?'''
   calcolo = "F * cos30"
   risultato = { valore = 35, unita = "\\newton", cifre = 2 }
-  soluzione = '''La forza è l'ipotenusa del triangolo rettangolo che ha le componenti come cateti. La componente orizzontale è il cateto adiacente all'angolo di \ang{30}, che è misurato rispetto all'orizzontale:
+  soluzione = '''La forza è l'ipotenusa del triangolo rettangolo che ha le componenti come cateti, come in figura:
+\begin{center}
+\input{ud1/figure/carrozzina}
+\end{center}
+La componente orizzontale è il cateto adiacente all'angolo di \ang{30}, che è misurato rispetto all'orizzontale:
 \[
   F_x = F \cos\ang{30} \approx \SI{40}{\newton} \cdot 0{,}87 = \SI{34,8}{\newton} \approx \SI{35}{\newton}
 \]'''
@@ -533,6 +542,8 @@ dati.dy = { valore = 7, unita = "m" }
 \[
   s = \sqrt{(\SI{24}{\metre})^2 + (\SI{7}{\metre})^2} = \sqrt{576 + 49}\,\si{\metre} = \sqrt{625}\,\si{\metre} = \SI{25}{\metre}
 \]
+Richiamo di matematica: la radice a mano. Si cercano due quadrati noti fra cui sta il numero: $20^2 = 400$ e $30^2 = 900$, quindi $\sqrt{625}$ sta fra 20 e 30. Il numero finisce per 5, e infatti $25^2 = 625$. Se il numero non è un quadrato esatto si prova con due valori vicini e si prende quello che, al quadrato, gli si avvicina di più: per $\sqrt{4{,}75}$, $2{,}1^2 = 4{,}41$ e $2{,}2^2 = 4{,}84$, e 4,75 è più vicino a 4,84, quindi $\sqrt{4{,}75} \approx 2{,}2$. Con i decimali conviene togliere la virgola: $\sqrt{6{,}25} = \sqrt{625/100} = \sqrt{625}/10 = 2{,}5$.
+
 Il barelliere ha camminato per $24 + 7 = \SI{31}{\metre}$, ma si trova a \SI{25}{\metre} dal punto di partenza: la strada percorsa non è il modulo dello spostamento.'''
 
 [[problema]]
@@ -567,7 +578,8 @@ dati.d = { valore = "2,40", unita = "m" }
   soluzione = '''La pedana è l'ipotenusa del triangolo rettangolo che ha per cateti il dislivello e la lunghezza orizzontale. Per il teorema di Pitagora:
 \[
   L = \sqrt{h^2 + d^2} = \sqrt{0{,}70^2 + 2{,}40^2}\,\si{\metre} = \sqrt{0{,}49 + 5{,}76}\,\si{\metre} = \sqrt{6{,}25}\,\si{\metre} = \SI{2,5}{\metre}
-\]'''
+\]
+perché $2{,}5^2 = 6{,}25$.'''
 
   [[problema.parte]]
   domanda = '''Quanto vale il seno dell'angolo $\alpha$ che la pedana forma con il pavimento? L'angolo è maggiore o minore di \ang{30}?'''
@@ -590,7 +602,7 @@ dati.xQ = { valore = 15, unita = "mm" }
 dati.yQ = { valore = 26, unita = "mm" }
 
   [[problema.parte]]
-  domanda = '''Lo spostamento del marcatore è il vettore $\vec s$ che va da $P$ a $Q$. Quanto vale la sua componente $y$? Che cosa indica il suo segno?'''
+  domanda = '''Lo spostamento del marcatore è il vettore $\vec s$ che va da $P$ a $Q$. Le componenti di un vettore che va da un punto a un altro sono le differenze delle coordinate, arrivo meno partenza: $s_x = x_Q - x_P$ e $s_y = y_Q - y_P$. Quanto vale la sua componente $y$? Che cosa indica il suo segno?'''
   calcolo = "yQ - yP"
   risultato = { valore = -4, unita = "mm", cifre = 1 }
   soluzione = '''Le componenti del vettore che va da $P$ a $Q$ dicono di quanto si sposta in $x$ e di quanto in $y$ chi va da $P$ a $Q$: arrivo meno partenza, $s_x = x_Q - x_P$ e $s_y = y_Q - y_P$. Se si pensano $P$ e $Q$ come vettori con la coda nell'origine, è la differenza fra i due vettori, $\vec Q - \vec P$. Quindi
@@ -635,17 +647,21 @@ dati.F2 = { valore = "1,0", unita = "\\newton" }
   domanda = '''Quanto vale il modulo della forza totale sul dente?'''
   calcolo = "math.sqrt((F1 + F2 * cos60)**2 + (F2 * sin60)**2)"
   risultato = { valore = 2.2, unita = "\\newton", cifre = 2 }
-  soluzione = '''La prima forza ha componenti $(\SI{1,5}{\newton}, 0)$. Con le componenti del punto (a), si sommano le $x$ e le $y$:
+  soluzione = '''La prima forza ha componenti $(\SI{1,5}{\newton};\ 0)$. Con le componenti del punto (a), si sommano le $x$ e le $y$:
 \[
   R_x = \SI{1,5}{\newton} + \SI{0,50}{\newton} = \SI{2,0}{\newton}
   \qquad\qquad
   R_y = 0 + \SI{0,87}{\newton} = \SI{0,87}{\newton}
 \]
+In figura, la somma con la regola del parallelogramma e le sue componenti:
+\begin{center}
+\input{ud1/figure/ortodonzia}
+\end{center}
 Il modulo viene da Pitagora:
 \[
   R = \sqrt{R_x^2 + R_y^2} = \sqrt{2{,}0^2 + 0{,}87^2}\,\si{\newton} \approx \sqrt{4{,}0 + 0{,}75}\,\si{\newton} = \sqrt{4{,}75}\,\si{\newton} \approx \SI{2,2}{\newton}
 \]
-Per il quadrato di 0,87 conviene il valore esatto, $R_y = (\sqrt 3/2)\,\si{\newton}$: $(\sqrt 3/2)^2 = 3/4 = 0{,}75$. La radice è circa 2,2 perché $2{,}2^2 = 4{,}84$, vicino a 4,75. Il risultato è minore della somma dei moduli, $1{,}5 + 1{,}0 = \SI{2,5}{\newton}$, perché i due elastici non tirano nella stessa direzione.'''
+Per il quadrato di 0,87 conviene il valore esatto, $R_y = (\sqrt 3/2)\,\si{\newton}$: $(\sqrt 3/2)^2 = 3/4 = 0{,}75$. La radice è circa 2,2 perché $2{,}2^2 = 4{,}84$, vicino a 4,75, mentre $2{,}1^2 = 4{,}41$ è più lontano. Il risultato è minore della somma dei moduli, $1{,}5 + 1{,}0 = \SI{2,5}{\newton}$, perché i due elastici non tirano nella stessa direzione.'''
 
 [[problema]]
 id = "ud1-vett-angolo-componenti"
@@ -674,7 +690,7 @@ Il coseno è negativo, quindi l'angolo è ottuso. Poiché $\cos(\ang{180} - \the
 [[problema]]
 id = "ud1-vett-robot"
 livello = 2
-testo = '''Un robot chirurgico muove la punta di uno strumento per passi. Ogni passo è lo spostamento $\vec p = (0{,}6;\ -0{,}8)$, con le componenti in millimetri. Il robot fa tre passi, poi uno spostamento $\vec q = (2{,}2;\ 5{,}4)$, sempre in millimetri.'''
+testo = '''Un robot chirurgico muove la punta di uno strumento per passi. Ogni passo è lo spostamento $\vec p = (0{,}6;\ -0{,}8)$, con le componenti in millimetri. Il robot fa tre passi, poi uno spostamento $\vec q = (2{,}2;\ 5{,}4)$, sempre in millimetri. Quando le componenti hanno i decimali si separano con il punto e virgola, per non confonderle con la virgola dei decimali.'''
 
   [[problema.parte]]
   domanda = '''Calcola le componenti e il modulo dello spostamento $3\vec p$ dovuto ai tre passi.'''
@@ -716,7 +732,7 @@ dati.d2 = { valore = 20, unita = "\\kilo\\metre" }
   calcolo = "d1 + d2 * cos45"
   risultato = { valore = 34, unita = "\\kilo\\metre", cifre = 2 }
   rapido = '''\SI{34}{\kilo\metre} e \SI{14}{\kilo\metre}'''
-  soluzione = '''Il primo tratto ha componenti $(\SI{20}{\kilo\metre}, 0)$. Il secondo forma \ang{45} con l'asse $x$:
+  soluzione = '''Il primo tratto ha componenti $(\SI{20}{\kilo\metre};\ 0)$. Il secondo forma \ang{45} con l'asse $x$:
 \[
   d_{2x} = d_2 \cos\ang{45} \approx \SI{20}{\kilo\metre} \cdot 0{,}71 = \SI{14,2}{\kilo\metre}
   \qquad\qquad
@@ -727,7 +743,11 @@ Le componenti dello spostamento totale sono le somme delle componenti:
   R_x = \SI{20}{\kilo\metre} + \SI{14,2}{\kilo\metre} = \SI{34,2}{\kilo\metre} \approx \SI{34}{\kilo\metre}
   \qquad\qquad
   R_y = 0 + \SI{14,2}{\kilo\metre} \approx \SI{14}{\kilo\metre}
-\]'''
+\]
+In figura, i due tratti, lo spostamento totale e le sue componenti:
+\begin{center}
+\input{ud1/figure/elisoccorso}
+\end{center}'''
 
   [[problema.parte]]
   domanda = '''A che distanza dalla base si trova il luogo dell'incidente? Confrontala con la strada percorsa.'''
@@ -737,18 +757,18 @@ Le componenti dello spostamento totale sono le somme delle componenti:
 \[
   R = \sqrt{R_x^2 + R_y^2} \approx \sqrt{34^2 + 14^2}\,\si{\kilo\metre} = \sqrt{1156 + 196}\,\si{\kilo\metre} = \sqrt{1352}\,\si{\kilo\metre} \approx \SI{37}{\kilo\metre}
 \]
-Le componenti si arrotondano a \SI{34}{\kilo\metre} e \SI{14}{\kilo\metre} prima di elevarle al quadrato: i decimali non cambiano il risultato, e il conto si fa a mano senza fatica. La radice è circa 37 perché $37^2 = 1369$. L'elicottero ha volato per $20 + 20 = \SI{40}{\kilo\metre}$, ma si trova a \SI{37}{\kilo\metre} dalla base: i due tratti non hanno la stessa direzione, e il modulo della somma è minore della somma dei moduli.'''
+Le componenti si arrotondano a \SI{34}{\kilo\metre} e \SI{14}{\kilo\metre} prima di elevarle al quadrato: i decimali non cambiano il risultato, e il conto si fa a mano senza fatica. La radice è circa 37 perché $37^2 = 1369$, vicino a 1352, mentre $36^2 = 1296$ è più lontano. L'elicottero ha volato per $20 + 20 = \SI{40}{\kilo\metre}$, ma si trova a \SI{37}{\kilo\metre} dalla base: i due tratti non hanno la stessa direzione, e il modulo della somma è minore della somma dei moduli.'''
 
   [[problema.parte]]
   domanda = '''Quanto vale la tangente dell'angolo $\theta$ che lo spostamento totale forma con l'asse $x$? L'angolo è maggiore o minore di \ang{30}? In che direzione deve volare l'elicottero per tornare alla base in linea retta?'''
-  calcolo = "(d2 * sin45) / (d1 + d2 * cos45)"
-  risultato = { valore = 0.42, cifre = 2 }
-  rapido = '''0,42, minore di \ang{30}; ritorno verso ovest e un po' a sud'''
+  calcolo = "(d2 * math.sqrt(2) / 2) / (d1 + d2 * math.sqrt(2) / 2)"
+  risultato = { valore = 0.41, cifre = 2 }
+  rapido = '''0,41, minore di \ang{30}; ritorno verso ovest e un po' a sud'''
   soluzione = '''La tangente è il rapporto fra le componenti del punto (a):
 \[
-  \tan\theta = \frac{R_y}{R_x} = \frac{\SI{14,2}{\kilo\metre}}{\SI{34,2}{\kilo\metre}} \approx 0{,}42
+  \tan\theta = \frac{R_y}{R_x} \approx \frac{\SI{14}{\kilo\metre}}{\SI{34}{\kilo\metre}} = \frac{7}{17} \approx 0{,}41
 \]
-Le due componenti sono positive, quindi il vettore punta fra est e nord. La tangente cresce con l'angolo, e $\tan\ang{30} \approx 0{,}58$: poiché $0{,}42 < 0{,}58$, l'angolo è minore di \ang{30}. Per tornare l'elicottero deve percorrere lo spostamento opposto, $-\vec R = (-\SI{34}{\kilo\metre}, -\SI{14}{\kilo\metre})$: \SI{37}{\kilo\metre} con lo stesso angolo $\theta$ sotto il verso ovest, cioè verso ovest e un po' verso sud.'''
+La divisione a mano: $17 \cdot 0{,}4 = 6{,}8$, e il resto $7 - 6{,}8 = 0{,}2$ diviso 17 dà circa 0,01. Come al punto (b) si usano le componenti arrotondate. Con 14,2 e 34,2 si troverebbe 0,415, che arrotondato dà 0,42 solo perché $\cos\ang{45}$ è stato arrotondato a 0,71: il valore esatto è $\sqrt 2 - 1 \approx 0{,}414$. Per il confronto con \ang{30} basta molto meno: 14 è meno della metà di 34, quindi la tangente è minore di 0,5. Le due componenti sono positive, quindi il vettore punta fra est e nord. La tangente cresce con l'angolo, e $\tan\ang{30} \approx 0{,}58$: poiché $0{,}41 < 0{,}58$, l'angolo è minore di \ang{30}. Per tornare l'elicottero deve percorrere lo spostamento opposto, $-\vec R = (-\SI{34}{\kilo\metre};\ -\SI{14}{\kilo\metre})$: \SI{37}{\kilo\metre} con lo stesso angolo $\theta$ sotto il verso ovest, cioè verso ovest e un po' verso sud.'''
 
 [[problema]]
 id = "ud1-vett-rotula"
@@ -764,13 +784,16 @@ dati.F = { valore = 1200, unita = "\\newton" }
 \[
   R = 2F\cos\ang{60} = 2 \cdot \SI{1200}{\newton} \cdot 0{,}5 = \SI{1200}{\newton}
 \]
-A \ang{120} la somma di due forze uguali ha lo stesso modulo di ciascuna.'''
+A \ang{120} la somma di due forze uguali ha lo stesso modulo di ciascuna. In figura, a sinistra, questo caso; a destra quello del punto (b):
+\begin{center}
+\input{ud1/figure/rotula}
+\end{center}'''
 
   [[problema.parte]]
   domanda = '''Piegando di più il ginocchio, l'angolo fra le forze scende a \ang{90}. Quanto vale ora il modulo della somma?'''
   calcolo = "2 * F * cos45"
   risultato = { valore = 1.7e3, unita = "\\newton", cifre = 2 }
-  soluzione = '''Ognuna delle due forze forma ora \ang{45} con la bisettrice. Come nel punto (a):
+  soluzione = '''Ognuna delle due forze forma ora \ang{45} con la bisettrice (nella figura del punto (a), a destra). Come nel punto (a):
 \[
   R = 2F\cos\ang{45} \approx 2 \cdot \SI{1200}{\newton} \cdot 0{,}71 = \SI{1704}{\newton} \approx \SI{1,7e3}{\newton}
 \]
@@ -827,7 +850,7 @@ Controllo con base per altezza: la base è $a = \SI{4,0}{\centi\metre}$ e l'alte
 \[
   |\vec a + \vec b| = \sqrt{6{,}6^2 + 1{,}5^2}\,\si{\centi\metre} = \sqrt{43{,}56 + 2{,}25}\,\si{\centi\metre} = \sqrt{45{,}81}\,\si{\centi\metre} \approx \SI{6,8}{\centi\metre}
 \]
-perché $6{,}8^2 = 46{,}24$, vicino a 45,81. È meno della somma dei lati, $4{,}0 + 3{,}0 = \SI{7,0}{\centi\metre}$, ma di poco: i due lati formano un angolo piccolo.'''
+perché $6{,}8^2 = 46{,}24$, vicino a 45,81, mentre $6{,}7^2 = 44{,}89$ è più lontano. È meno della somma dei lati, $4{,}0 + 3{,}0 = \SI{7,0}{\centi\metre}$, ma di poco: i due lati formano un angolo piccolo.'''
 
 [[problema]]
 id = "ud1-trig-radiografia"
@@ -887,6 +910,10 @@ testo = '''In un laboratorio di analisi del cammino una telecamera riprende di l
 \[
   \vec v = (x_A - x_K,\ y_A - y_K) = (50 - 20,\ 20 - 50) = (30, -30)
 \]
+In figura, i tre marcatori e i due vettori:
+\begin{center}
+\input{ud1/figure/cammino}
+\end{center}
 La lunghezza della gamba è il modulo di $\vec v$:
 \[
   v = \sqrt{30^2 + (-30)^2}\,\si{\centi\metre} = \sqrt{2 \cdot 900}\,\si{\centi\metre} = 30\sqrt 2\,\si{\centi\metre} \approx 30 \cdot 1{,}41\,\si{\centi\metre} = \SI{42,3}{\centi\metre} \approx \SI{42}{\centi\metre}
@@ -1282,8 +1309,8 @@ Sulla circonferenza goniometrica il punto a \ang{150} sta a sinistra dell'asse $
   testo = '''$-\dfrac{1}{2}$'''
   commento = '''Il segno è giusto, ma usa $\cos\ang{60}$: sottrae \ang{90} invece di partire da \ang{180}, $\ang{150} - \ang{90} = \ang{60}$. L'angolo da usare è $\ang{180} - \ang{150} = \ang{30}$.'''
   [[quesito.opzione]]
-  testo = '''$-1$'''
-  commento = '''È $\cos\ang{180}$: il coseno vale $-1$ solo a \ang{180}, e \ang{150} non è \ang{180}.'''
+  testo = '''$-\dfrac{\sqrt 3}{3}$'''
+  commento = '''È $\tan\ang{150} = -\tan\ang{30}$: trova l'angolo supplementare e il segno giusti, ma scambia il coseno con la tangente.'''
   [[quesito.opzione]]
   testo = '''$-\dfrac{\sqrt 3}{2}$'''
   valore = -0.87
@@ -1295,7 +1322,10 @@ testo = '''Un ago da biopsia lungo {{L}} viene inserito in linea retta per tutta
 dati.L = { valore = 10, unita = "cm" }
 corretta = "A"
 calcolo = "L * cos60"
-soluzione = '''L'ago è l'ipotenusa di un triangolo rettangolo. La distanza lungo la pelle è il cateto che forma l'angolo di \ang{60} insieme all'ago, cioè il cateto adiacente:
+soluzione = '''L'ago è l'ipotenusa di un triangolo rettangolo. La distanza lungo la pelle è il cateto che forma l'angolo di \ang{60} insieme all'ago, cioè il cateto adiacente (in figura):
+\begin{center}
+\input{ud1/figure/biopsia}
+\end{center}
 \[
   d = L\cos\ang{60} = \SI{10}{\centi\metre} \cdot \frac{1}{2} = \SI{5}{\centi\metre}
 \]
@@ -1363,8 +1393,8 @@ soluzione = '''I due versori sono perpendicolari e hanno modulo 1, quindi il pro
   testo = '''$1$'''
   commento = '''Trova il modulo giusto, $1 \cdot 1 \cdot \sin\ang{90} = 1$, ma lo scrive come un numero: il prodotto vettoriale è un vettore, con una direzione e un verso.'''
   [[quesito.opzione]]
-  testo = '''$\hat\imath + \hat\jmath$'''
-  commento = '''Confonde il prodotto con la somma. Il prodotto vettoriale è perpendicolare a entrambi i fattori, mentre $\hat\imath + \hat\jmath$ sta nel loro piano.'''
+  testo = '''$-1$'''
+  commento = '''Trova il verso giusto, opposto a $\hat k$, ma scrive il risultato come un numero: il prodotto vettoriale è un vettore, $-\hat k$, non lo scalare $-1$.'''
 
 [[quesito]]
 id = "ud1-vett-differenza"
@@ -1489,7 +1519,10 @@ soluzione = '''Con la circonferenza goniometrica le formule delle componenti val
   \qquad\qquad
   F_y = F\sin\ang{120} \approx 6{,}0 \cdot 0{,}87 \approx 5{,}2
 \]
-La forza punta verso sinistra e verso l'alto.'''
+La forza punta verso sinistra e verso l'alto, come in figura:
+\begin{center}
+\input{ud1/figure/forza-120}
+\end{center}'''
 
   [[quesito.opzione]]
   testo = '''$(3{,}0;\ 5{,}2)$'''

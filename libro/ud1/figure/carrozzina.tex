@@ -1,0 +1,20 @@
+% Forza dell'infermiere sulle maniglie della carrozzina (problema ud1-vett-carrozzina):
+% F = 40 N a 30 gradi sotto l'orizzontale, con le componenti F_x e F_y < 0.
+% Scala: 10 N = 1 cm (F = 4, F_x = 3,46, F_y = -2).
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \draw[->] (-0.5,0) -- (5,0) node[right] {$x$};
+  \draw[->] (0,-2.6) -- (0,1) node[above] {$y$};
+  \coordinate (F) at (-30:4);
+  \draw[dashed, gray] (F) -- (F |- 0,0);
+  \draw[dashed, gray] (F) -- (0,0 |- F);
+  \draw[->, very thick, medica] (0,0) -- (F |- 0,0);
+  \node[medica, above] at (2.1,0) {$F_x = F\cos\ang{30} \approx \SI{35}{\newton}$};
+  \draw[->, very thick, attenzione] (0,0) -- (0,0 |- F);
+  \node[attenzione, left] at (0,-1) {$F_y = -F\sin\ang{30} = -\SI{20}{\newton}$};
+  \draw[->, very thick, formula] (0,0) -- (F);
+  \node[formula, below right] at (F) {$\vec F$, $F = \SI{40}{\newton}$};
+  \draw[esempio, thick] (1.2,0) arc[start angle=0, end angle=-30, radius=1.2];
+  \node[esempio] at (-15:1.65) {\ang{30}};
+  \fill (0,0) circle (1.5pt);
+  \node[above left] at (0,0) {maniglie};
+\end{tikzpicture}
