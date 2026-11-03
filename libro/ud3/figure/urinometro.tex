@@ -1,0 +1,35 @@
+% Urinometro che galleggia (a) in acqua distillata e (b) nell'urina: nell'urina, più
+% densa, affonda di meno. Il peso è lo stesso, e la spinta lo bilancia in tutti e due
+% i casi (ud3-statica-urinometro). Il dislivello è esagerato.
+\begin{tikzpicture}[>=Stealth, font=\small,
+    galleggiante/.pic={
+      \fill[esempio!30] (-0.12,0.6) rectangle (0.12,2.6);
+      \draw[thick, esempio] (-0.12,0.6) rectangle (0.12,2.6);
+      \fill[esempio!30] (0,0) ellipse (0.42 and 0.65);
+      \draw[thick, esempio] (0,0) ellipse (0.42 and 0.65);
+      \fill[richiamo] (0,-0.48) circle (0.14);
+      \foreach \t in {0.9,1.1,...,2.5} \draw[esempio] (-0.12,\t) -- (0,\t);
+    }]
+  % (a) acqua
+  \fill[formula!15] (0,0) rectangle (2.6,2.6);
+  \draw[very thick] (0,3.8) -- (0,0) -- (2.6,0) -- (2.6,3.8);
+  \pic at (1.3,1.1) {galleggiante};
+  \draw[formula, thick] (0,2.6) -- (2.6,2.6);
+  \draw[->, very thick, attenzione] (0.55,1.1) -- (0.55,0.3) node[below] {$mg$};
+  \draw[->, very thick, formula] (2.05,0.3) -- (2.05,1.1) node[above] {$F_\text{A}$};
+  \node[formula, align=center] at (1.3,-0.55) {$\rho = \SI{1,00}{\gram\per\centi\metre\cubed}$};
+  \node[align=center] at (1.3,-1.1) {$V_1 = \SI{20,0}{\centi\metre\cubed}$ immersi};
+  \node at (1.3,-1.65) {(a) acqua distillata};
+  % (b) urina
+  \begin{scope}[xshift=4.6cm]
+    \fill[formula!25] (0,0) rectangle (2.6,2.6);
+    \draw[very thick] (0,3.8) -- (0,0) -- (2.6,0) -- (2.6,3.8);
+    \pic at (1.3,1.4) {galleggiante};
+    \draw[formula, thick] (0,2.6) -- (2.6,2.6);
+    \draw[->, very thick, attenzione] (0.55,1.4) -- (0.55,0.6) node[below] {$mg$};
+    \draw[->, very thick, formula] (2.05,0.6) -- (2.05,1.4) node[above] {$F_\text{A}$};
+    \node[formula] at (1.3,-0.55) {$\rho_\text{u} > \rho$};
+    \node at (1.3,-1.1) {$V_2 = \SI{19,6}{\centi\metre\cubed}$ immersi};
+    \node at (1.3,-1.65) {(b) urina};
+  \end{scope}
+\end{tikzpicture}

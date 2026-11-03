@@ -193,7 +193,11 @@ dati.V2 = { valore = "19,6", unita = "\\centi\\metre\\cubed" }
   domanda = '''Qual è la massa dell'urinometro?'''
   calcolo = "1.0 * V1"
   risultato = { valore = 20.0, unita = "\\gram", cifre = 3 }
-  soluzione = '''Un corpo che galleggia è in equilibrio: la spinta è uguale al peso, $\rho_\text{f} V_\text{imm} g = m g$, quindi $m = \rho_\text{f} V_\text{imm}$, la massa del liquido spostato. In acqua, con $\rho = \SI{1,00}{\gram\per\centi\metre\cubed}$:
+  soluzione = '''Un corpo che galleggia è in equilibrio: la spinta è uguale al peso, $\rho_\text{f} V_\text{imm} g = m g$, quindi $m = \rho_\text{f} V_\text{imm}$, la massa del liquido spostato.
+\begin{center}
+\input{ud3/figure/urinometro}
+\end{center}
+In acqua, con $\rho = \SI{1,00}{\gram\per\centi\metre\cubed}$:
 \[
   m = \SI{1,00}{\gram\per\centi\metre\cubed} \cdot \SI{20,0}{\centi\metre\cubed} = \SI{20,0}{\gram}
 \]'''
@@ -206,7 +210,7 @@ dati.V2 = { valore = "19,6", unita = "\\centi\\metre\\cubed" }
 \[
   \rho_\text{u} = \frac{m}{V_2} = \frac{\SI{20,0}{\gram}}{\SI{19,6}{\centi\metre\cubed}} = \frac{200}{196}\,\si{\gram\per\centi\metre\cubed} = \frac{50}{49}\,\si{\gram\per\centi\metre\cubed} \approx \SI{1,02}{\gram\per\centi\metre\cubed} = \SI{1,02e3}{\kilo\gram\per\metre\cubed}
 \]
-L'urina è più densa dell'acqua perché contiene sali e urea disciolti: l'urinometro vi affonda meno. I valori normali vanno da circa 1005 a \SI{1030}{\kilo\gram\per\metre\cubed}.'''
+L'urina è più densa dell'acqua perché contiene sali e urea disciolti: l'urinometro vi affonda meno, come in figura. I valori normali vanno da circa 1005 a \SI{1030}{\kilo\gram\per\metre\cubed}.'''
 
 [[problema]]
 id = "ud3-statica-hales"
@@ -361,7 +365,11 @@ dati.pc = { valore = 60, unita = "\\mmHg" }
   domanda = '''Di quanti millimetri di mercurio la pressione del sangue diminuisce salendo dal cuore al cervello?'''
   calcolo = "rho_sangue * g * hs / mmHg"
   risultato = { valore = 1.6e2, unita = "\\mmHg", cifre = 2 }
-  soluzione = '''Per la legge di Stevino, fra due punti del sangue con dislivello $h$ la differenza di pressione è $\rho g h$:
+  soluzione = '''Per la legge di Stevino, fra due punti del sangue con dislivello $h$ la differenza di pressione è $\rho g h$. In figura le quote e le pressioni che si trovano nei tre punti del problema.
+\begin{center}
+\input{ud3/figure/giraffa}
+\end{center}
+Fra il cuore e il cervello:
 \[
   \Delta p = \SI{1060}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{2,0}{\metre} = 10388 \cdot 2{,}0\,\si{\pascal} \approx \SI{20800}{\pascal}
 \]
@@ -966,7 +974,10 @@ A distanza $x$ dall'asse $v(x) = v_\text{max}\,(1 - x^2/r^2)$. Il rapporto fra l
 \[
   v = \SI{0,50}{\metre\per\second} \cdot (1 - 0{,}64) = \SI{0,50}{\metre\per\second} \cdot 0{,}36 = \SI{0,18}{\metre\per\second}
 \]
-A un millimetro dalla parete la soluzione va a poco più di un terzo della velocità che ha sull'asse.'''
+A un millimetro dalla parete la soluzione va a poco più di un terzo della velocità che ha sull'asse, come mostra la figura.
+\begin{center}
+\input{ud3/figure/profilo-extracorporea}
+\end{center}'''
 
 [[problema]]
 id = "ud3-viscosi-cannula"
@@ -1405,7 +1416,11 @@ dati.R = { valore = "5,0e10", unita = "\\pascal\\second\\per\\metre\\cubed" }
   domanda = '''Quanto vale la differenza di pressione che spinge la soluzione nella vena?'''
   calcolo = "rho * 10 * h - pv"
   risultato = { valore = 1.0e4, unita = "\\pascal", cifre = 2 }
-  soluzione = '''La superficie del liquido nella sacca è alla pressione atmosferica. Per la legge di Stevino, all'altezza della vena la pressione relativa della soluzione nel tubo, se fosse ferma, sarebbe
+  soluzione = '''La superficie del liquido nella sacca è alla pressione atmosferica (in figura).
+\begin{center}
+\input{ud3/figure/flebo-resistenza}
+\end{center}
+Per la legge di Stevino, all'altezza della vena la pressione relativa della soluzione nel tubo, se fosse ferma, sarebbe
 \[
   \rho g h = \SI{1000}{\kilo\gram\per\metre\cubed} \cdot \SI{10}{\metre\per\second\squared} \cdot \SI{1,2}{\metre} = \SI{1,2e4}{\pascal}
 \]
@@ -1830,7 +1845,11 @@ dati.gamma = { valore = "0,073", unita = "\\newton\\per\\metre" }
   domanda = '''Quanto vale la forza massima che la tensione superficiale può esercitare sulla goccia?'''
   calcolo = "2 * 3.14 * (r * 1e-3) * gamma"
   risultato = { valore = 4.6e-4, unita = "\\newton", cifre = 2 }
-  soluzione = '''La tensione superficiale è la forza per unità di lunghezza del bordo. Con $r = \SI{1,0e-3}{\metre}$ il bordo è lungo $2\pi r = 2 \cdot 3{,}14 \cdot \SI{1,0e-3}{\metre} = \SI{6,28e-3}{\metre}$, e
+  soluzione = '''La tensione superficiale è la forza per unità di lunghezza del bordo; in figura tira verso l'alto lungo il bordo del beccuccio, e il peso tira verso il basso.
+\begin{center}
+\input{ud3/figure/goccia-beccuccio}
+\end{center}
+Con $r = \SI{1,0e-3}{\metre}$ il bordo è lungo $2\pi r = 2 \cdot 3{,}14 \cdot \SI{1,0e-3}{\metre} = \SI{6,28e-3}{\metre}$, e
 \[
   F = 2\pi r\,\gamma = \SI{6,28e-3}{\metre} \cdot \SI{0,073}{\newton\per\metre} = 0{,}458 \cdot 10^{-3}\,\si{\newton} \approx \SI{4,6e-4}{\newton}
 \]
@@ -2005,7 +2024,11 @@ dati.dh = { valore = 19, unita = "cm" }
 dati.p0 = { valore = 760, unita = "\\mmHg" }
 corretta = "C"
 calcolo = "p0 + 10 * dh"
-soluzione = '''Il gas spinge in basso il mercurio nel suo ramo e lo fa salire nell'altro: la sua pressione è maggiore di quella atmosferica, e la differenza è la pressione del dislivello, $p - p_\text{atm} = \rho g \Delta h$. Con il mercurio, un dislivello di \SI{19}{\centi\metre} = \SI{190}{\milli\metre} vale direttamente \SI{190}{\mmHg}. Quindi
+soluzione = '''Il gas spinge in basso il mercurio nel suo ramo e lo fa salire nell'altro: la sua pressione è maggiore di quella atmosferica, e la differenza è la pressione del dislivello, $p - p_\text{atm} = \rho g \Delta h$: in figura i punti A e B, alla stessa quota nel mercurio fermo, hanno la stessa pressione.
+\begin{center}
+\input{ud3/figure/manometro-gas}
+\end{center}
+Con il mercurio, un dislivello di \SI{19}{\centi\metre} = \SI{190}{\milli\metre} vale direttamente \SI{190}{\mmHg}. Quindi
 \[
   p = \SI{760}{\mmHg} + \SI{190}{\mmHg} = \SI{950}{\mmHg}
 \]'''
@@ -2251,7 +2274,11 @@ id = "ud3-viscosi-tre-vasi"
 tipo = "multipla"
 testo = '''Tre vasi uguali hanno ciascuno resistenza idraulica $R$. Due sono collegati in parallelo fra loro, e la coppia è in serie con il terzo. La resistenza equivalente dei tre vasi è'''
 corretta = "C"
-soluzione = '''I due vasi in parallelo: $1/R_\text{p} = 1/R + 1/R = 2/R$, quindi $R_\text{p} = R/2$. In serie con il terzo le resistenze si sommano: $R_\text{eq} = R/2 + R = 3R/2$.'''
+soluzione = '''Lo schema è in figura.
+\begin{center}
+\input{ud3/figure/tre-vasi}
+\end{center}
+I due vasi in parallelo: $1/R_\text{p} = 1/R + 1/R = 2/R$, quindi $R_\text{p} = R/2$. In serie con il terzo le resistenze si sommano: $R_\text{eq} = R/2 + R = 3R/2$.'''
 
   [[quesito.opzione]]
   testo = '''$3R$'''
@@ -2723,7 +2750,11 @@ tipo = "multipla"
 lampo = true
 testo = '''Due bolle di sapone, una di raggio \SI{1}{\centi\metre} e una di raggio \SI{2}{\centi\metre}, sono collegate da un tubicino con un rubinetto chiuso. Quando si apre il rubinetto'''
 corretta = "B"
-soluzione = '''Per la legge di Laplace la pressione dentro una bolla supera quella fuori di $\Delta p = 4\gamma/r$: è più grande nella bolla più piccola. Aprendo il rubinetto l'aria va dalla pressione più alta a quella più bassa, cioè dalla bolla piccola a quella grande. Svuotandosi, la bolla piccola diventa ancora più piccola e la sua pressione cresce ancora: si svuota nella grande, fino a ridursi a una piccola calotta sull'imboccatura del tubicino. È il motivo per cui gli alveoli polmonari, senza il surfattante, sarebbero instabili.'''
+soluzione = '''Per la legge di Laplace la pressione dentro una bolla supera quella fuori di $\Delta p = 4\gamma/r$: è più grande nella bolla più piccola. Aprendo il rubinetto l'aria va dalla pressione più alta a quella più bassa, cioè dalla bolla piccola a quella grande, come in figura.
+\begin{center}
+\input{ud3/figure/bolle-laplace}
+\end{center}
+Svuotandosi, la bolla piccola diventa ancora più piccola e la sua pressione cresce ancora: si svuota nella grande, fino a ridursi a una piccola calotta sull'imboccatura del tubicino. È il motivo per cui gli alveoli polmonari, senza il surfattante, sarebbero instabili.'''
 
   [[quesito.opzione]]
   testo = '''la bolla grande si svuota nella piccola, perché contiene più aria'''

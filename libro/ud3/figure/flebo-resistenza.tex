@@ -1,0 +1,27 @@
+% Flebo: superficie nella sacca 1,2 m sopra la vena, alla pressione atmosferica; tubo,
+% regolatore e cannula in serie con resistenza R; nella vena la pressione relativa p_v
+% (ud3-viscosi-flebo).
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % sacca
+  \fill[formula!15, rounded corners=4pt] (0,4.2) rectangle (1.4,5.4);
+  \fill[white] (0,5.1) rectangle (1.4,5.6);
+  \draw[thick, rounded corners=4pt] (0,4.2) rectangle (1.4,5.6);
+  \draw[formula, thick] (0,5.1) -- (1.4,5.1);
+  \draw[->, thick, attenzione] (0.7,6.2) -- (0.7,5.15) node[pos=0, above] {$p_\text{atm}$};
+  % tubo con la resistenza
+  \draw[very thick, formula] (0.7,4.2) -- (0.7,3.2);
+  \node[draw, thick, fill=formula!15, rounded corners=2pt, minimum width=0.7cm, minimum height=1.3cm,
+    anchor=north] (R) at (0.7,3.2) {$R$};
+  \node[right, align=left, font=\footnotesize] at (1.15,2.55) {tubo, regolatore\\e cannula};
+  \draw[very thick, formula] (R.south) -- (0.7,0.3) -- (1.6,0.3);
+  % vena
+  \fill[medica!20] (1.6,0) rectangle (4.4,0.6);
+  \draw[thick, medica] (1.6,0) -- (4.4,0) (1.6,0.6) -- (4.4,0.6);
+  \node[medica] at (3.0,0.3) {vena};
+  \node[below, medica] at (3.0,0) {$p_\text{v} = \SI{2,0e3}{\pascal}$};
+  % quota
+  \draw[dashed, richiamo] (1.4,5.1) -- (5.2,5.1);
+  \draw[dashed, richiamo] (4.4,0.3) -- (5.2,0.3);
+  \draw[|<->|] (5.0,0.3) -- (5.0,5.1) node[midway, right, align=left] {$h = \SI{1,2}{\metre}$\\[2pt]$\rho g h = \SI{1,2e4}{\pascal}$};
+  \draw[->, very thick, formula] (0.25,1.6) -- (0.25,0.8) node[midway, left] {$Q$};
+\end{tikzpicture}
