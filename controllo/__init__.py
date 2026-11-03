@@ -137,18 +137,22 @@ def segnaposti(cartella: Path) -> list[str]:
     ]
 
 
-# Separatori da testo generato (anti-pattern AI): il trattino lungo e il punto medio.
-# Il punto della moltiplicazione si scrive \cdot dentro una formula.
-SEPARATORE = re.compile(r"—|·|\\textemdash\b|\\textperiodcentered\b")
+# Separatori da testo generato (anti-pattern AI): il trattino lungo e il punto medio fra parole,
+# come in «Eserciziario UD1 · Meccanica». Il punto medio fra due numeri è una moltiplicazione
+# (3·10^4 in una risposta a completamento) e resta; nelle formule il prodotto si scrive \cdot.
+SEPARATORE = re.compile(r"—|\\textemdash\b|\\textperiodcentered\b|·")
+PRODOTTO = re.compile(r"[\d)]\s?·\s?[\d(]")
 
 
 def separatori(cartella: Path) -> list[str]:
-    """I trattini lunghi e i punti medi nei sorgenti del libro e delle pagine web."""
-    return [
-        f"{posizione}: separatore da togliere: {trovato.group()}"
-        for posizione, riga in righe(cartella, ".tex", ".cls", ".toml")
-        for trovato in SEPARATORE.finditer(riga)
-    ]
+    """I trattini lunghi e i punti medi usati come separatori nei sorgenti del libro."""
+    problemi = []
+    for posizione, riga in righe(cartella, ".tex", ".cls", ".toml"):
+        prodotti = {m.start() + m.group().index("·") for m in PRODOTTO.finditer(riga)}
+        for trovato in SEPARATORE.finditer(riga):
+            if trovato.group() != "·" or trovato.start() not in prodotti:
+                problemi.append(f"{posizione}: separatore da togliere: {trovato.group()}")
+    return problemi
 
 
 # Un overfull hbox più largo di così si vede nel margine: va nel rapporto come avviso.
