@@ -312,7 +312,10 @@ dati.q3 = { valore = "+1,0", unita = "\\micro\\coulomb" }
   \\
   F_{23} = \num{9e9} \cdot \frac{\num{2,0e-6} \cdot \num{1,0e-6}}{(0{,}30)^{2}}\,\si{\newton} = \frac{\num{1,8e-2}}{0{,}09}\,\si{\newton} = \SI{0,20}{\newton}
 \end{gather*}
-$q_1$ e $q_3$ sono positive e si respingono: $q_1$ spinge $q_3$ verso $+x$. $q_2$ è negativa e attira $q_3$ verso di sé, cioè verso $-x$. Le due forze sono sulla stessa retta con versi opposti:
+$q_1$ e $q_3$ sono positive e si respingono: $q_1$ spinge $q_3$ verso $+x$. $q_2$ è negativa e attira $q_3$ verso di sé, cioè verso $-x$. Le due forze sono sulla stessa retta con versi opposti, come in figura:
+\begin{center}
+\input{ud6/figure/tre-cariche}
+\end{center}
 \[
   F = F_{23} - F_{13} = \SI{0,20}{\newton} - \SI{0,10}{\newton} = \SI{0,10}{\newton}
 \]
@@ -1351,7 +1354,11 @@ dati.V = { valore = 12, unita = "\\volt" }
   domanda = '''Calcola la capacità equivalente del circuito.'''
   calcolo = "1 / (1 / C1 + 1 / (C2 + C3))"
   risultato = { valore = 2.7, unita = "\\micro\\farad", cifre = 2 }
-  soluzione = '''Prima il gruppo in parallelo, dove le capacità si sommano:
+  soluzione = '''Il circuito è quello in figura: $C_1$ è in serie con il gruppo in parallelo di $C_2$ e $C_3$.
+\begin{center}
+\input{ud6/figure/condensatori-misto}
+\end{center}
+Prima il gruppo in parallelo, dove le capacità si sommano:
 \[
   C_{23} = C_2 + C_3 = (2{,}0 + 6{,}0)\,\si{\micro\farad} = \SI{8,0}{\micro\farad}
 \]
@@ -1518,7 +1525,11 @@ dati.t = { valore = 20, unita = "\\milli\\second" }
   domanda = '''Calcola il flusso del campo magnetico attraverso la spira prima che il campo cominci a diminuire.'''
   calcolo = "B * A * 1e-4 * sin30"
   risultato = { valore = 5.0e-4, unita = "\\weber", cifre = 2 }
-  soluzione = '''Nel flusso $\Phi = BA\cos\theta$ l'angolo $\theta$ è quello fra il campo e la normale alla spira, non quello con il piano. La normale è perpendicolare al piano, quindi se il campo forma \ang{30} con il piano forma con la normale l'angolo $\theta = \ang{90} - \ang{30} = \ang{60}$, e $\cos\ang{60} = \frac12$. L'area in metri quadrati è $A = 50 \cdot \SI{e-4}{\metre\squared} = \SI{5,0e-3}{\metre\squared}$:
+  soluzione = '''Nel flusso $\Phi = BA\cos\theta$ l'angolo $\theta$ è quello fra il campo e la normale alla spira, non quello con il piano. La normale è perpendicolare al piano, quindi se il campo forma \ang{30} con il piano forma con la normale l'angolo $\theta = \ang{90} - \ang{30} = \ang{60}$ (in figura), e $\cos\ang{60} = \frac12$.
+\begin{center}
+\input{ud6/figure/spira-inclinata}
+\end{center}
+L'area in metri quadrati è $A = 50 \cdot \SI{e-4}{\metre\squared} = \SI{5,0e-3}{\metre\squared}$:
 \[
   \Phi = BA\cos\theta = \SI{0,20}{\tesla} \cdot \SI{5,0e-3}{\metre\squared} \cdot \frac12 = \SI{5,0e-4}{\weber}
 \]
@@ -1546,7 +1557,11 @@ dati.B = { valore = "0,60", unita = "\\tesla" }
   domanda = '''Calcola la forza elettromotrice indotta.'''
   calcolo = "B * (L * 1e-2) * v"
   risultato = { valore = 1.2, unita = "\\volt", cifre = 2 }
-  soluzione = '''In ogni secondo l'area del circuito cresce di $Lv$, e il flusso di $BLv$. La fem indotta è quindi, in modulo, $\mathcal E = BLv$, con $L = \SI{40}{\centi\metre} = \SI{0,40}{\metre}$:
+  soluzione = '''In un intervallo $\Delta t$ la sbarretta avanza di $v\,\Delta t$, e l'area del circuito cresce della striscia $L\,v\,\Delta t$ (in figura).
+\begin{center}
+\input{ud6/figure/sbarretta}
+\end{center}
+In ogni secondo l'area del circuito cresce di $Lv$, e il flusso di $BLv$. La fem indotta è quindi, in modulo, $\mathcal E = BLv$, con $L = \SI{40}{\centi\metre} = \SI{0,40}{\metre}$:
 \[
   \mathcal E = BLv = \SI{0,60}{\tesla} \cdot \SI{0,40}{\metre} \cdot \SI{5,0}{\metre\per\second} = 0{,}24 \cdot 5{,}0\,\si{\volt} = \SI{1,2}{\volt}
 \]'''
@@ -1586,7 +1601,11 @@ Le linee del campo sono circonferenze intorno al primo cavo: nel punto in cui pa
 \[
   F = I\,L\,B = \SI{10}{\ampere} \cdot \SI{2,0}{\metre} \cdot \SI{4,0e-4}{\tesla} = 80 \cdot 10^{-4}\,\si{\newton} = \SI{8,0e-3}{\newton}
 \]
-Con le correnti nello stesso verso i due cavi si attraggono. È una forza piccola: per questo i cavi percorsi da correnti ordinarie non si muovono in modo visibile.'''
+Con le correnti nello stesso verso i due cavi si attraggono: in figura le correnti escono dal foglio, il campo del primo cavo nel punto del secondo punta verso l'alto, e la regola della mano destra dà sul secondo cavo una forza diretta verso il primo.
+\begin{center}
+\input{ud6/figure/fili-paralleli}
+\end{center}
+Sul primo cavo agisce una forza uguale e opposta. È una forza piccola: per questo i cavi percorsi da correnti ordinarie non si muovono in modo visibile.'''
 
 [[problema]]
 id = "ud6-magnetismo-elettrone-rm"
@@ -1642,7 +1661,11 @@ A parità di velocità e di carica il raggio è proporzionale alla massa: lo ion
   domanda = '''A che distanza l'uno dall'altro arrivano sul rivelatore i due tipi di ioni?'''
   calcolo = "2 * (2.16e-26 - 2.00e-26) * v / (e * B)"
   risultato = { valore = 5.0e-3, unita = "m", cifre = 2 }
-  soluzione = '''Dopo mezzo giro ogni ione arriva sul rivelatore a una distanza dal punto d'ingresso uguale al diametro della sua circonferenza, $2r$. La distanza fra i due punti d'arrivo è la differenza dei diametri. Conviene calcolarla in un colpo solo, con la differenza delle masse, $\Delta m = \SI{0,16e-26}{\kilo\gram}$, per non perdere cifre:
+  soluzione = '''Dopo mezzo giro ogni ione arriva sul rivelatore a una distanza dal punto d'ingresso uguale al diametro della sua circonferenza, $2r$. La distanza fra i due punti d'arrivo è la differenza dei diametri, come in figura.
+\begin{center}
+\input{ud6/figure/spettrometro}
+\end{center}
+Conviene calcolarla in un colpo solo, con la differenza delle masse, $\Delta m = \SI{0,16e-26}{\kilo\gram}$, per non perdere cifre:
 \[
   2r_{13} - 2r_{12} = \frac{2\,\Delta m\,v}{eB} = \frac{2 \cdot \num{0,16e-26} \cdot \num{1,0e5}}{\num{6,4e-20}}\,\si{\metre}
 \]
@@ -2372,7 +2395,10 @@ testo = '''Una spira circolare conduttrice giace nel piano del foglio, in un cam
 corretta = "C"
 soluzione = '''Il flusso attraverso la spira diminuisce. Per la legge di Lenz la corrente indotta produce un campo che si oppone alla diminuzione, cioè che cerca di mantenere il flusso: dentro la spira il suo campo entra nel foglio, come quello esterno.
 
-Per trovare il verso della corrente si applica la regola del filo (pollice lungo la corrente, dita intorno al filo) a un tratto della spira. Nel tratto in alto una corrente oraria va verso destra. Con il pollice verso destra, le dita che si chiudono intorno al filo entrano nel foglio sotto il filo, cioè dentro la spira. Lo stesso vale per ogni tratto: una corrente oraria produce dentro la spira un campo che entra nel foglio. Quindi la corrente indotta circola in senso orario.'''
+Per trovare il verso della corrente si applica la regola del filo (pollice lungo la corrente, dita intorno al filo) a un tratto della spira. Nel tratto in alto una corrente oraria va verso destra. Con il pollice verso destra, le dita che si chiudono intorno al filo entrano nel foglio sotto il filo, cioè dentro la spira. Lo stesso vale per ogni tratto: una corrente oraria produce dentro la spira un campo che entra nel foglio. Quindi la corrente indotta circola in senso orario, come in figura.
+\begin{center}
+\input{ud6/figure/verso-indotta}
+\end{center}'''
 
   [[quesito.opzione]]
   testo = '''in senso antiorario, perché il campo della corrente indotta è sempre opposto al campo esterno'''

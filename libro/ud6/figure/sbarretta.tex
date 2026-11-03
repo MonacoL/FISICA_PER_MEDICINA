@@ -1,0 +1,21 @@
+% Sbarretta che scorre sui binari in un campo uniforme (ud6-magnetismo-sbarretta): in un
+% intervallo Delta t l'area del circuito cresce della striscia L v Delta t.
+\begin{circuitikz}[european, >=Stealth, font=\small]
+  % area del circuito e striscia aggiunta in Delta t
+  \fill[medica!8] (0,0) rectangle (4.2,2.4);
+  \fill[esempio!20] (4.2,0) rectangle (5.6,2.4);
+  \foreach \x in {0.7,1.5,...,7.2} \foreach \y in {0.4,1.2,2.0}
+    \node[medica!60, font=\scriptsize] at (\x,\y) {$\otimes$};
+  % binari e resistore
+  \draw (0,0) to[R, l={$R = \SI{2,0}{\ohm}$}] (0,2.4);
+  \draw[very thick, richiamo] (0,2.4) -- (7.4,2.4);
+  \draw[very thick, richiamo] (0,0) -- (7.4,0);
+  % sbarretta, ora e dopo Delta t
+  \draw[line width=3pt, esempio!80!black] (4.2,-0.15) -- (4.2,2.55);
+  \draw[very thick, dashed, esempio] (5.6,-0.15) -- (5.6,2.55);
+  \draw[->, very thick, esempio] (4.3,2.85) -- (5.5,2.85) node[right] {$v = \SI{5,0}{\metre\per\second}$};
+  % quote
+  \draw[<->] (7.8,0) -- (7.8,2.4) node[midway, right] {$L = \SI{40}{\centi\metre}$};
+  \draw[<->] (4.2,-0.45) -- (5.6,-0.45) node[midway, below] {$v\,\Delta t$};
+  \node[medica, anchor=north west] at (0.2,-0.2) {$\vec B$ entra, $B = \SI{0,60}{\tesla}$};
+\end{circuitikz}

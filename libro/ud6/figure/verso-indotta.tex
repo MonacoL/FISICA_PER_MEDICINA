@@ -1,0 +1,23 @@
+% Spira nel piano del foglio, campo esterno che entra e diminuisce (ud6-magnetismo-verso-indotta):
+% la corrente indotta circola in senso orario e dentro la spira produce un campo che entra nel foglio.
+\begin{tikzpicture}[>=Stealth, font=\small,
+    corrente/.style={attenzione, very thick, postaction={decorate},
+      decoration={markings, mark=at position 0.125 with {\arrow{Stealth}},
+        mark=at position 0.375 with {\arrow{Stealth}}, mark=at position 0.625 with {\arrow{Stealth}},
+        mark=at position 0.875 with {\arrow{Stealth}}}}]
+  % campo esterno
+  % campo esterno, senza i simboli che cadrebbero sul filo della spira
+  \foreach \x in {-2.4,-1.6,...,2.5} \foreach \y in {-1.6,-0.8,...,1.7} {
+    \pgfmathparse{abs(veclen(\x,\y) - 1.45) > 0.3 ? 1 : 0}
+    \ifnum\pgfmathresult=1 \node[medica!55, font=\scriptsize] at (\x,\y) {$\otimes$}; \fi
+  }
+  % spira, percorsa in senso orario (dall'alto verso destra)
+  \draw[corrente] (0,1.45) arc[start angle=90, end angle=-270, radius=1.45];
+  \node[attenzione, fill=white, inner sep=1pt] at (0,1.85) {$I$, senso orario};
+  % campo della corrente indotta, dentro la spira
+  \foreach \p in {(-0.45,0.3),(0.45,0.3),(-0.45,-0.45),(0.45,-0.45)}
+    \node[esempio, font=\large] at \p {$\otimes$};
+  \node[esempio, fill=white, inner sep=1pt, align=center, font=\footnotesize] at (0,-2.25)
+    {campo della corrente indotta: entra nel foglio};
+  \node[medica, anchor=west, align=left] at (2.75,0.4) {$\vec B$ esterno:\\entra e diminuisce};
+\end{tikzpicture}

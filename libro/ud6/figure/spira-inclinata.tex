@@ -1,0 +1,20 @@
+% Spira vista di lato in un campo uniforme (ud6-magnetismo-spira-inclinata): il campo forma
+% 30 gradi con il piano della spira e 60 gradi con la normale, l'angolo che va nel flusso.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % spira in prospettiva
+  \fill[formula!12] (0,0) ellipse (1.7 and 0.45);
+  \draw[very thick, formula] (0,0) ellipse (1.7 and 0.45);
+  \node[formula] at (-1.45,0.55) {spira};
+  % linee del campo, a 30 gradi dal piano
+  \foreach \k in {-1.3,0,1.3}
+    \draw[->, thick, medica] ($(\k*-0.5,\k*0.866)+(210:2.6)$) -- ($(\k*-0.5,\k*0.866)+(30:2.9)$);
+  \node[medica, anchor=south west] at ($(-0.65,1.126)+(30:2.9)$) {$\vec B$};
+  % piano e normale
+  \draw[dashed, formula] (1.7,0) -- (3.3,0);
+  \draw[->, very thick, attenzione] (0,0) -- (0,2.4) node[above] {normale};
+  % angoli
+  \draw[richiamo] (2.2,0) arc[start angle=0, end angle=30, radius=2.2];
+  \node[richiamo] at (15:2.6) {\ang{30}};
+  \draw[attenzione] (0,1.0) arc[start angle=90, end angle=30, radius=1.0];
+  \node[attenzione, fill=white, inner sep=1pt] at (60:1.35) {$\theta = \ang{60}$};
+\end{tikzpicture}
