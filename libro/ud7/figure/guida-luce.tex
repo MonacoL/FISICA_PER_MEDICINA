@@ -1,0 +1,30 @@
+% Bacchetta di vetro (n = 1,41) in aria. A sinistra un raggio colpisce la parete
+% a 30 gradi ed esce a 45 gradi; a destra un raggio a 60 gradi supera l'angolo
+% limite (45 gradi) e viene riflesso del tutto. Esercizio ud7-ottica-guida-luce (soluzione)
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \fill[formula!10] (0,-0.8) rectangle (10,0.8);
+  \draw[thick] (0,0.8) -- (10,0.8) (0,-0.8) -- (10,-0.8);
+  \node[below] at (5,-0.8) {vetro, $n = 1{,}41$};
+  \node at (8.8,1.2) {aria};
+  % raggio a 30 gradi: esce
+  \draw[dashed, gray] (1.92,1.9) -- (1.92,-0.3);
+  \draw[esempio, very thick, ->] (1.0,-0.8) -- (1.46,0);
+  \draw[esempio, very thick] (1.46,0) -- (1.92,0.8);
+  \draw[esempio, very thick, ->] (1.92,0.8) -- (2.92,1.8);
+  \draw[esempio!60, thin, ->] (1.92,0.8) -- (2.38,0.0);
+  \draw ([shift={(270:0.45)}]1.92,0.8) arc[start angle=270, end angle=240, radius=0.45];
+  \node at ([shift={(247:0.85)}]1.92,0.8) {\ang{30}};
+  \draw ([shift={(90:0.55)}]1.92,0.8) arc[start angle=90, end angle=45, radius=0.55];
+  \node at ([shift={(67:0.9)}]1.92,0.8) {\ang{45}};
+  \node[esempio, above] at (2.92,1.8) {esce};
+  % raggio a 60 gradi: riflessione totale
+  \draw[dashed, gray] (5.97,1.3) -- (5.97,-0.3);
+  \draw[dashed, gray] (8.74,0.3) -- (8.74,-1.3);
+  \draw[medica, very thick, ->] (3.2,-0.8) -- (4.585,0);
+  \draw[medica, very thick] (4.585,0) -- (5.97,0.8);
+  \draw[medica, very thick, ->] (5.97,0.8) -- (7.355,0);
+  \draw[medica, very thick] (7.355,0) -- (8.74,-0.8) -- (10,-0.073);
+  \draw ([shift={(270:0.65)}]5.97,0.8) arc[start angle=270, end angle=210, radius=0.65];
+  \node at ([shift={(238:0.98)}]5.97,0.8) {\ang{60}};
+  \node[medica, above] at (5.97,1.3) {riflessione totale};
+\end{tikzpicture}

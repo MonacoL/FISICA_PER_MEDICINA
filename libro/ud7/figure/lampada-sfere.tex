@@ -1,0 +1,20 @@
+% Inverso del quadrato: la potenza della lampada attraversa sfere sempre più grandi.
+% Lo stesso cono di raggi copre a r2 = 2 r1 una superficie 4 volte più grande.
+% Esercizio ud7-onde-lampada (soluzione)
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \fill[esempio!12] (0,0) -- (12:2.8) arc[start angle=12, end angle=42, radius=2.8] -- cycle;
+  \draw[dashed, gray] (0,0) circle (1.4);
+  \draw[dashed, gray] (0,0) circle (2.8);
+  \draw[esempio!70, thin] (0,0) -- (12:2.8);
+  \draw[esempio!70, thin] (0,0) -- (42:2.8);
+  \draw[esempio, line width=2pt] (12:1.4) arc[start angle=12, end angle=42, radius=1.4];
+  \draw[esempio, line width=2pt] (12:2.8) arc[start angle=12, end angle=42, radius=2.8];
+  \node[esempio] at (27:1.85) {$S$};
+  \node[esempio] at (27:3.3) {$4S$};
+  \draw[->] (0,0) -- (200:1.4) node[midway, above=1pt] {$r_1$};
+  \draw[->] (0,0) -- (245:2.8) node[pos=0.7, right] {$r_2$};
+  \fill[attenzione] (0,0) circle (2.2pt);
+  \node[attenzione, below right] at (0.05,-0.05) {lampada};
+  \node[align=left, anchor=west] at (3.9,0.6) {$r_1 = \SI{2,0}{\metre}$: $I_1 = \SI{2,0}{\watt\per\metre\squared}$\\[3pt]
+    $r_2 = \SI{4,0}{\metre}$: $I_2 = I_1/4 = \SI{0,50}{\watt\per\metre\squared}$};
+\end{tikzpicture}

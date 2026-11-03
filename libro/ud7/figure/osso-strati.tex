@@ -1,0 +1,34 @@
+% Due fasci di raggi X attraversano 12 cm: solo tessuti molli (x1/2 = 3,0 cm),
+% oppure tessuti molli e 3 cm di osso (x1/2 = 1,0 cm). Le righe tratteggiate
+% separano gli spessori emivalenti. Esercizio ud7-lb-osso (soluzione)
+\begin{tikzpicture}[>=Stealth, font=\small, x=0.42cm]
+  % fascio 1: 12 cm di tessuto
+  \fill[esempio!15] (0,1.4) rectangle (12,2.2);
+  \draw (0,1.4) rectangle (12,2.2);
+  \foreach \x in {3,6,9} \draw[dashed, gray] (\x,1.4) -- (\x,2.2);
+  \node at (6,2.45) {tessuti molli};
+  % fascio 2: 3 cm di tessuto, 3 cm di osso, 6 cm di tessuto
+  \fill[esempio!15] (0,0) rectangle (3,0.8);
+  \fill[richiamo!35] (3,0) rectangle (6,0.8);
+  \fill[esempio!15] (6,0) rectangle (12,0.8);
+  \draw (0,0) rectangle (12,0.8);
+  \draw (3,0) -- (3,0.8) (6,0) -- (6,0.8);
+  \foreach \x in {4,5,9} \draw[dashed, gray] (\x,0) -- (\x,0.8);
+  \node at (1.5,1.05) {tessuto};
+  \node at (4.5,1.05) {osso};
+  \node at (9,1.05) {tessuto};
+  % misure
+  \draw[|<->|] (0,-0.25) -- (3,-0.25) node[midway, below] {\SI{3}{\centi\metre}};
+  \draw[|<->|] (3,-0.25) -- (6,-0.25) node[midway, below] {\SI{3}{\centi\metre}};
+  \draw[|<->|] (6,-0.25) -- (12,-0.25) node[midway, below] {\SI{6}{\centi\metre}};
+  % fasci e rivelatore
+  \foreach \y/\n in {1.8/1, 0.4/2} {
+    \draw[->, formula, very thick] (-3.2,\y) -- (-0.1,\y);
+    \node[formula, above] at (-1.65,\y) {fascio \n};
+    \draw[->, formula, very thick] (12.1,\y) -- (13.4,\y);
+  }
+  \fill[richiamo] (13.5,0) rectangle (13.8,2.2);
+  \node[above] at (13.65,2.2) {rivelatore};
+  \node[formula, anchor=west, align=left] at (14.4,1.8) {4 dimezzamenti:\\$1/2^4 = 1/16$};
+  \node[formula, anchor=west, align=left] at (14.4,0.4) {$3 + 3 = 6$ dimezzamenti:\\$1/2^6 = 1/64$};
+\end{tikzpicture}

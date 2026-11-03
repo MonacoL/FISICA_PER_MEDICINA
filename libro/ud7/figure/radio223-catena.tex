@@ -1,0 +1,20 @@
+% Catena del radio-223 nel piano Z-N: ogni decadimento alfa toglie 2 protoni
+% e 2 neutroni, il decadimento beta- trasforma un neutrone in protone.
+% Esercizio ud7-radio-radio223 (soluzione)
+\begin{tikzpicture}[>=Stealth, font=\small, x=0.95cm, y=0.62cm,
+    nucleo/.style={draw, fill=formula!10, minimum width=0.85cm, minimum height=0.45cm, inner sep=1pt, font=\footnotesize}]
+  \draw[->] (81.2,127) -- (89,127) node[right] {$Z$};
+  \draw[->] (81.2,127) -- (81.2,136.4) node[above] {$N$};
+  \foreach \z in {82,...,88} \draw (\z,127) -- (\z,126.85) node[below] {\z};
+  \foreach \n in {128,...,135} \draw (81.2,\n) -- (81.05,\n) node[left] {\n};
+  \foreach \z/\n in {88/135, 86/133, 84/131, 82/129, 83/128} \draw[dotted, gray] (\z,127) -- (\z,\n) (81.2,\n) -- (\z,\n);
+  \node[nucleo] (ra) at (88,135) {$\nuclide{223}{}{Ra}$};
+  \node[nucleo] (rn) at (86,133) {$\nuclide{219}{}{Rn}$};
+  \node[nucleo] (po) at (84,131) {$\nuclide{215}{}{Po}$};
+  \node[nucleo] (pb) at (82,129) {$\nuclide{211}{}{Pb}$};
+  \node[nucleo, fill=attenzione!15] (bi) at (83,128) {$\nuclide{211}{}{Bi}$};
+  \foreach \a/\b in {ra/rn, rn/po, po/pb} \draw[->, esempio, thick] (\a) -- (\b) node[midway, above right=-1pt] {$\alpha$};
+  \draw[->, medica, thick] (pb.south east) -- (bi.north west);
+  \node[medica, anchor=west] at (82.6,128.75) {$\beta^-$};
+  \node[align=left, anchor=west] at (86.2,130.0) {$\alpha$: $Z - 2$, $N - 2$\\$\beta^-$: $Z + 1$, $N - 1$};
+\end{tikzpicture}
