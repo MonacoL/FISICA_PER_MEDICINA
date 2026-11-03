@@ -1,0 +1,20 @@
+% Forze su q3 dovute a q1 e a q2, lungo l'asse x (ud6-elettrostatica-tre-cariche).
+% Asse: 1 cm del disegno per 10 cm; forze: 1 cm del disegno per 0,10 N.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  \draw[->] (-0.6,0) -- (8.2,0) node[below] {$x$};
+  \foreach \x/\t in {0/0, 3/30, 6/60} {
+    \draw (\x,0.08) -- (\x,-0.08);
+    \node[font=\footnotesize] at (\x,-0.45) {\SI{\t}{\centi\metre}};
+  }
+  \fill[attenzione] (0,0) circle (4pt);
+  \node[attenzione] at (0,0.5) {$q_1 = +4{,}0\,\si{\micro\coulomb}$};
+  \fill[formula] (3,0) circle (4pt);
+  \node[formula] at (3,-0.95) {$q_2 = \SI{-2,0}{\micro\coulomb}$};
+  \fill[attenzione] (6,0) circle (4pt);
+  \node[attenzione] at (6,-0.95) {$q_3 = +1{,}0\,\si{\micro\coulomb}$};
+  % forze su q3
+  \draw[dotted] (6,0.15) -- (6,1.85);
+  \draw[->, very thick, esempio] (6,0.6) -- (7,0.6) node[right] {$\vec F_{13}$: \SI{0,10}{\newton}};
+  \draw[->, very thick, esempio] (6,1.1) -- (4,1.1) node[left] {$\vec F_{23}$: \SI{0,20}{\newton}};
+  \draw[->, very thick, attenzione] (6,1.7) -- (5,1.7) node[left] {forza totale $\vec F$: \SI{0,10}{\newton}};
+\end{tikzpicture}

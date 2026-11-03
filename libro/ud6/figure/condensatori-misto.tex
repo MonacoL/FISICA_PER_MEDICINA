@@ -1,0 +1,12 @@
+% Circuito di ud6-condensatori-misto: C1 in serie con il parallelo di C2 e C3,
+% collegati a un generatore da 12 V.
+\begin{circuitikz}[european, >=Stealth, font=\small]
+  \draw (0,0) to[battery1, l=\SI{12}{\volt}, invert] (0,2.6)
+        to[C, l={$C_1 = \SI{4,0}{\micro\farad}$}] (3.6,2.6) -- (4.6,2.6);
+  \draw (4.6,2.6) node[circ]{} to[C, l=$C_2$] (4.6,0) node[circ]{};
+  \draw (4.6,2.6) -- (6.8,2.6) to[C, l=$C_3$] (6.8,0) -- (4.6,0) -- (0,0);
+  \node[font=\footnotesize, anchor=west] at (5.25,0.85) {\SI{2,0}{\micro\farad}};
+  \node[font=\footnotesize, anchor=west] at (7.45,0.85) {\SI{6,0}{\micro\farad}};
+  \draw[dashed, medica] (4.15,-0.35) rectangle (8.9,3.0);
+  \node[medica, anchor=north east] at (8.9,-0.4) {gruppo in parallelo $C_{23}$};
+\end{circuitikz}

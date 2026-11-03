@@ -1,0 +1,20 @@
+% Due cavi paralleli con correnti nello stesso verso, che escono dal foglio, visti di fronte
+% (ud6-magnetismo-fili-paralleli): il campo del cavo 1 nel punto del cavo 2 e le forze.
+\begin{tikzpicture}[>=Stealth, font=\small]
+  % linea del campo del cavo 1 che passa per il cavo 2
+  \draw[medica, thick] (-25:3.6) arc[start angle=-25, end angle=25, radius=3.6];
+  \draw[medica, thick, dashed] (25:3.6) arc[start angle=25, end angle=38, radius=3.6];
+  \draw[medica, thick, dashed] (-25:3.6) arc[start angle=-25, end angle=-38, radius=3.6];
+  \draw[->, very thick, medica] (3.6,0) -- (3.6,1.3) node[right] {$\vec B_1$};
+  % forze
+  \draw[->, very thick, attenzione] (3.6,0) -- (2.4,0) node[above] {$\vec F$};
+  \draw[->, very thick, attenzione!55] (0,0) -- (1.2,0) node[above] {$-\vec F$};
+  % cavi: correnti che escono dal foglio
+  \foreach \x in {0,3.6} {
+    \draw[thick, fill=white] (\x,0) circle (0.2);
+    \fill (\x,0) circle (0.065);
+  }
+  \node[anchor=east] at (-0.3,0) {cavo 1, $I$};
+  \node[anchor=north west] at (3.75,-0.15) {cavo 2, $I$};
+  \draw[<->] (0,-1.05) -- (3.6,-1.05) node[midway, below] {$d = \SI{5,0}{\milli\metre}$};
+\end{tikzpicture}
