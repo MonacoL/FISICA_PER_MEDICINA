@@ -77,6 +77,10 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: controllo
     runs-on: ubuntu-latest
+    # Due push ravvicinati su main: il secondo deploy aspetta il primo invece di fallire.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     permissions:
       pages: write
       id-token: write
