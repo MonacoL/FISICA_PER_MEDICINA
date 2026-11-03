@@ -1,0 +1,29 @@
+% Due altoparlanti in fase e l'ascoltatore (problema ud4-interf-altoparlanti):
+% r1 = 4,0 m, r2 = 5,2 m. Sul cammino più lungo è evidenziato il tratto in più,
+% Delta r = 1,2 m, diviso in tre lunghezze d'onda da 0,40 m.
+\begin{tikzpicture}[>=Stealth, font=\small, scale=1.35]
+  \coordinate (S1) at (0,0);
+  \coordinate (S2) at (0,-3.32);
+  \coordinate (P) at (4,0);
+  % altoparlanti
+  \foreach \s/\n in {S1/1, S2/2} {
+    \filldraw[fill=richiamo!30, draw=richiamo, thick] ($(\s)+(-0.32,-0.2)$) rectangle ($(\s)+(-0.12,0.2)$);
+    \filldraw[fill=richiamo!30, draw=richiamo, thick] ($(\s)+(-0.12,-0.12)$) -- ($(\s)+(0,-0.3)$) -- ($(\s)+(0,0.3)$) -- ($(\s)+(-0.12,0.12)$) -- cycle;
+    \node[left] at ($(\s)+(-0.35,0)$) {altoparlante \n};
+  }
+  % ascoltatore
+  \fill[medica] (P) circle (3pt);
+  \node[medica, right] at ($(P)+(0.1,0)$) {ascoltatore};
+  % cammini
+  \draw[formula, thick] (S1) -- (P) node[midway, above] {$r_1 = \SI{4,0}{\metre}$};
+  \draw[formula, thick] (S2) -- (P);
+  \path (S2) -- (P) node[formula, pos=0.6, sloped, below] {$r_2 = \SI{5,2}{\metre}$};
+  % tratto in più, vicino all'altoparlante 2: tre lunghezze d'onda
+  \coordinate (Q) at ($(P)!4/5.2!(S2)$);
+  \draw[esempio, line width=2.2pt] (Q) -- (S2);
+  \foreach \j in {0,1,2,3} {
+    \fill[esempio] ($(S2)!\j/3!(Q)$) circle (1.6pt);
+  }
+  \draw[dotted] (S1) arc[start angle=180, end angle=219.7, radius=4];
+  \node[esempio, anchor=west, align=left] at ($(S2)!0.5!(Q)+(0.25,-0.15)$) {$\Delta r = \SI{1,2}{\metre} = 3\lambda$};
+\end{tikzpicture}

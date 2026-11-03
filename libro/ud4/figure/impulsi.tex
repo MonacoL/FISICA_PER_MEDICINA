@@ -1,0 +1,33 @@
+% Due impulsi che si vengono incontro su una corda (problema ud4-interf-impulsi):
+% gobba di 3,0 cm verso l'alto e di 1,0 cm verso il basso, a 5,0 m di distanza,
+% a 50 m/s. A t = 0,050 s si sovrappongono a metà strada: lo spostamento è
+% 3,0 - 1,0 = 2,0 cm; dopo proseguono con la forma di prima.
+\begin{tikzpicture}[>=Stealth, font=\small, x=1.5cm, y=0.32cm]
+  % prima: t = 0
+  \begin{scope}
+    \node[anchor=west] at (-0.6,5.6) {(1) $t = 0$};
+    \draw[formula, thick, domain=-0.6:5.6, samples=150] plot (\x, {3*exp(-8*\x*\x) - exp(-8*(\x-5)*(\x-5))});
+    \draw[->, esempio, thick] (0.45,2.2) -- (1.15,2.2) node[right] {$v$};
+    \draw[->, esempio, thick] (4.55,1.2) -- (3.85,1.2) node[left] {$v$};
+    \node[left] at (-0.12,2.6) {$\SI{3,0}{\centi\metre}$};
+    \node[below] at (5,-1) {$\SI{1,0}{\centi\metre}$};
+    \draw[|<->|] (0,-2.6) -- (5,-2.6) node[midway, below] {$d = \SI{5,0}{\metre}$};
+  \end{scope}
+  % durante: t = 0,050 s, i picchi coincidono a metà strada
+  \begin{scope}[yshift=-3.7cm]
+    \node[anchor=west] at (-0.6,5.6) {(2) $t = \SI{0,050}{\second}$: i picchi coincidono};
+    \draw[richiamo, dashed, domain=1.4:3.6, samples=80] plot (\x, {3*exp(-8*(\x-2.5)*(\x-2.5))});
+    \draw[richiamo, dashed, domain=1.4:3.6, samples=80] plot (\x, {-exp(-8*(\x-2.5)*(\x-2.5))});
+    \draw[formula, thick, domain=-0.6:5.6, samples=150] plot (\x, {2*exp(-8*(\x-2.5)*(\x-2.5))});
+    \node[formula, right] at (3.25,2.2) {$y = 3{,}0 - 1{,}0 = \SI{2,0}{\centi\metre}$};
+    \draw[|<->|] (0,-2.6) -- (2.5,-2.6) node[midway, below] {$\SI{2,5}{\metre}$};
+    \draw[|<->|] (2.5,-2.6) -- (5,-2.6) node[midway, below] {$\SI{2,5}{\metre}$};
+  \end{scope}
+  % dopo
+  \begin{scope}[yshift=-7.4cm]
+    \node[anchor=west] at (-0.6,5.0) {(3) dopo l'incontro};
+    \draw[formula, thick, domain=-0.6:5.6, samples=150] plot (\x, {3*exp(-8*(\x-4)*(\x-4)) - exp(-8*(\x-1)*(\x-1))});
+    \draw[->, esempio, thick] (4.45,2.2) -- (5.15,2.2) node[right] {$v$};
+    \draw[->, esempio, thick] (0.55,1.2) -- (-0.15,1.2) node[left] {$v$};
+  \end{scope}
+\end{tikzpicture}

@@ -1,0 +1,27 @@
+% L'impulso ecografico attraversa 2,9 cm di grasso e poi il muscolo, fino alla
+% struttura, e torna alla sonda (problema ud4-eco-strati). Degli 80 microsecondi
+% di andata e ritorno, 40 sono passati nel grasso e 40 nel muscolo.
+\begin{tikzpicture}[>=Stealth, font=\small, y=-0.75cm]
+  % strati (asse verticale verso il basso, in centimetri di profondità)
+  \fill[esempio!20] (0,0) rectangle (5,2.9);
+  \fill[attenzione!12] (0,2.9) rectangle (5,7.0);
+  \draw[thick] (0,0) -- (5,0);
+  \draw (0,2.9) -- (5,2.9);
+  \node[esempio, anchor=west] at (0.15,0.45) {grasso};
+  \node[esempio, anchor=west] at (0.15,1.0) {$v_g = \SI{1450}{\metre\per\second}$};
+  \node[attenzione, anchor=west] at (0.15,3.35) {muscolo};
+  \node[attenzione, anchor=west] at (0.15,3.9) {$v_m = \SI{1580}{\metre\per\second}$};
+  % sonda
+  \filldraw[fill=richiamo!40, draw=richiamo, thick] (3.1,-0.9) rectangle (3.9,0);
+  \node[left] at (3.05,-0.5) {sonda};
+  % struttura
+  \filldraw[fill=richiamo!60, draw=black] (3.5,6.06) ellipse (0.55 and 0.16);
+  \node[left] at (2.9,6.06) {struttura};
+  % andata e ritorno
+  \draw[->, formula, thick] (3.35,0.05) -- (3.35,5.85);
+  \draw[->, formula, thick] (3.65,5.85) -- (3.65,0.05);
+  % profondità
+  \draw[|<->|] (5.4,0) -- (5.4,2.9) node[midway, right, align=left] {$s = \SI{2,9}{\centi\metre}$\\$t_g = \SI{40}{\micro\second}$};
+  \draw[|<->|] (5.4,2.9) -- (5.4,6.06) node[midway, right, align=left] {$d_m \approx \SI{3,16}{\centi\metre}$\\$t_m = 80 - 40 = \SI{40}{\micro\second}$};
+  \draw[dotted] (4.05,6.06) -- (5.4,6.06);
+\end{tikzpicture}
