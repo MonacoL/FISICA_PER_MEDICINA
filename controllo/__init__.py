@@ -11,7 +11,7 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from controllo.esercizi import PDF_WEB, genera
+from controllo.esercizi import PDF_WEB, figure_usate, genera, svg_figura
 
 RADICE = Path(__file__).resolve().parent.parent
 
@@ -236,10 +236,41 @@ def compila(cartella: Path, sorgente: str) -> Esito:
         # Righe del log non spezzate a 79 caratteri, così i percorsi restano interi.
         env={**os.environ, "max_print_line": "10000"},
     )
-    log = cartella / "build" / Path(sorgente).with_suffix(".log")
+    log = cartella / "build" / Path(sorgente).with_suffix(".log").name
     if esito.returncode != 0:
         return Esito(False, errori(log) or [f"latexmk è uscito con codice {esito.returncode}"])
     return Esito(True, etichette(cartella, log), overfull(cartella, log))
+
+
+FIGURE_WEB = r"""\documentclass{fisica}
+\usepackage[active,tightpage]{preview}
+\setlength\PreviewBorder{4pt}
+\begin{document}
+%s
+\end{document}
+"""
+
+
+def figure_web(cartella: Path) -> Esito:
+    """Compila da sole le figure degli esercizi, una per pagina, e ne fa gli SVG delle pagine web."""
+    figure = figure_usate(cartella)
+    if not figure:
+        return Esito(True)
+    corpo = "\n".join(rf"\begin{{preview}}\input{{{f}}}\end{{preview}}" for f in figure)
+    (cartella / "build").mkdir(exist_ok=True)
+    (cartella / "build" / "figure-web.tex").write_text(FIGURE_WEB % corpo, encoding="utf-8")
+    esito = compila(cartella, "build/figure-web.tex")
+    if not esito.compila:
+        return esito
+    uscita = cartella / "build" / "web" / "figure"
+    uscita.mkdir(parents=True, exist_ok=True)
+    for pagina, figura in enumerate(figure, start=1):
+        subprocess.run(
+            ["pdftocairo", "-svg", "-f", str(pagina), "-l", str(pagina),
+             str(cartella / "build" / "figure-web.pdf"), str(uscita / svg_figura(figura))],
+            check=True,
+        )
+    return Esito(True, [], esito.avvisi)
 
 
 def rapporto(intestazione: str, errori: list[str], avvisi: list[str]) -> None:
@@ -292,6 +323,9 @@ def main() -> None:
         stato = "compila" if esito.compila else "non compila"
         rapporto(f"{nome}: {stato}", esito.errori, esito.avvisi)
         riuscito = riuscito and not esito.errori
+    esito = figure_web(argomenti.cartella)
+    rapporto(f"Figure delle pagine web: {'compilano' if esito.compila else 'non compilano'}", esito.errori, esito.avvisi)
+    riuscito = riuscito and not esito.errori
     # Il libro va accanto alle pagine web, che lo collegano per scaricarlo.
     libro = argomenti.cartella / "build" / "libro.pdf"
     web = argomenti.cartella / "build" / "web"

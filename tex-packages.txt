@@ -31,3 +31,5 @@ etoolbox
 l3packages
 needspace
 circuitikz
+preview
+grfext

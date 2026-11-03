@@ -519,17 +519,27 @@ NON_WEB = re.compile(
 )
 
 
+# Una figura in un testo o in una soluzione: nel PDF si include così com'è.
+FIGURA = re.compile(r"\\begin\{center\}\s*\\input\{([^}]*)\}\s*\\end\{center\}")
+
+
+def svg_figura(percorso: str) -> str:
+    """ud2/figure/trazione → ud2-trazione.svg, il nome della figura accanto alle pagine web."""
+    return percorso.replace("/figure/", "-").replace("/", "-") + ".svg"
+
+
+def figure_usate(cartella: Path) -> list[str]:
+    """Le figure che le fonti degli esercizi includono, ognuna una volta."""
+    return sorted({p for f in cartella.glob("*/esercizi.toml") for p in FIGURA.findall(f.read_text(encoding="utf-8"))})
+
+
 def latex_a_html(testo: str) -> str:
     testo = html.escape(testo, quote=False)
     testo = re.sub(r"\\textbf\{([^}]*)\}", r"<b>\1</b>", testo)
     testo = re.sub(r"\\emph\{([^}]*)\}", r"<em>\1</em>", testo)
     testo = testo.replace(r"\completa", "______").replace("~", " ")
-    # Le figure TikZ non si vedono nella pagina: al loro posto un rimando al PDF.
-    testo = re.sub(
-        r"\\begin\{center\}\s*\\input\{[^}]*\}\s*\\end\{center\}",
-        '<p><em>(La figura è nel <a href="' + PDF_WEB + '" download>libro in PDF</a>.)</em></p>',
-        testo,
-    )
+    # Le figure TikZ arrivano come SVG, che `controllo` compila da sole (figure_web).
+    testo = FIGURA.sub(lambda m: f'<img class="figura" src="figure/{svg_figura(m.group(1))}" alt="">', testo)
     testo = re.sub(r"\\begin\{itemize\}", "<ul>", testo)
     testo = re.sub(r"\\end\{itemize\}", "</ul>", testo)
     testo = re.sub(r"\\item\b\s*", "<li>", testo)

@@ -12,6 +12,8 @@
 #   lampo = true: il testo va nella dispensa (\input{ud7/generati/lampo-<id>}),
 #   la soluzione svolta nell'eserciziario;
 # - testo, soluzione e commenti sono LaTeX, in stringhe letterali '''...''';
+# - una figura si include con \begin{center}\input{ud7/figure/<nome>}\end{center}
+#   nel testo o nella soluzione: va nel PDF e, come SVG, nella pagina web;
 # - {{nome}} nel testo inserisce un dato di `dati`, con virgola e unità. Per tenere
 #   le cifre significative il valore si scrive come stringa: valore = "0,50";
 # - calcolo è un'espressione Python sui dati e sulle costanti; il controllo la
