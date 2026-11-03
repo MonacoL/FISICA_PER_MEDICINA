@@ -354,6 +354,10 @@ def simulazioni_latex(fonte: dict) -> str:
 # sono ridefinite in MathJax; il resto del LaTeX in modo testo diventa HTML minimo.
 
 
+# Il nome del libro in PDF accanto alle pagine web: `controllo` lo copia lì dopo averlo compilato.
+PDF_WEB = "fisica-per-medicina.pdf"
+
+
 def latex_a_html(testo: str) -> str:
     testo = html.escape(testo, quote=False)
     testo = re.sub(r"\\textbf\{([^}]*)\}", r"<b>\1</b>", testo)
@@ -362,7 +366,7 @@ def latex_a_html(testo: str) -> str:
     # Le figure TikZ non si vedono nella pagina: al loro posto un rimando al PDF.
     testo = re.sub(
         r"\\begin\{center\}\s*\\input\{[^}]*\}\s*\\end\{center\}",
-        "<p><em>(La figura è nel libro in PDF.)</em></p>",
+        '<p><em>(La figura è nel <a href="' + PDF_WEB + '" download>libro in PDF</a>.)</em></p>',
         testo,
     )
     pezzi = re.split(r"(\$[^$]*\$|\\\[.*?\\\])", testo, flags=re.S)
