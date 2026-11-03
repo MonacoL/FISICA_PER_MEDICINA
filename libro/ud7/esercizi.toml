@@ -118,7 +118,11 @@ dati.P = { valore = 100, unita = "W" }
   domanda = '''Quanto vale l'intensità a \SI{4,0}{\metre}?'''
   calcolo = "P / (4 * math.pi * 2.0**2) * (2.0 / 4.0)**2"
   risultato = { valore = 0.50, unita = "W/m^2", cifre = 2 }
-  soluzione = '''La distanza raddoppia, da \SI{2,0}{\metre} a \SI{4,0}{\metre}. Per la legge dell'inverso del quadrato l'intensità si divide per $2^2 = 4$:
+  soluzione = '''La distanza raddoppia, da \SI{2,0}{\metre} a \SI{4,0}{\metre}. Per la legge dell'inverso del quadrato l'intensità si divide per $2^2 = 4$: in figura, lo stesso cono di raggi a distanza doppia copre una superficie quattro volte più grande.
+\begin{center}
+\input{ud7/figure/lampada-sfere}
+\end{center}
+Quindi
 \[
   I_2 = I_1 \left(\frac{r_1}{r_2}\right)^{2} = \SI{2,0}{\watt\per\metre\squared} \cdot \left(\frac{2{,}0}{4{,}0}\right)^{2} = \frac{\SI{2,0}{\watt\per\metre\squared}}{4} = \SI{0,50}{\watt\per\metre\squared}
 \]'''
@@ -831,7 +835,10 @@ dati.xo = { valore = "1,0", unita = "cm" }
   domanda = '''Quale frazione esce dal secondo percorso?'''
   calcolo = "2**(-9 / xt) * 2**(-3 / xo)"
   risultato = { valore = 0.0156, cifre = 3 }
-  soluzione = '''Gli strati si attraversano uno dopo l'altro, e ognuno moltiplica l'intensità per la sua frazione. \SI{9}{\centi\metre} di tessuto sono $9/3 = 3$ spessori emivalenti, \SI{3}{\centi\metre} di osso sono $3/1 = 3$ spessori emivalenti: in tutto 6 dimezzamenti.
+  soluzione = '''Gli strati si attraversano uno dopo l'altro, e ognuno moltiplica l'intensità per la sua frazione. \SI{9}{\centi\metre} di tessuto sono $9/3 = 3$ spessori emivalenti, \SI{3}{\centi\metre} di osso sono $3/1 = 3$ spessori emivalenti: in tutto 6 dimezzamenti. In figura le righe tratteggiate separano gli spessori emivalenti dei due percorsi.
+\begin{center}
+\input{ud7/figure/osso-strati}
+\end{center}
 \[
   \frac{I}{I_0} = \frac{1}{2^3} \cdot \frac{1}{2^3} = \frac{1}{2^6} = \frac{1}{64} \approx 0{,}0156
 \]'''
@@ -1061,7 +1068,10 @@ testo = '''Il radio-223, $\nuclide{223}{88}{Ra}$, si usa per curare le metastasi
 \[
   N = A - Z = 211 - 83 = 128
 \]
-La catena è $\nuclide{223}{88}{Ra} \to \nuclide{219}{86}{Rn} \to \nuclide{215}{84}{Po} \to \nuclide{211}{82}{Pb} \to \nuclide{211}{83}{Bi}$.'''
+La catena è $\nuclide{223}{88}{Ra} \to \nuclide{219}{86}{Rn} \to \nuclide{215}{84}{Po} \to \nuclide{211}{82}{Pb} \to \nuclide{211}{83}{Bi}$. In figura la stessa catena nel piano $Z$, $N$: ogni $\alpha$ è un passo in diagonale verso il basso a sinistra, il $\beta^-$ un passo verso il basso a destra.
+\begin{center}
+\input{ud7/figure/radio223-catena}
+\end{center}'''
 
 [[problema]]
 id = "ud7-radio-rifiuti"
@@ -1089,7 +1099,10 @@ dati.Alim = { valore = 10, unita = "kBq" }
 \[
   t = 6 \cdot \SI{10}{\hour} = \SI{60}{\hour}
 \]
-cioè altre \SI{30}{\hour} dopo la seconda misura.'''
+cioè altre \SI{30}{\hour} dopo la seconda misura. In figura, la curva dell'attività con le tre misure.
+\begin{center}
+\input{ud7/figure/rifiuti-attivita}
+\end{center}'''
 
 [[problema]]
 id = "ud7-radio-fosforo"
@@ -1320,7 +1333,10 @@ dati.f = { valore = 12, unita = "cm" }
   \qquad\Longrightarrow\qquad
   q = \SI{15}{\centi\metre}
 \]
-$q > 0$: l'immagine è reale, dall'altra parte della lente. L'oggetto è oltre $2f = \SI{24}{\centi\metre}$, e infatti l'immagine cade fra $f$ e $2f$.'''
+$q > 0$: l'immagine è reale, dall'altra parte della lente. L'oggetto è oltre $2f = \SI{24}{\centi\metre}$, e infatti l'immagine cade fra $f$ e $2f$, come si vede in figura con i raggi notevoli.
+\begin{center}
+\input{ud7/figure/coniugati-lente}
+\end{center}'''
 
 [[problema]]
 id = "ud7-ottica-riflesso-rifratto"
@@ -1343,7 +1359,11 @@ dati.n = { valore = "1,41" }
   domanda = '''Quale angolo formano fra loro il raggio riflesso e il raggio rifratto?'''
   calcolo = "180 - 45 - math.degrees(math.asin(sin45 / n))"
   risultato = { valore = 105, unita = "\\degree", cifre = 3 }
-  soluzione = '''Per la legge della riflessione il raggio riflesso forma \ang{45} con la normale, dalla parte dell'aria. Il raggio rifratto forma \ang{30} con la normale, dalla parte del materiale. Le due metà della normale, sopra e sotto la superficie, formano un angolo piatto di \ang{180}, e i due raggi stanno dalla stessa parte della normale (come nella figura della rifrazione nella dispensa: incidente a sinistra della normale, riflesso e rifratto entrambi a destra). L'angolo fra i due raggi è quindi
+  soluzione = '''Per la legge della riflessione il raggio riflesso forma \ang{45} con la normale, dalla parte dell'aria. Il raggio rifratto forma \ang{30} con la normale, dalla parte del materiale. Le due metà della normale, sopra e sotto la superficie, formano un angolo piatto di \ang{180}, e i due raggi stanno dalla stessa parte della normale (come nella figura della rifrazione nella dispensa: incidente a sinistra della normale, riflesso e rifratto entrambi a destra). In figura i tre raggi con i loro angoli.
+\begin{center}
+\input{ud7/figure/riflesso-rifratto}
+\end{center}
+L'angolo fra i due raggi è quindi
 \[
   \ang{180} - \ang{45} - \ang{30} = \ang{105}
 \]'''
@@ -1588,7 +1608,10 @@ Il raggio si allontana dalla normale, perché passa in un mezzo meno denso. Ques
   \qquad\Longrightarrow\qquad
   \theta_\ell = \ang{45}
 \]
-Un raggio a \ang{60} supera l'angolo limite. La legge di Snell darebbe $\sin\theta_2 = 1{,}41 \cdot 0{,}87 \approx 1{,}2$, ma un seno non può superare 1: il raggio rifratto non c'è, e tutta la luce viene riflessa dentro la bacchetta. È la riflessione totale, che tiene la luce dentro le fibre ottiche degli endoscopi.'''
+Un raggio a \ang{60} supera l'angolo limite. La legge di Snell darebbe $\sin\theta_2 = 1{,}41 \cdot 0{,}87 \approx 1{,}2$, ma un seno non può superare 1: il raggio rifratto non c'è, e tutta la luce viene riflessa dentro la bacchetta. È la riflessione totale, che tiene la luce dentro le fibre ottiche degli endoscopi. In figura i due raggi: quello a \ang{30} esce, quello a \ang{60} resta nella bacchetta.
+\begin{center}
+\input{ud7/figure/guida-luce}
+\end{center}'''
 
 # ==================================================================== quesiti d'esame
 
@@ -1841,7 +1864,11 @@ tipo = "multipla"
 testo = '''Un filtro di alluminio lascia passare $1/3$ dei fotoni di una certa energia che lo colpiscono. Quale frazione di quei fotoni passa attraverso due filtri uguali sovrapposti?'''
 corretta = "A"
 calcolo = "(1/3)**2"
-soluzione = '''Ogni filtro lascia passare una frazione fissa di quello che gli arriva. Il primo lascia passare $1/3$ dei fotoni, il secondo $1/3$ di quel terzo: $1/3 \cdot 1/3 = 1/9$. Raddoppiare lo spessore eleva al quadrato la frazione trasmessa.'''
+soluzione = '''Ogni filtro lascia passare una frazione fissa di quello che gli arriva. Il primo lascia passare $1/3$ dei fotoni, il secondo $1/3$ di quel terzo: $1/3 \cdot 1/3 = 1/9$, come in figura.
+\begin{center}
+\input{ud7/figure/filtri-alluminio}
+\end{center}
+Raddoppiare lo spessore eleva al quadrato la frazione trasmessa.'''
 
   [[quesito.opzione]]
   testo = '''$1/9$'''
