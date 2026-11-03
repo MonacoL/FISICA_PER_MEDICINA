@@ -365,11 +365,7 @@ dati.pc = { valore = 60, unita = "\\mmHg" }
   domanda = '''Di quanti millimetri di mercurio la pressione del sangue diminuisce salendo dal cuore al cervello?'''
   calcolo = "rho_sangue * g * hs / mmHg"
   risultato = { valore = 1.6e2, unita = "\\mmHg", cifre = 2 }
-  soluzione = '''Per la legge di Stevino, fra due punti del sangue con dislivello $h$ la differenza di pressione è $\rho g h$. In figura le quote e le pressioni che si trovano nei tre punti del problema.
-\begin{center}
-\input{ud3/figure/giraffa}
-\end{center}
-Fra il cuore e il cervello:
+  soluzione = '''Per la legge di Stevino, fra due punti del sangue con dislivello $h$ la differenza di pressione è $\rho g h$. Fra il cuore e il cervello:
 \[
   \Delta p = \SI{1060}{\kilo\gram\per\metre\cubed} \cdot \SI{9,8}{\metre\per\second\squared} \cdot \SI{2,0}{\metre} = 10388 \cdot 2{,}0\,\si{\pascal} \approx \SI{20800}{\pascal}
 \]
@@ -401,7 +397,10 @@ Più del doppio della pressione media di una persona: il cuore della giraffa ha 
 \[
   p_\text{zampe} = \SI{216}{\mmHg} + \SI{141}{\mmHg} = \SI{357}{\mmHg} \approx \SI{3,6e2}{\mmHg}
 \]
-La pelle delle zampe della giraffa è molto spessa e tesa, come una calza elastica, e impedisce che i vasi si dilatino e che il liquido esca nei tessuti: è la stessa funzione delle calze elastiche contro le vene varicose.'''
+La pelle delle zampe della giraffa è molto spessa e tesa, come una calza elastica, e impedisce che i vasi si dilatino e che il liquido esca nei tessuti: è la stessa funzione delle calze elastiche contro le vene varicose. In figura le quote e le pressioni trovate nei tre punti.
+\begin{center}
+\input{ud3/figure/giraffa}
+\end{center}'''
 
 [[problema]]
 id = "ud3-statica-sollevatore"
@@ -1298,7 +1297,7 @@ Un ago di diametro interno \SI{1,2}{\milli\metre} invece di \SI{0,40}{\milli\met
 [[problema]]
 id = "ud3-viscosi-bypass"
 livello = 3
-testo = '''Una coronaria sana ha una resistenza idraulica di {{R0}}, e fra i suoi due estremi il sangue ha una differenza di pressione di {{dp}}. Una placca restringe un tratto lungo un quinto della coronaria, e in quel tratto il raggio si dimezza. Tratta la coronaria come un tubo di raggio costante, con il tratto ristretto in serie con il resto, e considera laminare il moto. Supponi che la differenza di pressione non cambi.'''
+testo = '''Una coronaria sana ha una resistenza idraulica di {{R0}}, e fra i suoi due estremi il sangue ha una differenza di pressione di {{dp}}. Una placca restringe un tratto lungo un quinto della coronaria, e in quel tratto il raggio si dimezza. Tratta la coronaria sana come un tubo di raggio costante, e il tratto ristretto come un tubo più stretto in serie con il resto, e considera laminare il moto. Supponi che la differenza di pressione non cambi.'''
 dati.R0 = { valore = "1,0e10", unita = "\\pascal\\second\\per\\metre\\cubed" }
 dati.dp = { valore = "1,0e4", unita = "\\pascal" }
 
@@ -1332,7 +1331,7 @@ cioè \SI{60}{\milli\litre} al minuto. Dopo, con la resistenza del punto (a):
 Un quarto di prima, \SI{15}{\milli\litre} al minuto: il muscolo cardiaco servito dalla coronaria va in ischemia, soprattutto sotto sforzo.'''
 
   [[problema.parte]]
-  domanda = '''Un chirurgo fa un bypass: collega un vaso, con resistenza \SI{2,0e10}{\pascal\second\per\metre\cubed}, dall'aorta alla coronaria dopo la placca, in parallelo con tutta la coronaria malata. Con la stessa differenza di pressione, quanto sangue arriva ora al cuore oltre la placca?'''
+  domanda = '''Un chirurgo fa un bypass: collega un vaso, con resistenza \SI{2,0e10}{\pascal\second\per\metre\cubed}, dall'aorta all'estremità della coronaria, a valle di tutto il tratto malato: il bypass è in parallelo con tutta la coronaria. Con la stessa differenza di pressione, quanto sangue arriva in tutto, sommando i due rami, al muscolo cardiaco servito dalla coronaria?'''
   calcolo = "dp / (1 / (1 / (R0 / 5 * 2**4 + R0 * 4 / 5) + 1 / 2.0e10))"
   risultato = { valore = 7.5e-7, unita = "\\metre\\cubed\\per\\second", cifre = 2 }
   soluzione = '''Si lavora in unità di \SI{e10}{\pascal\second\per\metre\cubed}. La coronaria malata (4,0) e il bypass (2,0) sono in parallelo:
@@ -1753,9 +1752,9 @@ Una pressione sistolica così bassa non è sostenibile: il controllo della press
 \]
 Il sangue rallenta. Per il teorema di Bernoulli, con i due tratti alla stessa altezza e $\frac{1}{2}\rho = 530$, la pressione cresce di
 \[
-  p_2 - p_1 = \tfrac{1}{2}\rho\,(v_1^2 - v_2^2) = 530 \cdot (0{,}25 - 0{,}0064)\,\si{\pascal} \approx 530 \cdot 0{,}24\,\si{\pascal} \approx \SI{127}{\pascal} \approx \SI{1,3e2}{\pascal}
+  p_2 - p_1 = \tfrac{1}{2}\rho\,(v_1^2 - v_2^2) = 530 \cdot (0{,}25 - 0{,}0064)\,\si{\pascal} \approx 530 \cdot 0{,}244\,\si{\pascal} \approx \SI{129}{\pascal} \approx \SI{1,3e2}{\pascal}
 \]
-dove $530 \cdot 0{,}24 = 500 \cdot 0{,}24 + 30 \cdot 0{,}24 = 120 + 7{,}2 \approx 127$. In millimetri di mercurio è $127/133 \approx \SI{1,0}{\mmHg}$, meno dell'1\% di \SI{120}{\mmHg}. Si può quindi dare la stessa pressione ai due tratti: la tensione nell'aneurisma cresce per il raggio, non per la pressione.'''
+dove $530 \cdot 0{,}244 = 500 \cdot 0{,}244 + 30 \cdot 0{,}244 = 122 + 7{,}3 \approx 129$. In millimetri di mercurio è $129/133 \approx \SI{1,0}{\mmHg}$, meno dell'1\% di \SI{120}{\mmHg}. Si può quindi dare la stessa pressione ai due tratti: la tensione nell'aneurisma cresce per il raggio, non per la pressione.'''
 
 [[problema]]
 id = "ud3-superficie-alveoli"
@@ -2075,7 +2074,7 @@ soluzione = '''Su un corpo completamente immerso agiscono il peso, $\rho_\text{c
 [[quesito]]
 id = "ud3-statica-iperbarica-mmhg"
 tipo = "completamento"
-testo = '''Durante una seduta in camera iperbarica la pressione assoluta dell'aria è {{p}}. Con $\SI{1}{atm} = \SI{760}{\mmHg}$, la pressione nella camera supera quella atmosferica esterna di \completa{} mmHg.'''
+testo = '''Durante una seduta in camera iperbarica la pressione assoluta dell'aria è {{p}}, e fuori la pressione è \SI{1}{atm}. Con $\SI{1}{atm} = \SI{760}{\mmHg}$, la pressione nella camera supera quella esterna di \completa{} mmHg.'''
 dati.p = { valore = "2,5", unita = "atm" }
 calcolo = "(p - 1) * 760"
 risposta = "1140"
@@ -2101,8 +2100,9 @@ soluzione = '''A parità di pressione, $\rho g \Delta h$ è lo stesso: una colon
 [[quesito]]
 id = "ud3-statica-tavoletta"
 tipo = "completamento"
-testo = '''Una tavoletta di schiuma per la riabilitazione in acqua galleggia con un quinto del suo volume immerso. La densità della schiuma è \completa{} kg/m³.'''
-calcolo = "1000 / 5"
+testo = '''Una tavoletta di schiuma per la riabilitazione galleggia in acqua ({{rho}}) con un quinto del suo volume immerso. La densità della schiuma è \completa{} kg/m³.'''
+dati.rho = { valore = 1000, unita = "\\kilo\\gram\\per\\metre\\cubed" }
+calcolo = "rho / 5"
 risposta = "200"
 soluzione = '''Per un corpo che galleggia la frazione immersa è il rapporto delle densità, $V_\text{imm}/V = \rho_\text{c}/\rho_\text{f}$. Quindi
 \[
@@ -2320,25 +2320,25 @@ soluzione = '''Le due classificazioni sono indipendenti. Gli strati che scorrono
 [[quesito]]
 id = "ud3-viscosi-raddoppio"
 tipo = "multipla"
-testo = '''Un organo ha bisogno del doppio del sangue. A parità di differenza di pressione, e con moto laminare, il raggio delle sue arteriole deve'''
+testo = '''Un organo ha bisogno del doppio del sangue. A parità di differenza di pressione, e con moto laminare, il raggio delle sue arteriole deve cambiare di'''
 corretta = "D"
 calcolo = "round(100 * (2**0.25 - 1))"
 soluzione = '''Per la legge di Poiseuille la portata è proporzionale a $r^4$. Per raddoppiarla serve un fattore $k$ con $k^4 = 2$. Si prova $k = 1{,}19$: $1{,}19^2 \approx 1{,}42$ e $1{,}42^2 \approx 2{,}0$. Il raggio deve aumentare di circa il 19\%.'''
 
   [[quesito.opzione]]
-  testo = '''aumentare del 100\%'''
+  testo = '''$+100\%$'''
   commento = '''Tratta la portata come proporzionale al raggio. Con il raggio doppio la portata diventerebbe $2^4 = 16$ volte più grande.'''
   [[quesito.opzione]]
-  testo = '''aumentare del 41\%'''
+  testo = '''$+41\%$'''
   commento = '''Tratta la portata come proporzionale a $r^2$, cioè all'area: $\sqrt{2} \approx 1{,}41$. Ma con il raggio cresce anche la velocità media, e la portata va con $r^4$.'''
   [[quesito.opzione]]
-  testo = '''aumentare del 26\%'''
+  testo = '''$+26\%$'''
   commento = '''Usa la terza potenza del raggio: $1{,}26^3 \approx 2$. La potenza giusta è la quarta: $1{,}26^4 \approx 2{,}5$.'''
   [[quesito.opzione]]
-  testo = '''aumentare del 19\%'''
+  testo = '''$+19\%$'''
   valore = 19
   [[quesito.opzione]]
-  testo = '''diminuire del 19\%'''
+  testo = '''$-19\%$'''
   commento = '''Il numero è giusto, il verso no: un'arteriola più stretta ha una resistenza maggiore e lascia passare meno sangue. Per avere più sangue le arteriole si dilatano.'''
 
 [[quesito]]
@@ -2427,8 +2427,8 @@ soluzione = '''Per la legge di Jurin, $h = 2\gamma\cos\theta/(\rho g r)$, l'alte
   testo = '''\SI{6}{\centi\metre}'''
   valore = 6
   [[quesito.opzione]]
-  testo = '''\SI{0,22}{\centi\metre}'''
-  commento = '''Sbaglia due volte: proporzionalità diretta e al quadrato, $2/3^2 \approx 0{,}22$.'''
+  testo = '''\SI{3}{\centi\metre}'''
+  commento = '''Legge «tre volte più piccolo» come «più piccolo di un terzo»: con $r' = 2r/3$ l'altezza diventa $2 \cdot 3/2 = \SI{3}{\centi\metre}$. Tre volte più piccolo vuol dire $r' = r/3$.'''
 
 [[quesito]]
 id = "ud3-superficie-bolla-sapone"

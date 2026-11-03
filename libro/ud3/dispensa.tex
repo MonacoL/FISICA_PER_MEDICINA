@@ -562,9 +562,9 @@ circa $64/133 \approx \SI{0,5}{\mmHg}$: un aumento piccolo. Nell'aneurisma l'eff
 
 \begin{applicazione}{l'ecocardiografia e la stenosi aortica}
 Quando la valvola aortica è stenotica, il sangue che esce dal ventricolo deve passare per un orifizio stretto, e lo attraversa a grande velocità. L'eco-Doppler (UD4) misura questa velocità, e dal teorema di Bernoulli il cardiologo ricava la differenza di pressione fra il ventricolo e l'aorta. Se la velocità prima della valvola è trascurabile, la differenza è $\Delta p = \frac{1}{2}\rho v^2 = 530\,v^2$ in pascal, con $v$ in metri al secondo; in millimetri di mercurio $530/133 \approx 4$, e si ottiene la regola usata in ecocardiografia:
-\[
-  \Delta p\ (\text{in } \si{\mmHg}) \approx 4\,v^2\ (v \text{ in } \si{\metre\per\second})
-\]
+\begin{formula}[Regola dell'ecocardiografia]
+\Delta p\ (\text{in } \si{\mmHg}) \approx 4\,v^2\ (v \text{ in } \si{\metre\per\second})
+\end{formula}
 Una velocità di \SI{4}{\metre\per\second} attraverso la valvola corrisponde a $4 \cdot 4^2 = \SI{64}{\mmHg}$: il ventricolo deve produrre una pressione di \SI{64}{\mmHg} più alta di quella dell'aorta. Una velocità di \SI{4}{\metre\per\second} o più è uno dei criteri della stenosi aortica grave.
 \end{applicazione}
 
@@ -847,9 +847,9 @@ Gli alveoli polmonari sono piccole sacche di raggio intorno a \SI{0,1}{\milli\me
 
 \begin{applicazione}{la parete dei vasi e l'aneurisma}
 La legge di Laplace vale anche per un vaso sanguigno, che è un tubo di raggio $r$ con dentro una pressione $\Delta p$ più alta di fuori. Per un cilindro, la tensione $T$ che la parete deve sopportare (la forza per unità di lunghezza che tiene unita la parete, in \si{\newton\per\metre}, come $\gamma$) è
-\[
-  T = \Delta p\;r
-\]
+\begin{formula}[Legge di Laplace per la parete di un vaso]
+T = \Delta p\;r
+\end{formula}
 È la stessa legge di Laplace, scritta per la parete: una sfera è curva in due direzioni e dà $\Delta p = 2T/r$, come la goccia; un cilindro è curvo in una sola direzione, intorno all'asse, e dà $\Delta p = T/r$, cioè $T = \Delta p\,r$. Qui $T$ non è una proprietà di un liquido, come $\gamma$, ma la tensione che il tessuto della parete deve reggere. Nell'aorta, con $r = \SI{1,2}{\centi\metre}$ e $\Delta p = \SI{100}{\mmHg} = 100 \cdot \SI{133}{\pascal} = \SI{1,33e4}{\pascal}$, la tensione è $T = \SI{1,33e4}{\pascal} \cdot \SI{1,2e-2}{\metre} \approx \SI{160}{\newton\per\metre}$ (infatti $1{,}33 \cdot 1{,}2 \approx 1{,}6$). In un capillare, con $r = \SI{4}{\micro\metre}$ e $\Delta p = \SI{25}{\mmHg} \approx \SI{3,3e3}{\pascal}$, è $T = \SI{3,3e3}{\pascal} \cdot \SI{4e-6}{\metre} \approx \SI{1,3e-2}{\newton\per\metre}$, più di diecimila volte meno: per questo il capillare può avere una parete sottilissima, fatta di un solo strato di cellule, che lascia passare gli scambi. In un aneurisma il raggio cresce, e con esso la tensione sulla parete, già indebolita: la parete si sfianca ancora, il raggio cresce di più, e il circolo vizioso può portare alla rottura.
 \end{applicazione}
 
