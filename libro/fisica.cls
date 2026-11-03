@@ -1,4 +1,4 @@
-% fisica.cls — stile del Libro (ricostruito dai PDF UD7, ADR 0003)
+% fisica.cls, stile del Libro (ricostruito dai PDF UD7, ADR 0003)
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{fisica}[2026/11/02 Fisica per il semestre filtro]
 
@@ -68,7 +68,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 % Fuori da una UD (indice, frontespizio) l'intestazione resta vuota.
-\fancyhead[L]{\small\ifx\udtitolo\empty\else Fisica -- UD~\theunita: \udtitolo\fi}
+\fancyhead[L]{\small\ifx\udtitolo\empty\else UD~\theunita: \udtitolo\fi}
 \fancyhead[R]{\small\parte}
 \fancyfoot[C]{\small\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
@@ -111,7 +111,7 @@
   \thispagestyle{fancy}%
   \begin{center}
     {\LARGE\bfseries Eserciziario\par}\vspace{0.4em}
-    {\large Unità didattica \theunita\ -- \udtitolo\par}\vspace{0.2em}
+    {\large Unità didattica \theunita: \udtitolo\par}\vspace{0.2em}
     {\normalsize #1\par}
   \end{center}}
 
@@ -137,7 +137,7 @@
   \phantomsection\addcontentsline{toc}{section}{Simulazione #1}%
   \begin{center}
     {\LARGE\bfseries Simulazione #1\par}\vspace{0.4em}
-    {\normalsize 31 quesiti: 21 a risposta multipla e 10 a completamento \textperiodcentered\ 50 minuti\par}
+    {\normalsize 31 quesiti in 50 minuti, 21 a risposta multipla e 10 a completamento\par}
   \end{center}}
 
 \newcommand{\soluzionisimulazione}[1]{%
@@ -224,7 +224,7 @@
 
 % --- Esercizi (provvisorio: il formato vero lo decide il ticket "Fonte unica
 % degli esercizi") -------------------------------------------------------
-\newcommand{\livello}[2]{\subsection*{Livello #1 -- #2}}
+\newcommand{\livello}[2]{\subsection*{Livello #1: #2}}
 \newcommand{\problema}{%
   \par\medskip\refstepcounter{problema}\textbf{Problema~\theproblema.}\ }
 \newcommand{\quesito}{%
@@ -315,7 +315,7 @@
   filtro. I quesiti d'esame sono originali, costruiti sul modello delle prove reali:
   all'esame non si usano calcolatrice né formulario.\par\medskip
   Quest'opera è distribuita con licenza Creative Commons
-  Attribuzione -- Non commerciale -- Condividi allo stesso modo 4.0 Internazionale
+  Attribuzione - Non commerciale - Condividi allo stesso modo 4.0 Internazionale
   (CC BY-NC-SA 4.0), \url{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it}.
   Il codice che lo genera (template \LaTeX{} e script) è distribuito con licenza MIT.
   \copyright~2026 \autore.\par}

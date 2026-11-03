@@ -7,7 +7,7 @@ Dopo il primo giro di revisione, tocca a chi ha scritto la UD. Si fanno al massi
 Per ogni rapporto del primo giro pubblica un commento di risposta nella PR, con `gh pr comment <numero> --body-file <file>`:
 
 ```markdown
-## Risposte al <nome del revisore> · <UD> <parte> · giro 1
+## Risposte al <nome del revisore>, <UD> <parte>, giro 1
 Rapporto: <link al commento del revisore>
 
 | Rilievo | Gravità | Decisione | Che cosa cambia / motivo |

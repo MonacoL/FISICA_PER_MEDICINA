@@ -22,7 +22,7 @@
 #   risultati rapidi per quella parte, es. rapido = '''\SI{140}{\metre}; spostamento nullo''';
 # - le costanti sono quelle che lo studente usa a mano.
 
-titolo = "Eserciziario UD7 · Fisica delle radiazioni"
+titolo = "Fisica delle radiazioni"
 
 [costanti]
 ln2 = 0.69

@@ -9,13 +9,6 @@ window.MathJax = {
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     macros: {
-      SI: ['#2\\,\\mathrm{#3}', 3, ''], num: ['#1', 1],
-      centi: 'c', second: 's', hour: 'h', mega: 'M', giga: 'G', kilo: 'k', milli: 'm', nano: 'n',
-      joule: 'J', watt: 'W', hertz: 'Hz', electronvolt: 'eV', per: '/', squared: '^2', ang: ['#1^\\circ', 1],
-      kelvin: 'K', celsius: '{}^\\circ\\mathrm{C}', degree: '^\\circ', gram: 'g', litre: 'L', mole: 'mol',
-      newton: 'N', pascal: 'Pa', volt: 'V', tesla: 'T', minute: 'min', calorie: 'cal', bel: 'B', deci: 'd',
-      micro: '\\mu ', radian: 'rad', cubed: '^3', metre: 'm', bar: 'bar', mmHg: 'mmHg', atm: 'atm', SIrange: ['#2\\text{–}#3\\,\\mathrm{#4}', 4, ''],
-      becquerel: 'Bq', percent: '\\%', tothe: ['^{#1}', 1],
       nuclide: ['{}^{#1}_{#2}\\mathrm{#3}', 3]
     }
   }
@@ -32,8 +25,13 @@ window.MathJax = {
   body { margin: 0; background: var(--sfondo); color: var(--testo); font: 17px/1.55 Georgia, serif; }
   main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
   a { color: var(--accento); }
-  .nota { font: 14px/1.5 system-ui, sans-serif; color: var(--tenue); border-left: 3px solid var(--accento); padding: 4px 12px; }
-  h1 { font-size: 26px; margin: 8px 0 4px; }
+  .nota { font: 14px/1.5 system-ui, sans-serif; margin: 0; }
+  .occhiello { font: 600 13px system-ui, sans-serif; text-transform: uppercase; letter-spacing: .04em; color: var(--tenue); margin: 16px 0 0; }
+  h1 { font-size: 26px; margin: 4px 0 4px; }
+  details.gruppo { border-top: 1px solid var(--linea); }
+  details.gruppo:last-child { border-bottom: 1px solid var(--linea); }
+  summary { cursor: pointer; padding: 14px 4px; font: 600 18px/1.4 system-ui, sans-serif; color: var(--accento); }
+  summary .quanti { font: 400 14px system-ui, sans-serif; color: var(--tenue); margin-left: 10px; }
   .es { background: var(--carta); border: 1px solid var(--linea); border-radius: 6px; padding: 16px 18px; margin: 18px 0; }
   .titolo { font: 600 13px system-ui, sans-serif; text-transform: uppercase; letter-spacing: .04em; color: var(--accento); }
   .opz { display: block; width: 100%; text-align: left; font: inherit; color: inherit; background: none;
@@ -51,7 +49,8 @@ window.MathJax = {
 </head>
 <body>
 <main>
-  <p class="nota"><a href="index.html">Tutti gli eserciziari</a> · Generata da <code>esercizi.toml</code>, la stessa fonte dell'eserciziario in PDF.</p>
+  <p class="nota"><a href="index.html">Tutti gli eserciziari</a></p>
+  <p class="occhiello"><!--OCCHIELLO--></p>
   <h1><!--TITOLO--></h1>
   <div id="esercizi"></div>
 </main>
@@ -68,7 +67,7 @@ function interruttore(etichetta, contenuto) {
 }
 function normalizza(s) { return s.trim().replace(/\s+/g, '').toUpperCase(); }
 
-ESERCIZI.forEach(es => {
+function esercizio(es) {
   const c = el('section', 'es');
   c.append(el('div', 'titolo', es.titolo), el('p', '', es.testo));
   if (es.tipo === 'problema') {
@@ -95,7 +94,17 @@ ESERCIZI.forEach(es => {
     const sol = el('div', 'soluzione nascosto', `<b>Risposta: ${es.risposta}.</b> ${es.soluzione}`);
     c.append(inp, prova, esito, el('br'), interruttore('Soluzione svolta', sol), sol);
   }
-  box.append(c);
+  return c;
+}
+
+// Un gruppo per livello o per tipo di quesito: si apre con un clic.
+ESERCIZI.forEach(g => {
+  const d = el('details', 'gruppo');
+  const s = el('summary', '', g.titolo);
+  const nome = g.esercizi[0].tipo === 'problema' ? ['problema', 'problemi'] : ['quesito', 'quesiti'];
+  s.append(el('span', 'quanti', `${g.esercizi.length} ${nome[g.esercizi.length === 1 ? 0 : 1]}`));
+  d.append(s, ...g.esercizi.map(esercizio));
+  box.append(d);
 });
 </script>
 </body>

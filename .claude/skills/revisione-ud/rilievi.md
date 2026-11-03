@@ -13,16 +13,16 @@ Nel dubbio fra due gravità, scegli la più alta e spiega il dubbio nel rilievo.
 ## Formato
 
 ```markdown
-## <Nome del revisore> · <UD> <parte> · giro <1 | 2>
+## <Nome del revisore>, <UD> <parte>, giro <1 | 2>
 
 <Una riga: che cosa hai letto e quanti rilievi per gravità, es. "3 rilievi: 1 bloccante, 1 da correggere, 1 suggerimento".>
 
-### <PREFISSO>-1 · <Gravità>
+### <PREFISSO>-1 (<gravità>)
 **Dove:** `libro/ud7/dispensa.tex:42` (PDF p. 3)
 **Problema:** <che cosa non va, citando il testo o la formula>
 **Correzione proposta:** <testo, formula o conto corretto, pronto da applicare>
 
-### <PREFISSO>-2 · <Gravità>
+### <PREFISSO>-2 (<gravità>)
 ...
 
 <Sezioni aggiuntive richieste dal singolo revisore, es. la copertura del syllabus.>

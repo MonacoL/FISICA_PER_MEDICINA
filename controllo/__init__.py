@@ -137,6 +137,24 @@ def segnaposti(cartella: Path) -> list[str]:
     ]
 
 
+# Separatori da testo generato (anti-pattern AI): il trattino lungo e il punto medio fra parole,
+# come in «Eserciziario UD1 · Meccanica». Il punto medio fra due numeri è una moltiplicazione
+# (3·10^4 in una risposta a completamento) e resta; nelle formule il prodotto si scrive \cdot.
+SEPARATORE = re.compile(r"—|\\textemdash\b|\\textperiodcentered\b|·")
+PRODOTTO = re.compile(r"[\d)]\s?·\s?[\d(]")
+
+
+def separatori(cartella: Path) -> list[str]:
+    """I trattini lunghi e i punti medi usati come separatori nei sorgenti del libro."""
+    problemi = []
+    for posizione, riga in righe(cartella, ".tex", ".cls", ".toml"):
+        prodotti = {m.start() + m.group().index("·") for m in PRODOTTO.finditer(riga)}
+        for trovato in SEPARATORE.finditer(riga):
+            if trovato.group() != "·" or trovato.start() not in prodotti:
+                problemi.append(f"{posizione}: separatore da togliere: {trovato.group()}")
+    return problemi
+
+
 # Un overfull hbox più largo di così si vede nel margine: va nel rapporto come avviso.
 SOGLIA_OVERFULL_PT = 5.0
 
@@ -264,7 +282,7 @@ def main() -> None:
         rapporto(f"Esercizi {ud.upper()}: {stato}", errori_esercizi, avvisi_esercizi)
         riuscito = riuscito and not errori_esercizi
 
-    problemi = segnaposti(argomenti.cartella) + pacchetti_assenti(
+    problemi = segnaposti(argomenti.cartella) + separatori(argomenti.cartella) + pacchetti_assenti(
         argomenti.cartella, argomenti.pacchetti
     )
     rapporto(f"Sorgenti: {'da sistemare' if problemi else 'puliti'}", problemi, [])
