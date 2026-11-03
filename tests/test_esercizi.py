@@ -132,6 +132,19 @@ def test_figura_nel_testo_diventa_un_svg_nella_pagina_web() -> None:
 
 
 
+
+def test_unita_scritte_come_testo_diventano_siunitx_nel_libro() -> None:
+    from controllo.esercizi import grandezza
+
+    assert grandezza("0,35", "cm^-1") == r"\SI[per-mode=power]{0,35}{\centi\metre\tothe{-1}}"
+    assert grandezza("2,0", "W/m^2") == r"\SI{2,0}{\watt\per\metre\squared}"
+
+
+def test_risposta_negativa_esce_con_il_segno_meno() -> None:
+    from controllo.esercizi import risposta_latex
+
+    assert risposta_latex("-11") == "$-11$" and risposta_latex("0,8") == "0,8"
+
 def test_unita_di_siunitx_diventano_latex_per_mathjax() -> None:
     from controllo.esercizi import latex_a_html
 

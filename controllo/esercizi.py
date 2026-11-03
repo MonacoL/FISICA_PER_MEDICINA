@@ -230,8 +230,13 @@ def testo_quesito(q: dict) -> str:
     return testo + ("\n" + opzioni_latex(q) if q["tipo"] == "multipla" else "")
 
 
+def risposta_latex(risposta: str) -> str:
+    """Una risposta a completamento nel PDF: un numero negativo con il segno meno, non il trattino."""
+    return f"${risposta}$" if re.fullmatch(r"-[0-9,]+", risposta) else risposta
+
+
 def risposta_breve(q: dict) -> str:
-    return q["corretta"] if q["tipo"] == "multipla" else q["risposta"]
+    return q["corretta"] if q["tipo"] == "multipla" else risposta_latex(q["risposta"])
 
 
 def soluzione_quesito(q: dict) -> str:
@@ -241,7 +246,7 @@ def soluzione_quesito(q: dict) -> str:
             rf"  \item {LETTERE[j]}) {o['commento']}" for j, o in enumerate(q["opzione"]) if "commento" in o
         ]
         return testo + "\n\\begin{itemize}\n" + "\n".join(distrattori) + "\n\\end{itemize}"
-    return rf"\textbf{{Risposta: {q['risposta']}.}} {q['soluzione']}"
+    return rf"\textbf{{Risposta: {risposta_latex(q['risposta'])}.}} {q['soluzione']}"
 
 
 def parti(p: dict) -> list[str]:
@@ -365,7 +370,7 @@ PREFISSI = {
     "pico": "p", "nano": "n", "micro": r"\mu ", "milli": "m", "centi": "c", "deci": "d",
     "kilo": "k", "mega": "M", "giga": "G",
 }
-UNITA = {
+SIMBOLI = {
     "metre": "m", "second": "s", "gram": "g", "kelvin": "K", "mole": "mol", "ampere": "A",
     "newton": "N", "joule": "J", "watt": "W", "pascal": "Pa", "hertz": "Hz", "volt": "V",
     "coulomb": "C", "farad": "F", "ohm": r"\Omega", "tesla": "T", "weber": "Wb",
@@ -437,8 +442,8 @@ def unita_tex(unita: str, per_potenza: bool = False) -> str:
         i += len(nome) + 1
         if nome in PREFISSI:
             prefisso += PREFISSI[nome]
-        elif nome in UNITA:
-            simbolo = UNITA[nome]
+        elif nome in SIMBOLI:
+            simbolo = SIMBOLI[nome]
             if not simbolo.startswith(("\\", "{")):
                 simbolo = rf"\mathrm{{{simbolo}}}"
             if prefisso.startswith(r"\mu"):
@@ -489,7 +494,7 @@ def siunitx_tex(testo: str) -> tuple[str, list[tuple[int, int]]]:
             numero, j = argomento(testo, j)
             unita, j = argomento(testo, j)
             u = unita_tex(unita, per_potenza)
-            tex = numero_tex(numero) + ("" if u == UNITA["degree"] else r"\,") + u
+            tex = numero_tex(numero) + ("" if u == SIMBOLI["degree"] else r"\,") + u
         elif macro == "SIrange":
             da, j = argomento(testo, j)
             a, j = argomento(testo, j)
