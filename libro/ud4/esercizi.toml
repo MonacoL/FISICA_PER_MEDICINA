@@ -94,7 +94,7 @@ dati.lam = { valore = "0,50", unita = "m" }
 \[
   k = \frac{2\pi}{\lambda} = \frac{6{,}28}{\SI{0,50}{\metre}} = 6{,}28 \cdot 2\,\si{\radian\per\metre} \approx \SI{12,6}{\radian\per\metre}
 \]
-Dividere per $0{,}50$ vuol dire moltiplicare per 2. Il numero d'onda dice di quanti radianti cresce la fase per ogni metro: qui $4\pi$.'''
+Dividere per $0{,}50$ vuol dire moltiplicare per 2. Il numero d'onda dice di quanti radianti cresce l'angolo $kx$ dentro il seno per ogni metro: qui $4\pi$, cioè due giri completi, perché in un metro stanno due lunghezze d'onda.'''
 
 [[problema]]
 id = "ud4-osc-astronauta"
@@ -110,7 +110,8 @@ dati.T = { valore = "1,2", unita = "s" }
   soluzione = '''La pulsazione si ricava dal periodo, con $2\pi \approx 6{,}28$:
 \[
   \omega = \frac{2\pi}{T} = \frac{6{,}28}{\SI{1,2}{\second}} \approx \SI{5,23}{\radian\per\second} \approx \SI{5,2}{\radian\per\second}
-\]'''
+\]
+Il quoziente: $6{,}28/1{,}2 = 62{,}8/12$; $12 \cdot 5 = 60$, restano $2{,}8$, e $2{,}8/12 \approx 0{,}23$. Quindi $\omega \approx \SI{5,23}{\radian\per\second}$.'''
 
   [[problema.parte]]
   domanda = '''Quanto vale la massa dell'astronauta?'''
@@ -432,6 +433,21 @@ dati.s = { valore = "0,20", unita = "mm" }
 \]
 La lunghezza d'onda è più del doppio che nei tessuti molli: il calcolo si fa sempre con la velocità del mezzo in cui l'onda si trova.'''
 
+  [[problema.parte]]
+  domanda = '''La struttura si trova a \SI{4,0}{\centi\metre} di profondità nei tessuti molli. Dopo quanto tempo torna alla sonda la sua eco? Quanti periodi degli ultrasuoni da \SI{10}{\mega\hertz} stanno in questo tempo?'''
+  calcolo = "2 * 4.0e-2 / v_tessuti * 1e6"
+  risultato = { valore = 52, unita = "\\micro\\second", cifre = 2 }
+  rapido = '''\SI{52}{\micro\second}; circa 520 periodi'''
+  soluzione = '''L'impulso va alla struttura e torna: percorre $2d = 2 \cdot \SI{4,0}{\centi\metre} = \SI{8,0e-2}{\metre}$ nei tessuti molli. Quindi
+\[
+  t = \frac{2d}{v} = \frac{\SI{8,0e-2}{\metre}}{\SI{1540}{\metre\per\second}} = \frac{8{,}0}{1{,}54} \cdot 10^{-2-3}\,\si{\second} \approx 5{,}2 \cdot 10^{-5}\,\si{\second} = \SI{52}{\micro\second}
+\]
+perché $1{,}54 \cdot 5{,}2 \approx 8{,}0$. Con il periodo del punto (b), $T = \SI{e-7}{\second}$, il numero di periodi è
+\[
+  \frac{t}{T} = \frac{\SI{5,2e-5}{\second}}{\SI{e-7}{\second}} = 5{,}2 \cdot 10^{-5+7} = 520
+\]
+L'eco torna dopo circa 520 oscillazioni degli ultrasuoni: un impulso di poche oscillazioni è molto più breve del tempo di andata e ritorno, e l'ecografo fa in tempo a riceverlo prima di emettere il successivo.'''
+
 [[problema]]
 id = "ud4-onda-equazione-corda"
 livello = 3
@@ -519,15 +535,15 @@ dati.rho = { valore = 1025, unita = "\\kilo\\gram\\per\\metre\\cubed" }
   [[problema.parte]]
   calcolo = "math.sqrt(B / rho)"
   risultato = { valore = 1.5e3, unita = "m/s", cifre = 2 }
-  soluzione = '''Il suono è un'onda longitudinale e nel fluido la sua velocità è $v = \sqrt{B/\rho}$. La densità è $\SI{1025}{\kilo\gram\per\metre\cubed} = \SI{1,025e3}{\kilo\gram\per\metre\cubed}$, quindi
+  soluzione = '''Il suono è un'onda longitudinale e nel fluido la sua velocità è $v = \sqrt{B/\rho}$. La densità è quasi $\SI{1000}{\kilo\gram\per\metre\cubed} = \SI{e3}{\kilo\gram\per\metre\cubed}$, e per una stima a due cifre basta questo valore:
 \[
-  \frac{B}{\rho} = \frac{\SI{2,3e9}{\pascal}}{\SI{1,025e3}{\kilo\gram\per\metre\cubed}} = \frac{2{,}3}{1{,}025} \cdot 10^{9-3}\,\si{\metre\squared\per\second\squared} \approx 2{,}24 \cdot 10^{6}\,\si{\metre\squared\per\second\squared}
+  \frac{B}{\rho} \approx \frac{\SI{2,3e9}{\pascal}}{\SI{e3}{\kilo\gram\per\metre\cubed}} = 2{,}3 \cdot 10^{9-3}\,\si{\metre\squared\per\second\squared} = 2{,}3 \cdot 10^{6}\,\si{\metre\squared\per\second\squared}
 \]
-Dividere per un numero poco più grande di 1 è come moltiplicare per uno poco più piccolo di 1: $2{,}3/1{,}025 \approx 2{,}3 \cdot (1 - 0{,}025) = 2{,}3 - 0{,}06 \approx 2{,}24$. La radice:
+La radice:
 \[
-  v = \sqrt{2{,}24 \cdot 10^{6}}\,\si{\metre\per\second} = \sqrt{2{,}24} \cdot 10^{3}\,\si{\metre\per\second} \approx \SI{1,5e3}{\metre\per\second}
+  v \approx \sqrt{2{,}3 \cdot 10^{6}}\,\si{\metre\per\second} = \sqrt{2{,}3} \cdot 10^{3}\,\si{\metre\per\second} \approx \SI{1,5e3}{\metre\per\second}
 \]
-perché $1{,}5^2 = 2{,}25$. È quasi la velocità in acqua: il plasma è fatto soprattutto di acqua.'''
+perché $1{,}5^2 = 2{,}25$, e quindi $\sqrt{2{,}3}$ è poco più di $1{,}5$. Con la densità vera, un po' più grande di 1000, la velocità è appena più bassa, ma resta \SI{1,5e3}{\metre\per\second} a due cifre. È quasi la velocità in acqua: il plasma è fatto soprattutto di acqua.'''
 
 [[problema]]
 id = "ud4-vel-osso"
@@ -699,7 +715,7 @@ perché $85 \cdot 0{,}4 = 34$.'''
 [[problema]]
 id = "ud4-interf-impulsi"
 livello = 2
-testo = '''Una corda lunga, di densità lineare {{mu}}, è tesa con una forza di {{F}}. Dalle due estremità partono nello stesso istante due impulsi, uno verso l'altro: il primo è una gobba alta {{h1}} verso l'alto, il secondo una gobba di {{h2}} verso il basso. All'inizio i due impulsi distano {{d}}.'''
+testo = '''Una corda lunga, di densità lineare {{mu}}, è tesa con una forza di {{F}}. Da due punti della corda partono nello stesso istante due impulsi, uno verso l'altro: il primo è una gobba alta {{h1}} verso l'alto, il secondo una gobba di {{h2}} verso il basso. All'inizio i due impulsi distano {{d}}.'''
 dati.mu = { valore = 10, unita = "\\gram\\per\\metre" }
 dati.F = { valore = 25, unita = "\\newton" }
 dati.h1 = { valore = "3,0", unita = "cm" }
@@ -857,7 +873,7 @@ L'intensità si riduce di un fattore 100: diventa un centesimo di quella del rum
 \[
   10 \log_{10} 100 = 10 \log_{10} 10^{2} = 10 \cdot 2\,\si{\deci\bel} = \SI{20}{\deci\bel}
 \]
-Quindi il livello diventa $\SI{110}{\deci\bel} - \SI{20}{\deci\bel} = \SI{90}{\deci\bel}$. È ancora molto, perché le cuffie cancellano bene solo il tono dominante: per questo in risonanza magnetica si usano anche tappi o cuffie passive.'''
+Quindi il livello diventa $\SI{110}{\deci\bel} - \SI{20}{\deci\bel} = \SI{90}{\deci\bel}$. È ancora molto: anche cancellando il 90\% dell'ampiezza resta un centesimo dell'intensità, e il livello scende solo di \SI{20}{\deci\bel}. In più le cuffie cancellano bene solo il tono dominante, non il resto del rumore: per questo in risonanza magnetica si usano anche tappi o cuffie passive.'''
 
 [[problema]]
 id = "ud4-vel-corde-vocali"
@@ -1175,7 +1191,7 @@ Il conto diretto dà lo stesso: $10\log_{10}(4 \cdot 10^{9}) = 10\,(0{,}6 + 9) =
 [[problema]]
 id = "ud4-int-hifu"
 livello = 3
-testo = '''Negli ultrasuoni focalizzati ad alta intensità (HIFU) un trasduttore concentra il fascio in una piccola zona all'interno del corpo, dove il calore distrugge il tessuto, per esempio un fibroma dell'utero. Il trasduttore eroga {{P}} da una superficie di {{S1}}, e tutta la potenza arriva su una zona focale di {{S2}}.'''
+testo = '''Negli ultrasuoni focalizzati ad alta intensità (HIFU) un trasduttore (la sonda che emette gli ultrasuoni) concentra il fascio in una piccola zona all'interno del corpo, dove il calore distrugge il tessuto, per esempio un fibroma dell'utero. Il trasduttore eroga {{P}} da una superficie di {{S1}}, e tutta la potenza arriva su una zona focale di {{S2}}.'''
 dati.P = { valore = 50, unita = "W" }
 dati.S1 = { valore = 20, unita = "\\centi\\metre\\squared" }
 dati.S2 = { valore = "2,0", unita = "\\milli\\metre\\squared" }
@@ -1762,7 +1778,7 @@ La profondità vera è la somma dei due tratti: $\SI{2,9}{\centi\metre} + \SI{3,
 \[
   d = \frac{v\,t}{2} = \frac{\SI{1540}{\metre\per\second} \cdot \SI{8,0e-5}{\second}}{2} = 1540 \cdot 4{,}0 \cdot 10^{-5}\,\si{\metre} = \SI{6,16e-2}{\metre} \approx \SI{6,2}{\centi\metre}
 \]
-Lo schermo mostra la struttura $6{,}16 - 6{,}06 = \SI{0,10}{\centi\metre} = \SI{1}{\milli\metre}$ più in profondità di dove è davvero. Nel grasso il suono è più lento di \SI{1540}{\metre\per\second}: lì l'ecografo sovrastima il tratto di circa \SI{1,8}{\milli\metre} ($\SI{1540}{\metre\per\second} \cdot \SI{20}{\micro\second} = \SI{3,08}{\centi\metre}$ invece di \SI{2,9}{\centi\metre}). Nel muscolo è più veloce, e il tratto viene sottostimato di circa \SI{0,8}{\milli\metre} (\SI{3,08}{\centi\metre} invece di \SI{3,16}{\centi\metre}). Prevale il grasso, e la struttura appare \SI{1}{\milli\metre} più in profondità. In un paziente con uno strato di grasso più spesso l'errore cresce.'''
+Lo schermo mostra la struttura $6{,}16 - 6{,}06 = \SI{0,10}{\centi\metre} = \SI{1}{\milli\metre}$ più in profondità di dove è davvero. In ciascuno strato l'impulso passa \SI{40}{\micro\second} fra andata e ritorno, e l'ecografo gli attribuisce lo spessore $d = v\,t/2 = \SI{1540}{\metre\per\second} \cdot \SI{20}{\micro\second} = \SI{3,08}{\centi\metre}$. Nel grasso il suono è più lento di \SI{1540}{\metre\per\second} e lo spessore vero è \SI{2,9}{\centi\metre}: l'ecografo lo sovrastima di circa \SI{1,8}{\milli\metre}. Nel muscolo il suono è più veloce e lo spessore vero è \SI{3,16}{\centi\metre}: l'ecografo lo sottostima di circa \SI{0,8}{\milli\metre}. Prevale il grasso, e la struttura appare \SI{1}{\milli\metre} più in profondità. In un paziente con uno strato di grasso più spesso l'errore cresce.'''
 
 [[problema]]
 id = "ud4-doppler-carotide"
@@ -1986,7 +2002,7 @@ id = "ud4-vel-acqua-aria"
 tipo = "multipla"
 testo = '''Il suono viaggia in acqua circa quattro volte più veloce che in aria, anche se l'acqua è circa 800 volte più densa. Il motivo è che'''
 corretta = "D"
-soluzione = '''Nei fluidi la velocità del suono è $v = \sqrt{B/\rho}$: la densità sta al denominatore e da sola renderebbe l'acqua più lenta. Ma l'acqua è molto meno comprimibile dell'aria: $B_\text{acqua}/B_\text{aria} \approx \num{2,2e9}/\num{1,4e5} \approx \num{1,6e4}$, mentre il rapporto delle densità è circa 800. Il rapporto $B/\rho$ in acqua è quindi circa $\num{16000}/800 \approx 20$ volte quello dell'aria, e la velocità circa $\sqrt{20} \approx 4{,}5$ volte più grande.'''
+soluzione = '''Nei fluidi la velocità del suono è $v = \sqrt{B/\rho}$: la densità sta al denominatore e da sola renderebbe l'acqua più lenta. Ma l'acqua è molto meno comprimibile dell'aria: $B_\text{acqua}/B_\text{aria} \approx \num{2,2e9}/(\num{1,4e5}) \approx \num{1,6e4}$, mentre il rapporto delle densità è circa 800. Il rapporto $B/\rho$ in acqua è quindi circa $\num{16000}/800 \approx 20$ volte quello dell'aria, e la velocità circa $\sqrt{20} \approx 4{,}5$ volte più grande.'''
 
   [[quesito.opzione]]
   testo = '''un mezzo più denso trasmette il suono più velocemente'''
@@ -2126,13 +2142,13 @@ soluzione = '''La superficie in metri quadrati è $\SI{2,0}{\centi\metre\squared
   commento = '''Divide $0{,}60$ per $2{,}0$ senza convertire i centimetri quadrati: \SI{0,30}{\watt\per\centi\metre\squared} è giusto, ma non è in \si{\watt\per\metre\squared}.'''
   [[quesito.opzione]]
   testo = '''\SI{30}{\watt\per\metre\squared}'''
-  commento = '''Converte i centimetri quadrati come centimetri, $\SI{1}{\centi\metre\squared} = \SI{e-2}{\metre\squared}$: $0{,}60/\num{2,0e-2} = 30$. Il fattore va elevato al quadrato, $(\num{e-2})^2 = \num{e-4}$.'''
+  commento = '''Converte i centimetri quadrati come centimetri, $\SI{1}{\centi\metre\squared} = \SI{e-2}{\metre\squared}$: $0{,}60/(\num{2,0e-2}) = 30$. Il fattore va elevato al quadrato, $(\num{e-2})^2 = \num{e-4}$.'''
   [[quesito.opzione]]
   testo = '''\SI{3,3e-4}{\watt\per\metre\squared}'''
   commento = '''Rovescia la formula: $S/P = \num{2,0e-4}/0{,}60 \approx \num{3,3e-4}$, che si misura in \si{\metre\squared\per\watt}.'''
   [[quesito.opzione]]
   testo = '''\SI{3,0e5}{\watt\per\metre\squared}'''
-  commento = '''Confonde i centimetri quadrati con i millimetri quadrati, $\SI{1}{\milli\metre\squared} = \SI{e-6}{\metre\squared}$: $0{,}60/\num{2,0e-6} = \num{3,0e5}$.'''
+  commento = '''Confonde i centimetri quadrati con i millimetri quadrati, $\SI{1}{\milli\metre\squared} = \SI{e-6}{\metre\squared}$: $0{,}60/(\num{2,0e-6}) = \num{3,0e5}$.'''
   [[quesito.opzione]]
   testo = '''\SI{3,0e3}{\watt\per\metre\squared}'''
   valore = 3000
@@ -2354,7 +2370,7 @@ soluzione = '''I dettagli più piccoli che l'ecografia distingue sono dell'ordin
   commento = '''Rovescia la relazione $\lambda = v/f$: a frequenza più bassa la lunghezza d'onda è più lunga, e i dettagli piccoli si perdono.'''
   [[quesito.opzione]]
   testo = '''una sonda da \SI{20}{\kilo\hertz}, appena sopra il limite dell'udito, perché i tessuti la assorbono pochissimo'''
-  commento = '''A \SI{20}{\kilo\hertz} la lunghezza d'onda nei tessuti è $1540/\num{2e4} \approx \SI{0,077}{\metre} = \SI{7,7}{\centi\metre}$, più grande della tiroide stessa: non si vedrebbe nessun dettaglio. L'ecografia usa frequenze fra 2 e \SI{15}{\mega\hertz}.'''
+  commento = '''A \SI{20}{\kilo\hertz} la lunghezza d'onda nei tessuti è $1540/(\num{2e4}) \approx \SI{0,077}{\metre} = \SI{7,7}{\centi\metre}$, più grande della tiroide stessa: non si vedrebbe nessun dettaglio. L'ecografia usa frequenze fra 2 e \SI{15}{\mega\hertz}.'''
 
 [[quesito]]
 id = "ud4-db-audiometro"
