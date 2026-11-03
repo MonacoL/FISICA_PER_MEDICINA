@@ -1,0 +1,33 @@
+% Posizione del dito nel tremore, x(t) = A cos(omega t) con A = 1,0 cm e
+% T = 0,20 s (problema ud4-osc-tremore). Sono segnati gli istanti dei punti
+% (b) e (c): a t = 0,10 s il dito è in -A, a t = 0,025 s è ancora a 0,71 cm.
+\begin{tikzpicture}[>=Stealth, font=\small, x=40cm, y=1.3cm]
+  % assi (t in secondi, x in centimetri)
+  \draw[->] (0,0) -- (0.235,0) node[right] {$t$ (\si{\second})};
+  \draw[->] (0,-1.4) -- (0,1.6) node[above] {$x$ (\si{\centi\metre})};
+  \draw (0.002,1) -- (-0.002,1) node[left] {$1{,}0$};
+  \draw (0.002,-1) -- (-0.002,-1) node[left] {$-1{,}0$};
+  \draw[dashed, richiamo] (0,1) -- (0.20,1);
+  \draw[dashed, richiamo] (0,-1) -- (0.10,-1);
+  % la sinusoide
+  \draw[formula, very thick, domain=0:0.22, samples=120] plot (\x, {cos(\x*1800)});
+  % tacche sull'asse dei tempi
+  % (le etichette stanno dalla parte in cui la curva non passa)
+  \foreach \t in {0.05, 0.15, 0.20} { \draw (\t,0.06) -- (\t,-0.06); }
+  \node[anchor=south west] at (0.05,0.02) {$0{,}050$};
+  \node[anchor=south east] at (0.15,0.02) {$0{,}15$};
+  \node[below] at (0.20,-0.04) {$0{,}20$};
+  % punto (b): t = 0,10 s
+  \draw[dashed, esempio] (0.10,0) -- (0.10,-1);
+  \fill[esempio] (0.10,-1) circle (2pt);
+  \node[esempio, above] at (0.10,0.04) {$0{,}10$};
+  \node[esempio, below] at (0.10,-1.05) {(b) $x = -A$};
+  % punto (c): t = 0,025 s
+  \draw[dashed, medica] (0.025,0) -- (0.025,0.707) -- (0,0.707);
+  \fill[medica] (0.025,0.707) circle (2pt);
+  \node[medica, left] at (0,0.707) {$0{,}71$};
+  \node[medica, below] at (0.025,-0.04) {$0{,}025$};
+  \node[medica] at (0.0125,0.35) {(c)};
+  % periodo
+  \draw[|<->|] (0,1.3) -- (0.20,1.3) node[midway, above] {$T = \SI{0,20}{\second}$};
+\end{tikzpicture}

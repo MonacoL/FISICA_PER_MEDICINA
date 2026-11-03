@@ -1,0 +1,31 @@
+% Due istantanee dell'onda y = 4,0 mm sin(kx - omega t), con lambda = 0,80 m e
+% v = 20 m/s (problema ud4-onda-equazione-corda): a t = 0 (continua) e a
+% t = 0,0050 s (tratteggiata), quando l'onda è avanzata di v t = 0,10 m.
+% Il punto in x = 0,20 m passa dalla cresta (4,0 mm) a 2,8 mm.
+\begin{tikzpicture}[>=Stealth, font=\small, x=9cm, y=0.28cm]
+  % assi (x in metri, y in millimetri)
+  \draw[->] (0,0) -- (1.02,0) node[right] {$x$ (\si{\metre})};
+  \draw[->] (0,-5.2) -- (0,6.4) node[above] {$y$ (\si{\milli\metre})};
+  \draw (0.008,4) -- (-0.008,4) node[left] {$4{,}0$};
+  \draw (0.008,-4) -- (-0.008,-4) node[left] {$-4{,}0$};
+  \foreach \x in {0.40, 0.80} { \draw (\x,0.25) -- (\x,-0.25); }
+  % etichette dalla parte in cui le curve non passano
+  \node[anchor=north east] at (0.40,-0.2) {$0{,}40$};
+  \node[anchor=south east] at (0.80,0.2) {$0{,}80$};
+  % istantanee
+  \draw[formula, very thick, domain=0:0.95, samples=120] plot (\x, {4*sin(\x*450)});
+  \draw[esempio, very thick, dashed, domain=0:0.95, samples=120] plot (\x, {4*sin(\x*450 - 45)});
+  % legenda, sotto il grafico
+  \draw[formula, very thick] (0.20,-7.5) -- (0.28,-7.5) node[right, black] {$t = 0$};
+  \draw[esempio, very thick, dashed] (0.50,-7.5) -- (0.58,-7.5) node[right, black] {$t = \SI{0,0050}{\second}$};
+  % la cresta avanza di 0,10 m
+  \draw[->, esempio, thick] (0.20,5.0) -- (0.30,5.0);
+  \node[esempio, above] at (0.25,5.0) {$\SI{0,10}{\metre}$};
+  % il punto in x = 0,20 m
+  \draw[dotted] (0.20,0) -- (0.20,4);
+  \node[below] at (0.20,-0.2) {$0{,}20$};
+  \fill[formula] (0.20,4) circle (2.2pt);
+  \fill[esempio] (0.20,2.83) circle (2.2pt);
+  \draw[dotted] (0,2.83) -- (0.20,2.83);
+  \node[esempio, left] at (0,2.83) {$2{,}8$};
+\end{tikzpicture}

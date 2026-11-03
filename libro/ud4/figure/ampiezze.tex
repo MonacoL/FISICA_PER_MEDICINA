@@ -1,0 +1,24 @@
+% Sovrapposizione di due onde con la stessa frequenza e ampiezze 3,0 mm e
+% 2,0 mm (problema ud4-interf-ampiezze): in fase l'ampiezza risultante è
+% 5,0 mm, in opposizione di fase 1,0 mm. Le due onde sono sottili, la somma
+% è spessa.
+\begin{tikzpicture}[>=Stealth, font=\small, x=0.85cm, y=0.24cm]
+  \foreach \col/\segno/\titolo/\ris in {0/1/{(a) in fase}/{5{,}0}, 6.0/-1/{(b) in opposizione di fase}/{1{,}0}} {
+    \begin{scope}[xshift=\col cm]
+      \node[anchor=west] at (-0.3,9.6) {\titolo};
+      \draw[->] (0,0) -- (5.0,0) node[right] {$x$};
+      \draw[->] (0,-6) -- (0,6.4) node[above] {$y$ (\si{\milli\metre})};
+      \draw[formula, thick, domain=0:4.6, samples=100] plot (\x, {3*sin(\x*180)});
+      \draw[medica, thick, domain=0:4.6, samples=100] plot (\x, {\segno*2*sin(\x*180)});
+      \draw[esempio, very thick, domain=0:4.6, samples=100] plot (\x, {(3+\segno*2)*sin(\x*180)});
+      \draw[dashed, esempio] (0,{3+\segno*2}) -- (0.5,{3+\segno*2});
+      \node[esempio, left] at (0,{3+\segno*2}) {$\ris$};
+    \end{scope}
+  }
+  % legenda
+  \begin{scope}[yshift=-2.1cm]
+    \draw[formula, thick] (0,0) -- (0.6,0) node[right, black] {onda 1: \SI{3,0}{\milli\metre}};
+    \draw[medica, thick] (4.2,0) -- (4.8,0) node[right, black] {onda 2: \SI{2,0}{\milli\metre}};
+    \draw[esempio, very thick] (8.4,0) -- (9.0,0) node[right, black] {somma};
+  \end{scope}
+\end{tikzpicture}
