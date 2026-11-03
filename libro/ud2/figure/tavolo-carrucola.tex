@@ -3,7 +3,8 @@
 % e l'attrito dinamico F_d all'indietro (peso e forza normale si bilanciano e
 % non sono disegnati). Sul pesetto: la tensione F_T verso l'alto e il peso
 % m_2 g verso il basso. Le frecce a indicano il verso del moto, che si prende
-% come positivo per ciascun corpo.
+% come positivo per ciascun corpo. Le forze sono in scala, 1 cm ogni 10 N:
+% F_T = 9,6 N, m_2 g = 10 N, F_d = 8,0 N.
 \begin{tikzpicture}[>=Stealth, font=\small]
   % tavolo
   \fill[richiamo!20] (-0.5,-0.6) rectangle (5.0,0);
@@ -23,10 +24,10 @@
   \filldraw[fill=esempio!20, draw=esempio, thick] (5.25,-1.4) rectangle (5.85,-2.0);
   \node[esempio] at (5.55,-1.7) {$m_2$};
   % forze sul blocco
-  \draw[->, formula, very thick] (2.4,0.45) -- (3.7,0.45) node[right] {$\vec F_T$};
-  \draw[->, medica, very thick] (1.0,0.45) -- (0.0,0.45) node[above] {$\vec F_d$};
+  \draw[->, formula, very thick] (2.4,0.45) -- (3.36,0.45) node[right] {$\vec F_T$};
+  \draw[->, medica, very thick] (1.0,0.45) -- (0.2,0.45) node[above] {$\vec F_d$};
   % forze sul pesetto
-  \draw[->, formula, very thick] (5.85,-1.45) -- (5.85,-0.6) node[right] {$\vec F_T$};
+  \draw[->, formula, very thick] (5.85,-1.45) -- (5.85,-0.49) node[right] {$\vec F_T$};
   \draw[->, attenzione, very thick] (5.55,-2.0) -- (5.55,-3.0) node[right] {$m_2\vec g$};
   % versi del moto
   \draw[->, black!60, thick] (1.0,1.25) -- (2.4,1.25) node[right] {$a$};

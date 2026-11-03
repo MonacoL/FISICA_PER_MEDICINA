@@ -1,7 +1,9 @@
 % Diagramma di corpo libero del pacco sullo scivolo inclinato di 30 gradi
 % (problema ud2-dinamica-scivolo): il peso F_p = mg, verticale, con le componenti
 % F_p sin 30 lungo lo scivolo e F_p cos 30 perpendicolare; la forza normale F_N,
-% che bilancia F_p cos 30; l'attrito, lungo lo scivolo verso l'alto.
+% che bilancia F_p cos 30; l'attrito statico massimo F_s,max, lungo lo scivolo
+% verso l'alto. Le frecce sono in scala: F_s,max (17,4 N) è più corta di
+% F_p sin 30 (25 N), quindi il pacco scivola.
 \begin{tikzpicture}[>=Stealth, font=\small]
   \def\a{30}
   \fill[richiamo!20] (0,0) -- (6.5,0) -- (6.5,{6.5*tan(\a)}) -- cycle;
@@ -24,5 +26,5 @@
   % forza normale
   \draw[->, formula, very thick] (C) -- ++({\a+90}:2.078) node[above] {$\vec F_N$};
   % attrito, verso l'alto lungo lo scivolo
-  \draw[->, medica, very thick] (C) -- ++(\a:1.3) node[above, yshift=2pt] {attrito};
+  \draw[->, medica, very thick] (C) -- ++(\a:0.84) node[above, yshift=2pt] {$F_{s,\max}$};
 \end{tikzpicture}
